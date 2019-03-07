@@ -27,6 +27,12 @@ function getRandomInt(min, max) {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } // stolen off StackOverflow
+
+function GenItemID(){
+	return Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString(); 
+}
+
+
 function getItem(template)
 {
 	for(var itm in itemJSON) {
@@ -147,7 +153,7 @@ function handleMoving(body) {
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].upd.StackObjectsCount -= body.count;
-					var newItem = getRandomInt(0, 999999999).toString(); 
+					var newItem = GenItemID(); 
 					ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
@@ -230,7 +236,7 @@ function handleMoving(body) {
 									}
 								}
 								if(badSlot == "no"){
-									var newItem = Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+									var newItem = GenItemID();
 									ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 									tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 									toDo = [[tmpTrader.data.items[key]._id, newItem]];
@@ -238,7 +244,7 @@ function handleMoving(body) {
 										if(toDo[0] != undefined){
 											for (var tmpKey in tmpTrader.data.items) {
 												if (tmpTrader.data.items[tmpKey].parentId && tmpTrader.data.items[tmpKey].parentId == toDo[0][0]) {
-													newItem = Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+													newItem = GenItemID();
 													ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 													tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 													toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
