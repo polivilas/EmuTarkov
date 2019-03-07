@@ -11,6 +11,9 @@ var traderImg = new RegExp('/files/([a-z0-9/\.jpng])+', 'i');
 var content = new RegExp('/uploads/([a-z0-9/\.jpng_])+', 'i');
 var pushNotifier = new RegExp('/push/notifier/get/', 'i');
 var ItemOutput = "";
+var tmpItem = {};
+var tmpSize = {};
+var toDo = [];
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 function ReadJson(file) {
@@ -24,7 +27,67 @@ function getRandomInt(min, max) {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } // stolen off StackOverflow
-
+function getItem(template)
+{
+	for(var itm in itemJSON) {
+		if (itemJSON[itm]._id && itemJSON[itm]._id == template) {
+			var item = itemJSON[itm];
+			return [true, item];
+		}
+	}
+	return [false, {}];
+}
+function getSize(itemtpl, itemID, location)
+{
+	toDo = [itemID];
+	tmpItem = getItem(itemtpl);
+	if (!tmpItem[0])
+	{
+		console.log("SHITS FUCKED GETSIZE1", itemID);
+		return;
+	} else {
+		tmpItem = tmpItem[1];
+	}
+	var outX = 0, outY = 0, outL = 0, outR = 0, outU = 0, outD = 0, tmpL = 0, tmpR = 0, tmpU = 0, tmpD = 0;
+	outX = tmpItem._props.Width;
+	outY = tmpItem._props.Height;
+	while(true){
+		if(toDo[0] != undefined){
+			for (var tmpKey in location) {
+				if (location[tmpKey].parentId && location[tmpKey].parentId == toDo[0]) {
+					toDo.push(location[tmpKey]._id);
+					
+					tmpItem = getItem(location[tmpKey]._tpl);
+					if (!tmpItem[0])
+					{
+						console.log("SHITS FUCKED GETSIZE2", tmpItem, location[tmpKey]._tpl);
+						return;
+					} else {
+						tmpItem = tmpItem[1];
+					}
+					if(tmpItem._props.ExtraSizeLeft != undefined && tmpItem._props.ExtraSizeLeft > tmpL){
+						tmpL = tmpItem._props.ExtraSizeLeft; 
+					}
+					if(tmpItem._props.ExtraSizeRight != undefined && tmpItem._props.ExtraSizeRight > tmpR){
+						tmpR = tmpItem._props.ExtraSizeRight; 
+					}
+					if(tmpItem._props.ExtraSizeUp != undefined && tmpItem._props.ExtraSizeUp > tmpU){
+						tmpU = tmpItem._props.ExtraSizeUp; 
+					}
+					if(tmpItem._props.ExtraSizeDown != undefined && tmpItem._props.ExtraSizeDown > tmpD){
+						tmpD = tmpItem._props.ExtraSizeDown; 
+					}
+				}
+			}
+			outL += tmpL; outR += tmpR; outU += tmpU; outD += tmpD;
+			tmpL = 0; tmpR = 0; tmpU = 0; tmpD = 0;
+			toDo.splice(0, 1);
+			continue;
+		}
+		break;
+	}
+	return [outX, outY, outL, outR, outU, outD];
+}
 function handleMoving(body) {
 	console.log(body);
 	var tmpList = JSON.parse(ReadJson('list.json'));
@@ -36,6 +99,7 @@ function handleMoving(body) {
 			FinalOutput = "OK";
 			break;
 		case "Move":
+			
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].parentId = body.to.id;
@@ -102,26 +166,41 @@ function handleMoving(body) {
 						var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
 						for (var key2 in tmpList.data[1].Inventory.items) {
 							if(tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35") { // hideout
-								for(var key3 in itemJSON) {
-									if (itemJSON[key3]._id && itemJSON[key3]._id == tmpList.data[1].Inventory.items[key2]._tpl) {
-										var iH = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? itemJSON[key3]._props.Width : itemJSON[key3]._props.Height);
-										var iW = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? itemJSON[key3]._props.Height : itemJSON[key3]._props.Width);
-										for (var x = 0; x < iH; x++) {
-											Stash2D[tmpList.data[1].Inventory.items[key2].location.y + x].fill(1, tmpList.data[1].Inventory.items[key2].location.x, tmpList.data[1].Inventory.items[key2].location.x + iW);
-										}
-										break;
-									}
+								tmpItem = getItem(tmpList.data[1].Inventory.items[key2]._tpl);
+								if (!tmpItem[0])
+								{
+									console.log("SHITS FUCKED");
+									return;
+								} else {
+									tmpItem = tmpItem[1];
+								}
+								tmpSize = getSize(tmpList.data[1].Inventory.items[key2]._tpl,tmpList.data[1].Inventory.items[key2]._id, tmpList.data[1].Inventory.items);
+								//			x			L				r
+								var iW = tmpSize[0] + tmpSize[2] + tmpSize[3];
+								//			y			u				d
+								var iH = tmpSize[1] + tmpSize[4] + tmpSize[5];
+								var fH = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iW : iH);
+								var fW = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iH : iW);
+								for (var x = 0; x < fH; x++) {
+									Stash2D[tmpList.data[1].Inventory.items[key2].location.y + x].fill(1, tmpList.data[1].Inventory.items[key2].location.x, tmpList.data[1].Inventory.items[key2].location.x + fW);
 								}
 							}
 						}
 						var tmpSizeX = 0; var tmpSizeY = 0;
-						for(var key4 in itemJSON) {
-							if (itemJSON[key4]._id && itemJSON[key4]._id == tmpTrader.data.items[key]._tpl) {
-								tmpSizeX = itemJSON[key4]._props.Width; tmpSizeY = itemJSON[key4]._props.Height;
-								break;
-							}
+						tmpItem = getItem(tmpTrader.data.items[key]._tpl);
+						if (!tmpItem[0])
+						{
+							console.log("SHITS FUCKED BUY_FROM_TRADER");
+							return;
+						} else {
+							tmpItem = tmpItem[1];
 						}
+						tmpSize = getSize(tmpTrader.data.items[key]._tpl,tmpTrader.data.items[key]._id, tmpTrader.data.items);
+						tmpSizeX = tmpSize[0] + tmpSize[2] + tmpSize[3];
+						tmpSizeY = tmpSize[1] + tmpSize[4] + tmpSize[5];
+						console.log(tmpSizeX, tmpSizeY);
 						var badSlot = "no";
+						console.log(Stash2D);
 						for (var y = 0; y < stashY; y++) {
 							for (var x = 0; x < stashX; x++) {
 								badSlot = "no";
@@ -137,9 +216,25 @@ function handleMoving(body) {
 									}
 								}
 								if(badSlot == "no"){
-									var newItem = getRandomInt(0, 999999999).toString(); 
+									var newItem = Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
 									ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 									tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+									toDo = [[tmpTrader.data.items[key]._id, newItem]];
+									while(true){
+										if(toDo[0] != undefined){
+											for (var tmpKey in tmpTrader.data.items) {
+												if (tmpTrader.data.items[tmpKey].parentId && tmpTrader.data.items[tmpKey].parentId == toDo[0][0]) {
+													newItem = Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+													ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+													tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+													toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
+												}
+											}
+											toDo.splice(0, 1);
+											continue;
+										}
+										break;
+									}
 									fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 									FinalOutput = "OK";
 									return;
