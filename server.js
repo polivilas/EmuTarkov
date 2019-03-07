@@ -118,16 +118,30 @@ function handleMoving(body) {
 			}
 			break;
 		case "Remove":
-			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
-					ItemOutput.data.items.del.push({"_id": body.item});
-
-					tmpList.data[1].Inventory.items.splice(key, 1);
-					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
-					FinalOutput = "OK";
+				toDo = [body.item];
+				while(true){
+					if(toDo[0] != undefined){
+						while(true){ // needed else iterator may decide to jump over stuff
+							var tmpEmpty = "yes";
+							for (var tmpKey in tmpList.data[1].Inventory.items) {	
+								if ((tmpList.data[1].Inventory.items[tmpKey].parentId && tmpList.data[1].Inventory.items[tmpKey].parentId == toDo[0]) || (tmpList.data[1].Inventory.items[tmpKey]._id && tmpList.data[1].Inventory.items[tmpKey]._id == toDo[0])) {
+									ItemOutput.data.items.del.push({"_id": tmpList.data[1].Inventory.items[tmpKey]._id});
+									toDo.push(tmpList.data[1].Inventory.items[tmpKey]._id);
+									tmpList.data[1].Inventory.items.splice(tmpKey, 1);
+									tmpEmpty = "no";
+								}
+							}
+							if(tmpEmpty == "yes"){
+								break;
+							};
+						}
+						toDo.splice(0, 1);
+						continue;
+					}
 					break;
 				}
-			}
+				fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+				FinalOutput = "OK";
 			break;
 		case "Split":
 			for (var key in tmpList.data[1].Inventory.items) {
