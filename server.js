@@ -27,6 +27,9 @@ function getRandomInt(min, max) {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } // stolen off StackOverflow
+function setRandomInt(){
+	return Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+} // just to change this shit in one place in the future // propably easier managing
 function getItem(template)
 {
 	for(var itm in itemJSON) {
@@ -119,7 +122,8 @@ function handleMoving(body) {
 			break;
 		case "Remove":
 			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
+				//Delete items that id is same as body.item + delete every item that contains body.item as parentID // could fix undeleted weapons from containers which disapear but stays in the code
+				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item || tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key].parentId == body.item) {
 					ItemOutput.data.items.del.push({"_id": body.item});
 
 					tmpList.data[1].Inventory.items.splice(key, 1);
@@ -133,7 +137,7 @@ function handleMoving(body) {
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].upd.StackObjectsCount -= body.count;
-					var newItem = getRandomInt(0, 999999999).toString(); 
+					var newItem = setRandomInt(); 
 					ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
@@ -216,7 +220,7 @@ function handleMoving(body) {
 									}
 								}
 								if(badSlot == "no"){
-									var newItem = Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+									var newItem = setRandomInt();
 									ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 									tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 									toDo = [[tmpTrader.data.items[key]._id, newItem]];
@@ -224,7 +228,7 @@ function handleMoving(body) {
 										if(toDo[0] != undefined){
 											for (var tmpKey in tmpTrader.data.items) {
 												if (tmpTrader.data.items[tmpKey].parentId && tmpTrader.data.items[tmpKey].parentId == toDo[0][0]) {
-													newItem = Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+													newItem = setRandomInt();
 													ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 													tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 													toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
@@ -281,6 +285,11 @@ function handleRequest(req, body, url) {
 		}
 	}
 	console.log(url + " with data " + body);
+	//fix for levels of traders there is propably ?retry=4 as crown level // you should turn it off for now untill we dont get full traders working
+	if(url.indexOf("?retry=1") > -1 || url.indexOf("?retry=2") > -1 || url.indexOf("?retry=3") > -1) {
+		FinalOutput = "DEAD";// dont know if this is good idea // change it if needed ;)
+		return;
+	}
 	
 	// handle special cases
 	if (url.match(assort)) {
