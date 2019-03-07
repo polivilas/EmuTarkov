@@ -165,7 +165,7 @@ function handleMoving(body) {
 					if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
 						var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
 						for (var key2 in tmpList.data[1].Inventory.items) {
-							if(tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35") { // hideout
+							if(tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35" && tmpList.data[1].Inventory.items[key2].location != undefined) { // hideout
 								tmpItem = getItem(tmpList.data[1].Inventory.items[key2]._tpl);
 								if (!tmpItem[0])
 								{
