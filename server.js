@@ -304,11 +304,11 @@ function handleRequest(req, body, url) {
 	
 	// handle special cases
 	if (url.match(assort)) {
-		FinalOutput = ReadJson("assort/" + url.substring(36).replace(/[^a-zA-Z0-9]/g, '') + ".json");
+		FinalOutput = ReadJson("assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
 		return;
 	}
 	if (url.match(prices)) {
-		FinalOutput = ReadJson("prices/" + url.substring(46).replace(/[^a-zA-Z0-9]/g, '') + ".json"); // thats some budget ass shit
+		FinalOutput = ReadJson("prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
 		return;
 	}
 	if (url.match(getTrader)) {
@@ -353,7 +353,7 @@ function handleRequest(req, body, url) {
 			break;
 		case "/client/menu/locale/en":
 		case "/client/menu/locale/ru":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"menu":{"NEXT":"NEXT", "Escape from Tarkov":"ESCAPE FROM TARKOV", "Servers are currently at full capacity":"Servers are currently at full capacity", "EXIT":"EXIT", "REMEMBER ACCOUNT":"REMEMBER ACCOUNT", "AUTHORIZATION":"AUTHORIZATION", "Profile data loading...":"Profile data loading...", "{0} Beta version":"{0} Beta version", "DOWN: ":"DOWN: ", "LEFT: ":"LEFT: ", "RIGHT: ":"RIGHT: "}}, "crc":0}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"menu":{"NEXT":"NEXT", "Escape from Tarkov":"ESCAPE FROM TARKOV", "Servers are currently at full capacity":"Servers are currently at full capacity", "EXIT":"EXIT", "REMEMBER ACCOUNT":"REMEMBER ACCOUNT", "AUTHORIZATION":"AUTHORIZATION", "Profile data loading...":"Profile data loading...", "{0} Beta version":"{0} Beta version | EmuTarkov", "DOWN: ":"DOWN: ", "LEFT: ":"LEFT: ", "RIGHT: ":"RIGHT: "}}, "crc":0}';
 			break;
 		case "/client/game/version/validate":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
@@ -382,11 +382,14 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"weather":{"timestamp":' + Math.floor(new Date() / 1000) + ', "cloud":-0.475, "wind_speed":2, "wind_direction":3, "wind_gustiness":0.081, "rain":1, "rain_intensity":0, "fog":0.002, "temp":14, "pressure":763, "date":"2019-02-24", "time":"2019-02-24 19:15:02"}, "date":"2019-02-24", "time":"21:02:30", "acceleration":7}}';
 			break;
 		case "/client/locale/en":
+		case "/client/locale/En":
 		case "/client/locale/ru":
+		case "/client/locale/Ru":
 			FinalOutput = ReadJson('locale_en.json');
 			break;
 		case "/client/locations":
-			FinalOutput = ReadJson('locations.json');
+			//FinalOutput = ReadJson('locations.json');
+			FinalOutput = ReadJson('locations_old.json');
 			break;
 		case "/client/handbook/templates":
 			FinalOutput = ReadJson('templates.json');
