@@ -100,21 +100,21 @@ function handleMoving(body) {
 	switch(body.Action) {
 
 		case "QuestAccept":
-			tmpList.data[1].Quests.push({"qid": body.qid.toString(), "startTime": 1337, "status": 2}); // statuses seem as follow - 1 - not accepted | 2 - accepted | 3 - failed | 4 - completed
+			tmpList.data[0].Quests.push({"qid": body.qid.toString(), "startTime": 1337, "status": 2}); // statuses seem as follow - 1 - not accepted | 2 - accepted | 3 - failed | 4 - completed
 			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 			FinalOutput = "OK";
 			break;
 		case "Move":
 			
-			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
-					tmpList.data[1].Inventory.items[key].parentId = body.to.id;
-					tmpList.data[1].Inventory.items[key].slotId = body.to.container;
+			for (var key in tmpList.data[0].Inventory.items) {
+				if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id == body.item) {
+					tmpList.data[0].Inventory.items[key].parentId = body.to.id;
+					tmpList.data[0].Inventory.items[key].slotId = body.to.container;
 					if (body.to.location) {
-						tmpList.data[1].Inventory.items[key].location = body.to.location;
+						tmpList.data[0].Inventory.items[key].location = body.to.location;
 					} else {
-						if (tmpList.data[1].Inventory.items[key].location) {
-							tmpList.data[1].Inventory.items[key].location = {"x": 0, "y": 0, "r": 0};
+						if (tmpList.data[0].Inventory.items[key].location) {
+							tmpList.data[0].Inventory.items[key].location = {"x": 0, "y": 0, "r": 0};
 						}
 					}
 					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
@@ -129,11 +129,11 @@ function handleMoving(body) {
 					if(toDo[0] != undefined){
 						while(true){ // needed else iterator may decide to jump over stuff
 							var tmpEmpty = "yes";
-							for (var tmpKey in tmpList.data[1].Inventory.items) {	
-								if ((tmpList.data[1].Inventory.items[tmpKey].parentId && tmpList.data[1].Inventory.items[tmpKey].parentId == toDo[0]) || (tmpList.data[1].Inventory.items[tmpKey]._id && tmpList.data[1].Inventory.items[tmpKey]._id == toDo[0])) {
-									ItemOutput.data.items.del.push({"_id": tmpList.data[1].Inventory.items[tmpKey]._id});
-									toDo.push(tmpList.data[1].Inventory.items[tmpKey]._id);
-									tmpList.data[1].Inventory.items.splice(tmpKey, 1);
+							for (var tmpKey in tmpList.data[0].Inventory.items) {	
+								if ((tmpList.data[0].Inventory.items[tmpKey].parentId && tmpList.data[0].Inventory.items[tmpKey].parentId == toDo[0]) || (tmpList.data[0].Inventory.items[tmpKey]._id && tmpList.data[0].Inventory.items[tmpKey]._id == toDo[0])) {
+									ItemOutput.data.items.del.push({"_id": tmpList.data[0].Inventory.items[tmpKey]._id});
+									toDo.push(tmpList.data[0].Inventory.items[tmpKey]._id);
+									tmpList.data[0].Inventory.items.splice(tmpKey, 1);
 									tmpEmpty = "no";
 								}
 							}
@@ -150,12 +150,12 @@ function handleMoving(body) {
 				FinalOutput = "OK";
 			break;
 		case "Split":
-			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
-					tmpList.data[1].Inventory.items[key].upd.StackObjectsCount -= body.count;
+			for (var key in tmpList.data[0].Inventory.items) {
+				if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id == body.item) {
+					tmpList.data[0].Inventory.items[key].upd.StackObjectsCount -= body.count;
 					var newItem = GenItemID(); 
-					ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-					tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
+					ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[0].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
+					tmpList.data[0].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[0].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
@@ -163,13 +163,13 @@ function handleMoving(body) {
 			}
 			break;
 		case "Merge":
-			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.with) {
-					for (var key2 in tmpList.data[1].Inventory.items) {
-						if (tmpList.data[1].Inventory.items[key2]._id && tmpList.data[1].Inventory.items[key2]._id == body.item) {
-							tmpList.data[1].Inventory.items[key].upd.StackObjectsCount = (tmpList.data[1].Inventory.items[key].upd.StackObjectsCount ? tmpList.data[1].Inventory.items[key].upd.StackObjectsCount : 1) + (tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount ? tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount : 1);
-							ItemOutput.data.items.del.push({"_id": tmpList.data[1].Inventory.items[key2]._id});
-							tmpList.data[1].Inventory.items.splice(key2, 1);
+			for (var key in tmpList.data[0].Inventory.items) {
+				if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id == body.with) {
+					for (var key2 in tmpList.data[0].Inventory.items) {
+						if (tmpList.data[0].Inventory.items[key2]._id && tmpList.data[0].Inventory.items[key2]._id == body.item) {
+							tmpList.data[0].Inventory.items[key].upd.StackObjectsCount = (tmpList.data[0].Inventory.items[key].upd.StackObjectsCount ? tmpList.data[0].Inventory.items[key].upd.StackObjectsCount : 1) + (tmpList.data[0].Inventory.items[key2].upd.StackObjectsCount ? tmpList.data[0].Inventory.items[key2].upd.StackObjectsCount : 1);
+							ItemOutput.data.items.del.push({"_id": tmpList.data[0].Inventory.items[key2]._id});
+							tmpList.data[0].Inventory.items.splice(key2, 1);
 							fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 							FinalOutput = "OK";
 							break;
@@ -180,13 +180,13 @@ function handleMoving(body) {
 			break;
 		case "TradingConfirm":
 			if(body.type == "buy_from_trader") {
-				var tmpTrader = JSON.parse(ReadJson('assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+				var tmpTrader = JSON.parse(ReadJson('assort/' + body.tid.replace(/[^a-zA-Z0-9_]/g, '') + '.json'));
 				for (var key in tmpTrader.data.items) {
 					if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
 						var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
-						for (var key2 in tmpList.data[1].Inventory.items) {
-							if(tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35" && tmpList.data[1].Inventory.items[key2].location != undefined) { // hideout
-								tmpItem = getItem(tmpList.data[1].Inventory.items[key2]._tpl);
+						for (var key2 in tmpList.data[0].Inventory.items) {
+							if(tmpList.data[0].Inventory.items[key2].parentId == "hideout" && tmpList.data[0].Inventory.items[key2].location != undefined) { // hideout
+								tmpItem = getItem(tmpList.data[0].Inventory.items[key2]._tpl);
 								if (!tmpItem[0])
 								{
 									console.log("SHITS FUCKED");
@@ -194,15 +194,15 @@ function handleMoving(body) {
 								} else {
 									tmpItem = tmpItem[1];
 								}
-								tmpSize = getSize(tmpList.data[1].Inventory.items[key2]._tpl,tmpList.data[1].Inventory.items[key2]._id, tmpList.data[1].Inventory.items);
+								tmpSize = getSize(tmpList.data[0].Inventory.items[key2]._tpl,tmpList.data[0].Inventory.items[key2]._id, tmpList.data[0].Inventory.items);
 								//			x			L				r
 								var iW = tmpSize[0] + tmpSize[2] + tmpSize[3];
 								//			y			u				d
 								var iH = tmpSize[1] + tmpSize[4] + tmpSize[5];
-								var fH = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iW : iH);
-								var fW = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iH : iW);
+								var fH = (tmpList.data[0].Inventory.items[key2].location.rotation == "Vertical" ? iW : iH);
+								var fW = (tmpList.data[0].Inventory.items[key2].location.rotation == "Vertical" ? iH : iW);
 								for (var x = 0; x < fH; x++) {
-									Stash2D[tmpList.data[1].Inventory.items[key2].location.y + x].fill(1, tmpList.data[1].Inventory.items[key2].location.x, tmpList.data[1].Inventory.items[key2].location.x + fW);
+									Stash2D[tmpList.data[0].Inventory.items[key2].location.y + x].fill(1, tmpList.data[0].Inventory.items[key2].location.x, tmpList.data[0].Inventory.items[key2].location.x + fW);
 								}
 							}
 						}
@@ -237,8 +237,8 @@ function handleMoving(body) {
 								}
 								if(badSlot == "no"){
 									var newItem = GenItemID();
-									ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
-									tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+									ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "hideout", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+									tmpList.data[0].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "hideout", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 									toDo = [[tmpTrader.data.items[key]._id, newItem]];
 									while(true){
 										if(toDo[0] != undefined){
@@ -246,7 +246,7 @@ function handleMoving(body) {
 												if (tmpTrader.data.items[tmpKey].parentId && tmpTrader.data.items[tmpKey].parentId == toDo[0][0]) {
 													newItem = GenItemID();
 													ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
-													tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+													tmpList.data[0].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
 													toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
 												}
 											}
@@ -267,9 +267,9 @@ function handleMoving(body) {
 			}
 			break;
 		case "Fold":
-			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
-					tmpList.data[1].Inventory.items[key].upd.Foldable = {"Folded": body.value};
+			for (var key in tmpList.data[0].Inventory.items) {
+				if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id == body.item) {
+					tmpList.data[0].Inventory.items[key].upd.Foldable = {"Folded": body.value};
 					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
@@ -277,9 +277,9 @@ function handleMoving(body) {
 			}
 			break;
 		case "Toggle":
-			for (var key in tmpList.data[1].Inventory.items) {
-				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
-					tmpList.data[1].Inventory.items[key].upd.Togglable = {"On": body.value};
+			for (var key in tmpList.data[0].Inventory.items) {
+				if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id == body.item) {
+					tmpList.data[0].Inventory.items[key].upd.Togglable = {"On": body.value};
 					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
@@ -304,11 +304,11 @@ function handleRequest(req, body, url) {
 	
 	// handle special cases
 	if (url.match(assort)) {
-		FinalOutput = ReadJson("assort/" + url.substring(36).replace(/[^a-zA-Z0-9]/g, '') + ".json");
+		FinalOutput = ReadJson("assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
 		return;
 	}
 	if (url.match(prices)) {
-		FinalOutput = ReadJson("prices/" + url.substring(46).replace(/[^a-zA-Z0-9]/g, '') + ".json"); // thats some budget ass shit
+		FinalOutput = ReadJson("prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
 		return;
 	}
 	if (url.match(getTrader)) {
@@ -328,7 +328,7 @@ function handleRequest(req, body, url) {
 
 	switch(url) {
 		case "/":
-			FinalOutput = 'EFT backend emulator for Escape From Tarkov version 0.11.2.2680 by polivilas @ UnKnoWnCheaTs.me';
+			FinalOutput = 'EFT backend emulator for Escape From Tarkov version 0.1.0.1002 by polivilas @ UnKnoWnCheaTs.me';
 			break;
 		case "/client/friend/list":
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
@@ -353,13 +353,13 @@ function handleRequest(req, body, url) {
 			break;
 		case "/client/menu/locale/en":
 		case "/client/menu/locale/ru":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"menu":{"NEXT":"NEXT", "Escape from Tarkov":"ESCAPE FROM TARKOV", "Servers are currently at full capacity":"Servers are currently at full capacity", "EXIT":"EXIT", "REMEMBER ACCOUNT":"REMEMBER ACCOUNT", "AUTHORIZATION":"AUTHORIZATION", "Profile data loading...":"Profile data loading...", "{0} Beta version":"{0} Beta version", "DOWN: ":"DOWN: ", "LEFT: ":"LEFT: ", "RIGHT: ":"RIGHT: "}}, "crc":0}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"menu":{"NEXT":"NEXT", "Escape from Tarkov":"ESCAPE FROM TARKOV", "Servers are currently at full capacity":"Servers are currently at full capacity", "EXIT":"EXIT", "REMEMBER ACCOUNT":"REMEMBER ACCOUNT", "AUTHORIZATION":"AUTHORIZATION", "Profile data loading...":"Profile data loading...", "{0} Beta version":"{0} Beta version | EmuTarkov", "DOWN: ":"DOWN: ", "LEFT: ":"LEFT: ", "RIGHT: ":"RIGHT: "}}, "crc":0}';
 			break;
 		case "/client/game/version/validate":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 		case "/client/game/login":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":false, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":false, "queued":false, "taxonomy":105, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
 		case "/client/items":
 			FinalOutput = ReadJson('items.json');
@@ -370,6 +370,9 @@ function handleRequest(req, body, url) {
 		case "/client/game/profile/list":
 			FinalOutput = ReadJson('list.json');
 			break;
+		case "/client/items/characteristics":
+			FinalOutput = ReadJson('characteristics.json');
+			break;
 		case "/client/game/profile/select":
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:1337", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
@@ -379,9 +382,10 @@ function handleRequest(req, body, url) {
 		case "/client/game/keepalive":
 			break;
 		case "/client/weather":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"weather":{"timestamp":' + Math.floor(new Date() / 1000) + ', "cloud":-0.475, "wind_speed":2, "wind_direction":3, "wind_gustiness":0.081, "rain":1, "rain_intensity":0, "fog":0.002, "temp":14, "pressure":763, "date":"2019-02-24", "time":"2019-02-24 19:15:02"}, "date":"2019-02-24", "time":"21:02:30", "acceleration":7}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"weather":{"timestamp":' + Math.floor(new Date() / 1000) + ', "cloud":-0.475, "wind_speed":2, "wind_direction":3, "wind_gustiness":0.081, "rain":1, "rain_intensity":0, "fog":0.002, "temp":14, "pressure":763, "date":"2019-02-24", "time":"2019-02-24 19:15:02"}, "date":"2019-02-24", "time":"2019-02-24 21:02:30", "acceleration":7}}';
 			break;
 		case "/client/locale/en":
+		case "/client/locale/En":
 		case "/client/locale/ru":
 			FinalOutput = ReadJson('locale_en.json');
 			break;
