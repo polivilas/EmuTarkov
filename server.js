@@ -388,8 +388,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('locale_en.json');
 			break;
 		case "/client/locations":
-			//FinalOutput = ReadJson('locations.json');
-			FinalOutput = ReadJson('locations_old.json');
+			FinalOutput = ReadJson('locations.json');
 			break;
 		case "/client/handbook/templates":
 			FinalOutput = ReadJson('templates.json');
