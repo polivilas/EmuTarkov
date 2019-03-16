@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var zlib = require('zlib');
+var regedit = require('regedit');
 var server = http.createServer();
 var FinalOutput = "";
 var PORT = 1337;
@@ -467,3 +468,32 @@ server.on('request', function(req, resp) {
 server.listen(PORT, function() {
 	console.log('EmuTarkov listening on: %s',PORT);
 });
+
+var spoofedLogin = JSON.parse('{"email":"1337","password":"1337","toggle":true,"timestamp":1337}');
+function SpoofLauncher(){
+	spoofedLogin.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
+	console.log(spoofedLogin.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
+	var tmpB64 = Buffer.from(JSON.stringify(spoofedLogin)).toString('base64');
+	var bytes = [];
+	for (var i = 0; i < tmpB64.length; ++i) {
+		var code = tmpB64.charCodeAt(i);
+		bytes = bytes.concat([code]);
+	}
+	bytes = bytes.concat(0);
+	regedit.putValue({
+		'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {
+			'bC5vLmcuaS5u_h1472614626': {
+				value: bytes,
+				type: 'REG_BINARY'
+			}
+		}
+	}, function(err) {
+		if(err){
+			console.log("Shits fucked.", err);
+		};
+	});
+};
+setInterval(function() {
+	SpoofLauncher();
+}, 1000 * 60);
+SpoofLauncher();
