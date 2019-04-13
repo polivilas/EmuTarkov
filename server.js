@@ -407,8 +407,11 @@ function handleRequest(req, body, url) {
 		case "/client/server/list":
 			FinalOutput = ReadJson('serverList.json');
 			break;
+		case "/client/ragfair/search":
+			FinalOutput = ReadJson('ragfair/search.json');
+			break;
 		default:
-			console.log("UNHANDLED REQUEST " + req.url);
+			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
 			break;
 	}
 }
