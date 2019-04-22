@@ -29,10 +29,14 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } // stolen off StackOverflow
 
+function getRandomIntEx(max) 
+{
+	return Math.floor(Math.random() * Math.floor(max));
+}
+
 function GenItemID(){
 	return Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString(); 
 }
-
 
 function getItem(template)
 {
@@ -51,7 +55,7 @@ function getSize(itemtpl, itemID, location)
 	if (!tmpItem[0])
 	{
 		console.log("SHITS FUCKED GETSIZE1", itemID);
-		return;
+		return; 
 	} else {
 		tmpItem = tmpItem[1];
 	}
@@ -95,6 +99,333 @@ function getSize(itemtpl, itemID, location)
 	}
 	return [outX, outY, outL, outR, outU, outD];
 }
+
+function generateBots(databots) //Welcome to the Scav Randomizer :) 
+{
+	var generatedBots = [];
+	var bots_number = 0;
+	var presets = 
+	{
+		Head:["wild_head_1","wild_head_2","wild_head_3","wild_dealmaker_head","bear_head_1","usec_head_1","head_boss_killa","bear_head"],
+		Body:["wild_body","wild_body_1","wild_body_2","wild_body_3","wild_dealmaker_body","wild_security_body_1","wild_security_body_2","top_boss_killa","top_wild_scavelite"],
+		Feet:["wild_feet","wild_feet_1","wild_feet_2","wild_dealmaker_feet","wild_security_feet_1","pant_boss_killa","pants_wild_scavelite"],
+		pmcBotVoices:["Bear_1","Bear_2","Usec_1","Usec_2","Usec_3"], 
+
+		filter_mosin:["5ae08f0a5acfc408fb1398a1","5bfd297f0db834001a669119"],
+		Grenades:["5710c24ad2720bc3458b45a3","58d3db5386f77426186285a0","5448be9a4bdc2dfd2f8b456a","5a0c27731526d80618476ac4"],
+		Backpacks:["5c0e774286f77468413cc5b2","544a5cde4bdc2d39388b456b","56e335e4d2720b6c058b456d","56e33680d2720be2748b4576","5ab8f04f86f774585f4237d8","5c0e805e86f774683f3dd637","545cdae64bdc2d39198b4568","56e33634d2720bd8058b456b","5ab8ebf186f7742d8b372e80","56e294cdd2720b603a8b4575","59e763f286f7742ee57895da","5ab8ee7786f7742d8f33f0b9","5b44c6ae86f7742d1627baea","5ca20d5986f774331e7c9602"],
+		Rigs:["59e7643b86f7742cbf2c109a","5b44cad286f77402a54ae7e5","5c0e446786f7742013381639","5c0e6a1586f77404597b4965","544a5caa4bdc2d1a388b4568","5929a2a086f7744f4b234d43","5c0e722886f7740458316a57","5c0e746986f7741453628fe5","592c2d1a86f7746dbe2af32a","5c0e3eb886f7742015526062","5b44c8ea86f7742d1627baf1","5ab8dab586f77441cd04f2a2","572b7adb24597762ae139821","5c0e9f2c86f77432297fe0a3","5648a69d4bdc2ded0b8b457b","5ab8dced86f774646209ec87","5ca20abf86f77418567a43f2"],
+		Armors:["5c0e5bab86f77461f55ed1f3","5648a7494bdc2d9d488b4583","59e7635f86f7742cbf2c1095","5ab8e4ed86f7742d8e50c7fa","5b44d22286f774172b0c9de8","5c0e625a86f7742d77340f62","5c0e655586f774045612eeb2","5b44cf1486f77431723e3d05","5b44d0de86f774503d30cba8","545cdb794bdc2d3a198b456a","5ab8e79e86f7742d8b372e78","5c0e541586f7747fa54205c9","5c0e57ba86f7747fa141986d","5c0e5edb86f77461f55ed1f7","5c0e51be86f774598e797894","5c0e53c886f7747fa54205c7","5b44cd8b86f774503d30cba2","5ca2151486f774244a3b8d30","5ca21c6986f77479963115a7"],
+		Facecovers:["59e7715586f7742ee5789605","5b4325355acfc40019478126","5ab8f4ff86f77431c60d91ba","5ab8f85d86f7745cd93a1cf5","5b432f3d5acfc4704b4a1dfb","5bd0716d86f774171822ef4b","5bd073a586f7747e6f135799","5bd06f5d86f77427101ad47c","5bd071d786f7747e707b93a3","5b432b6c5acfc4001a599bf0","5ab8f39486f7745cd93a1cca","5b432b2f5acfc4771e1c6622","5b432c305acfc40019478128","5c1a1e3f2e221602b66cc4c2","572b7fa524597762b747ce82","572b7f1624597762ae139822","5b4326435acfc433000ed01d"],
+		Headwear:["59e7708286f7742cbd762753","5aa7cfc0e5b5b00015693143","5aa7e454e5b5b0214e506fa2","5b432d215acfc4771e1c6624","5c066ef40db834001966a595","5c06c6a80db834001b735491","5c17a7ed2e2216152142459c","572b7d8524597762b472f9d1","5aa7e4a4e5b5b000137b76f2","5b4329f05acfc47a86086aa1","5b40e3f35acfc40016388218","5b43271c5acfc432ff4dce65","59e770f986f7742cbe3164ef","59ef13ca86f77445fd0e2483","5aa2b87de5b5b00016327c25","5aa2b8d7e5b5b00014028f4a","5ac8d6885acfc400180ae7b0","572b7fa124597762b472f9d2","5a7c4850e899ef00150be885","5b4327aa5acfc400175496e0","5c0d2727d174af02a012cf58","5c0e874186f7745dc7616606","5645bc214bdc2d363b8b4571","5aa2b9ede5b5b000137b758b","5bd073c986f7747f627e796c","5ab8f20c86f7745cdb629fb2","5aa2a7e8e5b5b00016327c16","5aa2ba19e5b5b00014028f4e","5c091a4e0db834001d5addc8","5aa2ba46e5b5b000137b758d","5aa7d03ae5b5b00016327db5","5aa7d193e5b5b000171d063f","5c08f87c0db8340019124324","59e7711e86f7746cae05fbe1","5a154d5cfcdbcb001a3b00da","5a43943586f77416ad2f06e2","5a16bb52fcdbcb001a3b00dc","5aa2b89be5b5b0001569311f","5aa7e276e5b5b000171d0647","5b4329075acfc400153b78ff","5b40e1525acfc4771e1c6611","5b40e5e25acfc4001a599bea","5a43957686f7742a2c2f11b0","5b40e2bc5acfc40016388216","5b40e4035acfc47a87740943","5b40e61f5acfc4001a599bec","5ca20ee186f774799474abc2"],
+		Eyewear:["5b432be65acfc433000ed01f","5aa2b986e5b5b00014028f4c","5aa2b923e5b5b000137b7589","59e770b986f7742cbd762754","5aa2b9aee5b5b00015693121","5c1a1cc52e221602b3136e3d","5c0d32fcd174af02a1659c75","557ff21e4bdc2d89578b4586"],
+		knives:["57e26ea924597715ca604a09","5bc9c1e2d4351e00367fbcf0","5bffdc370db834001d23eca8","54491bb74bdc2d09088b4567","57e26fc7245977162a14b800","5bead2e00db834001c062938","5c0116620db834001808a647","5c07df7f0db834001b73588a","5c0126f40db834002a125382","5bffe7930db834001b734a39","5c012ffc0db834001d23f03f","5c010e350db83400232feec7","57cd379a24597778e7682ecf","5bffdd7e0db834001b734a1a"],
+		pistols:["5a17f98cfcdbcb0980087290","5b1fa9b25acfc40018633c01","56d59856d2720bd8418b456a","5b3b713c5acfc4330140bd8d","5a7ae0c351dfba0017554310","576a581d2459771e7b1bc4f1","59f98b4986f7746f546d2cef","571a12c42459771f627b58a0","5abccb7dd8ce87001773e277","5448bd6b4bdc2dfc2f8b4569","579204f224597773d619e051","56e0598dd2720bb5668b45a6",]
+	}
+	
+	var weaponPresets = JSON.parse(ReadJson("bots/presetExtended.json")); //load all weapons
+	databots.conditions.forEach(function(params) // loop to generate all scavs 
+	{
+		for (var i = 1; i <= params.Limit; i++) //generate as many as the game request
+		{
+			var BotBase = JSON.parse(ReadJson("bots/bot_base.json")); //load a dummy bot with nothing
+			var internalId = getRandomIntEx(10000); //generate a scavSeed
+
+			//filling basic infos
+			BotBase._id  = "scavNumber" + internalId;
+			BotBase.Info.Nickname = "Scav Number " + internalId;
+			BotBase.Info.LowerNickname = "Scav Number " + internalId;
+
+			if(params.Role == "pmcBot"){ BotBase.Info.Voice = presets.pmcBotVoices[getRandomIntEx(presets.pmcBotVoices.length)]; } //if its a raider, give him a noice voice
+			else{ BotBase.Info.Voice = "Scav_" + getRandomInt(1,6); } //or just set a simple scav voice
+
+			BotBase.Info.Settings.Role = params.Role; 
+			BotBase.Info.Settings.BotDifficulty = params.Difficulty;
+
+			//define a skin for the scav : 
+			BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/"+presets.Head[getRandomIntEx(presets.Head.length)] +".bundle";
+			BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/"+presets.Body[getRandomIntEx(presets.Body.length)] +".bundle";
+			BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/"+presets.Feet[getRandomIntEx(presets.Feet.length)] +".bundle";
+
+			//randomize skills (because why not?)
+			BotBase.Skills.Common.forEach(function(skill)
+			{
+				skill.Progress = getRandomIntEx(5000);
+				skill.MaxAchieved = skill.Progress;
+			});
+
+			//choose randomly a weapon from preset.json before filling items
+			var Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+
+			//check if its a pistol or a primary..
+			Weapon.isPistol = false;
+			presets.pistols.forEach(function(pistoltpl)
+			{   
+				if(pistoltpl == Weapon._items[0]._tpl){ Weapon.isPistol = true; }
+			});
+
+			//Add a vest or rig on the scav (can be an armored vest)
+			var tempw = {};
+			tempw._id = "TacticalVestScav"+ internalId;
+			tempw._tpl = presets.Rigs[getRandomIntEx(presets.Rigs.length)];
+			tempw.parentId = "5c6687d65e9d882c8841f0fd";
+			tempw.slotId = "TacticalVest";  
+			BotBase.Inventory.items.push(tempw);
+
+			//fill your dummy bot with the random selected preset weapon and its mods
+			Weapon._items.forEach(function(item)
+			{
+				if(item._id == Weapon._parent)//if its the weapon itself then add it differently
+				{
+					if( Weapon.isPistol == false )
+					{   
+						var tempw = {};
+						tempw._id = item._id;
+						tempw._tpl = item._tpl;
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "FirstPrimaryWeapon";  
+						BotBase.Inventory.items.push(tempw);
+					}
+					if( Weapon.isPistol == true )
+					{   
+						var tempw = {};
+						tempw._id = item._id;
+						tempw._tpl = item._tpl;
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "Holster";  
+						BotBase.Inventory.items.push(tempw);
+					}
+				}
+				else //add mods, vital parts, etcc
+				{   
+					//randomize magazine
+					if(item.slotId == "mod_magazine" )
+					{   
+						var compatiblesmags = {};
+						for(var slot of itemJSON[Weapon._items[0]._tpl]._props.Slots)
+						{
+							if (slot._name == "mod_magazine")
+							{
+								compatiblesmags = slot._props.filters[0].Filter;    //array of compatible mags for this weapon
+								break; 
+							} 
+						}
+
+						var ammo_filter = itemJSON[Weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos 
+
+						var isMosin = false;
+						presets.filter_mosin.forEach(function(someMosinId)
+						{
+							if(Weapon._items[0]._tpl == someMosinId){isMosin = true;}   //check if the weapon given is a mosin
+						});
+						
+						if(isMosin == false)
+						{                       
+							//add a magazine
+							var tempw = {};
+							tempw._id = "MagazineWeaponScav"+ internalId;
+							tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize the magazine of the weapon
+							var selectedmag = tempw._tpl //store this value 
+							tempw.parentId = Weapon._items[0]._id; //put this mag on the weapon
+							tempw.slotId = "mod_magazine";
+							BotBase.Inventory.items.push(tempw);
+
+							//then fill ammo of randomized mag
+							var tempw = {};
+							tempw._id = "AmmoMagazine1Scav"+ internalId;
+							tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
+							tempw.parentId = "MagazineWeaponScav"+ internalId; 
+							tempw.slotId = "cartridges";
+							tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count }; //fill the magazine
+							BotBase.Inventory.items.push(tempw);
+						}
+						else 
+						{
+							BotBase.Inventory.items.push(item);
+							//add a magazine
+							var tempw = {};
+							tempw._id = "AmmoMagazine1Scav"+ internalId;
+							tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
+							tempw.parentId = item._id ;
+							tempw.slotId = "cartridges";
+							tempw.upd = {"StackObjectsCount": itemJSON[item._tpl]._props.Cartridges[0]._max_count }; //fill the magazine
+							BotBase.Inventory.items.push(tempw);
+						}
+						
+						//add magazine in the vest
+						var tempw = {};
+						tempw._id = "magazine2VestScav"+ internalId;
+						tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
+						var selectedmag = tempw._tpl; //store the selected magazine template for ammo
+						tempw.parentId = "TacticalVestScav"+ internalId;
+						tempw.slotId = "2";
+						tempw.location =  {"x": 0,"y": 0,"r": 0};
+						BotBase.Inventory.items.push(tempw);
+
+						//add ammo in the magazine INSIDE THE VEST-RIG
+						var tempw = {};
+						tempw._id = "AmmoMagazine2Scav"+ internalId;
+						tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+						tempw.parentId = "magazine2VestScav"+ internalId;
+						tempw.slotId = "cartridges";
+						tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count };
+						BotBase.Inventory.items.push(tempw);
+
+						//add another magazine in the vest
+						var tempw = {};
+						tempw._id = "magazine3VestScav"+ internalId;
+						tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
+						var selectedmag = tempw._tpl; //store the selected magazine template for ammo
+						tempw.parentId = "TacticalVestScav"+ internalId;
+						tempw.slotId = "3";
+						tempw.location =  {"x": 0,"y": 0,"r": 0};
+						BotBase.Inventory.items.push(tempw);
+
+						var tempw = {};
+						tempw._id = "AmmoMagazine3Scav"+ internalId;
+						tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+						tempw.parentId = "magazine3VestScav"+ internalId;
+						tempw.slotId = "cartridges";
+						tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count };
+						BotBase.Inventory.items.push(tempw);
+
+						//add a stack of ammo for moslings and sks
+						var tempw = {};
+						tempw._id = "AmmoFree2Scav"+ internalId;
+						tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+						tempw.parentId = "TacticalVestScav"+ internalId;
+						tempw.slotId = "1";
+						tempw.upd = {"StackObjectsCount": getRandomInt(10,30) };
+						BotBase.Inventory.items.push(tempw);
+
+					}
+					else
+					{
+						BotBase.Inventory.items.push(item); //add mods and vital parts
+					}
+				}
+			});
+
+			//add a knife
+			var tempw = {};
+			tempw._id = "ScabbardScav"+ internalId;
+			tempw._tpl= presets.knives[getRandomIntEx(presets.knives.length)];  //yes exactly like above, randomize everything
+			tempw.parentId = "5c6687d65e9d882c8841f0fd";
+			tempw.slotId = "Scabbard";  
+			BotBase.Inventory.items.push(tempw);
+
+			if(getRandomIntEx(100) <= 30) //30% chance to add some glasses
+			{
+				var tempw = {};
+				tempw._id = "EyeWearScav"+ internalId;
+				tempw._tpl= presets.Eyewear[getRandomIntEx(presets.Eyewear.length)];
+				tempw.parentId = "5c6687d65e9d882c8841f0fd";
+				tempw.slotId = "Eyewear";  
+				BotBase.Inventory.items.push(tempw);
+			}
+
+			if(getRandomIntEx(100) <= 40)
+			{
+				var tempw = {};
+				tempw._id = "FaceCoverScav"+ internalId;
+				tempw._tpl= presets.Facecovers[getRandomIntEx(presets.Facecovers.length)];
+				tempw.parentId = "5c6687d65e9d882c8841f0fd";
+				tempw.slotId = "FaceCover";  
+				BotBase.Inventory.items.push(tempw);
+			}
+			
+			if(getRandomIntEx(100) <= 40 ) 
+			{
+				var tempw = {};
+				tempw._id = "HeadWearScav"+ internalId;
+				tempw._tpl= presets.Headwear[getRandomIntEx(presets.Headwear.length)];
+				tempw.parentId = "5c6687d65e9d882c8841f0fd";
+				tempw.slotId = "Headwear";  
+				BotBase.Inventory.items.push(tempw);
+			}
+
+			if(getRandomIntEx(100) <= 25) 
+			{
+				var tempw = {};
+				tempw._id = "BackpackScav"+ internalId;
+				tempw._tpl= presets.Backpacks[getRandomIntEx(presets.Backpacks.length)];
+				tempw.parentId = "5c6687d65e9d882c8841f0fd";
+				tempw.slotId = "Backpack";  
+				BotBase.Inventory.items.push(tempw);
+
+				if(getRandomIntEx(100) <= 50) //chance to add something inside
+				{
+					//to be implemented...
+				}
+			}   
+			if(getRandomIntEx(100) <=  25) 
+			{
+				var tempw = {};
+				tempw._id = "ArmorVestScav"+ internalId;
+				tempw._tpl= presets.Armors[getRandomIntEx(presets.Armors.length)];
+				tempw.parentId = "5c6687d65e9d882c8841f0fd";
+				tempw.slotId = "ArmorVest";
+				var durabl = getRandomIntEx(45);
+				tempw.upd = {"Repairable": {"Durability": durabl }};
+				BotBase.Inventory.items.push(tempw);
+			}
+
+			if(getRandomIntEx(100) <= 10 ) 
+			{
+				var tempw = {};
+				tempw._id = "PocketItemScav"+ internalId;
+				tempw._tpl= presets.Grenades[getRandomIntEx(presets.Grenades.length)];
+				tempw.parentId = "5c6687d65e9d882c8841f121";
+				tempw.slotId = "pocket1"; 
+				tempw.location =  {"x": 0,"y": 0,"r": 0}; 
+				BotBase.Inventory.items.push(tempw);
+			}
+
+			bots_number++; //just a counter :)
+			generatedBots.push(BotBase); //don't forget to add your nice scav with all other
+			
+		}
+	});
+	
+	fs.writeFileSync('bots/bot_generate_v2.json', JSON.stringify(generatedBots, null, "\t"), 'utf8'); //just a log file ... 
+	console.log("generated " +  bots_number + " scavs possibilities");
+	return generatedBots;
+}
+
+function RagfairOffers(request)
+{
+	/* // forecast/provide flea market api management when i will find that famous search.json
+	request = JSON.parse(request)
+	if(request.handbookId != "")
+	{
+		var handbook = JSON.parse( ReadJson('templates.json') );
+		handbook.data.Categories.forEach(function(categ)
+		{
+			if(categ.Id == request.handbookId)
+			{
+				//console.log(categ);
+			}
+		});
+	}
+
+	if( request.linkedSearchId != "" )
+	{
+		itemJSON[request.linkedSearchId]._props.Slots.forEach(function(ItemSlot)
+		{   
+			ItemSlot._props.filters.forEach(function(itemSlotFilter)
+			{   
+				itemSlotFilter.Filter.forEach(function(mod)
+				{
+					//console.log( itemJSON[mod]._name ); 
+				})
+				
+			});
+			
+		});
+		
+	}*/
+}
+
 function handleMoving(body) {
 	console.log(body);
 	var tmpList = JSON.parse(ReadJson('list.json'));
@@ -399,7 +730,8 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('quest_list.json');
 			break;
 		case "/client/game/bot/generate":
-			FinalOutput = ReadJson('bot_generate.json');
+			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
+			//FinalOutput = ReadJson('bot_generate.json');
 			break;
 		case "/client/trading/api/getTradersList":
 			FinalOutput = ReadJson('traderList.json');
