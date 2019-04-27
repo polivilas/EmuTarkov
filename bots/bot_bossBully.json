@@ -1,11 +1,11 @@
 {
-    "_id": "",
+    "_id": "BossReshala",
     "aid": 0,
     "savage": null,
     "Info": 
     {
-        "Nickname": "scav",
-        "LowerNickname": "",
+        "Nickname": "Reshala",
+        "LowerNickname": "reshala",
         "Side": "savage",
         "Voice": "Scav_5",
         "Level": 1,
@@ -18,8 +18,8 @@
         "LastTimePlayedAsSavage": 0,
         "Settings": 
         {
-            "Role": "assault",
-            "BotDifficulty": "normal",
+            "Role": "bossBully",
+            "BotDifficulty": "hard",
             "Experience": -1
         },
         "NeedWipe": false,
@@ -30,17 +30,17 @@
     {
         "Head": 
         {
-            "path": "assets/content/characters/character/prefabs/.bundle",
+            "path": "assets/content/characters/character/prefabs/wild_dealmaker_head.bundle",
             "rcid": null
         },
         "Body": 
         {
-            "path": "assets/content/characters/character/prefabs/.bundle",
+            "path": "assets/content/characters/character/prefabs/wild_dealmaker_body.bundle",
             "rcid": ""
         },
         "Feet": 
         {
-            "path": "assets/content/characters/character/prefabs/.bundle",
+            "path": "assets/content/characters/character/prefabs/wild_dealmaker_feet.bundle",
             "rcid": null
         },
         "Hands": 
@@ -67,56 +67,56 @@
             {
                 "Health": 
                 {
-                    "Current": 35,
-                    "Maximum": 35
+                    "Current": 62,
+                    "Maximum": 62
                 }
             },
             "Chest": 
             {
                 "Health": 
                 {
-                    "Current": 80,
-                    "Maximum": 80
+                    "Current": 138,
+                    "Maximum": 138
                 }
             },
             "Stomach": 
             {
                 "Health": 
                 {
-                    "Current": 70,
-                    "Maximum": 70
+                    "Current": 120,
+                    "Maximum": 120
                 }
             },
             "LeftArm": 
             {
                 "Health": 
                 {
-                    "Current": 60,
-                    "Maximum": 60
+                    "Current": 100,
+                    "Maximum": 100
                 }
             },
             "RightArm": 
             {
                 "Health": 
                 {
-                    "Current": 60,
-                    "Maximum": 60
+                    "Current": 100,
+                    "Maximum": 100
                 }
             },
             "LeftLeg": 
             {
                 "Health": 
                 {
-                    "Current": 65,
-                    "Maximum": 65
+                    "Current": 110,
+                    "Maximum": 110
                 }
             },
             "RightLeg": 
             {
                 "Health": 
                 {
-                    "Current": 65,
-                    "Maximum": 65
+                    "Current": 110,
+                    "Maximum": 110
                 }
             }
         }
@@ -129,12 +129,78 @@
                 "_id": "5c6687d65e9d882c8841f0fd",
                 "_tpl": "55d7217a4bdc2d86028b456d"
             },
-
             {
                 "_id": "5c6687d65e9d882c8841f121",
-                "_tpl": "557ffd194bdc2d28148b457f",
+                "_tpl": "5af99e9186f7747c447120b8",
                 "parentId": "5c6687d65e9d882c8841f0fd",
                 "slotId": "Pockets"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3514",
+                "_tpl": "5b3b713c5acfc4330140bd8d",
+                "parentId": "5c6687d65e9d882c8841f0fd",
+                "slotId": "Holster"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3515",
+                "_tpl": "5b3baf8f5acfc40dc5296692",
+                "parentId": "5b44abe986f774283e2e3514",
+                "slotId": "mod_barrel"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3516",
+                "_tpl": "5b3cadf35acfc400194776a0",
+                "parentId": "5b44abe986f774283e2e3514",
+                "slotId": "mod_pistol_grip"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3517",
+                "_tpl": "571a29dc2459771fb2755a6a",
+                "parentId": "5b44abe986f774283e2e3514",
+                "slotId": "mod_magazine"
+            },
+            {
+                "_id": "ammoMagWeaponReshala",
+                "_tpl": "573602322459776445391df1",
+                "parentId": "5b44abe986f774283e2e3517",
+                "slotId": "cartridges",
+                "upd": {"StackObjectsCount": 8 }
+            },
+            
+            {
+                "_id": "grenade1Reshala",
+                "_tpl": "5710c24ad2720bc3458b45a3",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket1",
+                "location": {"x": 0,"y": 0,"r": 0}
+            },
+            {
+                "_id": "grenade2Reshala",
+                "_tpl": "5710c24ad2720bc3458b45a3",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket2",
+                "location": {"x": 0,"y": 0,"r": 0}
+            },
+            {
+                "_id": "meds3Reshala",
+                "_tpl": "590c678286f77426c9660122",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket3",
+                "location": {"x": 0,"y": 0,"r": 0}
+            },
+            {
+                "_id": "mag4reshala",
+                "_tpl": "571a29dc2459771fb2755a6a",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket4",
+                "location": {"x": 0,"y": 0,"r": 0}
+            },
+            {
+                "_id": "ammoMag4Reshala",
+                "_tpl": "573602322459776445391df1",
+                "parentId": "mag4reshala",
+                "slotId": "cartridges",
+                "upd": {"StackObjectsCount": 8 }
             },
             {
               "_id": "5c6687d65e9d882c8841f0fc",
