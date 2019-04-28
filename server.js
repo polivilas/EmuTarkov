@@ -179,7 +179,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 
 						switch(params.Role)
 						{
-							case"followerBully":
+							case "followerBully":
 								BotBase._id  = "guard_" + internalId;
 								BotBase.Info.Nickname = "Guard " + i;
 								BotBase.Info.LowerNickname = "guard" + internalId;
@@ -188,13 +188,13 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 								BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/wild_security_feet_1.bundle";
 							break;
 
-							case"marksman":
+							case "marksman":
 								BotBase._id  = "sniper_" + internalId;
-								BotBase.Info.Nickname = "Sniper  " + internalId;
+								BotBase.Info.Nickname = "Sniper " + internalId;
 								BotBase.Info.LowerNickname = "sniper" + internalId;
 							break;
-	
-							case"pmcBot":
+	 
+							case "pmcBot":
 								BotBase._id  = "raider_" + internalId;
 								BotBase.Info.Nickname = "Raider  " + internalId;
 								BotBase.Info.LowerNickname = "raider" + internalId;
@@ -217,6 +217,19 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 
 					//choose randomly a weapon from preset.json before filling items
 					var Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+					if(params.Role == "marksman")
+					{
+						var found = false;
+						while(found == false)
+						{
+							Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+							presets.filter_marksman.forEach(function(filter)
+							{
+								if(Weapon._items[0]._tpl == filter){ found = true; }
+							});
+						}
+					}
+
 
 					//check if its a pistol or a primary..
 					Weapon.isPistol = false;
@@ -820,6 +833,19 @@ function handleRequest(req, body, url) {
 			break;
 		case "/client/ragfair/search":
 			FinalOutput = ReadJson('ragfair/search.json');
+			break;
+		case "/dump":
+
+				var presetExtended = JSON.parse(ReadJson("bots/presetExtended.json"));
+
+				presetExtended.data.forEach(function(pres)
+				{
+					if(pres._items[0]._tpl == "5aafa857e5b5b00018480968")
+					{
+						console.log(pres._id);
+					}					
+				});
+
 			break;
 		default:
 			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
