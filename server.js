@@ -129,10 +129,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 			
 			default:
 
-				if(params.Role == "followerBully")
-				{
-					params.Limit = 9;
-				}
+				if(params.Role == "followerBully"){ params.Limit = 5; }
 
 				for (var i = 1; i <= params.Limit ;i++) //generate as many as the game request
 				{
@@ -142,7 +139,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 					if(presets.EnablePmcWar == true)	
 					{		
 
-						if(getRandomIntEx(100) >= 55 )
+						if( getRandomIntEx(100) >= 55 )
 						{	
 							BotBase._id  = "Usec" + internalId;
 							BotBase.Info.Nickname = "Usec " + internalId;
@@ -229,7 +226,6 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 							});
 						}
 					}
-
 
 					//check if its a pistol or a primary..
 					Weapon.isPistol = false;
@@ -379,6 +375,13 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 							}
 						}
 					});
+					
+					for( var bdpt in BotBase.Health.BodyParts )
+					{
+						BotBase.Health.BodyParts[bdpt].Health.Current = BotBase.Health.BodyParts[bdpt].Health.Current + getRandomInt(-10,10);
+						BotBase.Health.BodyParts[bdpt].Health.Maximum = BotBase.Health.BodyParts[bdpt].Health.Current;
+					}
+
 
 					//add a knife
 					var tempw = {};
@@ -528,6 +531,93 @@ function handleMoving(body) {
 			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 			FinalOutput = "OK";
 			break;
+
+		case "QuestComplete":
+
+			tmpList.data[1].Quests.forEach(function(quest)
+			{
+				if(quest.qid == body.qid){quest.status = 4;}
+			});
+
+			//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
+
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			FinalOutput = "OK";
+			break;
+
+		/*
+		case "QuestHandover": //save progression of quests, but how to store it in the profile ? 
+
+			body.items.forEach(function(idToRemove)
+			{
+				for( var i = 0; i < tmpList.data[1].Inventory.items.length; i++)
+				{ 	
+					if ( tmpList.data[1].Inventory.items[i]._id === idToRemove.id || tmpList.data[1].Inventory.items[i].parentId === idToRemove.id) 
+					{	
+						tmpList.data[1].Inventory.items.splice(i, 1); 			
+					}
+				}
+				
+				tmpList.data[1].Quests.forEach(function(quest)
+				{
+					if(quest.qid == body.qid)
+					{
+						quest.condition[body.conditionId] + 1; ~ ~ ~ 
+					}
+				})
+
+			});
+	
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			FinalOutput = "OK";
+			break;
+		*/
+
+		/*
+		case "Heal": 
+			for (var bdpart in tmpList.data[1].Health.BodyParts)
+			{
+				if(bdpart == body.part)
+				{
+					tmpList.data[1].Health.BodyParts[bdpart].Health.Current = tmpList.data[1].Health.BodyParts[bdpart].Health.Current + body.count;
+					//modify body.item hp ressource in list.json
+					//and check if its 0 = delete the item 
+					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+
+					FinalOutput = "OK";
+					break;
+				}
+			}	
+		break;
+		
+		case "Eat":
+
+			var metabolism = tmpList.data[1].Skills.Common.Metabolism.Progress;
+			var effects = [];
+			tmpList.data[1].Inventory.forEach(function(inv)
+			{
+				if(inv._id == body.item)
+				{
+					effects[0] = itemJSON[inv._tpl].effects_health.energy.value;
+					effects[1] = itemJSON[inv._tpl].effects_health.hydratation.value;	
+				}
+			});  
+			
+			effects[0] = effects[0] * metabolism/10000 + 1;
+			effects[1] = effects[1] * metabolism/10000 + 1;
+
+			tmpList.data[1].Health.Hydratation.Current = tmpList.data[1].Health.Hydratation.Current + effects[1];
+			tmpList.data[1].Health.Energy.Current = tmpList.data[1].Health.Energy.Current + effects[0];
+
+			//modify body.item ressource in list.json
+			//and check if its 0 = delete the item 
+
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			FinalOutput = "OK";
+
+		break;
+		*/
+
 		case "Move":
 			
 			for (var key in tmpList.data[1].Inventory.items) {
@@ -710,6 +800,9 @@ function handleMoving(body) {
 				}
 			}
 			break;
+
+
+
 		default:
 			console.log("UNHANDLED ACTION");
 			break;
@@ -834,19 +927,74 @@ function handleRequest(req, body, url) {
 		case "/client/ragfair/search":
 			FinalOutput = ReadJson('ragfair/search.json');
 			break;
+
 		case "/dump":
+			/*
+			var locales = JSON.parse( ReadJson('locale_en.json') );
+			var templates = JSON.parse( ReadJson('templates.json') );
+			var res = [];
 
-				var presetExtended = JSON.parse(ReadJson("bots/presetExtended.json"));
-
-				presetExtended.data.forEach(function(pres)
+			var weaponcateglist = [];
+			
+			templates.data.Categories.forEach(function(categ)
+			{
+				if(categ.ParentId == "5b5f78dc86f77409407a7f8e")
 				{
-					if(pres._items[0]._tpl == "5aafa857e5b5b00018480968")
-					{
-						console.log(pres._id);
-					}					
-				});
+					weaponcateglist.push(categ.Id);
+				}
+			});
 
+			
+			var WeaponIdList = []
+			templates.data.Items.forEach(function(item)
+			{
+				weaponcateglist.forEach(function(weapcateg)
+				{
+					if(weapcateg == item.ParentId)
+					{
+						WeaponIdList.push(item.Id);
+					}
+				});
+			});
+
+			WeaponIdList.forEach(function(weaponid)
+			{
+				var tempitem = {};
+				tempitem.weaponName = locales.data.templates[ weaponid ].Name;
+				tempitem.slots = [];
+
+				for( var slot in itemJSON[weaponid]._props.Slots)
+				{
+					
+					var tempslot = {}
+					tempslot.modSlot = itemJSON[weaponid]._props.Slots[slot]._name
+					tempslot.modName = [];
+					itemJSON[weaponid]._props.Slots[slot]._props.filters[0].Filter.forEach(function(filtr)
+					{	
+						tempslot.modName.push( locales.data.templates[ filtr ].Name);
+					});
+					tempitem.slots.push(tempslot);
+					
+				}
+
+				if(itemJSON[weaponid]._props.Chambers != undefined )
+				{
+					var chamber = {}
+					chamber.modSlot = "Chamber";
+					chamber.ammos = [];	
+					itemJSON[weaponid]._props.Chambers[0]._props.filters[0].Filter.forEach(function(ammo)
+					{
+						chamber.ammos.push( locales.data.templates[ ammo ].Name );
+					});
+					tempitem.slots.push(chamber);
+				}
+				res.push(tempitem);
+			});
+
+			fs.writeFileSync('weapon_dependencies.json', JSON.stringify(res, null, "\t"), 'utf8');
+			*/
 			break;
+
 		default:
 			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
 			break;
