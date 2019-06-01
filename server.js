@@ -927,6 +927,9 @@ function handleRequest(req, body, url) {
 		case "/client/ragfair/search":
 			FinalOutput = ReadJson('ragfair/search.json');
 			break;
+		case "/client/match/available":
+			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
+			break;
 
 		case "/dump":
 			/*
@@ -994,7 +997,6 @@ function handleRequest(req, body, url) {
 			fs.writeFileSync('weapon_dependencies.json', JSON.stringify(res, null, "\t"), 'utf8');
 			*/
 			break;
-
 		default:
 			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
 			break;
