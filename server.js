@@ -29,10 +29,14 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } // stolen off StackOverflow
 
+function getRandomIntEx(max) 
+{
+	return Math.floor(Math.random() * Math.floor(max));
+}
+
 function GenItemID(){
 	return Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString(); 
 }
-
 
 function getItem(template)
 {
@@ -51,7 +55,7 @@ function getSize(itemtpl, itemID, location)
 	if (!tmpItem[0])
 	{
 		console.log("SHITS FUCKED GETSIZE1", itemID);
-		return;
+		return; 
 	} else {
 		tmpItem = tmpItem[1];
 	}
@@ -95,6 +99,428 @@ function getSize(itemtpl, itemID, location)
 	}
 	return [outX, outY, outL, outR, outU, outD];
 }
+
+function generateBots(databots) //Welcome to the Scav Randomizer :) 
+{
+	var generatedBots = [];
+	var bots_number = 0;
+	var presets = JSON.parse(ReadJson("bots/BotsSettings.json"))
+	
+	var weaponPresets = JSON.parse(ReadJson("bots/presetExtended.json")); //load all weapons
+	databots.conditions.forEach(function(params) // loop to generate all scavs 
+	{
+		switch(params.Role)
+		{	
+			case "bossBully":
+				bots_number++;
+				var boss = JSON.parse(ReadJson("bots/bot_bossBully.json"))
+				boss.Info.Settings.Role = params.Role; 
+				boss.Info.Settings.BotDifficulty = params.Difficulty;
+				generatedBots.push(boss);
+			break;
+			
+			case "bossKilla":
+				bots_number++;
+				var boss = JSON.parse(ReadJson("bots/bot_bossKilla.json"))
+				boss.Info.Settings.Role = params.Role; 
+				boss.Info.Settings.BotDifficulty = params.Difficulty;
+				generatedBots.push(boss);
+			break;
+			
+			default:
+
+				if(params.Role == "followerBully"){ params.Limit = 5; }
+
+				for (var i = 1; i <= params.Limit ;i++) //generate as many as the game request
+				{
+					var BotBase = JSON.parse(ReadJson("bots/bot_base.json")); //load a dummy bot with nothing
+					var internalId = getRandomIntEx(10000); //generate a scavSeed
+
+					if(presets.EnablePmcWar == true)	
+					{		
+
+						if( getRandomIntEx(100) >= 55 )
+						{	
+							BotBase._id  = "Usec" + internalId;
+							BotBase.Info.Nickname = "Usec " + internalId;
+							BotBase.Info.LowerNickname = "usec" + internalId;
+							BotBase.Info.Side = "Usec";
+							BotBase.Info.Voice = "Usec_"+getRandomInt(1,3);
+							BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/usec_head_1.bundle";
+							BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/usec_body.bundle";
+							BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/usec_feet.bundle";
+						}
+						else
+						{
+							BotBase._id  = "Bear" + internalId;
+							BotBase.Info.Nickname = "Bear " + internalId;
+							BotBase.Info.LowerNickname = "Bear" + internalId;
+							BotBase.Info.Side = "Bear";
+							BotBase.Info.Voice = "Bear_"+getRandomInt(1,2);
+							BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/bear_head.bundle";
+							BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/bear_body.bundle";
+							BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/bear_feet.bundle";
+						}
+					}
+					else
+					{	
+						BotBase._id  = "scav_" + internalId;
+						BotBase.Info.Nickname = "Scav " + internalId;
+						BotBase.Info.LowerNickname = "scav" + internalId;
+
+						//define a skin for the scav : 
+						BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/"+presets.Head[getRandomIntEx(presets.Head.length)] +".bundle";
+						BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/"+presets.Body[getRandomIntEx(presets.Body.length)] +".bundle";
+						BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/"+presets.Feet[getRandomIntEx(presets.Feet.length)] +".bundle";
+						BotBase.Info.Voice = "Scav_" + getRandomInt(1,6); 
+
+						switch(params.Role)
+						{
+							case "followerBully":
+								BotBase._id  = "guard_" + internalId;
+								BotBase.Info.Nickname = "Guard " + i;
+								BotBase.Info.LowerNickname = "guard" + internalId;
+								BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/wild_head_1.bundle";
+								BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/wild_security_body_1.bundle";
+								BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/wild_security_feet_1.bundle";
+							break;
+
+							case "marksman":
+								BotBase._id  = "sniper_" + internalId;
+								BotBase.Info.Nickname = "Sniper " + internalId;
+								BotBase.Info.LowerNickname = "sniper" + internalId;
+							break;
+	 
+							case "pmcBot":
+								BotBase._id  = "raider_" + internalId;
+								BotBase.Info.Nickname = "Raider  " + internalId;
+								BotBase.Info.LowerNickname = "raider" + internalId;
+								BotBase.Info.Voice = presets.pmcBotVoices[getRandomIntEx(presets.pmcBotVoices.length)];
+							break;	
+						}
+					}
+
+					BotBase.Info.Settings.Role = params.Role; 
+					BotBase.Info.Settings.BotDifficulty = params.Difficulty;
+
+					//randomize skills (because why not?)
+					BotBase.Skills.Common.forEach(function(skill)
+					{
+						skill.Progress = getRandomIntEx(5000);
+						skill.MaxAchieved = skill.Progress;
+					});
+
+					BotBase.Info.Experience = getRandomIntEx(25000000); //level 70 max
+
+					//choose randomly a weapon from preset.json before filling items
+					var Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+					if(params.Role == "marksman")
+					{
+						var found = false;
+						while(found == false)
+						{
+							Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+							presets.filter_marksman.forEach(function(filter)
+							{
+								if(Weapon._items[0]._tpl == filter){ found = true; }
+							});
+						}
+					}
+
+					//check if its a pistol or a primary..
+					Weapon.isPistol = false;
+					presets.pistols.forEach(function(pistoltpl)
+					{   
+						if(pistoltpl == Weapon._items[0]._tpl){ Weapon.isPistol = true; }
+					});
+
+					//Add a vest or rig on the scav (can be an armored vest)
+					var tempw = {};
+					tempw._id = "TacticalVestScav"+ internalId;
+					tempw._tpl = presets.Rigs[getRandomIntEx(presets.Rigs.length)];
+					tempw.parentId = "5c6687d65e9d882c8841f0fd";
+					tempw.slotId = "TacticalVest";  
+					BotBase.Inventory.items.push(tempw);
+
+					//fill your dummy bot with the random selected preset weapon and its mods
+					Weapon._items.forEach(function(item)
+					{
+						if(item._id == Weapon._parent)//if its the weapon itself then add it differently
+						{
+							if( Weapon.isPistol == false )
+							{   
+								var tempw = {};
+								tempw._id = item._id;
+								tempw._tpl = item._tpl;
+								tempw.parentId = "5c6687d65e9d882c8841f0fd";
+								tempw.slotId = "FirstPrimaryWeapon";  
+								BotBase.Inventory.items.push(tempw);
+							}
+							if( Weapon.isPistol == true )
+							{   
+								var tempw = {};
+								tempw._id = item._id;
+								tempw._tpl = item._tpl;
+								tempw.parentId = "5c6687d65e9d882c8841f0fd";
+								tempw.slotId = "Holster";  
+								BotBase.Inventory.items.push(tempw);
+							}
+						}
+						else //add mods, vital parts, etcc
+						{   
+							//randomize magazine
+							if(item.slotId == "mod_magazine" )
+							{   
+								var compatiblesmags = {};
+								for(var slot of itemJSON[Weapon._items[0]._tpl]._props.Slots)
+								{
+									if (slot._name == "mod_magazine")
+									{
+										compatiblesmags = slot._props.filters[0].Filter;    //array of compatible mags for this weapon
+										break; 
+									} 
+								}
+
+								var ammo_filter = itemJSON[Weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos 
+
+								var isMosin = false;
+								presets.filter_mosin.forEach(function(someMosinId)
+								{
+									if(Weapon._items[0]._tpl == someMosinId){isMosin = true;}   //check if the weapon given is a mosin
+								});
+								
+								if(isMosin == false)
+								{                       
+									//add a magazine
+									var tempw = {};
+									tempw._id = "MagazineWeaponScav"+ internalId;
+									tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize the magazine of the weapon
+									var selectedmag = tempw._tpl //store this value 
+									tempw.parentId = Weapon._items[0]._id; //put this mag on the weapon
+									tempw.slotId = "mod_magazine";
+									BotBase.Inventory.items.push(tempw);
+
+									//then fill ammo of randomized mag
+									var tempw = {};
+									tempw._id = "AmmoMagazine1Scav"+ internalId;
+									tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
+									tempw.parentId = "MagazineWeaponScav"+ internalId; 
+									tempw.slotId = "cartridges";
+									tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count }; //fill the magazine
+									BotBase.Inventory.items.push(tempw);
+								}
+								else //don't randomize mosin magazine ! 
+								{
+									BotBase.Inventory.items.push(item);
+									//add a magazine
+									var tempw = {};
+									tempw._id = "AmmoMagazine1Scav"+ internalId;
+									tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
+									tempw.parentId = item._id ;
+									tempw.slotId = "cartridges";
+									tempw.upd = {"StackObjectsCount": itemJSON[item._tpl]._props.Cartridges[0]._max_count }; //fill the magazine
+									BotBase.Inventory.items.push(tempw);
+								}
+								
+								//add magazine in the vest
+								var tempw = {};
+								tempw._id = "magazine2VestScav"+ internalId;
+								tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
+								var selectedmag = tempw._tpl; //store the selected magazine template for ammo
+								tempw.parentId = "TacticalVestScav"+ internalId;
+								tempw.slotId = "2";
+								tempw.location =  {"x": 0,"y": 0,"r": 0};
+								BotBase.Inventory.items.push(tempw);
+
+								//add ammo in the magazine INSIDE THE VEST-RIG
+								var tempw = {};
+								tempw._id = "AmmoMagazine2Scav"+ internalId;
+								tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+								tempw.parentId = "magazine2VestScav"+ internalId;
+								tempw.slotId = "cartridges";
+								tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count };
+								BotBase.Inventory.items.push(tempw);
+
+								//add another magazine in the vest
+								var tempw = {};
+								tempw._id = "magazine3VestScav"+ internalId;
+								tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
+								var selectedmag = tempw._tpl; //store the selected magazine template for ammo
+								tempw.parentId = "TacticalVestScav"+ internalId;
+								tempw.slotId = "3";
+								tempw.location =  {"x": 0,"y": 0,"r": 0};
+								BotBase.Inventory.items.push(tempw);
+
+								var tempw = {};
+								tempw._id = "AmmoMagazine3Scav"+ internalId;
+								tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+								tempw.parentId = "magazine3VestScav"+ internalId;
+								tempw.slotId = "cartridges";
+								tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count };
+								BotBase.Inventory.items.push(tempw);
+
+								//add a stack of ammo for moslings and sks
+								var tempw = {};
+								tempw._id = "AmmoFree2Scav"+ internalId;
+								tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+								tempw.parentId = "TacticalVestScav"+ internalId;
+								tempw.slotId = "1";
+								tempw.upd = {"StackObjectsCount": getRandomInt(10,30) };
+								BotBase.Inventory.items.push(tempw);
+
+							}
+							else
+							{
+								BotBase.Inventory.items.push(item); //add mods and vital parts
+							}
+						}
+					});
+					
+					for( var bdpt in BotBase.Health.BodyParts )
+					{
+						BotBase.Health.BodyParts[bdpt].Health.Current = BotBase.Health.BodyParts[bdpt].Health.Current + getRandomInt(-10,10);
+						BotBase.Health.BodyParts[bdpt].Health.Maximum = BotBase.Health.BodyParts[bdpt].Health.Current;
+					}
+
+
+					//add a knife
+					var tempw = {};
+					tempw._id = "ScabbardScav"+ internalId;
+					tempw._tpl= presets.knives[getRandomIntEx(presets.knives.length)];  //yes exactly like above, randomize everything
+					tempw.parentId = "5c6687d65e9d882c8841f0fd";
+					tempw.slotId = "Scabbard";  
+					BotBase.Inventory.items.push(tempw);
+
+
+					if(getRandomIntEx(100) <= 30) //30% chance to add some glasses
+					{
+						var tempw = {};
+						tempw._id = "EyeWearScav"+ internalId;
+						tempw._tpl= presets.Eyewear[getRandomIntEx(presets.Eyewear.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "Eyewear";  
+						BotBase.Inventory.items.push(tempw);
+					}
+
+					if(getRandomIntEx(100) <= 40)
+					{
+						var tempw = {};
+						tempw._id = "FaceCoverScav"+ internalId;
+						tempw._tpl= presets.Facecovers[getRandomIntEx(presets.Facecovers.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "FaceCover";  
+						BotBase.Inventory.items.push(tempw);
+					}
+					
+					if(getRandomIntEx(100) <= 40 ) 
+					{
+						var tempw = {};
+						tempw._id = "HeadWearScav"+ internalId;
+						tempw._tpl= presets.Headwear[getRandomIntEx(presets.Headwear.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "Headwear";  
+						BotBase.Inventory.items.push(tempw);
+					}
+
+					if(getRandomIntEx(100) <= 25) 
+					{
+						var tempw = {};
+						tempw._id = "BackpackScav"+ internalId;
+						tempw._tpl= presets.Backpacks[getRandomIntEx(presets.Backpacks.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "Backpack";  
+						BotBase.Inventory.items.push(tempw);
+
+						if(getRandomIntEx(100) <= 50) //chance to add something inside
+						{
+							//to be implemented...
+						}
+					}   
+					if(getRandomIntEx(100) <=  25) 
+					{
+						var tempw = {};
+						tempw._id = "ArmorVestScav"+ internalId;
+						tempw._tpl= presets.Armors[getRandomIntEx(presets.Armors.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f0fd";
+						tempw.slotId = "ArmorVest";
+						var durabl = getRandomIntEx(45);
+						tempw.upd = {"Repairable": {"Durability": durabl }};
+						BotBase.Inventory.items.push(tempw);
+					}
+
+					if(getRandomIntEx(100) <=  10 || params.Role == "followerBully") //add meds
+					{
+						
+						var tempw = {};
+						tempw._id = "PocketMedScav"+ internalId;
+						tempw._tpl= presets.meds[getRandomIntEx(presets.meds.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f121";
+						tempw.slotId = "pocket2"; 
+						tempw.location =  {"x": 0,"y": 0,"r": 0}; 
+						BotBase.Inventory.items.push(tempw);
+						
+					}
+
+					if(getRandomIntEx(100) <= 10 || params.Role == "followerBully" ) 
+					{
+						var tempw = {};
+						tempw._id = "PocketItemScav"+ internalId;
+						tempw._tpl= presets.Grenades[getRandomIntEx(presets.Grenades.length)];
+						tempw.parentId = "5c6687d65e9d882c8841f121";
+						tempw.slotId = "pocket1"; 
+						tempw.location =  {"x": 0,"y": 0,"r": 0}; 
+						BotBase.Inventory.items.push(tempw);
+					}
+
+					bots_number++; //just a counter :)
+					generatedBots.push(BotBase); //don't forget to add your nice scav with all other
+					
+				}
+			break;
+		}
+	});
+	
+	//fs.writeFileSync('bots/bot_generate_v2.json', JSON.stringify(generatedBots, null, "\t"), 'utf8'); //just a log file ... 
+	console.log("generated " +  bots_number + " scavs possibilities");
+	return generatedBots;
+}
+
+
+
+function RagfairOffers(request)
+{
+	/* // forecast/provide flea market api management when i will find that famous search.json
+	request = JSON.parse(request)
+	if(request.handbookId != "")
+	{
+		var handbook = JSON.parse( ReadJson('templates.json') );
+		handbook.data.Categories.forEach(function(categ)
+		{
+			if(categ.Id == request.handbookId)
+			{
+				//console.log(categ);
+			}
+		});
+	}
+
+	if( request.linkedSearchId != "" )
+	{
+		itemJSON[request.linkedSearchId]._props.Slots.forEach(function(ItemSlot)
+		{   
+			ItemSlot._props.filters.forEach(function(itemSlotFilter)
+			{   
+				itemSlotFilter.Filter.forEach(function(mod)
+				{
+					//console.log( itemJSON[mod]._name ); 
+				})
+				
+			});
+			
+		});
+		
+	}*/
+}
+
 function handleMoving(body) {
 	console.log(body);
 	var tmpList = JSON.parse(ReadJson('list.json'));
@@ -105,6 +531,93 @@ function handleMoving(body) {
 			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 			FinalOutput = "OK";
 			break;
+
+		case "QuestComplete":
+
+			tmpList.data[1].Quests.forEach(function(quest)
+			{
+				if(quest.qid == body.qid){quest.status = 4;}
+			});
+
+			//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
+
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			FinalOutput = "OK";
+			break;
+
+		/*
+		case "QuestHandover": //save progression of quests, but how to store it in the profile ? 
+
+			body.items.forEach(function(idToRemove)
+			{
+				for( var i = 0; i < tmpList.data[1].Inventory.items.length; i++)
+				{ 	
+					if ( tmpList.data[1].Inventory.items[i]._id === idToRemove.id || tmpList.data[1].Inventory.items[i].parentId === idToRemove.id) 
+					{	
+						tmpList.data[1].Inventory.items.splice(i, 1); 			
+					}
+				}
+				
+				tmpList.data[1].Quests.forEach(function(quest)
+				{
+					if(quest.qid == body.qid)
+					{
+						quest.condition[body.conditionId] + 1; ~ ~ ~ 
+					}
+				})
+
+			});
+	
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			FinalOutput = "OK";
+			break;
+		*/
+
+		/*
+		case "Heal": 
+			for (var bdpart in tmpList.data[1].Health.BodyParts)
+			{
+				if(bdpart == body.part)
+				{
+					tmpList.data[1].Health.BodyParts[bdpart].Health.Current = tmpList.data[1].Health.BodyParts[bdpart].Health.Current + body.count;
+					//modify body.item hp ressource in list.json
+					//and check if its 0 = delete the item 
+					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+
+					FinalOutput = "OK";
+					break;
+				}
+			}	
+		break;
+		
+		case "Eat":
+
+			var metabolism = tmpList.data[1].Skills.Common.Metabolism.Progress;
+			var effects = [];
+			tmpList.data[1].Inventory.forEach(function(inv)
+			{
+				if(inv._id == body.item)
+				{
+					effects[0] = itemJSON[inv._tpl].effects_health.energy.value;
+					effects[1] = itemJSON[inv._tpl].effects_health.hydratation.value;	
+				}
+			});  
+			
+			effects[0] = effects[0] * metabolism/10000 + 1;
+			effects[1] = effects[1] * metabolism/10000 + 1;
+
+			tmpList.data[1].Health.Hydratation.Current = tmpList.data[1].Health.Hydratation.Current + effects[1];
+			tmpList.data[1].Health.Energy.Current = tmpList.data[1].Health.Energy.Current + effects[0];
+
+			//modify body.item ressource in list.json
+			//and check if its 0 = delete the item 
+
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			FinalOutput = "OK";
+
+		break;
+		*/
+
 		case "Move":
 			
 			for (var key in tmpList.data[1].Inventory.items) {
@@ -287,6 +800,9 @@ function handleMoving(body) {
 				}
 			}
 			break;
+
+
+
 		default:
 			console.log("UNHANDLED ACTION");
 			break;
@@ -399,7 +915,8 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('quest_list.json');
 			break;
 		case "/client/game/bot/generate":
-			FinalOutput = ReadJson('bot_generate.json');
+			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
+			//FinalOutput = ReadJson('bot_generate.json');
 			break;
 		case "/client/trading/api/getTradersList":
 			FinalOutput = ReadJson('traderList.json');
@@ -412,6 +929,73 @@ function handleRequest(req, body, url) {
 			break;
 		case "/client/match/available":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
+			break;
+
+		case "/dump":
+			/*
+			var locales = JSON.parse( ReadJson('locale_en.json') );
+			var templates = JSON.parse( ReadJson('templates.json') );
+			var res = [];
+
+			var weaponcateglist = [];
+			
+			templates.data.Categories.forEach(function(categ)
+			{
+				if(categ.ParentId == "5b5f78dc86f77409407a7f8e")
+				{
+					weaponcateglist.push(categ.Id);
+				}
+			});
+
+			
+			var WeaponIdList = []
+			templates.data.Items.forEach(function(item)
+			{
+				weaponcateglist.forEach(function(weapcateg)
+				{
+					if(weapcateg == item.ParentId)
+					{
+						WeaponIdList.push(item.Id);
+					}
+				});
+			});
+
+			WeaponIdList.forEach(function(weaponid)
+			{
+				var tempitem = {};
+				tempitem.weaponName = locales.data.templates[ weaponid ].Name;
+				tempitem.slots = [];
+
+				for( var slot in itemJSON[weaponid]._props.Slots)
+				{
+					
+					var tempslot = {}
+					tempslot.modSlot = itemJSON[weaponid]._props.Slots[slot]._name
+					tempslot.modName = [];
+					itemJSON[weaponid]._props.Slots[slot]._props.filters[0].Filter.forEach(function(filtr)
+					{	
+						tempslot.modName.push( locales.data.templates[ filtr ].Name);
+					});
+					tempitem.slots.push(tempslot);
+					
+				}
+
+				if(itemJSON[weaponid]._props.Chambers != undefined )
+				{
+					var chamber = {}
+					chamber.modSlot = "Chamber";
+					chamber.ammos = [];	
+					itemJSON[weaponid]._props.Chambers[0]._props.filters[0].Filter.forEach(function(ammo)
+					{
+						chamber.ammos.push( locales.data.templates[ ammo ].Name );
+					});
+					tempitem.slots.push(chamber);
+				}
+				res.push(tempitem);
+			});
+
+			fs.writeFileSync('weapon_dependencies.json', JSON.stringify(res, null, "\t"), 'utf8');
+			*/
 			break;
 		default:
 			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
