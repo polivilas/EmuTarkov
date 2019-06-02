@@ -928,6 +928,12 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('ragfair/search.json');
 			break;
 		case "/client/match/available":
+			FinalOutput = '{"err":0, "errmsg":null, "data":true}';
+			break;
+		case "/client/match/join":
+			FinalOutput = '{"err":0, "errmsg":null, "data":[null]}';
+			break;
+		case "/client/match/exit":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
