@@ -30,7 +30,7 @@ This works offline only. This doesn't work online or private LAN. Some functiona
 
 ## Issues
 All bugs/errors/issues:<br/>
-https://github.com/polivilas/EmuTarkov/issues
+https://github.com/polivilas/EmuTarkov/issues<br/>
 Please include your logs located in ```gamedir/logs``` as well.
 
 ## Contributions
