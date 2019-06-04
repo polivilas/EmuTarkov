@@ -904,8 +904,9 @@ function handleRequest(req, body, url) {
 		case "/client/getMetricsConfig":
 			FinalOutput = ReadJson('metricsConfig.json');
 			break;
-		case "/client/putMetrics"
+		case "/client/putMetrics":
 			FinalOutput = '{"err":0,"errmsg":null,"data":null}';
+			break;
 		case "/client/game/bot/generate":
 			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
 			//FinalOutput = ReadJson('bot_generate.json');
@@ -920,6 +921,23 @@ function handleRequest(req, body, url) {
 			RagfairOffers(info);
 			break;
 		case "/client/match/available":
+			FinalOutput = '{"err":0, "errmsg":null, "data":true}';
+			break;
+		case "/client/match/join":
+			var clientrequest = JSON.parse(body);
+			var shortid = "";
+						
+			if (clientrequest.savage == true) {
+				shortid = "3XR5";
+			} else {
+				shortid = "3SRC";
+			}
+
+			console.log("scav:" + clientrequest.savage + ", shortid: " + shortid);
+			
+			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": [ {"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": clientrequest.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid} ] });
+			break;
+		case "/client/match/exit":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 

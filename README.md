@@ -1,35 +1,42 @@
 # EmuTarkov
 Escape From Tarkov backend emulator written in JS.
 
-# How to use?
-First you need to install Node.JS on your computer : https://nodejs.org/en/ 
+## Note
+This works offline only. This doesn't work online or private LAN. Some functionality is not implemented. This is in active development and does contain bugs and/or errors.
 
-Once Node.js installed, download and unzip the emutarkov archive  anywhere you want on your computer.
-In emutarkov folder launch 'install.bat', it will install dependencies for your server 
+## Usage
+### Emulator setup
+```note: emudir is a reference to the emulator root directory```
+1. download [nodejs]( https://nodejs.org/en/) and install it to PATH.
+2. download the emulator source.
+3. run ```install.bat``` located in ```emudir```.
+### Game setup
+```note: the emulator supports only game version 0.11.7.3287```<br/>
+```note: gamedir is a reference to the game root directory```
+1. obtain a copy of the game.
+2. open ```client.config.json``` located in ```gamedir```.
+3. change ```"BackendUrl": "https://prod.escapefromtarkov.com",``` to ```"BackendUrl": "http://localhost:1337",```
+### Playing the game
+1. execute ```run.bat``` located in ```emudir```
+2. execute ```EscapeFromTarkov.exe``` located in ```gamedir```
+### Starting an offline raid
+1. press ESCAPE FROM TARKOV
+2. select the PMC
+3. select your location and press next
+4. check the map and press next
+5. check enable OFFLINE mode for this raid
+6. configure the raid to your liking
+7. press next or ready
 
-before running the server go to your EFT folder
- 
-Open 'client.config.json' with any text editor
+## Issues
+All bugs/errors/issues:<br/>
+https://github.com/polivilas/EmuTarkov/issues<br/>
+Please include your logs located in ```gamedir/logs``` as well.
 
-modify this following line : 
+## Contributions
+All bugfixes/contributions/pull requests:<br/>
+https://github.com/polivilas/EmuTarkov
 
-`"BackendUrl": "https://prod.escapefromtarkov.com", `to`"BackendUrl": "http://localhost:1337",`
-
- *Note : everytime the game has an update , you MUST redo this step*
-
-
-after you done all that, run 'run.bat' on emutarkov folder
-
-here you go, launch the game and enjoy :) 
-
-### Reminder 
-You don't need anything else and don't worry, nobody will knows
-
-This is a backend server emulator, witch means this is local, not online ! 
-
-# Contributions
-All bugfixes/contributions/pull requests --> https://github.com/polivilas/EmuTarkov
-
-# LICENSE
-CC BY-NC-SA 3.0 ( https://creativecommons.org/licenses/by-nc-sa/3.0/ )
-
+## License
+CC BY-NC-SA 3.0<br/>
+https://creativecommons.org/licenses/by-nc-sa/3.0/
