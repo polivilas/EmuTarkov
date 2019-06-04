@@ -901,6 +901,11 @@ function handleRequest(req, body, url) {
 		case "/client/quest/list":
 			FinalOutput = ReadJson('quest_list.json');
 			break;
+		case "/client/getMetricsConfig":
+			FinalOutput = ReadJson('metricsConfig.json');
+			break;
+		case "/client/putMetrics"
+			FinalOutput = '{"err":0,"errmsg":null,"data":null}';
 		case "/client/game/bot/generate":
 			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
 			//FinalOutput = ReadJson('bot_generate.json');
