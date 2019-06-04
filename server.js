@@ -931,7 +931,8 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":true}';
 			break;
 		case "/client/match/join":
-			FinalOutput = '{"err":0, "errmsg":null, "data":[null]}';
+			var matchjoin = JSON.parse(body);
+			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": [ {"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": matchjoin.location, "sid": "", "gamemode": "deathmatch", "shortid": "3XR5"} ] } );
 			break;
 		case "/client/match/exit":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
