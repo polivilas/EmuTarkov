@@ -2,7 +2,7 @@
 Escape From Tarkov backend emulator written in JS.
 
 ## Note
-This is for offline use only. Some functionality is not implemented.
+This works offline only. This doesn't work online or private LAN. Some functionality is not implemented. This is in active development and does contain bugs and/or errors.
 
 ## Usage
 ### Emulator setup
@@ -27,6 +27,11 @@ This is for offline use only. Some functionality is not implemented.
 5. check enable OFFLINE mode for this raid
 6. configure the raid to your liking
 7. press next or ready
+
+## Issues
+All bugs/errors/issues:<br/>
+https://github.com/polivilas/EmuTarkov/issues
+Please include your logs located in ```gamedir/logs``` as well.
 
 ## Contributions
 All bugfixes/contributions/pull requests:<br/>
