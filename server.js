@@ -954,7 +954,7 @@ server.listen(PORT, function() {
 	console.log('EmuTarkov listening on: %s',PORT);
 });
 
-var spoofedLogin = JSON.parse('{"email":"1337","password":"1337","toggle":true,"timestamp":1337}');
+var spoofedLogin = JSON.parse('{"email":' + settings.account.email + ',"password":' + settings.account.password + ', "toggle":true, "timestamp":1337}');
 function SpoofLauncher(){
 	spoofedLogin.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
 	console.log(spoofedLogin.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
