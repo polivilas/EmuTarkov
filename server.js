@@ -846,7 +846,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('traderList.json');
 			break;
 		case "/client/server/list":
-			FinalOutput = ReadJson('serverList.json');
+			FinalOutput = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":1337}]}'
 			break;
 		case "/client/ragfair/search":
 			RagfairOffers(info);
