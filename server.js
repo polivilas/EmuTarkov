@@ -4,7 +4,7 @@ var zlib = require('zlib');
 var regedit = require('regedit');
 var server = http.createServer();
 var FinalOutput = "";
-var PORT = 1337;
+var port = 0;
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
@@ -20,6 +20,12 @@ var stashY = 66; // ^ if you edited it ofc
 function ReadJson(file) {
 	return (fs.readFileSync(file, 'utf8')).replace(/[\r\n\t]/g, '');
 }
+
+var settings = JSON.parse(ReadJson("settings.json"));
+function loadSettings() {
+	port = settings.server.port;
+}
+loadSettings();
 
 var itemJSON = JSON.parse(ReadJson('data/items.json'));
 itemJSON = itemJSON.data;
@@ -104,7 +110,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 {
 	var generatedBots = [];
 	var bots_number = 0;
-	var presets = JSON.parse(ReadJson("data/bots/BotsSettings.json"))
+	var presets = JSON.parse(ReadJson("data/bots/BotsSettings.json"));
 
 	var weaponPresets = JSON.parse(ReadJson("data/bots/presetExtended.json")); //load all weapons
 	databots.conditions.forEach(function(params) // loop to generate all scavs
@@ -136,7 +142,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 					var BotBase = JSON.parse(ReadJson("data/bots/bot_base.json")); //load a dummy bot with nothing
 					var internalId = getRandomIntEx(10000); //generate a scavSeed
 
-					if(presets.EnablePmcWar == true)
+					if(settings.bots.enablePmcWar == true)
 					{
 
 						if( getRandomIntEx(100) >= 55 )
@@ -789,7 +795,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 		case "/client/game/login":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:' + port + '", "Messaging":"http://localhost:' + port + '", "Main":"http://localhost:' + port + '", "RagFair":"http://localhost:' + port + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
 		case "/client/game/logout":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
@@ -807,7 +813,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('data/list.json');
 			break;
 		case "/client/game/profile/select":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:1337", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:' + port + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
 		case "/client/profile/status":
 			FinalOutput = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
@@ -846,7 +852,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('data/traderList.json');
 			break;
 		case "/client/server/list":
-			FinalOutput = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":1337}]}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":' + port + '}]}';
 			break;
 		case "/client/ragfair/search":
 			RagfairOffers(info);
@@ -945,11 +951,11 @@ server.on('request', function(req, resp) {
 });
 
 //Start the server
-server.listen(PORT, function() {
-	console.log('EmuTarkov listening on: %s',PORT);
+server.listen(port, function() {
+	console.log('EmuTarkov listening on: %s', port);
 });
 
-var spoofedLogin = JSON.parse('{"email":"1337","password":"1337","toggle":true,"timestamp":1337}');
+var spoofedLogin = JSON.parse('{"email":' + settings.account.email + ',"password":' + settings.account.password + ', "toggle":true, "timestamp":1337}');
 function SpoofLauncher(){
 	spoofedLogin.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
 	console.log(spoofedLogin.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
