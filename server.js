@@ -950,6 +950,13 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
 			break;
 		case "/client/game/profile/nickname/change":
+			var clientrequest = JSON.parse(body);
+			var tmpList = JSON.parse(ReadJson("list.json"));
+
+			tmpList.data[1].Info.Nickname = clientrequest.nickname;
+			tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 			break;
 		case "/dump":
