@@ -21,6 +21,11 @@ function ReadJson(file) {
 	return (fs.readFileSync(file, 'utf8')).replace(/[\r\n\t]/g, '');
 }
 
+var settings = JSON.parse(ReadJson("settings.json"));
+function loadSettings() {
+	// enter code here
+}
+
 var itemJSON = JSON.parse(ReadJson('data/items.json'));
 itemJSON = itemJSON.data;
 function getRandomInt(min, max) {
@@ -104,7 +109,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 {
 	var generatedBots = [];
 	var bots_number = 0;
-	var presets = JSON.parse(ReadJson("data/bots/BotsSettings.json"))
+	var presets = JSON.parse(ReadJson("data/bots/BotsSettings.json"));
 
 	var weaponPresets = JSON.parse(ReadJson("data/bots/presetExtended.json")); //load all weapons
 	databots.conditions.forEach(function(params) // loop to generate all scavs
@@ -136,7 +141,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 					var BotBase = JSON.parse(ReadJson("data/bots/bot_base.json")); //load a dummy bot with nothing
 					var internalId = getRandomIntEx(10000); //generate a scavSeed
 
-					if(presets.EnablePmcWar == true)
+					if(settings.bots.enablePmcWar == true)
 					{
 
 						if( getRandomIntEx(100) >= 55 )
