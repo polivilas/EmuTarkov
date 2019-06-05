@@ -1,7 +1,9 @@
 var http = require('http');
 var fs = require('fs');
 var zlib = require('zlib');
+
 var login = require('./src/login.js');
+var utility = require('./src/utility.js');
 
 var server = http.createServer();
 var FinalOutput = "";
@@ -19,33 +21,17 @@ var toDo = [];
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 
-function ReadJson(file) {
-	return (fs.readFileSync(file, 'utf8')).replace(/[\r\n\t]/g, '');
-}
-
-function getRandomInt(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-} // stolen off StackOverflow
-
-function getRandomIntEx(max)
-{
-	return Math.floor(Math.random() * Math.floor(max));
-}
-
-var settings = JSON.parse(ReadJson("settings.json"));
+var settings = JSON.parse(utility.readJson("settings.json"));
 function loadSettings() {
 	port = settings.server.port;
 }
 loadSettings();
 
 function GenItemID(){
-	return Math.floor(new Date() / 1000) + getRandomInt(0, 999999999).toString();
+	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
 }
 
-var itemJSON = JSON.parse(ReadJson('data/items.json'));
+var itemJSON = JSON.parse(utility.readJson('data/items.json'));
 itemJSON = itemJSON.data;
 function getItem(template)
 {
@@ -124,13 +110,13 @@ function getSize(itemtpl, itemID, location)
 function generateBots(databots) { //Welcome to the Scav Randomizer :)
 	var generatedBots = [];
 	var bots_number = 0;
-	var presets = JSON.parse(ReadJson("data/bots/BotsSettings.json"));
-	var weaponPresets = JSON.parse(ReadJson("data/bots/presetExtended.json")); //load all weapons
+	var presets = JSON.parse(utility.readJson("data/bots/BotsSettings.json"));
+	var weaponPresets = JSON.parse(utility.readJson("data/bots/presetExtended.json")); //load all weapons
 
 	databots.conditions.forEach(function(params) { // loop to generate all scavs
 		switch (params.Role) {
 			case "bossBully":
-				var boss = JSON.parse(ReadJson("data/bots/bot_bossBully.json"));
+				var boss = JSON.parse(utility.readJson("data/bots/bot_bossBully.json"));
 
 				bots_number++;
 				boss.Info.Settings.Role = params.Role;
@@ -139,7 +125,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 				break;
 
 			case "bossKilla":				
-				var boss = JSON.parse(ReadJson("data/bots/bot_bossKilla.json"));
+				var boss = JSON.parse(utility.readJson("data/bots/bot_bossKilla.json"));
 
 				bots_number++;
 				boss.Info.Settings.Role = params.Role;
@@ -153,16 +139,16 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 				}
 
 				for (var i = 1; i <= params.Limit; i++)  { //generate as many as the game request
-					var BotBase = JSON.parse(ReadJson("data/bots/bot_base.json")); //load a dummy bot with nothing
-					var internalId = getRandomIntEx(10000); //generate a scavSeed
+					var BotBase = JSON.parse(utility.readJson("data/bots/bot_base.json")); //load a dummy bot with nothing
+					var internalId = utility.getRandomIntEx(10000); //generate a scavSeed
 
 					if (settings.bots.enablePmcWar == true) {
-						if (getRandomIntEx(100) >= 55 ) {
+						if (utility.getRandomIntEx(100) >= 55 ) {
 							BotBase._id = "Usec" + internalId;
 							BotBase.Info.Nickname = "Usec " + internalId;
 							BotBase.Info.LowerNickname = "usec" + internalId;
 							BotBase.Info.Side = "Usec";
-							BotBase.Info.Voice = "Usec_"+getRandomInt(1,3);
+							BotBase.Info.Voice = "Usec_"+utility.getRandomInt(1,3);
 							BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/usec_head_1.bundle";
 							BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/usec_body.bundle";
 							BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/usec_feet.bundle";
@@ -171,7 +157,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 							BotBase.Info.Nickname = "Bear " + internalId;
 							BotBase.Info.LowerNickname = "Bear" + internalId;
 							BotBase.Info.Side = "Bear";
-							BotBase.Info.Voice = "Bear_"+getRandomInt(1,2);
+							BotBase.Info.Voice = "Bear_"+utility.getRandomInt(1,2);
 							BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/bear_head.bundle";
 							BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/bear_body.bundle";
 							BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/bear_feet.bundle";
@@ -182,10 +168,10 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 						BotBase.Info.LowerNickname = "scav" + internalId;
 
 						//define a skin for the scav :
-						BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/"+presets.Head[getRandomIntEx(presets.Head.length)] +".bundle";
-						BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/"+presets.Body[getRandomIntEx(presets.Body.length)] +".bundle";
-						BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/"+presets.Feet[getRandomIntEx(presets.Feet.length)] +".bundle";
-						BotBase.Info.Voice = "Scav_" + getRandomInt(1,6);
+						BotBase.Customization.Head.path = "assets/content/characters/character/prefabs/"+presets.Head[utility.getRandomIntEx(presets.Head.length)] +".bundle";
+						BotBase.Customization.Body.path = "assets/content/characters/character/prefabs/"+presets.Body[utility.getRandomIntEx(presets.Body.length)] +".bundle";
+						BotBase.Customization.Feet.path = "assets/content/characters/character/prefabs/"+presets.Feet[utility.getRandomIntEx(presets.Feet.length)] +".bundle";
+						BotBase.Info.Voice = "Scav_" + utility.getRandomInt(1,6);
 
 						switch (params.Role) {
 							case "followerBully":
@@ -207,7 +193,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 								BotBase._id = "raider_" + internalId;
 								BotBase.Info.Nickname = "Raider " + internalId;
 								BotBase.Info.LowerNickname = "raider" + internalId;
-								BotBase.Info.Voice = presets.pmcBotVoices[getRandomIntEx(presets.pmcBotVoices.length)];
+								BotBase.Info.Voice = presets.pmcBotVoices[utility.getRandomIntEx(presets.pmcBotVoices.length)];
 								break;
 						}
 					}
@@ -217,20 +203,20 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 
 					//randomize skills (because why not?)
 					BotBase.Skills.Common.forEach(function(skill) {
-						skill.Progress = getRandomIntEx(5000);
+						skill.Progress = utility.getRandomIntEx(5000);
 						skill.MaxAchieved = skill.Progress;
 					});
 
-					BotBase.Info.Experience = getRandomIntEx(25000000); //level 70 max
+					BotBase.Info.Experience = utility.getRandomIntEx(25000000); //level 70 max
 
 					//choose randomly a weapon from preset.json before filling items
-					var Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+					var Weapon = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
 					
 					if (params.Role == "marksman") {
 						var found = false;
 						
 						while (found == false) {
-							Weapon = weaponPresets.data[getRandomIntEx(weaponPresets.data.length)];
+							Weapon = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
 
 							presets.filter_marksman.forEach(function(filter) {
 								if (Weapon._items[0]._tpl == filter) {
@@ -252,7 +238,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 					//Add a vest or rig on the scav (can be an armored vest)
 					var tempw = {};
 					tempw._id = "TacticalVestScav"+ internalId;
-					tempw._tpl = presets.Rigs[getRandomIntEx(presets.Rigs.length)];
+					tempw._tpl = presets.Rigs[utility.getRandomIntEx(presets.Rigs.length)];
 					tempw.parentId = "5c6687d65e9d882c8841f0fd";
 					tempw.slotId = "TacticalVest";
 					BotBase.Inventory.items.push(tempw);
@@ -304,7 +290,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 									var tempw = {};
 
 									tempw._id = "MagazineWeaponScav"+ internalId;
-									tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize the magazine of the weapon
+									tempw._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)]; //randomize the magazine of the weapon
 									
 									var selectedmag = tempw._tpl //store this value
 									
@@ -316,7 +302,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 									var tempw = {};
 									
 									tempw._id = "AmmoMagazine1Scav"+ internalId;
-									tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
+									tempw._tpl = ammo_filter[utility.getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
 									tempw.parentId = "MagazineWeaponScav"+ internalId;
 									tempw.slotId = "cartridges";
 									tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count }; //fill the magazine
@@ -328,7 +314,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 									var tempw = {};
 									
 									tempw._id = "AmmoMagazine1Scav"+ internalId;
-									tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
+									tempw._tpl = ammo_filter[utility.getRandomIntEx(ammo_filter.length)]; //randomize ammo inside the mag
 									tempw.parentId = item._id ;
 									tempw.slotId = "cartridges";
 									tempw.upd = {"StackObjectsCount": itemJSON[item._tpl]._props.Cartridges[0]._max_count }; //fill the magazine
@@ -339,7 +325,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 								var tempw = {};
 								
 								tempw._id = "magazine2VestScav"+ internalId;
-								tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
+								tempw._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
 								
 								var selectedmag = tempw._tpl; //store the selected magazine template for ammo
 								
@@ -352,7 +338,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 								var tempw = {};
 								
 								tempw._id = "AmmoMagazine2Scav"+ internalId;
-								tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+								tempw._tpl = ammo_filter[utility.getRandomIntEx(ammo_filter.length)];
 								tempw.parentId = "magazine2VestScav"+ internalId;
 								tempw.slotId = "cartridges";
 								tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count };
@@ -362,7 +348,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 								var tempw = {};
 								
 								tempw._id = "magazine3VestScav"+ internalId;
-								tempw._tpl = compatiblesmags[getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
+								tempw._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)]; //randomize this magazine too
 								
 								var selectedmag = tempw._tpl; //store the selected magazine template for ammo
 								
@@ -374,7 +360,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 								var tempw = {};
 								
 								tempw._id = "AmmoMagazine3Scav"+ internalId;
-								tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+								tempw._tpl = ammo_filter[utility.getRandomIntEx(ammo_filter.length)];
 								tempw.parentId = "magazine3VestScav"+ internalId;
 								tempw.slotId = "cartridges";
 								tempw.upd = {"StackObjectsCount": itemJSON[selectedmag]._props.Cartridges[0]._max_count };
@@ -384,10 +370,10 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 								var tempw = {};
 								
 								tempw._id = "AmmoFree2Scav"+ internalId;
-								tempw._tpl = ammo_filter[getRandomIntEx(ammo_filter.length)];
+								tempw._tpl = ammo_filter[utility.getRandomIntEx(ammo_filter.length)];
 								tempw.parentId = "TacticalVestScav"+ internalId;
 								tempw.slotId = "1";
-								tempw.upd = {"StackObjectsCount": getRandomInt(10,30) };
+								tempw.upd = {"StackObjectsCount": utility.getRandomInt(10,30) };
 								BotBase.Inventory.items.push(tempw);
 							} else {
 								BotBase.Inventory.items.push(item); //add mods and vital parts
@@ -396,7 +382,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 					});
 
 					for (var bdpt in BotBase.Health.BodyParts) {
-						BotBase.Health.BodyParts[bdpt].Health.Current = BotBase.Health.BodyParts[bdpt].Health.Current + getRandomInt(-10,10);
+						BotBase.Health.BodyParts[bdpt].Health.Current = BotBase.Health.BodyParts[bdpt].Health.Current + utility.getRandomInt(-10,10);
 						BotBase.Health.BodyParts[bdpt].Health.Maximum = BotBase.Health.BodyParts[bdpt].Health.Current;
 					}
 
@@ -404,67 +390,67 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 					//add a knife
 					var tempw = {};
 					tempw._id = "ScabbardScav"+ internalId;
-					tempw._tpl= presets.knives[getRandomIntEx(presets.knives.length)]; //yes exactly like above, randomize everything
+					tempw._tpl= presets.knives[utility.getRandomIntEx(presets.knives.length)]; //yes exactly like above, randomize everything
 					tempw.parentId = "5c6687d65e9d882c8841f0fd";
 					tempw.slotId = "Scabbard";
 					BotBase.Inventory.items.push(tempw);
 
 
-					if (getRandomIntEx(100) <= 30) { //30% chance to add some glasses
+					if (utility.getRandomIntEx(100) <= 30) { //30% chance to add some glasses
 						var tempw = {};
 						tempw._id = "EyeWearScav"+ internalId;
-						tempw._tpl= presets.Eyewear[getRandomIntEx(presets.Eyewear.length)];
+						tempw._tpl= presets.Eyewear[utility.getRandomIntEx(presets.Eyewear.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f0fd";
 						tempw.slotId = "Eyewear";
 						BotBase.Inventory.items.push(tempw);
 					}
 
-					if (getRandomIntEx(100) <= 40) {
+					if (utility.getRandomIntEx(100) <= 40) {
 						var tempw = {};
 						tempw._id = "FaceCoverScav"+ internalId;
-						tempw._tpl= presets.Facecovers[getRandomIntEx(presets.Facecovers.length)];
+						tempw._tpl= presets.Facecovers[utility.getRandomIntEx(presets.Facecovers.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f0fd";
 						tempw.slotId = "FaceCover";
 						BotBase.Inventory.items.push(tempw);
 					}
 
-					if(getRandomIntEx(100) <= 40 ) {
+					if(utility.getRandomIntEx(100) <= 40 ) {
 						var tempw = {};
 						tempw._id = "HeadWearScav"+ internalId;
-						tempw._tpl= presets.Headwear[getRandomIntEx(presets.Headwear.length)];
+						tempw._tpl= presets.Headwear[utility.getRandomIntEx(presets.Headwear.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f0fd";
 						tempw.slotId = "Headwear";
 						BotBase.Inventory.items.push(tempw);
 					}
 
-					if (getRandomIntEx(100) <= 25) {
+					if (utility.getRandomIntEx(100) <= 25) {
 						var tempw = {};
 						tempw._id = "BackpackScav"+ internalId;
-						tempw._tpl= presets.Backpacks[getRandomIntEx(presets.Backpacks.length)];
+						tempw._tpl= presets.Backpacks[utility.getRandomIntEx(presets.Backpacks.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f0fd";
 						tempw.slotId = "Backpack";
 						BotBase.Inventory.items.push(tempw);
 
-						if(getRandomIntEx(100) <= 50) { //chance to add something inside
+						if(utility.getRandomIntEx(100) <= 50) { //chance to add something inside
 							//to be implemented...
 						}
 					}
 
-					if (getRandomIntEx(100) <= 25) {
+					if (utility.getRandomIntEx(100) <= 25) {
 						var tempw = {};
 						tempw._id = "ArmorVestScav"+ internalId;
-						tempw._tpl= presets.Armors[getRandomIntEx(presets.Armors.length)];
+						tempw._tpl= presets.Armors[utility.getRandomIntEx(presets.Armors.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f0fd";
 						tempw.slotId = "ArmorVest";
-						var durabl = getRandomIntEx(45);
+						var durabl = utility.getRandomIntEx(45);
 						tempw.upd = {"Repairable": {"Durability": durabl }};
 						BotBase.Inventory.items.push(tempw);
 					}
 
-					if (getRandomIntEx(100) <= 10 || params.Role == "followerBully") { //add meds
+					if (utility.getRandomIntEx(100) <= 10 || params.Role == "followerBully") { //add meds
 						var tempw = {};
 						tempw._id = "PocketMedScav"+ internalId;
-						tempw._tpl= presets.meds[getRandomIntEx(presets.meds.length)];
+						tempw._tpl= presets.meds[utility.getRandomIntEx(presets.meds.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f121";
 						tempw.slotId = "pocket2";
 						tempw.location = {"x": 0,"y": 0,"r": 0};
@@ -472,10 +458,10 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 
 					}
 
-					if (getRandomIntEx(100) <= 10 || params.Role == "followerBully") {
+					if (utility.getRandomIntEx(100) <= 10 || params.Role == "followerBully") {
 						var tempw = {};
 						tempw._id = "PocketItemScav"+ internalId;
-						tempw._tpl= presets.Grenades[getRandomIntEx(presets.Grenades.length)];
+						tempw._tpl= presets.Grenades[utility.getRandomIntEx(presets.Grenades.length)];
 						tempw.parentId = "5c6687d65e9d882c8841f121";
 						tempw.slotId = "pocket1";
 						tempw.location = {"x": 0,"y": 0,"r": 0};
@@ -494,7 +480,7 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 	return generatedBots;
 }
 
-var ItemJSON = JSON.parse(ReadJson("data/items.json"));
+var ItemJSON = JSON.parse(utility.readJson("data/items.json"));
 function RagfairOffers(request) {
 	var tmpId = "54009119af1c881c07000029";
 	
@@ -506,7 +492,7 @@ function RagfairOffers(request) {
 		};
 	};
 
-	var response = JSON.parse(ReadJson("data/ragfair/search.json"));
+	var response = JSON.parse(utility.readJson("data/ragfair/search.json"));
 	
 	response.data.offers[0]._id = tmpId;
 	response.data.offers[0].items[0]._tpl = tmpId;
@@ -517,7 +503,7 @@ function RagfairOffers(request) {
 function handleMoving(body) {
 	console.log(body);
 	
-	var tmpList = JSON.parse(ReadJson('data/list.json'));
+	var tmpList = JSON.parse(utility.readJson('data/list.json'));
 
 	switch(body.Action) {
 		case "QuestAccept":
@@ -630,7 +616,7 @@ function handleMoving(body) {
 			break;
 		case "TradingConfirm":
 			if(body.type == "buy_from_trader") {
-				var tmpTrader = JSON.parse(ReadJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+				var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
 				for (var key in tmpTrader.data.items) {
 					if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
 						var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
@@ -787,12 +773,12 @@ function handleRequest(req, body, url) {
 
 	// handle special cases
 	if (url.match(assort)) {
-		FinalOutput = ReadJson("data/assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
+		FinalOutput = utility.readJson("data/assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
 		return;
 	}
 	
 	if (url.match(prices)) {
-		FinalOutput = ReadJson("data/prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
+		FinalOutput = utility.readJson("data/prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
 		return;
 	}
 	
@@ -866,15 +852,15 @@ function handleRequest(req, body, url) {
 			break;
 
 		case "/client/items":
-			FinalOutput = ReadJson('data/items.json');
+			FinalOutput = utility.readJson('data/items.json');
 			break;
 
 		case "/client/globals":
-			FinalOutput = ReadJson('data/globals.json');
+			FinalOutput = utility.readJson('data/globals.json');
 			break;
 
 		case "/client/game/profile/list":
-			FinalOutput = ReadJson('data/list.json');
+			FinalOutput = utility.readJson('data/list.json');
 			break;
 
 		case "/client/game/profile/select":
@@ -897,23 +883,23 @@ function handleRequest(req, body, url) {
 		case "/client/locale/En":
 		case "/client/locale/ru":
 		case "/client/locale/Ru":
-			FinalOutput = ReadJson('data/locale_en.json');
+			FinalOutput = utility.readJson('data/locale_en.json');
 			break;
 
 		case "/client/locations":
-			FinalOutput = ReadJson('data/locations.json');
+			FinalOutput = utility.readJson('data/locations.json');
 			break;
 
 		case "/client/handbook/templates":
-			FinalOutput = ReadJson('data/templates.json');
+			FinalOutput = utility.readJson('data/templates.json');
 			break;
 
 		case "/client/quest/list":
-			FinalOutput = ReadJson('data/questList.json');
+			FinalOutput = utility.readJson('data/questList.json');
 			break;
 
 		case "/client/getMetricsConfig":
-			FinalOutput = ReadJson('data/metricsConfig.json');
+			FinalOutput = utility.readJson('data/metricsConfig.json');
 			break;
 
 		case "/client/putMetrics":
@@ -925,7 +911,7 @@ function handleRequest(req, body, url) {
 			break;
 
 		case "/client/trading/api/getTradersList":
-			FinalOutput = ReadJson('data/traderList.json');
+			FinalOutput = utility.readJson('data/traderList.json');
 			break;
 
 		case "/client/server/list":
@@ -963,7 +949,7 @@ function handleRequest(req, body, url) {
 
 		case "/client/game/profile/nickname/change":
 			var clientrequest = JSON.parse(body);
-			var tmpList = JSON.parse(ReadJson("data/list.json"));
+			var tmpList = JSON.parse(utility.readJson("data/list.json"));
 
 			tmpList.data[1].Info.Nickname = clientrequest.nickname;
 			tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
