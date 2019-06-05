@@ -865,6 +865,9 @@ function handleRequest(req, body, url) {
 		case "/client/game/login":
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":false, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
+		case "/client/game/logout":
+			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
+			break;
 		case "/client/items":
 			FinalOutput = ReadJson('items.json');
 			break;
