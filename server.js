@@ -863,7 +863,13 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 		case "/client/game/login":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":false, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			break;
+		case "/client/game/logout":
+			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
+			break;
+		case "/client/queue/status":
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
 			break;
 		case "/client/items":
 			FinalOutput = ReadJson('items.json');
@@ -940,7 +946,19 @@ function handleRequest(req, body, url) {
 		case "/client/match/exit":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
+		case "/client/chatServer/list":
+			FinalOutput = '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
+			break;
+		case "/client/game/profile/nickname/change":
+			var clientrequest = JSON.parse(body);
+			var tmpList = JSON.parse(ReadJson("list.json"));
 
+			tmpList.data[1].Info.Nickname = clientrequest.nickname;
+			tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
+			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
+			break;
 		case "/dump":
 			/*
 			var locales = JSON.parse( ReadJson('locale_en.json') );
