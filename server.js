@@ -508,7 +508,7 @@ function handleMoving(body) {
 	switch(body.Action) {
 		case "QuestAccept":
 			tmpList.data[1].Quests.push({"qid": body.qid.toString(), "startTime": 1337, "status": 2}); // statuses seem as follow - 1 - not accepted | 2 - accepted | 3 - failed | 4 - completed
-			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			utility.writeJson('data/list.json', tmpList);
 			FinalOutput = "OK";
 			break;
 
@@ -521,7 +521,7 @@ function handleMoving(body) {
 
 			//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
 
-			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			utility.writeJson('data/list.json', tmpList);
 			FinalOutput = "OK";
 			break;
 
@@ -540,7 +540,7 @@ function handleMoving(body) {
 						}
 					}
 					
-					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					utility.writeJson('data/list.json', tmpList);
 					FinalOutput = "OK";
 					break;
 				}
@@ -576,7 +576,7 @@ function handleMoving(body) {
 				break;
 			}
 			
-			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			utility.writeJson('data/list.json', tmpList);
 			FinalOutput = "OK";
 			break;
 
@@ -589,7 +589,7 @@ function handleMoving(body) {
 					
 					ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					utility.writeJson('data/list.json', tmpList);
 					FinalOutput = "OK";
 
 					break;
@@ -605,7 +605,7 @@ function handleMoving(body) {
 							tmpList.data[1].Inventory.items[key].upd.StackObjectsCount = (tmpList.data[1].Inventory.items[key].upd.StackObjectsCount ? tmpList.data[1].Inventory.items[key].upd.StackObjectsCount : 1) + (tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount ? tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount : 1);
 							ItemOutput.data.items.del.push({"_id": tmpList.data[1].Inventory.items[key2]._id});
 							tmpList.data[1].Inventory.items.splice(key2, 1);
-							fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+							utility.writeJson('data/list.json', tmpList);
 							FinalOutput = "OK";
 
 							break;
@@ -715,7 +715,7 @@ function handleMoving(body) {
 										break;
 									}
 
-									fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+									utility.writeJson('data/list.json', tmpList);
 									FinalOutput = "OK";
 									return;
 								}
@@ -732,7 +732,7 @@ function handleMoving(body) {
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].upd.Foldable = {"Folded": body.value};
-					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					utility.writeJson('data/list.json', tmpList);
 					FinalOutput = "OK";
 
 					break;
@@ -744,7 +744,7 @@ function handleMoving(body) {
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].upd.Togglable = {"On": body.value};
-					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					utility.writeJson('data/list.json', tmpList);
 					FinalOutput = "OK";
 
 					break;
@@ -953,7 +953,7 @@ function handleRequest(req, body, url) {
 
 			tmpList.data[1].Info.Nickname = clientrequest.nickname;
 			tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
-			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			utility.writeJson('data/list.json', tmpList);
 			
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 			break;
