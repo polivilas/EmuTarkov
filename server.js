@@ -841,7 +841,6 @@ function handleRequest(req, body, url) {
 			break;
 		case "/client/game/bot/generate":
 			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
-			//FinalOutput = ReadJson('bot_generate.json');
 			break;
 		case "/client/trading/api/getTradersList":
 			FinalOutput = ReadJson('traderList.json');
