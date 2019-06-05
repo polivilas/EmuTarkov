@@ -1,7 +1,8 @@
 var http = require('http');
 var fs = require('fs');
 var zlib = require('zlib');
-var regedit = require('regedit');
+var login = require('./src/login.js');
+
 var server = http.createServer();
 var FinalOutput = "";
 var port = 0;
@@ -1041,38 +1042,12 @@ server.listen(port, function() {
 	console.log('EmuTarkov listening on: %s', port);
 });
 
-var spoofedLogin = JSON.parse('{"email":' + settings.account.email + ',"password":' + settings.account.password + ', "toggle":true, "timestamp":1337}');
-function SpoofLauncher() {
-	spoofedLogin.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
-	console.log(spoofedLogin.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
-	
-	var tmpB64 = Buffer.from(JSON.stringify(spoofedLogin)).toString('base64');
-	var bytes = [];
-	
-	for (var i = 0; i < tmpB64.length; ++i) {
-		var code = tmpB64.charCodeAt(i);
-		
-		bytes = bytes.concat([code]);
-	}
-	
-	bytes = bytes.concat(0);
-
-	regedit.putValue({
-		'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {
-			'bC5vLmcuaS5u_h1472614626': {
-				value: bytes,
-				type: 'REG_BINARY'
-			}
-		}
-	}, function(err) {
-		if(err){
-			console.log("Shits fucked.", err);
-		};
-	});
-};
+// create login token
+// NOTE: client-side only, split this into a separate application?
+var loginData = JSON.parse('{"email":' + settings.account.email + ',"password":' + settings.account.password + ', "toggle":true, "timestamp":1337}');
 
 setInterval(function() {
-	SpoofLauncher();
+	login.createToken(loginData);
 }, 1000 * 60);
 
-SpoofLauncher();
+login.createToken(loginData);
