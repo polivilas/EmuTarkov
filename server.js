@@ -4,7 +4,7 @@ var zlib = require('zlib');
 var regedit = require('regedit');
 var server = http.createServer();
 var FinalOutput = "";
-var port = 1337;
+var port = 0;
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
@@ -23,8 +23,9 @@ function ReadJson(file) {
 
 var settings = JSON.parse(ReadJson("settings.json"));
 function loadSettings() {
-	// enter code here
+	port = settings.server.port;
 }
+loadSettings();
 
 var itemJSON = JSON.parse(ReadJson('data/items.json'));
 itemJSON = itemJSON.data;
@@ -794,7 +795,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 		case "/client/game/login":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:1337", "Messaging":"http://localhost:1337", "Main":"http://localhost:1337", "RagFair":"http://localhost:1337"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:' + port + '", "Messaging":"http://localhost:' + port + '", "Main":"http://localhost:' + port + '", "RagFair":"http://localhost:' + port + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
 		case "/client/game/logout":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
@@ -812,7 +813,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('data/list.json');
 			break;
 		case "/client/game/profile/select":
-			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:1337", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:' + port + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
 		case "/client/profile/status":
 			FinalOutput = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
@@ -851,7 +852,7 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('data/traderList.json');
 			break;
 		case "/client/server/list":
-			FinalOutput = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":1337}]}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":' + port + '}]}';
 			break;
 		case "/client/ragfair/search":
 			RagfairOffers(info);
