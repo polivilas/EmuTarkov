@@ -4,10 +4,11 @@ var zlib = require('zlib');
 var login = require('./src/login.js');
 var utility = require('./src/utility.js');
 var item = require('./src/item.js');
+var ragfair = require('./src/ragfair.js');
 
 var server = http.createServer();
 var FinalOutput = "";
-var port = 0;
+var port = getPort();
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
@@ -15,11 +16,8 @@ var traderImg = new RegExp('/files/([a-z0-9/\.jpng])+', 'i');
 var content = new RegExp('/uploads/([a-z0-9/\.jpng_])+', 'i');
 var pushNotifier = new RegExp('/push/notifier/get/', 'i');
 
-var settings = JSON.parse(utility.readJson("settings.json"));
-function loadSettings() {
-	port = settings.server.port;
-}
-loadSettings();
+var itemJSON = JSON.parse(utility.readJson('data/items.json'));
+itemJSON = itemJSON.data;
 
 function generateBots(databots) { //Welcome to the Scav Randomizer :)
 	var generatedBots = [];
@@ -394,26 +392,6 @@ function generateBots(databots) { //Welcome to the Scav Randomizer :)
 	return generatedBots;
 }
 
-var ItemJSON = JSON.parse(utility.readJson("data/items.json"));
-function RagfairOffers(request) {
-	var tmpId = "54009119af1c881c07000029";
-	
-	for (var curItem in ItemJSON.data) {
-		if (curItem == request.handbookId) {
-			tmpId = curItem;
-			console.log("found item");
-			break;
-		};
-	};
-
-	var response = JSON.parse(utility.readJson("data/ragfair/search.json"));
-	
-	response.data.offers[0]._id = tmpId;
-	response.data.offers[0].items[0]._tpl = tmpId;
-	FinalOutput = JSON.stringify(response);
-	// this is really not okay. TODO: handle ragfair buying event - maybe connect to trader buy event?
-}
-
 function handleRequest(req, body, url) {
 	var info = JSON.parse("{}");
 
@@ -577,7 +555,7 @@ function handleRequest(req, body, url) {
 			break;
 
 		case "/client/ragfair/search":
-			RagfairOffers(info);
+			FinalOutput = ragfair.getOffers(info);
 			break;
 
 		case "/client/match/available":
