@@ -1,10 +1,10 @@
 var http = require('http');
 var zlib = require('zlib');
 
-var settings = require('./src/settings.js');
-var login = require('./src/login.js');
-var item = require('./src/item.js');
-var response = require('./src/response.js');
+var settings = require('./settings.js');
+var login = require('./login.js');
+var item = require('./item.js');
+var response = require('./response.js');
 
 var server = http.createServer();
 var port = settings.getPort();
