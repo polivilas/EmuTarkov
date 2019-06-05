@@ -21,7 +21,7 @@ function ReadJson(file) {
 	return (fs.readFileSync(file, 'utf8')).replace(/[\r\n\t]/g, '');
 }
 
-var itemJSON = JSON.parse(ReadJson('items.json'));
+var itemJSON = JSON.parse(ReadJson('data/items.json'));
 itemJSON = itemJSON.data;
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
@@ -104,16 +104,16 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 {
 	var generatedBots = [];
 	var bots_number = 0;
-	var presets = JSON.parse(ReadJson("bots/BotsSettings.json"))
+	var presets = JSON.parse(ReadJson("data/bots/BotsSettings.json"))
 
-	var weaponPresets = JSON.parse(ReadJson("bots/presetExtended.json")); //load all weapons
+	var weaponPresets = JSON.parse(ReadJson("data/bots/presetExtended.json")); //load all weapons
 	databots.conditions.forEach(function(params) // loop to generate all scavs
 	{
 		switch(params.Role)
 		{
 			case "bossBully":
 				bots_number++;
-				var boss = JSON.parse(ReadJson("bots/bot_bossBully.json"))
+				var boss = JSON.parse(ReadJson("data/bots/bot_bossBully.json"))
 				boss.Info.Settings.Role = params.Role;
 				boss.Info.Settings.BotDifficulty = params.Difficulty;
 				generatedBots.push(boss);
@@ -121,7 +121,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 
 			case "bossKilla":
 				bots_number++;
-				var boss = JSON.parse(ReadJson("bots/bot_bossKilla.json"))
+				var boss = JSON.parse(ReadJson("data/bots/bot_bossKilla.json"))
 				boss.Info.Settings.Role = params.Role;
 				boss.Info.Settings.BotDifficulty = params.Difficulty;
 				generatedBots.push(boss);
@@ -133,7 +133,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 
 				for (var i = 1; i <= params.Limit ;i++) //generate as many as the game request
 				{
-					var BotBase = JSON.parse(ReadJson("bots/bot_base.json")); //load a dummy bot with nothing
+					var BotBase = JSON.parse(ReadJson("data/bots/bot_base.json")); //load a dummy bot with nothing
 					var internalId = getRandomIntEx(10000); //generate a scavSeed
 
 					if(presets.EnablePmcWar == true)
@@ -480,13 +480,12 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 		}
 	});
 
-	//fs.writeFileSync('bots/bot_generate_v2.json', JSON.stringify(generatedBots, null, "\t"), 'utf8'); //just a log file ...
 	console.log("generated " + bots_number + " scavs possibilities");
 	return generatedBots;
 }
 
 
-var ItemJSON = JSON.parse(ReadJson("items.json"));
+var ItemJSON = JSON.parse(ReadJson("data/items.json"));
 function RagfairOffers(request)
 {
 	var tmpId = "54009119af1c881c07000029";
@@ -498,7 +497,7 @@ function RagfairOffers(request)
 			break;
 		};
 	};
-	var response = JSON.parse(ReadJson("ragfair/search.json"));
+	var response = JSON.parse(ReadJson("data/ragfair/search.json"));
 	response.data.offers[0]._id = tmpId;
 	response.data.offers[0].items[0]._tpl = tmpId;
 	FinalOutput = JSON.stringify(response);
@@ -507,12 +506,12 @@ function RagfairOffers(request)
 
 function handleMoving(body) {
 	console.log(body);
-	var tmpList = JSON.parse(ReadJson('list.json'));
+	var tmpList = JSON.parse(ReadJson('data/list.json'));
 	switch(body.Action) {
 
 		case "QuestAccept":
 			tmpList.data[1].Quests.push({"qid": body.qid.toString(), "startTime": 1337, "status": 2}); // statuses seem as follow - 1 - not accepted | 2 - accepted | 3 - failed | 4 - completed
-			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 			FinalOutput = "OK";
 			break;
 
@@ -524,82 +523,9 @@ function handleMoving(body) {
 
 			//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
 
-			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 			FinalOutput = "OK";
 			break;
-
-		/*
-		case "QuestHandover": //save progression of quests, but how to store it in the profile ?
-
-			body.items.forEach(function(idToRemove)
-			{
-				for( var i = 0; i < tmpList.data[1].Inventory.items.length; i++)
-				{
-					if ( tmpList.data[1].Inventory.items[i]._id === idToRemove.id || tmpList.data[1].Inventory.items[i].parentId === idToRemove.id)
-					{
-						tmpList.data[1].Inventory.items.splice(i, 1);
-					}
-				}
-
-				tmpList.data[1].Quests.forEach(function(quest)
-				{
-					if(quest.qid == body.qid)
-					{
-						quest.condition[body.conditionId] + 1; ~ ~ ~
-					}
-				})
-
-			});
-
-			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
-			FinalOutput = "OK";
-			break;
-		*/
-
-		/*
-		case "Heal":
-			for (var bdpart in tmpList.data[1].Health.BodyParts)
-			{
-				if(bdpart == body.part)
-				{
-					tmpList.data[1].Health.BodyParts[bdpart].Health.Current = tmpList.data[1].Health.BodyParts[bdpart].Health.Current + body.count;
-					//modify body.item hp ressource in list.json
-					//and check if its 0 = delete the item
-					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
-
-					FinalOutput = "OK";
-					break;
-				}
-			}
-		break;
-
-		case "Eat":
-
-			var metabolism = tmpList.data[1].Skills.Common.Metabolism.Progress;
-			var effects = [];
-			tmpList.data[1].Inventory.forEach(function(inv)
-			{
-				if(inv._id == body.item)
-				{
-					effects[0] = itemJSON[inv._tpl].effects_health.energy.value;
-					effects[1] = itemJSON[inv._tpl].effects_health.hydratation.value;
-				}
-			});
-
-			effects[0] = effects[0] * metabolism/10000 + 1;
-			effects[1] = effects[1] * metabolism/10000 + 1;
-
-			tmpList.data[1].Health.Hydratation.Current = tmpList.data[1].Health.Hydratation.Current + effects[1];
-			tmpList.data[1].Health.Energy.Current = tmpList.data[1].Health.Energy.Current + effects[0];
-
-			//modify body.item ressource in list.json
-			//and check if its 0 = delete the item
-
-			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
-			FinalOutput = "OK";
-
-		break;
-		*/
 
 		case "Move":
 
@@ -615,7 +541,7 @@ function handleMoving(body) {
 							delete tmpList.data[1].Inventory.items[key].location;
 						}
 					}
-					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
 				}
@@ -644,7 +570,7 @@ function handleMoving(body) {
 					}
 					break;
 				}
-				fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+				fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 				FinalOutput = "OK";
 			break;
 		case "Split":
@@ -654,7 +580,7 @@ function handleMoving(body) {
 					var newItem = GenItemID();
 					ItemOutput.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 					tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
 				}
@@ -668,7 +594,7 @@ function handleMoving(body) {
 							tmpList.data[1].Inventory.items[key].upd.StackObjectsCount = (tmpList.data[1].Inventory.items[key].upd.StackObjectsCount ? tmpList.data[1].Inventory.items[key].upd.StackObjectsCount : 1) + (tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount ? tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount : 1);
 							ItemOutput.data.items.del.push({"_id": tmpList.data[1].Inventory.items[key2]._id});
 							tmpList.data[1].Inventory.items.splice(key2, 1);
-							fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+							fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 							FinalOutput = "OK";
 							break;
 						}
@@ -678,7 +604,7 @@ function handleMoving(body) {
 			break;
 		case "TradingConfirm":
 			if(body.type == "buy_from_trader") {
-				var tmpTrader = JSON.parse(ReadJson('assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+				var tmpTrader = JSON.parse(ReadJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
 				for (var key in tmpTrader.data.items) {
 					if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
 						var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
@@ -756,7 +682,7 @@ function handleMoving(body) {
 										}
 										break;
 									}
-									fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+									fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 									FinalOutput = "OK";
 									return;
 								}
@@ -771,7 +697,7 @@ function handleMoving(body) {
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].upd.Foldable = {"Folded": body.value};
-					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
 				}
@@ -781,7 +707,7 @@ function handleMoving(body) {
 			for (var key in tmpList.data[1].Inventory.items) {
 				if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 					tmpList.data[1].Inventory.items[key].upd.Togglable = {"On": body.value};
-					fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+					fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 					FinalOutput = "OK";
 					break;
 				}
@@ -808,11 +734,11 @@ function handleRequest(req, body, url) {
 
 	// handle special cases
 	if (url.match(assort)) {
-		FinalOutput = ReadJson("assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
+		FinalOutput = ReadJson("data/assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
 		return;
 	}
 	if (url.match(prices)) {
-		FinalOutput = ReadJson("prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
+		FinalOutput = ReadJson("data/prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
 		return;
 	}
 	if (url.match(getTrader)) {
@@ -872,13 +798,13 @@ function handleRequest(req, body, url) {
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
 			break;
 		case "/client/items":
-			FinalOutput = ReadJson('items.json');
+			FinalOutput = ReadJson('data/items.json');
 			break;
 		case "/client/globals":
-			FinalOutput = ReadJson('globals.json');
+			FinalOutput = ReadJson('data/globals.json');
 			break;
 		case "/client/game/profile/list":
-			FinalOutput = ReadJson('list.json');
+			FinalOutput = ReadJson('data/list.json');
 			break;
 		case "/client/game/profile/select":
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:1337", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
@@ -896,32 +822,31 @@ function handleRequest(req, body, url) {
 		case "/client/locale/En":
 		case "/client/locale/ru":
 		case "/client/locale/Ru":
-			FinalOutput = ReadJson('locale_en.json');
+			FinalOutput = ReadJson('data/locale_en.json');
 			break;
 		case "/client/locations":
-			FinalOutput = ReadJson('locations.json');
+			FinalOutput = ReadJson('data/locations.json');
 			break;
 		case "/client/handbook/templates":
-			FinalOutput = ReadJson('templates.json');
+			FinalOutput = ReadJson('data/templates.json');
 			break;
 		case "/client/quest/list":
-			FinalOutput = ReadJson('quest_list.json');
+			FinalOutput = ReadJson('data/questList.json');
 			break;
 		case "/client/getMetricsConfig":
-			FinalOutput = ReadJson('metricsConfig.json');
+			FinalOutput = ReadJson('data/metricsConfig.json');
 			break;
 		case "/client/putMetrics":
-			FinalOutput = '{"err":0,"errmsg":null,"data":null}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 		case "/client/game/bot/generate":
 			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
-			//FinalOutput = ReadJson('bot_generate.json');
 			break;
 		case "/client/trading/api/getTradersList":
-			FinalOutput = ReadJson('traderList.json');
+			FinalOutput = ReadJson('data/traderList.json');
 			break;
 		case "/client/server/list":
-			FinalOutput = ReadJson('serverList.json');
+			FinalOutput = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":1337}]}';
 			break;
 		case "/client/ragfair/search":
 			RagfairOffers(info);
@@ -951,79 +876,15 @@ function handleRequest(req, body, url) {
 			break;
 		case "/client/game/profile/nickname/change":
 			var clientrequest = JSON.parse(body);
-			var tmpList = JSON.parse(ReadJson("list.json"));
+			var tmpList = JSON.parse(ReadJson("data/list.json"));
 
 			tmpList.data[1].Info.Nickname = clientrequest.nickname;
 			tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
-			fs.writeFileSync('list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
+			fs.writeFileSync('data/list.json', JSON.stringify(tmpList, null, "\t"), 'utf8');
 			
 			FinalOutput = '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 			break;
 		case "/dump":
-			/*
-			var locales = JSON.parse( ReadJson('locale_en.json') );
-			var templates = JSON.parse( ReadJson('templates.json') );
-			var res = [];
-
-			var weaponcateglist = [];
-
-			templates.data.Categories.forEach(function(categ)
-			{
-				if(categ.ParentId == "5b5f78dc86f77409407a7f8e")
-				{
-					weaponcateglist.push(categ.Id);
-				}
-			});
-
-
-			var WeaponIdList = []
-			templates.data.Items.forEach(function(item)
-			{
-				weaponcateglist.forEach(function(weapcateg)
-				{
-					if(weapcateg == item.ParentId)
-					{
-						WeaponIdList.push(item.Id);
-					}
-				});
-			});
-
-			WeaponIdList.forEach(function(weaponid)
-			{
-				var tempitem = {};
-				tempitem.weaponName = locales.data.templates[ weaponid ].Name;
-				tempitem.slots = [];
-
-				for( var slot in itemJSON[weaponid]._props.Slots)
-				{
-
-					var tempslot = {}
-					tempslot.modSlot = itemJSON[weaponid]._props.Slots[slot]._name
-					tempslot.modName = [];
-					itemJSON[weaponid]._props.Slots[slot]._props.filters[0].Filter.forEach(function(filtr)
-					{
-						tempslot.modName.push( locales.data.templates[ filtr ].Name);
-					});
-					tempitem.slots.push(tempslot);
-
-				}
-
-				if(itemJSON[weaponid]._props.Chambers != undefined )
-				{
-					var chamber = {}
-					chamber.modSlot = "Chamber";
-					chamber.ammos = [];
-					itemJSON[weaponid]._props.Chambers[0]._props.filters[0].Filter.forEach(function(ammo)
-					{
-						chamber.ammos.push( locales.data.templates[ ammo ].Name );
-					});
-					tempitem.slots.push(chamber);
-				}
-				res.push(tempitem);
-			});
-
-			fs.writeFileSync('weapon_dependencies.json', JSON.stringify(res, null, "\t"), 'utf8');
-			*/
 			break;
 		default:
 			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
