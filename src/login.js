@@ -34,4 +34,4 @@ function createToken(loginJson) {
 	});
 };
 
-module.exports = Object.assign({ createToken });
+module.exports.createToken = createToken;
