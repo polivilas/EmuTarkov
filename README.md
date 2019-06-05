@@ -9,7 +9,7 @@ This works offline only. This doesn't work online or private LAN. Some functiona
 ```note: emudir is a reference to the emulator root directory```
 1. download [nodejs]( https://nodejs.org/en/) and install it to PATH.
 2. download the emulator source.
-3. run ```install.bat``` located in ```emudir```.
+3. execute ```install.bat``` located in ```emudir```.
 ### Game setup
 ```note: the emulator supports only game version 0.11.7.3287```<br/>
 ```note: gamedir is a reference to the game root directory```
@@ -19,7 +19,7 @@ This works offline only. This doesn't work online or private LAN. Some functiona
 ### Playing the game
 1. execute ```run.bat``` located in ```emudir```
 2. execute ```EscapeFromTarkov.exe``` located in ```gamedir```
-### Starting an offline raid
+### Start an offline raid
 1. press ESCAPE FROM TARKOV
 2. select the PMC
 3. select your location and press next
@@ -31,7 +31,7 @@ This works offline only. This doesn't work online or private LAN. Some functiona
 ## Issues
 All bugs/errors/issues:<br/>
 https://github.com/polivilas/EmuTarkov/issues<br/>
-Please include your logs located in ```gamedir/logs``` as well.
+Please include your logs located in ```gamedir/logs```.
 
 ## Contributions
 All bugfixes/contributions/pull requests:<br/>
