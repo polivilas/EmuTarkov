@@ -667,7 +667,7 @@ server.listen(port, function() {
 
 // create login token
 // NOTE: client-side only, split this into a separate application?
-var loginData = JSON.parse('{"email":' + settings.account.email + ',"password":' + settings.account.password + ', "toggle":true, "timestamp":1337}');
+var loginData = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
 
 setInterval(function() {
 	login.createToken(loginData);
