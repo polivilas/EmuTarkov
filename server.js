@@ -868,6 +868,9 @@ function handleRequest(req, body, url) {
 		case "/client/game/logout":
 			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
+		case "/client/queue/status":
+			FinalOutput = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
+			break;
 		case "/client/items":
 			FinalOutput = ReadJson('items.json');
 			break;
