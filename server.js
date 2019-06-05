@@ -5,10 +5,11 @@ var login = require('./src/login.js');
 var utility = require('./src/utility.js');
 var item = require('./src/item.js');
 var ragfair = require('./src/ragfair.js');
+var settings = require('./src/settings.js');
 
 var server = http.createServer();
 var FinalOutput = "";
-var port = getPort();
+var port = settings.getPort();
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
