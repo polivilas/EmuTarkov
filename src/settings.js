@@ -1,3 +1,5 @@
+var utility = require('./utility.js');
+
 var settings = JSON.parse(utility.readJson("settings.json"));
 
 function getPort() {
