@@ -133,7 +133,7 @@ function generateBots(databots) //Welcome to the Scav Randomizer :)
 
 				for (var i = 1; i <= params.Limit ;i++) //generate as many as the game request
 				{
-					var BotBase = JSON.parse(ReadJson("bots/bot_base.json")); //load a dummy bot with nothing
+					var BotBase = JSON.parse(ReadJson("data/bots/bot_base.json")); //load a dummy bot with nothing
 					var internalId = getRandomIntEx(10000); //generate a scavSeed
 
 					if(presets.EnablePmcWar == true)
