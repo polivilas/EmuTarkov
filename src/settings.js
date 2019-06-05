@@ -15,3 +15,5 @@ function getPassword() {
 }
 
 module.exports.getPort = getPort;
+module.exports.getEmail = getEmail;
+module.exports.getPassword = getPassword;
