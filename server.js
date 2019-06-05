@@ -4,7 +4,7 @@ var zlib = require('zlib');
 var regedit = require('regedit');
 var server = http.createServer();
 var FinalOutput = "";
-var PORT = 1337;
+var port = 1337;
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
@@ -950,8 +950,8 @@ server.on('request', function(req, resp) {
 });
 
 //Start the server
-server.listen(PORT, function() {
-	console.log('EmuTarkov listening on: %s',PORT);
+server.listen(port, function() {
+	console.log('EmuTarkov listening on: %s', port);
 });
 
 var spoofedLogin = JSON.parse('{"email":' + settings.account.email + ',"password":' + settings.account.password + ', "toggle":true, "timestamp":1337}');
