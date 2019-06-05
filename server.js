@@ -831,13 +831,13 @@ function handleRequest(req, body, url) {
 			FinalOutput = ReadJson('templates.json');
 			break;
 		case "/client/quest/list":
-			FinalOutput = ReadJson('quest_list.json');
+			FinalOutput = ReadJson('questList.json');
 			break;
 		case "/client/getMetricsConfig":
 			FinalOutput = ReadJson('metricsConfig.json');
 			break;
 		case "/client/putMetrics":
-			FinalOutput = '{"err":0,"errmsg":null,"data":null}';
+			FinalOutput = '{"err":0, "errmsg":null, "data":null}';
 			break;
 		case "/client/game/bot/generate":
 			FinalOutput = JSON.stringify( {"err": 0,"errmsg": null,"data": generateBots(JSON.parse(body)) } );
