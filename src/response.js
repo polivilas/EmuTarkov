@@ -45,9 +45,12 @@ function changeNickname(body) {
     var clientrequest = JSON.parse(body);
 	var tmpList = JSON.parse(utility.readJson("data/list.json"));
 
-    // apply nickname
+	// apply nickname
+	tmpList.data[0].Info.Nickname = clientrequest.nickname;
+	tmpList.data[0].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	tmpList.data[1].Info.Nickname = clientrequest.nickname;
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
+	
     utility.writeJson('data/list.json', tmpList);
     
     return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
@@ -57,6 +60,7 @@ function get(req, body, url) {
 	var output = "";
 	var info = JSON.parse("{}");
 
+	// parse body
 	if (body != "") {
 		try {
 			info = JSON.parse(body);
