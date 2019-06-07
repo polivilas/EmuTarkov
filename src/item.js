@@ -201,7 +201,7 @@ function handleMoving(body) {
             break;
             
 		case "TradingConfirm":
-			if(body.type == "buy_from_trader") {
+			if (body.type == "buy_from_trader") {
 				var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
 				for (var key in tmpTrader.data.items) {
 					if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
