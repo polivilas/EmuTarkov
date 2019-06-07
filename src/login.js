@@ -1,14 +1,18 @@
 var regedit = require('regedit');
 
-function createToken(loginJson) {
+var settings = require('./settings.js');
+
+var data = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
+
+function createToken() {
 	// get timestamp
-	loginJson.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
-	console.log(loginJson.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
+	data.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
+	console.log(data.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
 	
 	// encrypt the token
-	var tmpB64 = Buffer.from(JSON.stringify(loginJson)).toString('base64');
+	var tmpB64 = Buffer.from(JSON.stringify(data)).toString('base64');
 	
-	// convert it to bytes
+	// convert encrypted token to bytes
 	var bytes = [];
 	
 	for (var i = 0; i < tmpB64.length; ++i) {

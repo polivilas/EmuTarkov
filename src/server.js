@@ -2,9 +2,9 @@ var http = require('http');
 var zlib = require('zlib');
 
 var settings = require('./settings.js');
-var login = require('./login.js');
 var item = require('./item.js');
 var response = require('./response.js');
+var login = require('./login.js');
 
 var server = http.createServer();
 var port = settings.getPort();
@@ -78,12 +78,9 @@ if (settings.getEmulateServer()) {
 
 // start the launcher
 if (settings.getEmulateLauncher()) {
-	// create login token
-	var loginData = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
-
 	setInterval(function() {
-		login.createToken(loginData);
+		login.createToken();
 	}, 1000 * 60);
 
-	login.createToken(loginData);
+	login.createToken();
 }
