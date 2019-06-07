@@ -19,7 +19,20 @@ function getRandomIntEx(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
+function convertStringToBytes(string) {
+	var bytes = [];
+	
+	for (var i = 0; i < string.length; ++i) {
+		var code = string.charCodeAt(i);
+		
+		bytes = bytes.concat([code]);
+	}
+	
+	return bytes.concat(0);
+}
+
 module.exports.readJson = readJson;
 module.exports.writeJson = writeJson;
 module.exports.getRandomInt = getRandomInt;
 module.exports.getRandomIntEx = getRandomIntEx;
+module.exports.convertStringToBytes = convertStringToBytes;

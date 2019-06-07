@@ -1,6 +1,7 @@
 var regedit = require('regedit');
 
 var settings = require('./settings.js');
+var utility = require('./utility.js');
 
 var data = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
 
@@ -13,15 +14,7 @@ function createToken() {
 	var tmpB64 = Buffer.from(JSON.stringify(data)).toString('base64');
 	
 	// convert encrypted token to bytes
-	var bytes = [];
-	
-	for (var i = 0; i < tmpB64.length; ++i) {
-		var code = tmpB64.charCodeAt(i);
-		
-		bytes = bytes.concat([code]);
-	}
-	
-	bytes = bytes.concat(0);
+	utility.convertStringToBytes(tmpB64);
 
 	// put the token into the registery
 	regedit.putValue( {
