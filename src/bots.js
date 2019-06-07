@@ -3,6 +3,24 @@ var settings = require('./settings.js');
 
 var items = JSON.parse(utility.readJson('data/items.json'));
 
+function generateBotBossBully(params) {
+	var boss = JSON.parse(utility.readJson("data/bots/botBossBully.json"));
+
+	boss.Info.Settings.Role = params.Role;
+	boss.Info.Settings.BotDifficulty = params.Difficulty;
+
+	return boss;
+}
+
+function generateBotBossKilla(params) {
+	var boss = JSON.parse(utility.readJson("data/bots/botBossKilla.json"));
+
+	boss.Info.Settings.Role = params.Role;
+	boss.Info.Settings.BotDifficulty = params.Difficulty;
+	
+	return boss;
+}
+
 function generate(databots) { //Welcome to the Scav Randomizer :)
 	var generatedBots = [];
 	var bots_number = 0;
@@ -12,21 +30,13 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 	databots.conditions.forEach(function(params) { // loop to generate all scavs
 		switch (params.Role) {
 			case "bossBully":
-				var boss = JSON.parse(utility.readJson("data/bots/botBossBully.json"));
-
+				generatedBots.push(generateBotBossBully(params));
 				bots_number++;
-				boss.Info.Settings.Role = params.Role;
-				boss.Info.Settings.BotDifficulty = params.Difficulty;
-				generatedBots.push(boss);
 				break;
 
-			case "bossKilla":				
-				var boss = JSON.parse(utility.readJson("data/bots/botBossKilla.json"));
-
+			case "bossKilla":
+				generatedBots.push(generateBotBossKilla(params));			
 				bots_number++;
-				boss.Info.Settings.Role = params.Role;
-				boss.Info.Settings.BotDifficulty = params.Difficulty;
-				generatedBots.push(boss);
 				break;
 
 			default:
