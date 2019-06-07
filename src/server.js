@@ -5,59 +5,53 @@ var settings = require('./settings.js');
 var item = require('./item.js');
 var response = require('./response.js');
 
-function redirect(resp) {
-	resp.writeHead(301, {Location: 'http://prod.escapefromtarkov.com'+req.url});
-	console.log("Redirecting");
-	resp.end();
+function sendResponse(req, resp, body) {
+	var output = "";
+	
+	// get response
+	if (req.method == "POST") {
+		output = response.get(req, body.toString(), req.url);
+	} else {
+		output = response.get(req, "{}", req.url);
+	}
+
+	// redirect
+	if (output == "DEAD") {
+		resp.writeHead(301, {Location: 'http://prod.escapefromtarkov.com'+req.url});
+		console.log("Redirecting");
+		resp.end();
+
+		return;
+	}
+
+	// send response
+	resp.writeHead(200, "OK", {'Content-Type': 'text/plain', 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=yolo'});
+	
+	zlib.deflate(output, function(err, buf) {
+		resp.end(buf);
+	});
 }
 
 function handleRequest(req, resp) {
-	// Get the IP address of the client
-	var output = "";
+	// reset item output
 	item.resetOutput();
 	
-	var remote = req.connection.remoteAddress;
+	// get the IP address of the client
+	console.log('Got request from: %s for %s', req.connection.remoteAddress, req.url);
 	
-	console.log('Got request from: %s for %s', remote, req.url);
-	
+	// handle the request
 	if (req.method == "POST") {
 		console.log("Posting");
+
+		// received data
 		req.on('data', function(data) {
-				zlib.inflate(data, function(error, body) {
-					if (error) {
-						console.log(error);
-					} else {
-						output = response.get(req, body.toString(), req.url);
-						
-						if (output == "DEAD") {
-							redirect(resp);
-							return;
-						}
-
-						resp.writeHead(200, "OK", {'Content-Type': 'text/plain', 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=yolo'});
-						
-						zlib.deflate(output, function(err, buf) {
-							resp.end(buf);
-						});
-
-						return;
-					}
+			zlib.inflate(data, function(err, body) {
+				sendResponse(req, resp, body);
 			});
 		});
 	} else {
 		console.log("Getting");
-		output = response.get(req, "{}", req.url);
-		
-		if (output == "DEAD") {
-			redirect(resp);
-			return;
-		}
-
-		resp.writeHead(200, "OK", {'Content-Type': 'text/plain', 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=yolo'});
-		
-		zlib.deflate(output, function(err, buf) {
-			resp.end(buf);
-		});
+		sendResponse(req, resp, null);
 	}
 }
 
