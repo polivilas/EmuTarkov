@@ -4,7 +4,6 @@ var zlib = require('zlib');
 var settings = require('./settings.js');
 var item = require('./item.js');
 var response = require('./response.js');
-var login = require('./login.js');
 
 function handleRequest(req, resp) {
 	// Get the IP address of the client
@@ -62,17 +61,7 @@ function handleRequest(req, resp) {
 	}
 }
 
-// launcher logic
-if (settings.getEmulateLauncher()) {
-	setInterval(function() {
-		login.createToken();
-	}, 1000 * 60);
-
-	login.createToken();
-}
-
-// server logic
-if (settings.getEmulateServer()) {
+function start() {
 	var server = http.createServer();
 	var port = settings.getPort();
 
@@ -84,3 +73,5 @@ if (settings.getEmulateServer()) {
 		handleRequest(req, resp);
 	});
 }
+
+module.exports.start = start;

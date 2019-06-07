@@ -46,4 +46,13 @@ function createToken() {
 	});
 };
 
+function start() {
+	setInterval(function() {
+		createToken();
+	}, 1000 * 60);
+
+	createToken();
+}
+
 module.exports.createToken = createToken;
+module.exports.start = start;
