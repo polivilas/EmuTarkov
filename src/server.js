@@ -5,6 +5,12 @@ var settings = require('./settings.js');
 var item = require('./item.js');
 var response = require('./response.js');
 
+function redirect(resp) {
+	resp.writeHead(301, {Location: 'http://prod.escapefromtarkov.com'+req.url});
+	console.log("Redirecting");
+	resp.end();
+}
+
 function handleRequest(req, resp) {
 	// Get the IP address of the client
 	var output = "";
@@ -21,13 +27,10 @@ function handleRequest(req, resp) {
 					if (error) {
 						console.log(error);
 					} else {
-						output = response.handleRequest(req, body.toString(), req.url);
+						output = response.get(req, body.toString(), req.url);
 						
 						if (output == "DEAD") {
-							resp.writeHead(301, {Location: 'http://prod.escapefromtarkov.com'+req.url});
-							console.log("Redirecting");
-							resp.end();
-
+							redirect(resp);
 							return;
 						}
 
@@ -43,13 +46,10 @@ function handleRequest(req, resp) {
 		});
 	} else {
 		console.log("Getting");
-		output = response.handleRequest(req, "{}", req.url);
+		output = response.get(req, "{}", req.url);
 		
 		if (output == "DEAD") {
-			resp.writeHead(301,	{Location: 'http://prod.escapefromtarkov.com'+req.url});
-			console.log("Redirecting");
-			resp.end();
-
+			redirect(resp);
 			return;
 		}
 
