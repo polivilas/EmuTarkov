@@ -24,7 +24,7 @@ function moveItem(info) {
         return JSON.stringify(item.getOutput());
     }
 
-    return "SHITS_FUCKED_ITEM_MOVING";    
+    return output;    
 }
 
 function joinMatch() {
