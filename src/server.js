@@ -66,16 +66,19 @@ server.on('request', function(req, resp) {
 	}
 });
 
-//Start the server
+// start the server
 server.listen(port, function() {
 	console.log('EmuTarkov listening on: %s', port);
 });
 
-// create login token
-var loginData = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
+// start the launcher
+if (settings.getEmulateLauncher()) {
+	// create login token
+	var loginData = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
 
-setInterval(function() {
+	setInterval(function() {
+		login.createToken(loginData);
+	}, 1000 * 60);
+
 	login.createToken(loginData);
-}, 1000 * 60);
-
-login.createToken(loginData);
+}
