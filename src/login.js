@@ -29,7 +29,7 @@ function createToken() {
 	var tmpB64 = convertStringToBase64(JSON.stringify(data));
 	
 	// convert encrypted token to bytes
-	convertStringToBytes(tmpB64);
+	var bytes = convertStringToBytes(tmpB64);
 
 	// put the token into the registery
 	regedit.putValue( {
