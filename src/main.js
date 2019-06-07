@@ -1,3 +1,5 @@
+"use strict";
+
 var settings = require('./settings.js');
 var login = require('./login.js');
 var server = require('./server.js');
