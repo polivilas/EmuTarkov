@@ -1,6 +1,7 @@
+"use strict";
+
 var http = require('http');
 var zlib = require('zlib');
-
 var settings = require('./settings.js');
 var item = require('./item.js');
 var response = require('./response.js');

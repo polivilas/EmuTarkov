@@ -1,3 +1,5 @@
+"use strict";
+
 var utility = require('./utility.js');
 
 var stashX = 10; // fix for your stash size

@@ -1,3 +1,5 @@
+"use strict";
+
 var utility = require('./utility.js');
 
 var data = JSON.parse(utility.readJson("data/settings.json"));

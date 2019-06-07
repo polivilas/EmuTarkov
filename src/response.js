@@ -1,3 +1,5 @@
+"use strict";
+
 var utility = require('./utility.js');
 var settings = require('./settings.js');
 var item = require('./item.js');

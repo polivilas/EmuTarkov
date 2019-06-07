@@ -1,5 +1,6 @@
-var regedit = require('regedit');
+"use strict";
 
+var regedit = require('regedit');
 var settings = require('./settings.js');
 
 var data = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
