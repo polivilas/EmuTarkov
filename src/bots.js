@@ -6,13 +6,13 @@ var items = JSON.parse(utility.readJson('data/items.json'));
 function generate(databots) { //Welcome to the Scav Randomizer :)
 	var generatedBots = [];
 	var bots_number = 0;
-	var presets = JSON.parse(utility.readJson("data/bots/BotsSettings.json"));
-	var weaponPresets = JSON.parse(utility.readJson("data/bots/presetExtended.json")); //load all weapons
+	var presets = JSON.parse(utility.readJson("data/bots/botSettings.json"));
+	var weaponPresets = JSON.parse(utility.readJson("data/bots/botWeapons.json")); //load all weapons
 
 	databots.conditions.forEach(function(params) { // loop to generate all scavs
 		switch (params.Role) {
 			case "bossBully":
-				var boss = JSON.parse(utility.readJson("data/bots/bot_bossBully.json"));
+				var boss = JSON.parse(utility.readJson("data/bots/botBossBully.json"));
 
 				bots_number++;
 				boss.Info.Settings.Role = params.Role;
@@ -21,7 +21,7 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 				break;
 
 			case "bossKilla":				
-				var boss = JSON.parse(utility.readJson("data/bots/bot_bossKilla.json"));
+				var boss = JSON.parse(utility.readJson("data/bots/botBossKilla.json"));
 
 				bots_number++;
 				boss.Info.Settings.Role = params.Role;
@@ -35,7 +35,7 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 				}
 
 				for (var i = 1; i <= params.Limit; i++)  { //generate as many as the game request
-					var BotBase = JSON.parse(utility.readJson("data/bots/bot_base.json")); //load a dummy bot with nothing
+					var BotBase = JSON.parse(utility.readJson("data/bots/botBase.json")); //load a dummy bot with nothing
 					var internalId = utility.getRandomIntEx(10000); //generate a scavSeed
 
 					if (settings.getEnablePmcWar() == true) {
