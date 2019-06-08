@@ -1,6 +1,8 @@
+"use strict";
+
 var utility = require('./utility.js');
 
-var settings = JSON.parse(utility.readJson("data/settings.json"));
+var data = JSON.parse(utility.readJson("data/settings.json"));
 
 function getServerSettings() {
     return settings.server;

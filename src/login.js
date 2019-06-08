@@ -1,23 +1,36 @@
-var regedit = require('regedit');
+"use strict";
 
-function createToken(loginJson) {
-	// get timestamp
-	loginJson.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
-	console.log(loginJson.timestamp, 'actual = ', Math.floor(new Date() / 1000) + 45);
-	
-	// encrypt the token
-	var tmpB64 = Buffer.from(JSON.stringify(loginJson)).toString('base64');
-	
-	// convert it to bytes
+var regedit = require('regedit');
+var settings = require('./settings.js');
+
+var data = JSON.parse('{"email":' + settings.getEmail() + ',"password":' + settings.getPassword() + ', "toggle":true, "timestamp":1337}');
+
+function convertStringToBase64(string) {
+	return Buffer.from(string).toString('base64');
+}
+
+function convertStringToBytes(string) {
 	var bytes = [];
 	
-	for (var i = 0; i < tmpB64.length; ++i) {
-		var code = tmpB64.charCodeAt(i);
+	for (var i = 0; i < string.length; ++i) {
+		var code = string.charCodeAt(i);
 		
 		bytes = bytes.concat([code]);
 	}
+
+	return bytes.concat(0);
+}
+
+function createToken() {
+	// generate timestamp
+	data.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
+	console.log("Token timestamp: " + data.timestamp);
 	
-	bytes = bytes.concat(0);
+	// encrypt the token
+	var tmpB64 = convertStringToBase64(JSON.stringify(data));
+	
+	// convert encrypted token to bytes
+	var bytes = convertStringToBytes(tmpB64);
 
 	// put the token into the registery
 	regedit.putValue( {
@@ -34,4 +47,13 @@ function createToken(loginJson) {
 	});
 };
 
+function start() {
+	setInterval(function() {
+		createToken();
+	}, 1000 * 60);
+
+	createToken();
+}
+
 module.exports.createToken = createToken;
+module.exports.start = start;
