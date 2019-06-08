@@ -21,7 +21,7 @@ function generateBotBossKilla(params) {
 	return boss;
 }
 
-function generateUsecAppearance(bot) {
+function generateUsecAppearance(bot, internalId) {
 	bot._id = "Usec" + internalId;
 	bot.Info.Nickname = "Usec " + internalId;
 	bot.Info.LowerNickname = "usec" + internalId;
@@ -33,7 +33,7 @@ function generateUsecAppearance(bot) {
 	return bot;
 }
 
-function generateBearAppearance(bot) {
+function generateBearAppearance(bot, internalId) {
 	bot._id = "Bear" + internalId;
 	bot.Info.Nickname = "Bear " + internalId;
 	bot.Info.LowerNickname = "Bear" + internalId;
@@ -45,7 +45,7 @@ function generateBearAppearance(bot) {
 	return bot;
 }
 
-function generateScavAppearance(bot) {
+function generateScavAppearance(bot, internalId, presets) {
 	bot._id = "scav_" + internalId;
 	bot.Info.Nickname = "Scav " + internalId;
 	bot.Info.LowerNickname = "scav" + internalId;
@@ -57,7 +57,7 @@ function generateScavAppearance(bot) {
 	return bot;
 }
 
-function generateBullyFollowerAppearance(bot) {
+function generateBullyFollowerAppearance(bot, internalId) {
 	bot._id = "guard_" + internalId;
 	bot.Info.Nickname = "Guard " + i;
 	bot.Info.LowerNickname = "guard" + internalId;
@@ -69,7 +69,7 @@ function generateBullyFollowerAppearance(bot) {
 	return bot;
 }
 
-function generateScavSniperAppearance(bot) {
+function generateScavSniperAppearance(bot, internalId, presets) {
 	bot._id = "sniper_" + internalId;
 	bot.Info.Nickname = "Sniper " + internalId;
 	bot.Info.LowerNickname = "sniper" + internalId;
@@ -81,7 +81,7 @@ function generateScavSniperAppearance(bot) {
 	return bot;
 }
 
-function generateRaiderAppearance(bot) {
+function generateRaiderAppearance(bot, internalId, presets) {
 	bot._id = "raider_" + internalId;
 	bot.Info.Nickname = "Raider " + internalId;
 	bot.Info.LowerNickname = "raider" + internalId;
@@ -110,18 +110,18 @@ function generateBotSkill(bot, params) {
 	return bot;
 }
 
-function generateBotWeapon(bot, params, weaponPresets) {
-	bot = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
+function generateBotWeapon(item, params, presets, weaponPresets) {
+	item = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
 	
 	// get marksman weapon
 	if (params.Role == "marksman") {
 		var found = false;
 		
 		while (found == false) {
-			bot = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
+			item = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
 
 			presets.filter_marksman.forEach(function(filter) {
-				if (bot._items[0]._tpl == filter) {
+				if (item._items[0]._tpl == filter) {
 					found = true;
 				}
 			});
@@ -129,18 +129,18 @@ function generateBotWeapon(bot, params, weaponPresets) {
 	}
 
 	// check if its a pistol or primary weapon
-	bot.isPistol = false;
+	item.isPistol = false;
 
 	presets.pistols.forEach(function(pistoltpl) {
-		if (pistoltpl == Weapon._items[0]._tpl) {
-			Weapon.isPistol = true;
+		if (pistoltpl == item._items[0]._tpl) {
+			item.isPistol = true;
 		}
 	});
 
-	return bot;
+	return item;
 }
 
-function generateBotVestRigItem(params, internalId) {
+function generateBotVestRigItem(internalId, presets) {
 	var item = {};
 
 	item._id = "TacticalVestScav"+ internalId;
@@ -151,7 +151,7 @@ function generateBotVestRigItem(params, internalId) {
 	return item;
 }
 
-function generateBotKnife(params, internalId) {
+function generateBotKnife(internalId, presets) {
 	var item = {};
 
 	item._id = "ScabbardScav"+ internalId;
@@ -162,7 +162,7 @@ function generateBotKnife(params, internalId) {
 	return item;
 }
 
-function generateBotGlasses(params, internalId) {
+function generateBotGlasses(internalId, presets) {
 	var item = {};
 	
 	item._id = "EyeWearScav"+ internalId;
@@ -173,7 +173,7 @@ function generateBotGlasses(params, internalId) {
 	return item;
 }
 
-function generateBotFaceCover(params, internalId) {
+function generateBotFaceCover(internalId, presets) {
 	var item = {};
 
 	item._id = "FaceCoverScav"+ internalId;
@@ -184,15 +184,18 @@ function generateBotFaceCover(params, internalId) {
 	return item;
 }
 
-function generateBotHeadwear(params, internalId) {
+function generateBotHeadwear(internalId, presets) {
 	var item = {};
 
-	// code here
+	item._id = "HeadWearScav"+ internalId;
+	item._tpl= presets.Headwear[utility.getRandomIntEx(presets.Headwear.length)];
+	item.parentId = "5c6687d65e9d882c8841f0fd";
+	item.slotId = "Headwear";
 
 	return item;
 }
 
-function generateBotBackpack(params, internalId) {
+function generateBotBackpack(internalId, presets) {
 	var item = {};
 
 	item._id = "BackpackScav"+ internalId;
@@ -205,7 +208,7 @@ function generateBotBackpack(params, internalId) {
 	return item;
 }
 
-function generateBotArmorVest(params, internalId) {
+function generateBotArmorVest(internalId, presets) {
 	var item = {};
 	var durabl = utility.getRandomIntEx(45);
 
@@ -218,7 +221,7 @@ function generateBotArmorVest(params, internalId) {
 	return item;
 }
 
-function generateBotMedPocket(params, internalId) {
+function generateBotMedPocket(internalId, presets) {
 	var item = {};
 
 	item._id = "PocketMedScav"+ internalId;
@@ -230,7 +233,7 @@ function generateBotMedPocket(params, internalId) {
 	return item;
 }
 
-function generateBotItemPocket(params, internalId) {
+function generateBotItemPocket(internalId, presets) {
 	var item = {};
 
 	item._id = "PocketItemScav"+ internalId;
@@ -242,35 +245,36 @@ function generateBotItemPocket(params, internalId) {
 	return item;
 }
 
-function generateBaseBot(presents, weaponPresets) {
+function generateBaseBot(params, presets, weaponPresets) {
 	var bot = JSON.parse(utility.readJson("data/bots/botBase.json"));
 	var internalId = utility.getRandomIntEx(10000);
 
-	// generate only PMC appearance
 	if (settings.getEnablePmcWar() == true) {
+		// generate only PMC appearance
 		if (utility.getRandomIntEx(100) >= 55 ) { 
-			bot = generateUsecAppearance(bot);
+			bot = generateUsecAppearance(bot, params);
 			bot.Info.Side = "Usec";
 		} else {
-			bot = generateBearAppearance(bot);
+			bot = generateBearAppearance(bot, params);
 			bot.Info.Side = "Bear";
 		}
 	} else {
+		// generate scav appearance
 		switch (params.Role) {
 			case "followerBully":
-				bot = generateBullyFollowerAppearance(bot);
+				bot = generateBullyFollowerAppearance(bot, params);
 				break;
 
 			case "marksman":
-				bot = generateScavSniperAppearance(bot);
+				bot = generateScavSniperAppearance(bot, params, presets);
 				break;
 
 			case "pmcBot":
-				bot = generateRaiderAppearance(bot);
+				bot = generateRaiderAppearance(bot, params, presets);
 				break;
 			
 			default:
-				bot = generateScavAppearance(bot);
+				bot = generateScavAppearance(bot, params, presets);
 				break;
 		}
 	}
@@ -279,10 +283,10 @@ function generateBaseBot(presents, weaponPresets) {
 	bot = generateBotSkill(bot, params);
 
 	// choose randomly a weapon from preset.json before filling items
-	var Weapon = generateBotWeapon(Weapon, params, weaponPresets);
+	var Weapon = generateBotWeapon(Weapon, params, presets, weaponPresets);
 
 	// add a vest or rig on the scav (can be an armored vest)
-	bot.Inventory.items.push(generateBotVestRigItem(params, internalId));
+	bot.Inventory.items.push(generateBotVestRigItem(internalId, presets));
 
 	// fill your dummy bot with the random selected preset weapon and its mods
 	Weapon._items.forEach(function(item) {
@@ -428,46 +432,41 @@ function generateBaseBot(presents, weaponPresets) {
 	}
 
 	// add a knife
-	bot.Inventory.items.push(generateBotKnife(params, internalId));
+	bot.Inventory.items.push(generateBotKnife(internalId, presets));
 
 	// 30% chance to add glasses
 	if (utility.getRandomIntEx(100) <= 30) {
-		bot.Inventory.items.push(generateBotGlasses(params, internalId));
+		bot.Inventory.items.push(generateBotGlasses(internalId, presets));
 	}
 
 	// 40% chance to add face cover
 	if (utility.getRandomIntEx(100) <= 40) {
-		bot.Inventory.items.push(generateBotFaceCover(params, internalId));
+		bot.Inventory.items.push(generateBotFaceCover(internalId, presets));
 	}
 
 	// 40% chance to add headwear
-	if(utility.getRandomIntEx(100) <= 40 ) {
-		var tempw = {};
-		tempw._id = "HeadWearScav"+ internalId;
-		tempw._tpl= presets.Headwear[utility.getRandomIntEx(presets.Headwear.length)];
-		tempw.parentId = "5c6687d65e9d882c8841f0fd";
-		tempw.slotId = "Headwear";
-		bot.Inventory.items.push(tempw);
+	if (utility.getRandomIntEx(100) <= 40 ) {
+		bot.Inventory.items.push(generateBotHeadwear(internalId, presets));
 	}
 
 	// 25% chance to add a backpack
 	if (utility.getRandomIntEx(100) <= 25) {
-		bot.Inventory.items.push(generateBotBackpack(params, internalId));
+		bot.Inventory.items.push(generateBotBackpack(internalId, presets));
 	}
 
 	// 25% chance to add an armor vest
 	if (utility.getRandomIntEx(100) <= 25) {
-		bot.Inventory.items.push(generateBotArmorVest(params, internalId));
+		bot.Inventory.items.push(generateBotArmorVest(internalId, presets));
 	}
 
 	// 10% chance to add a med pocket, bully followers have 100% chance
 	if (utility.getRandomIntEx(100) <= 10 || params.Role == "followerBully") { //add meds
-		bot.Inventory.items.push(generateBotMedPocket(presets, internalId));
+		bot.Inventory.items.push(generateBotMedPocket(internalId, presets));
 	}
 
 	// 10% chance to add a item pocket, bully followers have 100% chance
 	if (utility.getRandomIntEx(100) <= 10 || params.Role == "followerBully") {
-		bot.Inventory.items.push(generateBotItemPocket(presets, internalId));
+		bot.Inventory.items.push(generateBotItemPocket(internalId, presets));
 	}
 
 	return bot;
@@ -499,7 +498,7 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 
 				// generate as many as the game request
 				for (var i = 1; i <= params.Limit; i++)  {
-					generatedBots.push(generateBaseBot(presets, weaponPresets));
+					generatedBots.push(generateBaseBot(params, presets, weaponPresets));
 					botPossibilities++;
 				}
 				break;
