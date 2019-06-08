@@ -58,7 +58,6 @@ function changeNickname(body) {
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	
     utility.writeJson('data/list.json', tmpList);
-    
     return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 }
 

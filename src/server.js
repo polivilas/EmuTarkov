@@ -15,10 +15,6 @@ function sendResponse(req, resp, body) {
 	} else {
 		output = response.get(req, "{}", req.url);
 	}
-var server = http.createServer();
-var serverSettings = settings.getServerSettings();
-var port = serverSettings.port;
-var output = "";
 
 	// redirect
 	if (output == "DEAD") {
@@ -62,11 +58,8 @@ function handleRequest(req, resp) {
 
 function start() {
 	var server = http.createServer();
-	var port = settings.getPort();
+	var port = settings.getServerSettings().port;
 
-// create login token
-var accountSettings = settings.getAccountSettings();
-var loginData = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ', "toggle":true, "timestamp":1337}');
 	server.listen(port, function() {
 		console.log('EmuTarkov listening on: %s', port);
 	});
