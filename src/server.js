@@ -58,7 +58,7 @@ function handleRequest(req, resp) {
 
 function start() {
 	var server = http.createServer();
-	var port = settings.getPort();
+	var port = settings.getServerSettings().port;
 
 	server.listen(port, function() {
 		console.log('EmuTarkov listening on: %s', port);

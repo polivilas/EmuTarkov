@@ -4,33 +4,23 @@ var utility = require('./utility.js');
 
 var data = JSON.parse(utility.readJson("data/settings.json"));
 
-function getEmulateLauncher() {
-    return data.emulation.emulateLauncher;
+function getEmulationSettings() {
+    return data.emulation;
 }
 
-function getEmulateServer() {
-    return data.emulation.emulateServer;
+function getServerSettings() {
+    return data.server;
 }
 
-function getPort() {
-	return data.server.port;
+function getAccountSettings() {
+    return data.account;
 }
 
-function getEmail() {
-    return data.account.email;
+function getBotSettings() {
+    return data.bots;
 }
 
-function getPassword() {
-    return data.account.password;
-}
-
-function getEnablePmcWar() {
-    return data.bots.enablePmcWar;
-}
-
-module.exports.getEmulateLauncher = getEmulateLauncher;
-module.exports.getEmulateServer = getEmulateServer;
-module.exports.getPort = getPort;
-module.exports.getEmail = getEmail;
-module.exports.getPassword = getPassword;
-module.exports.getEnablePmcWar = getEnablePmcWar;
+module.exports.getEmulationSettings = getEmulationSettings;
+module.exports.getServerSettings = getServerSettings;
+module.exports.getAccountSettings = getAccountSettings;
+module.exports.getBotSettings = getBotSettings;

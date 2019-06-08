@@ -12,6 +12,10 @@ var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
 var traderImg = new RegExp('/files/([a-z0-9/\.jpng])+', 'i');
 var content = new RegExp('/uploads/([a-z0-9/\.jpng_])+', 'i');
 var pushNotifier = new RegExp('/push/notifier/get/', 'i');
+var serverSettings = settings.getServerSettings();
+var backendUrl = serverSettings.backendUrl;
+var ip = serverSettings.ip;
+var port = serverSettings.port;
 
 function moveItem(info) {
     var output = "";
@@ -29,7 +33,7 @@ function moveItem(info) {
     return output;    
 }
 
-function joinMatch() {
+function joinMatch(body) {
     var clientrequest = JSON.parse(body);
 	var shortid = "";
 	
@@ -54,7 +58,6 @@ function changeNickname(body) {
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	
     utility.writeJson('data/list.json', tmpList);
-    
     return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 }
 
@@ -130,7 +133,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/login":
-			output = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:' + settings.getPort() + '", "Messaging":"http://localhost:' + settings.getPort() + '", "Main":"http://localhost:' + settings.getPort() + '", "RagFair":"http://localhost:' + settings.getPort() + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			output = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
 
 		case "/client/game/logout":
@@ -154,7 +157,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/profile/select":
-			output = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:' + settings.getPort() + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+			output = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
 
 		case "/client/profile/status":
@@ -205,7 +208,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/server/list":
-			output = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":' + settings.getPort() + '}]}';
+			output = '{"err":0, "errmsg":null, "data":[{"ip":"'+ ip +'", "port":"' + port + '"}]}';
 			break;
 
 		case "/client/ragfair/search":

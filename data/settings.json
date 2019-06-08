@@ -4,13 +4,34 @@
         "emulateServer": true
     },
     "server": {
+        "backendUrl": "http://localhost:1337",
+        "ip": "127.0.0.1",
         "port": 1337
     },
     "account": {
         "email": "1337",
         "password": "1337"
     },
-    "bots": { 
-        "enablePmcWar": false
+    "bots": {
+        "pmcWar": {
+            "enabled": false
+        },
+        "limit": {
+            "bossKilla": 0,
+            "bossBully": 0,
+            "bullyFollowers": 5,
+            "marksman": 0,
+            "pmcBot": 0
+        },
+        "spawn": {
+            "pmcWarUsec": 55,
+            "glasses": 30,
+            "faceCover": 40,
+            "headwear": 40,
+            "backpack": 25,
+            "armorVest": 25,
+            "medPocket": 10,
+            "itemPocket": 10
+        }
     }
 }
