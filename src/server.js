@@ -7,7 +7,8 @@ var item = require('./item.js');
 var response = require('./response.js');
 
 var server = http.createServer();
-var port = settings.getServerPort();
+var serverSettings = settings.getServerSettings();
+var port = serverSettings.port;
 var output = "";
 
 server.on('request', function(req, resp) {
@@ -72,7 +73,8 @@ server.listen(port, function() {
 });
 
 // create login token
-var loginData = JSON.parse('{"email":' + settings.getAccountEmail() + ',"password":' + settings.getAccountPassword() + ', "toggle":true, "timestamp":1337}');
+var accountSettings = settings.getAccountSettings();
+var loginData = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ', "toggle":true, "timestamp":1337}');
 
 setInterval(function() {
 	login.createToken(loginData);

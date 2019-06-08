@@ -2,23 +2,18 @@ var utility = require('./utility.js');
 
 var settings = JSON.parse(utility.readJson("data/settings.json"));
 
-function getServerPort() {
-	return settings.server.port;
+function getServerSettings() {
+    return settings.server;
 }
 
-function getAccountEmail() {
-    return settings.account.email;
-}
-
-function getAccountPassword() {
-    return settings.account.password;
+function getAccountSettings() {
+    return settings.account;
 }
 
 function getBotSettings() {
     return settings.bots;
 }
 
-module.exports.getServerPort = getServerPort;
-module.exports.getAccountEmail = getAccountEmail;
-module.exports.getAccountPassword = getAccountPassword;
+module.exports.getServerSettings = getServerSettings;
+module.exports.getAccountSettings = getAccountSettings;
 module.exports.getBotSettings = getBotSettings;

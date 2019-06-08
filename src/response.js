@@ -10,6 +10,8 @@ var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
 var traderImg = new RegExp('/files/([a-z0-9/\.jpng])+', 'i');
 var content = new RegExp('/uploads/([a-z0-9/\.jpng_])+', 'i');
 var pushNotifier = new RegExp('/push/notifier/get/', 'i');
+var serverSettings = settings.getServerSettings();
+var port = serverSettings.port;
 
 function moveItem(info) {
     var output = "";
@@ -124,7 +126,7 @@ function handleRequest(req, body, url) {
 			break;
 
 		case "/client/game/login":
-			output = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:' + settings.getServerPort() + '", "Messaging":"http://localhost:' + settings.getServerPort() + '", "Main":"http://localhost:' + settings.getServerPort() + '", "RagFair":"http://localhost:' + settings.getServerPort() + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			output = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"http://localhost:' + port + '", "Messaging":"http://localhost:' + port + '", "Main":"http://localhost:' + port + '", "RagFair":"http://localhost:' + port + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
 
 		case "/client/game/logout":
@@ -148,7 +150,7 @@ function handleRequest(req, body, url) {
 			break;
 
 		case "/client/game/profile/select":
-			output = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:' + settings.getServerPort() + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+			output = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"localhost:' + port + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
 
 		case "/client/profile/status":
@@ -199,7 +201,7 @@ function handleRequest(req, body, url) {
 			break;
 
 		case "/client/server/list":
-			output = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":' + settings.getServerPort() + '}]}';
+			output = '{"err":0, "errmsg":null, "data":[{"ip":"127.0.0.1", "port":' + port + '}]}';
 			break;
 
 		case "/client/ragfair/search":
