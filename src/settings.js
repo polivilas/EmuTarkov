@@ -14,11 +14,11 @@ function getAccountPassword() {
     return settings.account.password;
 }
 
-function getBotsPmcWarEnabled() {
-    return settings.bots.enablePmcWar;
+function getBotSettings() {
+    return settings.bots;
 }
 
 module.exports.getServerPort = getServerPort;
 module.exports.getAccountEmail = getAccountEmail;
 module.exports.getAccountPassword = getAccountPassword;
-module.exports.getBotsPmcWarEnabled = getBotsPmcWarEnabled;
+module.exports.getBotSettings = getBotSettings;

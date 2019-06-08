@@ -1,16 +1,8 @@
 var utility = require('./utility.js');
 var settings = require('./settings.js');
 
+var botSettings = settings.getBotSettings();
 var items = JSON.parse(utility.readJson('data/items.json'));
-
-function generateBotBossBully(params) {
-	var boss = JSON.parse(utility.readJson("data/bots/botBossBully.json"));
-
-	boss.Info.Settings.Role = params.Role;
-	boss.Info.Settings.BotDifficulty = params.Difficulty;
-
-	return boss;
-}
 
 function generateBotBossKilla(params) {
 	var boss = JSON.parse(utility.readJson("data/bots/botBossKilla.json"));
@@ -18,6 +10,15 @@ function generateBotBossKilla(params) {
 	boss.Info.Settings.Role = params.Role;
 	boss.Info.Settings.BotDifficulty = params.Difficulty;
 	
+	return boss;
+}
+
+function generateBotBossBully(params) {
+	var boss = JSON.parse(utility.readJson("data/bots/botBossBully.json"));
+
+	boss.Info.Settings.Role = params.Role;
+	boss.Info.Settings.BotDifficulty = params.Difficulty;
+
 	return boss;
 }
 
@@ -249,9 +250,9 @@ function generateBaseBot(params, presets, weaponPresets) {
 	var bot = JSON.parse(utility.readJson("data/bots/botBase.json"));
 	var internalId = utility.getRandomIntEx(10000);
 
-	if (settings.getBotsPmcWarEnabled() == true) {
+	if (botSettings.pmcWar.enabled == true) {
 		// generate only PMC appearance
-		if (utility.getRandomIntEx(100) >= 55 ) { 
+		if (utility.getRandomIntEx(100) >= botSettings.spawn.pmcWarUsec) { 
 			bot = generateUsecAppearance(bot, params);
 			bot.Info.Side = "Usec";
 		} else {
@@ -434,69 +435,101 @@ function generateBaseBot(params, presets, weaponPresets) {
 	// add a knife
 	bot.Inventory.items.push(generateBotKnife(internalId, presets));
 
-	// 30% chance to add glasses
-	if (utility.getRandomIntEx(100) <= 30) {
+	// chance to add glasses
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.glasses) {
 		bot.Inventory.items.push(generateBotGlasses(internalId, presets));
 	}
 
-	// 40% chance to add face cover
-	if (utility.getRandomIntEx(100) <= 40) {
+	// chance to add face cover
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.faceCover) {
 		bot.Inventory.items.push(generateBotFaceCover(internalId, presets));
 	}
 
-	// 40% chance to add headwear
-	if (utility.getRandomIntEx(100) <= 40 ) {
+	// chance to add headwear
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.headwear) {
 		bot.Inventory.items.push(generateBotHeadwear(internalId, presets));
 	}
 
-	// 25% chance to add a backpack
-	if (utility.getRandomIntEx(100) <= 25) {
+	// chance to add a backpack
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.backpack) {
 		bot.Inventory.items.push(generateBotBackpack(internalId, presets));
 	}
 
-	// 25% chance to add an armor vest
-	if (utility.getRandomIntEx(100) <= 25) {
+	// chance to add an armor vest
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.armorVest) {
 		bot.Inventory.items.push(generateBotArmorVest(internalId, presets));
 	}
 
-	// 10% chance to add a med pocket, bully followers have 100% chance
-	if (utility.getRandomIntEx(100) <= 10 || params.Role == "followerBully") { //add meds
+	// chance to add a med pocket, bully followers have 100% chance
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.medPocket || params.Role == "followerBully") {
 		bot.Inventory.items.push(generateBotMedPocket(internalId, presets));
 	}
 
-	// 10% chance to add a item pocket, bully followers have 100% chance
-	if (utility.getRandomIntEx(100) <= 10 || params.Role == "followerBully") {
+	// chance to add a item pocket, bully followers have 100% chance
+	if (utility.getRandomIntEx(100) <= botSettings.spawn.itemPocket || params.Role == "followerBully") {
 		bot.Inventory.items.push(generateBotItemPocket(internalId, presets));
 	}
 
 	return bot;
 }
 
-function generate(databots) { //Welcome to the Scav Randomizer :)
+function generate(databots) {
 	var presets = JSON.parse(utility.readJson("data/bots/botSettings.json"));
 	var weaponPresets = JSON.parse(utility.readJson("data/bots/botWeapons.json"));
 	var generatedBots = [];
 	var botPossibilities = 0;
 
-	databots.conditions.forEach(function(params) { // loop to generate all scavs
+	// loop to generate all scavs
+	databots.conditions.forEach(function(params) {
+		// limit spawns
+		var limit = 0;
+
 		switch (params.Role) {
-			case "bossBully":
-				generatedBots.push(generateBotBossBully(params));
-				botPossibilities++;
+			case "bossKilla":
+				limit = botSettings.spawner.limit.bossKilla;
 				break;
 
-			case "bossKilla":
-				generatedBots.push(generateBotBossKilla(params));			
-				botPossibilities++;
+			case "bossBully":
+				limit = botSettings.spawner.limit.bossBully;
+				break;
+
+			case "followerBully":
+				limit = botSettings.spawner.limit.bullyFollowers;
+				break;
+
+			case "marksman":
+				limit = botSettings.spawner.limit.marksman;
+				break;
+
+			case "pmcBot":
+				limit = botSettings.spawner.limit.pmcBot;
 				break;
 
 			default:
-				// there can only be 5 bully followers
-				if (params.Role == "followerBully") { 
-					params.Limit = 5; 
-				}
+				break;
+		}
 
-				// generate as many as the game request
+		if (limit > 0) {
+			params.Limit = limit;
+		}
+
+		// generate as many as the game request
+		switch (params.Role) {
+			case "bossKilla":
+				for (var i = 1; i <= params.Limit; i++)  {
+					generatedBots.push(generateBotBossKilla(params));
+					botPossibilities++;
+				}
+				break;
+			
+			case "bossBully":
+				for (var i = 1; i <= params.Limit; i++)  {
+					generatedBots.push(generateBotBossBully(params));
+					botPossibilities++;
+				}
+				break;
+
+			default:
 				for (var i = 1; i <= params.Limit; i++)  {
 					generatedBots.push(generateBaseBot(params, presets, weaponPresets));
 					botPossibilities++;
