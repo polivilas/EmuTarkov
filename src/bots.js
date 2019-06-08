@@ -60,7 +60,7 @@ function generateScavAppearance(bot, internalId, presets) {
 
 function generateBullyFollowerAppearance(bot, internalId) {
 	bot._id = "guard_" + internalId;
-	bot.Info.Nickname = "Guard " + i;
+	bot.Info.Nickname = "Guard " + internalId;
 	bot.Info.LowerNickname = "guard" + internalId;
 	bot.Info.Voice = "Scav_" + utility.getRandomInt(1,6);
 	bot.Customization.Head.path = "assets/content/characters/character/prefabs/wild_head_1.bundle";
@@ -486,23 +486,23 @@ function generate(databots) {
 
 		switch (params.Role) {
 			case "bossKilla":
-				limit = botSettings.spawner.limit.bossKilla;
+				limit = botSettings.limit.bossKilla;
 				break;
 
 			case "bossBully":
-				limit = botSettings.spawner.limit.bossBully;
+				limit = botSettings.limit.bossBully;
 				break;
 
 			case "followerBully":
-				limit = botSettings.spawner.limit.bullyFollowers;
+				limit = botSettings.limit.bullyFollowers;
 				break;
 
 			case "marksman":
-				limit = botSettings.spawner.limit.marksman;
+				limit = botSettings.limit.marksman;
 				break;
 
 			case "pmcBot":
-				limit = botSettings.spawner.limit.pmcBot;
+				limit = botSettings.limit.pmcBot;
 				break;
 
 			default:
