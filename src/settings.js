@@ -2,23 +2,23 @@ var utility = require('./utility.js');
 
 var settings = JSON.parse(utility.readJson("data/settings.json"));
 
-function getPort() {
+function getServerPort() {
 	return settings.server.port;
 }
 
-function getEmail() {
+function getAccountEmail() {
     return settings.account.email;
 }
 
-function getPassword() {
+function getAccountPassword() {
     return settings.account.password;
 }
 
-function getEnablePmcWar() {
+function getBotsPmcWarEnabled() {
     return settings.bots.enablePmcWar;
 }
 
-module.exports.getPort = getPort;
-module.exports.getEmail = getEmail;
-module.exports.getPassword = getPassword;
-module.exports.getEnablePmcWar = getEnablePmcWar;
+module.exports.getServerPort = getServerPort;
+module.exports.getAccountEmail = getAccountEmail;
+module.exports.getAccountPassword = getAccountPassword;
+module.exports.getBotsPmcWarEnabled = getBotsPmcWarEnabled;
