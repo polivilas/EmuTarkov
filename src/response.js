@@ -33,7 +33,7 @@ function moveItem(info) {
     return output;    
 }
 
-function joinMatch() {
+function joinMatch(body) {
     var clientrequest = JSON.parse(body);
 	var shortid = "";
 	
