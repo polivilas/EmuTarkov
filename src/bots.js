@@ -264,7 +264,7 @@ function generateBaseBot(params, presets, weaponPresets) {
 	var bot = JSON.parse(utility.readJson("data/bots/botBase.json"));
 	var internalId = utility.getRandomIntEx(10000);
 
-	if (botSettings.pmcWar.enabled == true) {
+	if (botSettings.pmcWar.enabled == true && params.Role != "followerBully") {
 		// generate only PMC bots
 		bot = generateRandomPmcBot(bot, params);
 	} else {
