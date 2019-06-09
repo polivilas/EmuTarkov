@@ -248,21 +248,27 @@ function generateBotItemPocket(internalId, presets) {
 	return item;
 }
 
+function generateRandomPmcBot(bot, params) {
+	if (utility.getRandomIntEx(100) >= botSettings.spawn.usec) { 
+		bot = generateUsecAppearance(bot, params);
+		bot.Info.Side = "Usec";
+	} else {
+		bot = generateBearAppearance(bot, params);
+		bot.Info.Side = "Bear";
+	}
+
+	return bot;
+}
+
 function generateBaseBot(params, presets, weaponPresets) {
 	var bot = JSON.parse(utility.readJson("data/bots/botBase.json"));
 	var internalId = utility.getRandomIntEx(10000);
 
 	if (botSettings.pmcWar.enabled == true) {
-		// generate only PMC appearance
-		if (utility.getRandomIntEx(100) >= botSettings.spawn.pmcWarUsec) { 
-			bot = generateUsecAppearance(bot, params);
-			bot.Info.Side = "Usec";
-		} else {
-			bot = generateBearAppearance(bot, params);
-			bot.Info.Side = "Bear";
-		}
+		// generate only PMC bots
+		bot = generateRandomPmcBot(bot, params);
 	} else {
-		// generate scav appearance
+		// generate scav bots
 		switch (params.Role) {
 			case "followerBully":
 				bot = generateBullyFollowerAppearance(bot, params);
@@ -279,6 +285,11 @@ function generateBaseBot(params, presets, weaponPresets) {
 			default:
 				bot = generateScavAppearance(bot, params, presets);
 				break;
+		}
+
+		// chance to spawn normal PMC bot
+		if (utility.getRandomIntEx(100) >= botSettings.spawn.pmc && params.Role != "followerBully") {
+			bot = generateRandomPmcBot(bot, params);
 		}
 	}
 
