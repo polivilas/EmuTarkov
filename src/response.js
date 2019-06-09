@@ -1,3 +1,5 @@
+"use strict";
+
 var utility = require('./utility.js');
 var settings = require('./settings.js');
 var item = require('./item.js');
@@ -24,7 +26,7 @@ function moveItem(info) {
         return JSON.stringify(item.getOutput());
     }
 
-    return "SHITS_FUCKED_ITEM_MOVING";    
+    return output;    
 }
 
 function joinMatch() {
@@ -45,18 +47,22 @@ function changeNickname(body) {
     var clientrequest = JSON.parse(body);
 	var tmpList = JSON.parse(utility.readJson("data/list.json"));
 
-    // apply nickname
+	// apply nickname
+	tmpList.data[0].Info.Nickname = clientrequest.nickname;
+	tmpList.data[0].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	tmpList.data[1].Info.Nickname = clientrequest.nickname;
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
+	
     utility.writeJson('data/list.json', tmpList);
     
     return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 }
 
-function handleRequest(req, body, url) {
+function get(req, body, url) {
 	var output = "";
 	var info = JSON.parse("{}");
 
+	// parse body
 	if (body != "") {
 		try {
 			info = JSON.parse(body);
@@ -69,24 +75,24 @@ function handleRequest(req, body, url) {
 
 	// handle special cases
 	if (url.match(assort)) {
-		output = utility.readJson("data/assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
+		return utility.readJson("data/assort/" + url.substring(36).replace(/[^a-zA-Z0-9_]/g, '') + ".json");
 	}
 	
 	if (url.match(prices)) {
-		output = utility.readJson("data/prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
+		return utility.readJson("data/prices/" + url.substring(46).replace(/[^a-zA-Z0-9_]/g, '') + ".json"); // thats some budget ass shit
 	}
 	
 	if (url.match(getTrader)) {
 		console.log(url.substring(30));
-		output = '{"err":0, "errmsg":null, "data":{"_id":"' + url.substring(30) + '", "working":true, "name":"ez", "surname":"ez", "nickname":"ez", "location":"", "avatar":"/files/trader/avatar/59b91ca086f77469a81232e4.jpg", "balance_rub":80000000, "balance_dol":80000000, "balance_eur":80000000, "display":true, "discount":1337, "discount_end":0, "buyer_up":false, "currency":"RUB", "supply_next_time":1551040000, "repair":{"availability":true, "quality":"1.2", "excluded_id_list":[], "excluded_category":[], "currency":"5449016a4bdc2d6f028b456f", "currency_coefficient":1, "price_rate":0}, "insurance":{"availability":true, "min_payment":0, "min_return_hour":24, "max_return_hour":36, "max_storage_time":72, "excluded_category":[]}, "gridHeight":1000, "loyalty":{"currentLevel":1337, "currentStanding":1337, "currentSalesSum":1337, "loyaltyLevels":{"0":{"minLevel":1, "minSalesSum":0, "minStanding":0}, "1":{"minLevel":1, "minSalesSum":1, "minStanding":1}, "2":{"minLevel":1, "minSalesSum":1, "minStanding":1}, "3":{"minLevel":1, "minSalesSum":1, "minStanding":1}}}, "sell_category":[]}}';
+		return '{"err":0, "errmsg":null, "data":{"_id":"' + url.substring(30) + '", "working":true, "name":"ez", "surname":"ez", "nickname":"ez", "location":"", "avatar":"/files/trader/avatar/59b91ca086f77469a81232e4.jpg", "balance_rub":80000000, "balance_dol":80000000, "balance_eur":80000000, "display":true, "discount":1337, "discount_end":0, "buyer_up":false, "currency":"RUB", "supply_next_time":1551040000, "repair":{"availability":true, "quality":"1.2", "excluded_id_list":[], "excluded_category":[], "currency":"5449016a4bdc2d6f028b456f", "currency_coefficient":1, "price_rate":0}, "insurance":{"availability":true, "min_payment":0, "min_return_hour":24, "max_return_hour":36, "max_storage_time":72, "excluded_category":[]}, "gridHeight":1000, "loyalty":{"currentLevel":1337, "currentStanding":1337, "currentSalesSum":1337, "loyaltyLevels":{"0":{"minLevel":1, "minSalesSum":0, "minStanding":0}, "1":{"minLevel":1, "minSalesSum":1, "minStanding":1}, "2":{"minLevel":1, "minSalesSum":1, "minStanding":1}, "3":{"minLevel":1, "minSalesSum":1, "minStanding":1}}}, "sell_category":[]}}';
 	}
 	
 	if (url.match(traderImg) || url.match(content)) {
-		output = "DEAD";
+		return "DEAD";
 	}
 	
 	if (url.match(pushNotifier)) {
-		output = '{"err":0, "errmsg":null, "data":[]}';
+		return '{"err":0, "errmsg":null, "data":[]}';
 	}
 
 	switch(url) {
@@ -234,4 +240,4 @@ function handleRequest(req, body, url) {
 	return output;
 }
 
-module.exports.handleRequest = handleRequest;
+module.exports.get = get;

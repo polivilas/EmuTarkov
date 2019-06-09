@@ -1,3 +1,5 @@
+"use strict";
+
 var utility = require('./utility.js');
 var settings = require('./settings.js');
 
@@ -172,7 +174,7 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 									}
 								}
 
-								var ammo_filter = items.data[Weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos
+								var ammo_filter = items.data[Weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter; //array of compatible ammos
 								var isMosin = false;
 
 								presets.filter_mosin.forEach(function(someMosinId) {
@@ -188,7 +190,7 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 									tempw._id = "MagazineWeaponScav"+ internalId;
 									tempw._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)]; //randomize the magazine of the weapon
 									
-									var selectedmag = tempw._tpl //store this value
+									var selectedmag = tempw._tpl; //store this value
 									
 									tempw.parentId = Weapon._items[0]._id; //put this mag on the weapon
 									tempw.slotId = "mod_magazine";
@@ -308,7 +310,7 @@ function generate(databots) { //Welcome to the Scav Randomizer :)
 						BotBase.Inventory.items.push(tempw);
 					}
 
-					if(utility.getRandomIntEx(100) <= 40 ) {
+					if (utility.getRandomIntEx(100) <= 40 ) {
 						var tempw = {};
 						tempw._id = "HeadWearScav"+ internalId;
 						tempw._tpl= presets.Headwear[utility.getRandomIntEx(presets.Headwear.length)];

@@ -1,23 +1,35 @@
+"use strict";
+
 var utility = require('./utility.js');
 
-var settings = JSON.parse(utility.readJson("data/settings.json"));
+var data = JSON.parse(utility.readJson("data/settings.json"));
+
+function getEmulateLauncher() {
+    return data.emulation.emulateLauncher;
+}
+
+function getEmulateServer() {
+    return data.emulation.emulateServer;
+}
 
 function getPort() {
-	return settings.server.port;
+	return data.server.port;
 }
 
 function getEmail() {
-    return settings.account.email;
+    return data.account.email;
 }
 
 function getPassword() {
-    return settings.account.password;
+    return data.account.password;
 }
 
 function getEnablePmcWar() {
-    return settings.bots.enablePmcWar;
+    return data.bots.enablePmcWar;
 }
 
+module.exports.getEmulateLauncher = getEmulateLauncher;
+module.exports.getEmulateServer = getEmulateServer;
 module.exports.getPort = getPort;
 module.exports.getEmail = getEmail;
 module.exports.getPassword = getPassword;
