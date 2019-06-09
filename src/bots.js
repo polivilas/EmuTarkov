@@ -264,31 +264,28 @@ function generateBaseBot(params, presets, weaponPresets) {
 	var bot = JSON.parse(utility.readJson("data/bots/botBase.json"));
 	var internalId = utility.getRandomIntEx(10000);
 
-	if (botSettings.pmcWar.enabled == true && params.Role != "followerBully") {
-		// generate only PMC bots
-		bot = generateRandomPmcBot(bot, params);
-	} else {
-		// generate scav bots
-		switch (params.Role) {
-			case "followerBully":
-				bot = generateBullyFollowerAppearance(bot, params);
-				break;
+	// generate scav bots
+	switch (params.Role) {
+		case "followerBully":
+			bot = generateBullyFollowerAppearance(bot, params);
+			break;
 
-			case "marksman":
-				bot = generateScavSniperAppearance(bot, params, presets);
-				break;
+		case "marksman":
+			bot = generateScavSniperAppearance(bot, params, presets);
+			break;
 
-			case "pmcBot":
-				bot = generateRaiderAppearance(bot, params, presets);
-				break;
-			
-			default:
-				bot = generateScavAppearance(bot, params, presets);
-				break;
-		}
+		case "pmcBot":
+			bot = generateRaiderAppearance(bot, params, presets);
+			break;
+		
+		default:
+			bot = generateScavAppearance(bot, params, presets);
+			break;
+	}
 
-		// chance to spawn normal PMC bot
-		if (utility.getRandomIntEx(100) >= botSettings.spawn.pmc && params.Role != "followerBully") {
+	// generate PMC bot instead
+	if (params.Role != "followerBully") {
+		if (botSettings.pmcWar.enabled == true || utility.getRandomIntEx(100) >= botSettings.spawn.pmc) {
 			bot = generateRandomPmcBot(bot, params);
 		}
 	}
@@ -297,15 +294,15 @@ function generateBaseBot(params, presets, weaponPresets) {
 	bot = generateBotSkill(bot, params);
 
 	// choose randomly a weapon from preset.json before filling items
-	var Weapon = generateBotWeapon(Weapon, params, presets, weaponPresets);
+	var weapon = generateBotWeapon(weapon, params, presets, weaponPresets);
 
 	// add a vest or rig on the scav (can be an armored vest)
 	bot.Inventory.items.push(generateBotVestRigItem(internalId, presets));
 
 	// fill your dummy bot with the random selected preset weapon and its mods
-	Weapon._items.forEach(function(item) {
-		if (item._id == Weapon._parent) { //if its the weapon itself then add it differently
-			if (Weapon.isPistol == false ) {
+	weapon._items.forEach(function(item) {
+		if (item._id == weapon._parent) { //if its the weapon itself then add it differently
+			if (weapon.isPistol == false ) {
 				var tempw = {};
 				
 				tempw._id = item._id;
@@ -315,7 +312,7 @@ function generateBaseBot(params, presets, weaponPresets) {
 				bot.Inventory.items.push(tempw);
 			}
 
-			if (Weapon.isPistol == true) {
+			if (weapon.isPistol == true) {
 				var tempw = {};
 				tempw._id = item._id;
 				tempw._tpl = item._tpl;
@@ -328,18 +325,18 @@ function generateBaseBot(params, presets, weaponPresets) {
 			if (item.slotId == "mod_magazine" ) {
 				var compatiblesmags = {};
 
-				for (var slot of items.data[Weapon._items[0]._tpl]._props.Slots) {
+				for (var slot of items.data[weapon._items[0]._tpl]._props.Slots) {
 					if (slot._name == "mod_magazine") {
 						compatiblesmags = slot._props.filters[0].Filter; //array of compatible mags for this weapon
 						break;
 					}
 				}
 
-				var ammo_filter = items.data[Weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos
+				var ammo_filter = items.data[weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos
 				var isMosin = false;
 
 				presets.filter_mosin.forEach(function(someMosinId) {
-					if (Weapon._items[0]._tpl == someMosinId) {
+					if (weapon._items[0]._tpl == someMosinId) {
 						isMosin = true;
 					} //check if the weapon given is a mosin
 				});
@@ -353,7 +350,7 @@ function generateBaseBot(params, presets, weaponPresets) {
 					
 					var selectedmag = tempw._tpl //store this value
 					
-					tempw.parentId = Weapon._items[0]._id; //put this mag on the weapon
+					tempw.parentId = weapon._items[0]._id; //put this mag on the weapon
 					tempw.slotId = "mod_magazine";
 					bot.Inventory.items.push(tempw);
 
