@@ -40,7 +40,7 @@ function generateUsecAppearance(bot, internalId) {
 	bot._id = "Usec" + internalId;
 	bot.Info.Nickname = "Usec " + internalId;
 	bot.Info.LowerNickname = "usec" + internalId;
-	bot.Info.Voice = "Usec_"+utility.getRandomInt(1,3);
+	bot.Info.Voice = "Usec_" + utility.getRandomInt(1, 3);
 	bot.Customization.Head.path = "assets/content/characters/character/prefabs/usec_head_1.bundle";
 	bot.Customization.Body.path = "assets/content/characters/character/prefabs/usec_body.bundle";
 	bot.Customization.Feet.path = "assets/content/characters/character/prefabs/usec_feet.bundle";
@@ -52,7 +52,7 @@ function generateBearAppearance(bot, internalId) {
 	bot._id = "Bear" + internalId;
 	bot.Info.Nickname = "Bear " + internalId;
 	bot.Info.LowerNickname = "Bear" + internalId;
-	bot.Info.Voice = "Bear_"+utility.getRandomInt(1,2);
+	bot.Info.Voice = "Bear_" + utility.getRandomInt(1, 2);
 	bot.Customization.Head.path = "assets/content/characters/character/prefabs/bear_head.bundle";
 	bot.Customization.Body.path = "assets/content/characters/character/prefabs/bear_body.bundle";
 	bot.Customization.Feet.path = "assets/content/characters/character/prefabs/bear_feet.bundle";
@@ -64,7 +64,7 @@ function generateScavAppearance(bot, internalId, presets) {
 	bot._id = "scav_" + internalId;
 	bot.Info.Nickname = "Scav " + internalId;
 	bot.Info.LowerNickname = "scav" + internalId;
-	bot.Info.Voice = "Scav_" + utility.getRandomInt(1,6);
+	bot.Info.Voice = "Scav_" + utility.getRandomInt(1, 6);
 	bot.Customization.Head.path = "assets/content/characters/character/prefabs/" + presets.Head[utility.getRandomIntEx(presets.Head.length)] + ".bundle";
 	bot.Customization.Body.path = "assets/content/characters/character/prefabs/" + presets.Body[utility.getRandomIntEx(presets.Body.length)] + ".bundle";
 	bot.Customization.Feet.path = "assets/content/characters/character/prefabs/" + presets.Feet[utility.getRandomIntEx(presets.Feet.length)] + ".bundle";
@@ -76,7 +76,7 @@ function generateBullyFollowerAppearance(bot, internalId) {
 	bot._id = "guard_" + internalId;
 	bot.Info.Nickname = "Guard " + internalId;
 	bot.Info.LowerNickname = "guard" + internalId;
-	bot.Info.Voice = "Scav_" + utility.getRandomInt(1,6);
+	bot.Info.Voice = "Scav_" + utility.getRandomInt(1, 6);
 	bot.Customization.Head.path = "assets/content/characters/character/prefabs/wild_head_1.bundle";
 	bot.Customization.Body.path = "assets/content/characters/character/prefabs/wild_security_body_1.bundle";
 	bot.Customization.Feet.path = "assets/content/characters/character/prefabs/wild_security_feet_1.bundle";
@@ -88,7 +88,7 @@ function generateScavSniperAppearance(bot, internalId, presets) {
 	bot._id = "sniper_" + internalId;
 	bot.Info.Nickname = "Sniper " + internalId;
 	bot.Info.LowerNickname = "sniper" + internalId;
-	bot.Info.Voice = "Scav_" + utility.getRandomInt(1,6);
+	bot.Info.Voice = "Scav_" + utility.getRandomInt(1, 6);
 	bot.Customization.Head.path = "assets/content/characters/character/prefabs/" + presets.Head[utility.getRandomIntEx(presets.Head.length)] + ".bundle";
 	bot.Customization.Body.path = "assets/content/characters/character/prefabs/" + presets.Body[utility.getRandomIntEx(presets.Body.length)] + ".bundle";
 	bot.Customization.Feet.path = "assets/content/characters/character/prefabs/" + presets.Feet[utility.getRandomIntEx(presets.Feet.length)] + ".bundle";
@@ -287,13 +287,16 @@ function getCompatibleMagazines(weapon) {
 
 	for (var slot of items.data[weapon._items[0]._tpl]._props.Slots) {
 		if (slot._name == "mod_magazine") {
-			// array of compatible mags for this weapon
 			compatiblesmagazines = slot._props.filters[0].Filter;
 			break;
 		}
 	}
 
 	return compatiblesmagazines;
+}
+
+function getCompatibleAmmo(weapon) {
+	return items.data[weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter;
 }
 
 function getWeaponMagazine(weapon, internalId, compatiblesmags) {
@@ -362,7 +365,7 @@ function getVestStackAmmo(id, itemslot, internalId, ammoFilter) {
 	item._tpl = ammoFilter[utility.getRandomIntEx(ammoFilter.length)];
 	item.parentId = "TacticalVestScav" + internalId;
 	item.slotId = itemslot.toString();
-	item.upd = {"StackObjectsCount": utility.getRandomInt(10,30)};
+	item.upd = {"StackObjectsCount": utility.getRandomInt(10, 30)};
 
 	return item;
 }
@@ -419,12 +422,12 @@ function generateBaseBot(params, presets, weaponPresets) {
 			if (item.slotId == "mod_magazine" ) {
 				// randomize magazine
 				var compatiblesmagazines = getCompatibleMagazines(weapon);
-				var ammoFilter = items.data[weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos
+				var ammoFilter = getCompatibleAmmo(weapon);
 				var isMosin = false;
 
 				 // check if the weapon is a mosin
-				presets.filter_mosin.forEach(function(someMosinId) {
-					if (weapon._items[0]._tpl == someMosinId) {
+				presets.filter_mosin.forEach(function(mosinId) {
+					if (weapon._items[0]._tpl == mosinId) {
 						isMosin = true;
 					}
 				});
@@ -464,7 +467,7 @@ function generateBaseBot(params, presets, weaponPresets) {
 
 	// randomize bot health
 	for (var bdpt in bot.Health.BodyParts) {
-		bot.Health.BodyParts[bdpt].Health.Current = bot.Health.BodyParts[bdpt].Health.Current + utility.getRandomInt(-10,10);
+		bot.Health.BodyParts[bdpt].Health.Current = bot.Health.BodyParts[bdpt].Health.Current + utility.getRandomInt(-10, 10);
 		bot.Health.BodyParts[bdpt].Health.Maximum = bot.Health.BodyParts[bdpt].Health.Current;
 	}
 
