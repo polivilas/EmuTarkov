@@ -508,10 +508,11 @@ function generate(databots) {
 				break;
 
 			default:
+				limit = botSettings.limit.scav;
 				break;
 		}
 
-		if (limit > 0) {
+		if (limit > -1) {
 			params.Limit = limit;
 		}
 
