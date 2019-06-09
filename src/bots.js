@@ -282,7 +282,7 @@ function assignWeaponToHolster(weapon) {
 	return item;
 }
 
-function getCompatibleMagazines() {
+function getCompatibleMagazines(weapon) {
 	var compatiblesmagazines = {};
 
 	for (var slot of items.data[weapon._items[0]._tpl]._props.Slots) {
@@ -296,19 +296,18 @@ function getCompatibleMagazines() {
 	return compatiblesmagazines;
 }
 
-function getRandomMagazine(weapon, internalId, compatiblesmags) {
+function getWeaponMagazine(weapon, internalId, compatiblesmags) {
 	var item = {};
 
 	item._id = "MagazineWeaponScav" + internalId;
 	item._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)];
 	item.parentId = weapon._items[0]._id;
 	item.slotId = "mod_magazine";
-	bot.Inventory.items.push(item);	
 
 	return item;
 }
 
-function getMagazineAmmo(selectedmag, internalId, ammoFilter) {
+function getWeaponMagazineAmmo(selectedmag, internalId, ammoFilter) {
 	var item = {};
 	
 	item._id = "AmmoMagazine1Scav" + internalId;
@@ -320,14 +319,14 @@ function getMagazineAmmo(selectedmag, internalId, ammoFilter) {
 	return item;
 }
 
-function getMosimAmmo(internalId, ammoFilter) {
+function getMosimAmmo(selectedmag, selectedmagid, internalId, ammoFilter) {
 	var item = {};
-					
-	item._id = "AmmoMagazine1Scav" + internalId;
+
+	item._id = "AmmoMagazine1Scav"+ internalId;
 	item._tpl = ammoFilter[utility.getRandomIntEx(ammoFilter.length)];
-	item.parentId = item._id ;
+	item.parentId = selectedmagid;
 	item.slotId = "cartridges";
-	item.upd = {"StackObjectsCount": items.data[item._tpl]._props.Cartridges[0]._max_count};
+	item.upd = {"StackObjectsCount": items.data[selectedmag]._props.Cartridges[0]._max_count};
 
 	return item;
 }
@@ -409,18 +408,17 @@ function generateBaseBot(params, presets, weaponPresets) {
 
 	// fill your dummy bot with the random selected preset weapon and its mods
 	weapon._items.forEach(function(item) {
-		// add weapon to weapon slot
 		if (item._id == weapon._parent) {
+			// add weapon to weapon slot
 			if (weapon.isPistol == false) {
 				bot.Inventory.items.push(assignWeaponToPrimary(item));
 			} else {
 				bot.Inventory.items.push(assignWeaponToHolster(item));
 			}
 		} else {
-			// add mods, vital parts, etc
 			if (item.slotId == "mod_magazine" ) {
 				// randomize magazine
-				var compatiblesmagazines = getCompatibleMagazines();
+				var compatiblesmagazines = getCompatibleMagazines(weapon);
 				var ammoFilter = items.data[weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter //array of compatible ammos
 				var isMosin = false;
 
@@ -431,20 +429,23 @@ function generateBaseBot(params, presets, weaponPresets) {
 					}
 				});
 
-				// give the weapon ammo
-				if (isMosin == false) {
-					var magazine = getRandomMagazine(weapon, internalId, compatiblesmagazines);
-					
-					bot.Inventory.items.push(magazine);
-					bot.Inventory.items.push(getMagazineAmmo(magazine._tpl, internalId, ammoFilter));
-				} else {
-					bot.Inventory.items.push(getMosimAmmo(internalId, ammoFilter));
-				}
-
-				//add magazines in the vest
+				// get the magazine
+				var mag1 = {};
 				var mag2 = getVestMagazine("magazine2VestScav", 2, internalId, compatiblesmagazines);
 				var mag3 = getVestMagazine("magazine3VestScav", 3, internalId, compatiblesmagazines);
-				
+
+				// give the weapon ammo
+				if (isMosin == false) {
+					mag1 = getWeaponMagazine(weapon, internalId, compatiblesmagazines);
+					bot.Inventory.items.push(mag1);
+					bot.Inventory.items.push(getWeaponMagazineAmmo(mag1._tpl, internalId, ammoFilter));
+				} else {
+					mag1 = item;
+					bot.Inventory.items.push(mag1);
+					bot.Inventory.items.push(getMosimAmmo(mag1._tpl, mag1._id, internalId, ammoFilter));
+				}
+
+				// add magazines in the vest
 				bot.Inventory.items.push(mag2);
 				bot.Inventory.items.push(mag3);
 
@@ -452,10 +453,10 @@ function generateBaseBot(params, presets, weaponPresets) {
 				bot.Inventory.items.push(getVestMagazineAmmo("AmmoMagazine2Scav", "magazine2VestScav", mag2._tpl, internalId, ammoFilter));
 				bot.Inventory.items.push(getVestMagazineAmmo("AmmoMagazine3Scav", "magazine3VestScav", mag3._tpl, internalId, ammoFilter));
 
-				//add a stack of ammo (for moslings and sks)
+				// add a stack of ammo (for moslings and sks)
 				bot.Inventory.items.push(getVestStackAmmo("AmmoFree2Scav", 1, internalId, ammoFilter));
 			} else {
-				//add mods and vital parts
+				// add mods and vital parts
 				bot.Inventory.items.push(item);
 			}
 		}
