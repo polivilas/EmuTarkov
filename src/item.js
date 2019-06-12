@@ -343,6 +343,11 @@ function confirmTrading(tmpList, body) {
 	return "";
 }
 
+function confirmRagfairTrading(tmpList , body)
+{
+	//confirmTrading copy paste and remove condition doesn't work ... :/
+}
+
 function getOutput() {
 	return output;
 }
@@ -383,6 +388,9 @@ function handleMoving(body) {
             
 		case "TradingConfirm":
 			return confirmTrading(tmpList, body);
+
+		case "RagFairBuyOffer":
+			return confirmRagfairTrading(tmpList, body);
 
 		default:
 			console.log("UNHANDLED ACTION");
