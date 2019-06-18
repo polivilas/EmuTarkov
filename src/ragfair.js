@@ -4,38 +4,30 @@ var utility = require('./utility.js');
 
 var items = JSON.parse(utility.readJson("data/items.json"));
 
-function getOffers(request) 
-{
+function getOffers(request)  {
 	var response = JSON.parse(utility.readJson("data/ragfair/search.json"));
 
-	if(request.handbookId != "")
-	{	
+	if (request.handbookId != "") {	
 		var isCateg = false;
-		var handbook = JSON.parse( utility.readJson('data/templates.json') );
-		handbook.data.Categories.forEach(function(categ)
-		{
-			if(categ.Id == request.handbookId)
-			{	
-				//console.log(categ);
+		var handbook = JSON.parse( utility.readJson('data/templates.json'));
+
+		handbook.data.Categories.forEach(function(categ) {
+			if (categ.Id == request.handbookId) {	
 				var sustain = categ.Id;
+				
 				isCateg = true;
-				handbook.data.Items.forEach(function(item)
-				{
-					if(item.ParentId == sustain )
-					{
+
+				handbook.data.Items.forEach(function(item) {
+					if (item.ParentId == sustain ) {
 						response.data.offers.push( CreateOffer(item.Id) );
 					}
 				});
 
-				handbook.data.Categories.forEach(function(categ2)
-				{
-					if(categ2.ParentId == sustain )
-					{
-						handbook.data.Items.forEach(function(item)
-						{
-							if(item.ParentId == categ2.Id)
-							{
-								response.data.offers.push( CreateOffer(item.Id) );
+				handbook.data.Categories.forEach(function(categ2) {
+					if(categ2.ParentId == sustain) {
+						handbook.data.Items.forEach(function(item) {
+							if (item.ParentId == categ2.Id) {
+								response.data.offers.push( CreateOffer(item.Id));
 							}
 						});
 					}
@@ -43,45 +35,37 @@ function getOffers(request)
 			}
 		});
 
-		if (isCateg == false)
-		{
+		if (isCateg == false) {
 			var tmpId = "54009119af1c881c07000029";
 	
-			for (var curItem in items.data) 
-			{
-				if (curItem == request.handbookId) 
-				{
+			for (var curItem in items.data) {
+				if (curItem == request.handbookId) {
 					tmpId = curItem;
 					console.log("found item");
+					
 					break;
 				};
 			};
 
-			response.data.offers.push( CreateOffer(tmpId) );
+			response.data.offers.push( CreateOffer(tmpId));
 		}	
 	}
 
-	if( request.linkedSearchId != "" )
-	{	
+	if( request.linkedSearchId != "") {	
 		var itemLink = items.data[request.linkedSearchId];
-		itemLink._props.Slots.forEach(function(ItemSlot)
-		{   
-			ItemSlot._props.filters.forEach(function(itemSlotFilter)
-			{   
-				itemSlotFilter.Filter.forEach(function(mod)
-				{
+
+		itemLink._props.Slots.forEach(function(ItemSlot) {   
+			ItemSlot._props.filters.forEach(function(itemSlotFilter) {   
+				itemSlotFilter.Filter.forEach(function(mod) {
 					var offer = CreateOffer(mod);
+
 					response.data.offers.push(offer);
 				})	
 			});
-			
 		});
-		
-		
 	}
 
 	return JSON.stringify(response);
-	// this is really not okay. TODO: handle ragfair buying event - maybe connect to trader buy event?
 }
 
 function CreateOffer(template)
