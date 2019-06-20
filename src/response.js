@@ -232,7 +232,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/profile/nickname/change":
-            		output = changeNickname(body);
+			output = changeNickname(body);
 			break;
 			
 		case "/favicon.ico":
