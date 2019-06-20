@@ -232,7 +232,14 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/profile/nickname/change":
-            output = changeNickname(body);
+            		output = changeNickname(body);
+			break;
+			
+		case "/favicon.ico":
+		case "/client/notifier/channel/create":
+		case "/client/match/group/status":
+		case "/client/match/group/looking/stop":
+		case "/client/match/group/exit_from_menu":
 			break;
 
 		default:
