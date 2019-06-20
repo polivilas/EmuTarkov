@@ -466,9 +466,9 @@ function generateBaseBot(params, presets, weaponPresets) {
 	});
 
 	// randomize bot health
-	for (var bdpt in bot.Health.BodyParts) {
-		bot.Health.BodyParts[bdpt].Health.Current = bot.Health.BodyParts[bdpt].Health.Current + utility.getRandomInt(-10, 10);
-		bot.Health.BodyParts[bdpt].Health.Maximum = bot.Health.BodyParts[bdpt].Health.Current;
+	for (var bodyPart in bot.Health.BodyParts) {
+		bot.Health.BodyParts[bodyPart].Health.Current += utility.getRandomInt(-10, 10);
+		bot.Health.BodyParts[bodyPart].Health.Maximum = bot.Health.BodyParts[bodyPart].Health.Current;
 	}
 
 	// add a knife
@@ -521,7 +521,7 @@ function generate(databots) {
 	// loop to generate all scavs
 	databots.conditions.forEach(function(params) {
 		// limit spawns
-		var limit = 0;
+		var limit = -1;
 
 		switch (params.Role) {
 			case "bossKilla":
@@ -554,27 +554,22 @@ function generate(databots) {
 		}
 
 		// generate as many as the game request
-		switch (params.Role) {
-			case "bossKilla":
-				for (var i = 1; i <= params.Limit; i++)  {
+		for (var i = 1; i <= params.Limit; i++)  {
+			switch (params.Role) {
+				case "bossKilla":
 					generatedBots.push(generateBotBossKilla(params));
-					botPossibilities++;
-				}
-				break;
+					break;
 			
-			case "bossBully":
-				for (var i = 1; i <= params.Limit; i++)  {
+				case "bossBully":
 					generatedBots.push(generateBotBossBully(params));
-					botPossibilities++;
-				}
-				break;
+					break;
 
-			default:
-				for (var i = 1; i <= params.Limit; i++)  {
+				default:
 					generatedBots.push(generateBaseBot(params, presets, weaponPresets));
-					botPossibilities++;
-				}
-				break;
+					break;
+			}
+			
+			botPossibilities++;
 		}
 	});
 
