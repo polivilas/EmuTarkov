@@ -6,6 +6,7 @@ var item = require('./item.js');
 var ragfair = require('./ragfair.js');
 var bots = require('./bots.js');
 
+var retry = new RegExp('/?retry=\d+', 'i');
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
@@ -18,23 +19,23 @@ var ip = serverSettings.ip;
 var port = serverSettings.port;
 
 function moveItem(info) {
-    var output = "";
+	var output = "";
 		
 	// handle all items
-    for (var a = 0; a < info.data.length; a++) {
-        output = item.handleMoving(info.data[a]);
-    }
+	for (var a = 0; a < info.data.length; a++) {
+		output = item.handleMoving(info.data[a]);
+	}
 
 	// return items
-    if (output == "OK") {
-        return JSON.stringify(item.getOutput());
-    }
+	if (output == "OK") {
+		return JSON.stringify(item.getOutput());
+	}
 
-    return output;    
+	return output;    
 }
 
 function joinMatch(body) {
-    var clientrequest = JSON.parse(body);
+	var clientrequest = JSON.parse(body);
 	var shortid = "";
 	
 	// check if the player is a scav
@@ -48,7 +49,7 @@ function joinMatch(body) {
 }
 
 function changeNickname(body) {
-    var clientrequest = JSON.parse(body);
+	var clientrequest = JSON.parse(body);
 	var tmpList = JSON.parse(utility.readJson("data/list.json"));
 
 	// apply nickname
@@ -57,14 +58,14 @@ function changeNickname(body) {
 	tmpList.data[1].Info.Nickname = clientrequest.nickname;
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	
-    utility.writeJson('data/list.json', tmpList);
-    return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
+	utility.writeJson('data/list.json', tmpList);
+	return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 }
 
 function get(req, body, url) {
 	var output = "";
 	var info = JSON.parse("{}");
-
+	
 	// parse body
 	if (body != "") {
 		try {
@@ -72,6 +73,11 @@ function get(req, body, url) {
 		} catch(err) {
 			console.error(err);
 		}
+	}
+	
+	// remove retry from URL
+	if (url.indexOf("?retry=") > -1) {
+		url.replace(retry, '');
 	}
 
 	console.log(url + " with data " + body);
@@ -98,7 +104,7 @@ function get(req, body, url) {
 		return '{"err":0, "errmsg":null, "data":[]}';
 	}
 
-	switch(url) {
+	switch (url) {
 		case "/":
 			output = 'EFT backend emulator for Escape From Tarkov version 0.11.7.3287 by polivilas @ UnKnoWnCheaTs.me';
 			break;
