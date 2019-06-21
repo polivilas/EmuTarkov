@@ -77,7 +77,7 @@ function get(req, body, url) {
 	
 	// remove retry from URL
 	if (url.indexOf("?retry=") > -1) {
-		url.replace(retry, '');
+		url.slice(url.indexOf("?retry=");
 	}
 
 	console.log(url + " with data " + body);
