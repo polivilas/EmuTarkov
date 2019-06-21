@@ -5,7 +5,6 @@ var settings = require('./settings.js');
 
 var accountSettings = settings.getAccountSettings();
 var data = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ', "toggle":true, "timestamp":0}');
-var keyLocation = 'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov';
 
 function convertStringToBase64(string) {
 	return Buffer.from(string).toString('base64');
@@ -35,9 +34,9 @@ function createToken() {
 
 	// put the token into the registery
 	regedit.putValue({'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {'bC5vLmcuaS5u_h1472614626': {value: bytes, type: 'REG_BINARY'}}}, function(err) {
-		if (err) {
+		if (err.code == 2) {
 			console.log("Registry key missing, creating one");
-			regedit.createKey(keyLocation, function(err){});
+			regedit.createKey('HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov', function(err){});
 			regedit.putValue({'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {'bC5vLmcuaS5u_h1472614626': {value: bytes, type: 'REG_BINARY'}}}, function(err) {});
 		}
 
