@@ -3,9 +3,10 @@
 var utility = require('./utility.js');
 
 var items = JSON.parse(utility.readJson("data/items.json"));
+var search = JSON.parse(utility.readJson("data/ragfair/search.json"));
 
 function getOffers(request)  {
-	var response = JSON.parse(utility.readJson("data/ragfair/search.json"));
+	var response = search;
 
 	if (request.handbookId != "") {	
 		var isCateg = false;
