@@ -4,7 +4,7 @@ var regedit = require('regedit');
 var settings = require('./settings.js');
 
 var accountSettings = settings.getAccountSettings();
-var data = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ', "toggle":true, "timestamp":0}');
+var data = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ',"toggle":true,"timestamp":0}');
 
 function convertStringToBase64(string) {
 	return Buffer.from(string).toString('base64');
