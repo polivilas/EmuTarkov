@@ -47,15 +47,15 @@ function getOffers(request)  {
 				}
 			}
 
-			response.data.offers.push( CreateOffer(tmpId));
+			response.data.offers.push(CreateOffer(tmpId));
 		}	
 	}
 
 	if (request.linkedSearchId != "") {	
 		var itemLink = items.data[request.linkedSearchId];
 
-		for (var ItemSlot of itemLink._props.Slots) {  
-			for (var itemSlotFilter of ItemSlot._props.filters) {
+		for (var itemSlot of itemLink._props.Slots) {  
+			for (var itemSlotFilter of itemSlot._props.filters) {
 				for (var mod of itemSlotFilter.Filter) {
 					var offer = CreateOffer(mod);
 
