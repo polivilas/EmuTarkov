@@ -4,8 +4,9 @@ var utility = require('./utility.js');
 
 var items = JSON.parse(utility.readJson("data/items.json"));
 var search = JSON.parse(utility.readJson("data/ragfair/search.json"));
+var offerBase = JSON.parse(utility.readJson("data/ragfair/offerBase.json"));
 
-function getOffers(request)  {
+function getOffers(request) {
 	var response = search;
 
 	if (request.handbookId != "") {	
@@ -69,14 +70,13 @@ function getOffers(request)  {
 	return JSON.stringify(response);
 }
 
-function CreateOffer(template)
-{
-	var offerBase = JSON.parse(utility.readJson("data/ragfair/offerBase.json"));
+function CreateOffer(template) {
+	var offer = offerBase;
 
-	offerBase._id = template;
-	offerBase.items[0]._tpl = template;
+	offer._id = template;
+	offer.items[0]._tpl = template;
 
-	return offerBase;
+	return offer;
 }
 
 module.exports.getOffers = getOffers;
