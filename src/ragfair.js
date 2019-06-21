@@ -9,31 +9,31 @@ function getOffers(request)  {
 
 	if (request.handbookId != "") {	
 		var isCateg = false;
-		var handbook = JSON.parse( utility.readJson('data/templates.json'));
+		var handbook = JSON.parse(utility.readJson('data/templates.json'));
 
-		handbook.data.Categories.forEach(function(categ) {
+		for (var categ of handbook.data.Categories) {
 			if (categ.Id == request.handbookId) {	
 				var sustain = categ.Id;
 				
 				isCateg = true;
 
-				handbook.data.Items.forEach(function(item) {
-					if (item.ParentId == sustain ) {
-						response.data.offers.push( CreateOffer(item.Id) );
+				for (var item of handbook.data.Items) {
+					if (item.ParentId == sustain) {
+						response.data.offers.push(CreateOffer(item.Id));
 					}
-				});
+				}
 
-				handbook.data.Categories.forEach(function(categ2) {
-					if(categ2.ParentId == sustain) {
-						handbook.data.Items.forEach(function(item) {
+				for (var categ2 of handbook.data.Categories) {
+					if (categ2.ParentId == sustain) {
+						for (var item of handbook.data.Items) {
 							if (item.ParentId == categ2.Id) {
-								response.data.offers.push( CreateOffer(item.Id));
+								response.data.offers.push(CreateOffer(item.Id));
 							}
-						});
+						}
 					}
-				});
+				}
 			}
-		});
+		}
 
 		if (isCateg == false) {
 			var tmpId = "54009119af1c881c07000029";
@@ -44,25 +44,25 @@ function getOffers(request)  {
 					console.log("found item");
 					
 					break;
-				};
-			};
+				}
+			}
 
 			response.data.offers.push( CreateOffer(tmpId));
 		}	
 	}
 
-	if( request.linkedSearchId != "") {	
+	if (request.linkedSearchId != "") {	
 		var itemLink = items.data[request.linkedSearchId];
 
-		itemLink._props.Slots.forEach(function(ItemSlot) {   
-			ItemSlot._props.filters.forEach(function(itemSlotFilter) {   
-				itemSlotFilter.Filter.forEach(function(mod) {
+		for (var ItemSlot of itemLink._props.Slots) {  
+			for (var itemSlotFilter of ItemSlot._props.filters) {
+				for (var mod of itemSlotFilter.Filter) {
 					var offer = CreateOffer(mod);
 
 					response.data.offers.push(offer);
-				})	
-			});
-		});
+				}
+			}
+		}
 	}
 
 	return JSON.stringify(response);

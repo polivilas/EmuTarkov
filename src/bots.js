@@ -116,10 +116,10 @@ function generateBotSkill(bot, params) {
 	bot.Info.Settings.BotDifficulty = params.Difficulty;
 
 	// randomize skills
-	bot.Skills.Common.forEach(function(skill) {
+	for (var skill of bot.Skills.Common) {
 		skill.Progress = utility.getRandomIntEx(5000);
 		skill.MaxAchieved = skill.Progress;
-	});
+	}
 
 	// randomize experience
 	bot.Info.Experience = utility.getRandomIntEx(25000000); //level 70 max
@@ -136,23 +136,23 @@ function generateBotWeapon(item, params) {
 		
 		while (found == false) {
 			item = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
-
-			presets.filter_marksman.forEach(function(filter) {
+			
+			for (var filter of presets.filter_marksman) {
 				if (item._items[0]._tpl == filter) {
 					found = true;
 				}
-			});
+			}
 		}
 	}
 
 	// check if its a pistol or primary weapon
 	item.isPistol = false;
 
-	presets.pistols.forEach(function(pistoltpl) {
+	for (var pistoltpl of presets.pistols) {
 		if (pistoltpl == item._items[0]._tpl) {
 			item.isPistol = true;
 		}
-	});
+	}
 
 	return item;
 }
@@ -412,7 +412,7 @@ function generateBaseBot(params) {
 	bot.Inventory.items.push(generateBotVestRigItem(internalId));
 
 	// fill your dummy bot with the random selected preset weapon and its mods
-	weapon._items.forEach(function(item) {
+	for (var item of weapon._items) {
 		if (item._id == weapon._parent) {
 			// add weapon to weapon slot
 			if (weapon.isPistol == false) {
@@ -427,12 +427,12 @@ function generateBaseBot(params) {
 				var ammoFilter = getCompatibleAmmo(weapon);
 				var isMosin = false;
 
-				 // check if the weapon is a mosin
-				presets.filter_mosin.forEach(function(mosinId) {
+				// check if the weapon is a mosin
+				for (var mosinId of presets.filter_mosin) {
 					if (weapon._items[0]._tpl == mosinId) {
 						isMosin = true;
 					}
-				});
+				}
 
 				// get the magazine
 				var mag1 = {};
@@ -465,7 +465,7 @@ function generateBaseBot(params) {
 				bot.Inventory.items.push(item);
 			}
 		}
-	});
+	}
 
 	// randomize bot health
 	for (var bodyPart in bot.Health.BodyParts) {
@@ -519,7 +519,7 @@ function generate(databots) {
 	var botPossibilities = 0;
 
 	// loop to generate all scavs
-	databots.conditions.forEach(function(params) {
+	for (var params of databots.conditions) {
 		// limit spawns
 		var limit = -1;
 
@@ -554,7 +554,7 @@ function generate(databots) {
 		}
 
 		// generate as many as the game request
-		for (var i = 1; i <= params.Limit; i++)  {
+		for (var i = 0; i < params.Limit; i++)  {
 			switch (params.Role) {
 				case "bossKilla":
 					generatedBots.push(generateBotBossKilla(params));
@@ -571,7 +571,7 @@ function generate(databots) {
 			
 			botPossibilities++;
 		}
-	});
+	}
 
 	console.log("generated " + botPossibilities + " scavs possibilities");
 	return generatedBots;

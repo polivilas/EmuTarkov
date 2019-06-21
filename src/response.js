@@ -22,8 +22,8 @@ function moveItem(info) {
 	var output = "";
 		
 	// handle all items
-	for (var a = 0; a < info.data.length; a++) {
-		output = item.handleMoving(info.data[a]);
+	for (var i = 0; i < info.data.length; i++) {
+		output = item.handleMoving(info.data[i]);
 	}
 
 	// return items

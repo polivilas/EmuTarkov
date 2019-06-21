@@ -98,11 +98,11 @@ function acceptQuest(tmpList, body) {
 function completeQuest(tmpList, body) {
 	var tmpList = JSON.parse(utility.readJson('data/list.json'));
 
-	tmpList.data[1].Quests.forEach(function(quest) {
+	for (var quest of tmpList.data[1].Quests) {
 		if (quest.qid == body.qid) {
 			quest.status = 4;
 		}
-	});
+	}
 
 	//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
 
