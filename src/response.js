@@ -153,6 +153,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/profile/list":
+			bots.generatePlayerScav();
 			output = utility.readJson('data/list.json');
 			break;
 

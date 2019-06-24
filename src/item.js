@@ -228,29 +228,23 @@ function toggleItem(tmpList, body) {
 	return "";
 }
 
-function confirmTrading(tmpList, body) 
-{
-	if (body.type == "buy_from_trader") 
-	{
+function confirmTrading(tmpList, body)  {
+	if (body.type == "buy_from_trader")  {
 		var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
-		for (var key in tmpTrader.data.items) 
-		{
-			if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) 
-			{
+
+		for (var key in tmpTrader.data.items) {
+			if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
 				var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
 				
-				for (var key2 in tmpList.data[1].Inventory.items) 
-				{
-					if (tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35" && tmpList.data[1].Inventory.items[key2].location != undefined) 
-					{ // hideout
+				for (var key2 in tmpList.data[1].Inventory.items)  {
+					// hideout
+					if (tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35" && tmpList.data[1].Inventory.items[key2].location != undefined) {
 						tmpItem = getItem(tmpList.data[1].Inventory.items[key2]._tpl);
 						
-						if (!tmpItem[0]) 
-						{
+						if (!tmpItem[0]) {
 							console.log("SHITS FUCKED");
 							return "SHITS_FUCKED";
-						}else 
-						{
+						} else {
 							tmpItem = tmpItem[1];
 						}
 
@@ -264,8 +258,7 @@ function confirmTrading(tmpList, body)
 						var fH = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iW : iH);
 						var fW = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iH : iW);
 						
-						for (var x = 0; x < fH; x++) 
-						{
+						for (var x = 0; x < fH; x++) {
 							Stash2D[tmpList.data[1].Inventory.items[key2].location.y + x].fill(1, tmpList.data[1].Inventory.items[key2].location.x, tmpList.data[1].Inventory.items[key2].location.x + fW);
 						}
 					}
@@ -275,21 +268,18 @@ function confirmTrading(tmpList, body)
 				
 				tmpItem = getItem(tmpTrader.data.items[key]._tpl);
 				
-				if (!tmpItem[0]) 
-				{
+				if (!tmpItem[0]) {
 					console.log("SHITS FUCKED BUY_FROM_TRADER");
 					return "SHITS_FUCKED_BUY_FROM_TRADER";
-				}else 
-				{
+				} else {
 					tmpItem = tmpItem[1];
 				}
 
 				tmpSize = getSize(tmpTrader.data.items[key]._tpl,tmpTrader.data.items[key]._id, tmpTrader.data.items);
 				
-				if (body.count > tmpItem._props.StackMaxSize) 
-				{
+				if (body.count > tmpItem._props.StackMaxSize) {
 					body.count = tmpItem._props.StackMaxSize;
-				};
+				}
 				
 				tmpSizeX = tmpSize[0] + tmpSize[2] + tmpSize[3];
 				tmpSizeY = tmpSize[1] + tmpSize[4] + tmpSize[5];
@@ -355,8 +345,8 @@ function confirmTrading(tmpList, body)
 	return "";
 }
 
-function confirmRagfairTrading(tmpList , body)
-{
+function confirmRagfairTrading(tmpList , body) {
+
 	body.Action = "TradingConfirm";
 	body.type = "buy_from_trader";
 	body.tid = "everythingTrader";
@@ -364,17 +354,12 @@ function confirmRagfairTrading(tmpList , body)
 	body.scheme_id = 0;
 	body.scheme_items = body.items;
 
-	var res = confirmTrading(tmpList, body) ;
-
-	if(res == "OK" )
+	if(confirmTrading(tmpList, body) == "OK" )
 	{
 		return "OK";
-	}
-	else
-	{
+	} else {
 		return "error";
 	}
-
 }
 
 function getOutput() {
