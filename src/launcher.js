@@ -4,7 +4,7 @@ var regedit = require('regedit');
 var settings = require('./settings.js');
 
 var accountSettings = settings.getAccountSettings();
-var data = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ', "toggle":true, "timestamp":0}');
+var data = JSON.parse('{"email":' + accountSettings.email + ',"password":' + accountSettings.password + ',"toggle":true,"timestamp":0}');
 
 function convertStringToBase64(string) {
 	return Buffer.from(string).toString('base64');
@@ -25,7 +25,6 @@ function convertStringToBytes(string) {
 function createToken() {
 	// generate timestamp
 	data.timestamp = (Math.floor(new Date() / 1000) + 45) ^ 698464131;
-	console.log("Token timestamp: " + data.timestamp);
 	
 	// encrypt the token
 	var tmpB64 = convertStringToBase64(JSON.stringify(data));
@@ -34,17 +33,14 @@ function createToken() {
 	var bytes = convertStringToBytes(tmpB64);
 
 	// put the token into the registery
-	regedit.putValue( {
-		'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {
-			'bC5vLmcuaS5u_h1472614626': {
-				value: bytes,
-				type: 'REG_BINARY'
-			}
+	regedit.putValue({'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {'bC5vLmcuaS5u_h1472614626': {value: bytes, type: 'REG_BINARY'}}}, function(err) {		
+		if (err && err.code == 2) {
+			console.log("Registry key missing, creating one");
+			regedit.createKey('HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov', function(err){});
+			regedit.putValue({'HKCU\\SOFTWARE\\Battlestate Games\\EscapeFromTarkov': {'bC5vLmcuaS5u_h1472614626': {value: bytes, type: 'REG_BINARY'}}}, function(err) {});
 		}
-    }, function(err) {
-		if (err) {
-			console.log("Shits fucked.", err);
-		};
+
+		console.log("Created login token at timestamp " + data.timestamp);
 	});
 };
 
