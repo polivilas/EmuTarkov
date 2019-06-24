@@ -17,3 +17,12 @@ https://github.com/polivilas/EmuTarkov
 ## License
 CC BY-NC-SA 3.0<br/>
 https://creativecommons.org/licenses/by-nc-sa/3.0/
+
+## Credits
+- polivilas
+- BALIST0N
+- TheMaoci
+- InNoHurryToCode
+- Windel
+- Juraszka
+- Mr RUSS
