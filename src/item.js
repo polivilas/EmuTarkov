@@ -244,6 +244,21 @@ function bindItem(tmpList, body)
 
 }
 
+function tagItem(tmpList, body)
+{
+	for(var item in tmpList.data[1].Inventory.items )
+	{
+		if(tmpList.data[1].Inventory.items[item]._id == body.item)
+		{
+			tmpList.data[1].Inventory.items[item].upd.Tag = {"Color": body.TagColor,"Name": body.TagName}
+		}
+		
+	}
+
+	utility.writeJson('data/list.json', tmpList);
+	return "OK";
+}
+
 function confirmTrading(tmpList, body)  {
 	if (body.type == "buy_from_trader")  {
 		var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
@@ -378,6 +393,44 @@ function confirmRagfairTrading(tmpList , body) {
 	}
 }
 
+function healPlayer(tmpList , body)
+{
+	//healing body part
+	for(var bdpart in tmpList.data[1].Health.BodyParts )
+	{
+		if(bdpart == body.part)
+		{
+			tmpList.data[1].Health.BodyParts[bdpart].Health.Current += body.count;
+		}
+	}
+
+	//update medkit used (hpresource)
+	for(var item in tmpList.data[1].Inventory.items )
+	{
+		if(tmpList.data[1].Inventory.items[item]._id == body.item) //find the medkit in the inventory
+		{
+			if(typeof tmpList.data[1].Inventory.items[item].upd.MedKit === "undefined")
+			{
+				var maxhp = getItem(tmpList.data[1].Inventory.items[item]._tpl)[1]._props.MaxHpResource;
+				tmpList.data[1].Inventory.items[item].upd.MedKit = { "HpResource": maxhp - body.count };
+			}
+			else
+			{
+				tmpList.data[1].Inventory.items[item].upd.MedKit.HpResource -= body.count
+
+			}
+
+			utility.writeJson('data/list.json', tmpList);
+
+			if(tmpList.data[1].Inventory.items[item].upd.MedKit.HpResource == 0 )//remove medkit if its empty
+			{
+				removeItem(tmpList, { Action: 'Remove', item: body.item })
+			}
+		}
+	}
+	return "OK";
+}
+
 function getOutput() {
 	return output;
 }
@@ -419,11 +472,17 @@ function handleMoving(body) {
         case "Bind":
 			return bindItem(tmpList, body);
 
+		case "Tag":
+			return tagItem(tmpList, body);
+
 		case "TradingConfirm":
 			return confirmTrading(tmpList, body);
 
 		case "RagFairBuyOffer":
 			return confirmRagfairTrading(tmpList, body);
+
+		case "Heal":
+			return healPlayer(tmpList, body);
 
 		default:
 			console.log("UNHANDLED ACTION");

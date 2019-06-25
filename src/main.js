@@ -1,14 +1,14 @@
 "use strict";
 
 var settings = require('./settings.js');
-var launcher = require('./launcher.js');
+var login = require('./login.js');
 var server = require('./server.js');
 
 var emulationSettings = settings.getEmulationSettings();
 
 // launcher logic
 if (emulationSettings.emulateLauncher) {
-	launcher.start();
+	login.start();
 }
 
 // server logic

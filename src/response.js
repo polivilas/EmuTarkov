@@ -6,7 +6,6 @@ var item = require('./item.js');
 var ragfair = require('./ragfair.js');
 var bots = require('./bots.js');
 
-var retry = new RegExp('/?retry=\d+', 'i');
 var assort = new RegExp('/client/trading/api/getTraderAssort/([a-z0-9])+', 'i');
 var prices = new RegExp('/client/trading/api/getUserAssortPrice/([a-z0-9])+', 'i');
 var getTrader = new RegExp('/client/trading/api/getTrader/', 'i');
@@ -19,37 +18,47 @@ var ip = serverSettings.ip;
 var port = serverSettings.port;
 
 function moveItem(info) {
-	var output = "";
+    var output = "";
 		
 	// handle all items
-	for (var i = 0; i < info.data.length; i++) {
-		output = item.handleMoving(info.data[i]);
-	}
+    for (var a = 0; a < info.data.length; a++) {
+        output = item.handleMoving(info.data[a]);
+    }
 
 	// return items
-	if (output == "OK") {
-		return JSON.stringify(item.getOutput());
-	}
+    if (output == "OK") {
+        return JSON.stringify(item.getOutput());
+    }
 
-	return output;    
+    return output;    
 }
 
 function joinMatch(body) {
-	var clientrequest = JSON.parse(body);
+
+    var clientrequest = JSON.parse(body);
+
+
+    var profile = JSON.parse( utility.readJson("data/list.json") );
 	var shortid = "";
+	var profileid = ""
 	
 	// check if the player is a scav
 	if (clientrequest.savage == true) {
 		shortid = "3XR5";
+		profileid = profile.data[0]._id;
 	} else {
 		shortid = "3SRC";
+		profileid = profile.data[1]._id;
 	}
+	
 
-	return JSON.stringify( {"err": 0,"errmsg": null,"data": [ {"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": clientrequest.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid} ] });
+
+	return JSON.stringify( {"err": 0,"errmsg": null,"data": [ {"profileid": profileid, "status": "busy", "ip": "127.0.0.1", "port": 1337, "location": clientrequest.location, "sid":shortid , "gamemode": "deathmatch", "shortid": shortid} ] });
+	//return utility.readJson("data/TestRegisterMatchData.json")
 }
 
 function changeNickname(body) {
-	var clientrequest = JSON.parse(body);
+    var clientrequest = JSON.parse(body);
 	var tmpList = JSON.parse(utility.readJson("data/list.json"));
 
 	// apply nickname
@@ -58,14 +67,14 @@ function changeNickname(body) {
 	tmpList.data[1].Info.Nickname = clientrequest.nickname;
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	
-	utility.writeJson('data/list.json', tmpList);
-	return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
+    utility.writeJson('data/list.json', tmpList);
+    return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 }
 
 function get(req, body, url) {
 	var output = "";
 	var info = JSON.parse("{}");
-	
+
 	// parse body
 	if (body != "") {
 		try {
@@ -73,11 +82,6 @@ function get(req, body, url) {
 		} catch(err) {
 			console.error(err);
 		}
-	}
-	
-	// remove retry from URL
-	if (url.indexOf("?retry=") > -1) {
-		url.slice(url.indexOf("?retry="));
 	}
 
 	console.log(url + " with data " + body);
@@ -104,7 +108,7 @@ function get(req, body, url) {
 		return '{"err":0, "errmsg":null, "data":[]}';
 	}
 
-	switch (url) {
+	switch(url) {
 		case "/":
 			output = 'EFT backend emulator for Escape From Tarkov version 0.11.7.3287 by polivilas @ UnKnoWnCheaTs.me';
 			break;
@@ -159,6 +163,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/profile/list":
+			bots.generatePlayerScav();
 			output = utility.readJson('data/list.json');
 			break;
 
@@ -238,14 +243,7 @@ function get(req, body, url) {
 			break;
 
 		case "/client/game/profile/nickname/change":
-			output = changeNickname(body);
-			break;
-			
-		case "/favicon.ico":
-		case "/client/notifier/channel/create":
-		case "/client/match/group/status":
-		case "/client/match/group/looking/stop":
-		case "/client/match/group/exit_from_menu":
+            output = changeNickname(body);
 			break;
 
 		default:

@@ -18,7 +18,7 @@ function sendResponse(req, resp, body) {
 
 	// redirect
 	if (output == "DEAD") {
-		resp.writeHead(301, {Location: 'http://prod.escapefromtarkov.com' + req.url});
+		resp.writeHead(301, {Location: 'http://prod.escapefromtarkov.com'+req.url});
 		console.log("Redirecting");
 		resp.end();
 
