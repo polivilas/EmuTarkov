@@ -98,11 +98,11 @@ function acceptQuest(tmpList, body) {
 function completeQuest(tmpList, body) {
 	var tmpList = JSON.parse(utility.readJson('data/list.json'));
 
-	for (var quest of tmpList.data[1].Quests) {
+	tmpList.data[1].Quests.forEach(function(quest) {
 		if (quest.qid == body.qid) {
 			quest.status = 4;
 		}
-	}
+	});
 
 	//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
 
@@ -228,6 +228,22 @@ function toggleItem(tmpList, body) {
 	return "";
 }
 
+function bindItem(tmpList, body)
+{
+	for(var index in tmpList.data[1].Inventory.fastPanel )
+	{
+		if( tmpList.data[1].Inventory.fastPanel[index] == body.item )//if binded items is already in fastPanel
+		{
+			tmpList.data[1].Inventory.fastPanel[index] = ""; // we need to remove index before re-adding somewhere else 
+		}
+	}
+	tmpList.data[1].Inventory.fastPanel[body.index] = body.item;
+
+	utility.writeJson('data/list.json', tmpList);
+	return "OK";
+
+}
+
 function confirmTrading(tmpList, body)  {
 	if (body.type == "buy_from_trader")  {
 		var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
@@ -346,6 +362,7 @@ function confirmTrading(tmpList, body)  {
 }
 
 function confirmRagfairTrading(tmpList , body) {
+
 	body.Action = "TradingConfirm";
 	body.type = "buy_from_trader";
 	body.tid = "everythingTrader";
@@ -353,9 +370,8 @@ function confirmRagfairTrading(tmpList , body) {
 	body.scheme_id = 0;
 	body.scheme_items = body.items;
 
-	var res = confirmTrading(tmpList, body);
-
-	if (res == "OK" ) {
+	if(confirmTrading(tmpList, body) == "OK" )
+	{
 		return "OK";
 	} else {
 		return "error";
@@ -399,7 +415,10 @@ function handleMoving(body) {
 
 		case "Toggle":
 			return toggleItem(tmpList, body);
-            
+
+        case "Bind":
+			return bindItem(tmpList, body);
+
 		case "TradingConfirm":
 			return confirmTrading(tmpList, body);
 
