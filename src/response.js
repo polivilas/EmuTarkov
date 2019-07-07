@@ -29,22 +29,6 @@ function getTraders() {
 			+ utility.readJson("data/configs/traders/SecretTrader.json") + ']}';			// TheMaoci
 }
 
-function moveItem(info) {
-	var output = "";
-		
-	// handle all items
-	for (var i = 0; i < info.data.length; i++) {
-		output = item.handleMoving(info.data[i]);
-	}
-
-	// return items
-	if (output == "OK") {
-		return JSON.stringify(item.getOutput());
-	}
-
-	return output;    
-}
-
 function joinMatch(info) {
 	var shortid = "";
 	
@@ -88,7 +72,9 @@ function get(req, body) {
 		url = url.split("?retry=")[0];
 	}
 
-	console.log(url + " with data ", body);
+	console.log("ProfileID: " + profile.getActiveID());
+	console.log("Request: " + url);
+	console.log(info);
 
 	// handle special cases
 	if (url.includes(assort)) {
@@ -121,7 +107,7 @@ function get(req, body) {
 			break;
 
 		case "/client/game/profile/items/moving":
-			output = moveItem(info);
+			output = item.moving(info);
 			break;
 			
 		case "/client/mail/dialog/list":

@@ -48,10 +48,8 @@ function getOffers(request) {
 					}
 					
 					break;
-				};
-			};
-
-			response.data.offers.push(createOffer(tmpId));
+				}
+			}
 		}	
 	}
 

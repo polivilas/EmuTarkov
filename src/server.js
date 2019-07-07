@@ -52,8 +52,6 @@ function sendResponse(req, resp, body) {
 	} else {
 		output = response.get(req, "{}");
 	}
-	
-	console.log("ProfileID: " + profile.getActiveID());
 
 	// send image
 	if (output == "IMAGE") {
@@ -69,16 +67,19 @@ function sendResponse(req, resp, body) {
 }
 
 function handleRequest(req, resp) {
+	// separate request in the log
+	console.log("------------------------------------------------------------------------------------------------------------------------");
+	
 	// reset item output
 	item.resetOutput();
 	
 	// get the IP address of the client
-	console.log('Got request from: %s for %s', req.connection.remoteAddress, req.url);
+	console.log("IP address:" + req.connection.remoteAddress, req.url);
 
 	// handle the request
+	console.log("Request method: " + req.method);
+	
 	if (req.method == "POST") {
-		console.log("POST");
-
 		// received data
 		req.on('data', function(data) {
 			zlib.inflate(data, function(err, body) {
@@ -86,7 +87,6 @@ function handleRequest(req, resp) {
 			});
 		});
 	} else {
-		console.log("GET");
 		sendResponse(req, resp, null);
 	}
 }
