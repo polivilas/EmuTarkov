@@ -2,6 +2,7 @@
 
 var utility = require('./utility.js');
 var settings = require('./settings.js');
+var profile = require('./profile.js');
 var item = require('./item.js');
 var ragfair = require('./ragfair.js');
 var bots = require('./bots.js');
@@ -13,18 +14,6 @@ var serverSettings = settings.getServerSettings();
 var backendUrl = serverSettings.backendUrl;
 var ip = serverSettings.ip;
 var port = serverSettings.port;
-
-function getAccount(info, output) {
-	var profiles = JSON.parse(utility.readJson("data/profiles/profiles.json"));
-
-	for (var profile of profiles) {
-		if (info.email == profile.email && info.pass == profile.password) {
-			return profile.id;
-		}
-	}
-
-	return 0;
-}
 
 function getTraders() {
 	return '{"err": 0,"errmsg": null,"data": ['
@@ -56,18 +45,17 @@ function moveItem(info) {
 	return output;    
 }
 
-function joinMatch(body) {
-	var clientrequest = JSON.parse(body);
+function joinMatch(info) {
 	var shortid = "";
 	
 	// check if the player is a scav
-	if (clientrequest.savage == true) {
+	if (info.savage == true) {
 		shortid = "3XR5";
 	} else {
 		shortid = "3SRC";
 	}
 
-	return JSON.stringify({"err": 0,"errmsg": null,"data":[{"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": clientrequest.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid} ] });
+	return JSON.stringify({"err": 0,"errmsg": null,"data":[{"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": info.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid} ] });
 }
 
 function getWeather() {
@@ -85,21 +73,8 @@ function getWeather() {
 	return '{"err":0, "errmsg":null, "data":{"weather":{"timestamp":' + Math.floor(today / 1000) + ', "cloud":-0.475, "wind_speed":2, "wind_direction":3, "wind_gustiness":0.081, "rain":1, "rain_intensity":0, "fog":0.002, "temp":14, "pressure":763, "date":"' + date + '", "time":"' + dateTime + '"}, "date":"' + date + '", "time":"' + time + '", "acceleration":1}}';			
 }
 
-function changeNickname(body) {
-	var clientrequest = JSON.parse(body);
-	var tmpList = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
-
-	// apply nickname
-	tmpList.data[0].Info.Nickname = clientrequest.nickname;
-	tmpList.data[0].Info.LowerNickname = clientrequest.nickname.toLowerCase();
-	tmpList.data[1].Info.Nickname = clientrequest.nickname;
-	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
-	
-	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
-	return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
-}
-
-function get(req, body, output) {
+function get(req, body) {
+	var output = "";
 	var url = req.url;
 	var info = JSON.parse("{}");
 
@@ -117,178 +92,173 @@ function get(req, body, output) {
 
 	// handle special cases
 	if (url.includes(assort)) {
-		output.message = utility.readJson("data/configs/assort/" + url.replace(assort, '') + ".json");
-		return output;
+		return utility.readJson("data/configs/assort/" + url.replace(assort, '') + ".json");
 	}
 	
 	if (url.includes(prices)) {
-		output.message = utility.readJson(utility.getAccountPath() + 'purchases.json');
-		return output;
+		return JSON.stringify(profile.getPurchasesData());
 	}
 	
 	if (url.includes(getTrader)) {
-		output.message = '{"err":0, "errmsg":null, "data":' + utility.readJson("data/configs/traders/" + url.replace(getTrader, '') + ".json") + '}';
-		return output;
+		return '{"err":0, "errmsg":null, "data":' + utility.readJson("data/configs/traders/" + url.replace(getTrader, '') + ".json") + '}';
 	}
 
 	if (url.includes("/data/images/")) {
-		output.message = "IMAGE";
-		return output;
+		return "IMAGE";
 	}
 	
 	if (url.includes("/push/notifier/get/")) {
-		output.message = '{"err":0, "errmsg":null, "data":[]}';
-		return output;
+		return '{"err":0, "errmsg":null, "data":[]}';
 	}
 
 	switch (url) {
 		case "/":
-			output.message = '0.11.7.3333 | EmuTarkov';
+			output = '0.11.7.3333 | EmuTarkov';
 			break;
 
 		case "/client/friend/list":
-			output.message = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
+			output = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
 			break;
 
 		case "/client/game/profile/items/moving":
-			output.message = moveItem(info);
+			output = moveItem(info);
 			break;
 			
 		case "/client/mail/dialog/list":
-			output.message = '{"err":0, "errmsg":null, "data":[]}';
+			output = '{"err":0, "errmsg":null, "data":[]}';
 			break;
 
 		case "/client/friend/request/list/outbox":
 		case "/client/friend/request/list/inbox":
-			output.message = '{"err":0, "errmsg":null, "data":[]}';
+			output = '{"err":0, "errmsg":null, "data":[]}';
 			break;
 
 		case "/client/languages":
-			output.message = utility.readJson('data/configs/locale/languages.json');
+			output = utility.readJson('data/configs/locale/languages.json');
             break;
 
 		case "/client/menu/locale/en":
-			output.message = utility.readJson('data/configs/locale/en/menu.json');
+			output = utility.readJson('data/configs/locale/en/menu.json');
 			break;
 
         case "/client/menu/locale/ru":
-		    output.message = utility.readJson('data/configs/locale/ru/menu.json');
+		    output = utility.readJson('data/configs/locale/ru/menu.json');
 			break;
 
 		case "/client/locale/en":
 		case "/client/locale/En":
-			output.message = utility.readJson('data/configs/locale/en/global.json');
+			output = utility.readJson('data/configs/locale/en/global.json');
 			break;
 
 		case "/client/locale/ru":
 		case "/client/locale/Ru":
-		    output.message = utility.readJson('data/configs/locale/ru/global.json');
+		    output = utility.readJson('data/configs/locale/ru/global.json');
 			break;
 
 		case "/client/game/version/validate":
-			output.message = '{"err":0, "errmsg":null, "data":null}';
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/game/login":
-			output.account = getAccount(info, output);
-			output.message = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			output = profile.findID(info, backendUrl);
 			break;
 
 		case "/client/game/logout":
-			output.message = '{"err":0, "errmsg":null, "data":null}';
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/queue/status":
-			output.message = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
+			output = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
 			break;
 
 		case "/client/items":
-			output.message = utility.readJson('data/configs/items.json');
+			output = utility.readJson('data/configs/items.json');
 			break;
 
 		case "/client/globals":
-			output.message = utility.readJson('data/configs/globals.json');
+			output = utility.readJson('data/configs/globals.json');
 			break;
 
 		case "/client/game/profile/list":
-			output.message = utility.readJson(utility.getAccountPath() + 'character.json');
+			output = JSON.stringify(profile.getCharacterData());
 			break;
 
 		case "/client/game/profile/select":
-			output.message = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+			output = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
 
 		case "/client/profile/status":
-			output.message = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
+			output = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 			break;
 
 		case "/client/game/keepalive":
-			output.message = '{"err":0, "errmsg":null, "data":null}';
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/weather":
-			output.message = getWeather();
+			output = getWeather();
 			break;
 
 		case "/client/locations":
-			output.message = utility.readJson('data/configs/locations.json');
+			output = utility.readJson('data/configs/locations.json');
 			break;
 
 		case "/client/handbook/templates":
-			output.message = utility.readJson('data/configs/templates.json');
+			output = utility.readJson('data/configs/templates.json');
 			break;
 
 		case "/client/quest/list":
 			bots.generatePlayerScav();
-			output.message = utility.readJson('data/configs/questList.json');
+			output = utility.readJson('data/configs/questList.json');
 			break;
 
 		case "/client/getMetricsConfig":
-			output.message = utility.readJson('data/configs/metricsConfig.json');
+			output = utility.readJson('data/configs/metricsConfig.json');
 			break;
 
 		case "/client/putMetrics":
-			output.message = '{"err":0, "errmsg":null, "data":null}';
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/game/bot/generate":
-			output.message = JSON.stringify( {"err": 0,"errmsg": null,"data": bots.generate(JSON.parse(body)) } );
+			output = JSON.stringify( {"err": 0,"errmsg": null,"data": bots.generate(JSON.parse(body)) } );
 			break;
 
 		case "/client/trading/api/getTradersList":
-			output.message = getTraders();
+			output = getTraders();
 			break;
 
 		case "/client/server/list":
-			output.message = '{"err":0, "errmsg":null, "data":[{"ip":"'+ ip +'", "port":"' + port + '"}]}';
+			output = '{"err":0, "errmsg":null, "data":[{"ip":"'+ ip +'", "port":"' + port + '"}]}';
 			break;
 
 		case "/client/ragfair/search":
-			output.message = ragfair.getOffers(info);
+			output = ragfair.getOffers(info);
 			break;
 
 		case "/client/match/available":
-			output.message = '{"err":0, "errmsg":null, "data":true}';
+			output = '{"err":0, "errmsg":null, "data":true}';
 			break;
 
 		case "/client/match/join":
-			output.message = joinMatch(body);
+			output = joinMatch(info);
 			break;
 
 		case "/client/match/exit":
-			output.message = '{"err":0, "errmsg":null, "data":null}';
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/chatServer/list":
-			output.message = '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
+			output = '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
 			break;
 
 		case "/client/game/profile/nickname/change":
-			output.message = changeNickname(body);
+			output = profile.changeNickname(info);
 			break;
 			
 		case "/favicon.ico":
 		case "/client/notifier/channel/create":
+		case "/client/game/profile/search":
 		case "/client/match/group/status":
 		case "/client/match/group/looking/stop":
 		case "/client/match/group/exit_from_menu":

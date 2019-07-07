@@ -3,8 +3,8 @@
 var fs = require('fs');
 var http = require('http');
 var zlib = require('zlib');
-var utility = require('./utility.js');
 var settings = require('./settings.js');
+var profile = require('./profile.js');
 var item = require('./item.js');
 var response = require('./response.js');
 
@@ -24,9 +24,9 @@ var getCookies = function(req) {
 }
 
 function sendJson(resp, output) {
-	resp.writeHead(200, "OK", {'Content-Type': 'text/plain', 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=' + output.account});
+	resp.writeHead(200, "OK", {'Content-Type': 'text/plain', 'content-encoding' : 'deflate', 'Set-Cookie' : 'PHPSESSID=' + profile.getActiveID()});
 	
-	zlib.deflate(output.message, function(err, buf) {
+	zlib.deflate(output, function(err, buf) {
 		resp.end(buf);
 	});
 }
@@ -41,39 +41,31 @@ function sendImage(resp, file) {
 }
 
 function sendResponse(req, resp, body) {
-	var output = JSON.parse('{"account":0, "message":""}');
+	var output = "";
 
-	// get active account
-	var account = getCookies(req)['PHPSESSID'];
-
-	if (account == undefined) {
-		output.account = 0;
-	} else {
-		output.account = account;
-	}
-
-	utility.setAccountID(account);
+	// get active profile
+	profile.setActiveID(getCookies(req)['PHPSESSID']);
 
 	// get response
 	if (req.method == "POST") {
-		output = response.get(req, body.toString(), output);
+		output = response.get(req, body.toString());
 	} else {
-		output = response.get(req, "{}", output);
+		output = response.get(req, "{}");
 	}
 	
-	console.log("ProfileID: " + output.account);
+	console.log("ProfileID: " + profile.getActiveID());
 
-	// image
-	if (output.message == "IMAGE") {
+	// send image
+	if (output == "IMAGE") {
 		sendImage(resp, '.' + req.url);
 		return;
 	}
 
-	// json
+	// send json
 	sendJson(resp, output);
 
-	// reset utility account id
-	utility.setAccountID(account);
+	// reset utility profile ID
+	profile.setActiveID(0);
 }
 
 function handleRequest(req, resp) {

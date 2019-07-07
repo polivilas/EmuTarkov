@@ -2,6 +2,7 @@
 
 var utility = require('./utility.js');
 var settings = require('./settings.js');
+var profile = require('./profile.js');
 
 var botSettings = settings.getBotSettings();
 var items = JSON.parse(utility.readJson('data/configs/items.json'));
@@ -617,14 +618,14 @@ function generate(databots) {
 }
 
 function generatePlayerScav() {
-	var character = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
+	var character = profile.getCharacterData();
 	var playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]})
 	
 	playerscav[0].Info.Settings = {};
 	playerscav[0]._id = "5c71b934354682353958e983";
 	character.data[0] = playerscav[0];
 	
-	utility.writeJson(utility.getAccountPath() + 'character.json', character);
+	profile.setCharacterData(character);
 }
 
 module.exports.generate = generate;

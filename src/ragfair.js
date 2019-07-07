@@ -3,61 +3,53 @@
 var utility = require('./utility.js');
 
 var items = JSON.parse(utility.readJson("data/configs/items.json"));
-var search = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
-var offerBase = JSON.parse(utility.readJson("data/configs/ragfair/offerBase.json"));
 
 function getOffers(request) {
-	var response = search;
+	var response = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
+	var handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
-	 //request an item or a category of item
-	if (request.handbookId != "") {
+	// request an item or a category of items 
+	if (request.handbookId != "") {	
 		var isCateg = false;
-		var handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
-		for (var categ of handbook.data.Categories) {
+		handbook.data.Categories.forEach(function(categ) {
+			// find the category in the handbook
 			if (categ.Id == request.handbookId) {	
-				var sustain = categ.Id;
-
 				isCateg = true;
-        
-				for (var item of handbook.data.Items) {
+				
+				//list all item of the category
+				handbook.data.Items.forEach(function(item) {
 					if (item.ParentId == categ.Id) {
 						response.data.offers.push(createOffer(item.Id));
 					}
-				}
+				});
 
-				for (var categ2 of handbook.data.Categories) {
-					if (categ2.ParentId == sustain) {
-						for (var item of handbook.data.Items) {
+				// recursive loops for sub categories
+				handbook.data.Categories.forEach(function(categ2) {
+					if (categ2.ParentId == categ.Id) {
+						handbook.data.Items.forEach(function(item) {
 							if (item.ParentId == categ2.Id) {
 								response.data.offers.push(createOffer(item.Id));
 							}
-						}
+						});
 					}
-				}
+				});
 			}
-		}
+		});
 
+		// if its a specific item searched
 		if (isCateg == false) {
-			var tmpId = "54009119af1c881c07000029";
-	
 			for (var curItem in items.data) {
-				if (curItem == request.handbookId) {
-					if (items.data[curItem]._name.substring(0,7) == "weapon_") {	
-						var weaponPresets = JSON.parse(utility.readJson('data/configs/bots/botWeapons.json'));
-            
-						for (var weaponPreset of weaponPresets) {
-							if (weaponPreset._items[0]._tpl == items.data[curItem]._id ) { 
-								response.data.offers.push(createOfferPreset(weaponPreset._items[0]._tpl , weaponPreset._items));
-							}
+				if (curItem == request.handbookId) {	
+					for (var someitem in handbook.data.Items) {	
+						if (handbook.data.Items[someitem].Id == request.handbookId ) {
+							response.data.offers.push(createOffer(curItem));
 						}
 					}
-          
-					tmpId = curItem;
-					console.log("found item");
+					
 					break;
-				}
-			}
+				};
+			};
 
 			response.data.offers.push(createOffer(tmpId));
 		}	
@@ -66,39 +58,29 @@ function getOffers(request) {
 	if (request.linkedSearchId != "") {	
 		var itemLink = items.data[request.linkedSearchId];
 
-		for (var itemSlot of itemLink._props.Slots) {  
-			for (var itemSlotFilter of itemSlot._props.filters) {
-				for (var mod of itemSlotFilter.Filter) {
-					var offer = createOffer(mod);
-
-					response.data.offers.push(offer);
-				}
-			}
-		}
+		itemLink._props.Slots.forEach(function(ItemSlot) {   
+			ItemSlot._props.filters.forEach(function(itemSlotFilter) {   
+				itemSlotFilter.Filter.forEach(function(mod) {
+					for (var someitem in handbook.data.Items) {
+						if (handbook.data.Items[someitem].Id == mod) {
+							response.data.offers.push(createOffer(mod));
+						}
+					}
+				})	
+			});
+		});
 	}
 
 	return JSON.stringify(response);
 }
 
 function createOffer(template) {
-	var offer = offerBase;
+	var offerBase = JSON.parse(utility.readJson("data/configs/ragfair/offerBase.json"));
 
-	offer._id = template;
-	offer.items[0]._tpl = template;
+	offerBase._id = template;
+	offerBase.items[0]._tpl = template;
 
-	return offer;
-}
-
-function createOfferPreset(template, preset) {
-	var offer = offerBase;
-
-	offer._id = template;
-	offer.items = preset;
-	offer.root = preset[0]._id;
-	offer.items[0].upd = {};
-	offer.items[0].upd.StackObjectsCount = 99;
-
-	return offer;
+	return offerBase;
 }
 
 module.exports.getOffers = getOffers;
