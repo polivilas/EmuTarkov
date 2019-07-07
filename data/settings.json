@@ -1,32 +1,29 @@
 {
-    "emulation": {
-        "emulateLauncher": true,
-        "emulateServer": true
-    },
     "server": {
+		"enabled": "true",
         "backendUrl": "http://localhost:1337",
         "ip": "127.0.0.1",
         "port": 1337
     },
-    "account": {
-        "email": "1337",
-        "password": "1337"
+    "launcher": {
+		"enabled": "true",
+        "email": "user@emutarkov.com",
+        "password": "password"
     },
     "bots": {
-        "pmcWar": {
-            "enabled": false
+        "pmcWar":{
+            "enabled": false,
+			"sideUsec": 55
         },
         "limit": {
-            "bossKilla": -1,
-            "bossBully": -1,
+            "bossKilla": 1,
+            "bossBully": 1,
             "bullyFollowers": 5,
-            "marksman": -1,
-            "pmcBot": -1,
-            "scav": -1
+            "marksman": 10,
+            "pmcBot": 10,
+            "scav": 30
         },
         "spawn": {
-            "pmc": 10,
-            "usec": 55,
             "glasses": 30,
             "faceCover": 40,
             "headwear": 40,

@@ -9,18 +9,19 @@ var offerBase = JSON.parse(utility.readJson("data/ragfair/offerBase.json"));
 function getOffers(request) {
 	var response = search;
 
-	if (request.handbookId != "") {	
+	 //request an item or a category of item
+	if (request.handbookId != "") {
 		var isCateg = false;
 		var handbook = JSON.parse(utility.readJson('data/templates.json'));
 
 		for (var categ of handbook.data.Categories) {
 			if (categ.Id == request.handbookId) {	
 				var sustain = categ.Id;
-				
-				isCateg = true;
 
+				isCateg = true;
+        
 				for (var item of handbook.data.Items) {
-					if (item.ParentId == sustain) {
+					if (item.ParentId == categ.Id) {
 						response.data.offers.push(CreateOffer(item.Id));
 					}
 				}
@@ -42,9 +43,18 @@ function getOffers(request) {
 	
 			for (var curItem in items.data) {
 				if (curItem == request.handbookId) {
+					if (items.data[curItem]._name.substring(0,7) == "weapon_") {	
+						var weaponPresets = JSON.parse(utility.readJson('data/bots/botWeapons.json'));
+            
+						for (var weaponPreset of weaponPresets) {
+							if (weaponPreset._items[0]._tpl == items.data[curItem]._id ) { 
+								response.data.offers.push(CreateOfferPreset(weaponPreset._items[0]._tpl , weaponPreset._items));
+							}
+						}
+					}
+          
 					tmpId = curItem;
 					console.log("found item");
-					
 					break;
 				}
 			}
@@ -70,11 +80,23 @@ function getOffers(request) {
 	return JSON.stringify(response);
 }
 
-function CreateOffer(template) {
+function createOffer(template) {
 	var offer = offerBase;
 
 	offer._id = template;
 	offer.items[0]._tpl = template;
+
+	return offer;
+}
+
+function createOfferPreset(template, preset) {
+	var offer = offerBase;
+
+	offer._id = template;
+	offer.items = preset;
+	offer.root = preset[0]._id;
+	offer.items[0].upd = {};
+	offer.items[0].upd.StackObjectsCount = 99;
 
 	return offer;
 }

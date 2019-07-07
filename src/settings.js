@@ -4,23 +4,18 @@ var utility = require('./utility.js');
 
 var data = JSON.parse(utility.readJson("data/settings.json"));
 
-function getEmulationSettings() {
-    return data.emulation;
-}
-
 function getServerSettings() {
     return data.server;
 }
 
-function getAccountSettings() {
-    return data.account;
+function getLauncherSettings() {
+    return data.launcher;
 }
 
 function getBotSettings() {
     return data.bots;
 }
 
-module.exports.getEmulationSettings = getEmulationSettings;
 module.exports.getServerSettings = getServerSettings;
-module.exports.getAccountSettings = getAccountSettings;
+module.exports.getLauncherSettings = getLauncherSettings;
 module.exports.getBotSettings = getBotSettings;

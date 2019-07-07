@@ -2,13 +2,14 @@
 
 var utility = require('./utility.js');
 
+var items = JSON.parse(utility.readJson('data/items.json'));
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
-var tmpSize = {};
-var tmpItem = {};
-var toDo = [];
 var output = "";
-var items = JSON.parse(utility.readJson('data/items.json'));
+var curr = [];
+curr['RUB'] = "5449016a4bdc2d6f028b456f";
+curr['USD'] = "5696686a4bdc2da3298b456a";
+curr['EUR'] = "569668774bdc2da2298b4568";
 
 function GenItemID() {
 	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
@@ -26,15 +27,8 @@ function getItem(template) {
 }
 
 function getSize(itemtpl, itemID, location) {
-	toDo = [itemID];
-	tmpItem = getItem(itemtpl);
-	
-	if (!tmpItem[0]) {
-		console.log("SHITS FUCKED GETSIZE1", itemID);
-		return;
-	} else {
-		tmpItem = tmpItem[1];
-	}
+	var toDo = [itemID];
+	var tmpItem = getItem(itemtpl)[1];
 
 	var outX = 0, outY = 0, outL = 0, outR = 0, outU = 0, outD = 0, tmpL = 0, tmpR = 0, tmpU = 0, tmpD = 0;
 	
@@ -46,14 +40,7 @@ function getSize(itemtpl, itemID, location) {
 			for (var tmpKey in location) {
 				if (location[tmpKey].parentId && location[tmpKey].parentId == toDo[0]) {
 					toDo.push(location[tmpKey]._id);
-					tmpItem = getItem(location[tmpKey]._tpl);
-
-					if (!tmpItem[0]) {
-						console.log("SHITS FUCKED GETSIZE2", tmpItem, location[tmpKey]._tpl);
-						return "SHITS_FUCKED_GETSIZE2";
-					} else {
-						tmpItem = tmpItem[1];
-					}
+					tmpItem = getItem(location[tmpKey]._tpl)[1];
 
 					if (tmpItem._props.ExtraSizeLeft != undefined && tmpItem._props.ExtraSizeLeft > tmpL) {
 						tmpL = tmpItem._props.ExtraSizeLeft;
@@ -110,6 +97,30 @@ function completeQuest(tmpList, body) {
 	return "OK";
 }
 
+function questHandover(tmpList, body) {
+	var counter = 0;
+	var found = false;
+
+ 	for (var itemHandover of body.items) {
+		counter += itemHandover.count;
+		removeItem(tmpList, {Action: 'Remove', item: itemHandover.id});
+	}
+
+ 	for (var backendCounter in tmpList.data[1].BackendCounters) {
+		if (backendCounter == body.conditionId) {
+			tmpList.data[1].BackendCounters[body.conditionId].value += counter;
+			found = true;
+		}
+	}
+
+ 	if (!found) {
+		tmpList.data[1].BackendCounters[body.conditionId] = {"id" : body.conditionId, "qid" : body.qid, "value" : counter};
+	}
+
+ 	utility.writeJson('data/list.json', tmpList);
+	return "OK";
+ }
+
 function moveItem(tmpList, body) {
 	for (var key in tmpList.data[1].Inventory.items) {
 		if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
@@ -133,11 +144,12 @@ function moveItem(tmpList, body) {
 }
 
 function removeItem(tmpList, body) {
-	toDo = [body.item];
+	var toDo = [body.item];
 
 	while (true) {
 		if (toDo[0] != undefined) {
-			while (true) { // needed else iterator may decide to jump over stuff
+			// needed else iterator may decide to jump over stuff
+			while (true) {
 				var tmpEmpty = "yes";
 
 				for (var tmpKey in tmpList.data[1].Inventory.items) {
@@ -145,11 +157,12 @@ function removeItem(tmpList, body) {
 						output.data.items.del.push({"_id": tmpList.data[1].Inventory.items[tmpKey]._id});
 						toDo.push(tmpList.data[1].Inventory.items[tmpKey]._id);
 						tmpList.data[1].Inventory.items.splice(tmpKey, 1);
+						
 						tmpEmpty = "no";
 					}
 				}
 
-				if (tmpEmpty == "yes"){
+				if (tmpEmpty == "yes") {
 					break;
 				};
 			}
@@ -228,74 +241,211 @@ function toggleItem(tmpList, body) {
 	return "";
 }
 
-function confirmTrading(tmpList, body)  {
-	if (body.type == "buy_from_trader")  {
-		var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+function tagItem(tmpList, body) {
+	for (var key in tmpList.data[1].Inventory.items) {
+		if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
+			tmpList.data[1].Inventory.items[key].upd.Tag = {"Color": body.TagColor, "Name": body.TagName};
 
-		for (var key in tmpTrader.data.items) {
-			if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
-				var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
+			utility.writeJson('data/list.json', tmpList);
+			return "OK";
+		}
+	}
+
+	return "";
+}
+
+function bindItem(tmpList, body) {
+	for (var index in tmpList.data[1].Inventory.fastPanel) {
+		// if binded items is already in fastPanel
+		if (tmpList.data[1].Inventory.fastPanel[index] == body.item) {
+			// we need to remove index before re-adding somewhere else 
+			tmpList.data[1].Inventory.fastPanel[index] = "";
+		}
+	}
+
+	tmpList.data[1].Inventory.fastPanel[body.index] = body.item;
+	utility.writeJson('data/list.json', tmpList);
+	return "OK";
+}
+
+function eatItem(tmpList, body) {
+	for (var item in tmpList.data[1].Inventory.items) {
+		if (tmpList.data[1].Inventory.items[item]._id == body.item) {
+			var effects = getItem(tmpList.data[1].Inventory.items[item]._tpl)[1]._props.effects_health;
+		}
+	}
+
+ 	tmpList.data[1].Health.Hydration.Current += effects.hydration.value;
+	tmpList.data[1].Health.Energy.Current += effects.energy.value;
+
+ 	if (tmpList.data[1].Health.Hydration.Current > tmpList.data[1].Health.Hydration.Maximum) {
+		tmpList.data[1].Health.Hydration.Current = tmpList.data[1].Health.Hydration.Maximum;
+	}
+	
+	if (tmpList.data[1].Health.Energy.Current > tmpList.data[1].Health.Energy.Maximum) {
+		tmpList.data[1].Health.Energy.Current = tmpList.data[1].Health.Energy.Maximum;
+	}
+
+ 	utility.writeJson('data/list.json', tmpList);
+ 	removeItem(tmpList, {Action: 'Remove', item: body.item});
+ 	return "OK";
+}
+
+function healPlayer(tmpList, body) {
+	// healing body part
+	for (var bdpart in tmpList.data[1].Health.BodyParts) {
+		if (bdpart == body.part) {
+			tmpList.data[1].Health.BodyParts[bdpart].Health.Current += body.count;
+		}
+	}
+
+	// update medkit used (hpresource)
+	for (var item in tmpList.data[1].Inventory.items) {
+		// find the medkit in the inventory
+		if (tmpList.data[1].Inventory.items[item]._id == body.item) {
+			if (typeof tmpList.data[1].Inventory.items[item].upd.MedKit === "undefined") {
+				var maxhp = getItem(tmpList.data[1].Inventory.items[item]._tpl)[1]._props.MaxHpResource;
 				
-				for (var key2 in tmpList.data[1].Inventory.items)  {
-					// hideout
-					if (tmpList.data[1].Inventory.items[key2].parentId == "5c71b934354682353958ea35" && tmpList.data[1].Inventory.items[key2].location != undefined) {
-						tmpItem = getItem(tmpList.data[1].Inventory.items[key2]._tpl);
-						
-						if (!tmpItem[0]) {
-							console.log("SHITS FUCKED");
-							return "SHITS_FUCKED";
+				tmpList.data[1].Inventory.items[item].upd.MedKit = {"HpResource": maxhp - body.count};
+			} else {
+				tmpList.data[1].Inventory.items[item].upd.MedKit.HpResource -= body.count;
+			}
+
+			utility.writeJson('data/list.json', tmpList);
+
+			// remove medkit if its empty
+			if (tmpList.data[1].Inventory.items[item].upd.MedKit.HpResource == 0 ) {
+				removeItem(tmpList, {Action: 'Remove', item: body.item});
+			}
+		}
+	}
+	
+	return "OK";
+}
+
+function recheckInventoryFreeSpace(tmpList){
+	var Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
+
+	for (var key in tmpList.data[1].Inventory.items) {
+		// hideout
+		if (tmpList.data[1].Inventory.items[key].parentId == "5c71b934354682353958ea35" && tmpList.data[1].Inventory.items[key].location != undefined) {
+			var tmpItem = getItem(tmpList.data[1].Inventory.items[key]._tpl)[1];
+			var tmpSize = getSize(tmpList.data[1].Inventory.items[key]._tpl, tmpList.data[1].Inventory.items[key]._id, tmpList.data[1].Inventory.items);
+			
+			//			x			L				r
+			var iW = tmpSize[0] + tmpSize[2] + tmpSize[3];
+			
+			//			y			u				d
+			var iH = tmpSize[1] + tmpSize[4] + tmpSize[5];
+			var fH = (tmpList.data[1].Inventory.items[key].location.rotation == "Vertical" ? iW : iH);
+			var fW = (tmpList.data[1].Inventory.items[key].location.rotation == "Vertical" ? iH : iW);
+			
+			for (var x = 0; x < fH; x++) {
+				Stash2D[tmpList.data[1].Inventory.items[key].location.y + x].fill(1, tmpList.data[1].Inventory.items[key].location.x, tmpList.data[1].Inventory.items[key].location.x + fW);
+			}
+		}
+	}
+
+	return Stash2D;
+}
+
+function payMoney(tmpList, amount, body) {
+	var tmpTraderInfo = JSON.parse(utility.readJson('data/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	var currency = curr[tmpTraderInfo.currency];
+
+	amount = Math.round(amount);
+
+	for (var key in tmpList.data[1].Inventory.items) {
+		if (tmpList.data[1].Inventory.items[key]._tpl == currency && tmpList.data[1].Inventory.items[key].upd.StackObjectsCount >= amount) {
+			tmpList.data[1].Inventory.items[key].upd.StackObjectsCount -= amount;
+			console.log("Money paid: " + amount + " " + tmpTraderInfo.currency);
+			return true;
+		}
+	}
+
+	console.log("no money found");
+	return false;
+}
+
+function getMoney(tmpList, amount, body) {
+	var tmpTraderInfo = JSON.parse(utility.readJson('data/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	var currency = curr[tmpTraderInfo.currency];
+
+	amount = Math.round(amount);
+
+	for (var key in tmpList.data[1].Inventory.items) {
+		if (tmpList.data[1].Inventory.items[key]._tpl == currency) {
+			tmpList.data[1].Inventory.items[key].upd.StackObjectsCount += amount;
+			console.log("Money earned: " + amount + " " + tmpTraderInfo.currency);
+			return true;
+		}
+	}
+
+	console.log("no money found");
+	return false;
+}
+
+function getStackSizes() {
+
+}
+
+function buyItem(tmpList, tmpUserTrader, body) {
+	var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+		
+	// pay the item	
+	if (!payMoney(tmpList, body.count, body)) {
+		console.log("no money found");
+		return "";
+	}
+		
+	for (var key in tmpTrader.data.items) {
+		if (tmpTrader.data.items[key]._id && tmpTrader.data.items[key]._id == body.item_id) {
+			var MaxStacks = 1;
+			var StacksValue = [];
+
+			var tmpItem = getItem(tmpTrader.data.items[key]._tpl)[1];
+
+			// split stacks if the size is higher than allowed
+			if (body.count > tmpItem._props.StackMaxSize) {
+				var count = body.count;
+					
+				//maxstacks if not divided by then +1
+				var calc = body.count - (Math.floor(body.count / tmpItem._props.StackMaxSize) * tmpItem._props.StackMaxSize);
+				MaxStacks = (calc > 0)? MaxStacks + Math.floor(count / tmpItem._props.StackMaxSize):Math.floor(count / tmpItem._props.StackMaxSize);
+
+				for (var sv = 0; sv < MaxStacks; sv++){
+					if (count > 0) {
+						if (count > tmpItem._props.StackMaxSize) {
+							count = count - tmpItem._props.StackMaxSize;
+							StacksValue[sv] = tmpItem._props.StackMaxSize;
 						} else {
-							tmpItem = tmpItem[1];
-						}
-
-						tmpSize = getSize(tmpList.data[1].Inventory.items[key2]._tpl,tmpList.data[1].Inventory.items[key2]._id, tmpList.data[1].Inventory.items);
-						
-						//			x			L				r
-						var iW = tmpSize[0] + tmpSize[2] + tmpSize[3];
-
-						//			y			u				d
-						var iH = tmpSize[1] + tmpSize[4] + tmpSize[5];
-						var fH = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iW : iH);
-						var fW = (tmpList.data[1].Inventory.items[key2].location.rotation == "Vertical" ? iH : iW);
-						
-						for (var x = 0; x < fH; x++) {
-							Stash2D[tmpList.data[1].Inventory.items[key2].location.y + x].fill(1, tmpList.data[1].Inventory.items[key2].location.x, tmpList.data[1].Inventory.items[key2].location.x + fW);
+							StacksValue[sv] = count;
 						}
 					}
 				}
+			} else {
+				StacksValue[0] = body.count;
+			}
 
-				var tmpSizeX = 0; var tmpSizeY = 0;
-				
-				tmpItem = getItem(tmpTrader.data.items[key]._tpl);
-				
-				if (!tmpItem[0]) {
-					console.log("SHITS FUCKED BUY_FROM_TRADER");
-					return "SHITS_FUCKED_BUY_FROM_TRADER";
-				} else {
-					tmpItem = tmpItem[1];
-				}
-
-				tmpSize = getSize(tmpTrader.data.items[key]._tpl,tmpTrader.data.items[key]._id, tmpTrader.data.items);
-				
-				if (body.count > tmpItem._props.StackMaxSize) {
-					body.count = tmpItem._props.StackMaxSize;
-				}
+			// for each stack
+			for (var stacks = 0; stacks < MaxStacks; stacks++){
+				var tmpSizeX = 0;
+				var tmpSizeY = 0;
+				var badSlot = "no";
+				var AddedProperly = false;
+				var tmpSize = getSize(tmpTrader.data.items[key]._tpl, tmpTrader.data.items[key]._id, tmpTrader.data.items);
+				var StashFS_2D = recheckInventoryFreeSpace(tmpList);					
 				
 				tmpSizeX = tmpSize[0] + tmpSize[2] + tmpSize[3];
 				tmpSizeY = tmpSize[1] + tmpSize[4] + tmpSize[5];
-				console.log(tmpSizeX, tmpSizeY);
-
-				var badSlot = "no";
-				
-				console.log(Stash2D);
-
+					
 				for (var y = 0; y < stashY; y++) {
 					for (var x = 0; x < stashX; x++) {
 						badSlot = "no";
-						
+
 						for (var itemY = 0; itemY < tmpSizeY; itemY++) {
 							for (var itemX = 0; itemX < tmpSizeX; itemX++) {
-								if (Stash2D[y + itemY][x + itemX] != 0) {
+								if (StashFS_2D[y + itemY][x + itemX] != 0) {
 									badSlot = "yes";
 									break;
 								}
@@ -308,18 +458,19 @@ function confirmTrading(tmpList, body)  {
 
 						if (badSlot == "no") {
 							var newItem = GenItemID();
-
-							output.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
-							tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
-							toDo = [[tmpTrader.data.items[key]._id, newItem]];
-							
+								
+							output.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": StacksValue[stacks]}});
+							tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[key]._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": StacksValue[stacks]}});
+							var toDo = [[tmpTrader.data.items[key]._id, newItem]];
+							tmpUserTrader.data[newItem] = [[{"_tpl": tmpTrader.data.items[key]._tpl, "count": ((body.count > 10)?(body.count * 0.8):(body.count))}]];
+								
 							while (true) {
 								if (toDo[0] != undefined) {
 									for (var tmpKey in tmpTrader.data.items) {
 										if (tmpTrader.data.items[tmpKey].parentId && tmpTrader.data.items[tmpKey].parentId == toDo[0][0]) {
 											newItem = GenItemID();
-											output.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
-											tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": body.count}});
+											output.data.items.new.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": StacksValue[stacks]}});
+											tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpTrader.data.items[tmpKey]._tpl, "parentId": toDo[0][1], "slotId": tmpTrader.data.items[tmpKey].slotId, "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": StacksValue[stacks]}});
 											toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
 										}
 									}
@@ -331,21 +482,82 @@ function confirmTrading(tmpList, body)  {
 								break;
 							}
 
-							utility.writeJson('data/list.json', tmpList);
-							return "OK";
+							AddedProperly = true;
+							break;
 						}
 					}
+						
+					if (AddedProperly) {
+						break;
+					}
 				}
-
-				break;
+			}	
+				
+			//this should be true ALWAYS -)
+			if (AddedProperly) {
+				utility.writeJson('data/boughtList.json', tmpUserTrader);
+				utility.writeJson('data/list.json', tmpList);
+				return "OK";
 			}
+				
+			break;
 		}
 	}
 
 	return "";
 }
 
-function confirmRagfairTrading(tmpList , body) {
+function sellItem(tmpList, tmpUserTrader, body) {
+	var checkID = 0;
+	var money = 0;
+
+	// find the items
+	for (var ListKey in tmpList.data[1].Inventory.items) {
+		for (var k in body.items) {
+			checkID = body.items[k].id.replace(' clone', '').replace(' clon', '');
+
+			console.log(checkID);
+
+			// item found
+			if (tmpList.data[1].Inventory.items[ListKey] && tmpList.data[1].Inventory.items[ListKey]._id == checkID) {
+				// remove from the inventory
+				removeItem(tmpList, {Action: 'Remove', item: checkID});
+
+				// add money to return to the player
+				money += tmpUserTrader.data[checkID][0][0].count;
+
+				// remove from the bought list
+				delete tmpUserTrader.data[checkID];
+			}
+		}
+	}
+
+	// get money the item
+	if (!getMoney(tmpList, money, body)) {
+		return "";
+	}
+				
+	utility.writeJson('data/boughtList.json', tmpUserTrader);
+	return "OK";
+}
+
+function confirmTrading(tmpList, body)  {
+	var tmpUserTrader = JSON.parse(utility.readJson('data/boughtList.json'));
+
+	// buying
+	if (body.type == "buy_from_trader")  {
+		return buyItem(tmpList, tmpUserTrader, body);
+	}
+
+	// selling
+	if (body.type == "sell_to_trader") {				
+		return sellItem(tmpList, tmpUserTrader, body)
+	}
+
+	return "";
+}
+
+function confirmRagfairTrading(tmpList, body) {
 	body.Action = "TradingConfirm";
 	body.type = "buy_from_trader";
 	body.tid = "everythingTrader";
@@ -353,9 +565,7 @@ function confirmRagfairTrading(tmpList , body) {
 	body.scheme_id = 0;
 	body.scheme_items = body.items;
 
-	var res = confirmTrading(tmpList, body);
-
-	if (res == "OK" ) {
+	if (confirmTrading(tmpList, body) == "OK" ) {
 		return "OK";
 	} else {
 		return "error";
@@ -370,10 +580,10 @@ function resetOutput() {
 	output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[]}}');
 }
 
-function handleMoving(body) {
-	console.log(body);
-	
+function handleMoving(body) {	
 	var tmpList = JSON.parse(utility.readJson('data/list.json'));
+
+	console.log(body);
 
 	switch(body.Action) {
 		case "QuestAccept":
@@ -381,6 +591,9 @@ function handleMoving(body) {
 
 		case "QuestComplete":
 			return completeQuest(tmpList, body);
+
+		case "QuestHandover":
+			return questHandover(tmpList, body);
 
 		case "Move":
 			return moveItem(tmpList, body);
@@ -400,6 +613,18 @@ function handleMoving(body) {
 		case "Toggle":
 			return toggleItem(tmpList, body);
             
+		case "Tag":
+			return tagItem(tmpList, body);
+
+		case "Bind":
+			return bindItem(tmpList, body);
+
+		case "Eat":
+			return eatItem(tmpList, body);
+
+		case "Heal":
+			return healPlayer(tmpList, body);
+
 		case "TradingConfirm":
 			return confirmTrading(tmpList, body);
 
