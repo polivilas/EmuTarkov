@@ -1,11 +1,11 @@
 "use strict";
 
-var utility = require('./utility.js');
-var settings = require('./settings.js');
-var profile = require('./profile.js');
-var item = require('./item.js');
-var ragfair = require('./ragfair.js');
-var bots = require('./bots.js');
+const utility = require('./utility.js');
+const settings = require('./settings.js');
+const profile = require('./profile.js');
+const item = require('./item.js');
+const ragfair = require('./ragfair.js');
+const bots = require('./bots.js');
 
 var assort = "/client/trading/api/getTraderAssort/";
 var prices = "/client/trading/api/getUserAssortPrice/trader/";
@@ -30,7 +30,7 @@ function getTraders() {
 }
 
 function joinMatch(info) {
-	var shortid = "";
+	let shortid = "";
 	
 	// check if the player is a scav
 	if (info.savage == true) {
@@ -43,24 +43,17 @@ function joinMatch(info) {
 }
 
 function getWeather() {
-	var today = new Date();
-	var day = ("0" + today.getDate()).substr(-2);
-	var month = ("0" + (today.getMonth() + 1)).substr(-2);
-	var year = ("000" + (today.getYear() + 1)).substr(-4);
-	var hours = ("0" + today.getHours()).substr(-2);
-	var minutes = ("0" + today.getMinutes()).substr(-2);
-	var seconds = ("0" + today.getSeconds()).substr(-2);
-	var date = today.getFullYear() + "-" + month + "-" + day;
-	var time = hours + ":" + minutes + ":" + seconds;
-	var dateTime = date + " " + time;
+	let time = utility.getTime().replace("-", ":").replace("-", ":");
+	let date = utility.getDate();
+	let dateTime = date + " " + time;
 
-	return '{"err":0, "errmsg":null, "data":{"weather":{"timestamp":' + Math.floor(today / 1000) + ', "cloud":-0.475, "wind_speed":2, "wind_direction":3, "wind_gustiness":0.081, "rain":1, "rain_intensity":0, "fog":0.002, "temp":14, "pressure":763, "date":"' + date + '", "time":"' + dateTime + '"}, "date":"' + date + '", "time":"' + time + '", "acceleration":1}}';			
+	return '{"err":0, "errmsg":null, "data":{"weather":{"timestamp":' + Math.floor(new Date() / 1000) + ', "cloud":-0.475, "wind_speed":2, "wind_direction":3, "wind_gustiness":0.081, "rain":1, "rain_intensity":0, "fog":0.002, "temp":14, "pressure":763, "date":"' + date + '", "time":"' + dateTime + '"}, "date":"' + date + '", "time":"' + time + '", "acceleration":1}}';			
 }
 
 function get(req, body) {
-	var output = "";
-	var url = req.url;
-	var info = JSON.parse("{}");
+	let output = "";
+	let url = req.url;
+	let info = JSON.parse("{}");
 
 	// parse body
 	if (body != "") {
@@ -91,6 +84,10 @@ function get(req, body) {
 
 	if (url.includes("/data/images/")) {
 		return "IMAGE";
+	}
+
+	if (url.includes("/uploads/")) {
+		return "CONTENT";
 	}
 	
 	if (url.includes("/push/notifier/get/")) {
@@ -146,7 +143,7 @@ function get(req, body) {
 			break;
 
 		case "/client/game/login":
-			output = profile.findID(info, backendUrl);
+			output = profile.find(info, backendUrl);
 			break;
 
 		case "/client/game/logout":
@@ -241,7 +238,32 @@ function get(req, body) {
 		case "/client/game/profile/nickname/change":
 			output = profile.changeNickname(info);
 			break;
+
+		case "/client/game/profile/voice/change":
+			profile.changeVoice(info);
+			output = '{"err":0, "errmsg":null, "data":null}';
+			break;
 			
+		case "/launcher/profile/create":
+			profile.create(info);
+			output = "DONE";
+			break;
+
+		case "/launcher/profile/delete":
+			profile.delete(info);			
+			output = "DONE";
+			break;
+
+		case "/launcher/profile/change/email":
+			profile.changeEmail(info);			
+			output = "DONE";
+			break;
+
+		case "/launcher/profile/change/password":
+			profile.changeEmail(info);			
+			output = "DONE";
+			break;
+
 		case "/favicon.ico":
 		case "/client/notifier/channel/create":
 		case "/client/game/profile/search":
@@ -251,7 +273,7 @@ function get(req, body) {
 			break;
 
 		default:
-			console.log('\x1b[31m',"UNHANDLED REQUEST " + req.url,'\x1b[0m');
+			console.log("UNHANDLED REQUEST " + req.url);
 			break;
 	}
 

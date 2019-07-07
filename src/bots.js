@@ -1,8 +1,8 @@
 "use strict";
 
-var utility = require('./utility.js');
-var settings = require('./settings.js');
-var profile = require('./profile.js');
+const utility = require('./utility.js');
+const settings = require('./settings.js');
+const profile = require('./profile.js');
 
 var botSettings = settings.getBotSettings();
 var items = JSON.parse(utility.readJson('data/configs/items.json'));
@@ -11,7 +11,7 @@ var weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.js
 var names = JSON.parse(utility.readJson("data/configs/bots/botNames.json")); 
 
 function generateBotBossKilla(params) {
-	var boss = JSON.parse(utility.readJson("data/configs/bots/botBossKilla.json"));
+	let boss = JSON.parse(utility.readJson("data/configs/bots/botBossKilla.json"));
 
 	boss.Info.Settings.Role = params.Role;
 	boss.Info.Settings.BotDifficulty = params.Difficulty;
@@ -20,7 +20,7 @@ function generateBotBossKilla(params) {
 }
 
 function generateBotBossBully(params) {
-	var boss = JSON.parse(utility.readJson("data/configs/bots/botBossBully.json"));
+	let boss = JSON.parse(utility.readJson("data/configs/bots/botBossBully.json"));
 
 	boss.Info.Settings.Role = params.Role;
 	boss.Info.Settings.BotDifficulty = params.Difficulty;
@@ -105,7 +105,7 @@ function generateBotSkill(bot, params) {
 	bot.Info.Settings.BotDifficulty = params.Difficulty;
 
 	// randomize skills
-	for (var skill of bot.Skills.Common) {
+	for (let skill of bot.Skills.Common) {
 		skill.Progress = utility.getRandomIntEx(5000);
 		skill.MaxAchieved = skill.Progress;
 	}
@@ -121,12 +121,12 @@ function generateBotWeapon(item, params) {
 	
 	// get marksman weapon
 	if (params.Role == "marksman") {
-		var found = false;
+		let found = false;
 		
 		while (found == false) {
 			item = weaponPresets.data[utility.getRandomIntEx(weaponPresets.data.length)];
 			
-			for (var filter of presets.filter_marksman) {
+			for (let filter of presets.filter_marksman) {
 				if (item._items[0]._tpl == filter) {
 					found = true;
 				}
@@ -137,7 +137,7 @@ function generateBotWeapon(item, params) {
 	// check if its a pistol or primary weapon
 	item.isPistol = false;
 
-	for (var pistoltpl of presets.pistols) {
+	for (let pistoltpl of presets.pistols) {
 		if (pistoltpl == item._items[0]._tpl) {
 			item.isPistol = true;
 		}
@@ -147,7 +147,7 @@ function generateBotWeapon(item, params) {
 }
 
 function generateBotVestRigItem(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "TacticalVestScav" + internalId;
 	item._tpl = presets.Rigs[utility.getRandomIntEx(presets.Rigs.length)];
@@ -158,7 +158,7 @@ function generateBotVestRigItem(internalId) {
 }
 
 function generateBotKnife(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "ScabbardScav" + internalId;
 	item._tpl= presets.knives[utility.getRandomIntEx(presets.knives.length)];
@@ -169,7 +169,7 @@ function generateBotKnife(internalId) {
 }
 
 function generateBotGlasses(internalId) {
-	var item = {};
+	let item = {};
 	
 	item._id = "EyeWearScav" + internalId;
 	item._tpl= presets.Eyewear[utility.getRandomIntEx(presets.Eyewear.length)];
@@ -180,7 +180,7 @@ function generateBotGlasses(internalId) {
 }
 
 function generateBotFaceCover(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "FaceCoverScav" + internalId;
 	item._tpl= presets.Facecovers[utility.getRandomIntEx(presets.Facecovers.length)];
@@ -191,7 +191,7 @@ function generateBotFaceCover(internalId) {
 }
 
 function generateBotHeadwear(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "HeadWearScav" + internalId;
 	item._tpl= presets.Headwear[utility.getRandomIntEx(presets.Headwear.length)];
@@ -202,7 +202,7 @@ function generateBotHeadwear(internalId) {
 }
 
 function generateBotBackpack(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "BackpackScav" + internalId;
 	item._tpl= presets.Backpacks[utility.getRandomIntEx(presets.Backpacks.length)];
@@ -215,10 +215,10 @@ function generateBotBackpack(internalId) {
 }
 
 function generateBotArmorVest(internalId) {
-	var item = {};
-	var armor = presets.Armors[utility.getRandomIntEx(presets.Armors.length)];
-	var durabl = items.data[armor]._props.MaxDurability;
-	var des = utility.getRandomIntEx(durabl);
+	let item = {};
+	let armor = presets.Armors[utility.getRandomIntEx(presets.Armors.length)];
+	let durabl = items.data[armor]._props.MaxDurability;
+	let des = items.data[armor]._props.MaxDurability;
 	
 	item._id = "ArmorVestScav" + internalId;
 	item._tpl= armor;
@@ -230,7 +230,7 @@ function generateBotArmorVest(internalId) {
 }
 
 function generateBotMedPocket(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "PocketMedScav" + internalId;
 	item._tpl= presets.meds[utility.getRandomIntEx(presets.meds.length)];
@@ -242,7 +242,7 @@ function generateBotMedPocket(internalId) {
 }
 
 function generateBotItemPocket(internalId) {
-	var item = {};
+	let item = {};
 
 	item._id = "PocketItemScav" + internalId;
 	item._tpl= presets.Grenades[utility.getRandomIntEx(presets.Grenades.length)];
@@ -254,41 +254,31 @@ function generateBotItemPocket(internalId) {
 }
 
 function assignWeaponToPrimary(weapon) {
-	var item = {};
+	let item = {};
 				
 	item._id = weapon._id;
 	item._tpl = weapon._tpl;
 	item.parentId = "5c6687d65e9d882c8841f0fd";
 	item.slotId = "FirstPrimaryWeapon";
 
-	item.upd = {};
-	item.upd.Repairable = {};
-	item.upd.Repairable.MaxDurability = utility.getRandomIntEx(100);
-	item.upd.Repairable.Durability = utility.getRandomIntEx(item.upd.Repairable.MaxDurability);
-
 	return item;
 }
 
 function assignWeaponToHolster(weapon) {
-	var item = {};
+	let item = {};
 	
 	item._id = weapon._id;
 	item._tpl = weapon._tpl;
 	item.parentId = "5c6687d65e9d882c8841f0fd";
 	item.slotId = "Holster";
 
-	item.upd = {};
-	item.upd.Repairable = {};
-	item.upd.Repairable.MaxDurability = utility.getRandomIntEx(100);
-	item.upd.Repairable.Durability = utility.getRandomIntEx(item.upd.Repairable.MaxDurability);
-
 	return item;
 }
 
 function getCompatibleMagazines(weapon) {
-	var compatiblesmagazines = {};
+	let compatiblesmagazines = {};
 
-	for (var slot of items.data[weapon._items[0]._tpl]._props.Slots) {
+	for (let slot of items.data[weapon._items[0]._tpl]._props.Slots) {
 		if (slot._name == "mod_magazine") {
 			compatiblesmagazines = slot._props.filters[0].Filter;
 			break;
@@ -303,7 +293,7 @@ function getCompatibleAmmo(weapon) {
 }
 
 function getWeaponMagazine(weapon, internalId, compatiblesmags) {
-	var item = {};
+	let item = {};
 
 	item._id = "MagazineWeaponScav" + internalId;
 	item._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)];
@@ -314,7 +304,7 @@ function getWeaponMagazine(weapon, internalId, compatiblesmags) {
 }
 
 function getWeaponMagazineAmmo(selectedmag, internalId, ammoFilter) {
-	var item = {};
+	let item = {};
 	
 	item._id = "AmmoMagazine1Scav" + internalId;
 	item._tpl = ammoFilter[utility.getRandomIntEx(ammoFilter.length)];
@@ -326,7 +316,7 @@ function getWeaponMagazineAmmo(selectedmag, internalId, ammoFilter) {
 }
 
 function getMosimAmmo(selectedmag, selectedmagid, internalId, ammoFilter) {
-	var item = {};
+	let item = {};
 
 	item._id = "AmmoMagazine1Scav"+ internalId;
 	item._tpl = ammoFilter[utility.getRandomIntEx(ammoFilter.length)];
@@ -338,7 +328,7 @@ function getMosimAmmo(selectedmag, selectedmagid, internalId, ammoFilter) {
 }
 
 function getVestMagazine(id, itemslot, internalId, compatiblesmags) {
-	var item = {};
+	let item = {};
 
 	item._id = id + internalId;
 	item._tpl = compatiblesmags[utility.getRandomIntEx(compatiblesmags.length)];
@@ -350,7 +340,7 @@ function getVestMagazine(id, itemslot, internalId, compatiblesmags) {
 }
 
 function getVestMagazineAmmo(id, magazineid, selectedmag, internalId, ammoFilter) {
-	var item = {};
+	let item = {};
 				
 	item._id = id + internalId;
 	item._tpl = ammoFilter[utility.getRandomIntEx(ammoFilter.length)];
@@ -362,7 +352,7 @@ function getVestMagazineAmmo(id, magazineid, selectedmag, internalId, ammoFilter
 }
 
 function getVestStackAmmo(id, itemslot, internalId, ammoFilter) {
-	var item = {};
+	let item = {};
 				
 	item._id = id + internalId;
 	item._tpl = ammoFilter[utility.getRandomIntEx(ammoFilter.length)];
@@ -374,8 +364,8 @@ function getVestStackAmmo(id, itemslot, internalId, ammoFilter) {
 }
 
 function getRandomName(nationality, nameType, gender) { 
-	var name = "UNKNOWN"; 
-	var tmpNames = []; 
+	let name = "UNKNOWN"; 
+	let tmpNames = []; 
 	 
 	switch (nationality) { 
 		case "russian": 
@@ -406,8 +396,8 @@ function getRandomFullName() {
 } 
 
 function generateBaseBot(params) {
-	var bot = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
-	var internalId = utility.getRandomIntEx(10000);
+	let bot = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
+	let internalId = utility.getRandomIntEx(10000);
 
 	// set nickname
 	bot.Info.Nickname = getRandomFullName();
@@ -452,7 +442,7 @@ function generateBaseBot(params) {
 	bot.Inventory.items.push(generateBotVestRigItem(internalId));
 
 	// fill your dummy bot with the random selected preset weapon and its mods
-	for (var item of weapon._items) {
+	for (let item of weapon._items) {
 		if (item._id == weapon._parent) {
 			// add weapon to weapon slot
 			if (weapon.isPistol == false) {
@@ -463,21 +453,21 @@ function generateBaseBot(params) {
 		} else {
 			if (item.slotId == "mod_magazine" ) {
 				// randomize magazine
-				var compatiblesmagazines = getCompatibleMagazines(weapon);
-				var ammoFilter = getCompatibleAmmo(weapon);
-				var isMosin = false;
+				let compatiblesmagazines = getCompatibleMagazines(weapon);
+				let ammoFilter = getCompatibleAmmo(weapon);
+				let isMosin = false;
 
 				// check if the weapon is a mosin
-				for (var mosinId of presets.filter_mosin) {
+				for (let mosinId of presets.filter_mosin) {
 					if (weapon._items[0]._tpl == mosinId) {
 						isMosin = true;
 					}
 				}
 
 				// get the magazine
-				var mag1 = {};
-				var mag2 = getVestMagazine("magazine2VestScav", 2, internalId, compatiblesmagazines);
-				var mag3 = getVestMagazine("magazine3VestScav", 3, internalId, compatiblesmagazines);
+				let mag1 = {};
+				let mag2 = getVestMagazine("magazine2VestScav", 2, internalId, compatiblesmagazines);
+				let mag3 = getVestMagazine("magazine3VestScav", 3, internalId, compatiblesmagazines);
 
 				// give the weapon ammo
 				if (isMosin == false) {
@@ -508,7 +498,7 @@ function generateBaseBot(params) {
 	}
 
 	// randomize bot health
-	for (var bodyPart in bot.Health.BodyParts) {
+	for (let bodyPart in bot.Health.BodyParts) {
 		bot.Health.BodyParts[bodyPart].Health.Current += utility.getRandomInt(-10, 10);
 		bot.Health.BodyParts[bodyPart].Health.Maximum = bot.Health.BodyParts[bodyPart].Health.Current;
 	}
@@ -555,13 +545,13 @@ function generateBaseBot(params) {
 }
 
 function generate(databots) {
-	var generatedBots = [];
-	var botPossibilities = 0;
+	let generatedBots = [];
+	let botPossibilities = 0;
 
 	// loop to generate all scavs
-	for (var params of databots.conditions) {
+	for (let params of databots.conditions) {
 		// limit spawns
-		var limit = -1;
+		let limit = -1;
 
 		switch (params.Role) {
 			case "bossKilla":
@@ -594,7 +584,7 @@ function generate(databots) {
 		}
 
 		// generate as many as the game request
-		for (var i = 0; i < params.Limit; i++)  {
+		for (let i = 0; i < params.Limit; i++)  {
 			switch (params.Role) {
 				case "bossKilla":
 					generatedBots.push(generateBotBossKilla(params));
@@ -618,8 +608,8 @@ function generate(databots) {
 }
 
 function generatePlayerScav() {
-	var character = profile.getCharacterData();
-	var playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]})
+	let character = profile.getCharacterData();
+	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]})
 	
 	playerscav[0].Info.Settings = {};
 	playerscav[0]._id = "5c71b934354682353958e983";

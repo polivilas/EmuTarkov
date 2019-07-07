@@ -1,20 +1,20 @@
 "use strict";
 
-var fs = require('fs');
-var http = require('http');
-var zlib = require('zlib');
-var settings = require('./settings.js');
-var profile = require('./profile.js');
-var item = require('./item.js');
-var response = require('./response.js');
+const fs = require('fs');
+const http = require('http');
+const zlib = require('zlib');
+const settings = require('./settings.js');
+const profile = require('./profile.js');
+const item = require('./item.js');
+const response = require('./response.js');
 
-var getCookies = function(req) {
-	var found = {}
-	var cookies = req.headers.cookie;
+function getCookies(req) {
+	let found = {}
+	let cookies = req.headers.cookie;
 
 	if (cookies) {
-		for (var cookie of cookies.split(';')) {
-			var parts = cookie.split('=');
+		for (let cookie of cookies.split(';')) {
+			let parts = cookie.split('=');
 
 			found[parts.shift().trim()] = decodeURI(parts.join('='));
 		}
@@ -32,8 +32,9 @@ function sendJson(resp, output) {
 }
 
 function sendImage(resp, file) {
-	var fileStream = fs.createReadStream(file);
+	let fileStream = fs.createReadStream(file);
 
+	// send file
 	fileStream.on('open', function() {
 		resp.setHeader('Content-Type', 'image/png');
 		fileStream.pipe(resp);
@@ -41,7 +42,7 @@ function sendImage(resp, file) {
 }
 
 function sendResponse(req, resp, body) {
-	var output = "";
+	let output = "";
 
 	// get active profile
 	profile.setActiveID(getCookies(req)['PHPSESSID']);
@@ -52,17 +53,26 @@ function sendResponse(req, resp, body) {
 	} else {
 		output = response.get(req, "{}");
 	}
-
-	// send image
-	if (output == "IMAGE") {
-		sendImage(resp, '.' + req.url);
+	
+	// prepare message to send
+	if (output == "DONE") {
 		return;
 	}
 
-	// send json
-	sendJson(resp, output);
+	if (output == "CONTENT") {
+		let image = req.url.replace('/uploads/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
 
-	// reset utility profile ID
+		console.log("The banner image location: " + image);
+		sendImage(resp, image);
+		return;
+	}
+
+	if (output == "IMAGE") {
+		sendImage(resp, "." + req.url);
+		return;
+	}
+
+	sendJson(resp, output);
 	profile.setActiveID(0);
 }
 
@@ -92,11 +102,16 @@ function handleRequest(req, resp) {
 }
 
 function start() {
-	var server = http.createServer();
-	var port = settings.getServerSettings().port;
+	let server = http.createServer();
+	let port = settings.getServerSettings().port;
+
+	server.on('error', function () {
+		console.log("Port " + port + " is already in use");
+		return;
+    });
 
 	server.listen(port, function() {
-		console.log('EmuTarkov listening on: %s', port);
+		console.log("Listening on port: " + port);
 	});
 	
 	server.on('request', function(req, resp) {

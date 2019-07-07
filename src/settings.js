@@ -1,6 +1,6 @@
 "use strict";
 
-var utility = require('./utility.js');
+const utility = require('./utility.js');
 
 var data = JSON.parse(utility.readJson("data/config.json"));
 
