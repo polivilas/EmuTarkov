@@ -1,9 +1,9 @@
 # EmuTarkov
 Escape From Tarkov backend emulator written in JS.
 
-## Information
-Setup, playing the game, faq, etc:<br/>
-https://github.com/InNoHurryToCode/EmuTarkov/wiki
+## Setup
+1. Download the latest release from the releases page.
+2. Change backendurl in Escape From Tarkov's client.config.json to "http://localhost:1337".
 
 ## Issues
 All bugs/errors/issues:<br/>
