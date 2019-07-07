@@ -7,8 +7,7 @@ Escape From Tarkov backend emulator written in JS.
 
 ## Issues
 All bugs/errors/issues:<br/>
-https://github.com/polivilas/EmuTarkov/issues<br/>
-Please include your logs located in ```gamedir/logs```.
+https://github.com/polivilas/EmuTarkov/issues
 
 ## Contributions
 All bugfixes/contributions/pull requests:<br/>
