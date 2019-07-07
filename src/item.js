@@ -2,7 +2,7 @@
 
 var utility = require('./utility.js');
 
-var items = JSON.parse(utility.readJson('data/items.json'));
+var items = JSON.parse(utility.readJson('data/configs/items.json'));
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 var output = "";
@@ -74,16 +74,16 @@ function getSize(itemtpl, itemID, location) {
 }
 
 function acceptQuest(tmpList, body) {
-	var tmpList = JSON.parse(utility.readJson('data/list.json'));
+	var tmpList = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
 
 	tmpList.data[1].Quests.push({"qid": body.qid.toString(), "startTime": 1337, "status": 2}); // statuses seem as follow - 1 - not accepted | 2 - accepted | 3 - failed | 4 - completed
 	
-	utility.writeJson('data/list.json', tmpList);
+	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 	return "OK";
 }
 
 function completeQuest(tmpList, body) {
-	var tmpList = JSON.parse(utility.readJson('data/list.json'));
+	var tmpList = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
 
 	for (var quest of tmpList.data[1].Quests) {
 		if (quest.qid == body.qid) {
@@ -93,7 +93,7 @@ function completeQuest(tmpList, body) {
 
 	//send reward to the profile : if quest_list.id == bodyqid then quest_list.succes
 
-	utility.writeJson('data/list.json', tmpList);
+	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 	return "OK";
 }
 
@@ -117,7 +117,7 @@ function questHandover(tmpList, body) {
 		tmpList.data[1].BackendCounters[body.conditionId] = {"id" : body.conditionId, "qid" : body.qid, "value" : counter};
 	}
 
- 	utility.writeJson('data/list.json', tmpList);
+ 	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 	return "OK";
  }
 
@@ -135,7 +135,7 @@ function moveItem(tmpList, body) {
 				}
 			}
 			
-			utility.writeJson('data/list.json', tmpList);
+			utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 			return "OK";
 		}
 	}
@@ -174,7 +174,7 @@ function removeItem(tmpList, body) {
 		break;
 	}
 	
-	utility.writeJson('data/list.json', tmpList);
+	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 	return "OK";
 }
 
@@ -188,7 +188,7 @@ function splitItem(tmpList, body) {
 			output.data.items.new.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 			tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": tmpList.data[1].Inventory.items[key]._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
 			
-			utility.writeJson('data/list.json', tmpList);
+			utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 			return "OK";
 		}
 	}
@@ -205,7 +205,7 @@ function mergeItem(tmpList, body) {
 					output.data.items.del.push({"_id": tmpList.data[1].Inventory.items[key2]._id});
 					tmpList.data[1].Inventory.items.splice(key2, 1);
 
-					utility.writeJson('data/list.json', tmpList);
+					utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 					return "OK";
 				}
 			}
@@ -220,7 +220,7 @@ function foldItem(tmpList, body) {
 		if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 			tmpList.data[1].Inventory.items[key].upd.Foldable = {"Folded": body.value};
 
-			utility.writeJson('data/list.json', tmpList);
+			utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 			return "OK";
 		}
 	}
@@ -233,7 +233,7 @@ function toggleItem(tmpList, body) {
 		if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 			tmpList.data[1].Inventory.items[key].upd.Togglable = {"On": body.value};
 
-			utility.writeJson('data/list.json', tmpList);
+			utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 			return "OK";
 		}
 	}
@@ -246,7 +246,7 @@ function tagItem(tmpList, body) {
 		if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.item) {
 			tmpList.data[1].Inventory.items[key].upd.Tag = {"Color": body.TagColor, "Name": body.TagName};
 
-			utility.writeJson('data/list.json', tmpList);
+			utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 			return "OK";
 		}
 	}
@@ -264,7 +264,7 @@ function bindItem(tmpList, body) {
 	}
 
 	tmpList.data[1].Inventory.fastPanel[body.index] = body.item;
-	utility.writeJson('data/list.json', tmpList);
+	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 	return "OK";
 }
 
@@ -286,7 +286,7 @@ function eatItem(tmpList, body) {
 		tmpList.data[1].Health.Energy.Current = tmpList.data[1].Health.Energy.Maximum;
 	}
 
- 	utility.writeJson('data/list.json', tmpList);
+ 	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
  	removeItem(tmpList, {Action: 'Remove', item: body.item});
  	return "OK";
 }
@@ -311,7 +311,7 @@ function healPlayer(tmpList, body) {
 				tmpList.data[1].Inventory.items[item].upd.MedKit.HpResource -= body.count;
 			}
 
-			utility.writeJson('data/list.json', tmpList);
+			utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 
 			// remove medkit if its empty
 			if (tmpList.data[1].Inventory.items[item].upd.MedKit.HpResource == 0 ) {
@@ -350,7 +350,7 @@ function recheckInventoryFreeSpace(tmpList){
 }
 
 function payMoney(tmpList, amount, body) {
-	var tmpTraderInfo = JSON.parse(utility.readJson('data/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	var tmpTraderInfo = JSON.parse(utility.readJson('data/configs/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
 	var currency = curr[tmpTraderInfo.currency];
 
 	amount = Math.round(amount);
@@ -368,7 +368,7 @@ function payMoney(tmpList, amount, body) {
 }
 
 function getMoney(tmpList, amount, body) {
-	var tmpTraderInfo = JSON.parse(utility.readJson('data/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	var tmpTraderInfo = JSON.parse(utility.readJson('data/configs/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
 	var currency = curr[tmpTraderInfo.currency];
 
 	amount = Math.round(amount);
@@ -390,7 +390,7 @@ function getStackSizes() {
 }
 
 function buyItem(tmpList, tmpUserTrader, body) {
-	var tmpTrader = JSON.parse(utility.readJson('data/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	var tmpTrader = JSON.parse(utility.readJson('data/configs/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
 		
 	// pay the item	
 	if (!payMoney(tmpList, body.count, body)) {
@@ -495,8 +495,8 @@ function buyItem(tmpList, tmpUserTrader, body) {
 				
 			//this should be true ALWAYS -)
 			if (AddedProperly) {
-				utility.writeJson('data/boughtList.json', tmpUserTrader);
-				utility.writeJson('data/list.json', tmpList);
+				utility.writeJson(utility.getAccountPath() + 'purchases.json', tmpUserTrader);
+				utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 				return "OK";
 			}
 				
@@ -537,12 +537,12 @@ function sellItem(tmpList, tmpUserTrader, body) {
 		return "";
 	}
 				
-	utility.writeJson('data/boughtList.json', tmpUserTrader);
+	utility.writeJson(utility.getAccountPath() + 'purchases.json', tmpUserTrader);
 	return "OK";
 }
 
 function confirmTrading(tmpList, body)  {
-	var tmpUserTrader = JSON.parse(utility.readJson('data/boughtList.json'));
+	var tmpUserTrader = JSON.parse(utility.readJson(utility.getAccountPath() + 'purchases.json'));
 
 	// buying
 	if (body.type == "buy_from_trader")  {
@@ -581,7 +581,7 @@ function resetOutput() {
 }
 
 function handleMoving(body) {	
-	var tmpList = JSON.parse(utility.readJson('data/list.json'));
+	var tmpList = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
 
 	console.log(body);
 

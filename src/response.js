@@ -14,20 +14,30 @@ var backendUrl = serverSettings.backendUrl;
 var ip = serverSettings.ip;
 var port = serverSettings.port;
 
-function getTraders() {
-	var output = '{"err": 0,"errmsg": null,"data": ['
-			+ utility.readJson("data/traders/54cb50c76803fa8b248b4571.json") + ', '	// Prapor
-			+ utility.readJson("data/traders/54cb57776803fa99248b456e.json") + ', '	// Therapist
-			+ utility.readJson("data/traders/579dc571d53a0658a154fbec.json") + ', '	// Fence 
-			+ utility.readJson("data/traders/58330581ace78e27b8b10cee.json") + ', '	// Skier
-			+ utility.readJson("data/traders/5935c25fb3acc3127c3d8cd9.json") + ', '	// Peacekeeper
-			+ utility.readJson("data/traders/5a7c2eca46aef81a7ca2145d.json") + ', '	// Mechanic
-			+ utility.readJson("data/traders/5ac3b934156ae10c4430e83c.json") + ', '	// Ragman
-			+ utility.readJson("data/traders/everythingTrader.json") + ', ' 		// Polivilas
-			+ utility.readJson("data/traders/PresetTrader.json") + ', ' 			// Jaeger
-			+ utility.readJson("data/traders/SecretTrader.json") + ']}';			// TheMaoci
+function getAccount(info, output) {
+	var profiles = JSON.parse(utility.readJson("data/profiles/profiles.json"));
 
-	return output;
+	for (var profile of profiles) {
+		if (info.email == profile.email && info.pass == profile.password) {
+			return profile.id;
+		}
+	}
+
+	return 0;
+}
+
+function getTraders() {
+	return '{"err": 0,"errmsg": null,"data": ['
+			+ utility.readJson("data/configs/traders/54cb50c76803fa8b248b4571.json") + ', '	// Prapor
+			+ utility.readJson("data/configs/traders/54cb57776803fa99248b456e.json") + ', '	// Therapist
+			+ utility.readJson("data/configs/traders/579dc571d53a0658a154fbec.json") + ', '	// Fence 
+			+ utility.readJson("data/configs/traders/58330581ace78e27b8b10cee.json") + ', '	// Skier
+			+ utility.readJson("data/configs/traders/5935c25fb3acc3127c3d8cd9.json") + ', '	// Peacekeeper
+			+ utility.readJson("data/configs/traders/5a7c2eca46aef81a7ca2145d.json") + ', '	// Mechanic
+			+ utility.readJson("data/configs/traders/5ac3b934156ae10c4430e83c.json") + ', '	// Ragman
+			+ utility.readJson("data/configs/traders/everythingTrader.json") + ', ' 		// Polivilas
+			+ utility.readJson("data/configs/traders/PresetTrader.json") + ', ' 			// Jaeger
+			+ utility.readJson("data/configs/traders/SecretTrader.json") + ']}';			// TheMaoci
 }
 
 function moveItem(info) {
@@ -57,10 +67,10 @@ function joinMatch(body) {
 		shortid = "3SRC";
 	}
 
-	return JSON.stringify( {"err": 0,"errmsg": null,"data": [ {"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": clientrequest.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid} ] });
+	return JSON.stringify({"err": 0,"errmsg": null,"data":[{"profileid": "5c71b934354682353958e983", "status": "busy", "ip": "", "port": 0, "location": clientrequest.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid} ] });
 }
 
-function getWeather(body) {
+function getWeather() {
 	var today = new Date();
 	var day = ("0" + today.getDate()).substr(-2);
 	var month = ("0" + (today.getMonth() + 1)).substr(-2);
@@ -77,7 +87,7 @@ function getWeather(body) {
 
 function changeNickname(body) {
 	var clientrequest = JSON.parse(body);
-	var tmpList = JSON.parse(utility.readJson("data/list.json"));
+	var tmpList = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
 
 	// apply nickname
 	tmpList.data[0].Info.Nickname = clientrequest.nickname;
@@ -85,15 +95,14 @@ function changeNickname(body) {
 	tmpList.data[1].Info.Nickname = clientrequest.nickname;
 	tmpList.data[1].Info.LowerNickname = clientrequest.nickname.toLowerCase();
 	
-	utility.writeJson('data/list.json', tmpList);
+	utility.writeJson(utility.getAccountPath() + 'character.json', tmpList);
 	return '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + '}}';	
 }
 
-function get(req, body) {
-	var output = "";
+function get(req, body, output) {
 	var url = req.url;
 	var info = JSON.parse("{}");
-	
+
 	// parse body
 	if (body != "") {
 		info = JSON.parse(body);
@@ -108,168 +117,174 @@ function get(req, body) {
 
 	// handle special cases
 	if (url.includes(assort)) {
-		return utility.readJson("data/assort/" + url.replace(assort, '') + ".json");
+		output.message = utility.readJson("data/configs/assort/" + url.replace(assort, '') + ".json");
+		return output;
 	}
 	
 	if (url.includes(prices)) {
-		return utility.readJson("data/boughtList.json");
+		output.message = utility.readJson(utility.getAccountPath() + 'purchases.json');
+		return output;
 	}
 	
 	if (url.includes(getTrader)) {
-		return '{"err":0, "errmsg":null, "data":' + utility.readJson("data/traders/" + url.replace(getTrader, '') + ".json") + '}';
+		output.message = '{"err":0, "errmsg":null, "data":' + utility.readJson("data/configs/traders/" + url.replace(getTrader, '') + ".json") + '}';
+		return output;
 	}
 
 	if (url.includes("/data/images/")) {
-		return "IMAGE";
+		output.message = "IMAGE";
+		return output;
 	}
 	
 	if (url.includes("/push/notifier/get/")) {
-		return '{"err":0, "errmsg":null, "data":[]}';
+		output.message = '{"err":0, "errmsg":null, "data":[]}';
+		return output;
 	}
 
 	switch (url) {
 		case "/":
-			output = '0.11.7.3333';
+			output.message = '0.11.7.3333 | EmuTarkov';
 			break;
 
 		case "/client/friend/list":
-			output = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
+			output.message = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
 			break;
 
 		case "/client/game/profile/items/moving":
-			output = moveItem(info);
+			output.message = moveItem(info);
 			break;
 			
 		case "/client/mail/dialog/list":
-			output = '{"err":0, "errmsg":null, "data":[]}';
+			output.message = '{"err":0, "errmsg":null, "data":[]}';
 			break;
 
 		case "/client/friend/request/list/outbox":
 		case "/client/friend/request/list/inbox":
-			output = '{"err":0, "errmsg":null, "data":[]}';
+			output.message = '{"err":0, "errmsg":null, "data":[]}';
 			break;
 
 		case "/client/languages":
-			output = utility.readJson('data/locale/languages.json');
+			output.message = utility.readJson('data/configs/locale/languages.json');
             break;
 
 		case "/client/menu/locale/en":
-			output = utility.readJson('data/locale/en/menu.json');
+			output.message = utility.readJson('data/configs/locale/en/menu.json');
 			break;
 
         case "/client/menu/locale/ru":
-		    output = utility.readJson('data/locale/ru/menu.json');
+		    output.message = utility.readJson('data/configs/locale/ru/menu.json');
 			break;
 
-				case "/client/locale/en":
+		case "/client/locale/en":
 		case "/client/locale/En":
-			output = utility.readJson('data/locale/en/global.json');
+			output.message = utility.readJson('data/configs/locale/en/global.json');
 			break;
 
 		case "/client/locale/ru":
 		case "/client/locale/Ru":
-		    output = utility.readJson('data/locale/ru/global.json');
+		    output.message = utility.readJson('data/configs/locale/ru/global.json');
 			break;
 
 		case "/client/game/version/validate":
-			output = '{"err":0, "errmsg":null, "data":null}';
+			output.message = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/game/login":
-			output = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
+			output.account = getAccount(info, output);
+			output.message = '{"err":0, "errmsg":null, "data":{"token":"token_1337", "aid":1337, "lang":"en", "languages":{"en":"English"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
 			break;
 
 		case "/client/game/logout":
-			output = '{"err":0, "errmsg":null, "data":null}';
+			output.message = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/queue/status":
-			output = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
+			output.message = '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
 			break;
 
 		case "/client/items":
-			output = utility.readJson('data/items.json');
+			output.message = utility.readJson('data/configs/items.json');
 			break;
 
 		case "/client/globals":
-			output = utility.readJson('data/globals.json');
+			output.message = utility.readJson('data/configs/globals.json');
 			break;
 
 		case "/client/game/profile/list":
-			output = utility.readJson('data/list.json');
+			output.message = utility.readJson(utility.getAccountPath() + 'character.json');
 			break;
 
 		case "/client/game/profile/select":
-			output = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+			output.message = '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 			break;
 
 		case "/client/profile/status":
-			output = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
+			output.message = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 			break;
 
 		case "/client/game/keepalive":
-			output = '{"err":0, "errmsg":null, "data":null}';
+			output.message = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/weather":
-			output = getWeather(body);
+			output.message = getWeather();
 			break;
 
 		case "/client/locations":
-			output = utility.readJson('data/locations.json');
+			output.message = utility.readJson('data/configs/locations.json');
 			break;
 
 		case "/client/handbook/templates":
-			output = utility.readJson('data/templates.json');
+			output.message = utility.readJson('data/configs/templates.json');
 			break;
 
 		case "/client/quest/list":
 			bots.generatePlayerScav();
-			output = utility.readJson('data/questList.json');
+			output.message = utility.readJson('data/configs/questList.json');
 			break;
 
 		case "/client/getMetricsConfig":
-			output = utility.readJson('data/metricsConfig.json');
+			output.message = utility.readJson('data/configs/metricsConfig.json');
 			break;
 
 		case "/client/putMetrics":
-			output = '{"err":0, "errmsg":null, "data":null}';
+			output.message = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/game/bot/generate":
-			output = JSON.stringify( {"err": 0,"errmsg": null,"data": bots.generate(JSON.parse(body)) } );
+			output.message = JSON.stringify( {"err": 0,"errmsg": null,"data": bots.generate(JSON.parse(body)) } );
 			break;
 
 		case "/client/trading/api/getTradersList":
-			output = getTraders();
+			output.message = getTraders();
 			break;
 
 		case "/client/server/list":
-			output = '{"err":0, "errmsg":null, "data":[{"ip":"'+ ip +'", "port":"' + port + '"}]}';
+			output.message = '{"err":0, "errmsg":null, "data":[{"ip":"'+ ip +'", "port":"' + port + '"}]}';
 			break;
 
 		case "/client/ragfair/search":
-			output = ragfair.getOffers(info);
+			output.message = ragfair.getOffers(info);
 			break;
 
 		case "/client/match/available":
-			output = '{"err":0, "errmsg":null, "data":true}';
+			output.message = '{"err":0, "errmsg":null, "data":true}';
 			break;
 
 		case "/client/match/join":
-			output = joinMatch(body);
+			output.message = joinMatch(body);
 			break;
 
 		case "/client/match/exit":
-			output = '{"err":0, "errmsg":null, "data":null}';
+			output.message = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/chatServer/list":
-			output = '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
+			output.message = '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
 			break;
 
 		case "/client/game/profile/nickname/change":
-			output = changeNickname(body);
+			output.message = changeNickname(body);
 			break;
 			
 		case "/favicon.ico":

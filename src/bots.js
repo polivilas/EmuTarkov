@@ -4,13 +4,13 @@ var utility = require('./utility.js');
 var settings = require('./settings.js');
 
 var botSettings = settings.getBotSettings();
-var items = JSON.parse(utility.readJson('data/items.json'));
-var presets = JSON.parse(utility.readJson("data/bots/botSettings.json"));
-var weaponPresets = JSON.parse(utility.readJson("data/bots/botWeapons.json"));
-var names = JSON.parse(utility.readJson("data/bots/botNames.json")); 
+var items = JSON.parse(utility.readJson('data/configs/items.json'));
+var presets = JSON.parse(utility.readJson("data/configs/bots/botSettings.json"));
+var weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
+var names = JSON.parse(utility.readJson("data/configs/bots/botNames.json")); 
 
 function generateBotBossKilla(params) {
-	var boss = JSON.parse(utility.readJson("data/bots/botBossKilla.json"));
+	var boss = JSON.parse(utility.readJson("data/configs/bots/botBossKilla.json"));
 
 	boss.Info.Settings.Role = params.Role;
 	boss.Info.Settings.BotDifficulty = params.Difficulty;
@@ -19,7 +19,7 @@ function generateBotBossKilla(params) {
 }
 
 function generateBotBossBully(params) {
-	var boss = JSON.parse(utility.readJson("data/bots/botBossBully.json"));
+	var boss = JSON.parse(utility.readJson("data/configs/bots/botBossBully.json"));
 
 	boss.Info.Settings.Role = params.Role;
 	boss.Info.Settings.BotDifficulty = params.Difficulty;
@@ -405,7 +405,7 @@ function getRandomFullName() {
 } 
 
 function generateBaseBot(params) {
-	var bot = JSON.parse(utility.readJson("data/bots/botBase.json"));
+	var bot = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
 	var internalId = utility.getRandomIntEx(10000);
 
 	// set nickname
@@ -617,14 +617,14 @@ function generate(databots) {
 }
 
 function generatePlayerScav() {
-	var profile = JSON.parse(utility.readJson('data/list.json'));
+	var character = JSON.parse(utility.readJson(utility.getAccountPath() + 'character.json'));
 	var playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]})
 	
 	playerscav[0].Info.Settings = {};
 	playerscav[0]._id = "5c71b934354682353958e983";
-	profile.data[0] = playerscav[0];
+	character.data[0] = playerscav[0];
 	
-	utility.writeJson('data/list.json', profile );
+	utility.writeJson(utility.getAccountPath() + 'character.json', character);
 }
 
 module.exports.generate = generate;

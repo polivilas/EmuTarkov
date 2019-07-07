@@ -7,12 +7,12 @@
 			"aid": 0,
 			"savage": null,
 			"Info": {
-				"Nickname": "Макс Воробьёв",
-				"LowerNickname": "scav6783",
+				"Nickname": "Василий Щербаков",
+				"LowerNickname": "scav1699",
 				"Side": "savage",
-				"Voice": "Scav_1",
+				"Voice": "Scav_3",
 				"Level": 1,
-				"Experience": 4121290,
+				"Experience": 1313256,
 				"RegistrationDate": 0,
 				"GameVersion": "",
 				"AccountType": 0,
@@ -26,15 +26,15 @@
 			},
 			"Customization": {
 				"Head": {
-					"path": "assets/content/characters/character/prefabs/wild_head_1.bundle",
+					"path": "assets/content/characters/character/prefabs/head_boss_killa.bundle",
 					"rcid": null
 				},
 				"Body": {
-					"path": "assets/content/characters/character/prefabs/wild_dealmaker_body.bundle",
+					"path": "assets/content/characters/character/prefabs/wild_body_1.bundle",
 					"rcid": ""
 				},
 				"Feet": {
-					"path": "assets/content/characters/character/prefabs/wild_security_feet_1.bundle",
+					"path": "assets/content/characters/character/prefabs/bear_feet.bundle",
 					"rcid": null
 				},
 				"Hands": {
@@ -54,44 +54,44 @@
 				"BodyParts": {
 					"Head": {
 						"Health": {
-							"Current": 37,
-							"Maximum": 37
+							"Current": 41,
+							"Maximum": 41
 						}
 					},
 					"Chest": {
 						"Health": {
-							"Current": 85,
-							"Maximum": 85
+							"Current": 77,
+							"Maximum": 77
 						}
 					},
 					"Stomach": {
 						"Health": {
-							"Current": 73,
-							"Maximum": 73
+							"Current": 69,
+							"Maximum": 69
 						}
 					},
 					"LeftArm": {
 						"Health": {
-							"Current": 68,
-							"Maximum": 68
+							"Current": 52,
+							"Maximum": 52
 						}
 					},
 					"RightArm": {
 						"Health": {
-							"Current": 66,
-							"Maximum": 66
+							"Current": 51,
+							"Maximum": 51
 						}
 					},
 					"LeftLeg": {
 						"Health": {
-							"Current": 64,
-							"Maximum": 64
+							"Current": 55,
+							"Maximum": 55
 						}
 					},
 					"RightLeg": {
 						"Health": {
-							"Current": 62,
-							"Maximum": 62
+							"Current": 73,
+							"Maximum": 73
 						}
 					}
 				}
@@ -121,42 +121,78 @@
 						"_tpl": "5963866286f7747bf429b572"
 					},
 					{
-						"_id": "TacticalVestScav6783",
-						"_tpl": "5b44cad286f77402a54ae7e5",
+						"_id": "TacticalVestScav1699",
+						"_tpl": "5929a2a086f7744f4b234d43",
 						"parentId": "5c6687d65e9d882c8841f0fd",
 						"slotId": "TacticalVest"
 					},
 					{
-						"_id": "5bd05f1186f774572f181683",
-						"_tpl": "5ba26383d4351e00334c93d9",
+						"_id": "5a88595b86f7741822597734",
+						"_tpl": "5a7ae0c351dfba0017554310",
 						"parentId": "5c6687d65e9d882c8841f0fd",
-						"slotId": "FirstPrimaryWeapon",
+						"slotId": "Holster",
 						"upd": {
 							"Repairable": {
-								"MaxDurability": 26,
-								"Durability": 14
+								"MaxDurability": 54,
+								"Durability": 19
 							}
 						}
 					},
 					{
-						"_id": "MagazineWeaponScav6783",
-						"_tpl": "5ba264f6d4351e0034777d52",
-						"parentId": "5bd05f1186f774572f181683",
+						"_id": "5a88665a86f774213552aa58",
+						"_tpl": "5a6b5ed88dc32e000c52ec86",
+						"parentId": "5a88595b86f7741822597734",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5a88680c86f77439ae3233d5",
+						"_tpl": "5a6b59a08dc32e000b452fb7",
+						"parentId": "5a88665a86f774213552aa58",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5a88595b86f7741822597748",
+						"_tpl": "5a71e4f48dc32e001207fb26",
+						"parentId": "5a88595b86f7741822597734",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5a886a6186f77439ae323423",
+						"_tpl": "5a7d912f159bd400165484f3",
+						"parentId": "5a88595b86f7741822597748",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5a886a6186f77439ae323424",
+						"_tpl": "5a7d9104159bd400134c8c21",
+						"parentId": "5a88595b86f7741822597748",
+						"slotId": "mod_sight_front"
+					},
+					{
+						"_id": "5a886a6186f77439ae323425",
+						"_tpl": "5a71e1868dc32e00094b97f3",
+						"parentId": "5a88595b86f7741822597748",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "MagazineWeaponScav1699",
+						"_tpl": "5a718da68dc32e000d46d264",
+						"parentId": "5a88595b86f7741822597734",
 						"slotId": "mod_magazine"
 					},
 					{
-						"_id": "AmmoMagazine1Scav6783",
-						"_tpl": "5ba26835d4351e0035628ff5",
-						"parentId": "MagazineWeaponScav6783",
+						"_id": "AmmoMagazine1Scav1699",
+						"_tpl": "5c3df7d588a4501f290594e5",
+						"parentId": "MagazineWeaponScav1699",
 						"slotId": "cartridges",
 						"upd": {
-							"StackObjectsCount": 20
+							"StackObjectsCount": 21
 						}
 					},
 					{
-						"_id": "magazine2VestScav6783",
-						"_tpl": "5ba26586d4351e44f824b340",
-						"parentId": "TacticalVestScav6783",
+						"_id": "magazine2VestScav1699",
+						"_tpl": "5a718b548dc32e000d46d262",
+						"parentId": "TacticalVestScav1699",
 						"slotId": "2",
 						"location": {
 							"x": 0,
@@ -165,9 +201,9 @@
 						}
 					},
 					{
-						"_id": "magazine3VestScav6783",
-						"_tpl": "5ba26586d4351e44f824b340",
-						"parentId": "TacticalVestScav6783",
+						"_id": "magazine3VestScav1699",
+						"_tpl": "5a718b548dc32e000d46d262",
+						"parentId": "TacticalVestScav1699",
 						"slotId": "3",
 						"location": {
 							"x": 0,
@@ -176,97 +212,55 @@
 						}
 					},
 					{
-						"_id": "AmmoMagazine2Scav6783",
-						"_tpl": "5ba26835d4351e0035628ff5",
-						"parentId": "magazine2VestScav6783",
+						"_id": "AmmoMagazine2Scav1699",
+						"_tpl": "5c3df7d588a4501f290594e5",
+						"parentId": "magazine2VestScav1699",
 						"slotId": "cartridges",
 						"upd": {
-							"StackObjectsCount": 40
+							"StackObjectsCount": 17
 						}
 					},
 					{
-						"_id": "AmmoMagazine3Scav6783",
-						"_tpl": "5ba26844d4351e00334c9475",
-						"parentId": "magazine3VestScav6783",
+						"_id": "AmmoMagazine3Scav1699",
+						"_tpl": "58864a4f2459770fcc257101",
+						"parentId": "magazine3VestScav1699",
 						"slotId": "cartridges",
 						"upd": {
-							"StackObjectsCount": 40
+							"StackObjectsCount": 17
 						}
 					},
 					{
-						"_id": "AmmoFree2Scav6783",
-						"_tpl": "5ba2678ad4351e44f824b344",
-						"parentId": "TacticalVestScav6783",
+						"_id": "AmmoFree2Scav1699",
+						"_tpl": "5c925fa22e221601da359b7b",
+						"parentId": "TacticalVestScav1699",
 						"slotId": "1",
 						"upd": {
-							"StackObjectsCount": 23
+							"StackObjectsCount": 17
 						}
 					},
 					{
-						"_id": "5bd05f1186f774572f181685",
-						"_tpl": "5ba26acdd4351e003562908e",
-						"parentId": "5bd05f1186f774572f181683",
-						"slotId": "mod_muzzle"
-					},
-					{
-						"_id": "5bd05f1186f774572f181686",
-						"_tpl": "5ba26ae8d4351e00367f9bdb",
-						"parentId": "5bd05f1186f774572f181685",
-						"slotId": "mod_muzzle"
-					},
-					{
-						"_id": "5bd05f1186f774572f181687",
-						"_tpl": "58d39d3d86f77445bb794ae7",
-						"parentId": "5bd05f1186f774572f181683",
-						"slotId": "mod_scope"
-					},
-					{
-						"_id": "5bd05f1186f774572f181688",
-						"_tpl": "58d39b0386f77443380bf13c",
-						"parentId": "5bd05f1186f774572f181687",
-						"slotId": "mod_scope"
-					},
-					{
-						"_id": "5bd05f1186f774572f181689",
-						"_tpl": "58d399e486f77442e0016fe7",
-						"parentId": "5bd05f1186f774572f181688",
-						"slotId": "mod_scope"
-					},
-					{
-						"_id": "5bd05f1186f774572f18168a",
-						"_tpl": "544909bb4bdc2d6f028b4577",
-						"parentId": "5bd05f1186f774572f181683",
-						"slotId": "mod_tactical_000"
-					},
-					{
-						"_id": "5bd05f1186f774572f18168b",
-						"_tpl": "57d17e212459775a1179a0f5",
-						"parentId": "5bd05f1186f774572f181683",
-						"slotId": "mod_tactical_002"
-					},
-					{
-						"_id": "5bd05f1186f774572f18168c",
-						"_tpl": "57d17c5e2459775a5c57d17d",
-						"parentId": "5bd05f1186f774572f18168b",
-						"slotId": "mod_flashlight"
-					},
-					{
-						"_id": "5bd05f1186f774572f18168d",
-						"_tpl": "5bcf0213d4351e0085327c17",
-						"parentId": "5bd05f1186f774572f181683",
-						"slotId": "mod_stock"
-					},
-					{
-						"_id": "ScabbardScav6783",
-						"_tpl": "54491bb74bdc2d09088b4567",
+						"_id": "ScabbardScav1699",
+						"_tpl": "5c0116620db834001808a647",
 						"parentId": "5c6687d65e9d882c8841f0fd",
 						"slotId": "Scabbard"
 					},
 					{
-						"_id": "HeadWearScav6783",
-						"_tpl": "5b4329075acfc400153b78ff",
+						"_id": "EyeWearScav1699",
+						"_tpl": "5aa2b986e5b5b00014028f4c",
 						"parentId": "5c6687d65e9d882c8841f0fd",
-						"slotId": "Headwear"
+						"slotId": "Eyewear"
+					},
+					{
+						"_id": "ArmorVestScav1699",
+						"_tpl": "5c0e57ba86f7747fa141986d",
+						"parentId": "5c6687d65e9d882c8841f0fd",
+						"slotId": "ArmorVest",
+						"upd": {
+							"Repairable": {
+								"MaxDurability": 55,
+								"Durability": 47
+							}
+						}
 					}
 				],
 				"equipment": "5c6687d65e9d882c8841f0fd",
@@ -279,326 +273,326 @@
 				"Common": [
 					{
 						"Id": "Endurance",
-						"Progress": 1011,
-						"MaxAchieved": 1011,
+						"Progress": 3706,
+						"MaxAchieved": 3706,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Strength",
-						"Progress": 3351,
-						"MaxAchieved": 3351,
+						"Progress": 2527,
+						"MaxAchieved": 2527,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Vitality",
-						"Progress": 3075,
-						"MaxAchieved": 3075,
+						"Progress": 816,
+						"MaxAchieved": 816,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Health",
-						"Progress": 4996,
-						"MaxAchieved": 4996,
+						"Progress": 3462,
+						"MaxAchieved": 3462,
 						"LastAccess": 0
 					},
 					{
 						"Id": "StressResistance",
-						"Progress": 1277,
-						"MaxAchieved": 1277,
+						"Progress": 4173,
+						"MaxAchieved": 4173,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Metabolism",
-						"Progress": 231,
-						"MaxAchieved": 231,
+						"Progress": 4580,
+						"MaxAchieved": 4580,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Immunity",
-						"Progress": 497,
-						"MaxAchieved": 497,
+						"Progress": 110,
+						"MaxAchieved": 110,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Perception",
-						"Progress": 2147,
-						"MaxAchieved": 2147,
+						"Progress": 2263,
+						"MaxAchieved": 2263,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Intellect",
-						"Progress": 395,
-						"MaxAchieved": 395,
+						"Progress": 357,
+						"MaxAchieved": 357,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Attention",
-						"Progress": 1245,
-						"MaxAchieved": 1245,
+						"Progress": 4906,
+						"MaxAchieved": 4906,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Charisma",
-						"Progress": 1564,
-						"MaxAchieved": 1564,
+						"Progress": 2779,
+						"MaxAchieved": 2779,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Memory",
-						"Progress": 840,
-						"MaxAchieved": 840,
+						"Progress": 1159,
+						"MaxAchieved": 1159,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Pistol",
-						"Progress": 2593,
-						"MaxAchieved": 2593,
+						"Progress": 4948,
+						"MaxAchieved": 4948,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Revolver",
-						"Progress": 1994,
-						"MaxAchieved": 1994,
+						"Progress": 2554,
+						"MaxAchieved": 2554,
 						"LastAccess": 0
 					},
 					{
 						"Id": "SMG",
-						"Progress": 3584,
-						"MaxAchieved": 3584,
+						"Progress": 651,
+						"MaxAchieved": 651,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Assault",
-						"Progress": 713,
-						"MaxAchieved": 713,
+						"Progress": 1493,
+						"MaxAchieved": 1493,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Shotgun",
-						"Progress": 2321,
-						"MaxAchieved": 2321,
+						"Progress": 1037,
+						"MaxAchieved": 1037,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Sniper",
-						"Progress": 1926,
-						"MaxAchieved": 1926,
+						"Progress": 2788,
+						"MaxAchieved": 2788,
 						"LastAccess": 0
 					},
 					{
 						"Id": "LMG",
-						"Progress": 1544,
-						"MaxAchieved": 1544,
+						"Progress": 1141,
+						"MaxAchieved": 1141,
 						"LastAccess": 0
 					},
 					{
 						"Id": "HMG",
-						"Progress": 4836,
-						"MaxAchieved": 4836,
+						"Progress": 2322,
+						"MaxAchieved": 2322,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Launcher",
-						"Progress": 3841,
-						"MaxAchieved": 3841,
+						"Progress": 539,
+						"MaxAchieved": 539,
 						"LastAccess": 0
 					},
 					{
 						"Id": "AttachedLauncher",
-						"Progress": 2290,
-						"MaxAchieved": 2290,
+						"Progress": 3220,
+						"MaxAchieved": 3220,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Throwing",
-						"Progress": 1501,
-						"MaxAchieved": 1501,
+						"Progress": 1362,
+						"MaxAchieved": 1362,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Melee",
-						"Progress": 1853,
-						"MaxAchieved": 1853,
+						"Progress": 4234,
+						"MaxAchieved": 4234,
 						"LastAccess": 0
 					},
 					{
 						"Id": "DMR",
-						"Progress": 1567,
-						"MaxAchieved": 1567,
+						"Progress": 4561,
+						"MaxAchieved": 4561,
 						"LastAccess": 0
 					},
 					{
 						"Id": "DrawMaster",
-						"Progress": 2524,
-						"MaxAchieved": 2524,
+						"Progress": 4187,
+						"MaxAchieved": 4187,
 						"LastAccess": 0
 					},
 					{
 						"Id": "AimMaster",
-						"Progress": 4541,
-						"MaxAchieved": 4541,
+						"Progress": 4563,
+						"MaxAchieved": 4563,
 						"LastAccess": 0
 					},
 					{
 						"Id": "RecoilControl",
-						"Progress": 2393,
-						"MaxAchieved": 2393,
+						"Progress": 757,
+						"MaxAchieved": 757,
 						"LastAccess": 0
 					},
 					{
 						"Id": "TroubleShooting",
-						"Progress": 575,
-						"MaxAchieved": 575,
+						"Progress": 2277,
+						"MaxAchieved": 2277,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Sniping",
-						"Progress": 206,
-						"MaxAchieved": 206,
+						"Progress": 2553,
+						"MaxAchieved": 2553,
 						"LastAccess": 0
 					},
 					{
 						"Id": "CovertMovement",
-						"Progress": 4188,
-						"MaxAchieved": 4188,
+						"Progress": 4249,
+						"MaxAchieved": 4249,
 						"LastAccess": 0
 					},
 					{
 						"Id": "ProneMovement",
-						"Progress": 3267,
-						"MaxAchieved": 3267,
+						"Progress": 3215,
+						"MaxAchieved": 3215,
 						"LastAccess": 0
 					},
 					{
 						"Id": "FirstAid",
-						"Progress": 4376,
-						"MaxAchieved": 4376,
+						"Progress": 3943,
+						"MaxAchieved": 3943,
 						"LastAccess": 0
 					},
 					{
 						"Id": "FieldMedicine",
-						"Progress": 1468,
-						"MaxAchieved": 1468,
+						"Progress": 3490,
+						"MaxAchieved": 3490,
 						"LastAccess": 0
 					},
 					{
 						"Id": "LightVests",
-						"Progress": 1067,
-						"MaxAchieved": 1067,
+						"Progress": 3545,
+						"MaxAchieved": 3545,
 						"LastAccess": 0
 					},
 					{
 						"Id": "HeavyVests",
-						"Progress": 4213,
-						"MaxAchieved": 4213,
+						"Progress": 4474,
+						"MaxAchieved": 4474,
 						"LastAccess": 0
 					},
 					{
 						"Id": "WeaponModding",
-						"Progress": 1412,
-						"MaxAchieved": 1412,
+						"Progress": 1497,
+						"MaxAchieved": 1497,
 						"LastAccess": 0
 					},
 					{
 						"Id": "AdvancedModding",
-						"Progress": 1506,
-						"MaxAchieved": 1506,
+						"Progress": 516,
+						"MaxAchieved": 516,
 						"LastAccess": 0
 					},
 					{
 						"Id": "NightOps",
-						"Progress": 1190,
-						"MaxAchieved": 1190,
+						"Progress": 4465,
+						"MaxAchieved": 4465,
 						"LastAccess": 0
 					},
 					{
 						"Id": "SilentOps",
-						"Progress": 894,
-						"MaxAchieved": 894,
+						"Progress": 3387,
+						"MaxAchieved": 3387,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Lockpicking",
-						"Progress": 1896,
-						"MaxAchieved": 1896,
+						"Progress": 1193,
+						"MaxAchieved": 1193,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Search",
-						"Progress": 3210,
-						"MaxAchieved": 3210,
+						"Progress": 4725,
+						"MaxAchieved": 4725,
 						"LastAccess": 0
 					},
 					{
 						"Id": "WeaponTreatment",
-						"Progress": 3097,
-						"MaxAchieved": 3097,
+						"Progress": 1803,
+						"MaxAchieved": 1803,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Freetrading",
-						"Progress": 4476,
-						"MaxAchieved": 4476,
+						"Progress": 4991,
+						"MaxAchieved": 4991,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Auctions",
-						"Progress": 2327,
-						"MaxAchieved": 2327,
+						"Progress": 4762,
+						"MaxAchieved": 4762,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Cleanoperations",
-						"Progress": 1480,
-						"MaxAchieved": 1480,
+						"Progress": 4251,
+						"MaxAchieved": 4251,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Barter",
-						"Progress": 2150,
-						"MaxAchieved": 2150,
+						"Progress": 2967,
+						"MaxAchieved": 2967,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Shadowconnections",
-						"Progress": 4369,
-						"MaxAchieved": 4369,
+						"Progress": 1034,
+						"MaxAchieved": 1034,
 						"LastAccess": 0
 					},
 					{
 						"Id": "Taskperformance",
-						"Progress": 1358,
-						"MaxAchieved": 1358,
+						"Progress": 4041,
+						"MaxAchieved": 4041,
 						"LastAccess": 0
 					},
 					{
 						"Id": "BearAssaultoperations",
-						"Progress": 4572,
-						"MaxAchieved": 4572,
+						"Progress": 2683,
+						"MaxAchieved": 2683,
 						"LastAccess": 0
 					},
 					{
 						"Id": "BearAuthority",
-						"Progress": 1674,
-						"MaxAchieved": 1674,
+						"Progress": 3732,
+						"MaxAchieved": 3732,
 						"LastAccess": 0
 					},
 					{
 						"Id": "BearAksystems",
-						"Progress": 4559,
-						"MaxAchieved": 4559,
+						"Progress": 4324,
+						"MaxAchieved": 4324,
 						"LastAccess": 0
 					},
 					{
 						"Id": "BearHeavycaliber",
-						"Progress": 3211,
-						"MaxAchieved": 3211,
+						"Progress": 586,
+						"MaxAchieved": 586,
 						"LastAccess": 0
 					},
 					{
 						"Id": "BearRawpower",
-						"Progress": 1384,
-						"MaxAchieved": 1384,
+						"Progress": 2623,
+						"MaxAchieved": 2623,
 						"LastAccess": 0
 					}
 				],

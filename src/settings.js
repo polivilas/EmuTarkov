@@ -2,7 +2,7 @@
 
 var utility = require('./utility.js');
 
-var data = JSON.parse(utility.readJson("data/settings.json"));
+var data = JSON.parse(utility.readJson("data/config.json"));
 
 function getServerSettings() {
     return data.server;

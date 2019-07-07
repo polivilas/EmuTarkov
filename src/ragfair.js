@@ -2,9 +2,9 @@
 
 var utility = require('./utility.js');
 
-var items = JSON.parse(utility.readJson("data/items.json"));
-var search = JSON.parse(utility.readJson("data/ragfair/search.json"));
-var offerBase = JSON.parse(utility.readJson("data/ragfair/offerBase.json"));
+var items = JSON.parse(utility.readJson("data/configs/items.json"));
+var search = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
+var offerBase = JSON.parse(utility.readJson("data/configs/ragfair/offerBase.json"));
 
 function getOffers(request) {
 	var response = search;
@@ -12,7 +12,7 @@ function getOffers(request) {
 	 //request an item or a category of item
 	if (request.handbookId != "") {
 		var isCateg = false;
-		var handbook = JSON.parse(utility.readJson('data/templates.json'));
+		var handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
 		for (var categ of handbook.data.Categories) {
 			if (categ.Id == request.handbookId) {	
@@ -22,7 +22,7 @@ function getOffers(request) {
         
 				for (var item of handbook.data.Items) {
 					if (item.ParentId == categ.Id) {
-						response.data.offers.push(CreateOffer(item.Id));
+						response.data.offers.push(createOffer(item.Id));
 					}
 				}
 
@@ -30,7 +30,7 @@ function getOffers(request) {
 					if (categ2.ParentId == sustain) {
 						for (var item of handbook.data.Items) {
 							if (item.ParentId == categ2.Id) {
-								response.data.offers.push(CreateOffer(item.Id));
+								response.data.offers.push(createOffer(item.Id));
 							}
 						}
 					}
@@ -44,11 +44,11 @@ function getOffers(request) {
 			for (var curItem in items.data) {
 				if (curItem == request.handbookId) {
 					if (items.data[curItem]._name.substring(0,7) == "weapon_") {	
-						var weaponPresets = JSON.parse(utility.readJson('data/bots/botWeapons.json'));
+						var weaponPresets = JSON.parse(utility.readJson('data/configs/bots/botWeapons.json'));
             
 						for (var weaponPreset of weaponPresets) {
 							if (weaponPreset._items[0]._tpl == items.data[curItem]._id ) { 
-								response.data.offers.push(CreateOfferPreset(weaponPreset._items[0]._tpl , weaponPreset._items));
+								response.data.offers.push(createOfferPreset(weaponPreset._items[0]._tpl , weaponPreset._items));
 							}
 						}
 					}
@@ -59,7 +59,7 @@ function getOffers(request) {
 				}
 			}
 
-			response.data.offers.push(CreateOffer(tmpId));
+			response.data.offers.push(createOffer(tmpId));
 		}	
 	}
 
@@ -69,7 +69,7 @@ function getOffers(request) {
 		for (var itemSlot of itemLink._props.Slots) {  
 			for (var itemSlotFilter of itemSlot._props.filters) {
 				for (var mod of itemSlotFilter.Filter) {
-					var offer = CreateOffer(mod);
+					var offer = createOffer(mod);
 
 					response.data.offers.push(offer);
 				}
