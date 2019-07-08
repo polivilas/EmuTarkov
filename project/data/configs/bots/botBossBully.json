@@ -1,0 +1,560 @@
+{
+    "_id": "BossReshala",
+    "aid": 0,
+    "savage": null,
+    "Info": {
+        "Nickname": "Reshala",
+        "LowerNickname": "reshala",
+        "Side": "savage",
+        "Voice": "Scav_5",
+        "Level": 1,
+        "Experience": 0,
+        "RegistrationDate": 0,
+        "GameVersion": "",
+        "AccountType": 0,
+        "MemberCategory": 0,
+        "lockedMoveCommands": false,
+        "LastTimePlayedAsSavage": 0,
+        "Settings": {
+            "Role": "bossBully",
+            "BotDifficulty": "hard",
+            "Experience": -1
+        },
+        "NeedWipe": false,
+        "GlobalWipe": false,
+        "NicknameChangeDate": 0
+    },
+    "Customization": {
+        "Head": {
+            "path": "assets/content/characters/character/prefabs/wild_dealmaker_head.bundle",
+            "rcid": null
+        },
+        "Body": {
+            "path": "assets/content/characters/character/prefabs/wild_dealmaker_body.bundle",
+            "rcid": ""
+        },
+        "Feet": {
+            "path": "assets/content/characters/character/prefabs/wild_dealmaker_feet.bundle",
+            "rcid": null
+        },
+        "Hands": {
+            "path": "assets/content/hands/wild/wild_body_3_firsthands.bundle",
+            "rcid": null
+        }
+    },
+    "Health": {
+        "Hydration": {
+            "Current": 100,
+            "Maximum": 100
+        },
+        "Energy": {
+            "Current": 100,
+            "Maximum": 100
+        },
+        "BodyParts": {
+            "Head": {
+                "Health": {
+                    "Current": 62,
+                    "Maximum": 62
+                }
+            },
+            "Chest": {
+                "Health": {
+                    "Current": 138,
+                    "Maximum": 138
+                }
+            },
+            "Stomach": {
+                "Health": {
+                    "Current": 120,
+                    "Maximum": 120
+                }
+            },
+            "LeftArm": {
+                "Health": {
+                    "Current": 100,
+                    "Maximum": 100
+                }
+            },
+            "RightArm": {
+                "Health": {
+                    "Current": 100,
+                    "Maximum": 100
+                }
+            },
+            "LeftLeg": {
+                "Health": {
+                    "Current": 110,
+                    "Maximum": 110
+                }
+            },
+            "RightLeg": {
+                "Health": {
+                    "Current": 110,
+                    "Maximum": 110
+                }
+            }
+        }
+    },
+    "Inventory": {
+        "items": [
+            {
+                "_id": "5c6687d65e9d882c8841f0fd",
+                "_tpl": "55d7217a4bdc2d86028b456d"
+            },
+            {
+                "_id": "5c6687d65e9d882c8841f121",
+                "_tpl": "5af99e9186f7747c447120b8",
+                "parentId": "5c6687d65e9d882c8841f0fd",
+                "slotId": "Pockets"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3514",
+                "_tpl": "5b3b713c5acfc4330140bd8d",
+                "parentId": "5c6687d65e9d882c8841f0fd",
+                "slotId": "Holster"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3515",
+                "_tpl": "5b3baf8f5acfc40dc5296692",
+                "parentId": "5b44abe986f774283e2e3514",
+                "slotId": "mod_barrel"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3516",
+                "_tpl": "5b3cadf35acfc400194776a0",
+                "parentId": "5b44abe986f774283e2e3514",
+                "slotId": "mod_pistol_grip"
+            },
+            {
+                "_id": "5b44abe986f774283e2e3517",
+                "_tpl": "571a29dc2459771fb2755a6a",
+                "parentId": "5b44abe986f774283e2e3514",
+                "slotId": "mod_magazine"
+            },
+            {
+                "_id": "ammoMagWeaponReshala",
+                "_tpl": "573602322459776445391df1",
+                "parentId": "5b44abe986f774283e2e3517",
+                "slotId": "cartridges",
+                "upd": {
+                    "StackObjectsCount": 8
+                }
+            },
+            {
+                "_id": "grenade1Reshala",
+                "_tpl": "5710c24ad2720bc3458b45a3",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket1",
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
+            },
+            {
+                "_id": "grenade2Reshala",
+                "_tpl": "5710c24ad2720bc3458b45a3",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket2",
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
+            },
+            {
+                "_id": "meds3Reshala",
+                "_tpl": "590c678286f77426c9660122",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket3",
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
+            },
+            {
+                "_id": "mag4reshala",
+                "_tpl": "571a29dc2459771fb2755a6a",
+                "parentId": "5c6687d65e9d882c8841f121",
+                "slotId": "pocket4",
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
+            },
+            {
+                "_id": "ammoMag4Reshala",
+                "_tpl": "573602322459776445391df1",
+                "parentId": "mag4reshala",
+                "slotId": "cartridges",
+                "upd": {
+                    "StackObjectsCount": 8
+                }
+            },
+            {
+                "_id": "5c6687d65e9d882c8841f0fc",
+                "_tpl": "566abbc34bdc2d92178b4576"
+            },
+            {
+                "_id": "5c6687d65e9d882c8841f0ff",
+                "_tpl": "5963866b86f7747bfa1c4462"
+            },
+            {
+                "_id": "5c6687d65e9d882c8841f0fe",
+                "_tpl": "5963866286f7747bf429b572"
+            }
+        ],
+        "equipment": "5c6687d65e9d882c8841f0fd",
+        "stash": "5c6687d65e9d882c8841f0fc",
+        "questRaidItems": "5c6687d65e9d882c8841f0fe",
+        "questStashItems": "5c6687d65e9d882c8841f0ff",
+        "fastPanel": {}
+    },
+    "Skills": {
+        "Common": [
+            {
+                "Id": "Endurance",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Strength",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Vitality",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Health",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "StressResistance",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Metabolism",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Immunity",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Perception",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Intellect",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Attention",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Charisma",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Memory",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Pistol",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Revolver",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "SMG",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Assault",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Shotgun",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Sniper",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "LMG",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "HMG",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Launcher",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "AttachedLauncher",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Throwing",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Melee",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "DMR",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "DrawMaster",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "AimMaster",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "RecoilControl",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "TroubleShooting",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Sniping",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "CovertMovement",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "ProneMovement",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "FirstAid",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "FieldMedicine",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "LightVests",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "HeavyVests",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "WeaponModding",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "AdvancedModding",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "NightOps",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "SilentOps",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Lockpicking",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Search",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "WeaponTreatment",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Freetrading",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Auctions",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Cleanoperations",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Barter",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Shadowconnections",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "Taskperformance",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "BearAssaultoperations",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "BearAuthority",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "BearAksystems",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "BearHeavycaliber",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            },
+            {
+                "Id": "BearRawpower",
+                "Progress": 0,
+                "MaxAchieved": 0,
+                "LastAccess": 0
+            }
+        ],
+        "Mastering": [],
+        "Points": 0
+    },
+    "Stats": {
+        "SessionCounters": {
+            "Items": []
+        },
+        "OverallCounters": {
+            "Items": []
+        }
+    },
+    "Encyclopedia": null,
+    "ConditionCounters": {
+        "Counters": []
+    },
+    "BackendCounters": {},
+    "InsuredItems": []
+}

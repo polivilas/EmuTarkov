@@ -1,4 +1,4 @@
 @echo off
 TITLE Installing packages
-npm install
+npm install nexe
 pause
