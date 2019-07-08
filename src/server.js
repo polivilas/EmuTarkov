@@ -3,13 +3,33 @@
 const fs = require('fs');
 const http = require('http');
 const zlib = require('zlib');
-const settings = require('./settings.js');
+const os = require('os');
+const utility =  require('./utility.js');
 const profile = require('./profile.js');
 const item = require('./item.js');
 const response = require('./response.js');
 
+var settings = JSON.parse(utility.readJson("data/config.json"));
+
+function getLocalIpAddress() {
+	let address = "127.0.0.1";
+    let ifaces = os.networkInterfaces();
+
+	for (let dev in ifaces) {
+		let iface = ifaces[dev].filter(function(details) {
+			return details.family === 'IPv4' && details.internal === false;
+		});
+
+		if (iface.length > 0) {
+			address = iface[0].address;
+		}
+	}
+
+	return address;
+}
+
 function getCookies(req) {
-	let found = {}
+	let found = {};
 	let cookies = req.headers.cookie;
 
 	if (cookies) {
@@ -43,6 +63,9 @@ function sendImage(resp, file) {
 
 function sendResponse(req, resp, body) {
 	let output = "";
+
+	// reset item output
+	item.resetOutput();
 
 	// get active profile
 	profile.setActiveID(getCookies(req)['PHPSESSID']);
@@ -80,11 +103,8 @@ function handleRequest(req, resp) {
 	// separate request in the log
 	console.log("------------------------------------------------------------------------------------------------------------------------");
 	
-	// reset item output
-	item.resetOutput();
-	
 	// get the IP address of the client
-	console.log("IP address:" + req.connection.remoteAddress, req.url);
+	console.log("IP address: " + req.connection.remoteAddress, req.url);
 
 	// handle the request
 	console.log("Request method: " + req.method);
@@ -103,17 +123,26 @@ function handleRequest(req, resp) {
 
 function start() {
 	let server = http.createServer();
-	let port = settings.getServerSettings().port;
+	let ip = getLocalIpAddress();
+	let port = settings.server.port;
 
+	// set the ip and backendurl
+	settings.server.ip = ip;
+	settings.server.backendUrl = "http://" + ip + ":" + port;
+	utility.writeJson("data/config.json", settings);
+
+	// check if port is already being listened to
 	server.on('error', function () {
 		console.log("Port " + port + " is already in use");
 		return;
     });
 
-	server.listen(port, function() {
-		console.log("Listening on port: " + port);
+	// listen to port
+	server.listen(port, ip, function() {
+		console.log("Listening on port " + port + " with IP " + ip);
 	});
 	
+	// handle request
 	server.on('request', function(req, resp) {
 		handleRequest(req, resp);
 	});

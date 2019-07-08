@@ -1,21 +1,21 @@
 "use strict";
 
 const utility = require('./utility.js');
-const settings = require('./settings.js');
 const profile = require('./profile.js');
 const item = require('./item.js');
 const ragfair = require('./ragfair.js');
 const bots = require('./bots.js');
 
+var settings = JSON.parse(utility.readJson("data/config.json"));
+var backendUrl = settings.server.backendUrl;
+var ip = settings.server.ip;
+var port = settings.server.port;
 var assort = "/client/trading/api/getTraderAssort/";
 var prices = "/client/trading/api/getUserAssortPrice/trader/";
 var getTrader = "/client/trading/api/getTrader/";
-var serverSettings = settings.getServerSettings();
-var backendUrl = serverSettings.backendUrl;
-var ip = serverSettings.ip;
-var port = serverSettings.port;
 
 function getTraders() {
+	// TODO: USE FS FOR THIS
 	return '{"err": 0,"errmsg": null,"data": ['
 			+ utility.readJson("data/configs/traders/54cb50c76803fa8b248b4571.json") + ', '	// Prapor
 			+ utility.readJson("data/configs/traders/54cb57776803fa99248b456e.json") + ', '	// Therapist
@@ -270,6 +270,8 @@ function get(req, body) {
 		case "/client/match/group/status":
 		case "/client/match/group/looking/stop":
 		case "/client/match/group/exit_from_menu":
+		case "/client/game/profile/savage/regenerate":
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		default:

@@ -342,6 +342,35 @@ function healPlayer(tmpList, body) {
 	return "OK";
 }
 
+function addToWishList(tmpList, body) {
+	// check if the item is already in wishlist
+	for (let item in tmpList.data[1].Wishlist) {
+		console.log(item);
+		// don't add the item
+		if (tmpList.data[1].WishList[item].tid == body.templateId) {
+			return "OK";
+		}
+	}
+
+	// add the item to the wishlist
+	tmpList.data[1].WishList.push({"tid": body.templateId});
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
+
+function removeFromWishList(tmpList, body) {
+	// remove the item if it exists
+	for (let item in tmpList.data[1].Wishlist) {
+		console.log(item);
+		if (tmpList.data[1].WishList[item].tid == body.templateId) {
+			tmpList.data[1].WishList.splice(item, 1);
+		}
+	}
+
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
+
 function recheckInventoryFreeSpace(tmpList){
 	let Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
 
@@ -656,6 +685,12 @@ function handleMoving(body) {
 
 		case "Heal":
 			return healPlayer(tmpList, body);
+
+		case "AddToWishList":
+			return addToWishList(tmpList, body);
+
+		case "RemoveFromWishList":
+			return removeFromWishList(tmpList, body);
 
 		case "TradingConfirm":
 			return confirmTrading(tmpList, body);

@@ -2,8 +2,7 @@
     "_id": "BossReshala",
     "aid": 0,
     "savage": null,
-    "Info": 
-    {
+    "Info": {
         "Nickname": "Reshala",
         "LowerNickname": "reshala",
         "Side": "savage",
@@ -16,8 +15,7 @@
         "MemberCategory": 0,
         "lockedMoveCommands": false,
         "LastTimePlayedAsSavage": 0,
-        "Settings": 
-        {
+        "Settings": {
             "Role": "bossBully",
             "BotDifficulty": "hard",
             "Experience": -1
@@ -26,105 +24,80 @@
         "GlobalWipe": false,
         "NicknameChangeDate": 0
     },
-    "Customization": 
-    {
-        "Head": 
-        {
+    "Customization": {
+        "Head": {
             "path": "assets/content/characters/character/prefabs/wild_dealmaker_head.bundle",
             "rcid": null
         },
-        "Body": 
-        {
+        "Body": {
             "path": "assets/content/characters/character/prefabs/wild_dealmaker_body.bundle",
             "rcid": ""
         },
-        "Feet": 
-        {
+        "Feet": {
             "path": "assets/content/characters/character/prefabs/wild_dealmaker_feet.bundle",
             "rcid": null
         },
-        "Hands": 
-        {
+        "Hands": {
             "path": "assets/content/hands/wild/wild_body_3_firsthands.bundle",
             "rcid": null
         }
     },
-    "Health": 
-    {
-        "Hydration": 
-        {
+    "Health": {
+        "Hydration": {
             "Current": 100,
             "Maximum": 100
         },
-        "Energy": 
-        {
+        "Energy": {
             "Current": 100,
             "Maximum": 100
         },
-        "BodyParts": 
-        {
-            "Head": 
-            {
-                "Health": 
-                {
+        "BodyParts": {
+            "Head": {
+                "Health": {
                     "Current": 62,
                     "Maximum": 62
                 }
             },
-            "Chest": 
-            {
-                "Health": 
-                {
+            "Chest": {
+                "Health": {
                     "Current": 138,
                     "Maximum": 138
                 }
             },
-            "Stomach": 
-            {
-                "Health": 
-                {
+            "Stomach": {
+                "Health": {
                     "Current": 120,
                     "Maximum": 120
                 }
             },
-            "LeftArm": 
-            {
-                "Health": 
-                {
+            "LeftArm": {
+                "Health": {
                     "Current": 100,
                     "Maximum": 100
                 }
             },
-            "RightArm": 
-            {
-                "Health": 
-                {
+            "RightArm": {
+                "Health": {
                     "Current": 100,
                     "Maximum": 100
                 }
             },
-            "LeftLeg": 
-            {
-                "Health": 
-                {
+            "LeftLeg": {
+                "Health": {
                     "Current": 110,
                     "Maximum": 110
                 }
             },
-            "RightLeg": 
-            {
-                "Health": 
-                {
+            "RightLeg": {
+                "Health": {
                     "Current": 110,
                     "Maximum": 110
                 }
             }
         }
     },
-    "Inventory": 
-    {
-        "items": 
-        [
+    "Inventory": {
+        "items": [
             {
                 "_id": "5c6687d65e9d882c8841f0fd",
                 "_tpl": "55d7217a4bdc2d86028b456d"
@@ -164,55 +137,74 @@
                 "_tpl": "573602322459776445391df1",
                 "parentId": "5b44abe986f774283e2e3517",
                 "slotId": "cartridges",
-                "upd": {"StackObjectsCount": 8 }
+                "upd": {
+                    "StackObjectsCount": 8
+                }
             },
-            
             {
                 "_id": "grenade1Reshala",
                 "_tpl": "5710c24ad2720bc3458b45a3",
                 "parentId": "5c6687d65e9d882c8841f121",
                 "slotId": "pocket1",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "grenade2Reshala",
                 "_tpl": "5710c24ad2720bc3458b45a3",
                 "parentId": "5c6687d65e9d882c8841f121",
                 "slotId": "pocket2",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "meds3Reshala",
                 "_tpl": "590c678286f77426c9660122",
                 "parentId": "5c6687d65e9d882c8841f121",
                 "slotId": "pocket3",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "mag4reshala",
                 "_tpl": "571a29dc2459771fb2755a6a",
                 "parentId": "5c6687d65e9d882c8841f121",
                 "slotId": "pocket4",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "ammoMag4Reshala",
                 "_tpl": "573602322459776445391df1",
                 "parentId": "mag4reshala",
                 "slotId": "cartridges",
-                "upd": {"StackObjectsCount": 8 }
+                "upd": {
+                    "StackObjectsCount": 8
+                }
             },
             {
-              "_id": "5c6687d65e9d882c8841f0fc",
-              "_tpl": "566abbc34bdc2d92178b4576"
+                "_id": "5c6687d65e9d882c8841f0fc",
+                "_tpl": "566abbc34bdc2d92178b4576"
             },
             {
-              "_id": "5c6687d65e9d882c8841f0ff",
-              "_tpl": "5963866b86f7747bfa1c4462"
+                "_id": "5c6687d65e9d882c8841f0ff",
+                "_tpl": "5963866b86f7747bfa1c4462"
             },
             {
-              "_id": "5c6687d65e9d882c8841f0fe",
-              "_tpl": "5963866286f7747bf429b572"
+                "_id": "5c6687d65e9d882c8841f0fe",
+                "_tpl": "5963866286f7747bf429b572"
             }
         ],
         "equipment": "5c6687d65e9d882c8841f0fd",
@@ -222,8 +214,7 @@
         "fastPanel": {}
     },
     "Skills": {
-        "Common": 
-        [
+        "Common": [
             {
                 "Id": "Endurance",
                 "Progress": 0,
@@ -553,17 +544,17 @@
         "Points": 0
     },
     "Stats": {
-      "SessionCounters": {
-        "Items": []
-      },
-      "OverallCounters": {
-        "Items": []
-      }
+        "SessionCounters": {
+            "Items": []
+        },
+        "OverallCounters": {
+            "Items": []
+        }
     },
     "Encyclopedia": null,
     "ConditionCounters": {
-      "Counters": []
+        "Counters": []
     },
     "BackendCounters": {},
     "InsuredItems": []
-}   
+}

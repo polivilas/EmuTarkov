@@ -16,11 +16,11 @@ function getOffers(request) {
 			// find the category in the handbook
 			if (categ.Id == request.handbookId) {
 				isCateg = true;
-
+				
 				// list all item of the category
 				for (let item of handbook.data.Items) {
 					if (item.ParentId == categ.Id) {
-						response.data.offers.push(createOffer(item.Id));
+						response.data.offers.push(createOffer(item.Id,item.Price));
 					}
 				}
 
@@ -29,7 +29,7 @@ function getOffers(request) {
 					if (categ2.ParentId == categ.Id) {
 						for (let item of handbook.data.Items) {
 							if (item.ParentId == categ2.Id) {
-								response.data.offers.push(createOffer(item.Id));
+								response.data.offers.push(createOffer(item.Id,item.Price));
 							}
 						}
 					}
@@ -38,12 +38,12 @@ function getOffers(request) {
 		}
 
 		// its a specific item searched then
-		if (isCateg == false) {	
+		if (isCateg == false) {
 			for (let curItem in items.data) {
 				if (curItem == request.handbookId) {
-					for (let someitem of handbook.data.Items) {	 
-						if (someitem.Id == request.handbookId ) { 
-							response.data.offers.push(createOffer(curItem)); 
+					for (let someitem of handbook.data.Items) {
+						if (someitem.Id == request.handbookId) {
+							response.data.offers.push(createOffer(curItem,someitem.Price)); 
 						} 
 					}
 
@@ -61,9 +61,9 @@ function getOffers(request) {
 			for (let itemSlot of itemLink._props.Slots) {
 				for (let itemSlotFilter of itemSlot._props.filters) {
 					for (let mod of itemSlotFilter.Filter) {
-						for (let someitem of handbook.data.Items) { 
+						for (let someitem of handbook.data.Items) {
 							if (someitem.Id == mod) { 
-								response.data.offers.push(createOffer(mod)); 
+								response.data.offers.push(createOffer(mod,someitem.Price)); 
 							} 
 						}
 					}
@@ -75,11 +75,12 @@ function getOffers(request) {
 	return JSON.stringify(response);
 }
 
-function createOffer(template) {
+function createOffer(template,price) {
 	let offerBase = JSON.parse(utility.readJson("data/configs/ragfair/offerBase.json"));
 
 	offerBase._id = template;
 	offerBase.items[0]._tpl = template;
+	offerBase.requirements[0].count = price;
 
 	return offerBase;
 }
