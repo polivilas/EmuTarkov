@@ -1,5 +1,5 @@
-# EmuTarkov
-Escape From Tarkov backend emulator written in JS.
+# EmuTarkov - Dev Release Creator
+Its an Just Emutarkov Release creator
 
 ## Information
 See https://justemutarkov.github.io
