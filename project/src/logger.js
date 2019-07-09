@@ -12,11 +12,11 @@ console.log = function(data, colorFront, colorBack) {
 
 	// check which colors to generate
     if (typeof colorFront !== "undefined") {
-		colors = [1] = colorFront.toLowerCase();
+		colors[1] = colorFront.toLowerCase();
 	}
 	
 	if (typeof colorBack !== "undefined") {
-		colors = [0] = colorBack.toLowerCase();
+		colors[0] = colorBack.toLowerCase();
 	}
 
 	// generate the colors
