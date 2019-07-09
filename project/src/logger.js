@@ -3,6 +3,12 @@ const path = require('path');
 const util = require('util');
 const utility = require('./utility.js');
 
+// colorData[0] -> front, colorData[1] -> back
+const colorData = [
+	{black: "\x1b[30m", red: "\x1b[31m", green: "\x1b[32m", yellow: "\x1b[33m", blue: "\x1b[34m", magenta: "\x1b[35m", cyan: "\x1b[36m", white: "\x1b[37m"},
+	{black: "\x1b[40m", red: "\x1b[41m", green: "\x1b[42m", yellow: "\x1b[43m", blue: "\x1b[44m", magenta: "\x1b[45m", cyan: "\x1b[46m", white: "\x1b[47m"}
+]
+
 var fileStream = undefined;
 
 printf = console.log; 
@@ -10,58 +16,25 @@ console.log = function(data, colorFront, colorBack) {
 	let setColors = "";
 	let colors = ["", ""];
 
-	// check which colors to generate
+	// check which colors need to be displayed
     if (typeof colorFront !== "undefined") {
-		colors[1] = colorFront.toLowerCase();
+		colors[0] = colorFront.toLowerCase();
 	}
 	
 	if (typeof colorBack !== "undefined") {
-		colors[0] = colorBack.toLowerCase();
+		colors[1] = colorBack.toLowerCase();
 	}
 
-	// generate the colors
+	// properly set colorString indicator
 	for (let i = 0; i < colors.length; i++) {
-		switch (colors[i]) {
-			case 'black':
-				setColors += "\x1b[40m";
-				break;
-
-			case 'red':
-				setColors += "\x1b[41m";
-				break;
-
-			case 'green':
-				setColors += "\x1b[42m";
-				break;
-
-			case 'yellow':
-				setColors += "\x1b[43m";
-				break;
-
-			case 'blue':
-				setColors += "\x1b[44m";
-				break;
-
-			case 'magenta':
-				setColors += "\x1b[45m";
-				break;
-
-			case 'cyan':
-				setColors += "\x1b[46m";
-				break;
-
-			case 'white':
-				setColors += "\x1b[47m";
-				break;
-            
-			default:
-				break;
+		if (((i == 0) || (i == 1)) && colors[i] != "") {
+			setColors += colorData[i][colors[i]];
 		}
 	}
-	
-	// show the data to the console
+
+	// print data
 	if (colors[0] != "" || colors[1] != "") {
-		printf(setColors + data + "\x1b[0m";);
+		printf(setColors + data + "\x1b[0m");
 	} else {
 		printf(data);
 	}
@@ -77,18 +50,18 @@ function separator() {
         s = s + '-';
 	}
     
-	console.log(s, "red", "black");
+	console.log(s);
 }
 
-function center(text){
-	let count = (process.stdout.columns - text.length) / 2;
-	let space = '';
+function center(text) {
+    let count = (process.stdout.columns - text.length) / 2;
+    let space = '';
 
-	for (let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
         space += ' ';
-	}
-	
-	return space + text;
+    }
+    
+    return space + text +  space;
 }
 
 function start() {
@@ -96,10 +69,12 @@ function start() {
 	let folder = "./logs";
 	let filepath = path.join(folder, file);
 
+	// create log folder
 	if (!fs.existsSync(folder)) {
 		fs.mkdirSync(folder);
 	}
 
+	// create log file
 	if (!fs.existsSync(filepath)) {
 		fs.writeFileSync(filepath);
 	}

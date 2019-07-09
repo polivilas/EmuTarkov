@@ -1,6 +1,9 @@
 @echo off
 TITLE Building EmuTarkov server
 
+REM delete package-lock.json
+del /s /q package-lock.json
+
 REM wipe out folder
 rd /s /q out
 mkdir out

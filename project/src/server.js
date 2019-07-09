@@ -3,11 +3,31 @@
 const fs = require('fs');
 const http = require('http');
 const zlib = require('zlib');
+const os = require('os');
+const utility =  require('./utility.js');
 const logger = require('./logger.js');
-const settings = require('./settings.js');
 const profile = require('./profile.js');
 const item = require('./item.js');
 const response = require('./response.js');
+
+var settings = JSON.parse(utility.readJson("data/config.json")); 
+ 
+function getLocalIpAddress() { 
+	let address = "127.0.0.1"; 
+    let ifaces = os.networkInterfaces(); 
+ 
+	for (let dev in ifaces) { 
+		let iface = ifaces[dev].filter(function(details) { 
+			return details.family === 'IPv4' && details.internal === false; 
+		}); 
+ 
+		if (iface.length > 0) { 
+			address = iface[0].address; 
+		} 
+	} 
+ 
+	return address; 
+} 
 
 function getCookies(req) {
 	let found = {}
@@ -85,10 +105,10 @@ function handleRequest(req, resp) {
 	logger.separator();
 	
 	// get the IP address of the client
-	console.log("IP address: " + req.connection.remoteAddress, req.url, "black", "green");
+	console.log("IP address: " + req.connection.remoteAddress, "yellow");
 
 	// handle the request
-	console.log("Request method: " + req.method, "black", "green");
+	console.log("Request method: " + req.method, "yellow");
 	
 	if (req.method == "POST") {
 		// received data
@@ -104,20 +124,30 @@ function handleRequest(req, resp) {
 
 function start() {
 	let server = http.createServer();
-	let port = settings.getServerSettings().port;
+	let port = settings.server.port;
+	let ip = getLocalIpAddress();
+ 
+	// set the ip and backendurl 
+	settings.server.ip = ip; 
+	settings.server.backendUrl = "http://" + ip + ":" + port; 
+	utility.writeJson("data/config.json", settings); 
+ 
+	// show our watermark
+	console.log("Just EmuTarkov 0.7.1", "white", "cyan");
+	console.log("https://justemutarkov.github.io/", "white", "cyan");
 
-	console.log(logger.center("Just EmuTarkov 0.7.0"), "black", "cyan"));
-	console.log(logger.center("for more check: https://justemutarkov.github.io/"), "black", "cyan"));
-	
+	// check if port is already being listened to 
 	server.on('error', function () {
-		console.log("Port " + port + " is already in use", "black", "red"));
+		console.log("Port " + port + " is already in use", "white", "red");
 		return;
     });
 
+	// listen to port on ip
 	server.listen(port, function() {
-		console.log("Listening on port: " + port, "black", "green"));
+		console.log("Listening on port: " + port + " with ip " + ip, "white", "green");
 	});
 	
+	// handle request 
 	server.on('request', function(req, resp) {
 		handleRequest(req, resp);
 	});

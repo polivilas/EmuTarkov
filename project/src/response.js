@@ -65,8 +65,8 @@ function get(req, body) {
 		url = url.split("?retry=")[0];
 	}
 
-	console.log("ProfileID: " + " " + profile.getActiveID(), "green", "black");
-	console.log("Request: " + " " + url, "green", "black");
+	console.log("ProfileID: " + " " + profile.getActiveID(), "green");
+	console.log("Request: " + " " + url, "green");
 	console.log(info);
 
 	// handle special cases
@@ -275,7 +275,7 @@ function get(req, body) {
 			break;
 
 		default:
-			console.log("UNHANDLED REQUEST " + req.url, "black", "red");
+			console.log("UNHANDLED REQUEST " + req.url, "white", "red");
 			break;
 	}
 
