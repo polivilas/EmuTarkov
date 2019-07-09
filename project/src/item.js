@@ -699,7 +699,7 @@ function handleMoving(body) {
 			return confirmRagfairTrading(tmpList, body);
 
 		default:
-			console.log("UNHANDLED ACTION", "red", "black");
+			console.log("UNHANDLED ACTION", "black" "red");
             return "";
 	}
 }

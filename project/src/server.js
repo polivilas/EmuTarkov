@@ -85,10 +85,10 @@ function handleRequest(req, resp) {
 	logger.separator();
 	
 	// get the IP address of the client
-	console.log("IP address: " + req.connection.remoteAddress, req.url, "green", "black");
+	console.log("IP address: " + req.connection.remoteAddress, req.url, "black", "green");
 
 	// handle the request
-	console.log("Request method: " + req.method, "green", "black");
+	console.log("Request method: " + req.method, "black", "green");
 	
 	if (req.method == "POST") {
 		// received data
@@ -106,16 +106,16 @@ function start() {
 	let server = http.createServer();
 	let port = settings.getServerSettings().port;
 
-	console.log(logger.center("Just EmuTarkov 0.7.0"), "cyan", "black"));
-	console.log(logger.center("for more check: https://justemutarkov.github.io/"), "cyan", "black"));
+	console.log(logger.center("Just EmuTarkov 0.7.0"), "black", "cyan"));
+	console.log(logger.center("for more check: https://justemutarkov.github.io/"), "black", "cyan"));
 	
 	server.on('error', function () {
-		console.log("Port " + port + " is already in use", "", "red"));
+		console.log("Port " + port + " is already in use", "black", "red"));
 		return;
     });
 
 	server.listen(port, function() {
-		console.log("Listening on port: " + port, "", "green"));
+		console.log("Listening on port: " + port, "black", "green"));
 	});
 	
 	server.on('request', function(req, resp) {

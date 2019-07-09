@@ -6,55 +6,61 @@ const utility = require('./utility.js');
 var fileStream = undefined;
 
 printf = console.log; 
-console.log = function(data, colorBack, colorFront) {
+console.log = function(data, colorFront, colorBack) {
 	let setColors = "";
+	let colors = ["", ""];
 
-	// check if we need to generate colors
-    if (typeof colorBack !== "undefined" && typeof colorFront !== "undefined") {
-		let colors = [colorBack.toLowerCase(), colorFront.toLowerCase()];
+	// check which colors to generate
+    if (typeof colorFront !== "undefined") {
+		colors = [1] = colorFront.toLowerCase();
+	}
+	
+	if (typeof colorBack !== "undefined") {
+		colors = [0] = colorBack.toLowerCase();
+	}
 
-		for (let i = 0; i < colors.length; i++) {
-			switch (colors[i]) {
-				case 'black':
-					setColors += "\x1b[40m";
-					break;
+	// generate the colors
+	for (let i = 0; i < colors.length; i++) {
+		switch (colors[i]) {
+			case 'black':
+				setColors += "\x1b[40m";
+				break;
 
-				case 'red':
-					setColors += "\x1b[41m";
-					break;
+			case 'red':
+				setColors += "\x1b[41m";
+				break;
 
-				case 'green':
-					setColors += "\x1b[42m";
-					break;
+			case 'green':
+				setColors += "\x1b[42m";
+				break;
 
-				case 'yellow':
-					setColors += "\x1b[43m";
-					break;
+			case 'yellow':
+				setColors += "\x1b[43m";
+				break;
 
-				case 'blue':
-					setColors += "\x1b[44m";
-					break;
+			case 'blue':
+				setColors += "\x1b[44m";
+				break;
 
-				case 'magenta':
-					setColors += "\x1b[45m";
-					break;
+			case 'magenta':
+				setColors += "\x1b[45m";
+				break;
 
-				case 'cyan':
-					setColors += "\x1b[46m";
-					break;
+			case 'cyan':
+				setColors += "\x1b[46m";
+				break;
 
-				case 'white':
-					setColors += "\x1b[47m";
-					break;
+			case 'white':
+				setColors += "\x1b[47m";
+				break;
             
-				default:
-					break;
-			}
+			default:
+				break;
 		}
 	}
 	
 	// show the data to the console
-	if (typeof colorBack !== "undefined" && typeof colorFront !== "undefined") {
+	if (typeof colorFront !== "undefined" || typeof colorBack !== "undefined") {
 		printf(setColors + data + "\x1b[0m";);
 	} else {
 		printf(data);

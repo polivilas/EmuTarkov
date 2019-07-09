@@ -275,7 +275,7 @@ function get(req, body) {
 			break;
 
 		default:
-			console.log("UNHANDLED REQUEST " + req.url, "red", "black");
+			console.log("UNHANDLED REQUEST " + req.url, "black", "red");
 			break;
 	}
 
