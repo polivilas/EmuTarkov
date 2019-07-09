@@ -81,7 +81,7 @@ function sendResponse(req, resp, body) {
 }
 
 function handleRequest(req, resp) {
-	// separate request in the log - themaoci -)
+	// separate request in the log
 	logger.separator();
 	
 	// get the IP address of the client
@@ -106,8 +106,8 @@ function start() {
 	let server = http.createServer();
 	let port = settings.getServerSettings().port;
 
-	console.log(logger.centerConsole("Just EmuTarkov 0.7.0"), "cyan", "black"));
-	console.log(logger.centerConsole("for more check: https://justemutarkov.github.io/"), "cyan", "black"));
+	console.log(logger.center("Just EmuTarkov 0.7.0"), "cyan", "black"));
+	console.log(logger.center("for more check: https://justemutarkov.github.io/"), "cyan", "black"));
 	
 	server.on('error', function () {
 		console.log("Port " + port + " is already in use", "", "red"));

@@ -74,7 +74,7 @@ function separator() {
 	console.log(s, "red", "black");
 }
 
-function centerConsole(text){
+function center(text){
 	let count = (process.stdout.columns - text.length) / 2;
 	let space = '';
 
@@ -101,4 +101,6 @@ function start() {
 	fileStream = fs.createWriteStream(filepath, {flags : 'w'});
 }
 
+module.exports.separator = separator;
+module.exports.center = center;
 module.exports.start = start;
