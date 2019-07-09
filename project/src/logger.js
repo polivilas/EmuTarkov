@@ -60,7 +60,7 @@ console.log = function(data, colorFront, colorBack) {
 	}
 	
 	// show the data to the console
-	if (typeof colorFront !== "undefined" || typeof colorBack !== "undefined") {
+	if (colors[0] != "" || colors[1] != "") {
 		printf(setColors + data + "\x1b[0m";);
 	} else {
 		printf(data);
