@@ -65,8 +65,8 @@ function get(req, body) {
 		url = url.split("?retry=")[0];
 	}
 
-	console.log("ProfileID: " + " " + profile.getActiveID(), "green");
-	console.log("Request: " + " " + url, "green");
+	console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
+	console.log("Request: " + " " + url, "cyan");
 	console.log(info);
 
 	// handle special cases

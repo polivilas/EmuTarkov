@@ -105,10 +105,10 @@ function handleRequest(req, resp) {
 	logger.separator();
 	
 	// get the IP address of the client
-	console.log("IP address: " + req.connection.remoteAddress, "yellow");
+	console.log("IP address: " + req.connection.remoteAddress, "cyan");
 
 	// handle the request
-	console.log("Request method: " + req.method, "yellow");
+	console.log("Request method: " + req.method, "cyan");
 	
 	if (req.method == "POST") {
 		// received data
@@ -135,6 +135,7 @@ function start() {
 	// show our watermark
 	console.log("Just EmuTarkov 0.7.1", "white", "cyan");
 	console.log("https://justemutarkov.github.io/", "white", "cyan");
+	logger.separator();
 
 	// check if port is already being listened to 
 	server.on('error', function () {
