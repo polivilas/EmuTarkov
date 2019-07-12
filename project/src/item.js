@@ -115,25 +115,25 @@ function questHandover(tmpList, body) {
 
  	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
- function addNote(tmpList, body) {
+function addNote(tmpList, body) {
 	tmpList.data[1].Notes.Notes.push({"Time": body.note.Time, "Text": body.note.Text});
 	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
- function editNode(tmpList, body) {
+function editNode(tmpList, body) {
 	tmpList.data[1].Notes.Notes[body.index] = {"Time": body.note.Time, "Text": body.note.Text};
 	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
- function deleteNote(tmpList, body) {
+function deleteNote(tmpList, body) {
 	tmpList.data[1].Notes.Notes.splice(body.index, 1);
 	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
 function moveItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
@@ -346,6 +346,7 @@ function addToWishList(tmpList, body) {
 	// check if the item is already in wishlist
 	for (let item in tmpList.data[1].Wishlist) {
 		console.log(item);
+
 		// don't add the item
 		if (tmpList.data[1].WishList[item].tid == body.templateId) {
 			return "OK";
@@ -362,6 +363,7 @@ function removeFromWishList(tmpList, body) {
 	// remove the item if it exists
 	for (let item in tmpList.data[1].Wishlist) {
 		console.log(item);
+
 		if (tmpList.data[1].WishList[item].tid == body.templateId) {
 			tmpList.data[1].WishList.splice(item, 1);
 		}
@@ -371,7 +373,35 @@ function removeFromWishList(tmpList, body) {
 	return "OK";
 }
 
-function recheckInventoryFreeSpace(tmpList){
+function examineItem(tmpList, body) {
+	let returnedID = "BAD";
+    
+    // search player inventory
+    if (returnedID == "BAD") {
+        for (let key of tmpList.data[1].Inventory.items) {
+            if (key._id == body.item) {
+                console.log("Found equipment examing item: " + key._id);
+                returnedID = key._tpl;
+                break;
+            }
+        }
+    }
+
+    // item found
+    if (returnedID != "BAD") {
+        console.log("EXAMINED: " + returnedID);
+        tmpList.data[1].Encyclopedia[returnedID] = true;
+        profile.setCharacterData(tmpList);
+		
+        return "OK";
+    }
+
+    // item not found
+    console.log("Cannot find proper item. Stopped.");
+	return "Cannot find";
+}
+
+function recheckInventoryFreeSpace(tmpList) {
 	let Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
 
 	for (let item of tmpList.data[1].Inventory.items) {
@@ -405,9 +435,9 @@ function payMoney(tmpList, amount, body) {
 		if (item._tpl == currency && item.upd.StackObjectsCount >= amount) {
 			item.upd.StackObjectsCount -= amount;
 			profile.setCharacterData(tmpList);
-			
 			console.log("Money paid: " + amount + " " + tmpTraderInfo.currency);
-			return true;
+
+            return true;
 		}
 	}
 
@@ -423,8 +453,8 @@ function getMoney(tmpList, amount, body) {
 		if (item._tpl == currency) {
 			item.upd.StackObjectsCount += amount;
 			profile.setCharacterData(tmpList);
-
 			console.log("Money received: " + amount + " " + tmpTraderInfo.currency);
+
 			return true;
 		}
 	}
@@ -685,6 +715,9 @@ function handleMoving(body) {
 
 		case "Heal":
 			return healPlayer(tmpList, body);
+		
+		case "Examine":
+			return examineItem(tmpList, body);
 
 		case "AddToWishList":
 			return addToWishList(tmpList, body);
