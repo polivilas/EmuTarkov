@@ -5,15 +5,15 @@ const { compile } = require('nexe');
 // compile the application
 compile({
 	input: '../project/src/main.js',
-	output: './out/server',
+    output: './out/EmuTarkov-Server',
 	build: false
 }).then(function(err) {
 	// set the icon
 	childProcess.execFile('./bin/ResourceHacker.exe', [
 		'-open',
-		'./out/server.exe',
+		'./out/EmuTarkov-Server.exe',
 		'-save',
-		'./out/server.exe',
+		'./out/EmuTarkov-Server.exe',
 		'-action',
 		'addoverwrite',
 		'-res',
