@@ -112,7 +112,13 @@ function handleRequest(req, resp) {
 	
 	if (req.method == "POST") {
 		// received data
-		req.on('data', function(data) {
+        req.on('data', function (data) {
+            // prevent flood attack
+            if (data.length > 1000000) {
+                request.connection.destroy();
+            }
+
+            // extract data
 			zlib.inflate(data, function(err, body) {
 				sendResponse(req, resp, body);
 			});
