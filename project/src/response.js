@@ -67,7 +67,6 @@ function get(req, body) {
 	if (url.includes("?retry=")) {
 		url = url.split("?retry=")[0];
 	}
-
 	console.log("Request: " + " " + url, "cyan");
 	console.log(info);
 
@@ -116,30 +115,13 @@ function get(req, body) {
 		case "/client/game/profile/items/moving":
 			output = item.moving(info);
 			break;
-			
-		case "/client/mail/dialog/list":
-			output = '{"err":0, "errmsg":null, "data":[]}';
-			break;
-
-		case "/client/friend/request/list/outbox":
-		case "/client/friend/request/list/inbox":
-			output = '{"err":0, "errmsg":null, "data":[]}';
-			break;
 
 		case "/client/languages":
             output = locale.getLanguages();
             break;
 
-		case "/client/game/version/validate":
-			output = '{"err":0, "errmsg":null, "data":null}';
-			break;
-
 		case "/client/game/login":
 			output = profile.find(info, backendUrl);
-			break;
-
-		case "/client/game/logout":
-			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/queue/status":
@@ -166,10 +148,6 @@ function get(req, body) {
 			output = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 			break;
 
-		case "/client/game/keepalive":
-			output = '{"err":0, "errmsg":null, "data":null}';
-			break;
-
 		case "/client/weather":
 			output = getWeather();
 			break;
@@ -188,10 +166,6 @@ function get(req, body) {
 
 		case "/client/getMetricsConfig":
 			output = utility.readJson('data/configs/metricsConfig.json');
-			break;
-
-		case "/client/putMetrics":
-			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/game/bot/generate":
@@ -216,10 +190,6 @@ function get(req, body) {
 
 		case "/client/match/join":
 			output = joinMatch(info);
-			break;
-
-		case "/client/match/exit":
-			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/chatServer/list":
@@ -255,12 +225,23 @@ function get(req, body) {
 			output = "DONE";
 			break;
 
+		case "/client/mail/dialog/list":
+		case "/client/friend/request/list/outbox":
+		case "/client/friend/request/list/inbox":
+			output = '{"err":0, "errmsg":null, "data":[]}';
+			break;
+
 		case "/favicon.ico":
+		case "/client/game/version/validate":
+		case "/client/game/logout":
+		case "/client/game/keepalive":
+		case "/client/putMetrics":
 		case "/client/notifier/channel/create":
 		case "/client/game/profile/search":
 		case "/client/match/group/status":
 		case "/client/match/group/looking/stop":
 		case "/client/match/group/exit_from_menu":
+		case "/client/match/exit":
 		case "/client/game/profile/savage/regenerate":
 			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
