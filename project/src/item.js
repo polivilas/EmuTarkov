@@ -8,10 +8,6 @@ var items = JSON.parse(utility.readJson('data/configs/items.json'));
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 var output = "";
-var curr = [];
-curr['RUB'] = "5449016a4bdc2d6f028b456f";
-curr['USD'] = "5696686a4bdc2da3298b456a";
-curr['EUR'] = "569668774bdc2da2298b4568";
 
 function GenItemID() {
 	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
@@ -428,39 +424,61 @@ function recheckInventoryFreeSpace(tmpList) {
 	return Stash2D;
 }
 
+function getCurrency(currency) {
+	// get currency
+	switch (currency) {
+		case "RUB":
+			return "5449016a4bdc2d6f028b456f";
+
+		case "EUR":
+			return "5696686a4bdc2da3298b456a";
+
+		case "USD":
+			return "569668774bdc2da2298b4568";
+	}
+
+	// currency not found
+	console.log("Currency not found, fallback to RUB", "white", "yellow");
+	return "5449016a4bdc2d6f028b456f";
+}
+
 function payMoney(tmpList, amount, body) {
-	let tmpTraderInfo = trader.getAssort(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
-	let currency = curr[tmpTraderInfo.currency];
+	let tmpTraderInfo = trader.get(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
+	let currency = getCurrency(tmpTraderInfo.data.currency);
+
+	console.log(tmpTraderInfo);
 
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._tpl == currency && item.upd.StackObjectsCount >= amount) {
 			item.upd.StackObjectsCount -= amount;
 			profile.setCharacterData(tmpList);
-			console.log("Money paid: " + amount + " " + tmpTraderInfo.currency);
+			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
 
             return true;
 		}
 	}
 
-	console.log("no money found");
+	console.log("No money found", "white", "red");
 	return false;
 }
 
 function getMoney(tmpList, amount, body) {
-	let tmpTraderInfo = trader.getAssort(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
-	let currency = curr[tmpTraderInfo.currency];
+	let tmpTraderInfo = trader.get(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
+	let currency = getCurrency(tmpTraderInfo.data.currency);
+
+	console.log(tmpTraderInfo);
 
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._tpl == currency) {
 			item.upd.StackObjectsCount += amount;
 			profile.setCharacterData(tmpList);
-			console.log("Money received: " + amount + " " + tmpTraderInfo.currency);
+			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
 
 			return true;
 		}
 	}
 
-	console.log("no money found");
+	console.log("No money found", "white", "red");
 	return false;
 }
 
@@ -629,8 +647,6 @@ function confirmTrading(tmpList, body)  {
 	let tmpUserTrader = profile.getPurchasesData();
 	let prices = trader.getAssort("everythingTrader");
 
-	console.log(prices);
-
 	// buying
 	if (body.type == "buy_from_trader")  {
 		return buyItem(tmpList, tmpUserTrader, prices, body);
@@ -638,7 +654,7 @@ function confirmTrading(tmpList, body)  {
 
 	// selling
 	if (body.type == "sell_to_trader") {				
-		return sellItem(tmpList, tmpUserTrader, prices, body)
+		return sellItem(tmpList, tmpUserTrader, prices, body);
 	}
 
 	return "";

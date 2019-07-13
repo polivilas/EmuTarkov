@@ -14,7 +14,6 @@ function loadAllTraders() {
 	// load trader files
 	for (let file in tradersDir) {
 		if (traderFiles[file] !== undefined) {
-			console.log("Found trader file " + traderFiles[file], "white", "yellow");
 			traders.push(JSON.parse(utility.readJson(tradersDir + traderFiles[file])));
 		}
 	}
@@ -26,7 +25,6 @@ function loadAllAssorts() {
 	// load assort files
 	for (let file in assortDir) {
 		if (assortFiles[file] !== undefined) {
-			console.log("Found assort file " + assortFiles[file], "white", "yellow");
 			assorts.push(JSON.parse(utility.readJson(assortDir + assortFiles[file])));
 		}
 	}
@@ -52,7 +50,7 @@ function get(id) {
 function getAssort(id) {
 	// find the assort
 	for (let i = 0; i < traders.length; i++) {
-		if (traders._id == id) {
+		if (traders[i]._id == id) {
 			return assorts[i];
 		}
 	}
