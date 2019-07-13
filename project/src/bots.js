@@ -7,7 +7,7 @@ var items = JSON.parse(utility.readJson('data/configs/items.json'));
 var presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
 var weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
 var names = JSON.parse(utility.readJson("data/configs/bots/botNames.json"));
-var settings = JSON.parse(utility.readJson("data/config.json"));
+var settings = JSON.parse(utility.readJson("data/server.config.json"));
 var handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
 function generateBotBossKilla(params) {

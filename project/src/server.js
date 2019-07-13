@@ -10,7 +10,7 @@ const profile = require('./profile.js');
 const item = require('./item.js');
 const response = require('./response.js');
 
-var settings = JSON.parse(utility.readJson("data/config.json")); 
+var settings = JSON.parse(utility.readJson("data/server.config.json")); 
  
 function getLocalIpAddress() { 
 	let address = "127.0.0.1"; 
@@ -136,7 +136,7 @@ function start() {
 	// set the ip and backendurl 
 	settings.server.ip = ip; 
 	settings.server.backendUrl = "http://" + ip + ":" + port; 
-	utility.writeJson("data/config.json", settings); 
+	utility.writeJson("data/server.config.json", settings); 
  
 	// show our watermark
 	console.log("Just EmuTarkov 0.7.1", "white", "cyan");

@@ -6,7 +6,7 @@ const item = require('./item.js');
 const ragfair = require('./ragfair.js');
 const bots = require('./bots.js');
 
-var settings = JSON.parse(utility.readJson("data/config.json"));
+var settings = JSON.parse(utility.readJson("data/server.config.json"));
 var backendUrl = settings.server.backendUrl;
 var ip = settings.server.ip;
 var port = settings.server.port;
