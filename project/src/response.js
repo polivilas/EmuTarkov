@@ -5,6 +5,7 @@ const profile = require('./profile.js');
 const item = require('./item.js');
 const ragfair = require('./ragfair.js');
 const bots = require('./bots.js');
+const locale = require('./locale.js');
 
 var settings = JSON.parse(utility.readJson("data/server.config.json"));
 var backendUrl = settings.server.backendUrl;
@@ -13,6 +14,8 @@ var port = settings.server.port;
 var assort = "/client/trading/api/getTraderAssort/";
 var prices = "/client/trading/api/getUserAssortPrice/trader/";
 var getTrader = "/client/trading/api/getTrader/";
+var localeGlobal = "/client/locale/";
+var localeMenu = "/client/menu/locale/";
 
 function getTraders() {
 	// TODO: USE FS FOR THIS
@@ -88,7 +91,15 @@ function get(req, body) {
 
 	if (url.includes("/uploads/")) {
 		return "CONTENT";
-	}
+    }
+
+    if (url.includes(localeMenu)) {
+        return locale.getMenu(url.replace(localeMenu, ''));
+    }
+
+    if (url.includes(localeGlobal)) {
+        return locale.getGlobal(url.replace(localeGlobal, ''));
+    }
 	
 	if (url.includes("/push/notifier/get/")) {
 		return '{"err":0, "errmsg":null, "data":[]}';
@@ -117,26 +128,8 @@ function get(req, body) {
 			break;
 
 		case "/client/languages":
-			output = utility.readJson('data/configs/locale/languages.json');
+            output = locale.getLanguages();
             break;
-
-		case "/client/menu/locale/en":
-			output = utility.readJson('data/configs/locale/en/menu.json');
-			break;
-
-        case "/client/menu/locale/ru":
-		    output = utility.readJson('data/configs/locale/ru/menu.json');
-			break;
-
-		case "/client/locale/en":
-		case "/client/locale/En":
-			output = utility.readJson('data/configs/locale/en/global.json');
-			break;
-
-		case "/client/locale/ru":
-		case "/client/locale/Ru":
-		    output = utility.readJson('data/configs/locale/ru/global.json');
-			break;
 
 		case "/client/game/version/validate":
 			output = '{"err":0, "errmsg":null, "data":null}';
@@ -190,8 +183,7 @@ function get(req, body) {
 			output = utility.readJson('data/configs/templates.json');
 			break;
 
-		case "/client/quest/list":
-			bots.generatePlayerScav();
+        case "/client/quest/list":
 			output = utility.readJson('data/configs/questList.json');
 			break;
 
