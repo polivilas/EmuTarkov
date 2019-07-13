@@ -70,6 +70,7 @@ function sendResponse(req, resp, body) {
 
 	// get active profile
 	profile.setActiveID(getCookies(req)['PHPSESSID']);
+	console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
 
 	// get response
 	if (req.method == "POST") {
