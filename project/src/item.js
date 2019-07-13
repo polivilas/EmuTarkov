@@ -2,6 +2,7 @@
 
 const utility = require('./utility.js');
 const profile = require('./profile.js');
+const trader = require('./trader.js');
 
 var items = JSON.parse(utility.readJson('data/configs/items.json'));
 var stashX = 10; // fix for your stash size
@@ -428,7 +429,7 @@ function recheckInventoryFreeSpace(tmpList) {
 }
 
 function payMoney(tmpList, amount, body) {
-	let tmpTraderInfo = JSON.parse(utility.readJson('data/configs/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	let tmpTraderInfo = trader.getAssort(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
 	let currency = curr[tmpTraderInfo.currency];
 
 	for (let item of tmpList.data[1].Inventory.items) {
@@ -446,7 +447,7 @@ function payMoney(tmpList, amount, body) {
 }
 
 function getMoney(tmpList, amount, body) {
-	let tmpTraderInfo = JSON.parse(utility.readJson('data/configs/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	let tmpTraderInfo = trader.getAssort(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
 	let currency = curr[tmpTraderInfo.currency];
 
 	for (let item of tmpList.data[1].Inventory.items) {
@@ -464,7 +465,7 @@ function getMoney(tmpList, amount, body) {
 }
 
 function buyItem(tmpList, tmpUserTrader, prices, body) {
-	let tmpTrader = JSON.parse(utility.readJson('data/configs/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
+	let tmpTrader = trader.getAssort(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
 	let money = tmpTrader.data.barter_scheme[body.item_id][0][0].count * body.count;
 
 	// print debug information
@@ -626,7 +627,9 @@ function sellItem(tmpList, tmpUserTrader, prices, body) {
 
 function confirmTrading(tmpList, body)  {
 	let tmpUserTrader = profile.getPurchasesData();
-	let prices = JSON.parse(utility.readJson('data/configs/assort/everythingTrader.json'));
+	let prices = trader.getAssort("everythingTrader");
+
+	console.log(prices);
 
 	// buying
 	if (body.type == "buy_from_trader")  {

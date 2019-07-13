@@ -6,6 +6,7 @@ const item = require('./item.js');
 const ragfair = require('./ragfair.js');
 const bots = require('./bots.js');
 const locale = require('./locale.js');
+const trader = require('./trader.js');
 
 var settings = JSON.parse(utility.readJson("data/server.config.json"));
 var backendUrl = settings.server.backendUrl;
@@ -16,21 +17,6 @@ var prices = "/client/trading/api/getUserAssortPrice/trader/";
 var getTrader = "/client/trading/api/getTrader/";
 var localeGlobal = "/client/locale/";
 var localeMenu = "/client/menu/locale/";
-
-function getTraders() {
-	// TODO: USE FS FOR THIS
-	return '{"err": 0,"errmsg": null,"data": ['
-			+ utility.readJson("data/configs/traders/54cb50c76803fa8b248b4571.json") + ', '	// Prapor
-			+ utility.readJson("data/configs/traders/54cb57776803fa99248b456e.json") + ', '	// Therapist
-			+ utility.readJson("data/configs/traders/579dc571d53a0658a154fbec.json") + ', '	// Fence 
-			+ utility.readJson("data/configs/traders/58330581ace78e27b8b10cee.json") + ', '	// Skier
-			+ utility.readJson("data/configs/traders/5935c25fb3acc3127c3d8cd9.json") + ', '	// Peacekeeper
-			+ utility.readJson("data/configs/traders/5a7c2eca46aef81a7ca2145d.json") + ', '	// Mechanic
-			+ utility.readJson("data/configs/traders/5ac3b934156ae10c4430e83c.json") + ', '	// Ragman
-			+ utility.readJson("data/configs/traders/everythingTrader.json") + ', ' 		// Polivilas
-			+ utility.readJson("data/configs/traders/PresetTrader.json") + ', ' 			// Jaeger
-			+ utility.readJson("data/configs/traders/SecretTrader.json") + ']}';			// TheMaoci
-}
 
 function joinMatch(info) {
 	let shortid = "";
@@ -67,38 +53,46 @@ function get(req, body) {
 	if (url.includes("?retry=")) {
 		url = url.split("?retry=")[0];
 	}
-	console.log("Request: " + " " + url, "cyan");
+
+	console.log("Request: " + url, "cyan");
 	console.log(info);
 
-	// handle special cases
-	if (url.includes(assort)) {
-		return utility.readJson("data/configs/assort/" + url.replace(assort, '') + ".json");
-	}
-	
+	// player bought items
 	if (url.includes(prices)) {
 		return JSON.stringify(profile.getPurchasesData());
 	}
-	
+
+	// trader profile
 	if (url.includes(getTrader)) {
-		return '{"err":0, "errmsg":null, "data":' + utility.readJson("data/configs/traders/" + url.replace(getTrader, '') + ".json") + '}';
+		return JSON.stringify(trader.get(url.replace(getTrader, '')));
 	}
 
+	// trader assortiment
+	if (url.includes(assort)) {
+		return JSON.stringify(trader.getAssort(url.replace(assort, '')));
+	}
+
+	// game images
 	if (url.includes("/data/images/")) {
 		return "IMAGE";
 	}
 
+	// raid banners
 	if (url.includes("/uploads/")) {
 		return "CONTENT";
     }
 
+	// menu localisation
     if (url.includes(localeMenu)) {
         return locale.getMenu(url.replace(localeMenu, ''));
     }
 
+	// global localisation
     if (url.includes(localeGlobal)) {
         return locale.getGlobal(url.replace(localeGlobal, ''));
     }
-	
+
+	// push notifier
 	if (url.includes("/push/notifier/get/")) {
 		return '{"err":0, "errmsg":null, "data":[]}';
 	}
@@ -173,7 +167,7 @@ function get(req, body) {
 			break;
 
 		case "/client/trading/api/getTradersList":
-			output = getTraders();
+			output = JSON.stringify(trader.getList());
 			break;
 
 		case "/client/server/list":

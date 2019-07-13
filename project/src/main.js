@@ -2,6 +2,7 @@
 
 const logger = require('./logger.js');
 const server = require('./server.js');
+const trader = require('./trader.js');
 
 function setTitle(title) {
     process.stdout.write(
@@ -12,3 +13,4 @@ function setTitle(title) {
 setTitle("Just EmuTarkov Server");
 logger.start();
 server.start();
+trader.load();
