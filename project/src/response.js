@@ -99,7 +99,7 @@ function get(req, body) {
 
 	switch (url) {
 		case "/":
-			output = '0.11.7.3333 | EmuTarkov';
+			output = '0.11.7.3333 | Just EmuTarkov | justemutarkov.github.io';
 			break;
 
 		case "/client/friend/list":
