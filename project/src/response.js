@@ -220,7 +220,7 @@ function get(req, body) {
 			break;
 
 		case "/client/match/available":
-			output = '{"err":0, "errmsg":null, "data":true}';
+			output = '{"err":0, "errmsg":null, "data":false}';
 			break;
 
 		case "/client/match/join":
