@@ -371,31 +371,42 @@ function removeFromWishList(tmpList, body) {
 }
 
 function examineItem(tmpList, body) {
-	let returnedID = "BAD";
-    
-    // search player inventory
-    if (returnedID == "BAD") {
-        for (let key of tmpList.data[1].Inventory.items) {
-            if (key._id == body.item) {
-                console.log("Found equipment examing item: " + key._id);
-                returnedID = key._tpl;
-                break;
-            }
-        }
-    }
+	let returned = "BAD";
 
-    // item found
-    if (returnedID != "BAD") {
-        console.log("EXAMINED: " + returnedID);
-        tmpList.data[1].Encyclopedia[returnedID] = true;
-        profile.setCharacterData(tmpList);
-		
-        return "OK";
-    }
+	// trader inventory
+	if (tmpTrader) {
+		for (let item of tmpTrader.data) {
+			if (item._id == body.item) {
+				console.log("Found trader with examined item: " + item._id);
+				returned = item._tpl;
+				break;
+			}
+		}
+	}
 
-    // item not found
-    console.log("Cannot find proper item. Stopped.");
-	return "Cannot find";
+	// player inventory
+	if (returned == "BAD") {
+		for (let item of tmpList.data[1].Inventory.items) {
+			if (item._id == body.item) {
+				console.log("Found equipment examing item: " + item._id);
+				returned = item._tpl;
+				break;
+			}
+		}
+	}
+
+	// item not found
+	if (returned == "BAD") {
+		console.log("Cannot find proper item. Stopped.", "white", "red");
+		return "BAD";
+	}
+
+	// item found
+	console.log("EXAMINED: " + returned, "white", "green");
+	tmpList.data[1].Encyclopedia[returned] = true;
+	profile.setCharacterData(tmpList);
+
+	return "OK";
 }
 
 function recheckInventoryFreeSpace(tmpList) {
