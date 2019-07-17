@@ -408,6 +408,21 @@ function examineItem(tmpList, body) {
 
 	return "OK";
 }
+function transferItem(tmpList, body) {
+	for (let item of tmpList.data[1].Inventory.items) {
+			if (item._id == body.item) {
+				if(item.upd.StackObjectsCount > body.count)
+					item.upd.StackObjectsCount -= body.count;
+				else 
+					item.splice(item, 1);
+			}
+			if(item._id == body.with){
+				item.upd.StackObjectsCount += body.count;
+			}
+	}
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
 
 function recheckInventoryFreeSpace(tmpList) {
 	let Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
@@ -749,6 +764,9 @@ function handleMoving(body) {
 		case "Examine":
 			return examineItem(tmpList, body);
 
+		case "Transfer":
+			return transferItem(tmpList, body);
+
 		case "AddToWishList":
 			return addToWishList(tmpList, body);
 
@@ -762,7 +780,7 @@ function handleMoving(body) {
 			return confirmRagfairTrading(tmpList, body);
 
 		default:
-			console.log("UNHANDLED ACTION", "white", "red");
+			console.log("UNHANDLED ACTION:" + body.Action, "white", "red");
             return "";
 	}
 }
