@@ -219,10 +219,19 @@ function get(req, body) {
 			output = "DONE";
 			break;
 
+		case "/client/match/group/status":
+			output = '{ "err": 0, "errmsg": null, "data": { "players": [], "invite": [], "group": [] } }';
+			break;
+
 		case "/client/mail/dialog/list":
 		case "/client/friend/request/list/outbox":
 		case "/client/friend/request/list/inbox":
 			output = '{"err":0, "errmsg":null, "data":[]}';
+			break;
+
+		case "":
+			// TODO: actually generate the response properly
+			output = `{ "err": 0, "errmsg": null, "data": [{ "_id": "5c71b934354682353958e983", "Info": { "Nickname": "TEST", "Side": "Usec", "Level": 1 } }] }`;
 			break;
 
 		case "/favicon.ico":
@@ -231,11 +240,10 @@ function get(req, body) {
 		case "/client/game/keepalive":
 		case "/client/putMetrics":
 		case "/client/notifier/channel/create":
-		case "/client/game/profile/search":
-		case "/client/match/group/status":
 		case "/client/match/group/looking/stop":
 		case "/client/match/group/exit_from_menu":
 		case "/client/match/exit":
+		case "/client/match/updatePing":
 		case "/client/game/profile/savage/regenerate":
 			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
