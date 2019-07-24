@@ -17,6 +17,7 @@ function setPlayerStash(){
 	stashX = X;
 	stashY = Y;
 }
+
 function GenItemID() {
 	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
 }
@@ -493,38 +494,51 @@ function getCurrency(currency) {
 	return "5449016a4bdc2d6f028b456f";
 }
 
-function payMoney(tmpList, amount, body) {
-	let tmpTraderInfo = trader.get(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
-	let currency = getCurrency(tmpTraderInfo.data.currency);
-
-	console.log(tmpTraderInfo);
+function payMoney(tmpList, moneyObject, body) {
+	// function for paying money/trading for goods
 
 	for (let item of tmpList.data[1].Inventory.items) {
-		if (item._tpl == currency && item.upd.StackObjectsCount >= amount) {
-			item.upd.StackObjectsCount -= amount;
-			profile.setCharacterData(tmpList);
-			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
-
-            return true;
+		for (let i = 0; i < moneyObject.length; i++){
+			if(typeof item.upd != "undefined")
+				if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount > body[i].count) {
+					tester++;
+					item.upd.StackObjectsCount -= body[i].count;
+					output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
+				} else if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount == body[i].count) {
+					delete tmpList.data[1].Inventory.items[item];
+					output.data.items.del.push({ "_id": item._id });
+				} else if (item._id == moneyObject[i].id && item.upd.StackObjectsCount < body[i].count)
+					return false;
 		}
 	}
+	// this script will not override data if something goes wrong aka return false;
+	// if everything goes OK save profile
+	profile.setCharacterData(tmpList);
+	console.log("Items taken. Status OK.", "white", "green");
+	return true;
+}
 
-	console.log("No money found", "white", "red");
-	return false;
+function findMoney(tmpList, barter_itemID) {
+	let prepareReturn = [];
+		for (let item of tmpList.data[1].Inventory.items)
+			for (let i = 0; i < barter_itemID.length; i++)
+				if (item._id == barter_itemID[i])
+					prepareReturn[i] = item;
+	return prepareReturn; // if none return []
 }
 
 function getMoney(tmpList, amount, body) {
 	let tmpTraderInfo = trader.get(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
 	let currency = getCurrency(tmpTraderInfo.data.currency);
 
-	console.log(tmpTraderInfo);
+	//console.log(tmpTraderInfo);
 
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._tpl == currency) {
 			item.upd.StackObjectsCount += amount;
 			profile.setCharacterData(tmpList);
+			output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
 			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
-
 			return true;
 		}
 	}
@@ -535,18 +549,31 @@ function getMoney(tmpList, amount, body) {
 
 function buyItem(tmpList, tmpUserTrader, prices, body) {
 	let tmpTrader = trader.getAssort(body.tid.replace(/[^a-zA-Z0-9]/g, ''));
-	let money = tmpTrader.data.barter_scheme[body.item_id][0][0].count * body.count;
-
-	// print debug information
-	console.log("Item:");
+	// Buy item has only 1 item thats why [0][0]
 	console.log(body.scheme_items);
-
-	// pay the item	
-	if (!payMoney(tmpList, money, body)) {
+	let money = [];
+	let moneyID = [];
+	//prepare barter items as money (roubles are counted there as well)
+	for(let i = 0; i < body.scheme_items.length; i++){
+		money[i] = body.scheme_items[i].count; //tmpTrader.data.barter_scheme[body.item_id][0][0].count 
+		moneyID[i] = body.scheme_items[i].id;
+	}
+	//check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
+	let moneyObject = findMoney(tmpList, moneyID);
+	if(typeof moneyObject[0] == "undefined"){
+		console.log("Error something goes wrong (findMoney) - stop cheating");
+		return "";
+	}
+	
+	// pay the item	to profile
+	if (!payMoney(tmpList, moneyObject, body.scheme_items)) {
 		console.log("no money found");
 		return "";
 	}
 		
+	// print debug information
+	console.log("Bought item: " + body.item_id);
+	
 	for (let item of tmpTrader.data.items) {
 		if (item._id && item._id == body.item_id) {
 			let MaxStacks = 1;
@@ -677,7 +704,6 @@ function sellItem(tmpList, tmpUserTrader, prices, body) {
 			if (item && item._id == checkID) {
 				// add money to return to the player
 				money += prices.data.barter_scheme[item._tpl][0][0].count * body.items[i].count;
-				
 				if (removeItem(tmpList, {Action: 'Remove', item: checkID}) == "OK") {
 					delete tmpUserTrader.data[checkID];
 				}
