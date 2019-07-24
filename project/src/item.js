@@ -804,3 +804,4 @@ function moving(info) {
 module.exports.getOutput = getOutput;
 module.exports.resetOutput = resetOutput;
 module.exports.moving = moving;
+module.exports.removeItem = removeItem;

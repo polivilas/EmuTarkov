@@ -61,41 +61,131 @@ function sendImage(resp, file) {
 		fileStream.pipe(resp);
 	});
 }
+function saveProfileProgress(body)
+{
+		let offRaidData = JSON.parse(body);
+		let offRaidProfile = offRaidData.profile;
+		let currentProfile = profile.getCharacterData();
+
+		//replace data below
+		currentProfile.data[1].Info.Experience = offRaidProfile.Info.Experience;
+		currentProfile.data[1].Health = offRaidProfile.Health;
+		currentProfile.data[1].Skills = offRaidProfile.Skills;
+		currentProfile.data[1].Stats.SessionCounters = offRaidProfile.Stats.SessionCounters;
+		currentProfile.data[1].Stats.OverallCounters = offRaidProfile.Stats.OverallCounters;
+		currentProfile.data[1].Stats.LastSessionDate = offRaidProfile.Stats.LastSessionDate;
+		currentProfile.data[1].Encyclopedia = offRaidProfile.Encyclopedia;
+		currentProfile.data[1].ConditionCounters = offRaidProfile.ConditionCounters;
+		currentProfile.data[1].Quests = offRaidProfile.Quests;
+		currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
+
+
+		//work with a string instead of looping through data, less code, less ressources, faster
+		var string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
+
+		//replace all these GClasses shit
+		string_inventory = string_inventory.replace(new RegExp("GClass795", 'g'), "Repairable");
+		string_inventory = string_inventory.replace(new RegExp("GClass780", 'g'), "Foldable");
+		string_inventory = string_inventory.replace(new RegExp("GClass779", 'g'), "FireMode");
+		string_inventory = string_inventory.replace(new RegExp("GClass796", 'g'), "Sight");
+		string_inventory = string_inventory.replace(new RegExp("GClass791", 'g'), "MedKit");
+
+		//and then re-parse the string into an object
+		offRaidProfile.Inventory.items = JSON.parse(string_inventory);
+
+
+		//remove previous equippement & other, KEEP ONLY THE STASH
+		item.removeItem( currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.equipment} );
+		item.removeItem( currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questRaidItems} );
+		item.removeItem( currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questStashItems} );
+
+		//and then fill with offline raid equipement
+		for(var inventoryitem in offRaidProfile.Inventory.items)
+		{
+			currentProfile.data[1].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);
+		}	
+
+		let pocketid = "";
+		var items_to_delete = [];
+
+		//but if the player get killed, he loose almost everything
+		if(offRaidData.exfil != "Survived" && offRaidData.exfil != "Runner")
+		{	
+			for(var inventoryitem in currentProfile.data[1].Inventory.items )
+			{
+				if(  currentProfile.data[1].Inventory.items[inventoryitem].parentId == currentProfile.data[1].Inventory.equipment 
+					&& currentProfile.data[1].Inventory.items[inventoryitem].slotId != "SecuredContainer"
+					&& currentProfile.data[1].Inventory.items[inventoryitem].slotId != "Scabbard"
+					&& currentProfile.data[1].Inventory.items[inventoryitem].slotId != "Pockets")
+				{
+					//store it and delete later because i dont know its not working otherwiswe
+					items_to_delete.push( currentProfile.data[1].Inventory.items[inventoryitem]._id );
+				}
+
+				//we need pocket id for later, its working differently
+				if (currentProfile.data[1].Inventory.items[inventoryitem].slotId == "Pockets")
+				{
+					pocketid = currentProfile.data[1].Inventory.items[inventoryitem]._id;
+				}
+			}
+
+			//and then delete inside pockets
+			for(var inventoryitem in currentProfile.data[1].Inventory.items )
+			{
+				if(currentProfile.data[1].Inventory.items[inventoryitem].parentId == pocketid )
+				{
+					//store it and delete later because i dont know its not working otherwiswe
+					items_to_delete.push( currentProfile.data[1].Inventory.items[inventoryitem]._id );
+				}	
+			}
+
+			//finally delete them
+			for(var item_to_delete in items_to_delete )
+			{
+				item.removeItem( currentProfile, {Action: 'Remove', item: items_to_delete[item_to_delete] } );
+			}	
+		}
+
+		profile.setCharacterData(currentProfile);	
+}
+
 
 function sendResponse(req, resp, body) {
+	if(req.url == "/OfflineRaidSave"){
+		return;
+	}
 	let output = "";
-
 	// reset item output
 	item.resetOutput();
-
 	// get active profile
-	profile.setActiveID(getCookies(req)['PHPSESSID']);
-	console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
 
-	// get response
-	if (req.method == "POST") {
-		output = response.get(req, body.toString());
-	} else {
-		output = response.get(req, "{}");
-	}
+		profile.setActiveID(getCookies(req)['PHPSESSID']);
+		console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
 	
-	// prepare message to send
-	if (output == "DONE") {
-		return;
-	}
+		// get response
+		if (req.method == "POST") {
+			output = response.get(req, body.toString());
+		} else {
+			output = response.get(req, "{}");
+		}
+		
+		// prepare message to send
+		if (output == "DONE") {
+			return;
+		}
 
-	if (output == "CONTENT") {
-		let image = req.url.replace('/uploads/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
+		if (output == "CONTENT") {
+			let image = req.url.replace('/uploads/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
 
-		console.log("The banner image location: " + image);
-		sendImage(resp, image);
-		return;
-	}
+			console.log("The banner image location: " + image);
+			sendImage(resp, image);
+			return;
+		}
 
-	if (output == "IMAGE") {
-		sendImage(resp, "." + req.url);
-		return;
-	}
+		if (output == "IMAGE") {
+			sendImage(resp, "." + req.url);
+			return;
+		}
 
 	sendJson(resp, output);
 	profile.setActiveID(0);
@@ -115,10 +205,17 @@ function handleRequest(req, resp) {
 		// received data
         req.on('data', function (data) {
             // prevent flood attack
-            if (data.length > 1000000) {
+            if (data.length > 1000000 && req.url != "/OfflineRaidSave") {
                 request.connection.destroy();
             }
-
+			if(req.url == "/OfflineRaidSave"){
+				console.log("Request: < SAVE_PROFILE_REQUEST >", "cyan");
+				//save offline profile there checking the data on the fly / "exfil" and "profile" entry
+				profile.setActiveID(1);
+				console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
+				saveProfileProgress(data.toString('utf8'));
+				return;
+			}
             // extract data
 			zlib.inflate(data, function(err, body) {
 				sendResponse(req, resp, body);

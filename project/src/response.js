@@ -43,7 +43,6 @@ function get(req, body) {
 	let output = "";
 	let url = req.url;
 	let info = JSON.parse("{}");
-
 	// parse body
 	if (body != "") {
 		info = JSON.parse(body);
@@ -155,7 +154,7 @@ function get(req, body) {
 			break;
 
         case "/client/quest/list":
-			output = utility.readJson('data/configs/questList.json');
+			output = utility.readJson('data/configs/questList_small.json');
 			break;
 
 		case "/client/getMetricsConfig":
