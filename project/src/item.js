@@ -9,6 +9,14 @@ var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 var output = "";
 
+//this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
+function setPlayerStash(){
+	let stashTPL = profile.getStashType();
+	let X = (items.data[stashTPL]._props.Grids[0]._props.cellsH != 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
+	let Y = (items.data[stashTPL]._props.Grids[0]._props.cellsV != 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
+	stashX = X;
+	stashY = Y;
+}
 function GenItemID() {
 	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
 }
@@ -137,7 +145,17 @@ function moveItem(tmpList, body) {
 		if (item._id && item._id == body.item) {
 			item.parentId = body.to.id;
 			item.slotId = body.to.container;
-			
+			//cartriges handler start
+			if (body.to.container == 'cartridges'){
+				let count_cartriges = 0;
+				for (let item_ammo in tmpList.data[1].Inventory.items) {
+					if(body.to.id == item_ammo.parentId){
+						count_cartriges = count_cartriges + 1;
+					}
+				}
+				body.to.location = count_cartriges;//wrong location for first cartrige
+			}
+			//cartriges handler end
 			if (body.to.location) {
 				item.location = body.to.location;
 			} else {
@@ -197,10 +215,17 @@ function splitItem(tmpList, body) {
 			item.upd.StackObjectsCount -= body.count;
 			
 			let newItem = GenItemID();
-			
-			output.data.items.new.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-			tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-			
+			let location = body.container.location;
+			if(typeof body.container.location == "undefined" && body.container.container === "cartridges"){
+				let temp_counter = 0;
+				for (let item_ammo in tmpList.data[1].Inventory.items) {
+					if(item_ammo.parentId == body.container.id)
+						temp_counter++;
+				}
+				location = temp_counter;//wrong location for first cartrige
+			}
+				output.data.items.new.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": location, "upd": {"StackObjectsCount": body.count}});
+				tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": location, "upd": {"StackObjectsCount": body.count}});
 			profile.setCharacterData(tmpList);
 			return "OK";
 		}

@@ -61,9 +61,9 @@ function sendImage(resp, file) {
 		fileStream.pipe(resp);
 	});
 }
-function saveProfileProgress(body)
+
+function saveProfileProgress(offRaidData)
 {
-		let offRaidData = JSON.parse(body);
 		let offRaidProfile = offRaidData.profile;
 		let currentProfile = profile.getCharacterData();
 
@@ -149,7 +149,6 @@ function saveProfileProgress(body)
 		profile.setCharacterData(currentProfile);	
 }
 
-
 function sendResponse(req, resp, body) {
 	if(req.url == "/OfflineRaidSave"){
 		return;
@@ -205,21 +204,23 @@ function handleRequest(req, resp) {
 		// received data
         req.on('data', function (data) {
             // prevent flood attack
-            if (data.length > 1000000 && req.url != "/OfflineRaidSave") {
+            if (data.length > 1000000 && req.url != "/OfflineRaidSave")
                 request.connection.destroy();
-            }
+            
 			if(req.url == "/OfflineRaidSave"){
 				console.log("Request: < SAVE_PROFILE_REQUEST >", "cyan");
-				//save offline profile there checking the data on the fly / "exfil" and "profile" entry
-				profile.setActiveID(1);
-				console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
-				saveProfileProgress(data.toString('utf8'));
+					//save offline profile there checking the data on the fly / "exfil" and "profile" entry
+				let parseBody = JSON.parse(data.toString('utf8'));
+				profile.setActiveID(parseBody.profile.aid);
+				console.log("ProfileID: " + profile.getActiveID(), "cyan");
+				saveProfileProgress(parseBody);
 				return;
+			} else {
+				// extract data
+				zlib.inflate(data, function(err, body) {
+					sendResponse(req, resp, body);
+				});
 			}
-            // extract data
-			zlib.inflate(data, function(err, body) {
-				sendResponse(req, resp, body);
-			});
 		});
 	} else {
 		sendResponse(req, resp, null);
