@@ -9,9 +9,13 @@ const logger = require('./logger.js');
 const profile = require('./profile.js');
 const item = require('./item.js');
 const response = require('./response.js');
+const ver = "0.7.2";
 
 var settings = JSON.parse(utility.readJson("data/server.config.json")); 
- 
+var settingsDev = (typeof settings.devs != "undefined")?settings.dev:false;
+function version(){
+	return ver;
+}
 function getLocalIpAddress() { 
 	let address = "127.0.0.1"; 
     let ifaces = os.networkInterfaces(); 
@@ -89,6 +93,12 @@ function saveProfileProgress(offRaidData)
 		string_inventory = string_inventory.replace(new RegExp("GClass779", 'g'), "FireMode");
 		string_inventory = string_inventory.replace(new RegExp("GClass796", 'g'), "Sight");
 		string_inventory = string_inventory.replace(new RegExp("GClass791", 'g'), "MedKit");
+		string_inventory = string_inventory.replace(new RegExp("GClass778", 'g'), "FaceShield");
+		string_inventory = string_inventory.replace(new RegExp("GClass788", 'g'), "Light");
+		string_inventory = string_inventory.replace(new RegExp("GClass786", 'g'), "Keycard");
+		string_inventory = string_inventory.replace(new RegExp("GClass799", 'g'), "Tag");
+		string_inventory = string_inventory.replace(new RegExp("GClass800", 'g'), "Togglable");
+		// left to check: SpawnedInSession, Dogtag
 
 		//and then re-parse the string into an object
 		offRaidProfile.Inventory.items = JSON.parse(string_inventory);
@@ -159,7 +169,9 @@ function sendResponse(req, resp, body) {
 	// get active profile
 
 		profile.setActiveID(getCookies(req)['PHPSESSID']);
-		console.log("ProfileID: " + " " + profile.getActiveID(), "cyan");
+		console.log("[Request]::" + req.url, "cyan");
+		if(settingsDev)
+			console.log(body.toString());
 	
 		// get response
 		if (req.method == "POST") {
@@ -185,7 +197,8 @@ function sendResponse(req, resp, body) {
 			sendImage(resp, "." + req.url);
 			return;
 		}
-
+		//if(req.url == "/client/game/profile/items/moving")
+		//	console.log(output);
 	sendJson(resp, output);
 	profile.setActiveID(0);
 }
@@ -195,10 +208,10 @@ function handleRequest(req, resp) {
 	logger.separator();
 	
 	// get the IP address of the client
-	console.log("IP address: " + req.connection.remoteAddress, "cyan");
-
-	// handle the request
-	console.log("Request method: " + req.method, "cyan");
+	let IP = "[Access][IP > " + req.connection.remoteAddress + "]";
+	let method = (settingsDev)?" <" + req.method + ">":"";
+	let prof = " Profile(" + profile.getActiveID() + ")";
+	console.log(IP + method + prof, "cyan"); //log display
 	
 	if (req.method == "POST") {
 		// received data
@@ -206,13 +219,12 @@ function handleRequest(req, resp) {
             // prevent flood attack
             if (data.length > 1000000 && req.url != "/OfflineRaidSave")
                 request.connection.destroy();
-            
 			if(req.url == "/OfflineRaidSave"){
-				console.log("Request: < SAVE_PROFILE_REQUEST >", "cyan");
+                console.log(data.toString('utf8'));
 					//save offline profile there checking the data on the fly / "exfil" and "profile" entry
 				let parseBody = JSON.parse(data.toString('utf8'));
 				profile.setActiveID(parseBody.profile.aid);
-				console.log("ProfileID: " + profile.getActiveID(), "cyan");
+				console.log("Request: /SAVE_PROFILE_REQUEST", "cyan");
 				saveProfileProgress(parseBody);
 				return;
 			} else {
@@ -238,7 +250,7 @@ function start() {
 	utility.writeJson("data/server.config.json", settings); 
  
 	// show our watermark
-	console.log("Just EmuTarkov 0.7.1", "white", "cyan");
+	console.log("Just EmuTarkov " + version(), "white", "cyan");
 	console.log("https://justemutarkov.github.io/", "white", "cyan");
 	logger.separator();
 
@@ -260,3 +272,4 @@ function start() {
 }
 
 module.exports.start = start;
+module.exports.version = version;

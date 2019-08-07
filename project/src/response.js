@@ -53,12 +53,10 @@ function get(req, body) {
 		url = url.split("?retry=")[0];
 	}
 
-	console.log("Request: " + url, "cyan");
-	console.log(info);
 
 	// player bought items
 	if (url.includes(prices)) {
-		return JSON.stringify(profile.getPurchasesData());
+		return profile.getPurchasesData();
 	}
 
 	// trader profile
@@ -154,7 +152,7 @@ function get(req, body) {
 			break;
 
         case "/client/quest/list":
-			output = utility.readJson('data/configs/questList_small.json');
+			output = utility.readJson('data/configs/questList.json');
 			break;
 
 		case "/client/getMetricsConfig":
@@ -178,7 +176,7 @@ function get(req, body) {
 			break;
 
 		case "/client/match/available":
-			output = '{"err":0, "errmsg":null, "data":false}';
+			output = '{"err":999, "errmsg":"Online isnt working in JustEmuTarkov", "data":false}';
 			break;
 
 		case "/client/match/join":

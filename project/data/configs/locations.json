@@ -418,7 +418,7 @@
                         "RequirementTip": "EXFIL_Item"
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "BossLocationSpawn": [
                     {
                         "BossName": "bossKilla",
@@ -454,7 +454,7 @@
                 ]
             },
             "5704e4dad2720bb55b8b4567": {
-                "Enabled": true,
+                "Enabled": false,
                 "Locked": true,
                 "Insurance": true,
                 "Name": "Lighthouse",
@@ -549,7 +549,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Lighthouse",
                 "_Id": "5704e4dad2720bb55b8b4567",
                 "Loot": [],
@@ -668,7 +668,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Private Area",
                 "_Id": "5704e64ad2720bb55b8b456e",
                 "Loot": [],
@@ -787,7 +787,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "RezervBase",
                 "_Id": "5704e5fad2720bc05b8b4567",
                 "Loot": [],
@@ -1229,7 +1229,7 @@
                         "RequirementTip": ""
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Shoreline",
                 "_Id": "5704e554d2720bac5b8b456e",
                 "Loot": [],
@@ -1253,7 +1253,7 @@
                 "BossLocationSpawn": []
             },
             "5714dc342459777137212e0b": {
-                "Enabled": true,
+                "Enabled": false,
                 "Locked": true,
                 "Insurance": true,
                 "Name": "Suburbs",
@@ -1348,7 +1348,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Suburbs",
                 "_Id": "5714dc342459777137212e0b",
                 "Loot": [],
@@ -1372,7 +1372,7 @@
                 "BossLocationSpawn": []
             },
             "5714dc692459777137212e12": {
-                "Enabled": true,
+                "Enabled": false,
                 "Locked": true,
                 "Insurance": true,
                 "Name": "Streets of Tarkov",
@@ -1469,7 +1469,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Tarkov Streets",
                 "_Id": "5714dc692459777137212e12",
                 "Loot": [],
@@ -1493,7 +1493,7 @@
                 "BossLocationSpawn": []
             },
             "5704e5a4d2720bb45b8b4567": {
-                "Enabled": true,
+                "Enabled": false,
                 "Locked": true,
                 "Insurance": true,
                 "Name": "Terminal",
@@ -1588,7 +1588,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Terminal",
                 "_Id": "5704e5a4d2720bb45b8b4567",
                 "Loot": [],
@@ -1619,7 +1619,7 @@
                 "BossLocationSpawn": []
             },
             "5704e47ed2720bb35b8b4568": {
-                "Enabled": true,
+                "Enabled": false,
                 "Locked": true,
                 "Insurance": true,
                 "Name": "Town",
@@ -1714,7 +1714,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Town",
                 "_Id": "5704e47ed2720bb35b8b4568",
                 "Loot": [],
@@ -2170,7 +2170,7 @@
                         "RequirementTip": "EXFIL_Item"
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "Woods",
                 "_Id": "5704e3c2d2720bac5b8b4567",
                 "Loot": [],
@@ -2699,7 +2699,7 @@
                         "RequirementTip": "EXFIL_Item"
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "BossLocationSpawn": [
                     {
                         "BossName": "bossBully",
@@ -2963,7 +2963,7 @@
                         "Count": 0
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "develop",
                 "_Id": "56db0b3bd2720bb0678b4567",
                 "Loot": [],
@@ -3022,10 +3022,22 @@
                 "waves": [
                     {
                         "number": 0,
-                        "time_min": 40,
-                        "time_max": 1000,
+                        "time_min": 400,
+                        "time_max": 500,
                         "slots_min": 1,
-                        "slots_max": 4,
+                        "slots_max": 3,
+                        "SpawnPoints": "BotZone",
+                        "BotSide": "Savage",
+                        "BotPreset": "hard",
+                        "WildSpawnType": "assault",
+                        "isPlayers": true
+                    },
+                    {
+                        "number": 1,
+                        "time_min": 400,
+                        "time_max": 600,
+                        "slots_min": 1,
+                        "slots_max": 3,
                         "SpawnPoints": "BotZone",
                         "BotSide": "Savage",
                         "BotPreset": "normal",
@@ -3033,21 +3045,9 @@
                         "isPlayers": true
                     },
                     {
-                        "number": 1,
-                        "time_min": 0,
-                        "time_max": 10,
-                        "slots_min": 1,
-                        "slots_max": 3,
-                        "SpawnPoints": "BotZone",
-                        "BotSide": "Savage",
-                        "BotPreset": "normal",
-                        "WildSpawnType": "assault",
-                        "isPlayers": false
-                    },
-                    {
                         "number": 2,
-                        "time_min": 210,
-                        "time_max": 300,
+                        "time_min": 500,
+                        "time_max": 700,
                         "slots_min": 1,
                         "slots_max": 3,
                         "SpawnPoints": "BotZone",
@@ -3058,9 +3058,9 @@
                     },
                     {
                         "number": 3,
-                        "time_min": 260,
-                        "time_max": 350,
-                        "slots_min": 0,
+                        "time_min": 660,
+                        "time_max": 850,
+                        "slots_min": 1,
                         "slots_max": 3,
                         "SpawnPoints": "BotZone",
                         "BotSide": "Savage",
@@ -3070,8 +3070,8 @@
                     },
                     {
                         "number": 4,
-                        "time_min": 410,
-                        "time_max": 500,
+                        "time_min": 610,
+                        "time_max": 900,
                         "slots_min": 1,
                         "slots_max": 3,
                         "SpawnPoints": "BotZone",
@@ -3082,9 +3082,9 @@
                     },
                     {
                         "number": 5,
-                        "time_min": 460,
-                        "time_max": 510,
-                        "slots_min": 0,
+                        "time_min": 700,
+                        "time_max": 900,
+                        "slots_min": 1,
                         "slots_max": 3,
                         "SpawnPoints": "BotZone",
                         "BotSide": "Savage",
@@ -3094,10 +3094,10 @@
                     },
                     {
                         "number": 6,
-                        "time_min": 1400,
-                        "time_max": 1500,
+                        "time_min": 800,
+                        "time_max": 1100,
                         "slots_min": 1,
-                        "slots_max": 3,
+                        "slots_max": 8,
                         "SpawnPoints": "BotZone",
                         "BotSide": "Savage",
                         "BotPreset": "hard",
@@ -3106,10 +3106,10 @@
                     },
                     {
                         "number": 7,
-                        "time_min": 1600,
-                        "time_max": 1700,
-                        "slots_min": 0,
-                        "slots_max": 3,
+                        "time_min": 900,
+                        "time_max": 1200,
+                        "slots_min": 1,
+                        "slots_max": 8,
                         "SpawnPoints": "BotZone",
                         "BotSide": "Savage",
                         "BotPreset": "hard",
@@ -3133,8 +3133,8 @@
                 "OpenZones": "BotZone",
                 "OcculsionCullingEnabled": true,
                 "GlobalLootChanceModifier": 1,
-                "OldSpawn": true,
-                "NewSpawn": false,
+                "OldSpawn": false,
+                "NewSpawn": true,
                 "BotMax": 0,
                 "BotStart": 0,
                 "BotStop": 0,
@@ -3159,8 +3159,8 @@
                     "GainSight": 0.8,
                     "MarksmanAccuratyCoef": 1,
                     "VisibleDistance": 1,
-                    "DistToSleep": 120,
-                    "DistToActivate": 100,
+                    "DistToSleep": 80,
+                    "DistToActivate": 79,
                     "MagnetPower": 15
                 },
                 "exits": [
@@ -3172,7 +3172,7 @@
                         "MinTime": 0,
                         "MaxTime": 0,
                         "PlayersCount": 0,
-                        "ExfiltrationTime": 10
+                        "ExfiltrationTime": 15
                     },
                     {
                         "Name": "Gate 3",
@@ -3182,7 +3182,7 @@
                         "MinTime": 0,
                         "MaxTime": 0,
                         "PlayersCount": 0,
-                        "ExfiltrationTime": 10
+                        "ExfiltrationTime": 15
                     },
                     {
                         "Name": "Gate 0",
@@ -3192,10 +3192,10 @@
                         "MinTime": 0,
                         "MaxTime": 0,
                         "PlayersCount": 0,
-                        "ExfiltrationTime": 10
+                        "ExfiltrationTime": 15
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "factory4_day",
                 "_Id": "55f2d3fd4bdc2d5f408b4567",
                 "Loot": [],
@@ -3462,7 +3462,7 @@
                         "ExfiltrationTime": 10
                     }
                 ],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "factory4_night",
                 "_Id": "59fc81d786f774390775787e",
                 "Loot": [],
@@ -3598,7 +3598,7 @@
                     "VisibleDistance": 0
                 },
                 "exits": [],
-                "DisabledForScav": false,
+                "DisabledForScav": true,
                 "Id": "hideout",
                 "_Id": "599319c986f7740dca3070a6",
                 "Loot": [],
@@ -4124,6 +4124,10 @@
             {
                 "Source": "55f2d3fd4bdc2d5f408b4567",
                 "Destination": "5704e3c2d2720bac5b8b4567"
+            },
+			{
+                "Source": "55f2d3fd4bdc2d5f408b4567",
+                "Destination": "5704e554d2720bac5b8b456e"
             },
             {
                 "Source": "5704e3c2d2720bac5b8b4567",
