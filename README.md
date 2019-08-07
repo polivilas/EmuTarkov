@@ -1,6 +1,10 @@
 # EmuTarkov
 Escape From Tarkov backend emulator written in JS.
 
+- removed EXE file cause its making false positive virus detections(from github repository)
+to run script you need node and install node_packages
+code to run node server from console: "node src/main.js"
+
 ## Information
 See https://justemutarkov.github.io
 

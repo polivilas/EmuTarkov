@@ -1,33 +1,22 @@
 "use strict";
 
 const utility = require('./utility.js');
-const settings = require('./settings.js');
 const profile = require('./profile.js');
 const item = require('./item.js');
 const ragfair = require('./ragfair.js');
 const bots = require('./bots.js');
+const locale = require('./locale.js');
+const trader = require('./trader.js');
 
+var settings = JSON.parse(utility.readJson("data/server.config.json"));
+var backendUrl = settings.server.backendUrl;
+var ip = settings.server.ip;
+var port = settings.server.port;
 var assort = "/client/trading/api/getTraderAssort/";
 var prices = "/client/trading/api/getUserAssortPrice/trader/";
 var getTrader = "/client/trading/api/getTrader/";
-var serverSettings = settings.getServerSettings();
-var backendUrl = serverSettings.backendUrl;
-var ip = serverSettings.ip;
-var port = serverSettings.port;
-
-function getTraders() {
-	return '{"err": 0,"errmsg": null,"data": ['
-			+ utility.readJson("data/configs/traders/54cb50c76803fa8b248b4571.json") + ', '	// Prapor
-			+ utility.readJson("data/configs/traders/54cb57776803fa99248b456e.json") + ', '	// Therapist
-			+ utility.readJson("data/configs/traders/579dc571d53a0658a154fbec.json") + ', '	// Fence 
-			+ utility.readJson("data/configs/traders/58330581ace78e27b8b10cee.json") + ', '	// Skier
-			+ utility.readJson("data/configs/traders/5935c25fb3acc3127c3d8cd9.json") + ', '	// Peacekeeper
-			+ utility.readJson("data/configs/traders/5a7c2eca46aef81a7ca2145d.json") + ', '	// Mechanic
-			+ utility.readJson("data/configs/traders/5ac3b934156ae10c4430e83c.json") + ', '	// Ragman
-			+ utility.readJson("data/configs/traders/everythingTrader.json") + ', ' 		// Polivilas
-			+ utility.readJson("data/configs/traders/PresetTrader.json") + ', ' 			// Jaeger
-			+ utility.readJson("data/configs/traders/SecretTrader.json") + ']}';			// TheMaoci
-}
+var localeGlobal = "/client/locale/";
+var localeMenu = "/client/menu/locale/";
 
 function joinMatch(info) {
 	let shortid = "";
@@ -54,7 +43,6 @@ function get(req, body) {
 	let output = "";
 	let url = req.url;
 	let info = JSON.parse("{}");
-
 	// parse body
 	if (body != "") {
 		info = JSON.parse(body);
@@ -65,38 +53,50 @@ function get(req, body) {
 		url = url.split("?retry=")[0];
 	}
 
-	console.log("ProfileID: " + profile.getActiveID());
-	console.log("Request: " + url);
-	console.log(info);
 
-	// handle special cases
-	if (url.includes(assort)) {
-		return utility.readJson("data/configs/assort/" + url.replace(assort, '') + ".json");
-	}
-	
+	// player bought items
 	if (url.includes(prices)) {
-		return JSON.stringify(profile.getPurchasesData());
-	}
-	
-	if (url.includes(getTrader)) {
-		return '{"err":0, "errmsg":null, "data":' + utility.readJson("data/configs/traders/" + url.replace(getTrader, '') + ".json") + '}';
+		return profile.getPurchasesData();
 	}
 
+	// trader profile
+	if (url.includes(getTrader)) {
+		return JSON.stringify(trader.get(url.replace(getTrader, '')));
+	}
+
+	// trader assortiment
+	if (url.includes(assort)) {
+		return JSON.stringify(trader.getAssort(url.replace(assort, '')));
+	}
+
+	// game images
 	if (url.includes("/data/images/")) {
 		return "IMAGE";
 	}
 
+	// raid banners
 	if (url.includes("/uploads/")) {
 		return "CONTENT";
-	}
-	
+    }
+
+	// menu localisation
+    if (url.includes(localeMenu)) {
+        return locale.getMenu(url.replace(localeMenu, ''));
+    }
+
+	// global localisation
+    if (url.includes(localeGlobal)) {
+        return locale.getGlobal(url.replace(localeGlobal, ''));
+    }
+
+	// push notifier
 	if (url.includes("/push/notifier/get/")) {
 		return '{"err":0, "errmsg":null, "data":[]}';
 	}
 
 	switch (url) {
 		case "/":
-			output = '0.11.7.3333 | EmuTarkov';
+			output = '0.11.7.3333 | Just EmuTarkov | justemutarkov.github.io';
 			break;
 
 		case "/client/friend/list":
@@ -106,48 +106,13 @@ function get(req, body) {
 		case "/client/game/profile/items/moving":
 			output = item.moving(info);
 			break;
-			
-		case "/client/mail/dialog/list":
-			output = '{"err":0, "errmsg":null, "data":[]}';
-			break;
-
-		case "/client/friend/request/list/outbox":
-		case "/client/friend/request/list/inbox":
-			output = '{"err":0, "errmsg":null, "data":[]}';
-			break;
 
 		case "/client/languages":
-			output = utility.readJson('data/configs/locale/languages.json');
+            output = locale.getLanguages();
             break;
-
-		case "/client/menu/locale/en":
-			output = utility.readJson('data/configs/locale/en/menu.json');
-			break;
-
-        case "/client/menu/locale/ru":
-		    output = utility.readJson('data/configs/locale/ru/menu.json');
-			break;
-
-		case "/client/locale/en":
-		case "/client/locale/En":
-			output = utility.readJson('data/configs/locale/en/global.json');
-			break;
-
-		case "/client/locale/ru":
-		case "/client/locale/Ru":
-		    output = utility.readJson('data/configs/locale/ru/global.json');
-			break;
-
-		case "/client/game/version/validate":
-			output = '{"err":0, "errmsg":null, "data":null}';
-			break;
 
 		case "/client/game/login":
 			output = profile.find(info, backendUrl);
-			break;
-
-		case "/client/game/logout":
-			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/queue/status":
@@ -174,10 +139,6 @@ function get(req, body) {
 			output = '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 			break;
 
-		case "/client/game/keepalive":
-			output = '{"err":0, "errmsg":null, "data":null}';
-			break;
-
 		case "/client/weather":
 			output = getWeather();
 			break;
@@ -190,8 +151,7 @@ function get(req, body) {
 			output = utility.readJson('data/configs/templates.json');
 			break;
 
-		case "/client/quest/list":
-			bots.generatePlayerScav();
+        case "/client/quest/list":
 			output = utility.readJson('data/configs/questList.json');
 			break;
 
@@ -199,16 +159,12 @@ function get(req, body) {
 			output = utility.readJson('data/configs/metricsConfig.json');
 			break;
 
-		case "/client/putMetrics":
-			output = '{"err":0, "errmsg":null, "data":null}';
-			break;
-
 		case "/client/game/bot/generate":
 			output = JSON.stringify( {"err": 0,"errmsg": null,"data": bots.generate(JSON.parse(body)) } );
 			break;
 
 		case "/client/trading/api/getTradersList":
-			output = getTraders();
+			output = JSON.stringify(trader.getList());
 			break;
 
 		case "/client/server/list":
@@ -220,15 +176,11 @@ function get(req, body) {
 			break;
 
 		case "/client/match/available":
-			output = '{"err":0, "errmsg":null, "data":true}';
+			output = '{"err":999, "errmsg":"Online isnt working in JustEmuTarkov", "data":false}';
 			break;
 
 		case "/client/match/join":
 			output = joinMatch(info);
-			break;
-
-		case "/client/match/exit":
-			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		case "/client/chatServer/list":
@@ -264,16 +216,37 @@ function get(req, body) {
 			output = "DONE";
 			break;
 
-		case "/favicon.ico":
-		case "/client/notifier/channel/create":
-		case "/client/game/profile/search":
 		case "/client/match/group/status":
+			output = '{ "err": 0, "errmsg": null, "data": { "players": [], "invite": [], "group": [] } }';
+			break;
+
+		case "/client/mail/dialog/list":
+		case "/client/friend/request/list/outbox":
+		case "/client/friend/request/list/inbox":
+			output = '{"err":0, "errmsg":null, "data":[]}';
+			break;
+
+		case "":
+			// TODO: actually generate the response properly
+			output = `{ "err": 0, "errmsg": null, "data": [{ "_id": "5c71b934354682353958e983", "Info": { "Nickname": "TEST", "Side": "Usec", "Level": 1 } }] }`;
+			break;
+
+		case "/favicon.ico":
+		case "/client/game/version/validate":
+		case "/client/game/logout":
+		case "/client/game/keepalive":
+		case "/client/putMetrics":
+		case "/client/notifier/channel/create":
 		case "/client/match/group/looking/stop":
 		case "/client/match/group/exit_from_menu":
+		case "/client/match/exit":
+		case "/client/match/updatePing":
+		case "/client/game/profile/savage/regenerate":
+			output = '{"err":0, "errmsg":null, "data":null}';
 			break;
 
 		default:
-			console.log("UNHANDLED REQUEST " + req.url);
+			console.log("UNHANDLED REQUEST " + req.url, "white", "red");
 			break;
 	}
 

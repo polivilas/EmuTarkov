@@ -21,17 +21,78 @@ function getCharacterData() {
 	return JSON.parse(utility.readJson(getPath() + 'character.json'));
 }
 
+function getStashType(){
+	let temp = JSON.parse(utility.readJson(getPath() + 'character.json'));
+	for (let key in temp.data[1].Inventory.items) {
+		if(temp.data[1].Inventory.items[key]._id == temp.data[1].Inventory.stash)
+			return temp.data[1].Inventory.items[key]._tpl;
+	}
+	console.log("Not found Stash: error check character.json", "red")
+	return "NotFound Error";
+}
+
 function setCharacterData(data) {
 	utility.writeJson(getPath() + 'character.json', data);
 }
 
 function getPurchasesData() {
-	return JSON.parse(utility.readJson(getPath() + 'purchases.json'));
+	//themaoci fix for offline raid selling ;) selling for 0.9 times of regular price for now
+	//load files
+	let multiplier = 0.9;
+	let data = JSON.parse(utility.readJson(getPath() + 'character.json'));
+	let items = JSON.parse(utility.readJson('data/configs/items.json'));
+	items = items.data;
+	//prepared vars
+	let equipment = data.data[1].Inventory.equipment;
+	let stash = data.data[1].Inventory.stash;
+	let questRaidItems = data.data[1].Inventory.questRaidItems;
+	let questStashItems = data.data[1].Inventory.questStashItems;
+	
+	data = data.data[1].Inventory.items; // make data as .items array
+	
+	//do not add this items to the list of soldable
+	let notSoldableItems = [
+		"544901bf4bdc2ddf018b456d",//wad of rubles
+		"5449016a4bdc2d6f028b456f",// rubles
+		"569668774bdc2da2298b4568",// euros
+		"5696686a4bdc2da3298b456a" // dolars
+	];
+	
+	let purchaseOutput = '{"err": 0,"errmsg":null,"data":{'; //start output string here
+	let i = 0;
+	for(let invItems in data){
+		if(	data[invItems]._id != equipment && 
+			data[invItems]._id != stash &&
+			data[invItems]._id != questRaidItems &&
+			data[invItems]._id != questStashItems && 
+			notSoldableItems.indexOf(data[invItems]._tpl) == -1){
+			if(i != 0){
+				
+				purchaseOutput += ',';
+			}
+			else 
+			{
+				i++;
+			}
+			let itemCount = (typeof data[invItems].upd != "undefined")?((typeof data[invItems].upd.StackObjectsCount != "undefined")?data[invItems].upd.StackObjectsCount:1):1;
+			let templateId = data[invItems]._tpl;
+			let basePrice = (items[templateId]._props.CreditsPrice >= 1)?items[templateId]._props.CreditsPrice:1;
+			let preparePrice = basePrice * multiplier * itemCount;
+			preparePrice = (preparePrice > 0 && preparePrice != "NaN")?preparePrice:1;
+			purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' + data[invItems]._tpl + 
+			'","count": ' + preparePrice.toFixed(0) + '}]]';
+		}
+		
+	}
+	purchaseOutput += '}}'; // end output string here
+	utility.writeJson(getPath() + 'purchases.json', purchaseOutput);
+	return purchaseOutput;
 }
 
 function setPurchasesData(data) {
 	utility.writeJson(getPath() + 'purchases.json', data);
 }
+
 
 function getActiveID() {
 	return profileID;
@@ -240,6 +301,7 @@ module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
 module.exports.getPurchasesData = getPurchasesData;
 module.exports.setPurchasesData = setPurchasesData;
+module.exports.getStashType = getStashType;
 module.exports.getActiveID = getActiveID;
 module.exports.setActiveID = setActiveID;
 module.exports.changeNickname = changeNickname;

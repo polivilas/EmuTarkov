@@ -2,15 +2,19 @@
 
 const utility = require('./utility.js');
 const profile = require('./profile.js');
+const trader = require('./trader.js');
 
 var items = JSON.parse(utility.readJson('data/configs/items.json'));
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 var output = "";
-var curr = [];
-curr['RUB'] = "5449016a4bdc2d6f028b456f";
-curr['USD'] = "5696686a4bdc2da3298b456a";
-curr['EUR'] = "569668774bdc2da2298b4568";
+
+//this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
+function setPlayerStash(){
+	let stashTPL = profile.getStashType();
+	stashX = (items.data[stashTPL]._props.Grids[0]._props.cellsH != 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
+	stashY = (items.data[stashTPL]._props.Grids[0]._props.cellsV != 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
+}
 
 function GenItemID() {
 	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
@@ -43,20 +47,20 @@ function getSize(itemtpl, itemID, location) {
 					toDo.push(location[tmpKey]._id);
 					tmpItem = getItem(location[tmpKey]._tpl)[1];
 
-					if (tmpItem._props.ExtraSizeLeft != undefined && tmpItem._props.ExtraSizeLeft > tmpL) {
-						tmpL = tmpItem._props.ExtraSizeLeft;
+					if (typeof tmpItem._props.ExtraSizeLeft != "undefined" && tmpItem._props.ExtraSizeLeft != 0) {
+						tmpL += tmpItem._props.ExtraSizeLeft;
 					}
 					
-					if (tmpItem._props.ExtraSizeRight != undefined && tmpItem._props.ExtraSizeRight > tmpR) {
-						tmpR = tmpItem._props.ExtraSizeRight;
+					if (typeof tmpItem._props.ExtraSizeRight != "undefined" && tmpItem._props.ExtraSizeRight != 0) {
+						tmpR += tmpItem._props.ExtraSizeRight;
 					}
 					
-					if (tmpItem._props.ExtraSizeUp != undefined && tmpItem._props.ExtraSizeUp > tmpU) {
-						tmpU = tmpItem._props.ExtraSizeUp;
+					if (typeof tmpItem._props.ExtraSizeUp != "undefined" && tmpItem._props.ExtraSizeUp != 0) {
+						tmpU += tmpItem._props.ExtraSizeUp;
 					}
 					
-					if (tmpItem._props.ExtraSizeDown != undefined && tmpItem._props.ExtraSizeDown > tmpD) {
-						tmpD = tmpItem._props.ExtraSizeDown;
+					if (typeof tmpItem._props.ExtraSizeDown != "undefined" && tmpItem._props.ExtraSizeDown != 0) {
+						tmpD += tmpItem._props.ExtraSizeDown;
 					}
 				}
 			}
@@ -115,32 +119,42 @@ function questHandover(tmpList, body) {
 
  	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
- function addNote(tmpList, body) {
+function addNote(tmpList, body) {
 	tmpList.data[1].Notes.Notes.push({"Time": body.note.Time, "Text": body.note.Text});
 	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
- function editNode(tmpList, body) {
+function editNode(tmpList, body) {
 	tmpList.data[1].Notes.Notes[body.index] = {"Time": body.note.Time, "Text": body.note.Text};
 	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
- function deleteNote(tmpList, body) {
+function deleteNote(tmpList, body) {
 	tmpList.data[1].Notes.Notes.splice(body.index, 1);
 	profile.setCharacterData(tmpList);
 	return "OK";
- }
+}
 
 function moveItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id && item._id == body.item) {
 			item.parentId = body.to.id;
 			item.slotId = body.to.container;
-			
+			//cartriges handler start
+			if (body.to.container == 'cartridges'){
+				let count_cartriges = 0;
+				for (let item_ammo in tmpList.data[1].Inventory.items) {
+					if(body.to.id == item_ammo.parentId){
+						count_cartriges = count_cartriges + 1;
+					}
+				}
+				body.to.location = count_cartriges;//wrong location for first cartrige
+			}
+			//cartriges handler end
 			if (body.to.location) {
 				item.location = body.to.location;
 			} else {
@@ -157,7 +171,7 @@ function moveItem(tmpList, body) {
 	return "";
 }
 
-function removeItem(tmpList, body) {
+function removeItem(tmpList, body, ) {
 	var toDo = [body.item];
 
 	while (true) {
@@ -200,10 +214,17 @@ function splitItem(tmpList, body) {
 			item.upd.StackObjectsCount -= body.count;
 			
 			let newItem = GenItemID();
-			
-			output.data.items.new.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-			tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": body.container.location, "upd": {"StackObjectsCount": body.count}});
-			
+			let location = body.container.location;
+			if(typeof body.container.location == "undefined" && body.container.container === "cartridges"){
+				let temp_counter = 0;
+				for (let item_ammo in tmpList.data[1].Inventory.items) {
+					if(item_ammo.parentId == body.container.id)
+						temp_counter++;
+				}
+				location = temp_counter;//wrong location for first cartrige
+			}
+				output.data.items.new.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": location, "upd": {"StackObjectsCount": body.count}});
+				tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": location, "upd": {"StackObjectsCount": body.count}});
 			profile.setCharacterData(tmpList);
 			return "OK";
 		}
@@ -342,7 +363,110 @@ function healPlayer(tmpList, body) {
 	return "OK";
 }
 
-function recheckInventoryFreeSpace(tmpList){
+function addToWishList(tmpList, body) {
+	// check if the item is already in wishlist
+	for (let item in tmpList.data[1].Wishlist) {
+		console.log(item);
+
+		// don't add the item
+		if (tmpList.data[1].WishList[item].tid == body.templateId) {
+			return "OK";
+		}
+	}
+
+	// add the item to the wishlist
+	tmpList.data[1].WishList.push({"tid": body.templateId});
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
+
+function removeFromWishList(tmpList, body) {
+	// remove the item if it exists
+	for (let item in tmpList.data[1].Wishlist) {
+		console.log(item);
+
+		if (tmpList.data[1].WishList[item].tid == body.templateId) {
+			tmpList.data[1].WishList.splice(item, 1);
+		}
+	}
+
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
+
+function examineItem(tmpList, body) {
+	let returned = "BAD";
+
+	// trader inventory
+	if (tmpTrader) {
+		for (let item of tmpTrader.data) {
+			if (item._id == body.item) {
+				console.log("Found trader with examined item: " + item._id);
+				returned = item._tpl;
+				break;
+			}
+		}
+	}
+
+	// player inventory
+	if (returned == "BAD") {
+		for (let item of tmpList.data[1].Inventory.items) {
+			if (item._id == body.item) {
+				console.log("Found equipment examing item: " + item._id);
+				returned = item._tpl;
+				break;
+			}
+		}
+	}
+
+	// item not found
+	if (returned == "BAD") {
+		console.log("Cannot find proper item. Stopped.", "white", "red");
+		return "BAD";
+	}
+
+	// item found
+	console.log("EXAMINED: " + returned, "white", "green");
+	tmpList.data[1].Encyclopedia[returned] = true;
+	profile.setCharacterData(tmpList);
+
+	return "OK";
+}
+
+function transferItem(tmpList, body) {
+	for (let item of tmpList.data[1].Inventory.items) {
+			if (item._id == body.item) {
+				if(item.upd.StackObjectsCount > body.count)
+					item.upd.StackObjectsCount -= body.count;
+				else 
+					item.splice(item, 1);
+			}
+			if(item._id == body.with){
+				item.upd.StackObjectsCount += body.count;
+			}
+	}
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
+
+function swapItem(tmpList, body) {
+	for (let item of tmpList.data[1].Inventory.items) {
+			if (item._id == body.item) {
+				item.parentId = body.to.id // parentId
+				item.slotId = body.to.container // slotId
+				item.location = body.to.location // location
+			}
+			if(item._id == body.item2){
+				item.parentId = body.to2.id
+				item.slotId = body.to2.container
+				delete item.location;
+			}
+	}
+	profile.setCharacterData(tmpList);
+	return "OK";
+}
+
+function recheckInventoryFreeSpace(tmpList) {
 	let Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
 
 	for (let item of tmpList.data[1].Inventory.items) {
@@ -364,60 +488,103 @@ function recheckInventoryFreeSpace(tmpList){
 			}
 		}
 	}
-
 	return Stash2D;
 }
 
-function payMoney(tmpList, amount, body) {
-	let tmpTraderInfo = JSON.parse(utility.readJson('data/configs/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
-	let currency = curr[tmpTraderInfo.currency];
+function getCurrency(currency) {
+	// get currency
+	switch (currency) {
+		case "RUB":
+			return "5449016a4bdc2d6f028b456f";
 
-	for (let item of tmpList.data[1].Inventory.items) {
-		if (item._tpl == currency && item.upd.StackObjectsCount >= amount) {
-			item.upd.StackObjectsCount -= amount;
-			profile.setCharacterData(tmpList);
-			
-			console.log("Money paid: " + amount + " " + tmpTraderInfo.currency);
-			return true;
-		}
+		case "EUR":
+			return "5696686a4bdc2da3298b456a";
+
+		case "USD":
+			return "569668774bdc2da2298b4568";
 	}
-
-	console.log("no money found");
-	return false;
+	// currency not found
+	console.log("Currency not found, fallback to RUB", "white", "yellow");
+	return "5449016a4bdc2d6f028b456f";
 }
 
-function getMoney(tmpList, amount, body) {
-	let tmpTraderInfo = JSON.parse(utility.readJson('data/configs/traders/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
-	let currency = curr[tmpTraderInfo.currency];
+function payMoney(tmpList, moneyObject, body) {
+	// function for paying money/trading for goods
+
+	for (let item of tmpList.data[1].Inventory.items) {
+		for (let i = 0; i < moneyObject.length; i++){
+			if(typeof item.upd != "undefined")
+				if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount > body[i].count) {
+					item.upd.StackObjectsCount -= body[i].count;
+					output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
+				} else if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount == body[i].count) {
+					delete tmpList.data[1].Inventory.items[item];
+					output.data.items.del.push({ "_id": item._id });
+				} else if (item._id == moneyObject[i].id && item.upd.StackObjectsCount < body[i].count)
+					return false;
+		}
+	}
+	// this script will not override data if something goes wrong aka return false;
+	// if everything goes OK save profile
+	profile.setCharacterData(tmpList);
+	console.log("Items taken. Status OK.", "white", "green");
+	return true;
+}
+
+function findMoney(tmpList, barter_itemID) {
+	let prepareReturn = [];
+		for (let item of tmpList.data[1].Inventory.items)
+			for (let i = 0; i < barter_itemID.length; i++)
+				if (item._id == barter_itemID[i])
+					prepareReturn[i] = item;
+	return prepareReturn; // if none return []
+}
+
+function getMoney(tmpList, amount, body, output) {
+	
+	let tmpTraderInfo = trader.get(body.tid);
+	let currency = getCurrency(tmpTraderInfo.data.currency);
 
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._tpl == currency) {
 			item.upd.StackObjectsCount += amount;
 			profile.setCharacterData(tmpList);
-
-			console.log("Money received: " + amount + " " + tmpTraderInfo.currency);
+			output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
+			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
 			return true;
 		}
 	}
 
-	console.log("no money found");
+	console.log("No money found", "white", "red");
 	return false;
 }
 
-function buyItem(tmpList, tmpUserTrader, prices, body) {
-	let tmpTrader = JSON.parse(utility.readJson('data/configs/assort/' + body.tid.replace(/[^a-zA-Z0-9]/g, '') + '.json'));
-	let money = tmpTrader.data.barter_scheme[body.item_id][0][0].count * body.count;
-
-	// print debug information
-	console.log("Item:");
+function buyItem(tmpList, body) {
+	let tmpTrader = trader.getAssort(body.tid);
+	// Buy item has only 1 item thats why [0][0]
 	console.log(body.scheme_items);
-
-	// pay the item	
-	if (!payMoney(tmpList, money, body)) {
+	let money = [];
+	let moneyID = [];
+	//prepare barter items as money (roubles are counted there as well)
+	for(let i = 0; i < body.scheme_items.length; i++){
+		money[i] = body.scheme_items[i].count; //tmpTrader.data.barter_scheme[body.item_id][0][0].count 
+		moneyID[i] = body.scheme_items[i].id;
+	}
+	//check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
+	let moneyObject = findMoney(tmpList, moneyID);
+	if(typeof moneyObject[0] == "undefined"){
+		console.log("Error something goes wrong (findMoney) - stop cheating");
+		return "";
+	}
+	
+	// pay the item	to profile
+	if (!payMoney(tmpList, moneyObject, body.scheme_items)) {
 		console.log("no money found");
 		return "";
 	}
 		
+	// print debug information
+	console.log("Bought item: " + body.item_id);
 	for (let item of tmpTrader.data.items) {
 		if (item._id && item._id == body.item_id) {
 			let MaxStacks = 1;
@@ -455,7 +622,7 @@ function buyItem(tmpList, tmpUserTrader, prices, body) {
 				let addedProperly = false;
 				let tmpSize = getSize(item._tpl, item._id, tmpTrader.data.item);
 				let StashFS_2D = recheckInventoryFreeSpace(tmpList);					
-				
+				console.log(tmpSize);
 				tmpSizeX = tmpSize[0] + tmpSize[2] + tmpSize[3];
 				tmpSizeY = tmpSize[1] + tmpSize[4] + tmpSize[5];
 					
@@ -482,7 +649,7 @@ function buyItem(tmpList, tmpUserTrader, prices, body) {
 
 							output.data.items.new.push({"_id": newItem, "_tpl": item._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": StacksValue[stacks]}});
 							tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": item._tpl, "parentId": "5c71b934354682353958ea35", "slotId": "hideout", "location": {"x": x, "y": y, "r": 0}, "upd": {"StackObjectsCount": StacksValue[stacks]}});
-							tmpUserTrader.data[newItem] = [[{"_tpl": item._tpl, "count": prices.data.barter_scheme[item._tpl][0][0].count}]];
+							//tmpUserTrader.data[newItem] = [[{"_tpl": item._tpl, "count": prices.data.barter_scheme[item._tpl][0][0].count}]];
 							
 							while (true) {
 								if (toDo[0] != undefined) {
@@ -523,7 +690,7 @@ function buyItem(tmpList, tmpUserTrader, prices, body) {
 			}	
 			
 			// assumes addedProperly is always true
-			profile.setPurchasesData(tmpUserTrader);
+			//profile.setPurchasesData(tmpUserTrader);
 			profile.setCharacterData(tmpList);
 			return "OK";
 		}
@@ -532,13 +699,13 @@ function buyItem(tmpList, tmpUserTrader, prices, body) {
 	return "";
 }
 
-function sellItem(tmpList, tmpUserTrader, prices, body) {
+function sellItem(tmpList, body) {
 	let money = 0;
 
 	// print debug information
 	console.log("Items:");
 	console.log(body.items);
-
+	let prices = JSON.parse(profile.getPurchasesData());
 	// find the items
 	for (let item of tmpList.data[1].Inventory.items) {
 		for (let i in body.items) {
@@ -547,36 +714,34 @@ function sellItem(tmpList, tmpUserTrader, prices, body) {
 			// item found
 			if (item && item._id == checkID) {
 				// add money to return to the player
-				money += prices.data.barter_scheme[item._tpl][0][0].count * body.items[i].count;
-				
+				let price_money = prices.data[item._id][0][0].count;
 				if (removeItem(tmpList, {Action: 'Remove', item: checkID}) == "OK") {
-					delete tmpUserTrader.data[checkID];
+					money += price_money * body.items[i].count;
 				}
 			}
 		}
 	}
 
 	// get money the item
-	if (!getMoney(tmpList, money, body)) {
+	if (!getMoney(tmpList, money, body, output)) {
 		return "";
 	}
 				
-	profile.setPurchasesData(tmpUserTrader);
+	//profile.setPurchasesData(tmpUserTrader); 
 	return "OK";
 }
 
 function confirmTrading(tmpList, body)  {
-	let tmpUserTrader = profile.getPurchasesData();
-	let prices = JSON.parse(utility.readJson('data/configs/assort/everythingTrader.json'));
 
 	// buying
 	if (body.type == "buy_from_trader")  {
-		return buyItem(tmpList, tmpUserTrader, prices, body);
+		setPlayerStash();
+		return buyItem(tmpList, body);
 	}
 
 	// selling
 	if (body.type == "sell_to_trader") {				
-		return sellItem(tmpList, tmpUserTrader, prices, body)
+		return sellItem(tmpList, body);
 	}
 
 	return "";
@@ -585,7 +750,7 @@ function confirmTrading(tmpList, body)  {
 function confirmRagfairTrading(tmpList, body) {
 	body.Action = "TradingConfirm";
 	body.type = "buy_from_trader";
-	body.tid = "everythingTrader";
+	body.tid = "91_everythingTrader";
 	body.item_id = body.offerId;
 	body.scheme_id = 0;
 	body.scheme_items = body.items;
@@ -656,6 +821,21 @@ function handleMoving(body) {
 
 		case "Heal":
 			return healPlayer(tmpList, body);
+		
+		case "Examine":
+			return examineItem(tmpList, body);
+
+		case "Transfer":
+			return transferItem(tmpList, body);
+
+		case "Swap":
+			return swapItem(tmpList, body);
+
+		case "AddToWishList":
+			return addToWishList(tmpList, body);
+
+		case "RemoveFromWishList":
+			return removeFromWishList(tmpList, body);
 
 		case "TradingConfirm":
 			return confirmTrading(tmpList, body);
@@ -664,7 +844,7 @@ function handleMoving(body) {
 			return confirmRagfairTrading(tmpList, body);
 
 		default:
-			console.log("UNHANDLED ACTION");
+			console.log("UNHANDLED ACTION:" + body.Action, "white", "red");
             return "";
 	}
 }
@@ -688,3 +868,4 @@ function moving(info) {
 module.exports.getOutput = getOutput;
 module.exports.resetOutput = resetOutput;
 module.exports.moving = moving;
+module.exports.removeItem = removeItem;

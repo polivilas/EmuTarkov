@@ -2,8 +2,7 @@
     "_id": "BossKilla",
     "aid": 0,
     "savage": null,
-    "Info": 
-    {
+    "Info": {
         "Nickname": "Killa",
         "LowerNickname": "killa",
         "Side": "savage",
@@ -16,8 +15,7 @@
         "MemberCategory": 0,
         "lockedMoveCommands": false,
         "LastTimePlayedAsSavage": 0,
-        "Settings": 
-        {
+        "Settings": {
             "Role": "bossKilla",
             "BotDifficulty": "hard",
             "Experience": -1
@@ -26,110 +24,84 @@
         "GlobalWipe": false,
         "NicknameChangeDate": 0
     },
-    "Customization": 
-    {
-        "Head": 
-        {
+    "Customization": {
+        "Head": {
             "path": "assets/content/characters/character/prefabs/head_boss_killa.bundle",
             "rcid": null
         },
-        "Body": 
-        {
+        "Body": {
             "path": "assets/content/characters/character/prefabs/top_boss_killa.bundle",
             "rcid": ""
         },
-        "Feet": 
-        {
+        "Feet": {
             "path": "assets/content/characters/character/prefabs/pant_boss_killa.bundle",
             "rcid": null
         },
-        "Hands": 
-        {
+        "Hands": {
             "path": "assets/content/hands/wild/wild_body_3_firsthands.bundle",
             "rcid": null
         }
     },
-    "Health": 
-    {
-        "Hydration": 
-        {
+    "Health": {
+        "Hydration": {
             "Current": 100,
             "Maximum": 100
         },
-        "Energy": 
-        {
+        "Energy": {
             "Current": 100,
             "Maximum": 100
         },
-        "BodyParts": 
-        {
-            "Head": 
-            {
-                "Health": 
-                {
+        "BodyParts": {
+            "Head": {
+                "Health": {
                     "Current": 70,
                     "Maximum": 70
                 }
             },
-            "Chest": 
-            {
-                "Health": 
-                {
+            "Chest": {
+                "Health": {
                     "Current": 170,
                     "Maximum": 170
                 }
             },
-            "Stomach": 
-            {
-                "Health": 
-                {
+            "Stomach": {
+                "Health": {
                     "Current": 150,
                     "Maximum": 150
                 }
             },
-            "LeftArm": 
-            {
-                "Health": 
-                {
+            "LeftArm": {
+                "Health": {
                     "Current": 100,
                     "Maximum": 100
                 }
             },
-            "RightArm": 
-            {
-                "Health": 
-                {
+            "RightArm": {
+                "Health": {
                     "Current": 100,
                     "Maximum": 100
                 }
             },
-            "LeftLeg": 
-            {
-                "Health": 
-                {
+            "LeftLeg": {
+                "Health": {
                     "Current": 120,
                     "Maximum": 120
                 }
             },
-            "RightLeg": 
-            {
-                "Health": 
-                {
+            "RightLeg": {
+                "Health": {
                     "Current": 120,
                     "Maximum": 120
                 }
             }
         }
     },
-    "Inventory": 
-    {
-        "items": 
-        [
+    "Inventory": {
+        "items": [
             {
                 "_id": "5c6687d65e9d882c8841f0fd",
                 "_tpl": "55d7217a4bdc2d86028b456d"
             },
-
             {
                 "_id": "5c6687d65e9d882c8841f121",
                 "_tpl": "5af99e9186f7747c447120b8",
@@ -231,9 +203,10 @@
                 "_tpl": "5c0e842486f77443a74d2976",
                 "parentId": "HeadWearKilla",
                 "slotId": "mod_equipment",
-                "upd": 
-                {
-                    "Togglable":{"On": true}
+                "upd": {
+                    "Togglable": {
+                        "On": true
+                    }
                 }
             },
             {
@@ -247,64 +220,83 @@
                 "_tpl": "55d482194bdc2d1d4e8b456b",
                 "parentId": "VestRigKilla",
                 "slotId": "1",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "ammoMag1Killa",
                 "_tpl": "5c0d5e4486f77478390952fe",
                 "parentId": "magRig1Killa",
                 "slotId": "cartridges",
-                "upd": {"StackObjectsCount": 60 }
+                "upd": {
+                    "StackObjectsCount": 60
+                }
             },
             {
                 "_id": "magRig2Killa",
                 "_tpl": "55d482194bdc2d1d4e8b456b",
                 "parentId": "VestRigKilla",
                 "slotId": "2",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "ammoMag2Killa",
                 "_tpl": "5c0d5e4486f77478390952fe",
                 "parentId": "magRig2Killa",
                 "slotId": "cartridges",
-                "upd": {"StackObjectsCount": 60 }
+                "upd": {
+                    "StackObjectsCount": 60
+                }
             },
             {
                 "_id": "ammoMagWeaponKilla",
                 "_tpl": "5c0d5e4486f77478390952fe",
                 "parentId": "5c0c20f586f7745352630cf1",
                 "slotId": "cartridges",
-                "upd": {"StackObjectsCount": 95 }
+                "upd": {
+                    "StackObjectsCount": 95
+                }
             },
-            
-
             {
                 "_id": "grenade1Killa",
                 "_tpl": "5710c24ad2720bc3458b45a3",
                 "parentId": "5c6687d65e9d882c8841f121",
                 "slotId": "pocket1",
-                "location": {"x": 0,"y": 0,"r": 0}
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
                 "_id": "grenade2Killa",
                 "_tpl": "5710c24ad2720bc3458b45a3",
                 "parentId": "5c6687d65e9d882c8841f121",
                 "slotId": "pocket2",
-                "location": {"x": 0,"y": 0,"r": 0}
-            },
-
-            {
-              "_id": "5c6687d65e9d882c8841f0fc",
-              "_tpl": "566abbc34bdc2d92178b4576"
-            },
-            {
-              "_id": "5c6687d65e9d882c8841f0ff",
-              "_tpl": "5963866b86f7747bfa1c4462"
+                "location": {
+                    "x": 0,
+                    "y": 0,
+                    "r": 0
+                }
             },
             {
-              "_id": "5c6687d65e9d882c8841f0fe",
-              "_tpl": "5963866286f7747bf429b572"
+                "_id": "5c6687d65e9d882c8841f0fc",
+                "_tpl": "566abbc34bdc2d92178b4576"
+            },
+            {
+                "_id": "5c6687d65e9d882c8841f0ff",
+                "_tpl": "5963866b86f7747bfa1c4462"
+            },
+            {
+                "_id": "5c6687d65e9d882c8841f0fe",
+                "_tpl": "5963866286f7747bf429b572"
             }
         ],
         "equipment": "5c6687d65e9d882c8841f0fd",
@@ -314,8 +306,7 @@
         "fastPanel": {}
     },
     "Skills": {
-        "Common": 
-        [
+        "Common": [
             {
                 "Id": "Endurance",
                 "Progress": 0,
@@ -645,17 +636,17 @@
         "Points": 0
     },
     "Stats": {
-      "SessionCounters": {
-        "Items": []
-      },
-      "OverallCounters": {
-        "Items": []
-      }
+        "SessionCounters": {
+            "Items": []
+        },
+        "OverallCounters": {
+            "Items": []
+        }
     },
     "Encyclopedia": null,
     "ConditionCounters": {
-      "Counters": []
+        "Counters": []
     },
     "BackendCounters": {},
     "InsuredItems": []
-}   
+}

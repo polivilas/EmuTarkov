@@ -1,14 +1,14 @@
 "use strict";
 
 const utility = require('./utility.js');
-const settings = require('./settings.js');
 const profile = require('./profile.js');
 
-var botSettings = settings.getBotSettings();
 var items = JSON.parse(utility.readJson('data/configs/items.json'));
-var presets = JSON.parse(utility.readJson("data/configs/bots/botSettings.json"));
+var presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
 var weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
-var names = JSON.parse(utility.readJson("data/configs/bots/botNames.json")); 
+var names = JSON.parse(utility.readJson("data/configs/bots/botNames.json"));
+var settings = JSON.parse(utility.readJson("data/server.config.json"));
+var handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
 function generateBotBossKilla(params) {
 	let boss = JSON.parse(utility.readJson("data/configs/bots/botBossKilla.json"));
@@ -201,6 +201,33 @@ function generateBotHeadwear(internalId) {
 	return item;
 }
 
+function generateBotFaceShield(headwearTemplate,internalId) {
+	let headwearItem = items.data[headwearTemplate]._props;
+	
+	if (headwearItem.Slots.length > 0 && utility.getRandomIntEx(100) <= 100) {
+		for (let itemSlot of headwearItem.Slots) {
+			if (itemSlot._name == "mod_equipment" || itemSlot._name == "mod_equipment_000" ) {
+				let itemslotname = itemSlot._name;
+
+				if (itemSlot._props.filters[0].Filter.length > 0) {
+					let compat = itemSlot._props.filters[0].Filter;
+					let item = {};
+	
+					item._id = "FaceShieldScav" + internalId;
+					item._tpl= compat[utility.getRandomIntEx(compat.length)];
+					item.parentId = "HeadWearScav" + internalId;
+					item.slotId = itemslotname;
+					item.upd = {"Togglable": {"On": true}};
+					
+					return item;
+				}
+			}
+		}		
+	}
+
+	return null;
+}
+
 function generateBotBackpack(internalId) {
 	let item = {};
 
@@ -209,9 +236,33 @@ function generateBotBackpack(internalId) {
 	item.parentId = "5c6687d65e9d882c8841f0fd";
 	item.slotId = "Backpack";
 
-	// todo: add items inside backpack
-
 	return item;
+}
+
+function generateBotBackpackItem(internalId,backpackId) {
+	let item = {};
+		
+	// be very carefull with this ... 
+	while (true) {
+		let found = true;
+		let itemHandbook = handbook.data.Items[utility.getRandomIntEx(handbook.data.Items.length)];
+
+		for (let expt of presets.item_backpack_exceptions) {	
+			if (expt == itemHandbook.ParentId) {
+				found = false;
+			}
+		}
+
+		if (found == true) {
+			item._id = "BackpackItemScav" + internalId;
+			item._tpl = itemHandbook.Id;
+			item.parentId = backpackId;
+			item.slotId = "main";
+			item.location = {x:0, y:0, r:"Horizontal"};
+
+			return item;
+		}
+	}
 }
 
 function generateBotArmorVest(internalId) {
@@ -422,8 +473,8 @@ function generateBaseBot(params) {
 	}
 
 	// generate PMC bot instead
-	if (params.Role != "followerBully" && botSettings.pmcWar.enabled == true) {
-		if (utility.getRandomIntEx(100) <= botSettings.pmcWar.sideUsec) { 
+	if (params.Role != "followerBully" && settings.bots.pmcWar.enabled == true) {
+		if (utility.getRandomIntEx(100) <= settings.bots.pmcWar.sideUsec) { 
 			bot = generateUsecAppearance(bot, internalId);
 			bot.Info.Side = "Usec";
 		} else {
@@ -507,37 +558,47 @@ function generateBaseBot(params) {
 	bot.Inventory.items.push(generateBotKnife(internalId));
 
 	// chance to add glasses
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.glasses) {
+	if (utility.getRandomIntEx(100) <= settings.bots.spawn.glasses) {
 		bot.Inventory.items.push(generateBotGlasses(internalId));
 	}
 
 	// chance to add face cover
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.faceCover) {
+	if (utility.getRandomIntEx(100) <= settings.bots.spawn.faceCover) {
 		bot.Inventory.items.push(generateBotFaceCover(internalId));
 	}
 
 	// chance to add headwear
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.headwear) {
-		bot.Inventory.items.push(generateBotHeadwear(internalId));
+	if (utility.getRandomIntEx(100) <= 100) {
+		let hdwItem = generateBotHeadwear(internalId);
+		let fcshItem = generateBotFaceShield(hdwItem._tpl, internalId);
+
+		bot.Inventory.items.push(hdwItem);
+		
+		if (fcshItem != null) {
+			bot.Inventory.items.push(fcshItem);
+		} 
 	}
 
 	// chance to add a backpack
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.backpack) {
-		bot.Inventory.items.push(generateBotBackpack(internalId));
+	if (utility.getRandomIntEx(100) <= settings.bots.spawn.backpack) {
+		let backpack = generateBotBackpack(internalId);
+
+		bot.Inventory.items.push(backpack);
+		bot.Inventory.items.push(generateBotBackpackItem(internalId,backpack._id));
 	}
 
 	// chance to add an armor vest
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.armorVest) {
+	if (utility.getRandomIntEx(100) <= settings.bots.spawn.armorVest) {
 		bot.Inventory.items.push(generateBotArmorVest(internalId));
 	}
 
 	// chance to add a med pocket, bully followers have 100% chance
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.medPocket || params.Role == "followerBully") {
+	if (utility.getRandomIntEx(100) <= settings.bots.spawn.medPocket || params.Role == "followerBully") {
 		bot.Inventory.items.push(generateBotMedPocket(internalId));
 	}
 
 	// chance to add a item pocket, bully followers have 100% chance
-	if (utility.getRandomIntEx(100) <= botSettings.spawn.itemPocket || params.Role == "followerBully") {
+	if (utility.getRandomIntEx(100) <= settings.bots.spawn.itemPocket || params.Role == "followerBully") {
 		bot.Inventory.items.push(generateBotItemPocket(internalId));
 	}
 
@@ -555,27 +616,27 @@ function generate(databots) {
 
 		switch (params.Role) {
 			case "bossKilla":
-				limit = botSettings.limit.bossKilla;
+				limit = settings.bots.limit.bossKilla;
 				break;
 
 			case "bossBully":
-				limit = botSettings.limit.bossBully;
+				limit = settings.bots.limit.bossBully;
 				break;
 
 			case "followerBully":
-				limit = botSettings.limit.bullyFollowers;
+				limit = settings.bots.limit.bullyFollowers;
 				break;
 
 			case "marksman":
-				limit = botSettings.limit.marksman;
+				limit = settings.bots.limit.marksman;
 				break;
 
 			case "pmcBot":
-				limit = botSettings.limit.pmcBot;
+				limit = settings.bots.limit.pmcBot;
 				break;
 
 			default:
-				limit = botSettings.limit.scav;
+				limit = settings.bots.limit.scav;
 				break;
 		}
 
@@ -609,7 +670,7 @@ function generate(databots) {
 
 function generatePlayerScav() {
 	let character = profile.getCharacterData();
-	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]})
+	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]});
 	
 	playerscav[0].Info.Settings = {};
 	playerscav[0]._id = "5c71b934354682353958e983";
