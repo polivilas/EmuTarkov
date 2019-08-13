@@ -8,18 +8,106 @@ var items = JSON.parse(utility.readJson('data/configs/items.json'));
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 var output = "";
+// --------------------------------------------------------------------------------------------------------------------- \\
+// recalculate stach taken place
+function recheckInventoryFreeSpace(tmpList) {
+	let Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
+	//console.log(tmpList.data[1].Inventory.stash);
+	for (let item of tmpList.data[1].Inventory.items) {
+		// hideout  // added proper stash ID older was "5c71b934354682353958ea35"
+		if (item.parentId == tmpList.data[1].Inventory.stash && item.location != undefined) {
+			let tmpItem = getItem(item._tpl)[1];
+			let tmpSize = getSize(item._tpl, item._id, tmpList.data[1].Inventory.items);
+			
+			//			x			L				r
+			let iW = tmpSize[0] + tmpSize[2] + tmpSize[3];
+			
+			//			y			u				d
+			let iH = tmpSize[1] + tmpSize[4] + tmpSize[5];
+			let fH = (item.location.rotation == "Vertical" ? iW : iH);
+			let fW = (item.location.rotation == "Vertical" ? iH : iW);
+			
+			for (let x = 0; x < fH; x++) {
+				Stash2D[item.location.y + x].fill(1, item.location.x, item.location.x + fW);
+			}
+		}
+	}
+	return Stash2D;
+}
+// Translate currency_name to _tpl
+function getCurrency(currency) {
+	// get currency
+	switch (currency) {
+		case "EUR":
+			return "5696686a4bdc2da3298b456a";
 
+		case "USD":
+			return "569668774bdc2da2298b4568";
+			
+		default:
+			return "5449016a4bdc2d6f028b456f"; // RUB is here // set by default
+	}
+}
+// take money and insert items into return to server request
+function payMoney(tmpList, moneyObject, body) {
+	for (let item of tmpList.data[1].Inventory.items) {
+		for (let i = 0; i < moneyObject.length; i++){
+			if(typeof item.upd != "undefined")
+				if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount > body[i].count) {
+					item.upd.StackObjectsCount -= body[i].count;
+					output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
+				} else if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount == body[i].count) {
+					delete tmpList.data[1].Inventory.items[item];
+					output.data.items.del.push({ "_id": item._id });
+				} else if (item._id == moneyObject[i].id && item.upd.StackObjectsCount < body[i].count)
+					return false;
+		}
+	}
+	// this script will not override data if something goes wrong aka return false;
+	// if everything goes OK save profile
+	profile.setCharacterData(tmpList);
+	console.log("Items taken. Status OK.", "white", "green");
+	return true;
+}
+// find required items to take after buying (handles multiple items)
+function findMoney(tmpList, barter_itemID) {
+	let prepareReturn = [];
+		for (let item of tmpList.data[1].Inventory.items)
+			for (let i = 0; i < barter_itemID.length; i++)
+				if (item._id == barter_itemID[i])
+					prepareReturn[i] = item;
+	return prepareReturn; // if none return []
+}
+// receive money back after selling
+function getMoney(tmpList, amount, body, output) {
+	
+	let tmpTraderInfo = trader.get(body.tid);
+	let currency = getCurrency(tmpTraderInfo.data.currency);
+
+	for (let item of tmpList.data[1].Inventory.items) {
+		if (item._tpl == currency) {
+			item.upd.StackObjectsCount += amount;
+			profile.setCharacterData(tmpList);
+			output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
+			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
+			return true;
+		}
+	}
+
+	console.log("No money found", "white", "red");
+	return false;
+}
 //this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
 function setPlayerStash(){
 	let stashTPL = profile.getStashType();
 	stashX = (items.data[stashTPL]._props.Grids[0]._props.cellsH != 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
 	stashY = (items.data[stashTPL]._props.Grids[0]._props.cellsV != 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
 }
-
+// --> Generate ID not repeatable for item
 function GenItemID() {
 	return Math.floor(new Date() / 1000) + utility.getRandomInt(0, 999999999).toString();
 }
-
+// -> Gets item from <input: _tpl>
 function getItem(template) {
 	for (let itm in items.data) {
 		if (items.data[itm]._id && items.data[itm]._id == template) {
@@ -27,10 +115,9 @@ function getItem(template) {
 			return [true, item];
 		}
 	}
-
 	return [false, {}];
 }
-
+// -> Prepares item Width and height returns array(6)
 function getSize(itemtpl, itemID, location) {
 	let toDo = [itemID];
 	let tmpItem = getItem(itemtpl)[1];
@@ -77,13 +164,13 @@ function getSize(itemtpl, itemID, location) {
 	
 	return [outX, outY, outL, outR, outU, outD];
 }
-
+// -> Accept quest
 function acceptQuest(tmpList, body) {
 	tmpList.data[1].Quests.push({"qid": body.qid.toString(), "startTime": 1337, "status": 2}); // statuses seem as follow - 1 - not accepted | 2 - accepted | 3 - failed | 4 - completed
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> 
 function completeQuest(tmpList, body) {
 	for (let quest of tmpList.data[1].Quests) {
 		if (quest.qid == body.qid) {
@@ -96,7 +183,7 @@ function completeQuest(tmpList, body) {
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> 
 function questHandover(tmpList, body) {
 	let counter = 0;
 	let found = false;
@@ -120,42 +207,44 @@ function questHandover(tmpList, body) {
  	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> 
 function addNote(tmpList, body) {
 	tmpList.data[1].Notes.Notes.push({"Time": body.note.Time, "Text": body.note.Text});
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> 
 function editNode(tmpList, body) {
 	tmpList.data[1].Notes.Notes[body.index] = {"Time": body.note.Time, "Text": body.note.Text};
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> 
 function deleteNote(tmpList, body) {
 	tmpList.data[1].Notes.Notes.splice(body.index, 1);
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> Move item to diffrent place - counts with equiping filling magazine etc
 function moveItem(tmpList, body) {
+	//cartriges handler start
+	if (body.to.container == 'cartridges'){
+		let tmp_counter = 0;
+		for (let item_ammo in tmpList.data[1].Inventory.items) {
+			if(body.to.id == tmpList.data[1].Inventory.items[item_ammo].parentId){
+				tmp_counter++;
+			}
+		}
+		body.to.location = tmp_counter;//wrong location for first cartrige
+		console.log(body.to.location);
+	}
+	//cartriges handler end
+	
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id && item._id == body.item) {
 			item.parentId = body.to.id;
 			item.slotId = body.to.container;
-			//cartriges handler start
-			if (body.to.container == 'cartridges'){
-				let count_cartriges = 0;
-				for (let item_ammo in tmpList.data[1].Inventory.items) {
-					if(body.to.id == item_ammo.parentId){
-						count_cartriges = count_cartriges + 1;
-					}
-				}
-				body.to.location = count_cartriges;//wrong location for first cartrige
-			}
-			//cartriges handler end
-			if (body.to.location) {
+			if (typeof body.to.location != "undefined") {
 				item.location = body.to.location;
 			} else {
 				if (item.location) {
@@ -170,7 +259,7 @@ function moveItem(tmpList, body) {
 
 	return "";
 }
-
+// -> Deletes item completly
 function removeItem(tmpList, body, ) {
 	var toDo = [body.item];
 
@@ -207,22 +296,21 @@ function removeItem(tmpList, body, ) {
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// -> Spliting item / Create new item with splited amount and removing that amount from older one
 function splitItem(tmpList, body) {
+	let location = body.container.location;
+	if(typeof body.container.location == "undefined" && body.container.container === "cartridges"){
+		let tmp_counter = 0;
+		for (let item_ammo in tmpList.data[1].Inventory.items) {
+			if(tmpList.data[1].Inventory.items[item_ammo].parentId == body.container.id)
+				tmp_counter++;
+		}
+		location = tmp_counter;//wrong location for first cartrige
+	}
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id && item._id == body.item) {
 			item.upd.StackObjectsCount -= body.count;
-			
 			let newItem = GenItemID();
-			let location = body.container.location;
-			if(typeof body.container.location == "undefined" && body.container.container === "cartridges"){
-				let temp_counter = 0;
-				for (let item_ammo in tmpList.data[1].Inventory.items) {
-					if(item_ammo.parentId == body.container.id)
-						temp_counter++;
-				}
-				location = temp_counter;//wrong location for first cartrige
-			}
 				output.data.items.new.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": location, "upd": {"StackObjectsCount": body.count}});
 				tmpList.data[1].Inventory.items.push({"_id": newItem, "_tpl": item._tpl, "parentId": body.container.id, "slotId": body.container.container, "location": location, "upd": {"StackObjectsCount": body.count}});
 			profile.setCharacterData(tmpList);
@@ -232,7 +320,7 @@ function splitItem(tmpList, body) {
 
 	return "";
 }
-
+// -> Merging to one item / deletes one item and adding its value to second one
 function mergeItem(tmpList, body) {
 	for (let key in tmpList.data[1].Inventory.items) {
 		if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id == body.with) {
@@ -251,7 +339,7 @@ function mergeItem(tmpList, body) {
 
 	return "";
 }
-
+// -> Fold item / generally weapon
 function foldItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id && item._id == body.item) {
@@ -264,7 +352,7 @@ function foldItem(tmpList, body) {
 
 	return "";
 }
-
+// -> Toggle item / flashlight, laser etc.
 function toggleItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id && item._id == body.item) {
@@ -277,7 +365,7 @@ function toggleItem(tmpList, body) {
 
 	return "";
 }
-
+// -> Tag item / Taggs item with given name and color
 function tagItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id && item._id == body.item) {
@@ -290,7 +378,7 @@ function tagItem(tmpList, body) {
 
 	return "";
 }
-
+// -> Binds item to quick bar
 function bindItem(tmpList, body) {
 	for (let index in tmpList.data[1].Inventory.fastPanel) { 
 		// if binded items is already in fastPanel 
@@ -304,7 +392,7 @@ function bindItem(tmpList, body) {
 	profile.setCharacterData(tmpList); 
 	return "OK"; 
 }
-
+// -> Eat item and get benefits // maybe for future features
 function eatItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 		if (item._id == body.item) {
@@ -330,7 +418,7 @@ function eatItem(tmpList, body) {
  	removeItem(tmpList, {Action: 'Remove', item: body.item});
  	return "OK";
 }
-
+// -> Healing
 function healPlayer(tmpList, body) {
 	// healing body part
 	for (let bdpart in tmpList.data[1].Health.BodyParts) {
@@ -362,7 +450,7 @@ function healPlayer(tmpList, body) {
 	
 	return "OK";
 }
-
+// add to Wish list - really dont know what it is ...
 function addToWishList(tmpList, body) {
 	// check if the item is already in wishlist
 	for (let item in tmpList.data[1].Wishlist) {
@@ -379,7 +467,7 @@ function addToWishList(tmpList, body) {
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// remove to Wish list - really dont know what it is ...
 function removeFromWishList(tmpList, body) {
 	// remove the item if it exists
 	for (let item in tmpList.data[1].Wishlist) {
@@ -393,7 +481,7 @@ function removeFromWishList(tmpList, body) {
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// examine item and adds it to examined list
 function examineItem(tmpList, body) {
 	let returned = "BAD";
 
@@ -432,7 +520,7 @@ function examineItem(tmpList, body) {
 
 	return "OK";
 }
-
+// transfer item // mainly drag drop item from scav inventory to stash and reloading weapon by clicking 'Reload"
 function transferItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 			if (item._id == body.item) {
@@ -448,7 +536,7 @@ function transferItem(tmpList, body) {
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
+// Swap Item // dont know for what it is ... maybe replace one item with another
 function swapItem(tmpList, body) {
 	for (let item of tmpList.data[1].Inventory.items) {
 			if (item._id == body.item) {
@@ -465,100 +553,7 @@ function swapItem(tmpList, body) {
 	profile.setCharacterData(tmpList);
 	return "OK";
 }
-
-function recheckInventoryFreeSpace(tmpList) {
-	let Stash2D = Array(stashY).fill(0).map(x => Array(stashX).fill(0));
-
-	for (let item of tmpList.data[1].Inventory.items) {
-		// hideout
-		if (item.parentId == "5c71b934354682353958ea35" && item.location != undefined) {
-			let tmpItem = getItem(item._tpl)[1];
-			let tmpSize = getSize(item._tpl, item._id, tmpList.data[1].Inventory.items);
-			
-			//			x			L				r
-			let iW = tmpSize[0] + tmpSize[2] + tmpSize[3];
-			
-			//			y			u				d
-			let iH = tmpSize[1] + tmpSize[4] + tmpSize[5];
-			let fH = (item.location.rotation == "Vertical" ? iW : iH);
-			let fW = (item.location.rotation == "Vertical" ? iH : iW);
-			
-			for (let x = 0; x < fH; x++) {
-				Stash2D[item.location.y + x].fill(1, item.location.x, item.location.x + fW);
-			}
-		}
-	}
-	return Stash2D;
-}
-
-function getCurrency(currency) {
-	// get currency
-	switch (currency) {
-		case "RUB":
-			return "5449016a4bdc2d6f028b456f";
-
-		case "EUR":
-			return "5696686a4bdc2da3298b456a";
-
-		case "USD":
-			return "569668774bdc2da2298b4568";
-	}
-	// currency not found
-	console.log("Currency not found, fallback to RUB", "white", "yellow");
-	return "5449016a4bdc2d6f028b456f";
-}
-
-function payMoney(tmpList, moneyObject, body) {
-	// function for paying money/trading for goods
-
-	for (let item of tmpList.data[1].Inventory.items) {
-		for (let i = 0; i < moneyObject.length; i++){
-			if(typeof item.upd != "undefined")
-				if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount > body[i].count) {
-					item.upd.StackObjectsCount -= body[i].count;
-					output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
-				} else if (item._id == moneyObject[i]._id && item.upd.StackObjectsCount == body[i].count) {
-					delete tmpList.data[1].Inventory.items[item];
-					output.data.items.del.push({ "_id": item._id });
-				} else if (item._id == moneyObject[i].id && item.upd.StackObjectsCount < body[i].count)
-					return false;
-		}
-	}
-	// this script will not override data if something goes wrong aka return false;
-	// if everything goes OK save profile
-	profile.setCharacterData(tmpList);
-	console.log("Items taken. Status OK.", "white", "green");
-	return true;
-}
-
-function findMoney(tmpList, barter_itemID) {
-	let prepareReturn = [];
-		for (let item of tmpList.data[1].Inventory.items)
-			for (let i = 0; i < barter_itemID.length; i++)
-				if (item._id == barter_itemID[i])
-					prepareReturn[i] = item;
-	return prepareReturn; // if none return []
-}
-
-function getMoney(tmpList, amount, body, output) {
-	
-	let tmpTraderInfo = trader.get(body.tid);
-	let currency = getCurrency(tmpTraderInfo.data.currency);
-
-	for (let item of tmpList.data[1].Inventory.items) {
-		if (item._tpl == currency) {
-			item.upd.StackObjectsCount += amount;
-			profile.setCharacterData(tmpList);
-			output.data.items.change.push({"_id": item._id, "_tpl": item._tpl, "parentId": item.parentId, "slotId": item.slotId, "location": item.location, "upd": {"StackObjectsCount": item.upd.StackObjectsCount}});
-			console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green");
-			return true;
-		}
-	}
-
-	console.log("No money found", "white", "red");
-	return false;
-}
-
+// Buying item from trader
 function buyItem(tmpList, body) {
 	let tmpTrader = trader.getAssort(body.tid);
 	// Buy item has only 1 item thats why [0][0]
@@ -642,7 +637,8 @@ function buyItem(tmpList, body) {
 								break;
 							}
 						}
-
+						console.log("Item placed at position [" +x + "," +y + "]");
+						//console.log(StashFS_2D);
 						if (badSlot == "no") {
 							let newItem = GenItemID();
 							let toDo = [[item._id, newItem]];
@@ -698,7 +694,7 @@ function buyItem(tmpList, body) {
 
 	return "";
 }
-
+// Selling item to trader
 function sellItem(tmpList, body) {
 	let money = 0;
 
@@ -730,7 +726,7 @@ function sellItem(tmpList, body) {
 	//profile.setPurchasesData(tmpUserTrader); 
 	return "OK";
 }
-
+// separate is that selling or buying
 function confirmTrading(tmpList, body)  {
 
 	// buying
@@ -746,8 +742,9 @@ function confirmTrading(tmpList, body)  {
 
 	return "";
 }
-
+// Ragfair trading
 function confirmRagfairTrading(tmpList, body) {
+	console.log(body);
 	body.Action = "TradingConfirm";
 	body.type = "buy_from_trader";
 	body.tid = "91_everythingTrader";
@@ -761,7 +758,7 @@ function confirmRagfairTrading(tmpList, body) {
 		return "error";
 	}
 }
-
+// --- REQUEST HANDLING BELOW --- //
 function getOutput() {
 	return output;
 }

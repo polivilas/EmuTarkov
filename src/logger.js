@@ -81,6 +81,27 @@ function start() {
 
 	fileStream = fs.createWriteStream(filepath, {flags : 'w'});
 }
+	process.on('uncaughtException',
+		function (err)
+		{
+			var stack = err.stack;
+			var timeout = 1;
+			console.log("SERVER CRASHED! - check lastest .log file");
+			console.log("[ERROR] - starts", "red");
+			console.log(err);
+			console.log("[ERROR] - ends", "red");
+			setTimeout
+			(
+				function()
+				{
+					console.log("[KILLING PROCESS]", "red");
+					return process.kill(process.pid);
+				},
+				// timeout * 1000
+				timeout * 1000 // extra time. pm2 auto-restarts on crash...
+			);
+		}
+	);
 
 module.exports.separator = separator;
 module.exports.center = center;

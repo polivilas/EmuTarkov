@@ -219,6 +219,33 @@ function get(req, body) {
 		case "/client/match/group/status":
 			output = '{ "err": 0, "errmsg": null, "data": { "players": [], "invite": [], "group": [] } }';
 			break;
+		
+		case "/client/repair/exec":
+			//repair this :) by TheMaoci
+			output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[]}}')
+			let data = profile.getCharacterData();
+			let count = info.items.length;
+			let RequestData = info.items;
+			let cnt = 0;
+			for(let inventory in data.data[1].Inventory.items){
+				for(let item in RequestData){
+					if(cnt == count)
+						break;
+					if(data.data[1].Inventory.items[inventory]._id == RequestData[item]._id){
+						if(typeof data.data[1].Inventory.items[inventory].upd.Repairable != "undefined"){
+						let calculateDurability = data.data[1].Inventory.items[inventory].upd.Repairable.Durability + RequestData[item].count;
+						data.data[1].Inventory.items[inventory].upd.Repairable.Durability = calculateDurability;
+						output.data.items.change.push(data.data[1].Inventory.items[inventory]);
+						cnt++;
+						}
+					}
+				}
+			if(cnt == count)
+				break;
+			}
+			console.log(output.data.items.change[0].upd.Repairable);
+			profile.setCharacterData(data)
+			break;
 
 		case "/client/mail/dialog/list":
 		case "/client/friend/request/list/outbox":

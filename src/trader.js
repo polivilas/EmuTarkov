@@ -8,17 +8,17 @@ var assortDir = "data/configs/assort/";
 var traders = [];
 var assorts = [];
 var settings = JSON.parse(utility.readJson("data/server.config.json"));
-var settingsDev = (typeof settings.devs != "undefined")?settings.dev:false;
 
 function loadAllTraders() {
 	let traderFiles = fs.readdirSync(tradersDir);
-	
 	// load trader files
 	for (let file in tradersDir) {
 		//console.log(file);
-		if (traderFiles[file] !== undefined && ((!settingsDev && traderFiles[file] != "91_everythingTrader.json" && traderFiles[file] != "92_SecretTrader.json") || settingsDev) ) {
-			traders.push(JSON.parse(utility.readJson(tradersDir + traderFiles[file])));
-		}
+		if (traderFiles[file] !== undefined)
+			if(settings.dev == true || ((settings.dev == false || settings.dev === undefined)&& traderFiles[file] != "91_everythingTrader.json" && traderFiles[file] != "92_SecretTrader.json"))
+			{
+				traders.push(JSON.parse(utility.readJson(tradersDir + traderFiles[file])));
+			}
 	}
 }
 
@@ -26,9 +26,11 @@ function loadAllAssorts() {
 	let assortFiles = fs.readdirSync(assortDir);
 	// load assort files
 	for (let file in assortDir) {
-		if (assortFiles[file] !== undefined && ((!settingsDev && assortFiles[file] != "91_everythingTrader.json" && assortFiles[file] != "92_SecretTrader.json") || settingsDev) ) {
-			assorts.push(JSON.parse(utility.readJson(assortDir + assortFiles[file])));
-		}
+		if (assortFiles[file] !== undefined)
+			if(settings.dev == true || ((settings.dev == false || settings.dev === undefined) && assortFiles[file] != "91_everythingTrader.json" && assortFiles[file] != "92_SecretTrader.json"))
+			{
+				assorts.push(JSON.parse(utility.readJson(assortDir + assortFiles[file])));
+			}
 	}
 }
 

@@ -12,7 +12,7 @@ const response = require('./response.js');
 const ver = "0.7.2";
 
 var settings = JSON.parse(utility.readJson("data/server.config.json")); 
-var settingsDev = (typeof settings.devs != "undefined")?settings.dev:false;
+
 function version(){
 	return ver;
 }
@@ -68,12 +68,12 @@ function sendImage(resp, file) {
 
 function saveProfileProgress(offRaidData)
 {
-		let offRaidProfile = offRaidData.profile;
+	 	let profile_data = JSON.parse(utility.readJson(settings.game + "\\SavedProfile.json"));
+		let offRaidProfile = profile_data;
 		let currentProfile = profile.getCharacterData();
-
 		//replace data below
 		currentProfile.data[1].Info.Experience = offRaidProfile.Info.Experience;
-		currentProfile.data[1].Health = offRaidProfile.Health;
+		//currentProfile.data[1].Health = offRaidProfile.Health;
 		currentProfile.data[1].Skills = offRaidProfile.Skills;
 		currentProfile.data[1].Stats.SessionCounters = offRaidProfile.Stats.SessionCounters;
 		currentProfile.data[1].Stats.OverallCounters = offRaidProfile.Stats.OverallCounters;
@@ -81,7 +81,7 @@ function saveProfileProgress(offRaidData)
 		currentProfile.data[1].Encyclopedia = offRaidProfile.Encyclopedia;
 		currentProfile.data[1].ConditionCounters = offRaidProfile.ConditionCounters;
 		currentProfile.data[1].Quests = offRaidProfile.Quests;
-		currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
+		//currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
 
 
 		//work with a string instead of looping through data, less code, less ressources, faster
@@ -103,7 +103,6 @@ function saveProfileProgress(offRaidData)
 		//and then re-parse the string into an object
 		offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
-
 		//remove previous equippement & other, KEEP ONLY THE STASH
 		item.removeItem( currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.equipment} );
 		item.removeItem( currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questRaidItems} );
@@ -119,7 +118,7 @@ function saveProfileProgress(offRaidData)
 		var items_to_delete = [];
 
 		//but if the player get killed, he loose almost everything
-		if(offRaidData.exfil != "Survived" && offRaidData.exfil != "Runner")
+		if(offRaidData.status != "Survived" && offRaidData.status != "Runner")
 		{	
 			for(var inventoryitem in currentProfile.data[1].Inventory.items )
 			{
@@ -155,7 +154,7 @@ function saveProfileProgress(offRaidData)
 				item.removeItem( currentProfile, {Action: 'Remove', item: items_to_delete[item_to_delete] } );
 			}	
 		}
-
+		utility.writeJson(settings.game + "\\SavedProfile.json", "{}");
 		profile.setCharacterData(currentProfile);	
 }
 
@@ -170,7 +169,7 @@ function sendResponse(req, resp, body) {
 
 		profile.setActiveID(getCookies(req)['PHPSESSID']);
 		console.log("[Request]::" + req.url, "cyan");
-		if(settingsDev)
+		if(settings.dev == true)
 			console.log(body.toString());
 	
 		// get response
@@ -207,10 +206,19 @@ function handleRequest(req, resp) {
 	// separate request in the log
 	logger.separator();
 	
+	let prof = "";
+	if (req.method == "POST") {
+		if(req.url != "/OfflineRaidSave"){
+		profile.setActiveID(getCookies(req)['PHPSESSID']);
+		prof = " Profile(" + profile.getActiveID() + ")";
+		}
+		else
+		{
+		}
+	}
 	// get the IP address of the client
 	let IP = "[Access][IP > " + req.connection.remoteAddress + "]";
-	let method = (settingsDev)?" <" + req.method + ">":"";
-	let prof = " Profile(" + profile.getActiveID() + ")";
+	let method = (settings.dev == true)?" <" + req.method + ">":"";
 	console.log(IP + method + prof, "cyan"); //log display
 	
 	if (req.method == "POST") {
@@ -220,10 +228,13 @@ function handleRequest(req, resp) {
             if (data.length > 1000000 && req.url != "/OfflineRaidSave")
                 request.connection.destroy();
 			if(req.url == "/OfflineRaidSave"){
-                console.log(data.toString('utf8'));
+				let PreparedStringData = data.toString().replace(/(\\r\\n)+/g, "").replace(/(\\)+/g, "");
+                console.log(PreparedStringData); // here is a bug not all data is transfered
 					//save offline profile there checking the data on the fly / "exfil" and "profile" entry
-				let parseBody = JSON.parse(data.toString('utf8'));
-				profile.setActiveID(parseBody.profile.aid);
+					
+				let parseBody = JSON.parse(PreparedStringData);
+				profile.setActiveID(parseBody.aid);
+				let profile_data = utility.readJson(settings.game + "\\SavedProfile.json");
 				console.log("Request: /SAVE_PROFILE_REQUEST", "cyan");
 				saveProfileProgress(parseBody);
 				return;
@@ -243,7 +254,7 @@ function start() {
 	let server = http.createServer();
 	let port = settings.server.port;
 	let ip = getLocalIpAddress();
- 
+	
 	// set the ip and backendurl 
 	settings.server.ip = ip; 
 	settings.server.backendUrl = "http://" + ip + ":" + port; 
@@ -269,6 +280,8 @@ function start() {
 	server.on('request', function(req, resp) {
 		handleRequest(req, resp);
 	});
+	
+
 }
 
 module.exports.start = start;

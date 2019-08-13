@@ -85,7 +85,7 @@ function getPurchasesData() {
 		
 	}
 	purchaseOutput += '}}'; // end output string here
-	utility.writeJson(getPath() + 'purchases.json', purchaseOutput);
+	//utility.writeJson(getPath() + 'purchases.json', purchaseOutput); // save to file isnt needed anymore
 	return purchaseOutput;
 }
 
