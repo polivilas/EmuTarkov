@@ -9,7 +9,7 @@ const logger = require('./logger.js');
 const profile = require('./profile.js');
 const item = require('./item.js');
 const response = require('./response.js');
-const ver = "0.7.2";
+const ver = "0.7.3";
 
 var settings = JSON.parse(utility.readJson("data/server.config.json")); 
 
