@@ -5,6 +5,8 @@ Escape From Tarkov backend emulator written in JS.
 to run script you need node and install node_packages
 code to run node server from console: "node src/main.js"
 
+we also provides compiled user friendly builds in releases section
+
 ## Information
 See https://justemutarkov.github.io
 
