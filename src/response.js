@@ -120,7 +120,13 @@ function get(req, body) {
 			break;
 
 		case "/client/items":
-			output = utility.readJson('data/configs/items.json');
+			// custom items handling
+			let base = JSON.parse(utility.readJson('data/configs/items.json'));
+			let newI = JSON.parse(utility.readJson('data/configs/items_new.json'));
+			for(let i of newI){
+				base.data[i._id] = i;
+			}
+			output = JSON.stringify(base);
 			break;
 
 		case "/client/globals":
