@@ -1,0 +1,53 @@
+{
+	"game": "E:\\EFT-TEST",
+	"server": {
+		"backendUrl": "http://192.168.1.8:1337",
+		"ip": "192.168.1.8",
+		"port": 1337,
+		"lootSaving": true
+	},
+	"debug": {
+		"showSeparator": false,
+		"debugMode": true,
+		"disableLogsDisplayer": true
+	},
+	"bots": {
+		"pmcWar": {
+			"enabled": false,
+			"sideUsec": 50
+		},
+		"limit": {
+			"override": true,
+			"bossKilla": 1,
+			"bossBully": 1,
+			"bullyFollowers": 5,
+			"marksman": 10,
+			"pmcBot": 10,
+			"scav": 30
+		},
+		"weapon": {
+			"main": 64,
+			"secondary": 50
+		},
+		"equipment": {
+			"eyewear": 100,
+			"facecover": 100,
+			"headwear": 100,
+			"backpack": 100,
+			"armorvest": 100
+		},
+		"headwear": {
+			"faceshield": 100
+		},
+		"vest": {
+			"magChance": 80,
+			"stacksChance": 80
+		},
+		"pocket": {
+			"granade": 50,
+			"meds": 50,
+			"med_to_gra": 50,
+			"description": "med_to_gra means: if roll 1 - 100 -> <=50 medicament will be added if >50 granade. This Message Can be deleted if not needed."
+		}
+	}
+}
