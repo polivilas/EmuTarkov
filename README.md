@@ -42,7 +42,7 @@ Note: This repo is updated from a private repository sporadically. It might not 
 
 - simplyfy console returns (dev mode displays more important data for debug mainly for coders)
 
-* sample: [INFO][\<Ip>192.168.1.1:1337]\<POST>[Profile:0][\<Req:/client/items]
+* sample: [INFO][\<ip>192.168.1.1:1337]\<POST>[Profile:0][\<req:/client/items]
 
 - fixed image downloading ( copying them to temp folder on request ) - it should handle all requests now
 - added new variable game version to ability to make backward compatibility in the future (loaded from /client/game/version/validate)
