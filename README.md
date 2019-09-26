@@ -1,6 +1,7 @@
 # JustEmuTarkov 0.7.4 Release (developer branch)
 
 Automatickly generated files of JustEmuTarkov Server
+
 Note: This repo is updated from a private repository sporadically. It might not be up to date at all times.
 
 ## How to run it - Instructions
