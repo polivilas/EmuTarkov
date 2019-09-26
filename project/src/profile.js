@@ -281,7 +281,7 @@ function changeEmail(info) {
 		if (info.email === profile.email && (info.pass === profile.password || info.pass === profile.password_md5)) {
 			profile.email = info.newEmail;
 			setProfiles(profiles);
-			console.log("Profile " + profile.id + " changed mail");
+			console.log("Profile " + profile.id + " changed email to " + info.newEmail);
 			return;
 		}
 	}
@@ -293,7 +293,7 @@ function changePassword(info) {
 		if (info.email === profile.email && (info.pass === profile.password || info.pass === profile.password_md5)) {
 			profile.password = info.newPass;
 			setProfiles(profiles);
-			console.log("Profile " + profile.id + " changed mail");
+			console.log("Profile " + profile.id + " changed password to " + info.newPass);
 			return;
 		}
 	}
