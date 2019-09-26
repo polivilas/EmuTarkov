@@ -8,7 +8,7 @@ Note: This repo is updated from a private repository sporadically. It might not 
 
 1. Download everything from release's (https://github.com/justemutarkov/EmuTarkov-Server/releases) in this case release 0.7.4
 2. unzip it somewhere, so you will know where.
-3. File Assembly-CSharp.dll you need to move to {drive}:/{EscapeFromTarkovGameDirectory}/EscapeFromTarkov*data/Managed/* (copy file to \_ character - and it should ask you for override (make a backup of that file just incase you want to go back to the start point) - just do it)
+3. File Assembly-CSharp.dll you need to move to {drive}:/{EscapeFromTarkovGameDirectory}/EscapeFromTarkov\_data/Managed/\* (copy file to \_ character - and it should ask you for override (make a backup of that file just incase you want to go back to the start point) - just do it)
 4. Start Launcher (you should notice red text on the left side - it displaying errors in real time)
 5. Go to Settings tab
 6. Copy your game directory - like this `{drive}:/{EscapeFromTarkovGameDirectory}` // for me its `C:/EscapeFromTarkovGame/`
