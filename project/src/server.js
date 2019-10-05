@@ -293,11 +293,19 @@ function handleRequest(req, resp) {
 function start() {
 	let server = http.createServer();
 	let port = settings.server.port;
-	let ip = getLocalIpAddress();
+	let ip = settings.server.ip;
 	
-	// set the ip and backendurl 
-	settings.server.ip = ip; 
+	// generate ip
+	if (settings.server.generateIp == true)
+	{
+		ip = getLocalIpAddress();
+		settings.server.ip = ip; 
+	}
+	
+	// generate backendurl
 	settings.server.backendUrl = "http://" + ip + ":" + port; 
+	
+	// save settings
 	utility.writeJson("server.config.json", settings); 
  
 	// show our watermark
