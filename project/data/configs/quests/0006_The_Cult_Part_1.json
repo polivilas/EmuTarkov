@@ -1,0 +1,159 @@
+{
+	"_id": "5a27b9de86f77464e5044585",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5a29222486f77456f50d09e7.jpg",
+	"type": "Exploration",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "6700",
+				"id": "5c9509f686f7745516178633",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.06",
+				"id": "5bcf1b7e86f7746a486b842b",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b42",
+				"value": "700",
+				"id": "5a2803a286f774528903e08e",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b42",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 700
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b43",
+				"value": "3",
+				"id": "5a2803c386f7740e44081674",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b43",
+						"_tpl": "5734758f24597738025ee253",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b44",
+				"id": "5ac66cda86f77405cd5462ce",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 2,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b44",
+						"_tpl": "59e6906286f7746c9f75e847"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a71f786f7745b18478ef9"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba51d86f7743af1475c39",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_007_1_N1",
+									"value": "1",
+									"id": "5a3ba52586f77464d01fd619"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3ba51d86f7743af1475c3a"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5a28051286f7740eb10bac03",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5a28054586f7740f9e121614"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a2eb6e586f7747063190763"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5a28051286f7740eb10bac04",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a3ba51d86f7743af1475c3a",
+								"id": "5a60a9aa86f77455b64814e2"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

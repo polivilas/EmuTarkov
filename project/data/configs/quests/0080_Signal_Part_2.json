@@ -1,0 +1,195 @@
+{
+	"_id": "5ac346a886f7744e1b083d67",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4d8f186f774422237860d.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "8700",
+				"id": "5c950d2886f77455185027fa",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c9c",
+				"value": "50000",
+				"id": "5acb7c4586f7740fae6a5e34",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c9c",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf293886f7746a45695b17",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf3b7186f774184175301d"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"573477e124597737dd42e191"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 0,
+					"parentId": "",
+					"id": "5cb6f81d86f7740e9d452683"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"573477e124597737dd42e191"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5ac5e79986f7747398341847",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"590a358486f77429692b2790"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 2,
+					"parentId": "",
+					"id": "5cb6f88d86f7747d215f09c1"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590a358486f77429692b2790"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5ac5e88e86f7741c5804f9db",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"590a3b0486f7743954552bdb"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 4,
+					"parentId": "",
+					"id": "5cb6f8de86f7740e9d452685"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590a3b0486f7743954552bdb"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "5ac5e98886f77479bc6ca201",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"56742c324bdc2d150f8b456d"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 6,
+					"parentId": "",
+					"id": "5cb6f9c586f7740ace254c44"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"56742c324bdc2d150f8b456d"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 7,
+					"parentId": "",
+					"id": "5ac5ea0586f774609f36280c",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

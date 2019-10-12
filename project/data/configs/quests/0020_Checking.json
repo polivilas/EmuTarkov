@@ -1,0 +1,160 @@
+{
+	"_id": "5936da9e86f7742d65037edf",
+	"traderId": "1_prapor",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/59c26dd986f77427033c3e83.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "800",
+				"id": "5c989baa86f7745a9e30037f",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.05",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf0dfa86f7742ce2243a33"
+			},
+			{
+				"target": "5d34df2788a4504526796b99",
+				"value": "4000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2e7eb486f7740f8f54c493",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b99",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 4000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b9a",
+				"value": "1",
+				"id": "5a3fa4bb86f774470d79d8a3",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b9a",
+						"_tpl": "571a12c42459771f627b58a0",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796b9b",
+						"_tpl": "571a26d524597720680fbe8a",
+						"parentId": "5d34df2788a4504526796b9a",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796b9c",
+						"_tpl": "571a282c2459771fb2755a69",
+						"parentId": "5d34df2788a4504526796b9a",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796b9d",
+						"_tpl": "571a29dc2459771fb2755a6a",
+						"parentId": "5d34df2788a4504526796b9a",
+						"slotId": "mod_magazine"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b9e",
+				"value": "3",
+				"id": "5a2e7f3986f7741a9865a986",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b9e",
+						"_tpl": "571a29dc2459771fb2755a6a",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "2",
+					"index": 0,
+					"parentId": "",
+					"id": "59a9269486f7747aab09a77c"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5937fd0086f7742bf33fc198"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "5968ec9986f7741ddd6c1012"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5937fd0086f7742bf33fc198"
+					],
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "5967920f86f77468d219d632",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5968ec9986f7741ddd6c1012",
+								"id": "5a5778c986f7740ad83cd652"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5937ee6486f77408994ba448"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "5968ec9986f7741ddd6c1012",
+					"id": "5975de1f86f7744ca53b7c82"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

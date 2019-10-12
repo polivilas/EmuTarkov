@@ -1,0 +1,194 @@
+{
+	"_id": "5ac2426c86f774138762edfe",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5ae3260986f7745b3e3bf2a7.jpg",
+	"type": "WeaponAssembly",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796c61",
+				"value": "1",
+				"id": "5ad07e8f86f7742f92462779",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c61",
+						"_tpl": "57dc2fa62459775949412633",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c62",
+						"_tpl": "57e3dba62459770f0c32322b",
+						"parentId": "5d34df2788a4504526796c61",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796c63",
+						"_tpl": "57dc347d245977596754e7a1",
+						"parentId": "5d34df2788a4504526796c61",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796c64",
+						"_tpl": "564ca99c4bdc2d16268b4589",
+						"parentId": "5d34df2788a4504526796c61",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796c65",
+						"_tpl": "57dc324a24597759501edc20",
+						"parentId": "5d34df2788a4504526796c61",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796c66",
+						"_tpl": "57dc334d245977597164366f",
+						"parentId": "5d34df2788a4504526796c61",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796c67",
+						"_tpl": "59d36a0086f7747e673f3946",
+						"parentId": "5d34df2788a4504526796c61",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5d34df2788a4504526796c68",
+						"_tpl": "56dfef82d2720bbd668b4567",
+						"parentId": "5d34df2788a4504526796c64",
+						"slotId": "cartridges",
+						"location": 0,
+						"upd": {
+							"StackObjectsCount": 30
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c69",
+						"_tpl": "57dc32dc245977596d4ef3d3",
+						"parentId": "5d34df2788a4504526796c67",
+						"slotId": "mod_handguard"
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "6000",
+				"id": "5c950c8086f77455192fa441",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c6a",
+				"value": "60000",
+				"id": "5acb80b286f7742b0b02e96a",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c6a",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 60000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf26dd86f7746a45695b0b",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "11",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf37a186f7741843346d0c"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "WeaponAssembly",
+				"_props": {
+					"target": [
+						"57dc2fa62459775949412633"
+					],
+					"value": "1",
+					"durability": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"ergonomics": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"baseAccuracy": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"recoil": {
+						"value": 600,
+						"compareMethod": "<="
+					},
+					"muzzleVelocity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"weight": {
+						"value": 3.5,
+						"compareMethod": "<="
+					},
+					"magazineCapacity": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"width": {
+						"value": 3,
+						"compareMethod": "<="
+					},
+					"height": {
+						"value": 2,
+						"compareMethod": "<="
+					},
+					"effectiveDistance": {
+						"value": 100,
+						"compareMethod": ">="
+					},
+					"emptyTacticalSlot": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"hasItemFromCategory": [],
+					"index": 0,
+					"parentId": "",
+					"id": "5accd9b686f774112d7173d1",
+					"containsItems": [
+						"57ffa9f4245977728561e844"
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

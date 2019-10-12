@@ -1,0 +1,113 @@
+{
+	"_id": "5aa7e276e5b5b000171d0647",
+	"_name": "helmet_altyn",
+	"_parent": "5a341c4086f77401f2541505",
+	"_type": "Item",
+	"_props": {
+		"Name": "helmet_altyn",
+		"ShortName": "helmet_altyn",
+		"Description": "helmet_altyn",
+		"Weight": 4,
+		"BackgroundColor": "default",
+		"Width": 2,
+		"Height": 2,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 1,
+		"CreditsPrice": 160327,
+		"ItemSound": "gear_helmet",
+		"Prefab": {
+			"path": "assets/content/items/equipment/helmet_altyn/item_equipment_helmet_altyn.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 4,
+		"HideEntrails": false,
+		"RepairCost": 495,
+		"RepairSpeed": 10,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_equipment",
+				"_id": "5aa7e325e5b5b0214e506fa1",
+				"_parent": "5aa7e276e5b5b000171d0647",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5aa7e373e5b5b000137b76f0"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"BlocksEarpiece": true,
+		"BlocksEyewear": false,
+		"BlocksHeadwear": false,
+		"BlocksFaceCover": false,
+		"Durability": 45,
+		"MaxDurability": 45,
+		"armorClass": "5",
+		"speedPenaltyPercent": -7,
+		"mousePenalty": -17,
+		"weaponErgonomicPenalty": -6,
+		"armorZone": [
+			"Head"
+		],
+		"Indestructibility": 0.9,
+		"headSegments": [
+			"Top",
+			"Nape",
+			"Ears"
+		],
+		"FaceShieldComponent": false,
+		"FaceShieldMask": "NoMask",
+		"HasHinge": false,
+		"MaterialType": "Helmet",
+		"RicochetParams": {
+			"x": 0.9,
+			"y": 0.4,
+			"z": 70
+		},
+		"DeafStrength": "High",
+		"BluntThroughput": 0.14,
+		"ArmorMaterial": "ArmoredSteel"
+	},
+	"_proto": "5645bc214bdc2d363b8b4571"
+}

@@ -1,0 +1,185 @@
+{
+	"_id": "59ca2eb686f77445a80ed049",
+	"traderId": "1_prapor",
+	"location": "any",
+	"image": "/files/quest/icon/594d246986f77427fc3b2fb4.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20600",
+				"id": "5c94f31186f7745516178627",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.12",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf14ac86f7742ce2243a44"
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.15",
+				"id": "5a4bb08f88a45042d81131fc",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "4_skier",
+				"value": "0.06",
+				"id": "5a4cc6b288a450121c30645b",
+				"type": "TraderStanding",
+				"index": 3
+			},
+			{
+				"target": "5d34df2788a4504526796c58",
+				"value": "1",
+				"unknown": true,
+				"id": "59db7f1e86f77448bf51a967",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c58",
+						"_tpl": "59db794186f77448bc595262",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c59",
+				"value": "250000",
+				"id": "5a2fb3bd86f774769635db16",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c59",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 250000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "21",
+					"index": 0,
+					"parentId": "",
+					"id": "59a926b186f774753c5479a2"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "20",
+					"type": "Elimination",
+					"counter": {
+						"id": "59ca2fba86f77445e4732b24",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5c46fbd72e2216398b5a8c9c"
+									],
+									"id": "5a71b27186f77402ed444540"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "59ca2fba86f77445e4732b25"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59f32bb586f774757e1e8442"
+					],
+					"value": "10",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5b05468f86f774030379eb74",
+					"onlyFoundInRaid": false
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59f32bb586f774757e1e8442"
+					],
+					"value": "10",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5b0548e686f7740306753506",
+					"onlyFoundInRaid": false
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59f32c3b86f77472a31742f0"
+					],
+					"value": "10",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "5cb3393888a4505d02042061",
+					"onlyFoundInRaid": false
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59f32c3b86f77472a31742f0"
+					],
+					"value": "10",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "5cb3397c88a450159a723d79",
+					"onlyFoundInRaid": false
+				}
+			}
+		],
+		"Fail": []
+	}
+}

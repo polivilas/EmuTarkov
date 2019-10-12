@@ -1,0 +1,170 @@
+{
+	"_id": "5af0548586f7743a532b7e99",
+	"_name": "item_barter_medical_ibuprofen",
+	"_parent": "5448f3a14bdc2d27728b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "ibuprofen",
+		"ShortName": "ibuprofen",
+		"Description": "ibuprofen",
+		"Weight": 0.1,
+		"BackgroundColor": "orange",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 3,
+		"CreditsPrice": 16823,
+		"ItemSound": "med_pills",
+		"Prefab": {
+			"path": "assets/content/weapons/usable_items/item_ibuprofen/item_ibuprofen_loot.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "assets/content/weapons/usable_items/item_ibuprofen/item_ibuprofen_container.bundle",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 4,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"medUseTime": 5,
+		"medEffectType": "duringUse",
+		"MaxHpResource": 12,
+		"hpResourceRate": 0,
+		"StimulatorBuffs": "",
+		"effects_health": {
+			"common": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"head": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"chest": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"tummy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"energy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"hydration": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_damage": {
+			"bloodloss": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"fracture": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"pain": {
+				"remove": true,
+				"time": 0,
+				"duration": 500,
+				"fadeOut": 100
+			},
+			"contusion": {
+				"remove": true,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"toxication": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"radExposure": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			}
+		},
+		"MaxEfficiency": 0,
+		"Addiction": 0,
+		"Overdose": 0,
+		"OverdoseRecovery": 0,
+		"AddictionRecovery": 0,
+		"Buffs": []
+	},
+	"_proto": "544fb37f4bdc2dee738b4567"
+}

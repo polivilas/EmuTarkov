@@ -1,0 +1,117 @@
+{
+	"_id": "596a1e6c86f7741ddc2d3206",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/5979d3da86f774719f309082.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "5000",
+				"id": "5c95063986f77455185027f4",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.07",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf13fb86f77423c25c50b0"
+			},
+			{
+				"target": "5d34df2788a4504526796bc1",
+				"value": "30000",
+				"id": "5a2fba6886f774769635db1c",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bc1",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 30000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bc2",
+				"value": "4",
+				"id": "5ac6643e86f774055a77c730",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bc2",
+						"_tpl": "5673de654bdc2d180f8b456d",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bc3",
+				"value": "2",
+				"id": "5a2fbaa686f77476953ee329",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bc3",
+						"_tpl": "590c5d4b86f774784e1b9c45",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"57347d7224597744596b4e72"
+					],
+					"value": "15",
+					"index": 0,
+					"parentId": "",
+					"id": "596a1f0486f77456630ea4d2",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"57347d7224597744596b4e72"
+					],
+					"value": "15",
+					"index": 1,
+					"parentId": "",
+					"id": "596a1f1586f77420d2328077",
+					"visibilityConditions": [],
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

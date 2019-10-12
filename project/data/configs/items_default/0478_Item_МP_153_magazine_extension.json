@@ -1,0 +1,105 @@
+{
+	"_id": "56deeefcd2720bc8328b4568",
+	"_name": "mag_mr153_izhmeh_12g_8",
+	"_parent": "5448bc234bdc2d3c308b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "Удлиннитель магазина МР-153 12к для МР-153 до 8 ми патронов",
+		"ShortName": "МР153x8",
+		"Description": "Удлиннитель магазина МР-153",
+		"Weight": 0.3,
+		"BackgroundColor": "yellow",
+		"Width": 3,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 10,
+		"CreditsPrice": 2122,
+		"ItemSound": "mag_plastic",
+		"Prefab": {
+			"path": "assets/content/items/mods/magazines/mag_mr153_izhmeh_12g_8.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 2,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 2,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": 0,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": -2,
+		"Velocity": 0,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"magAnimationIndex": 0,
+		"Cartridges": [
+			{
+				"_name": "cartridges",
+				"_id": "574880d12459771f661283c5",
+				"_parent": "56deeefcd2720bc8328b4568",
+				"_max_count": 8,
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"560d5e524bdc2d25448b4571",
+								"5c0d591486f7744c505b416f",
+								"58820d1224597753c90aeb13"
+							]
+						}
+					]
+				},
+				"_proto": "5748538b2459770af276a261"
+			}
+		],
+		"CanFast": false,
+		"CanHit": false,
+		"CanAdmin": false,
+		"LoadUnloadModifier": 0,
+		"CheckTimeModifier": 0,
+		"CheckOverride": 0,
+		"ReloadMagType": "InternalMagazine"
+	},
+	"_proto": "56deee15d2720bee328b4567"
+}

@@ -1,0 +1,125 @@
+{
+	"_id": "5967733e86f774602332fc84",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/59689e1c86f7740d14064725.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "500",
+				"id": "5c9505aa86f774592a47024e",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.07",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bd1891e86f7747591621672"
+			},
+			{
+				"target": "5d34df2788a4504526796bb7",
+				"value": "10000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2fb4e186f77432ea548a85",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb7",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 10000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb8",
+				"value": "4",
+				"id": "5a2fb4b286f774769839eb53",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb8",
+						"_tpl": "544fb37f4bdc2dee738b4567",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb9",
+				"value": "4",
+				"id": "5a2fb4c086f7742eb03f3623",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb9",
+						"_tpl": "5755356824597772cb798962",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bba",
+				"value": "4",
+				"id": "5a2fb4ce86f774769732daa8",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bba",
+						"_tpl": "544fb3364bdc2d34748b456a",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"544fb45d4bdc2dee738b4568"
+					],
+					"value": "5",
+					"index": 0,
+					"parentId": "",
+					"id": "5968edc086f77420d2328014"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"544fb45d4bdc2dee738b4568"
+					],
+					"value": "5",
+					"index": 1,
+					"parentId": "",
+					"id": "59689eb886f7740d137ebfc3",
+					"visibilityConditions": []
+				}
+			}
+		],
+		"Fail": []
+	}
+}

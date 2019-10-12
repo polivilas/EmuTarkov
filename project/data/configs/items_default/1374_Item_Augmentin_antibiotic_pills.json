@@ -1,0 +1,178 @@
+{
+	"_id": "590c695186f7741e566b64a2",
+	"_name": "augmentin",
+	"_parent": "5448f3a14bdc2d27728b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "Antibiotics",
+		"ShortName": "Antibiotics",
+		"Description": "",
+		"Weight": 0.3,
+		"BackgroundColor": "orange",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 4,
+		"CreditsPrice": 9175,
+		"ItemSound": "med_pills",
+		"Prefab": {
+			"path": "assets/content/weapons/usable_items/item_augmentin/item_augmentin_loot.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "assets/content/weapons/usable_items/item_augmentin/item_augmentin_container.bundle",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 50,
+		"ExamineExperience": 25,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"medUseTime": 5,
+		"medEffectType": "duringUse",
+		"MaxHpResource": 0,
+		"hpResourceRate": 0,
+		"StimulatorBuffs": "",
+		"effects_health": {
+			"common": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"head": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"chest": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"tummy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"energy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"hydration": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_damage": {
+			"bloodloss": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"fracture": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"pain": {
+				"remove": true,
+				"time": 0,
+				"duration": 200,
+				"fadeOut": 60
+			},
+			"contusion": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"toxication": {
+				"remove": true,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			},
+			"radExposure": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0
+			}
+		},
+		"MaxEfficiency": 0,
+		"Addiction": 0,
+		"Overdose": 0,
+		"OverdoseRecovery": 0,
+		"AddictionRecovery": 0,
+		"Buffs": [
+			{
+				"Skill": "Health",
+				"FadeIn": 0,
+				"Plato": 0,
+				"FadeOut": 0,
+				"PlatoValue": 0
+			}
+		]
+	},
+	"_proto": "544fb37f4bdc2dee738b4567"
+}

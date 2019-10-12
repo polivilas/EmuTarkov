@@ -1,0 +1,241 @@
+{
+	"_id": "5a27b75b86f7742e97191958",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/594d241f86f7740d8246218d.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796c5c",
+				"value": "1",
+				"id": "5a295d3686f7746bbb5adb38",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c5c",
+						"_tpl": "55801eed4bdc2d89578b4588",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c5d",
+				"value": "1",
+				"id": "5a295d4886f77450df330e04",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c5d",
+						"_tpl": "544fb5454bdc2df8738b456a",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "5400",
+				"id": "5c9509b786f774551528def2",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.06",
+				"id": "5bcf1af486f7746a472ad844",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c5e",
+				"value": "800",
+				"id": "5a27d67b86f7741d1c25d39f",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c5e",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 800
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c5f",
+				"value": "1",
+				"id": "5a27d6a986f7741d066098da",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c5f",
+						"_tpl": "5645bc214bdc2d363b8b4571",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c60",
+				"id": "5ac66af386f77405cd5462c5",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 1,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c60",
+						"_tpl": "58d399e486f77442e0016fe7"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "10",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a71a086f7745a7e19f63d"
+				}
+			},
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5a27d2af86f7744e1115b323",
+					"status": 4,
+					"index": 1,
+					"parentId": "",
+					"id": "5bcf241486f7746a4959344a"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba11786f7742c9d4f5d28",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_001",
+									"value": "1",
+									"id": "5a3ba1c286f7742c9d4f5d49"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3ba11786f7742c9d4f5d29"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"55801eed4bdc2d89578b4588"
+					],
+					"zoneId": "place_peacemaker_001",
+					"value": "1",
+					"minDurability": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5a27d81a86f774472a6e0456",
+					"dogtagLevel": 0,
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"544fb5454bdc2df8738b456a"
+					],
+					"zoneId": "place_peacemaker_001",
+					"value": "1",
+					"minDurability": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5a27d85286f77448d82084e7",
+					"dogtagLevel": 0,
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Discover",
+					"counter": {
+						"id": "5c93794086f7740a13567866",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5c93795386f77411fc1e1822"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c93795d86f7740a111bd782"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5c93794086f7740a13567867",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a27d81a86f774472a6e0456",
+								"id": "5c93966986f774122a7ac1a4"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a27d85286f77448d82084e7",
+								"id": "5c93967486f774122c346f86"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

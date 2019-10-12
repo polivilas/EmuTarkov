@@ -1,0 +1,83 @@
+{
+	"_id": "596a101f86f7741ddb481582",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/59c274ae86f77475060a9341.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "4600",
+				"id": "5c94ff4786f774551528deea",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.3",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "597afde186f7741ce2755eb5"
+			},
+			{
+				"target": "5d34df2788a4504526796c35",
+				"value": "180000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2e7c6a86f7741a943575b4",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c35",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 180000
+						}
+					}
+				]
+			}
+		],
+		"Fail": [
+			{
+				"target": "4_skier",
+				"value": "-0.3",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "597afde186f7741ce2755eb7"
+			}
+		]
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5938878586f7741b797c562f"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "596a10d886f7741ddf17dbf0"
+				}
+			}
+		],
+		"Fail": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "596a0e1686f7741ddf17dbee",
+					"status": "4",
+					"index": 0,
+					"parentId": "",
+					"id": "596a117386f7741ddf17dbf1"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,101 @@
+{
+	"_id": "560835c74bdc2dc8488b456f",
+	"_name": "barrel_mr133_510mm_plank",
+	"_parent": "555ef6e44bdc2de9068b457e",
+	"_type": "Item",
+	"_props": {
+		"Name": "Ствол 510мм для ружья МР-133 12к с прицельной планкой",
+		"ShortName": "510мм МР-133 12к",
+		"Description": "Стандартный заводской ствол для ружья МР-133 длинной 510мм под патрон 12-го калибра, с широкой прицельной планкой.",
+		"Weight": 0.85,
+		"BackgroundColor": "blue",
+		"Width": 3,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 10,
+		"CreditsPrice": 4020,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/barrels/barrel_mr133_510mm_plank.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 6,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 1,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_muzzle",
+				"_id": "564e840e4bdc2df55a8b4567",
+				"_parent": "560835c74bdc2dc8488b456f",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5c0111ab0db834001966914d",
+								"560838c94bdc2d77798b4569",
+								"5b363dea5acfc4771e1c5e7e"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -3,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 0,
+		"Velocity": 5.4,
+		"RaidModdable": false,
+		"ToolModdable": true,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"CenterOfImpact": 1.25,
+		"ShotgunDispersion": 1.9,
+		"IsSilencer": false
+	},
+	"_proto": "55d449444bdc2d962f8b456d"
+}

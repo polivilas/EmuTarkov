@@ -1,0 +1,170 @@
+{
+	"_id": "590c661e86f7741e566b646a",
+	"_name": "item_meds_automedkit",
+	"_parent": "5448f39d4bdc2d0a728b4568",
+	"_type": "Item",
+	"_props": {
+		"Name": "Automedkit",
+		"ShortName": "Automedkit",
+		"Description": "Automedkit",
+		"Weight": 1,
+		"BackgroundColor": "orange",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Common",
+		"SpawnChance": 10,
+		"CreditsPrice": 5775,
+		"ItemSound": "med_medkit",
+		"Prefab": {
+			"path": "assets/content/weapons/usable_items/item_automedkit/item_automedkit_loot.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "assets/content/weapons/usable_items/item_automedkit/item_automedkit_container.bundle",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 25,
+		"ExamineExperience": 10,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"medUseTime": 3,
+		"medEffectType": "duringUse",
+		"MaxHpResource": 220,
+		"hpResourceRate": 70,
+		"StimulatorBuffs": "",
+		"effects_health": {
+			"common": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"head": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"chest": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"tummy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"energy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"hydration": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_damage": {
+			"bloodloss": {
+				"remove": true,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0,
+				"cost": 40
+			},
+			"fracture": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0,
+				"cost": 0
+			},
+			"pain": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0,
+				"cost": 0
+			},
+			"contusion": {
+				"remove": false,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0,
+				"cost": 0
+			},
+			"toxication": {
+				"remove": true,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0,
+				"cost": 0
+			},
+			"radExposure": {
+				"remove": true,
+				"time": 0,
+				"duration": 0,
+				"fadeOut": 0,
+				"cost": 0
+			}
+		}
+	},
+	"_proto": "544fb45d4bdc2dee738b4568"
+}

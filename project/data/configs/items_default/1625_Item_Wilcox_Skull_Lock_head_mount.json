@@ -1,0 +1,107 @@
+{
+	"_id": "5a16bb52fcdbcb001a3b00dc",
+	"_name": "helmet_wilcox_skull_lock",
+	"_parent": "5a341c4086f77401f2541505",
+	"_type": "Item",
+	"_props": {
+		"Name": "helmet_wilcox_skull_lock",
+		"ShortName": "helmet_wilcox_skull_lock",
+		"Description": "helmet_wilcox_skull_lock",
+		"Weight": 0.5,
+		"BackgroundColor": "default",
+		"Width": 2,
+		"Height": 2,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 6,
+		"CreditsPrice": 19724,
+		"ItemSound": "gear_helmet",
+		"Prefab": {
+			"path": "assets/content/items/equipment/customizable/skull_lock/helmet_wilcox_skull_lock.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 4,
+		"HideEntrails": false,
+		"RepairCost": 40,
+		"RepairSpeed": 10,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_nvg",
+				"_id": "5a17e73bfcdbcbcae6687269",
+				"_parent": "5a16bb52fcdbcb001a3b00dc",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a16b8a9fcdbcb00165aa6ca"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"BlocksEarpiece": false,
+		"BlocksEyewear": false,
+		"BlocksHeadwear": false,
+		"BlocksFaceCover": false,
+		"Durability": 100,
+		"MaxDurability": 100,
+		"armorClass": "0",
+		"speedPenaltyPercent": 0,
+		"mousePenalty": 0,
+		"weaponErgonomicPenalty": 0,
+		"armorZone": [],
+		"Indestructibility": 0.9,
+		"headSegments": [],
+		"FaceShieldComponent": false,
+		"FaceShieldMask": "NoMask",
+		"HasHinge": false,
+		"MaterialType": "BodyArmor",
+		"RicochetParams": {
+			"x": 0,
+			"y": 0,
+			"z": 80
+		},
+		"DeafStrength": "None",
+		"BluntThroughput": 0,
+		"ArmorMaterial": "UHMWPE"
+	},
+	"_proto": "5645bc214bdc2d363b8b4571"
+}

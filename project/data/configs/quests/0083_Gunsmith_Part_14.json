@@ -1,0 +1,158 @@
+{
+	"_id": "5b477b6f86f7747290681823",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5b47863b86f7744d1c353203.jpg",
+	"type": "WeaponAssembly",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 14,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20800",
+				"id": "5c950e2286f774551757f06b",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5b4876bc86f77447c5418006",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796cb6",
+				"value": "100000",
+				"id": "5b4876c786f7746eb62fc13a",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cb6",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 100000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cb7",
+				"value": "1",
+				"id": "5b4876d886f7744a14343af4",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cb7",
+						"_tpl": "5b3b99475acfc432ff4dcbee",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cb8",
+				"id": "5b48e79886f774517c2e658b",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 3,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cb8",
+						"_tpl": "5b07dd285acfc4001754240d"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "27",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0cce86f774287331639a"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "WeaponAssembly",
+				"_props": {
+					"target": [
+						"5a0ec13bfcdbcb00165aa685"
+					],
+					"value": "1",
+					"durability": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"ergonomics": {
+						"value": 62,
+						"compareMethod": ">="
+					},
+					"baseAccuracy": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"recoil": {
+						"value": 400,
+						"compareMethod": "<="
+					},
+					"muzzleVelocity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"weight": {
+						"value": 5,
+						"compareMethod": "<="
+					},
+					"magazineCapacity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"width": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"height": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"effectiveDistance": {
+						"value": 500,
+						"compareMethod": ">="
+					},
+					"emptyTacticalSlot": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"hasItemFromCategory": [],
+					"containsItems": [
+						"57cff947245977638e6f2a19",
+						"56eabf3bd2720b75698b4569",
+						"5b30ac585acfc433000eb79c",
+						"59d6272486f77466146386ff",
+						"57cffb66245977632f391a99",
+						"5a9fbacda2750c00141e080f"
+					],
+					"index": 0,
+					"parentId": "",
+					"id": "5b477f1486f7743009493232"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

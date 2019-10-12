@@ -1,0 +1,116 @@
+{
+	"_id": "5ae449d986f774453a54a7e1",
+	"traderId": "7_ragman",
+	"location": "any",
+	"image": "/files/quest/icon/5ae4a74386f7744748710d72.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "24100",
+				"id": "5c95118b86f774551528defc",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796cfa",
+				"value": "250000",
+				"id": "5ae9e5ed86f7742cfd3cb562",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cfa",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 250000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.09",
+				"id": "5bcf11be86f77423c25c50a8",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796cfb",
+				"id": "5af0816386f774376c4da1f7",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 3,
+				"traderId": "7_ragman",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cfb",
+						"_tpl": "5ab8e79e86f7742d8b372e78"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "40",
+					"index": 0,
+					"parentId": "",
+					"id": "5af4186c86f77428ae313afa"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5ad7247386f7747487619dc3"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5ae9e55886f77445315f662a"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5ad7247386f7747487619dc3"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5ae9e58886f77423572433f5",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae9e55886f77445315f662a",
+								"id": "5ae9e58e86f77423572433f6"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

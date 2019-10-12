@@ -1,0 +1,130 @@
+{
+	"_id": "5b3b6e495acfc4330140bd88",
+	"_name": "scope_base_armasight_vulcan_gen3_bravo_mg_3,5x",
+	"_parent": "55818aeb4bdc2ddc698b456a",
+	"_type": "Item",
+	"_props": {
+		"Name": "scope_base_armasight_vulcan_gen3_bravo_mg_3,5x",
+		"ShortName": "scope_base_armasight_vulcan_gen3_bravo_mg_3,5x",
+		"Description": "scope_base_armasight_vulcan_gen3_bravo_mg_3,5x",
+		"Weight": 0.9,
+		"BackgroundColor": "blue",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 1,
+		"CreditsPrice": 46950,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/scopes/scope_base_armasight_vulcan_gen3_bravo_mg_3,5x.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 10,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_scope",
+				"_id": "5b3b7b205acfc4001638810b",
+				"_parent": "5b3b6e495acfc4330140bd88",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"57ae0171245977343c27bfcf",
+								"58d39d3d86f77445bb794ae7",
+								"577d128124597739d65d0e56",
+								"58d2664f86f7747fec5834f6",
+								"5a33b2c9c4a282000c5a9511"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_tactical",
+				"_id": "5b3cbcaf5acfc400194776a3",
+				"_parent": "5b3b6e495acfc4330140bd88",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b3cbc235acfc4001863ac44"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": 0,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": -3,
+		"Velocity": 0,
+		"RaidModdable": true,
+		"ToolModdable": true,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 500,
+		"sightModType": "optic",
+		"variableZoom": false,
+		"varZoomCount": 0,
+		"varZoomAdd": 0,
+		"aimingSensitivity": 0.45,
+		"SightModesCount": 1,
+		"OpticCalibrationDistances": [
+			50,
+			100,
+			150,
+			200
+		]
+	},
+	"_proto": "5a1eaa87fcdbcb001865f75e"
+}

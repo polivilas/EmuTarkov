@@ -1,0 +1,112 @@
+{
+	"_id": "5645bc214bdc2d363b8b4571",
+	"_name": "helmet",
+	"_parent": "5a341c4086f77401f2541505",
+	"_type": "Item",
+	"_props": {
+		"Name": "Kiver-M Helmet",
+		"ShortName": "Kiver-M",
+		"Description": "Ballistic helmet",
+		"Weight": 1.2,
+		"BackgroundColor": "default",
+		"Width": 2,
+		"Height": 2,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 6,
+		"CreditsPrice": 31124,
+		"ItemSound": "gear_helmet",
+		"Prefab": {
+			"path": "assets/content/items/equipment/helmet_kiverm/item_equipment_helmet_kiverm.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 4,
+		"HideEntrails": false,
+		"RepairCost": 450,
+		"RepairSpeed": 10,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_equipment",
+				"_id": "5b46244386f7741a6a537e22",
+				"_parent": "5645bc214bdc2d363b8b4571",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b46238386f7741a693bcf9c"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"BlocksEarpiece": true,
+		"BlocksEyewear": false,
+		"BlocksHeadwear": false,
+		"BlocksFaceCover": false,
+		"Durability": 35,
+		"MaxDurability": 35,
+		"armorClass": "3",
+		"speedPenaltyPercent": -3,
+		"mousePenalty": -5,
+		"weaponErgonomicPenalty": -1,
+		"armorZone": [
+			"Head"
+		],
+		"Indestructibility": 0.9,
+		"headSegments": [
+			"Top",
+			"Nape",
+			"Ears"
+		],
+		"FaceShieldComponent": false,
+		"FaceShieldMask": "NoMask",
+		"HasHinge": false,
+		"MaterialType": "Helmet",
+		"RicochetParams": {
+			"x": 0.8,
+			"y": 0.3,
+			"z": 70
+		},
+		"DeafStrength": "High",
+		"BluntThroughput": 0.15,
+		"ArmorMaterial": "UHMWPE"
+	}
+}

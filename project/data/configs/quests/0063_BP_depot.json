@@ -1,0 +1,177 @@
+{
+	"_id": "59c124d686f774189b3c843f",
+	"traderId": "1_prapor",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/59c133eb86f7740e7b544c71.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796c55",
+				"value": "4",
+				"id": "59c1296686f77415077de0d9",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c55",
+						"_tpl": "5991b51486f77447b112d44f",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "2900",
+				"id": "5c94f00286f77455192fa423",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.08",
+				"id": "5bcf0ecd86f7742ce2243a35",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c56",
+				"value": "3",
+				"id": "59c1298986f774150429841c",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c56",
+						"_tpl": "5448be9a4bdc2dfd2f8b456a",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c57",
+				"value": "8000",
+				"id": "5a2e81c486f7741a972d4ee7",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c57",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 8000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "5",
+					"index": 0,
+					"parentId": "",
+					"id": "5a60963486f7745c452e10d1"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "fuel1",
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "59c128b986f77415037680df",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "fuel2",
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "59c128cc86f774189b3c84b5",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "fuel3",
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "59c128d886f77414fe7f1a64",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "fuel4",
+					"value": "1",
+					"index": 3,
+					"parentId": "",
+					"id": "59c128f386f774189b3c84bb",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5c92184386f7746afa2e783f",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5c92189286f7746af93240ab"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5c92184386f7746afa2e7840"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

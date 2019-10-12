@@ -1,0 +1,186 @@
+{
+	"_id": "5b477f7686f7744d1b23c4d2",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5b47867286f7744d1a393de9.jpg",
+	"type": "WeaponAssembly",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 14,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "22600",
+				"id": "5c950e3686f77455192fa449",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5b4876f586f7744d06237e5c",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796ccd",
+				"value": "700",
+				"id": "5b48772b86f7744d06237e61",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796ccd",
+						"_tpl": "569668774bdc2da2298b4568",
+						"upd": {
+							"StackObjectsCount": 700
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cce",
+				"value": "1",
+				"id": "5b48774086f77447c541800d",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cce",
+						"_tpl": "5aafa857e5b5b00018480968",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796ccf",
+						"_tpl": "5aaf8a0be5b5b00015693243",
+						"parentId": "5d34df2788a4504526796cce",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd0",
+						"_tpl": "5ab372a310e891001717f0d8",
+						"parentId": "5d34df2788a4504526796cce",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd1",
+						"_tpl": "571659bb2459771fb2755a12",
+						"parentId": "5d34df2788a4504526796cd0",
+						"slotId": "mod_pistolgrip"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd2",
+						"_tpl": "5649be884bdc2d79388b4577",
+						"parentId": "5d34df2788a4504526796cd0",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd3",
+						"_tpl": "58d2946386f774496974c37e",
+						"parentId": "5d34df2788a4504526796cd2",
+						"slotId": "mod_stock_000"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd4",
+						"_tpl": "5addbac75acfc400194dbc56",
+						"parentId": "5d34df2788a4504526796cce",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd5",
+						"_tpl": "5addbbb25acfc40015621bd9",
+						"parentId": "5d34df2788a4504526796cd4",
+						"slotId": "mod_muzzle"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "29",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0d7186f77412bc326997"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "WeaponAssembly",
+				"_props": {
+					"target": [
+						"5aafa857e5b5b00018480968"
+					],
+					"value": "1",
+					"durability": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"ergonomics": {
+						"value": 26,
+						"compareMethod": ">="
+					},
+					"baseAccuracy": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"recoil": {
+						"value": 350,
+						"compareMethod": "<="
+					},
+					"muzzleVelocity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"weight": {
+						"value": 7.3,
+						"compareMethod": "<="
+					},
+					"magazineCapacity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"width": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"height": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"effectiveDistance": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"emptyTacticalSlot": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"hasItemFromCategory": [],
+					"containsItems": [
+						"5addbfbb5acfc400194dbcf7",
+						"5aa66be6e5b5b0214e506e97",
+						"58d399e486f77442e0016fe7",
+						"57fd23e32459772d0805bcf1"
+					],
+					"index": 0,
+					"parentId": "",
+					"id": "5b47824386f7744d190d8dd1"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

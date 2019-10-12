@@ -1,0 +1,82 @@
+{
+	"_id": "56e294cdd2720b603a8b4575",
+	"_name": "endlessBackpack",
+	"_parent": "5448e53e4bdc2d60728b4567",
+	"_type": "Item",
+	"_props": {
+		"Name": "Developer Pack",
+		"ShortName": "Developer Pack",
+		"Description": "Developer Pack",
+		"Weight": 1,
+		"BackgroundColor": "violet",
+		"Width": 4,
+		"Height": 4,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 50,
+		"CreditsPrice": 100000000,
+		"ItemSound": "gear_backpack",
+		"Prefab": {
+			"path": "assets/content/items/equipment/backpack_trizip/item_equipment_backpack_trizip.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 10,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [
+			{
+				"_name": "main",
+				"_id": "56e294d8d2720bbb668b456a",
+				"_parent": "56e294cdd2720b603a8b4575",
+				"_props": {
+					"filters": [],
+					"cellsH": 6,
+					"cellsV": 50,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			}
+		],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"SearchSound": "looting_body_extended",
+		"BlocksArmorVest": false,
+		"speedPenaltyPercent": 0,
+		"GridLayoutName": ""
+	},
+	"_proto": "545cdae64bdc2d39198b4568"
+}

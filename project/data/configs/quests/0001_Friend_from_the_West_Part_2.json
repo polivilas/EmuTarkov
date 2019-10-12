@@ -1,0 +1,62 @@
+{
+	"_id": "5a27d2af86f7744e1115b323",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/59c274ae86f77475060a9341.jpg",
+	"type": "Merchant",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 9,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9200",
+				"id": "5c94ff6b86f774551617862c",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.12",
+				"id": "5a27d38386f7743e0e35e17d",
+				"type": "TraderStanding",
+				"index": 1
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "9",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a718086f7745a9d6892d9"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5696686a4bdc2da3298b456a"
+					],
+					"value": "6000",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5a27d34586f7744e1115b327",
+					"maxDurability": 0,
+					"dogtagLevel": 0
+				}
+			}
+		],
+		"Fail": []
+	}
+}

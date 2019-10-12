@@ -1,0 +1,196 @@
+{
+	"_id": "59f98b4986f7746f546d2cef",
+	"_name": "weapon_tochmash_sr1mp_9x21",
+	"_parent": "5447b5cf4bdc2d65278b4567",
+	"_type": "Item",
+	"_props": {
+		"Name": "weapon_tochmash_sr1mp_9x21",
+		"ShortName": "weapon_tochmash_sr1mp_9x21",
+		"Description": "weapon_tochmash_sr1mp_9x21",
+		"Weight": 0.79,
+		"BackgroundColor": "black",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 2,
+		"CreditsPrice": 19292,
+		"ItemSound": "weap_pistol",
+		"Prefab": {
+			"path": "assets/content/weapons/sr1mp/weapon_tochmash_sr1mp_9x21_container.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 10,
+		"HideEntrails": false,
+		"RepairCost": 20,
+		"RepairSpeed": 3,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_mount",
+				"_id": "59f98b4986f7746f546d2cf0",
+				"_parent": "59f98b4986f7746f546d2cef",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a27b281c4a28200741e1e52",
+								"5a27bad7c4a282000b15184b"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_magazine",
+				"_id": "59f98b4986f7746f546d2cf1",
+				"_parent": "59f98b4986f7746f546d2cef",
+				"_props": {
+					"filters": [
+						{
+							"AnimationIndex": -1,
+							"Filter": [
+								"59f99a7d86f7745b134aa97b"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c394bdc2dae468b4577"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"weapClass": "pistol",
+		"weapUseType": "secondary",
+		"ammoCaliber": "Caliber9x21",
+		"Durability": 100,
+		"MaxDurability": 100,
+		"OperatingResource": 12000,
+		"RepairComplexity": 0,
+		"durabSpawnMin": 25,
+		"durabSpawnMax": 75,
+		"isFastReload": true,
+		"RecoilForceUp": 520,
+		"RecoilForceBack": 325,
+		"Convergence": 5,
+		"RecoilAngle": 85,
+		"weapFireType": [
+			"single"
+		],
+		"RecolDispersion": 20,
+		"bFirerate": 30,
+		"Ergonomics": 82,
+		"Velocity": 0.1,
+		"bEffDist": 50,
+		"bHearDist": 80,
+		"isChamberLoad": true,
+		"chamberAmmoCount": 1,
+		"isBoltCatch": true,
+		"defMagType": "59f99a7d86f7745b134aa97b",
+		"defAmmo": "5a269f97c4a282000b151807",
+		"shotgunDispersion": 10,
+		"Chambers": [
+			{
+				"_name": "patron_in_weapon",
+				"_id": "59f98b4986f7746f546d2cf3",
+				"_parent": "59f98b4986f7746f546d2cef",
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"5a269f97c4a282000b151807",
+								"5a26abfac4a28232980eabff",
+								"5a26ac06c4a282000c5a90a8",
+								"5a26ac0ec4a28200741e1e18"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d4af244bdc2d962f8b4571"
+			}
+		],
+		"CameraRecoil": 0.05,
+		"CameraSnap": 3.5,
+		"ReloadMode": "ExternalMagazine",
+		"CenterOfImpact": 0.6,
+		"AimPlane": 0.026,
+		"DeviationCurve": 1,
+		"DeviationMax": 100,
+		"Foldable": false,
+		"Retractable": false,
+		"TacticalReloadStiffnes": {
+			"x": 0.95,
+			"y": 0.33,
+			"z": 0.95
+		},
+		"TacticalReloadFixation": 0.95,
+		"RecoilCenter": {
+			"x": 0,
+			"y": -0.44,
+			"z": -0.005
+		},
+		"RotationCenter": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"RotationCenterNoStock": {
+			"x": 0,
+			"y": -0.45,
+			"z": -0.05
+		},
+		"SizeReduceRight": 0,
+		"FoldedSlot": "",
+		"CompactHandling": false,
+		"SightingRange": 100,
+		"MinRepairDegradation": 0,
+		"MaxRepairDegradation": 0.01,
+		"IronSightRange": 25,
+		"MustBoltBeOpennedForExternalReload": false,
+		"MustBoltBeOpennedForInternalReload": false,
+		"BoltAction": false,
+		"HipAccuracyRestorationDelay": 0.2,
+		"HipAccuracyRestorationSpeed": 7,
+		"HipInnaccuracyGain": 0.16,
+		"ManualBoltCatch": false
+	},
+	"_proto": "56d59856d2720bd8418b456a"
+}

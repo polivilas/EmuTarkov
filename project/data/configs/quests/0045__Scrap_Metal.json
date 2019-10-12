@@ -1,0 +1,312 @@
+{
+	"_id": "5a27b7d686f77460d847e6a6",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5a29221d86f77457303da9fa.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7200",
+				"id": "5c9509d086f774551528def3",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1b2586f7746a49593325",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796bf5",
+				"value": "850",
+				"id": "5a27fb0486f7742607399c34",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bf5",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 850
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bf6",
+				"value": "2",
+				"id": "5a27fb2486f774268504c967",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bf6",
+						"_tpl": "59d6088586f774275f37482f",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796bf7",
+						"_tpl": "59d64ec286f774171d1e0a42",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5d34df2788a4504526796bf8",
+						"_tpl": "59d64fc686f774171b243fe2",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796bf9",
+						"_tpl": "59e62cc886f77440d40b52a1",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796bfa",
+						"_tpl": "59d6507c86f7741b846413a2",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796bfb",
+						"_tpl": "59d650cf86f7741b846413a4",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796bfc",
+						"_tpl": "59d6514b86f774171a068a08",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796bfd",
+						"_tpl": "59d625f086f774661516605d",
+						"parentId": "5d34df2788a4504526796bf6",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796bfe",
+						"_tpl": "59d64f2f86f77417193ef8b3",
+						"parentId": "5d34df2788a4504526796bf7",
+						"slotId": "mod_handguard"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bff",
+				"value": "200",
+				"id": "5a27fb5486f774262138d6a8",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bff",
+						"_tpl": "5656d7c34bdc2d9d198b4587",
+						"upd": {
+							"StackObjectsCount": 200
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c00",
+				"id": "5b42250e86f774370c7284a9",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 2,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c00",
+						"_tpl": "5926bb2186f7744b1c6c6e60",
+						"parentId": "hideout",
+						"slotId": "hideout"
+					},
+					{
+						"_id": "5d34df2788a4504526796c01",
+						"_tpl": "5926c3b286f774640d189b6b",
+						"parentId": "5d34df2788a4504526796c00",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796c02",
+						"_tpl": "5926f2e086f7745aae644231",
+						"parentId": "5d34df2788a4504526796c00",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796c03",
+						"_tpl": "5926c32286f774616e42de99",
+						"parentId": "5d34df2788a4504526796c00",
+						"slotId": "mod_charge"
+					},
+					{
+						"_id": "5d34df2788a4504526796c04",
+						"_tpl": "58864a4f2459770fcc257101",
+						"parentId": "5d34df2788a4504526796c01",
+						"slotId": "cartridges",
+						"location": 0,
+						"upd": {
+							"StackObjectsCount": 30
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c05",
+						"_tpl": "5926f34786f77469195bfe92",
+						"parentId": "5d34df2788a4504526796c02",
+						"slotId": "mod_handguard"
+					},
+					{
+						"_id": "5d34df2788a4504526796c06",
+						"_tpl": "5926d2be86f774134d668e4e",
+						"parentId": "5d34df2788a4504526796c02",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796c07",
+						"_tpl": "5926d40686f7740f152b6b7e",
+						"parentId": "5d34df2788a4504526796c02",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796c08",
+						"_tpl": "5926d33d86f77410de68ebc0",
+						"parentId": "5d34df2788a4504526796c02",
+						"slotId": "mod_muzzle"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "10",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a71c686f7745a9d6892e6"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_003_N1",
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "5a37e8ae86f77415076b401d",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_003_N2",
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "5a27fc8186f7746371546243",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_003_N3",
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "5a27fc9686f774675744bb60",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c939d0e86f774185203c4c2",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5c939d1886f7741229301dc2"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c939d2586f774122b6e7852"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5c939d0e86f774185203c4c3",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a37e8ae86f77415076b401d",
+								"id": "5c9a166586f77438c80164e8"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a27fc8186f7746371546243",
+								"id": "5c9a166a86f7741da4659f71"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a27fc9686f774675744bb60",
+								"id": "5c9a166f86f7747dbe2da3be"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,124 @@
+{
+	"_id": "5c0e805e86f774683f3dd637",
+	"_name": "item_equipment_backpack_paratus",
+	"_parent": "5448e53e4bdc2d60728b4567",
+	"_type": "Item",
+	"_props": {
+		"Name": "Pilgrim",
+		"ShortName": "Pilgrim",
+		"Description": "Pilgrim",
+		"Weight": 1.3,
+		"BackgroundColor": "violet",
+		"Width": 5,
+		"Height": 7,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 2,
+		"CreditsPrice": 59200,
+		"ItemSound": "gear_backpack",
+		"Prefab": {
+			"path": "assets/content/items/equipment/backpack_paratus_3_day/item_equipment_backpack_paratus_3_day.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 10,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [
+			{
+				"_name": "main",
+				"_id": "5c0e805e86f774683f3dd639",
+				"_parent": "5c0e805e86f774683f3dd637",
+				"_props": {
+					"filters": [],
+					"cellsH": 5,
+					"cellsV": 5,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			},
+			{
+				"_name": "1",
+				"_id": "5c0e816086f7745dc7616605",
+				"_parent": "5c0e805e86f774683f3dd637",
+				"_props": {
+					"filters": [],
+					"cellsH": 1,
+					"cellsV": 2,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			},
+			{
+				"_name": "2",
+				"_id": "5c0e816886f7742b461cca32",
+				"_parent": "5c0e805e86f774683f3dd637",
+				"_props": {
+					"filters": [],
+					"cellsH": 1,
+					"cellsV": 2,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			},
+			{
+				"_name": "3",
+				"_id": "5c0e816c86f77452b35dc6e4",
+				"_parent": "5c0e805e86f774683f3dd637",
+				"_props": {
+					"filters": [],
+					"cellsH": 3,
+					"cellsV": 2,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			}
+		],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"SearchSound": "looting_body_extended",
+		"BlocksArmorVest": false,
+		"speedPenaltyPercent": -5,
+		"GridLayoutName": "Paratus"
+	},
+	"_proto": "544a5cde4bdc2d39388b456b"
+}

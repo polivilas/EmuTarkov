@@ -1,0 +1,178 @@
+{
+	"_id": "5c0bbaa886f7746941031d82",
+	"traderId": "4_skier",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/59c274ae86f77475060a9341.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "29700",
+				"id": "5c94ffd386f77455185027f2",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d8c",
+				"value": "120000",
+				"id": "5c17b9a586f77430a41a0953",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d8c",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 120000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d8d",
+				"id": "5c17bee186f77430a70d197b",
+				"type": "AssortmentUnlock",
+				"index": 2,
+				"loyaltyLevel": 3,
+				"traderId": "4_skier",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d8d",
+						"_tpl": "5c1127d0d174af29be75cf68"
+					}
+				]
+			},
+			{
+				"target": "4_skier",
+				"value": "0.07",
+				"id": "5c17cfec86f77418e53fc71b",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c0bc91486f7746ab41857a2",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fa91586f7740de474cb36"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5c12301c86f77419522ba7e4"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c50481c86f77410650e0521"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"55801eed4bdc2d89578b4588"
+					],
+					"zoneId": "Q019_3",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 40,
+					"index": 1,
+					"parentId": "",
+					"id": "5c0bc32986f7743e4d1002d2"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"59faf7ca86f7740dbe19f6c2"
+					],
+					"zoneId": "Q019_3",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 40,
+					"index": 2,
+					"parentId": "",
+					"id": "5c0bc43e86f7744794440ba5"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5c12301c86f77419522ba7e4"
+					],
+					"zoneId": "Q019_3",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 40,
+					"index": 3,
+					"parentId": "",
+					"id": "5c12320586f77437e44bcb15"
+				}
+			}
+		],
+		"Fail": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c1233ac86f77406fa13bae9",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5c1233c086f7745cf57b9274"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5c1233d286f7745cf57b9275"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c1233ac86f77406fa13baea"
+				}
+			}
+		]
+	}
+}

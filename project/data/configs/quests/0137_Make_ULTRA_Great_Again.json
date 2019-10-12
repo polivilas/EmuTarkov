@@ -1,0 +1,97 @@
+{
+	"_id": "5ae448bf86f7744d733e55ee",
+	"traderId": "7_ragman",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5ae4a76086f774455f7d62d2.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9800",
+				"id": "5c95108086f774551617863f",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796dc9",
+				"value": "50000",
+				"id": "5ae9ac6686f7741e935c9a69",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc9",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.09",
+				"id": "5bcf0ed586f77423c05cad6d",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "20",
+					"type": "Elimination",
+					"counter": {
+						"id": "5ae44ecd86f77414a13c970d",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5ae44ef386f774149f15ed84"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5ae44efd86f774149d4cc6a4"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5aa2ba19e5b5b00014028f4e",
+											"544a5caa4bdc2d1a388b4568"
+										]
+									],
+									"id": "5c98e5d486f7747ea64fe856"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5ae44ecd86f77414a13c970e"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

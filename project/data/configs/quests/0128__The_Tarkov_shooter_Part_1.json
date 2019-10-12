@@ -1,0 +1,143 @@
+{
+	"_id": "5bc4776586f774512d07cf05",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "18900",
+				"id": "5c950ef786f774551617863b",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5bcf20bc86f7746a45695a6e",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796d94",
+				"value": "50000",
+				"id": "5bcf216586f7746a45695a6f",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d94",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d95",
+				"value": "2",
+				"id": "5bcf2cde86f77401c82fba55",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d95",
+						"_tpl": "5b3f7c1c5acfc40dc5296b1d",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d96",
+				"value": "2",
+				"id": "5bcf2d4886f774723055e998",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d96",
+						"_tpl": "5b3f7c005acfc4704b4a1de8",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d97",
+				"value": "2",
+				"id": "5bd7018286f77410f65dc659",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d97",
+						"_tpl": "5b3f7bf05acfc433000ecf6b",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": 15,
+					"type": "Elimination",
+					"counter": {
+						"id": "5bc4781086f774446c1ffb92",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"distance": {
+										"compareMethod": ">=",
+										"value": 50
+									},
+									"weaponModsExclusive": [
+										[
+											"5bbdb811d4351e45020113c7"
+										],
+										[
+											"5bc5a372d4351e44f824d17f"
+										],
+										[
+											"5b3f7c1c5acfc40dc5296b1d"
+										]
+									],
+									"id": "5bc5bc1186f7741b135e7788"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bc850d186f7747213700892"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

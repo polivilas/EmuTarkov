@@ -1,0 +1,114 @@
+{
+	"_id": "5a0449d586f77474e66227b7",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5a27c50f86f7740b3d65e16a.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7800",
+				"id": "5c950a5586f774592a470254",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.06",
+				"id": "5bcf1c0086f7746a486b842f",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b77",
+				"value": "980",
+				"id": "5a280eef86f7747e4b7dca8a",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b77",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 980
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b78",
+				"value": "4",
+				"id": "5a280f0286f7747a274b5c38",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b78",
+						"_tpl": "590c678286f77426c9660122",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a725b86f7745b18478f0d"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5a0448bc86f774736f14efa8"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5a044a6c86f7747370402d91"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5a0448bc86f774736f14efa8"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5a280f8d86f774141b501756",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a044a6c86f7747370402d91",
+								"id": "5a60aa4386f77452863963c8"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

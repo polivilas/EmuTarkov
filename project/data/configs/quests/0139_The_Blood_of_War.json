@@ -1,0 +1,151 @@
+{
+	"_id": "5ae448f286f77448d73c0131",
+	"traderId": "7_ragman",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5ae4a74386f7744748710d72.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7500",
+				"id": "5c95109a86f77455192fa44c",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796dcc",
+				"value": "60000",
+				"id": "5ae9ad3986f77458b06d5625",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dcc",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 60000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.06",
+				"id": "5bcf0f5c86f77423be216105",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_WARBLOOD_04_1",
+					"value": "1",
+					"plantTime": 30,
+					"index": 0,
+					"parentId": "",
+					"id": "5ae452c086f774336a397578"
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_WARBLOOD_04_2",
+					"value": "1",
+					"plantTime": 30,
+					"index": 1,
+					"parentId": "",
+					"id": "5ae452de86f77450595c4333"
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_WARBLOOD_04_3",
+					"value": "1",
+					"plantTime": 30,
+					"index": 2,
+					"parentId": "",
+					"id": "5ae452fa86f774336a39758e"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5ae4531986f774177033c3e5",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5ae4531f86f77417eb43f0d8"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5ae4532486f77418215460fb"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5ae4531986f774177033c3e6",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae452c086f774336a397578",
+								"id": "5ae4532a86f774336a39759e"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae452de86f77450595c4333",
+								"id": "5ae4532e86f774184a254940"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae452fa86f774336a39758e",
+								"id": "5ae4533286f7741b747a04d9"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

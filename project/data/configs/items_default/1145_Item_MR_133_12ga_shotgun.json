@@ -1,0 +1,287 @@
+{
+	"_id": "54491c4f4bdc2db1078b4568",
+	"_name": "weapon_izhmeh_mr133_12g",
+	"_parent": "5447b6094bdc2dc3278b4567",
+	"_type": "Item",
+	"_props": {
+		"Name": "Ружье МР-133 12к",
+		"ShortName": "МР-133 12к",
+		"Description": "Гладкоствольное многозарядное ружьё МР-133 с перезаряжанием цевьем, производства ИжМех. Надежное и удобное оружие для охоты и самообороны. Уникально в своем роде благодаря наличию затворной задержки.",
+		"Weight": 1.1,
+		"BackgroundColor": "black",
+		"Width": 3,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Common",
+		"SpawnChance": 7,
+		"CreditsPrice": 14443,
+		"ItemSound": "weap_pump",
+		"Prefab": {
+			"path": "assets/content/weapons/mr133/weapon_izhmeh_mr133_12g_container.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 4,
+		"HideEntrails": false,
+		"RepairCost": 50,
+		"RepairSpeed": 12,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_barrel",
+				"_id": "560d19c44bdc2de22e8b457a",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"55d4491a4bdc2d882f8b456e",
+								"560835c74bdc2dc8488b456f",
+								"560836484bdc2d20478b456e",
+								"560836b64bdc2d57468b4567",
+								"55d448594bdc2d8c2f8b4569",
+								"55d449444bdc2d962f8b456d",
+								"560836fb4bdc2d773f8b4569",
+								"560837154bdc2da74d8b4568",
+								"5608373c4bdc2dc8488b4570",
+								"560837544bdc2de22e8b456e",
+								"560837824bdc2d57468b4568",
+								"5608379a4bdc2d26448b4569"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_handguard",
+				"_id": "560d1a214bdc2da74d8b4570",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"55d45f484bdc2d972f8b456d",
+								"55d45d3f4bdc2d972f8b456c"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_magazine",
+				"_id": "560d1bc94bdc2de22e8b457b",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"AnimationIndex": 0,
+							"Filter": [
+								"55d484b44bdc2d1d4e8b456d",
+								"55d485804bdc2d8c2f8b456b",
+								"56deee15d2720bee328b4567",
+								"5882163e24597758206fee8c",
+								"5882163824597757561aa922",
+								"5882163224597757561aa920",
+								"56deeefcd2720bc8328b4568"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c394bdc2dae468b4577"
+			},
+			{
+				"_name": "mod_stock",
+				"_id": "560d1d074bdc2d26448b4574",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5bfe7fb30db8340018089fed",
+								"56083a334bdc2dc8488b4571",
+								"56083be64bdc2d20478b456f",
+								"56083cba4bdc2de22e8b456f"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_mount_001",
+				"_id": "560d1e974bdc2d20478b457b",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"55d48a634bdc2d8b2f8b456a"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_mount_000",
+				"_id": "5792111024597773c72397b5",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"55d48ebc4bdc2d8c2f8b456c"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"weapClass": "shotgun",
+		"weapUseType": "primary",
+		"ammoCaliber": "Caliber12g",
+		"Durability": 100,
+		"MaxDurability": 100,
+		"OperatingResource": 9000,
+		"RepairComplexity": 0,
+		"durabSpawnMin": 25,
+		"durabSpawnMax": 75,
+		"isFastReload": false,
+		"RecoilForceUp": 520,
+		"RecoilForceBack": 650,
+		"Convergence": 2.5,
+		"RecoilAngle": 90,
+		"weapFireType": [
+			"single"
+		],
+		"RecolDispersion": 15,
+		"bFirerate": 30,
+		"Ergonomics": 40,
+		"Velocity": 0,
+		"bEffDist": 70,
+		"bHearDist": 1,
+		"isChamberLoad": true,
+		"chamberAmmoCount": 1,
+		"isBoltCatch": true,
+		"defMagType": "55d484b44bdc2d1d4e8b456d",
+		"defAmmo": "560d5e524bdc2d25448b4571",
+		"shotgunDispersion": 20,
+		"Chambers": [
+			{
+				"_name": "patron_in_weapon",
+				"_id": "56eaa97bd2720bf2698b4574",
+				"_parent": "54491c4f4bdc2db1078b4568",
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"560d5e524bdc2d25448b4571",
+								"5c0d591486f7744c505b416f",
+								"58820d1224597753c90aeb13"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d4af244bdc2d962f8b4571"
+			}
+		],
+		"CameraRecoil": 0.3,
+		"CameraSnap": 3.5,
+		"ReloadMode": "InternalMagazine",
+		"CenterOfImpact": 0,
+		"AimPlane": 0.112,
+		"DeviationCurve": 1,
+		"DeviationMax": 100,
+		"Foldable": false,
+		"Retractable": false,
+		"TacticalReloadStiffnes": {
+			"x": 0.95,
+			"y": 0.33,
+			"z": 0.95
+		},
+		"TacticalReloadFixation": 0.95,
+		"RecoilCenter": {
+			"x": 0,
+			"y": -0.3,
+			"z": 0
+		},
+		"RotationCenter": {
+			"x": 0,
+			"y": -0.1,
+			"z": -0.03
+		},
+		"RotationCenterNoStock": {
+			"x": 0,
+			"y": -0.25,
+			"z": -0.06
+		},
+		"SizeReduceRight": 0,
+		"FoldedSlot": "",
+		"CompactHandling": true,
+		"SightingRange": 100,
+		"MinRepairDegradation": 0,
+		"MaxRepairDegradation": 0.01,
+		"IronSightRange": 25,
+		"MustBoltBeOpennedForExternalReload": false,
+		"MustBoltBeOpennedForInternalReload": false,
+		"BoltAction": false,
+		"HipAccuracyRestorationDelay": 0.2,
+		"HipAccuracyRestorationSpeed": 7,
+		"HipInnaccuracyGain": 0.16,
+		"ManualBoltCatch": false,
+		"ShotgunDispersion": 1
+	}
+}

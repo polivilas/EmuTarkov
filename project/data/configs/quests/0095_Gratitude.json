@@ -1,0 +1,120 @@
+{
+	"_id": "5ae449b386f77446d8741719",
+	"traderId": "7_ragman",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/5ae4a74386f7744748710d72.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "16300",
+				"id": "5c95117286f774551528defb",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796cf4",
+				"value": "80000",
+				"id": "5ae9e3af86f7746b6a466a8b",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cf4",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 80000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.07",
+				"id": "5bcf118986f77423c05cad71",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5ab8f4ff86f77431c60d91ba"
+					],
+					"zoneId": "place_THX_15",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 1,
+					"parentId": "",
+					"id": "5ae9e17c86f77440d37ce03c"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5ab8f85d86f7745cd93a1cf5"
+					],
+					"zoneId": "place_THX_15",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 2,
+					"parentId": "",
+					"id": "5ae9e1c786f77403fb3f9674"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5aa2b9aee5b5b00015693121"
+					],
+					"zoneId": "place_THX_15",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 3,
+					"parentId": "",
+					"id": "5ae9e2a286f7740de4152a0a"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5aa2b923e5b5b000137b7589"
+					],
+					"zoneId": "place_THX_15",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 4,
+					"parentId": "",
+					"id": "5ae9e2e386f7740de4152a0d"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

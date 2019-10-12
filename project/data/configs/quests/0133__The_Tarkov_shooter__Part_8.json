@@ -1,0 +1,153 @@
+{
+	"_id": "5bc4893c86f774626f5ebf3e",
+	"traderId": "6_mechanic",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "25200",
+				"id": "5c950f7186f774551617863e",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.06",
+				"id": "5bcf263c86f7746a45695b08",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796dbc",
+				"value": "200000",
+				"id": "5bcf265486f774378e266a36",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dbc",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 200000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dbd",
+				"value": "1",
+				"id": "5bcf266986f7746a45695b09",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dbd",
+						"_tpl": "5bae13bad4351e00320204af",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dbe",
+				"value": "1",
+				"id": "5bcf267786f7746a486b85e7",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dbe",
+						"_tpl": "5bae13ded4351e44f824bf38",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dbf",
+				"id": "5bcf268686f7746a45695b0a",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 4,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dbf",
+						"_tpl": "5bae13ded4351e44f824bf38"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dc0",
+				"id": "5bcf269286f7746a472ad9f7",
+				"type": "AssortmentUnlock",
+				"index": 6,
+				"loyaltyLevel": 4,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc0",
+						"_tpl": "5bae13bad4351e00320204af"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "4",
+					"type": "Elimination",
+					"counter": {
+						"id": "5bc48aed86f77452c947ce66",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"save": "Сохранить",
+									"form_id": "QuestManager-QuestSubConditionAddForm",
+									"token": "432f2f7567b5cd0f49eedea064e4a878",
+									"id": "5bc48b1c86f77452be306b5f"
+								}
+							},
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"resetOnSessionEnd": true,
+									"id": "5bc84a7b86f77466d6051e37"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bc48aed86f77452c947ce67"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

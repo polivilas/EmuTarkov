@@ -1,0 +1,119 @@
+{
+	"_id": "5a787f7ac5856700177af660",
+	"_name": "barrel_870_fixed_improved_cylinder_508mm",
+	"_parent": "555ef6e44bdc2de9068b457e",
+	"_type": "Item",
+	"_props": {
+		"Name": "barrel_870_extra_barrel_355mm",
+		"ShortName": "barrel_870_extra_barrel_355mm",
+		"Description": "barrel_870_extra_barrel_355mm",
+		"Weight": 0.8,
+		"BackgroundColor": "blue",
+		"Width": 3,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 30,
+		"CreditsPrice": 10378,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/barrels/barrel_870_fixed_improved_cylinder_508mm.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": true,
+		"QuestItem": false,
+		"LootExperience": 110,
+		"ExamineExperience": 6,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 1,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_muzzle",
+				"_id": "5a787f7ac5856700177af661",
+				"_parent": "5a787f7ac5856700177af660",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5c0111ab0db834001966914d",
+								"560838c94bdc2d77798b4569",
+								"5b363dea5acfc4771e1c5e7e"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_mount",
+				"_id": "5a7898b7c585673f2b5c3cb8",
+				"_parent": "5a787f7ac5856700177af660",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a789261c5856700186c65d3"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -4,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": -3,
+		"Velocity": 5.4,
+		"RaidModdable": false,
+		"ToolModdable": true,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"CenterOfImpact": 1.3,
+		"ShotgunDispersion": 1.9,
+		"IsSilencer": false
+	},
+	"_proto": "55d448594bdc2d8c2f8b4569"
+}

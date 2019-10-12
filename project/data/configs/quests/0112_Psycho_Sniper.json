@@ -1,0 +1,95 @@
+{
+	"_id": "5c0be13186f7746f016734aa",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5a27cafa86f77424e20615d6.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "32400",
+				"id": "5c98cca986f77433302b5f03",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d2e",
+				"value": "150000",
+				"id": "5c18c25286f77467bf06520f",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d2e",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 150000
+						}
+					}
+				]
+			},
+			{
+				"target": "Intellect",
+				"value": "1",
+				"id": "5c18c27786f77467c00e134d",
+				"type": "Skill",
+				"index": 2
+			},
+			{
+				"target": "Sniper",
+				"value": "1",
+				"id": "5c18c28486f77467bf065210",
+				"type": "Skill",
+				"index": 3
+			},
+			{
+				"target": "StressResistance",
+				"value": "1",
+				"id": "5c18c29386f77467c1502ac0",
+				"type": "Skill",
+				"index": 4
+			},
+			{
+				"target": "Perception",
+				"value": "1",
+				"id": "5c18c2ab86f774186730fed1",
+				"type": "Skill",
+				"index": 5
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "35",
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fb5f986f7744a1929a527"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "Skill",
+				"_props": {
+					"target": "Sniper",
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5c0be2b486f7747bcb347d58"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

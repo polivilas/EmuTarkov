@@ -1,0 +1,170 @@
+{
+	"_id": "59c9392986f7742f6923add2",
+	"traderId": "2_therapist",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/59c2742286f77475ec568d92.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "2_therapist",
+				"value": "0.3",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5a2fbb7a86f774769732daab"
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"593aa4be86f77457f56379f8"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "59c93bdb86f7742a19140434"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"591afe0186f77431bd616a11"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "59c93c1986f7742a424eaa33"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5913915886f774123603c392"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "59c93cbb86f7742a19140435"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5913877a86f774432f15d444"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "59c93cea86f7742a08623162"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"593aa4be86f77457f56379f8"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "59c93d4e86f774496b698953",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "59c93bdb86f7742a19140434",
+								"id": "5a5777f086f7740adb5caac7"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"591afe0186f77431bd616a11"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "59c93d8086f7742a19140436",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "59c93c1986f7742a424eaa33",
+								"id": "5a5777f786f7740ad83ccf69"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5913915886f774123603c392"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 6,
+					"parentId": "",
+					"id": "59c93d9c86f7742f6923add3",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "59c93cbb86f7742a19140435",
+								"id": "5a57780486f7740adc2f7e45"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5913877a86f774432f15d444"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 7,
+					"parentId": "",
+					"id": "59c93dbf86f7742a424eaa34",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "59c93cea86f7742a08623162",
+								"id": "5a57780c86f7741cc1242073"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,121 @@
+{
+	"_id": "5ab3afb2d8ce87001660304d",
+	"_name": "muzzle_m1a_smith_enterprise_socom_16_threaded_gas_lock_762x51",
+	"_parent": "550aa4bf4bdc2dd6348b456b",
+	"_type": "Item",
+	"_props": {
+		"Name": "muzzle_m1a_smith_enterprise_socom_16_threaded_gas_lock_762x51",
+		"ShortName": "muzzle_m1a_smith_enterprise_socom_16_threaded_gas_lock_762x51",
+		"Description": "muzzle_m1a_smith_enterprise_socom_16_threaded_gas_lock_762x51",
+		"Weight": 0.11,
+		"BackgroundColor": "blue",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 21,
+		"CreditsPrice": 4909,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/muzzle/muzzle_m1a_smith_enterprise_socom_16_threaded_gas_lock_762x51.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 5,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": true,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_sight_front",
+				"_id": "5ab3afb2d8ce87001660304f",
+				"_parent": "5ab3afb2d8ce87001660304d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5addba3e5acfc4001669f0ab",
+								"5aafa49ae5b5b00015042a58"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_muzzle",
+				"_id": "5ab3b244d8ce8700182eccb6",
+				"_parent": "5ab3afb2d8ce87001660304d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b7d693d5acfc43bca706a3d",
+								"5c878e9d2e2216000f201903",
+								"5bbdb8bdd4351e4502011460",
+								"5addbba15acfc400185c2854",
+								"5c7954d52e221600106f4cc7",
+								"59bffc1f86f77435b128b872"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -1,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 0,
+		"Velocity": 0.5,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"muzzleModType": "conpensator"
+	},
+	"_proto": "544a38634bdc2d58388b4568"
+}

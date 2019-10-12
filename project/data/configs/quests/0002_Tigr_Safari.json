@@ -1,0 +1,194 @@
+{
+	"_id": "5a27b7a786f774579c3eb376",
+	"traderId": "5_peacekeeper",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/57e4f1852459772a15635633.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "6600",
+				"id": "5c9509c586f7745516178632",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1b0886f7746a486b8428",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b22",
+				"value": "900",
+				"id": "5a27d94f86f77448d97fe86d",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b22",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 900
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b23",
+				"value": "1",
+				"id": "5a27d96286f774472a6e0466",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b23",
+						"_tpl": "592c2d1a86f7746dbe2af32a",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b24",
+				"value": "2",
+				"id": "5ac66b0886f77403dd390d5c",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b24",
+						"_tpl": "544a37c44bdc2d25388b4567",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "10",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a71b286f7745a7e19f642"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_002_N1",
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "5a27e73f86f7740fb275c94b",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_002_N2",
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "5a27e75886f7740aef4a9157",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_002_N3",
+					"value": "1",
+					"index": 3,
+					"parentId": "",
+					"id": "5a29653986f77406a3435b26",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c9394a986f7741228714be2",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5c9394ba86f774122a7ac1a2"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5c9394de86f774122c346f82"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5c9394a986f7741228714be3",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a27e73f86f7740fb275c94b",
+								"id": "5c9395ae86f774122c346f83"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a27e75886f7740aef4a9157",
+								"id": "5c9395be86f774122a7ac1a3"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a29653986f77406a3435b26",
+								"id": "5c9395cd86f774122c346f84"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

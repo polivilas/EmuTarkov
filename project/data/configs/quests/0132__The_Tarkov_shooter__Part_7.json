@@ -1,0 +1,122 @@
+{
+	"_id": "5bc4856986f77454c317bea7",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20700",
+				"id": "5c950f6286f774551757f06d",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5bcf25cc86f7746a45695b06",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796db9",
+				"value": "1",
+				"id": "5bcf25e886f774378e266a35",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796db9",
+						"_tpl": "5bc5a35cd4351e450201232f",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dba",
+				"id": "5bcf25f486f7746a472ad9f5",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 4,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dba",
+						"_tpl": "5bc5a35cd4351e450201232f"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dbb",
+				"value": "85000",
+				"id": "5bcf261286f7746a464c5684",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dbb",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 85000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "10",
+					"type": "Elimination",
+					"counter": {
+						"id": "5bc485b586f774726473a857",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"distance": {
+										"compareMethod": ">=",
+										"value": 80
+									},
+									"weaponModsInclusive": [
+										[
+											"5b86a0e586f7745b600ccb23"
+										],
+										[
+											"59bffbb386f77435b379b9c2"
+										]
+									],
+									"id": "5bc488ca86f77460ec12a0d0"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bc485b586f774726473a858"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

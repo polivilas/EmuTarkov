@@ -1,0 +1,127 @@
+{
+	"_id": "5c1234c286f77406fa13baeb",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/5968ec2986f7741ddf17db83.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "29300",
+				"id": "5c94fffe86f774551757f04d",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796cfc",
+				"value": "100000",
+				"id": "5c17bfb886f77430a64c69f1",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cfc",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 100000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cfd",
+				"id": "5c1bb2ef86f7745f97490443",
+				"type": "AssortmentUnlock",
+				"index": 2,
+				"loyaltyLevel": 4,
+				"traderId": "4_skier",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cfd",
+						"_tpl": "5c1127bdd174af44217ab8b9"
+					}
+				]
+			},
+			{
+				"target": "4_skier",
+				"value": "0.07",
+				"id": "5c17c1e586f77430a41a095b",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c0bbaa886f7746941031d82",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c1faa1986f7740ebd348c71"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "15",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c12359086f77437bd20fecc",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"54491c4f4bdc2db1078b4568",
+										"56dee2bdd2720bc8328b4567"
+									],
+									"id": "5c12360186f7745ac71d1fb4"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"572b7adb24597762ae139821",
+											"59e7708286f7742cbd762753"
+										]
+									],
+									"id": "5c12363286f7745c8b0203f4"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5c1ffed286f7742b3c0a8fd6"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fa9c986f7740de474cb3d"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

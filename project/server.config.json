@@ -1,16 +1,16 @@
 {
-	"game": "E:\\EFT-TEST",
 	"server": {
-		"backendUrl": "http://127.0.0.1:1337",
-		"ip": "127.0.0.1",
+		"backendUrl": "http://192.168.1.8:1337",
+		"ip": "192.168.1.8",
 		"port": 1337,
-		"generateIp": false,
-		"lootSaving": true
+		"lootSaving": true,
+		"generateIp": true,
+		"itemsCached": true
 	},
 	"debug": {
 		"showSeparator": false,
 		"debugMode": true,
-		"disableLogsDisplayer": true
+		"disableLogsDisplayer": false
 	},
 	"bots": {
 		"pmcWar": {
@@ -27,7 +27,7 @@
 			"scav": 30
 		},
 		"weapon": {
-			"main": 64,
+			"main": 65,
 			"secondary": 50
 		},
 		"equipment": {
@@ -47,8 +47,7 @@
 		"pocket": {
 			"granade": 50,
 			"meds": 50,
-			"med_to_gra": 50,
-			"description": "med_to_gra means: if roll 1 - 100 -> <=50 medicament will be added if >50 granade. This Message Can be deleted if not needed."
+			"med_to_gra": 50
 		}
 	}
 }

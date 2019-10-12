@@ -1,0 +1,76 @@
+{
+	"_id": "5a27ba9586f7741b543d8e85",
+	"traderId": "5_peacekeeper",
+	"location": "any",
+	"image": "/files/quest/icon/5a27c50f86f7740b3d65e16a.jpg",
+	"type": "Loyalty",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "11400",
+				"id": "5c950ab086f77455185027f5",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.09",
+				"id": "5bcf1c5a86f7746a472ad84d",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b79",
+				"id": "5ac66dd686f77403e00e1534",
+				"type": "AssortmentUnlock",
+				"index": 2,
+				"loyaltyLevel": 3,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b79",
+						"_tpl": "5a608bf24f39f98ffc77720e"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a726a86f7745b18478f10"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5696686a4bdc2da3298b456a"
+					],
+					"value": "8000",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5a28127b86f7743808504ecc",
+					"maxDurability": 0,
+					"dogtagLevel": 0
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,76 @@
+{
+	"_id": "596a204686f774576d4c95de",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/596a20d286f7741ddb4815d5.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "4500",
+				"id": "5c9505ce86f774551617862e",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.09",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf12d386f77423c05cad76"
+			},
+			{
+				"target": "5d34df2788a4504526796bc0",
+				"value": "18000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2fb63686f774769839eb55",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bc0",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 18000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "8",
+					"index": 0,
+					"parentId": "",
+					"id": "59a928be86f7747b375626be"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590a3efd86f77437d351a25b"
+					],
+					"value": "3",
+					"index": 2,
+					"parentId": "",
+					"id": "596a20ac86f7741ddf17dbf4",
+					"visibilityConditions": []
+				}
+			}
+		],
+		"Fail": []
+	}
+}

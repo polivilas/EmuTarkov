@@ -1,0 +1,80 @@
+{
+	"_id": "5737280e24597765cc785b5c",
+	"_name": "item_ammo_box_9x18pm_16_PSV",
+	"_parent": "543be5cb4bdc2deb348b4568",
+	"_type": "Item",
+	"_props": {
+		"Name": "ammo_box_9x18pm_16_PSV",
+		"ShortName": "ammo_box_9x18pm_16_PSV",
+		"Description": "ammo_box_9x18pm_16_PSV",
+		"Weight": 0.5,
+		"BackgroundColor": "yellow",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Common",
+		"SpawnChance": 70,
+		"CreditsPrice": 1,
+		"ItemSound": "ammo_pack_generic",
+		"Prefab": {
+			"path": "assets/content/items/ammo/boxes/item_ammo_box_9x18pm_16.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 0,
+		"ExamineExperience": 10,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"StackMinRandom": 16,
+		"StackMaxRandom": 16,
+		"ammoCaliber": "Caliber9x18PM",
+		"StackSlots": [
+			{
+				"_name": "cartridges",
+				"_id": "574d55f624597745a21eb3da",
+				"_parent": "5737280e24597765cc785b5c",
+				"_max_count": 16,
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"5737207f24597760ff7b25f2"
+							]
+						}
+					]
+				},
+				"_proto": "5748538b2459770af276a261"
+			}
+		]
+	},
+	"_proto": "573727c624597765cc785b5b"
+}

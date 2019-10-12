@@ -1,0 +1,108 @@
+{
+	"_id": "5beec9450db83400970084fd",
+	"_name": "sight_rear_all_izhmash_rpk16_std",
+	"_parent": "55818ac54bdc2d5b648b456e",
+	"_type": "Item",
+	"_props": {
+		"Name": "Целик Colt A2 Rearsight для AR-15 и совместимых",
+		"ShortName": "CA2R",
+		"Description": "Съемный целик Colt A2 Rearsight. Штатно устанавливается на M4A1.",
+		"Weight": 0.05,
+		"BackgroundColor": "blue",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 50,
+		"CreditsPrice": 800,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/sights rear/sight_rear_all_izhmash_rpk16_std.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 2,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_sight_rear",
+				"_id": "5bf3f5b10db834001d2c4aaa",
+				"_parent": "5beec9450db83400970084fd",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5ac733a45acfc400192630e2",
+								"5649b0544bdc2d1b2b8b458a",
+								"5ac72e475acfc400180ae6fe",
+								"5bf3f59f0db834001a6fa060"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": 0,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 0,
+		"Velocity": 0,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 600,
+		"sightModType": "iron",
+		"variableZoom": false,
+		"varZoomCount": 0,
+		"varZoomAdd": 0,
+		"aimingSensitivity": 0.65,
+		"SightModesCount": 1,
+		"OpticCalibrationDistances": [
+			100
+		]
+	},
+	"_proto": "55d4af3a4bdc2d972f8b456f"
+}

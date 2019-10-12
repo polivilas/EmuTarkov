@@ -1,0 +1,395 @@
+{
+	"_id": "5c0d4e61d09282029f53920e",
+	"traderId": "5_peacekeeper",
+	"location": "any",
+	"image": "/files/quest/icon/59675e7b86f77414b25fb049.jpg",
+	"type": "Exploration",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "35100",
+				"id": "5c950bc386f7745516178636",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d5d",
+				"value": "25000",
+				"id": "5c1cfe7e86f7743db8758cfd",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d5d",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 25000
+						}
+					}
+				]
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.12",
+				"id": "5c192f2e86f77458f2322b2d",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796d5e",
+				"id": "5c19314586f774315e7716c4",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 4,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d5e",
+						"_tpl": "5c0a2cec0db834001b7ce47d"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d5f",
+				"id": "5c19318086f7745fa96afd4a",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 4,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d5f",
+						"_tpl": "5c0e66e2d174af02a96252f4"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d60",
+				"id": "5c19319686f7747ce71bcbe7",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 2,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d60",
+						"_tpl": "5c0548ae0db834001966a3c2"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d61",
+				"value": "1",
+				"id": "5c1ce80a86f774716e34081d",
+				"type": "Item",
+				"index": 6,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d61",
+						"_tpl": "5c0a2cec0db834001b7ce47d",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d62",
+				"value": "1",
+				"id": "5c1ce81a86f774716e34081f",
+				"type": "Item",
+				"index": 7,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d62",
+						"_tpl": "5c0e66e2d174af02a96252f4",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d63",
+				"value": "3",
+				"id": "5c1ce82d86f77470b220d1d9",
+				"type": "Item",
+				"index": 8,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d63",
+						"_tpl": "5c0548ae0db834001966a3c2",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c0d4c12d09282029f539173",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c20ce7b86f7740bcc0c30a6"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c0d4ea5d09282029d76ad31",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "5c0d4f07d09282029f539214"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5c0d5097d09282029c740ede"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c0e6876d09282029e2fffe0"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c0d4ff4d09282029e2fffcd",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5c0d5035d09282029d76ad3a"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5c0d509dd09282029e2fffcf"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5c0e687ad0928202b25db840"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c13979886f774251443c1a5",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5c1397fd86f7743b056e2aaa"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5c13981886f774365a69cc4b"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5c13979886f774251443c1a6"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c13982286f774365a69cc4c",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5c13983086f7747878361a4e"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c13984486f774210563ecdf"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5c13982286f774365a69cc4d"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c13989886f7747878361a4f",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5c1398bd86f77430a665d30e"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"factory4_day",
+										"factory4_night"
+									],
+									"id": "5c1398ca86f77430a665d30f"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5c13989886f7747878361a50"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c1931e686f7747ce71bcbe9",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"laboratory"
+									],
+									"id": "5c1931f386f7745b0a61db26"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5c19320086f7745b0a61db27"
+								}
+							}
+						]
+					},
+					"index": 5,
+					"parentId": "",
+					"id": "5c1931e686f7747ce71bcbea"
+				}
+			}
+		],
+		"Fail": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5c0d4f46d09282029f539215",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Killed",
+										"Left",
+										"MissingInAction"
+									],
+									"id": "5c13990686f7743b056e2aab"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline",
+										"Woods",
+										"bigmap",
+										"factory4_day",
+										"factory4_night",
+										"laboratory",
+										"Interchange"
+									],
+									"id": "5c13992486f774365a69cc4e"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c0d4f46d09282029f539216"
+				}
+			}
+		]
+	}
+}

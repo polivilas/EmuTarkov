@@ -1,0 +1,114 @@
+{
+	"_id": "597a0e5786f77426d66c0636",
+	"traderId": "4_skier",
+	"location": "55f2d3fd4bdc2d5f408b4567",
+	"image": "/files/quest/icon/594d247486f77426ad2fd20b.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "5400",
+				"id": "5c94ff1286f774551617862b",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.08",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf1d5b86f774378e266917"
+			},
+			{
+				"target": "5d34df2788a4504526796c23",
+				"value": "2",
+				"id": "5a2e79ea86f77406357faa72",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c23",
+						"_tpl": "576fd4ec2459777f0b518431",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c24",
+				"value": "17000",
+				"id": "5a2e7a0486f77406357faa73",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c24",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 17000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "11",
+					"index": 0,
+					"parentId": "",
+					"id": "59a925b786f7747c3f075aaa"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"593a87af86f774122f54a951"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "597a15b386f774799e5cd152"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"593a87af86f774122f54a951"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "597a15c386f77405ba6887d2",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "597a15b386f774799e5cd152",
+								"id": "5a57795786f774411f6c2fc1"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

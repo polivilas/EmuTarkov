@@ -1,0 +1,188 @@
+{
+	"_id": "57513f9324597720a7128161",
+	"_name": "drink_juice_grand",
+	"_parent": "5448e8d64bdc2dce718b4568",
+	"_type": "Item",
+	"_props": {
+		"Name": "Grand juice",
+		"ShortName": "Grand juice",
+		"Description": "Grand juice",
+		"Weight": 1,
+		"BackgroundColor": "default",
+		"Width": 1,
+		"Height": 2,
+		"StackMaxSize": 1,
+		"Rarity": "Rare",
+		"SpawnChance": 30,
+		"CreditsPrice": 412,
+		"ItemSound": "food_juice_carton",
+		"Prefab": {
+			"path": "assets/content/weapons/usable_items/item_juice/item_juice_grand_loot.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "assets/content/weapons/usable_items/item_juice/item_juice_grand_container.bundle",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 10,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"foodUseTime": 4,
+		"foodEffectType": "afterUse",
+		"effects_health": {
+			"common": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"head": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"chest": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"tummy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"energy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"hydration": {
+				"value": 40,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_damage": {
+			"bloodloss": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"fracture": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"pain": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"contusion": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"toxication": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"radExposure": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_speed": {
+			"mobility": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"recoil": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"reloadSpeed": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"lootSpeed": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"unlockSpeed": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"MaxResource": 40
+	},
+	"_proto": "57513f07245977207e26a311"
+}

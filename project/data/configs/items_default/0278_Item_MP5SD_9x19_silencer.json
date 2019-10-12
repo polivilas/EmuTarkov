@@ -1,0 +1,97 @@
+{
+	"_id": "5926d33d86f77410de68ebc0",
+	"_name": "silencer_hk_mp5_sd_std_9x19",
+	"_parent": "550aa4cd4bdc2dd8348b456c",
+	"_type": "Item",
+	"_props": {
+		"Name": "silencer_hk_mp5_sd_std_9x19",
+		"ShortName": "silencer_hk_mp5_sd_std_9x19",
+		"Description": "silencer_hk_mp5_sd_std_9x19",
+		"Weight": 0.496,
+		"BackgroundColor": "blue",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 3,
+		"CreditsPrice": 26709,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/silencers/silencer_hk_mp5_sd_std_9x19.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 3,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 1,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": true,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_mount",
+				"_id": "59c63cf786f7747afe54e68b",
+				"_parent": "5926d33d86f77410de68ebc0",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"59c63b4486f7747afb151c1c"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -20,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 0,
+		"Velocity": 2,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"muzzleModType": "silencer"
+	},
+	"_proto": "57838c962459774a1651ec63"
+}

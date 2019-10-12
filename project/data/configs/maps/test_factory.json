@@ -1,0 +1,233 @@
+
+   {
+      "Enabled":true,
+      "Locked":false,
+      "Insurance":false,
+      "Name":"Factory",
+      "Description":"The industrial estate and facilities of the chemical plant No.16 that were rented out illegally to the TerraGroup company. ",
+      "Scene":{
+         "path":"maps\/factory_day_preset.bundle",
+         "rcid":"factory_day.scenespreset.asset"
+      },
+      "Area":0.9,
+      "RequiredPlayerLevel":0,
+      "surv_gather_minutes":1,
+      "MinPlayers":1,
+      "MaxPlayers":10,
+      "sav_gather_minutes":1,
+      "exit_count":3,
+      "exit_access_time":120,
+      "exit_time":1,
+      "Preview":{
+         "path":"",
+         "rcid":""
+      },
+      "IconX":10,
+      "IconY":700,
+      "filter_ex":[
+
+      ],
+      "waves":[
+          {
+            "number":0,
+            "time_min":700,
+            "time_max":1000,
+            "slots_min":7,
+            "slots_max":15,
+            "SpawnPoints":"BotZone",
+            "BotSide":"Savage",
+            "BotPreset":"hard",
+            "WildSpawnType":"assault",
+            "isPlayers":false
+         },
+         {
+            "number":1,
+            "time_min":500,
+            "time_max":800,
+            "slots_min":15,
+            "slots_max":20,
+            "SpawnPoints":"BotZone",
+            "BotSide":"Savage",
+            "BotPreset":"hard",
+            "WildSpawnType":"assault",
+            "isPlayers":false
+         }
+      ],
+      "limits":[
+
+      ],
+      "AveragePlayTime":15,
+      "AveragePlayerLevel":1,
+      "escape_time_limit":35,
+      "Rules":"AvoidOwnPmc",
+      "IsSecret":false,
+      "doors":[
+
+      ],
+      "ExitZones":"{BROKEN_LINK}",
+      "tmp_location_field_remove_me":0,
+      "MinDistToExitPoint":30,
+      "MaxDistToFreePoint":900,
+      "MinDistToFreePoint":10,
+      "MaxBotPerZone":4,
+      "OpenZones":"BotZone",
+      "OcculsionCullingEnabled":true,
+      "GlobalLootChanceModifier":1,
+      "OldSpawn":true,
+      "NewSpawn":false,
+      "BotMax":0,
+      "BotStart":0,
+      "BotStop":0,
+      "BotMaxTimePlayer":0,
+      "BotSpawnTimeOnMin":0,
+      "BotSpawnTimeOnMax":0,
+      "BotSpawnTimeOffMin":0,
+      "BotSpawnTimeOffMax":0,
+      "BotMaxPlayer":0,
+      "BotEasy":0,
+      "BotNormal":0,
+      "BotHard":0,
+      "BotImpossible":0,
+      "BotAssault":0,
+      "BotMarksman":0,
+      "DisabledScavExits":"Cellars,Gate 0",
+      "AccessKeys":[
+
+      ],
+      "MinMaxBots":[
+
+      ],
+      "BotLocationModifier":{
+         "AccuracySpeed":0.8,
+         "Scattering":0.8,
+         "GainSight":0.8,
+         "MarksmanAccuratyCoef":1,
+         "VisibleDistance":1,
+         "DistToSleep":120,
+         "DistToActivate":100,
+         "MagnetPower":15
+      },
+      "exits":[
+         {
+            "Name":"Cellars",
+            "EntryPoints":"Factory",
+            "Chance":100,
+            "Id":"",
+            "MinTime":0,
+            "MaxTime":0,
+            "PlayersCount":0,
+            "ExfiltrationTime":10
+         },
+         {
+            "Name":"Gate 3",
+            "EntryPoints":"Factory",
+            "Chance":100,
+            "Id":"",
+            "MinTime":0,
+            "MaxTime":0,
+            "PlayersCount":0,
+            "ExfiltrationTime":10
+         },
+         {
+            "Name":"Gate 0",
+            "EntryPoints":"Factory",
+            "Chance":100,
+            "Id":"",
+            "MinTime":0,
+            "MaxTime":0,
+            "PlayersCount":0,
+            "ExfiltrationTime":10
+         }
+      ],
+      "DisabledForScav":true,
+      "Id":"factory4_day",
+      "_Id":"CustomFactory",
+      "Loot":[
+
+      ],
+      "SpawnAreas":[
+
+      ],
+      "Banners":[
+         {
+            "id":"5464e0404bdc2d2a708b4567",
+            "pic":{
+               "path":"CONTENT\/banners\/banner_usec.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5464e0454bdc2d06708b4567",
+            "pic":{
+               "path":"CONTENT\/banners\/banner_bear.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5803a58524597710ca36fcb2",
+            "pic":{
+               "path":"CONTENT\/banners\/banner_terragroup.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5807bfe124597742a92e0a4c",
+            "pic":{
+               "path":"CONTENT\/banners\/norvinskzone.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5807c3f124597746bf2db2ce",
+            "pic":{
+               "path":"CONTENT\/banners\/banner_scav.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5807be8924597742c603fa19",
+            "pic":{
+               "path":"CONTENT\/banners\/banner_tarkov.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5805f617245977100b2c1f41",
+            "pic":{
+               "path":"CONTENT\/banners\/tglabs.jpg",
+               "rcid":""
+            }
+         },
+         {
+            "id":"5c1b857086f77465f465faa4",
+            "pic":{
+               "path":"CONTENT\/banners\/banner_scavraider.jpg",
+               "rcid":""
+            }
+         }
+      ],
+      "BossLocationSpawn":[
+		  {
+			"BossName": "pmcBot",
+			"BossChance": 100,
+			"BossZone": "BotZone",
+			"BossPlayer": false,
+			"BossDifficult": "normal",
+			"BossEscortType": "pmcBot",
+			"BossEscortDifficult": "normal",
+			"BossEscortAmount": "2",
+			"Time": 1
+		  },
+		  {
+			"BossName": "pmcBot",
+			"BossChance": 100,
+			"BossZone": "BotZone",
+			"BossPlayer": false,
+			"BossDifficult": "normal",
+			"BossEscortType": "pmcBot",
+			"BossEscortDifficult": "normal",
+			"BossEscortAmount": "2",
+			"Time": 1
+		  }
+      ]
+   }

@@ -1,0 +1,215 @@
+{
+	"_id": "5b47891f86f7744d1b23c571",
+	"traderId": "7_ragman",
+	"location": "any",
+	"image": "/files/quest/icon/5ae4a74386f7744748710d72.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "23000",
+				"id": "5c9511ef86f7745516178643",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.09",
+				"id": "5bcf121386f77423c25c50aa",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796cf7",
+				"value": "75000",
+				"id": "5b48a60286f7744b1229f6e5",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cf7",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 75000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cf8",
+				"value": "3",
+				"id": "5b48a61586f774036c1b7b35",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cf8",
+						"_tpl": "5734758f24597738025ee253",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cf9",
+				"value": "1",
+				"id": "5b48a62986f77479ec66a4d1",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cf9",
+						"_tpl": "5aa7e276e5b5b000171d0647",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "27",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0c8786f77479806f3028"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59e3639286f7741777737013"
+					],
+					"value": "4",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5b47899386f77470315db7f3"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59e3639286f7741777737013"
+					],
+					"value": "4",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5b4789b586f7744d190d8f43"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"573478bc24597738002c6175"
+					],
+					"value": "4",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5b4789df86f77468074619d7"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"573478bc24597738002c6175"
+					],
+					"value": "4",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5b478a0986f7744d190d8f46"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59e3658a86f7741776641ac4"
+					],
+					"value": "4",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "5b478a2186f77468074619da"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59e3658a86f7741776641ac4"
+					],
+					"value": "4",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "5b478a3786f77470315db7fa"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59faf7ca86f7740dbe19f6c2"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 6,
+					"parentId": "",
+					"id": "5b478a6c86f7744d190d8f4d"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59faf7ca86f7740dbe19f6c2"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 7,
+					"parentId": "",
+					"id": "5b478a8486f7744d1c35328b"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

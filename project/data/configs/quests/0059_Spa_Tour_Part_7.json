@@ -1,0 +1,195 @@
+{
+	"_id": "5a27bafb86f7741c73584017",
+	"traderId": "5_peacekeeper",
+	"location": "any",
+	"image": "/files/quest/icon/5a27c50f86f7740b3d65e16a.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "11600",
+				"id": "5c950abc86f774551757f064",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.09",
+				"id": "5bcf1c7586f7746a464c566b",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c44",
+				"value": "1",
+				"id": "5a2813cb86f774567931372b",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c44",
+						"_tpl": "5448ba0b4bdc2d02308b456c",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a727b86f7745b18478f13"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"544fb3f34bdc2d03748b456a"
+					],
+					"value": "6",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5a28151986f77466837984c9",
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"544fb3f34bdc2d03748b456a"
+					],
+					"value": "6",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5a28152b86f7740ab40845fb",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59faf98186f774067b6be103"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5a28157486f77405822f36c1",
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59faf98186f774067b6be103"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5a28159686f77405710b1e65",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59e35cbb86f7741778269d83"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "5a2815c186f77405822f36ce",
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59e35cbb86f7741778269d83"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "5a2815d786f774725a5893a6",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59fafb5d86f774067a6f2084"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 6,
+					"parentId": "",
+					"id": "5a28163686f7740ab4084611",
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59fafb5d86f774067a6f2084"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 7,
+					"parentId": "",
+					"id": "5a28164786f77405822f36d9",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

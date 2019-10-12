@@ -1,0 +1,145 @@
+{
+	"_id": "5c12452c86f7744b83469073",
+	"traderId": "1_prapor",
+	"location": "any",
+	"image": "/files/quest/icon/59c273da86f77459b8017e7b.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "17200",
+				"id": "5c94f37886f77455185027eb",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d3e",
+				"value": "1",
+				"id": "5c2246d288a450406d58a392",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d3e",
+						"_tpl": "5b6d9ce188a4501afc1b2b25",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.9",
+				"id": "5c2246fc88a45016e847fdf3",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796d3f",
+				"value": "55000",
+				"id": "5c22472088a45016ea6b71a3",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d3f",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 55000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "35",
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fab9286f77407e903a60d"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "7_ragman",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 0,
+					"parentId": "",
+					"id": "5c12470d86f77465ae27a8c0"
+				}
+			},
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "4_skier",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 1,
+					"parentId": "",
+					"id": "5c1247f386f77452db1d2b03"
+				}
+			},
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "6_mechanic",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 2,
+					"parentId": "",
+					"id": "5c12484586f7744b83469074"
+				}
+			},
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "5_peacekeeper",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 3,
+					"parentId": "",
+					"id": "5c12487386f7742a60324299"
+				}
+			},
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "1_prapor",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 4,
+					"parentId": "",
+					"id": "5c12489886f77452db1d2b05"
+				}
+			},
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "2_therapist",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 5,
+					"parentId": "",
+					"id": "5c1248ef86f77428266184c2"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

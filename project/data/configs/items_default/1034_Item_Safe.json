@@ -1,0 +1,86 @@
+{
+	"_id": "578f8782245977354405a1e3",
+	"_name": "Safe",
+	"_parent": "566965d44bdc2d814c8b4571",
+	"_type": "Item",
+	"_props": {
+		"Name": "Сейф",
+		"ShortName": "Сейф",
+		"Description": "Сейф",
+		"Weight": 1,
+		"BackgroundColor": "blue",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 50,
+		"CreditsPrice": 100,
+		"ItemSound": "generic",
+		"Prefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 10,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [
+			{
+				"_name": "main",
+				"_id": "578f889524597735675ff17e",
+				"_parent": "578f8782245977354405a1e3",
+				"_props": {
+					"filters": [],
+					"cellsH": 3,
+					"cellsV": 3,
+					"minCount": 0,
+					"maxCount": 8,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			}
+		],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"SearchSound": "safe_looting",
+		"BlocksArmorVest": false,
+		"SpawnFilter": [
+			"57864a3d24597754843f8721",
+			"5696686a4bdc2da3298b456a",
+			"569668774bdc2da2298b4568",
+			"5449016a4bdc2d6f028b456f"
+		]
+	},
+	"_proto": "578f8778245977358849a9b5"
+}

@@ -1,0 +1,123 @@
+{
+	"_id": "5bc4826c86f774106d22d88b",
+	"traderId": "6_mechanic",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20000",
+				"id": "5c950f4386f77455185027fc",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5bcf23c086f7746a49593449",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796dc4",
+				"id": "5bcf23ff86f7746a464c5678",
+				"type": "AssortmentUnlock",
+				"index": 2,
+				"loyaltyLevel": 3,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc4",
+						"_tpl": "5bc5a351d4351e003477a414"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dc5",
+				"value": "1",
+				"id": "5bcf241086f7746a45695afd",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc5",
+						"_tpl": "5bc5a351d4351e003477a414",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dc6",
+				"value": "75000",
+				"id": "5bcf242686f7746a45695afe",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc6",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 75000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": 12,
+					"type": "Elimination",
+					"counter": {
+						"id": "5bc482c186f774710a789f25",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"daytime": {
+										"from": 23,
+										"to": 4
+									},
+									"id": "5bc48a0f86f7742ce94849d9"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5bc48b3d86f77452b373195e"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bc84f7a86f774294c2f6862"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

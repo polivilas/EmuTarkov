@@ -1,0 +1,87 @@
+{
+	"_id": "5aafbde786f774389d0cbc0f",
+	"_name": "item_container_ammo",
+	"_parent": "5795f317245977243854e041",
+	"_type": "Item",
+	"_props": {
+		"Name": "ammocase",
+		"ShortName": "ammocase",
+		"Description": "ammocase",
+		"Weight": 3,
+		"BackgroundColor": "blue",
+		"Width": 2,
+		"Height": 2,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 1,
+		"CreditsPrice": 162552,
+		"ItemSound": "container_metal",
+		"Prefab": {
+			"path": "assets/content/items/containers/item_container_ammo/item_container_ammo.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 30,
+		"ExamineExperience": 10,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [
+			{
+				"_name": "main",
+				"_id": "5aafbde786f774389d0cbc11",
+				"_parent": "5aafbde786f774389d0cbc0f",
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"5485a8684bdc2da71d8b4567",
+								"543be5cb4bdc2deb348b4568"
+							]
+						}
+					],
+					"cellsH": 7,
+					"cellsV": 7,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			}
+		],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"TagColor": 0,
+		"TagName": ""
+	},
+	"_proto": "577e1c9d2459773cd707c525"
+}

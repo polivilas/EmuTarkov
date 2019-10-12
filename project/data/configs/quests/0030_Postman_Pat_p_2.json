@@ -1,0 +1,78 @@
+{
+	"_id": "596760e186f7741e11214d58",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/5967611386f7741dfe4f46fb.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": false,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "4200",
+				"id": "5c95064c86f774592a470250",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.06",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf141286f77423bf711c31"
+			},
+			{
+				"target": "5d34df2788a4504526796bc4",
+				"value": "5000",
+				"type": "Item",
+				"index": 2,
+				"id": "597afde186f7741ce2755e97",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bc4",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 5000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bc5",
+				"id": "5ac664a886f774066f04bd47",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 2,
+				"traderId": "2_therapist",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bc5",
+						"_tpl": "544fb45d4bdc2dee738b4568"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"591093bb86f7747caa7bb2ee"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "5968975586f7740e7266d974"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

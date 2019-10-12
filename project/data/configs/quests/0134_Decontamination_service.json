@@ -1,0 +1,145 @@
+{
+	"_id": "5c0d1c4cd0928202a02a6f5c",
+	"traderId": "2_therapist",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5c1e358f86f77408017f539f.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "21600",
+				"id": "5c9507a686f7743285178ad5",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796dc1",
+				"value": "300000",
+				"id": "5c1fd55086f7743c7b261edc",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc1",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 300000
+						}
+					}
+				]
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.11",
+				"id": "5c19288186f77457ce5995c1",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796dc2",
+				"value": "3",
+				"id": "5c1928b086f77401b1301f42",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc2",
+						"_tpl": "544fb3f34bdc2d03748b456a",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dc3",
+				"value": "3",
+				"id": "5c19294286f77401b46e25a3",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc3",
+						"_tpl": "590c678286f77426c9660122",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c0be5fc86f774467a116593",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fd53a86f7742b3c0a7b7a"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "30",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c0d1d3bd0928202a02a6f62",
+						"conditions": [
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"59e7635f86f7742cbf2c1095",
+											"59e7715586f7742ee5789605"
+										]
+									],
+									"id": "5c0d35e2d0928202b25db679"
+								}
+							},
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"distance": {
+										"compareMethod": "<=",
+										"value": 60
+									},
+									"id": "5c0d4b71d09282029c740ec4"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5c1b73d286f774245705eda5"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c1b778286f774294438b536"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-const utility = require('./utility.js');
+require('./libs.js');
 
 var localePath = "data/configs/locale/";
 
@@ -12,29 +12,40 @@ function getMenu(lang) {
     let langName = lang.toLowerCase();
     let json = JSON.parse(utility.readJson(localePath + langName + "/menu.json"));
     // general
-    json.data.menu["Escape from Tarkov"] = "JustEmuTarkov";
-    json.data.menu["{0} Beta version"] = "{0} | JustEmuTarkov | justemutarkov.github.io";
+    //json.data.menu["Escape from Tarkov"] = "JustEmuTarkov";
+    json.data.menu["{0} Beta version"] = "{0} | JET " + constants.serverVersion() + " | JustEmuTarkov";
     return JSON.stringify(json);
 }
 
-function getGlobal(lang) {
+function getGlobal(lang = "en") {
     let langName = lang.toLowerCase();
-    let json = JSON.parse(utility.readJson(localePath + langName + "/global.json"));
+    let langDir = localePath + langName + "/categories/";
+	let langBase = {"err":0,"errmsg":null,"data":{},"crc":0};
     // language specific
+	let items_List = fs.readdirSync(langDir);
+	// load trader files
+	for (let file in langDir) {
+		if (langDir.hasOwnProperty(file)) {
+			if (items_List[file] !== undefined) {
+				if (items_List.hasOwnProperty(file)) {
+					let temp_fileData = JSON.parse(utility.readJson(langDir + items_List[file]));
+					langBase.data[items_List[file].replace(".json","")] = temp_fileData;
+				}
+			}
+		}
+	}
     switch (lang) {
         case "ru":
-            json.data.interface["NDA Policy warning"] = "Добро Пожаловать в Just EmuTarkov. Удачи!";
+            langBase.data.interface["NDA Policy warning"] = "Добро Пожаловать в Just EmuTarkov. Удачи!";
             break;
         case "de":
-            json.data.interface["NDA Policy warning"] = "Willkommen bei JustEmuTarkov. Viel glück";
+            langBase.data.interface["NDA Policy warning"] = "Willkommen bei JustEmuTarkov. Viel glück";
             break;
         default:
-            json.data.interface["NDA Policy warning"] = "Welcome to JustEmuTarkov. Good luck!";
+            langBase.data.interface["NDA Policy warning"] = "Welcome to JustEmuTarkov. Good luck!";
     }
-    // general
-    json.data.interface["Escape from Tarkov"] = "JustEmuTarkov";
 
-    return JSON.stringify(json);
+    return JSON.stringify(langBase);
 }
 
 module.exports.getLanguages = getLanguages;

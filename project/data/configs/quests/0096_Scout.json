@@ -1,0 +1,206 @@
+{
+	"_id": "5ac3477486f7741d651d6885",
+	"traderId": "6_mechanic",
+	"location": "55f2d3fd4bdc2d5f408b4567",
+	"image": "/files/quest/icon/5ac4da0486f7744cc7701bdc.jpg",
+	"type": "Exploration",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9200",
+				"id": "5c950d6086f774592a470257",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796cf5",
+				"value": "30000",
+				"id": "5ace322c86f7744aac5392d5",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cf5",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 30000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf298886f774722d789e52",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796cf6",
+				"value": "2",
+				"id": "5ace325e86f774310f36963c",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cf6",
+						"_tpl": "59faff1d86f7746c51718c9c",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf3bcb86f77418403493b7"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ac61a8a86f7743a8d663c76",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_pacemaker_SCOUT_01",
+									"value": "1",
+									"id": "5ac61a9b86f7743a8b697a2d"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5ac61a8a86f7743a8d663c77"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ac61ab986f7746e352cec8b",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_pacemaker_SCOUT_02",
+									"value": "1",
+									"id": "5ac61ac586f7743a8b697a35"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5ac61ab986f7746e352cec8c"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ac61adf86f774741c1bf095",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_pacemaker_SCOUT_03",
+									"value": "1",
+									"id": "5ac61aea86f7743a8b697a36"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5ac61adf86f774741c1bf096"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5ac61b1486f7743a8f30fc83",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5ac61b1c86f774741c1bf0a1"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"factory4_day",
+										"factory4_night"
+									],
+									"id": "5b7ffa8e86f77457da4f820a"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5ac61b1486f7743a8f30fc84",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ac61a8a86f7743a8d663c77",
+								"id": "5ac61b2f86f7743a8d663c98"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ac61ab986f7746e352cec8c",
+								"id": "5ac61b3386f7743a8f30fc86"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ac61adf86f774741c1bf096",
+								"id": "5ac61b3a86f7743a8f30fc87"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,125 @@
+{
+	"_id": "5bfd4cd60db834001c38f095",
+	"_name": "barrel_mosin_izhmash_mosin_custom_threaded_sawn_off_220mm",
+	"_parent": "555ef6e44bdc2de9068b457e",
+	"_type": "Item",
+	"_props": {
+		"Name": "barrel_870_express_rifle_sights_fixed_improved_cylinder_508mm",
+		"ShortName": "barrel_870_express_rifle_sights_fixed_improved_cylinder_508mm",
+		"Description": "barrel_870_express_rifle_sights_fixed_improved_cylinder_508mm",
+		"Weight": 0.9,
+		"BackgroundColor": "blue",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 6,
+		"CreditsPrice": 7350,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/barrels/barrel_mosin_izhmash_mosin_custom_threaded_sawn_off_220mm.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 110,
+		"ExamineExperience": 6,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 1,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [
+			"5bbdb870d4351e00367fb67d",
+			"5bfd37c80db834001d23e842",
+			"5bfd384c0db834001a6691d3",
+			"5bfd35380db83400232fe5cc",
+			"5ae096d95acfc400185c2c81",
+			"5bae13bad4351e00320204af"
+		],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_muzzle",
+				"_id": "5bfd4cd60db834001c38f099",
+				"_parent": "5bfd4cd60db834001c38f095",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"59bffc1f86f77435b128b872"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_sight_rear",
+				"_id": "5bfd59dc0db834001d23e8e7",
+				"_parent": "5bfd4cd60db834001c38f095",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5bfd4c980db834001b73449d",
+								"5bbdb811d4351e45020113c7"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -1,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 5,
+		"Velocity": -2,
+		"RaidModdable": false,
+		"ToolModdable": true,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"CenterOfImpact": 0.18,
+		"ShotgunDispersion": 1.9,
+		"IsSilencer": false
+	},
+	"_proto": "55d448594bdc2d8c2f8b4569"
+}

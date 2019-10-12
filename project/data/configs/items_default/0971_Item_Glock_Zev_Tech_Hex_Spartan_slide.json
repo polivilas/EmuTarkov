@@ -1,0 +1,157 @@
+{
+	"_id": "5a71e4f48dc32e001207fb26",
+	"_name": "reciever_glock_zev_tech_spartan_rmr_cut_gen_3",
+	"_parent": "55818a304bdc2db5418b457d",
+	"_type": "Item",
+	"_props": {
+		"Name": "reciever_glock_zev_tech_spartan_rmr_cut_gen_3",
+		"ShortName": "reciever_glock_zev_tech_spartan_rmr_cut_gen_3",
+		"Description": "reciever_glock_zev_tech_spartan_rmr_cut_gen_3",
+		"Weight": 0.19,
+		"BackgroundColor": "blue",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 2,
+		"CreditsPrice": 22979,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/recievers/reciever_glock_zev_tech_spartan_rmr_cut_gen_3.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 2,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_sight_rear",
+				"_id": "5a71e4f48dc32e001207fb27",
+				"_parent": "5a71e4f48dc32e001207fb26",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a7d9122159bd4001438dbf4",
+								"5a6f5d528dc32e00094b97d9",
+								"5a7d912f159bd400165484f3",
+								"5a71e0fb8dc32e00094b97f2"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_sight_front",
+				"_id": "5a71e4f48dc32e001207fb28",
+				"_parent": "5a71e4f48dc32e001207fb26",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a7d90eb159bd400165484f1",
+								"5a6f58f68dc32e000a311390",
+								"5a7d9104159bd400134c8c21",
+								"5a71e0048dc32e000c52ecc8"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_scope",
+				"_id": "5a71e4f48dc32e001207fb29",
+				"_parent": "5a71e4f48dc32e001207fb26",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a71e1868dc32e00094b97f3",
+								"5a32aa8bc4a2826c6e06d737"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_muzzle",
+				"_id": "5a7b4d2ce899ef0016170fbd",
+				"_parent": "5a71e4f48dc32e001207fb26",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5a7b32a2e899ef00135e345a"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 2,
+		"Recoil": -7,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 10,
+		"Velocity": 0,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0
+	},
+	"_proto": "55d355e64bdc2d962f8b4569"
+}

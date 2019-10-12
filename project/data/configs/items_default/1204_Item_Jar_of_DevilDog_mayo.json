@@ -1,0 +1,188 @@
+{
+	"_id": "5bc9b156d4351e00367fbce9",
+	"_name": "item_food_mayo",
+	"_parent": "5448e8d04bdc2ddf718b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "Can of pink salmon",
+		"ShortName": "Pink salmon",
+		"Description": "Can of pink salmon",
+		"Weight": 0.3,
+		"BackgroundColor": "violet",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Superrare",
+		"SpawnChance": 3,
+		"CreditsPrice": 15000,
+		"ItemSound": "food_juice_carton",
+		"Prefab": {
+			"path": "assets/content/items/food/item_food_mayo/item_food_mayo.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "assets/content/weapons/usable_items/item_food_mayo/item_food_mayo_container.bundle",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 10,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"foodUseTime": 4,
+		"foodEffectType": "afterUse",
+		"effects_health": {
+			"common": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"head": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"arm_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"chest": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"tummy": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_left": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"leg_right": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"energy": {
+				"value": 100,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"hydration": {
+				"value": -99,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_damage": {
+			"bloodloss": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"fracture": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"pain": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"contusion": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"toxication": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			},
+			"radExposure": {
+				"remove": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"effects_speed": {
+			"mobility": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"recoil": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"reloadSpeed": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"lootSpeed": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			},
+			"unlockSpeed": {
+				"value": 0,
+				"percent": false,
+				"time": 0,
+				"duration": 0
+			}
+		},
+		"MaxResource": 100
+	},
+	"_proto": "57347d3d245977448f7b7f61"
+}

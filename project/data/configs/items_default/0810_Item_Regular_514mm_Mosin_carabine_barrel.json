@@ -1,0 +1,138 @@
+{
+	"_id": "5bfd4cbe0db834001b73449f",
+	"_name": "barrel_mosin_izhmash_mosin_carabine_514mm",
+	"_parent": "555ef6e44bdc2de9068b457e",
+	"_type": "Item",
+	"_props": {
+		"Name": "barrel_870_express_rifle_sights_fixed_improved_cylinder_508mm",
+		"ShortName": "barrel_870_express_rifle_sights_fixed_improved_cylinder_508mm",
+		"Description": "barrel_870_express_rifle_sights_fixed_improved_cylinder_508mm",
+		"Weight": 1.5,
+		"BackgroundColor": "blue",
+		"Width": 3,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 2,
+		"CreditsPrice": 3920,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/barrels/barrel_mosin_izhmash_mosin_carabine_514mm.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 110,
+		"ExamineExperience": 6,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 3,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_sight_front",
+				"_id": "5bfd4cbe0db834001b7344a1",
+				"_parent": "5bfd4cbe0db834001b73449f",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5ae099875acfc4001714e593"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_sight_rear",
+				"_id": "5bfd4cbe0db834001b7344a2",
+				"_parent": "5bfd4cbe0db834001b73449f",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5bfd4c980db834001b73449d"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_muzzle",
+				"_id": "5bfd4cbe0db834001b7344a3",
+				"_parent": "5bfd4cbe0db834001b73449f",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5bbdb83fd4351e44f824c44b",
+								"5bc5a351d4351e003477a414",
+								"5bc5a35cd4351e450201232f",
+								"5b86a0e586f7745b600ccb23"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -8,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": -5,
+		"Velocity": 0,
+		"RaidModdable": false,
+		"ToolModdable": true,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"CenterOfImpact": 0.05,
+		"ShotgunDispersion": 1.9,
+		"IsSilencer": false
+	},
+	"_proto": "55d448594bdc2d8c2f8b4569"
+}

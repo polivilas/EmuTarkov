@@ -1,0 +1,258 @@
+{
+	"_id": "5b3b713c5acfc4330140bd8d",
+	"_name": "weapon_toz_tt_762x25tt_gold",
+	"_parent": "5447b5cf4bdc2d65278b4567",
+	"_type": "Item",
+	"_props": {
+		"Name": "tt",
+		"ShortName": "tt",
+		"Description": "tt",
+		"Weight": 0.664,
+		"BackgroundColor": "yellow",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 4,
+		"CreditsPrice": 23185,
+		"ItemSound": "weap_pistol",
+		"Prefab": {
+			"path": "assets/content/weapons/tt/weapon_toz_tt_gold_762x25tt_container.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 20,
+		"ExamineExperience": 6,
+		"HideEntrails": false,
+		"RepairCost": 50,
+		"RepairSpeed": 3,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_barrel",
+				"_id": "5b3b713c5acfc4330140bd8f",
+				"_parent": "5b3b713c5acfc4330140bd8d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"571a26d524597720680fbe8a",
+								"571a279b24597720b4066566",
+								"5b3baf8f5acfc40dc5296692"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_pistol_grip",
+				"_id": "5b3b713c5acfc4330140bd90",
+				"_parent": "5b3b713c5acfc4330140bd8d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5c0684e50db834002a12585a",
+								"5bffcf7a0db83400232fea79",
+								"5c079ec50db834001966a706",
+								"5b3cadf35acfc400194776a0",
+								"571a282c2459771fb2755a69"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_magazine",
+				"_id": "5b3b713c5acfc4330140bd91",
+				"_parent": "5b3b713c5acfc4330140bd8d",
+				"_props": {
+					"filters": [
+						{
+							"AnimationIndex": -1,
+							"Filter": [
+								"571a29dc2459771fb2755a6a"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c394bdc2dae468b4577"
+			},
+			{
+				"_name": "mod_muzzle",
+				"_id": "5bffd90b0db83400232feb13",
+				"_parent": "5b3b713c5acfc4330140bd8d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5bffd7ed0db834001d23ebf9"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_tactical",
+				"_id": "5c07a00c0db834001966a79e",
+				"_parent": "5b3b713c5acfc4330140bd8d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5c079ed60db834001a66b372"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"weapClass": "pistol",
+		"weapUseType": "secondary",
+		"ammoCaliber": "Caliber762x25TT",
+		"Durability": 100,
+		"MaxDurability": 100,
+		"OperatingResource": 13500,
+		"RepairComplexity": 0,
+		"durabSpawnMin": 25,
+		"durabSpawnMax": 75,
+		"isFastReload": true,
+		"RecoilForceUp": 650,
+		"RecoilForceBack": 325,
+		"Convergence": 5,
+		"RecoilAngle": 90,
+		"weapFireType": [
+			"single"
+		],
+		"RecolDispersion": 10,
+		"bFirerate": 30,
+		"Ergonomics": 70,
+		"Velocity": 0,
+		"bEffDist": 50,
+		"bHearDist": 80,
+		"isChamberLoad": true,
+		"chamberAmmoCount": 1,
+		"isBoltCatch": true,
+		"defMagType": "571a29dc2459771fb2755a6a",
+		"defAmmo": "5736026a245977644601dc61",
+		"shotgunDispersion": 10,
+		"Chambers": [
+			{
+				"_name": "patron_in_weapon",
+				"_id": "5b3b713c5acfc4330140bd92",
+				"_parent": "5b3b713c5acfc4330140bd8d",
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"5735ff5c245977640e39ba7e",
+								"573601b42459776410737435",
+								"573602322459776445391df1",
+								"5736026a245977644601dc61",
+								"573603562459776430731618",
+								"573603c924597764442bd9cb",
+								"5735fdcd2459776445391d61"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d4af244bdc2d962f8b4571"
+			}
+		],
+		"CameraRecoil": 0.03,
+		"CameraSnap": 3.5,
+		"ReloadMode": "ExternalMagazine",
+		"CenterOfImpact": 0,
+		"AimPlane": 0.026,
+		"DeviationCurve": 1,
+		"DeviationMax": 100,
+		"Foldable": false,
+		"Retractable": false,
+		"TacticalReloadStiffnes": {
+			"x": 0.95,
+			"y": 0.33,
+			"z": 0.95
+		},
+		"TacticalReloadFixation": 0.95,
+		"RecoilCenter": {
+			"x": 0,
+			"y": -0.44,
+			"z": -0.005
+		},
+		"RotationCenter": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"RotationCenterNoStock": {
+			"x": 0,
+			"y": -0.45,
+			"z": -0.05
+		},
+		"SizeReduceRight": 0,
+		"FoldedSlot": "",
+		"CompactHandling": false,
+		"SightingRange": 100,
+		"MinRepairDegradation": 0,
+		"MaxRepairDegradation": 0.01,
+		"IronSightRange": 25,
+		"MustBoltBeOpennedForExternalReload": false,
+		"MustBoltBeOpennedForInternalReload": false,
+		"BoltAction": false,
+		"HipAccuracyRestorationDelay": 0.2,
+		"HipAccuracyRestorationSpeed": 7,
+		"HipInnaccuracyGain": 0.16,
+		"ManualBoltCatch": false
+	},
+	"_proto": "56d59856d2720bd8418b456a"
+}

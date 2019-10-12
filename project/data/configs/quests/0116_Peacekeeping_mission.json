@@ -1,0 +1,474 @@
+{
+	"_id": "5c0d4c12d09282029f539173",
+	"traderId": "5_peacekeeper",
+	"location": "any",
+	"image": "/files/quest/icon/5a27c44386f7744237421af0.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796d40",
+				"value": "1",
+				"id": "5c18bf1386f77467c00e1342",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d40",
+						"_tpl": "5aa7d03ae5b5b00016327db5",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d41",
+				"value": "1",
+				"id": "5c18bf1786f77467bf065204",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d41",
+						"_tpl": "5ab8e4ed86f7742d8e50c7fa",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d42",
+				"value": "1",
+				"id": "5c1a60bf86f7747954540e3c",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d42",
+						"_tpl": "5447a9cd4bdc2dbd208b4567",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796d43",
+						"_tpl": "55d4b9964bdc2d1d4e8b456e",
+						"parentId": "5d34df2788a4504526796d42",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796d44",
+						"_tpl": "55d4887d4bdc2d962f8b4570",
+						"parentId": "5d34df2788a4504526796d42",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796d45",
+						"_tpl": "55d355e64bdc2d962f8b4569",
+						"parentId": "5d34df2788a4504526796d42",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796d46",
+						"_tpl": "55d3632e4bdc2d972f8b4569",
+						"parentId": "5d34df2788a4504526796d45",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796d47",
+						"_tpl": "544a38634bdc2d58388b4568",
+						"parentId": "5d34df2788a4504526796d46",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796d48",
+						"_tpl": "56ea8d2fd2720b7c698b4570",
+						"parentId": "5d34df2788a4504526796d46",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5d34df2788a4504526796d49",
+						"_tpl": "55d4af3a4bdc2d972f8b456f",
+						"parentId": "5d34df2788a4504526796d48",
+						"slotId": "mod_sight_front"
+					},
+					{
+						"_id": "5d34df2788a4504526796d4a",
+						"_tpl": "55d459824bdc2d892f8b4573",
+						"parentId": "5d34df2788a4504526796d45",
+						"slotId": "mod_handguard"
+					},
+					{
+						"_id": "5d34df2788a4504526796d4b",
+						"_tpl": "55d5f46a4bdc2d1b198b4567",
+						"parentId": "5d34df2788a4504526796d45",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796d4c",
+						"_tpl": "5649be884bdc2d79388b4577",
+						"parentId": "5d34df2788a4504526796d42",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796d4d",
+						"_tpl": "55d4ae6c4bdc2d8b2f8b456e",
+						"parentId": "5d34df2788a4504526796d4c",
+						"slotId": "mod_stock_000"
+					},
+					{
+						"_id": "5d34df2788a4504526796d4e",
+						"_tpl": "55d44fd14bdc2d962f8b456e",
+						"parentId": "5d34df2788a4504526796d42",
+						"slotId": "mod_charge"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d4f",
+				"value": "3",
+				"id": "5c1a617e86f77442c47f3602",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d4f",
+						"_tpl": "5aaa5dfee5b5b000140293d3",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "32400",
+				"id": "5c950bac86f77455185027f7",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d50",
+				"value": "1",
+				"id": "5c1a271286f7741bb5336ccf",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d50",
+						"_tpl": "5bfea6e90db834001b7347f3",
+						"upd": {
+							"FireMode": {
+								"FireMode": "single"
+							},
+							"StackObjectsCount": 1
+						},
+						"parentId": "hideout",
+						"slotId": "hideout"
+					},
+					{
+						"_id": "5d34df2788a4504526796d51",
+						"_tpl": "5bfea7ad0db834001c38f1ee",
+						"parentId": "5d34df2788a4504526796d50",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796d52",
+						"_tpl": "5bfeb32b0db834001a6694d9",
+						"parentId": "5d34df2788a4504526796d50",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796d53",
+						"_tpl": "5bfebc320db8340019668d79",
+						"parentId": "5d34df2788a4504526796d50",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796d54",
+						"_tpl": "5a34fd2bc4a282329a73b4c5",
+						"parentId": "5d34df2788a4504526796d53",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796d55",
+						"_tpl": "5a34fe59c4a282000b1521a2",
+						"parentId": "5d34df2788a4504526796d54",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796d56",
+						"_tpl": "5bfebc5e0db834001a6694e5",
+						"parentId": "5d34df2788a4504526796d50",
+						"slotId": "mod_mount"
+					},
+					{
+						"_id": "5d34df2788a4504526796d57",
+						"_tpl": "5a37cb10c4a282329a73b4e7",
+						"parentId": "5d34df2788a4504526796d56",
+						"slotId": "mod_scope"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d58",
+				"value": "150",
+				"id": "5c1a272d86f7743e4346c3f8",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d58",
+						"_tpl": "5a6086ea4f39f99cd479502f",
+						"upd": {
+							"StackObjectsCount": 150
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d59",
+				"value": "2",
+				"id": "5c1a274586f774382929219e",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d59",
+						"_tpl": "5c0558060db834001b735271",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.12",
+				"id": "5c1fd64786f7743c7b261f7a",
+				"type": "TraderStanding",
+				"index": 4
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c0d0f1886f77457b8210226",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c20ce2c86f774337f427599"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "12",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c0d4c62d09282029d76ad28",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5447a9cd4bdc2dbd208b4567"
+									],
+									"id": "5c0d4c6ed0928202a62f4f20"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5aa7d03ae5b5b00016327db5",
+											"5ab8e4ed86f7742d8e50c7fa"
+										]
+									],
+									"id": "5c0d4c88d09282029f539179"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "5c0d4cf2d0928202b25db712"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fd66286f7743c7b261f7b"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "12",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c0d4d0bd09282029e2fffc9",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5447a9cd4bdc2dbd208b4567"
+									],
+									"id": "5c0d4d67d09282029d76ad2b"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5c0d4d72d0928202a62f4f23"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5aa7d03ae5b5b00016327db5",
+											"5ab8e4ed86f7742d8e50c7fa"
+										]
+									],
+									"id": "5c0d4dc3d0928202a62f4f26"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5c1b713486f77413bc250406"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "12",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c13949686f774210563eccc",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5447a9cd4bdc2dbd208b4567"
+									],
+									"id": "5c1394d886f77430a665d2f1"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5c13951786f774276a650530"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5aa7d03ae5b5b00016327db5",
+											"5ab8e4ed86f7742d8e50c7fa"
+										]
+									],
+									"id": "5c1a71cc86f77456661eaa5c"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5c1b713986f77470d8650910"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "12",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c13957986f77430a665d2fe",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5447a9cd4bdc2dbd208b4567"
+									],
+									"id": "5c1395b386f774276b24ae2b"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c1395d486f774276a650535"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5aa7d03ae5b5b00016327db5",
+											"5ab8e4ed86f7742d8e50c7fa"
+										]
+									],
+									"id": "5c1a725486f7744c2a78e8b3"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5c1b713f86f774719c22e8a0"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,79 @@
+{
+	"_id": "5ae449a586f7744bde357696",
+	"traderId": "7_ragman",
+	"location": "any",
+	"image": "/files/quest/icon/5ae4a7dd86f77448464ed2b2.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "12900",
+				"id": "5c95116686f774592a47025a",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796cfe",
+				"value": "32000",
+				"id": "5ae9c43086f7747d4c148abe",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cfe",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 32000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.07",
+				"id": "5bcf117086f77423c25c50a6",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796cff",
+				"value": "1",
+				"id": "5ae9c44e86f7746cd451db9d",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cff",
+						"_tpl": "5aa7e276e5b5b000171d0647",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "2_therapist",
+					"compareMethod": ">=",
+					"value": "3",
+					"index": 0,
+					"parentId": "",
+					"id": "5ae9c38e86f7743515398707"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

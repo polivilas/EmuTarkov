@@ -1,0 +1,116 @@
+{
+	"_id": "5a27bb1e86f7741f27621b7e",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/597a172486f774799e5cd153.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10400",
+				"id": "5c950ace86f774551528def6",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1c8786f7746a464c566c",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b20",
+				"value": "700",
+				"id": "5a2817ec86f77434aa3d22ae",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b20",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 700
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b21",
+				"value": "1",
+				"id": "5a2817f986f77433b7143ce7",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b21",
+						"_tpl": "567143bf4bdc2d1a0f8b4567",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a729086f7745a7e19f659"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5a29284f86f77463ef3db363"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5a28183186f774398675d127",
+					"dogtagLevel": 0
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5a29284f86f77463ef3db363"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5a28184c86f774376e43772a",
+					"dogtagLevel": 0,
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a28183186f774398675d127",
+								"id": "5a60aacb86f774590326d609"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

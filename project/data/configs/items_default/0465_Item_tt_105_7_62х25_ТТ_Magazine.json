@@ -1,0 +1,109 @@
+{
+	"_id": "571a29dc2459771fb2755a6a",
+	"_name": "mag_tt_toz_std_762x25tt_8",
+	"_parent": "5448bc234bdc2d3c308b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "Магазин стандартный 7.62х25 ТТ для ТТ на 8 патронов",
+		"ShortName": "7.62х25 ТТ",
+		"Description": "Штатный магазин на 8 патронов для пистолета ТТ.",
+		"Weight": 0.08,
+		"BackgroundColor": "yellow",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Common",
+		"SpawnChance": 15,
+		"CreditsPrice": 1157,
+		"ItemSound": "magazine_metal",
+		"Prefab": {
+			"path": "assets/content/items/mods/magazines/mag_tt_toz_std_762x25tt_8.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 2,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": 0,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 0,
+		"Velocity": 0,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"magAnimationIndex": 0,
+		"Cartridges": [
+			{
+				"_name": "cartridges",
+				"_id": "574880e12459771f643ff53a",
+				"_parent": "571a29dc2459771fb2755a6a",
+				"_max_count": 8,
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"5735ff5c245977640e39ba7e",
+								"573601b42459776410737435",
+								"573602322459776445391df1",
+								"5736026a245977644601dc61",
+								"573603562459776430731618",
+								"573603c924597764442bd9cb",
+								"5735fdcd2459776445391d61"
+							]
+						}
+					]
+				},
+				"_proto": "5748538b2459770af276a261"
+			}
+		],
+		"CanFast": false,
+		"CanHit": false,
+		"CanAdmin": false,
+		"LoadUnloadModifier": -15,
+		"CheckTimeModifier": -20,
+		"CheckOverride": 1,
+		"ReloadMagType": "ExternalMagazine"
+	},
+	"_proto": "56d59948d2720bb7418b4582"
+}

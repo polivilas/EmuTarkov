@@ -1,0 +1,169 @@
+{
+	"_id": "59675d6c86f7740a842fc482",
+	"traderId": "1_prapor",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/59c26f2b86f7744a351903d3.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "5400",
+				"id": "5c94f15a86f774551757f043",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.08",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf0ff686f77423c25c50a3"
+			},
+			{
+				"target": "5d34df2788a4504526796b45",
+				"value": "3",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2e86e986f7741b57301c49",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b45",
+						"_tpl": "55d482194bdc2d1d4e8b456b",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b46",
+				"value": "17000",
+				"type": "Item",
+				"index": 3,
+				"id": "5a2e86f986f7741a972d4ee8",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b46",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 17000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b47",
+				"value": "100",
+				"id": "5a2e871f86f7741a9612d1f7",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b47",
+						"_tpl": "56dfef82d2720bbd668b4567",
+						"upd": {
+							"StackObjectsCount": 100
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b48",
+				"id": "5ac651a986f774066f04bcf7",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 2,
+				"traderId": "1_prapor",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b48",
+						"_tpl": "55d482194bdc2d1d4e8b456b"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "9",
+					"index": 0,
+					"parentId": "",
+					"id": "59a926f786f77473e85737f3"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"55d482194bdc2d1d4e8b456b"
+					],
+					"value": "6",
+					"index": 0,
+					"parentId": "",
+					"id": "5968ed3186f77420d2328013"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"55d482194bdc2d1d4e8b456b"
+					],
+					"value": "6",
+					"index": 1,
+					"parentId": "",
+					"id": "59675e1d86f77414b07f137d",
+					"visibilityConditions": []
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"591afe0186f77431bd616a11"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "5968ed3186f77420d2328013",
+					"id": "5967938c86f77468cf5f9f54"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3fbe3a86f77414422e0d9a",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "bunker2",
+									"value": "1",
+									"id": "5a3fbe5d86f77414422e0da1"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "5968ed3186f77420d2328013",
+					"id": "5a3fbe3a86f77414422e0d9b"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

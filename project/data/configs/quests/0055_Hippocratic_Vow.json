@@ -1,0 +1,44 @@
+{
+	"_id": "5a5642ce86f77445c63c3419",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/59c2742286f77475ec568d92.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": false,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "2_therapist",
+				"value": "0.2",
+				"id": "5a57272286f7743d8b6ccaca",
+				"type": "TraderStanding",
+				"index": 0
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5696686a4bdc2da3298b456a"
+					],
+					"value": "500",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5a56489d86f7740cfe70eba2"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

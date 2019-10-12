@@ -1,0 +1,113 @@
+{
+	"_id": "5979f8bb86f7743ec214c7a6",
+	"traderId": "1_prapor",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/5979f91c86f77402996bf9c2.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7000",
+				"id": "5c94f03586f7745516178624",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.10",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf103486f77423c25c50a4"
+			},
+			{
+				"target": "5d34df2788a4504526796b40",
+				"value": "17000",
+				"id": "5a2e867186f7741a95102607",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b40",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 17000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b41",
+				"value": "4",
+				"id": "5a2e868686f7741a943575b9",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b41",
+						"_tpl": "5710c24ad2720bc3458b45a3",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			}
+		],
+		"Fail": [
+			{
+				"target": "1_prapor",
+				"value": "-0.06",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "597afde186f7741ce2755ed5"
+			}
+		]
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "20",
+					"type": "Elimination",
+					"counter": {
+						"id": "598f0c6386f7746c837802cb",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"daytime": {
+										"from": 15,
+										"to": 22
+									},
+									"id": "598f0c6986f77468ba349ed5"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "598f0c6e86f7746eec40ad7a"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5b0e766b86f7746bfa618964"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

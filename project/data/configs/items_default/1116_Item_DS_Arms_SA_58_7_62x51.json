@@ -1,0 +1,307 @@
+{
+	"_id": "5b0bbe4e5acfc40dc528a72d",
+	"_name": "weapon_dsa_sa58_762x51",
+	"_parent": "5447b5f14bdc2d61278b4567",
+	"_type": "Item",
+	"_props": {
+		"Name": "weapon_dsa_sa58_762x51",
+		"ShortName": "weapon_dsa_sa58_762x51",
+		"Description": "weapon_dsa_sa58_762x51\n",
+		"Weight": 1.46,
+		"BackgroundColor": "black",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 1,
+		"CreditsPrice": 38093,
+		"ItemSound": "weap_ar",
+		"Prefab": {
+			"path": "assets/content/weapons/sa58/weapon_dsa_sa58_762x51_container.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 30,
+		"ExamineExperience": 8,
+		"HideEntrails": false,
+		"RepairCost": 1000,
+		"RepairSpeed": 15,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_pistol_grip",
+				"_id": "5b0bbe4e5acfc40dc528a72f",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b7d679f5acfc4001a5c4024",
+								"5b7d678a5acfc4001a5c4022",
+								"5b099b965acfc400186331e6"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_magazine",
+				"_id": "5b0bbe4e5acfc40dc528a730",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"AnimationIndex": -1,
+							"Filter": [
+								"5b7bef1e5acfc43d82528402",
+								"5b099ac65acfc400186331e1",
+								"5b7bef5d5acfc43bca7067a3",
+								"5b7c2d1d5acfc43d1028532a",
+								"5b7d37845acfc400170e2f87",
+								"5b7bef9c5acfc43d102852ec"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c394bdc2dae468b4577"
+			},
+			{
+				"_name": "mod_handguard",
+				"_id": "5b0bbe4e5acfc40dc528a732",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b7be2345acfc400196d524a",
+								"5b7bebc85acfc43bca706666",
+								"5b7d671b5acfc43d82528ddd",
+								"5b7bed205acfc400161d08cc",
+								"5b7bedd75acfc43d825283f9",
+								"5b7bee755acfc400196d5383",
+								"5b7be1ca5acfc400170e2d2f",
+								"5b099a9d5acfc47a8607efe7"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_barrel",
+				"_id": "5b0bbe4e5acfc40dc528a733",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b099a765acfc47a8607efe3",
+								"5b7be1125acfc4001876c0e5",
+								"5b7be1265acfc400161d0798"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_sight_rear",
+				"_id": "5b0bd7855acfc400153aef5c",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b0bc22d5acfc47a8607f085"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_reciever",
+				"_id": "5b0bd7e35acfc4001a590630",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b7d6c105acfc40015109a5f",
+								"5b099bb25acfc400186331e8"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_stock",
+				"_id": "5b1113b15acfc4001637e9c5",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5b7d63b75acfc400170e2f8a",
+								"5b7d645e5acfc400170e2f90",
+								"5b7d64555acfc4001876c8e2",
+								"5b099bf25acfc4001637e683",
+								"5b7d63cf5acfc4001876c8df",
+								"5b7d63de5acfc400170e2f8d"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"weapClass": "assaultRifle",
+		"weapUseType": "primary",
+		"ammoCaliber": "Caliber762x51",
+		"Durability": 100,
+		"MaxDurability": 100,
+		"OperatingResource": 4000,
+		"RepairComplexity": 0,
+		"durabSpawnMin": 25,
+		"durabSpawnMax": 75,
+		"isFastReload": true,
+		"RecoilForceUp": 306,
+		"RecoilForceBack": 507,
+		"Convergence": 1.5,
+		"RecoilAngle": 90,
+		"weapFireType": [
+			"single",
+			"fullauto"
+		],
+		"RecolDispersion": 25,
+		"bFirerate": 700,
+		"Ergonomics": 31,
+		"Velocity": 0,
+		"bEffDist": 900,
+		"bHearDist": 80,
+		"isChamberLoad": true,
+		"chamberAmmoCount": 1,
+		"isBoltCatch": true,
+		"defMagType": "5b099ac65acfc400186331e1",
+		"defAmmo": "58dd3ad986f77403051cba8f",
+		"shotgunDispersion": 0,
+		"Chambers": [
+			{
+				"_name": "patron_in_weapon",
+				"_id": "5b0bbe4e5acfc40dc528a735",
+				"_parent": "5b0bbe4e5acfc40dc528a72d",
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"5a6086ea4f39f99cd479502f",
+								"5a608bf24f39f98ffc77720e",
+								"58dd3ad986f77403051cba8f"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d4af244bdc2d962f8b4571"
+			}
+		],
+		"CameraRecoil": 0.2,
+		"CameraSnap": 3.5,
+		"ReloadMode": "ExternalMagazine",
+		"CenterOfImpact": 0,
+		"AimPlane": 0.24,
+		"DeviationCurve": 1,
+		"DeviationMax": 100,
+		"Foldable": false,
+		"Retractable": false,
+		"TacticalReloadStiffnes": {
+			"x": 0.95,
+			"y": 0.33,
+			"z": 0.95
+		},
+		"TacticalReloadFixation": 0.95,
+		"RecoilCenter": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"RotationCenter": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"RotationCenterNoStock": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"SizeReduceRight": 0,
+		"FoldedSlot": "mod_stock",
+		"CompactHandling": true,
+		"SightingRange": 100,
+		"MinRepairDegradation": 0,
+		"MaxRepairDegradation": 0.01,
+		"IronSightRange": 100,
+		"MustBoltBeOpennedForExternalReload": false,
+		"MustBoltBeOpennedForInternalReload": false,
+		"BoltAction": false,
+		"HipAccuracyRestorationDelay": 0.2,
+		"HipAccuracyRestorationSpeed": 7,
+		"HipInnaccuracyGain": 0.16,
+		"ManualBoltCatch": false
+	},
+	"_proto": "5447a9cd4bdc2dbd208b4567"
+}

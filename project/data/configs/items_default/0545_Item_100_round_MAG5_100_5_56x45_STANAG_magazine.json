@@ -1,0 +1,111 @@
+{
+	"_id": "5c6592372e221600133e47d7",
+	"_name": "mag_stanag_surefire_mag5_556x45_100",
+	"_parent": "5448bc234bdc2d3c308b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "mag_stanag_surefire_mag5_556x45_100",
+		"ShortName": "mag_stanag_surefire_mag5_556x45_100",
+		"Description": "mag_stanag_surefire_mag5_556x45_100",
+		"Weight": 0.27,
+		"BackgroundColor": "yellow",
+		"Width": 1,
+		"Height": 3,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 10,
+		"CreditsPrice": 37755,
+		"ItemSound": "magazine_metal",
+		"Prefab": {
+			"path": "assets/content/items/mods/magazines/mag_stanag_surefire_mag5_556x45_100.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 30,
+		"ExamineExperience": 2,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 2,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": 0,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": -20,
+		"Velocity": 0,
+		"RaidModdable": true,
+		"ToolModdable": false,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": false,
+		"HasShoulderContact": false,
+		"SightingRange": 0,
+		"magAnimationIndex": 4,
+		"Cartridges": [
+			{
+				"_name": "cartridges",
+				"_id": "5c6592372e221600133e47d9",
+				"_parent": "5c6592372e221600133e47d7",
+				"_max_count": 100,
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"59e6920f86f77411d82aa167",
+								"59e6927d86f77411da468256",
+								"54527a984bdc2d4e668b4567",
+								"54527ac44bdc2d36668b4567",
+								"59e68f6f86f7746c9f75e846",
+								"59e6906286f7746c9f75e847",
+								"59e690b686f7746c9f75e848",
+								"59e6918f86f7746c9f75e849",
+								"5c0d5ae286f7741e46554302"
+							]
+						}
+					]
+				},
+				"_proto": "5748538b2459770af276a261"
+			}
+		],
+		"CanFast": false,
+		"CanHit": false,
+		"CanAdmin": false,
+		"LoadUnloadModifier": 15,
+		"CheckTimeModifier": 30,
+		"CheckOverride": 0,
+		"ReloadMagType": "ExternalMagazine"
+	},
+	"_proto": "544a37c44bdc2d25388b4567"
+}

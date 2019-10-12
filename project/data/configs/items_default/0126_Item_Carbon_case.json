@@ -1,0 +1,89 @@
+{
+	"_id": "5910922b86f7747d96753483",
+	"_name": "item_quest_container_carbon_case",
+	"_parent": "5671435f4bdc2d96058b4569",
+	"_type": "Item",
+	"_props": {
+		"Name": "Carbon case",
+		"ShortName": "Carbon case",
+		"Description": "Carbon case",
+		"Weight": 6,
+		"BackgroundColor": "yellow",
+		"Width": 4,
+		"Height": 4,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 0,
+		"CreditsPrice": 0,
+		"ItemSound": "container_case",
+		"Prefab": {
+			"path": "assets/content/items/quest/item_quest_container_carbon_case/item_quest_container_carbon_case.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": true,
+		"LootExperience": 100,
+		"ExamineExperience": 50,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"Grids": [
+			{
+				"_name": "main",
+				"_id": "5910922b86f7747d96753484",
+				"_parent": "5910922b86f7747d96753483",
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"543be5dd4bdc2deb348b4569"
+							]
+						}
+					],
+					"cellsH": 4,
+					"cellsV": 4,
+					"minCount": 0,
+					"maxCount": 0,
+					"maxWeight": 0
+				},
+				"_proto": "55d329c24bdc2d892f8b4567"
+			}
+		],
+		"Slots": [],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"KeyIds": [
+			"5751961824597720a31c09ac"
+		],
+		"TagColor": 0,
+		"TagName": ""
+	},
+	"_proto": "567143bf4bdc2d1a0f8b4567"
+}

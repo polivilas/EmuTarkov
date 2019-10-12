@@ -1,0 +1,80 @@
+{
+	"_id": "573733c72459776b0b7b51b0",
+	"_name": "item_ammo_box_545x39_30_bpz_sp",
+	"_parent": "543be5cb4bdc2deb348b4568",
+	"_type": "Item",
+	"_props": {
+		"Name": "ammo_box_545x39_30_bpz_sp",
+		"ShortName": "ammo_box_545x39_30_bpz_sp",
+		"Description": "ammo_box_545x39_30_bpz_sp",
+		"Weight": 0.5,
+		"BackgroundColor": "yellow",
+		"Width": 1,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Common",
+		"SpawnChance": 70,
+		"CreditsPrice": 1,
+		"ItemSound": "ammo_pack_generic",
+		"Prefab": {
+			"path": "assets/content/items/ammo/boxes/item_ammo_box_545x39_30_bpz_sp.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": true,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 0,
+		"ExamineExperience": 10,
+		"HideEntrails": true,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 0,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": false,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"StackMinRandom": 30,
+		"StackMaxRandom": 30,
+		"ammoCaliber": "Caliber9x18PM",
+		"StackSlots": [
+			{
+				"_name": "cartridges",
+				"_id": "574d52e6245977459a2f1581",
+				"_parent": "573733c72459776b0b7b51b0",
+				"_max_count": 30,
+				"_props": {
+					"filters": [
+						{
+							"Filter": [
+								"56dff421d2720b5f5a8b4567"
+							]
+						}
+					]
+				},
+				"_proto": "5748538b2459770af276a261"
+			}
+		]
+	},
+	"_proto": "5737339e2459776af261abeb"
+}

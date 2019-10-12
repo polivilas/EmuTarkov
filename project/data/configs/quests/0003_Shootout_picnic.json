@@ -1,0 +1,202 @@
+{
+	"_id": "59674cd986f7744ab26e32f2",
+	"traderId": "1_prapor",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/5967505886f774590730dadc.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "2000",
+				"id": "5c94efd386f77455192fa422",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.10",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf0e1d86f77423c05cad6b"
+			},
+			{
+				"target": "5d34df2788a4504526796b25",
+				"value": "6000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2e7f8886f7741a943575b6",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b25",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 6000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b26",
+				"value": "1",
+				"id": "5a3fa33686f77447bd4858b8",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b26",
+						"_tpl": "57dc2fa62459775949412633",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796b27",
+						"_tpl": "57e3dba62459770f0c32322b",
+						"parentId": "5d34df2788a4504526796b26",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796b28",
+						"_tpl": "57dc347d245977596754e7a1",
+						"parentId": "5d34df2788a4504526796b26",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796b29",
+						"_tpl": "564ca99c4bdc2d16268b4589",
+						"parentId": "5d34df2788a4504526796b26",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796b2a",
+						"_tpl": "57dc324a24597759501edc20",
+						"parentId": "5d34df2788a4504526796b26",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796b2b",
+						"_tpl": "57dc334d245977597164366f",
+						"parentId": "5d34df2788a4504526796b26",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796b2c",
+						"_tpl": "59d36a0086f7747e673f3946",
+						"parentId": "5d34df2788a4504526796b26",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5d34df2788a4504526796b2d",
+						"_tpl": "56dfef82d2720bbd668b4567",
+						"parentId": "5d34df2788a4504526796b29",
+						"slotId": "cartridges",
+						"location": 0,
+						"upd": {
+							"StackObjectsCount": 30
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796b2e",
+						"_tpl": "57dc32dc245977596d4ef3d3",
+						"parentId": "5d34df2788a4504526796b2c",
+						"slotId": "mod_handguard"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b2f",
+				"value": "3",
+				"id": "5a2e7ff386f7741a972d4ee5",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b2f",
+						"_tpl": "564ca99c4bdc2d16268b4589",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "3",
+					"index": 0,
+					"parentId": "",
+					"id": "59a926b186f774753c5479a2"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "12",
+					"type": "Elimination",
+					"counter": {
+						"id": "59674d5186f77446b872d5f6",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "59674d5586f77446b62554e7"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "59674d5a86f77446b872d5fa"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"572b7f1624597762ae139822"
+										],
+										[
+											"5b432f3d5acfc4704b4a1dfb"
+										],
+										[
+											"5ab8f4ff86f77431c60d91ba"
+										],
+										[
+											"5ab8f39486f7745cd93a1cca"
+										]
+									],
+									"id": "5c9216d486f7746af86a48c1"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5cb31b6188a450159d330a18"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

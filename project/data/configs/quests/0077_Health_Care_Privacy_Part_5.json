@@ -1,0 +1,107 @@
+{
+	"_id": "5a68669a86f774255929b4d4",
+	"traderId": "2_therapist",
+	"location": "59fc81d786f774390775787e",
+	"image": "/files/quest/icon/59c2742286f77475ec568d92.jpg",
+	"type": "Multi",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "13300",
+				"id": "5c95075386f7743285178ad4",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c92",
+				"value": "1",
+				"id": "5ac665d286f77405d472939f",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c92",
+						"_tpl": "5aafbcd986f7745e590fff23",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c93",
+				"value": "35000",
+				"id": "5a6887c686f77472c17ca5ed",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c93",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 35000
+						}
+					}
+				]
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.1",
+				"id": "5bcf183686f7746a45695a64",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a6879be86f774284429b1ba",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "ter_017_area_1",
+									"value": "1",
+									"id": "5a6879cf86f7745f5c382c3e"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a6879be86f774284429b1bb"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"590c5a7286f7747884343aea"
+					],
+					"zoneId": "ter_017_area_1",
+					"value": "3",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5a687a1c86f7745f2152168c",
+					"plantTime": 30
+				}
+			}
+		],
+		"Fail": []
+	}
+}
