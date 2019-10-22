@@ -49,9 +49,9 @@ https://creativecommons.org/licenses/by-nc-sa/3.0/
 ## Credits
 
 - polivilas
-- BALIST0N
 - TheMaoci
 - InNoHurryToCode
+- BALIST0N
 - Macmillanic
 - Mr RUSS
 - Windel
