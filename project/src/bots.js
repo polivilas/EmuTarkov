@@ -2,9 +2,6 @@
 require('./libs.js');
 
 const profileName = (profile.getCharacterData()).data[0].Info.Nickname;
-const backpackLootTable = JSON.parse(utility.readJson("data/configs/bots/botBackpackLootTable.json")).BackpackLootTable;
-const presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
-const weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
 
 // GENERATE BASE BODY
 function generateBotBoss(params, fileName) {
@@ -14,208 +11,11 @@ function generateBotBoss(params, fileName) {
     base['Info'].Settings.BotDifficulty = params.Difficulty;
     return base;
 }
+/**
+ * Small function to randomize pistol and make sure its returned an OBJECT
+ */
 
-function generateBotWeapon(params) { // generating presets
-    let tier = 0;
-    let len = 0;
-    let randomize = 0;
-    let weapon_preset_main = 0;
-    let weapon_preset_pist = 0;
-    //randomize Mainweapon and hostler weapon rolling if there should we (main weapon and postol) / (pistol) or (mainweapin only)
-    const chanceOfGetting = [settings.bots.weapon.main, settings.bots.weapon.secondary];
-    if (params.Role === "")
-        chanceOfGetting[0] = 100;
-    if (params.Role === "marksman") { // if bot is marksman sniper get item from fdiffrent table
-        len = presets.Weapons_Marksman.length;
-        randomize = utility.getRandomIntEx(len) - 1;
-        weapon_preset_main = presets.Weapons_Marksman[randomize]; // it should not have any pistols
-    } else {
-        if (utility.getRandomIntEx(100) < chanceOfGetting[0]) { // try to roll weapon
-            tier = bots_mf.calculateItemChance(presets.Weapons, params.Role);
-            len = presets.Weapons[tier].length;
-            randomize = utility.getRandomIntEx(len);
-            weapon_preset_main = presets.Weapons[tier][randomize]; // it should not have any pistols
-        }
-    }
-    if (weapon_preset_main !== 0) { // if weapon is rolled then try to roll pistol also
-        if (utility.getRandomIntEx(100) < chanceOfGetting[1]) {
-            tier = bots_mf.calculateItemChance(presets.Pistol);
-            len = presets.Pistol[tier].length;
-            randomize = utility.getRandomIntEx(len);
-            weapon_preset_pist = presets.Pistol[tier][randomize]; // only pistol tiers here
-        }
-    } else { // if no main weapon
-        tier = bots_mf.calculateItemChance(presets.Pistol);
-        len = presets.Pistol[tier].length;
-        randomize = utility.getRandomIntEx(len);
-        weapon_preset_pist = presets.Pistol[tier][randomize];
-    }
-    // weapon_preset_pist / weapon_preset_main - it contains preset name aka WeaponPresetXXX
-    let item_main = 0;
-    for (let i = 0; i < weaponPresets.data.length; i++) { // should return true or false
-        if (weaponPresets.data[i]._id === weapon_preset_main) {
-            item_main = weaponPresets.data[i];
-            break;
-        }
-    }
-    let item_pist = 0;
-    for (let i = 0; i < weaponPresets.data.length; i++) { // should return true or false
-        if (weaponPresets.data[i]._id === weapon_preset_pist) {
-            item_pist = weaponPresets.data[i];
-            break;
-        }
-    }
-    let isSingleLoaded = false;
-    for (let i = 0; i < presets.Single_Loading.length; i++) { // should return true or false
-        if (presets.Single_Loading[i] === weapon_preset_main) {
-            isSingleLoaded = true;
-            break;
-        }
-    }
-     // zero if no item
-    return [[item_main, isSingleLoaded], item_pist];
-}
-
-/* Gets Compatible magazines and sort them based on slots usage 1,2,3 to 0,1,2 place in table
-* input: weaponData, Grids of Rig
-* output: table[Mags1Slot, Mags2Slot, Mags3Slot]
-**/
-function getCompatibleMagazines(weapon, grids) {
-    let compatiblesmagazines = {};
-	let mags = [[],[],[]];
-    for (let slot of items.data[weapon._items[0]._tpl]._props.Slots) {
-        if (slot._name === "mod_magazine") {
-            compatiblesmagazines = slot._props.filters[0].Filter;
-            break;
-        }
-    }
-	for (let magazine of compatiblesmagazines){
-		switch(items.data[magazine]._props.Height){
-			case 2:
-				mags[1].push(magazine);
-			break;
-			case 3:
-				mags[2].push(magazine);
-			break;
-			default:
-				mags[0].push(magazine);
-			break;
-		}
-	}
-    return mags;
-}
-
-function getCompatibleAmmo(weapon) {
-    return items.data[weapon._items[0]._tpl]._props.Chambers[0]._props.filters[0].Filter;
-}
-
-function testRandomItems(){}
-// helping functions /
-
-function generatePocketItem(pocketNum = 1, botType) { // determine which item will be added medicament or granade
-
-    if (utility.getRandomInt() < settings.bots.pocket.med_to_gra) {
-        if (utility.getRandomInt() <= settings.bots.pocket.meds || botType === "followerBully") { // meds
-            let item = {};
-            const tier = bots_mf.calculateItemChance(presets.Medicaments);
-            const len = presets.Medicaments[tier].length;
-            const randomize = utility.getRandomInt(0,len-1);
-            const itemTpl = presets.Medicaments[tier][randomize];
-            let item_data = items.data[itemTpl];
-            item._id = "Pocket_" + utility.getRandomIntEx(999999);
-            item._tpl = itemTpl;
-            item.parentId = "5c6687d65e9d882c8841f121";
-            item.slotId = "pocket" + pocketNum;
-            item.location = {x: 0, y: 0, r: "Horizontal"};
-            item.upd = bots_mf.updCreator(item_data.parentId, item_data);
-            return item;
-        }
-    } else {
-        if (utility.getRandomInt() <= settings.bots.pocket.granade || botType === "followerBully") { // granades
-            let item = {};
-            const len = presets.Grenades.length;
-            const randomize = utility.getRandomInt(0,len-1);
-            const itemTpl = presets.Grenades[randomize];
-            item._id = "Pocket_" + utility.getRandomIntEx(999999);
-            item._tpl = itemTpl;
-            item.parentId = "5c6687d65e9d882c8841f121";
-            item.slotId = "pocket" + pocketNum;
-            item.location = {x: 0, y: 0, r: "Horizontal"};
-            item.upd = {StackObjectsCount: 1};
-            return item;
-        }
-    }
-    return false;
-}
-
-function getWeaponMagazine(weapon, internalId, compatiblesmags) {
-    let item = {};
-    item._id = "MagazineWeaponScav" + internalId;
-    item._tpl = compatiblesmags;
-    item.parentId = weapon._items[0]._id;
-    item.slotId = "mod_magazine";
-
-    return item;
-}
-
-function getWeaponMagazineAmmo(mag, internalId, ammoFilter) {
-    let item = {};
-    let max_ammo = items.data[mag._tpl]._props.Cartridges[0]._max_count;
-    item._id = "AmmoMag1" + internalId;
-    item._tpl = ammoFilter[utility.getRandomInt(0,ammoFilter.length-1)];
-    item.parentId = mag._id;
-    item.slotId = "cartridges";
-    item.upd = {"StackObjectsCount": max_ammo};
-
-    return item;
-}
-
-function getMosimAmmo(selectedmag, selectedmagid, ammoFilter) {
-    let item = {};
-
-    item._id = "AmmoMag1" + utility.getRandomIntEx(99999);
-    item._tpl = ammoFilter[utility.getRandomInt(0,ammoFilter.length-1)];
-    item.parentId = selectedmagid;
-    item.slotId = "cartridges";
-    item.upd = {"StackObjectsCount": items.data[selectedmag]._props.Cartridges[0]._max_count};
-
-    return item;
-}
-
-function getVestMagazine(id, itemslot, Vest, Mag_tpl, loc = [0,0]) {
-    let item = {};
-    item._id = id;
-    item._tpl = Mag_tpl;
-    item.parentId = Vest;
-    item.slotId = itemslot.toString();
-    item.location = {"x": loc[0], "y": loc[1], "r": "Horizontal", "isSearched": true};
-    return item;
-}
-
-function getVestMagazineAmmo(id, magazineid, selectedmag, ammoFilter) {
-    let item = {};
-    item._id = id;
-    item._tpl = ammoFilter[utility.getRandomInt(0,ammoFilter.length-1)];
-    item.parentId = magazineid;
-    item.slotId = "cartridges";
-    item.upd = {"StackObjectsCount": items.data[selectedmag]._props.Cartridges[0]._max_count};
-
-    return item;
-}
-
-function getVestStackAmmo(id, itemslot, internalId, ammoFilter) {
-    let item = {};
-    let Item_tpl = ammoFilter[utility.getRandomInt(0,ammoFilter.length-1)];
-    item._id = id + utility.getRandomIntEx(99999);
-    item._tpl = Item_tpl;
-    item.parentId = internalId;
-    item.slotId = itemslot.toString();
-    item.upd = {"StackObjectsCount": utility.getRandomInt(5, items.data[Item_tpl]._props.StackMaxSize - 1)}; // from 5 ammo to max avaliable in 1 stack
-
-    return item;
-}
-
-function pushItemWeapon(weapon, Inventory, MagType = -1, TacticalVest) {
+function pushItemWeapon(weapon, Inventory, MagType = -1, Magazines, ammoFilter) {
     let weap = weapon._items;
     for (let item in weap) {
         let itm = "";
@@ -229,87 +29,27 @@ function pushItemWeapon(weapon, Inventory, MagType = -1, TacticalVest) {
             if (MagType === "pistol") { // its secondary - main part
                 itm.slotId = "Holster";
             }
-
             Inventory.push(itm);
         } else {
-				let vest = "";
-				for (let item in Inventory){
-					if(Inventory[item].slotId === "TacticalVest")
-					{
-						vest = Inventory[item];
-						break;
-					}
-				}
             //this is only adopted - in future made autonomic placement of ammo and mags
             if (weap[item].slotId === "mod_magazine") { // its a magazine
-                let tableSizes = [[], [], []];
-
-                if (vest._tpl !== "") {
-                    for (let grid in items.data[vest._tpl]._props.Grids) {
-                        let calcSize = items.data[vest._tpl]._props.Grids[grid]._props.cellsH * items.data[vest._tpl]._props.Grids[grid]._props.cellsV;
-                        if (calcSize === 1)
-                            tableSizes[0].push(items.data[vest._tpl]._props.Grids[grid]._name); // 1x1
-                        else if (calcSize === 2 && items.data[vest._tpl]._props.Grids[grid]._props.cellsH === 1)
-                            tableSizes[1].push(items.data[vest._tpl]._props.Grids[grid]._name); // 1x2 only magazines
-                        else
-                            tableSizes[2].push(items.data[vest._tpl]._props.Grids[grid]._name); // 2x2 no more are there -)
-                    }
-                }
-                let compatiblesmagazines = getCompatibleMagazines(weapon, items.data[vest._tpl]._props.Grids);
-                // now check where we can put magazines
-				let magTypeNum = 0;
-				if(compatiblesmagazines[0].length > 0) {
-					compatiblesmagazines = compatiblesmagazines[0];
-				} else if(compatiblesmagazines[1].length > 0) {
-					compatiblesmagazines = compatiblesmagazines[1];
-					magTypeNum = 1;
-				} else if(compatiblesmagazines[2].length > 0) {
-					compatiblesmagazines = compatiblesmagazines[2];
-					magTypeNum = 2;
-				}
-				let len = compatiblesmagazines;
-				// --- filling up vest with mags and ammo
+				let len = Magazines.length;
                 let random = utility.getRandomInt(0,len -1);
-                let selectOneMagazineOnly = compatiblesmagazines[random]; // select one magazine type and fill everything with it
-                let ammoFilter = getCompatibleAmmo(weapon); // make ammo table
+                let selectOneMagazineOnly = Magazines[random]; // select one magazine type and fill everything with it
                 if (MagType !== "pistol") {
-
                     if (MagType === false) { // if its not mozin type weapon // generate main weapon magazine
-                        let mag1 = getWeaponMagazine(weapon, utility.getRandomIntEx(10000), selectOneMagazineOnly);
-                        let mag1Ammo = getWeaponMagazineAmmo(mag1, utility.getRandomIntEx(10000), ammoFilter);
+                        let mag1 = guns_f.getWeaponMagazine(weapon, utility.getRandomIntEx(10000), selectOneMagazineOnly);
+                        let mag1Ammo = guns_f.getWeaponMagazineAmmo(mag1, utility.getRandomIntEx(10000), ammoFilter);
                         Inventory.push(mag1);
                         Inventory.push(mag1Ammo);
-                        // and now generate magazines for vest with ammo
-                        if (vest !== "") {
-							for (let slotY = 0; slotY < magTypeNum + 1; slotY++) {
-								for (let i = 0; i < tableSizes[1].length; i++) {	// creating magazines for all 1x2 slots with change 80% to apearing
-									if (utility.getRandomInt() <= settings.bots.vest.magChance) {
-										//substring place in vest so we will have view which slots are still empty
-										let mag = getVestMagazine("mag" + i + "Vest" + utility.getRandomIntEx(99999), tableSizes[1][i], vest._id, selectOneMagazineOnly, [0,slotY]);
-										let ammo = getVestMagazineAmmo("AmmoMag" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter);
-										Inventory.push(mag);
-										Inventory.push(ammo);
-									}
-								}
-							}
-                        }
                     } else if (MagType === true) {
                         let mag1 = weap[item];
-                        Inventory.push(getMosimAmmo(mag1._tpl, mag1._id, ammoFilter));
+                        Inventory.push(guns_f.getMosimAmmo(mag1._tpl, mag1._id, ammoFilter));
                         Inventory.push(mag1);
-
                     }
-                    if (vest !== "") {
-                        for (let i = 0; i < tableSizes[0].length; i++) {	// creating ammo stacks for all 1x1 slots
-                            if (utility.getRandomInt() <= settings.bots.vest.stacksChance) {
-                                let stackammo = getVestStackAmmo("StackAmmo" + utility.getRandomIntEx(99999), tableSizes[0][i], vest._id, ammoFilter);
-                                Inventory.push(stackammo);
-                            }
-                        }
-                    }
-                } else {
+                } else { // gun without changable mag
                     let mag1 = weap[item];
-                    Inventory.push(getMosimAmmo(mag1._tpl, mag1._id, ammoFilter));
+                    Inventory.push(guns_f.getMosimAmmo(mag1._tpl, mag1._id, ammoFilter));
                     Inventory.push(mag1);
                 }
 // --- filling up vest with mags and ammo
@@ -321,8 +61,6 @@ function pushItemWeapon(weapon, Inventory, MagType = -1, TacticalVest) {
     }
     return Inventory;
 }
-
-
 function generateBaseBot(params) {
     let bot = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
     // generate bot appearance
@@ -375,7 +113,7 @@ function generateBaseBot(params) {
                         "Side": "Usec",
                         "Level": bot.Info.Level,
                         "Time": "0001-01-01T00:00:00",
-                        "Status": "Killed by",
+                        "Status": "Killed by ",
                         "KillerName": profileName,
                         "WeaponName": ""
                     }
@@ -395,7 +133,7 @@ function generateBaseBot(params) {
                         "Side": "Bear",
                         "Level": bot.Info.Level,
                         "Time": "0001-01-01T00:00:00",
-                        "Status": "Killed by",
+                        "Status": "Killed by ",
                         "KillerName": profileName,
                         "WeaponName": "" // cannot set it out cause player can change weapon in raid
                     }
@@ -403,56 +141,282 @@ function generateBaseBot(params) {
             });
         }
     }
-
-
-    // choose randomly a weapon from preset.json before filling items
-    var weapon = generateBotWeapon(params);
-
+// choose randomly a weapon from preset.json before filling items
+    let weapon = guns_f.generateBotWeapon(params);
     // Tactical vest Assignation
     let TacticalVest = itemPattern_f.generateItemByPattern("TacticalVest", bot.Inventory.items);
+	let vest = "";
+	let tableSizes = [[], [], [], []]; // 1, 2, 3, 2x2
     if (TacticalVest !== {}) {
         bot['Inventory'].items = TacticalVest;
-    }
+		for (let item in bot['Inventory'].items){
+			if(bot['Inventory'].items[item].slotId === "TacticalVest")
+			{
+				vest = bot['Inventory'].items[item];
+				break;
+			}
+		}
+		if(vest !== ""){
+		//vest slots splited to small medium and big
+			for (let grid in items.data[vest._tpl]._props.Grids) {
+				if (items.data[vest._tpl]._props.Grids[grid]._props.cellsV === 1)
+					tableSizes[0].push(items.data[vest._tpl]._props.Grids[grid]._name); // 1x1
+				else if (items.data[vest._tpl]._props.Grids[grid]._props.cellsV === 2 && items.data[vest._tpl]._props.Grids[grid]._props.cellsH === 2)
+					tableSizes[3].push(items.data[vest._tpl]._props.Grids[grid]._name); // 2x2
+				else if (items.data[vest._tpl]._props.Grids[grid]._props.cellsV === 2 && items.data[vest._tpl]._props.Grids[grid]._props.cellsH === 1) 
+					tableSizes[1].push(items.data[vest._tpl]._props.Grids[grid]._name); // 1x2
+				else if (items.data[vest._tpl]._props.Grids[grid]._props.cellsV === 3)
+					tableSizes[2].push(items.data[vest._tpl]._props.Grids[grid]._name); // 1x3
+			}
+		}
+	}
 
-    // set weapons
-    if (weapon[0][0] !== 0)
-        bot['Inventory'].items = pushItemWeapon(weapon[0][0], bot['Inventory'].items, weapon[0][1], TacticalVest);
-    if (weapon[1] !== 0)
-        bot['Inventory'].items = pushItemWeapon(weapon[1], bot['Inventory'].items, "pistol", TacticalVest);
+// TODO: check what vest have spaces and put mags there
+	let ammoFilter_main = "";
+	let compatiblesmagazines_mainWeapon = "";
+	let ammoFilter_secondary = "";
+	let compatiblesmagazines_secondWeapon = "";
+	let len = 0;
+	let random = 0;
+	let selectOneMagazineOnly_main = "";
+	let selectOneMagazineOnly_sub = "";
+	let magSize = [0,0];
+	if(weapon[0][0] !== 0){
+		ammoFilter_main = guns_f.getCompatibleAmmo(weapon[0][0]); // make ammo table
+		compatiblesmagazines_mainWeapon = guns_f.getCompatibleMagazines(weapon[0][0]);
+		let random_magIndex = utility.getRandomInt(0,1);// randomize first table and second table which holds 1x1, 1x2 magazines
+		let magsizeSelector = ((tableSizes[random_magIndex].length > 0)?random_magIndex:((random_magIndex == 1)?0:1)); // select one table from mags 1 slot or 1x2 slot size magazines
+		if(compatiblesmagazines_mainWeapon[magsizeSelector].length == 0)
+		{
+			magsizeSelector = ((magsizeSelector == 0)?1:0); // switch from actual to reverse one if no magazines found
+		}
+		compatiblesmagazines_mainWeapon = compatiblesmagazines_mainWeapon[magsizeSelector];
+		len = compatiblesmagazines_mainWeapon.length - 1;
+		random = utility.getRandomInt(0, len);
+		selectOneMagazineOnly_main = compatiblesmagazines_mainWeapon[random];
+		bot['Inventory'].items = pushItemWeapon(weapon[0][0], bot['Inventory'].items, weapon[0][1], compatiblesmagazines_mainWeapon, ammoFilter_main);
+	}
+	// make same for secondary if exist
+	if(weapon[1] !== 0){
+		ammoFilter_secondary = guns_f.getCompatibleAmmo(weapon[1]);
+		compatiblesmagazines_secondWeapon = guns_f.getCompatibleMagazines(weapon[1]);
+		let random_magIndex = utility.getRandomInt(0,1);
+		let magsizeSelector = ((tableSizes[random_magIndex].length > 0)?random_magIndex:((random_magIndex == 1)?0:1));
+		if(compatiblesmagazines_secondWeapon[magsizeSelector].length == 0)
+		{
+			magsizeSelector = ((magsizeSelector == 0)?1:0);
+		}
+		compatiblesmagazines_secondWeapon = compatiblesmagazines_secondWeapon[magsizeSelector];
+		len = compatiblesmagazines_secondWeapon.length - 1;
+		random = utility.getRandomInt(0, len);
+		selectOneMagazineOnly_sub = compatiblesmagazines_secondWeapon[random];
+		bot['Inventory'].items = pushItemWeapon(weapon[1], bot['Inventory'].items, "pistol", compatiblesmagazines_secondWeapon, ammoFilter_secondary);
+	}
+// adds magazines to vest
+	if (vest !== "") {
+		if(weapon[0][0] !== 0){
+			//check what slots we have accessed
+			// magazines for 1x2 slot
+			let magazineProperty = items.data[selectOneMagazineOnly_main]._props;
+			
+			if(magazineProperty.Width == 1 && magazineProperty.Height == 2){
+				if(tableSizes[1].length != 0){ // mags 1x2 for 1x2 slots
+					for (let i = 0; i < tableSizes[1].length; i++)
+					{	// creating magazines for all 1x2 slots with change 80% to apearing
+						if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+						{
+							let mag = guns_f.getVestMagazine("mag" + i + "Vest" + utility.getRandomIntEx(999999), tableSizes[1][i], vest._id, selectOneMagazineOnly_main, [0,0]);
+							let ammo = guns_f.getVestMagazineAmmo("AmmoMag" + i + "Vest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_main);
+							bot['Inventory'].items.push(mag);
+							bot['Inventory'].items.push(ammo);
+							tableSizes[1].splice(i,1);
+						}
+					}
+				}
+				if(tableSizes[3].length != 0){ // mags 1x2 for 2x2 slots (set them 2 for slot 0 and 1)
+					for (let i = 0; i < tableSizes[3].length; i++)
+					{	// creating magazines for all 1x2 slots with change 80% to apearing
+						let magAdded = false;
+						for(let n = 0; n < 2; n++){
+							if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+							{
+								magAdded = true;
+								let mag = guns_f.getVestMagazine("mag" + i + "Vest" + utility.getRandomIntEx(999999), tableSizes[3][i], vest._id, selectOneMagazineOnly_main, [n,0]);
+								let ammo = guns_f.getVestMagazineAmmo("AmmoMag" + i + "Vest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_main);
+								bot['Inventory'].items.push(mag);
+								bot['Inventory'].items.push(ammo);
+								
+							}
+						}
+						if(magAdded)
+							tableSizes[3].splice(i,1); // yes yes it will lead to empty slots fuck it!!
+					}
+				}
+			} else if (magazineProperty.Width == 1 && magazineProperty.Height == 1){
+				if(tableSizes[1].length != 0){
+					for (let i = 0; i < tableSizes[1].length; i++)
+					{	// creating magazines for all 1x2 slots with change 80% to apearing
+						let magAdded = false;
+						for(let n = 0; n < 2; n++){
+							if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+							{
+								magAdded = true;
+								let mag = guns_f.getVestMagazine("mag" + i + "Vest" + utility.getRandomIntEx(999999), tableSizes[1][i], vest._id, selectOneMagazineOnly_main, [0,n]);
+								let ammo = guns_f.getVestMagazineAmmo("AmmoMag" + i + "Vest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_main);
+								bot['Inventory'].items.push(mag);
+								bot['Inventory'].items.push(ammo);
+								
+							}
+						}
+						if(magAdded)
+							tableSizes[1].splice(i,1);
+					}
+				}
+			} else if(magazineProperty.Width == 1 && magazineProperty.Height == 3){
+				if(tableSizes[2].length != 0){
+					for (let i = 0; i < tableSizes[2].length; i++)
+					{	// creating magazines for all 1x2 slots with change 80% to apearing
+						if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+						{
+							let mag = guns_f.getVestMagazine("mag" + i + "Vest" + utility.getRandomIntEx(999999), tableSizes[2][i], vest._id, selectOneMagazineOnly_main, [0,0]);
+							let ammo = guns_f.getVestMagazineAmmo("AmmoMag" + i + "Vest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_main);
+							bot['Inventory'].items.push(mag);
+							bot['Inventory'].items.push(ammo);
+							tableSizes[2].splice(i,1);
+						}
+					}
+				}
+			} else if(magazineProperty.Width == 2 && magazineProperty.Height == 2){
+				if(tableSizes[3].length != 0){
+					for (let i = 0; i < tableSizes[3].length; i++)
+					{	// creating magazines for all 1x2 slots with change 80% to apearing
+						if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+						{
+							let mag = guns_f.getVestMagazine("mag" + i + "Vest" + utility.getRandomIntEx(999999), tableSizes[3][i], vest._id, selectOneMagazineOnly_main, [0,0]);
+							let ammo = guns_f.getVestMagazineAmmo("AmmoMag" + i + "Vest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_main);
+							bot['Inventory'].items.push(mag);
+							bot['Inventory'].items.push(ammo);
+							tableSizes[3].splice(i,1);
+						}
+					}
+				}
+			}
+			if(tableSizes[0].length != 0){
+				// slot 1x1 for ammo stacks only? maybe?
+				for (let i = 0; i < tableSizes[0].length; i++)
+				{	// ammo stacks
+					if(utility.getRandomIntEx(100) <= settings.bots.vest.stacksChance)
+					{
+						let stackammo = guns_f.getVestStackAmmo("StackAmmo" + utility.getRandomIntEx(999999), tableSizes[0][i], vest._id, ammoFilter_main);
+						//console.log(stackammo);
+						bot['Inventory'].items.push(stackammo);
+						tableSizes[0].splice(i,1);
+					}
+				}
+			}
+		}
+		if(weapon[1] !== 0){
+			let magazineProperty = items.data[selectOneMagazineOnly_sub]._props;
 
+			if(tableSizes[1].length > 0){
+				if(magazineProperty.Width == 1 && magazineProperty.Height == 2){
+					for (let i = 0; i < tableSizes[1].length; i++)
+					{	// pistol mags
+						if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+						{
+							let mag = guns_f.getVestMagazine("magP" + i + "Vest" + utility.getRandomIntEx(99999), tableSizes[1][i], vest._id, selectOneMagazineOnly_sub, [0,0]);
+							let ammo = guns_f.getVestMagazineAmmo("AmmoMagPVest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_secondary);
+							bot['Inventory'].items.push(mag);
+							bot['Inventory'].items.push(ammo);
+							tableSizes[1].splice(i,1);
+						}
+					}
+				}
+				if(magazineProperty.Width == 1 && magazineProperty.Height == 1){
+					for (let i = 0; i < tableSizes[1].length; i++)
+					{	// pistol mags
+						let magAdded = false;
+						for (let n = 0; n < 2; n++)
+						{	// pistol mags
+							if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+							{
+								magAdded = true;
+								let mag = guns_f.getVestMagazine("magP" + i + "Vest" + utility.getRandomIntEx(99999), tableSizes[1][i], vest._id, selectOneMagazineOnly_sub, [0,n]);
+								let ammo = guns_f.getVestMagazineAmmo("AmmoMagPVest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_secondary);
+								bot['Inventory'].items.push(mag);
+								bot['Inventory'].items.push(ammo);
+								
+							}
+						}
+						if(magAdded)
+							tableSizes[1].splice(i,1);
+					}
+				}
+			}
+			if(tableSizes[2].length > 0){
+				if(magazineProperty.Width == 1 && magazineProperty.Height == 2){
+					for (let i = 0; i < tableSizes[2].length; i++)
+					{	// pistol mags
+						if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+						{
+							let mag = guns_f.getVestMagazine("magP" + i + "Vest" + utility.getRandomIntEx(99999), tableSizes[2][i], vest._id, selectOneMagazineOnly_sub, [0,0]);
+							let ammo = guns_f.getVestMagazineAmmo("AmmoMagPVest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_secondary);
+							bot['Inventory'].items.push(mag);
+							bot['Inventory'].items.push(ammo);
+							tableSizes[2].splice(i,1);
+						}
+					}
+				}
+				if(magazineProperty.Width == 1 && magazineProperty.Height == 1){
+					for (let i = 0; i < tableSizes[2].length; i++)
+					{	// pistol mags
+						let magAdded = false;
+						for (let n = 0; n < 3; n++){
+							if(utility.getRandomIntEx(100) <= settings.bots.vest.magChance)
+							{
+								magAdded = true;
+								let mag = guns_f.getVestMagazine("magP" + i + "Vest" + utility.getRandomIntEx(99999), tableSizes[2][i], vest._id, selectOneMagazineOnly_sub, [0,0]);
+								let ammo = guns_f.getVestMagazineAmmo("AmmoMagPVest" + utility.getRandomIntEx(999999), mag._id, mag._tpl, ammoFilter_secondary);
+								bot['Inventory'].items.push(mag);
+								bot['Inventory'].items.push(ammo);
+							}
+						}
+						if(magAdded)							
+							tableSizes[2].splice(i,1);
+					}
+				}
+			}
+			
 
+		}
+	}
+//now inserts magazines ends
+//now inserts magazines ends
+//now inserts magazines ends
     for (let bodyPart in bot.Health.BodyParts) { // randomize bot health <base-10 to base>
         bot.Health.BodyParts[bodyPart].Health.Current -= utility.getRandomInt(0, 10);
         bot.Health.BodyParts[bodyPart].Health.Maximum = bot.Health.BodyParts[bodyPart].Health.Current;
     }
-
     // add a knife (its always added)
     bot['Inventory'].items = itemPattern_f.generateItemByPattern("Scabbard", bot['Inventory'].items);
-
-    if (utility.getRandomInt() <= settings['bots']['equipment']['eyewear']) { // chance to add glasses
-        bot['Inventory'].items = itemPattern_f.generateItemByPattern("Eyewear", bot['Inventory'].items, params.Role);
-    }
-
-    if (utility.getRandomInt() <= settings['bots']['equipment']['facecover']) { // chance to add face cover
-        bot['Inventory'].items = itemPattern_f.generateItemByPattern("FaceCover", bot['Inventory'].items, params.Role);
-    }
-
-
     if (utility.getRandomInt() <= settings['bots']['equipment']['headwear']) { // chance to add headwear
         bot['Inventory'].items = itemPattern_f.generateItemByPattern("Headwear", bot['Inventory'].items, params.Role);
     }
-
+    if (utility.getRandomInt() <= settings['bots']['equipment']['eyewear']) { // chance to add glasses
+        bot['Inventory'].items = itemPattern_f.generateItemByPattern("Eyewear", bot['Inventory'].items, params.Role);
+    }
+    if (utility.getRandomInt() <= settings['bots']['equipment']['facecover']) { // chance to add face cover
+        bot['Inventory'].items = itemPattern_f.generateItemByPattern("FaceCover", bot['Inventory'].items, params.Role);
+    }
     if (utility.getRandomInt() <= settings['bots']['equipment']['backpack']) { // chance to add a backpack
         bot['Inventory'].items = itemPattern_f.generateItemByPattern("Backpack", bot['Inventory'].items, params.Role);
     }
-
     if (utility.getRandomInt() <= settings['bots']['equipment']['armorvest']) { // chance to add an armor vest
         bot['Inventory'].items = itemPattern_f.generateItemByPattern("ArmorVest", bot['Inventory'].items, params.Role);
     }
-
     // chance to add a med pocket, bully followers have 100% chance
     for (let i = 1; i <= 4; i++) {// pockets fill up section
-        let pocketItem_tmp = generatePocketItem(i, params.Role);
+        let pocketItem_tmp = pocket_f.generatePocketItem(i, params.Role);
         if (pocketItem_tmp !== false) { // fill up if item was choosed
             bot['Inventory'].items.push(pocketItem_tmp);
         }
@@ -496,7 +460,7 @@ function generate(databots) {
                 break;
         }
 
-        if (limit > -1 && settings.bots.limit.overRide === true) {
+        if (limit > -1 && settings.bots.limit.override === true) {
             params.Limit = limit;
         }
 

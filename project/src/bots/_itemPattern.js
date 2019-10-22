@@ -66,6 +66,7 @@ function generateItemByPattern(itemType, Inventory, Role = "") {
 }
 
 function generateBotBackpackItem(botInventory, backpack) {
+	let Inventory = botInventory;
     // its work need to find out upd dependencies and adds them;
     const backpackData = items.data[backpack._tpl]._props.Grids[0]._props;
     let backpack2D = new Array(backpackData.cellsV);
@@ -73,21 +74,20 @@ function generateBotBackpackItem(botInventory, backpack) {
         backpack2D[i] = new Array(backpackData.cellsH).fill(0);
     }
 
-    const backpackSize = Math.floor((backpackData.cellsV * backpackData.cellsH) / 3);// how much slots we have
+    const backpackSize = utility.getRandomInt(0,Math.floor((backpackData.cellsV * backpackData.cellsH) / 2));// how much slots we will fill up later
     var RollItems = new Array(backpackSize);
     for (var i = 0; i < RollItems.length; i++) {
         let tier = bots_mf.calculateItemChance(backpackLootTable, "");
         RollItems[i] = backpackLootTable[tier][utility.getRandomInt(0,backpackLootTable[tier].length - 1)];
     }
     for (let i = 0; i < backpackSize; i++) {
-        let item = items.data[RollItems[i]]; // fixed 
-        let found = false;
-        if (!found)
-            continue;
-
+        let item = items.data[RollItems[i]]; // fixed
+        if(typeof item == "undefined"){
+            console.log(RollItems[i])
+        }
         //if item is OK get item sizing and put it in free slot
-        const tmpSizeX = items.data[items.data[item]._id]._props.Width; // X + Left + Right
-        const tmpSizeY = items.data[items.data[item]._id]._props.Height; // Y + Up + Down
+        const tmpSizeX = items.data[item._id]._props.Width; // X + Left + Right
+        const tmpSizeY = items.data[item._id]._props.Height; // Y + Up + Down
         ImDoneWithThisOne:
             for (let x = 0; x <= backpackData.cellsH - tmpSizeX; x++) {
                 for (let y = 0; y <= backpackData.cellsV - tmpSizeY; y++) {
@@ -105,14 +105,14 @@ function generateBotBackpackItem(botInventory, backpack) {
                     if (badSlot === "yes") {
                         continue;
                     }
-                    const ItemTemplate = items.data[item.Id];
+                    const ItemTemplate = items.data[item._id];
                     for (let itemY = 0; itemY < tmpSizeY; itemY++) {
                         for (let itemX = 0; itemX < tmpSizeX; itemX++) {
                             backpack2D[itemY + y][itemX + x] = 1;
                         }
                     }
                     let rightUPD = bots_mf.updCreator(ItemTemplate._parent, ItemTemplate);
-                    botInventory.push({
+                    Inventory.push({
                         _id: "BP_" + backpack._id + "_" + utility.getRandomInt(100000, 999999),
                         _tpl: ItemTemplate._id,
                         parentId: backpack._id,
@@ -131,7 +131,7 @@ function generateBotBackpackItem(botInventory, backpack) {
             }
 
     }
-    return botInventory;
+    return Inventory;
 }
 
 

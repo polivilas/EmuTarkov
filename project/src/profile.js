@@ -94,7 +94,6 @@ function saveProfileProgress(offRaidData) {
         "GClass000": "Dogtag" ??? unknownGCLASS for 3333 version
     }
     */
-    // left to check: SpawnedInSession, Dogtag
 
     //and then re-parse the string into an object preparing to replace ID fix
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
@@ -109,7 +108,7 @@ function saveProfileProgress(offRaidData) {
                 offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questStashItems
             ) {
                 let old_id = offRaidProfile.Inventory.items[recalID]._id;
-                let new_id = "oRd_" + utility.generateNewItemId();
+                let new_id = utility.generateNewItemId();
                 string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
             }
         }

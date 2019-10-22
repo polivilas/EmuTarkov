@@ -11,6 +11,14 @@ global.settings = JSON.parse((fs.readFileSync("server.config.json", 'utf8'))
 																	.replace(/[\r\n\t]/g, '')
 																	.replace(/\s\s+/g, '')
 							);
+global.backendUrl = settings.server.backendUrl;
+global.ip = settings.server.ip;
+global.port = settings.server.port;
+global.assort = "/client/trading/api/getTraderAssort/";
+global.prices = "/client/trading/api/getUserAssortPrice/trader/";
+global.getTrader = "/client/trading/api/getTrader/";
+global.localeGlobal = "/client/locale/";
+global.localeMenu = "/client/menu/locale/";
 global.items = "";
 global.quests = "";
 global.locations = "";
@@ -35,6 +43,9 @@ global.appeariance_f = require('./bots/_appeariance.js');	// bots/_appeariance
 global.stats_f = require('./bots/_stats.js');				// bots/_stats
 global.names_f = require('./bots/_names.js');				// bots/_names
 global.itemPattern_f = require('./bots/_itemPattern.js');	// bots/_itemPattern
+global.guns_f = require('./bots/_guns.js');	// bots/_guns
+
+global.pocket_f = require('./bots/_pocket.js');	// bots/_itemPattern
 global.bots = require('./bots.js');						// bots
 //global.bots = require('./bots.js');						// bots
 global.itm_hf = require('./item/helpFunctions.js');			// item/helpFunctions
@@ -51,6 +62,13 @@ global.ragfair = require('./ragfair.js');				// ragfair
 // load data
 global.locations = locations_f.prepareLocations();
 global.quests = quests_f.prepareQuests();
+
+
+global.backpackLootTable = JSON.parse(utility.readJson("data/configs/bots/botBackpackLootTable.json")).BackpackLootTable;
+global.presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
+global.weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
+global.presets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcPresets.json"));
+global.weaponPresets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcWeapons.json"));
 
 
 /* Made by TheMaoci - Load only once */

@@ -164,8 +164,6 @@ function buyItem(tmpList, body, trad = "") { // Buying item from trader
                     }
                 profile.setCharacterData(tmpList); // save after each added item
             }
-			console.log(output.data.items.new,"","",true);
-			console.log(output.data.items.change,"","",true);
             return output;
         }
     }
@@ -240,11 +238,7 @@ function confirmRagfairTrading(tmpList, body) {
     body.scheme_id = 0;
     body.scheme_items = body.items;
 
-    if (confirmTrading(tmpList, body, "ragfair") === "OK") {
-        return "OK";
-    } else {
-        return "error";
-    }
+    return confirmTrading(tmpList, body, "ragfair");
 }
 
 

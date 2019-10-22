@@ -13,6 +13,16 @@ function sendJson(resp, output) {
         resp.end(buf);
     });
 }
+function sendTrueJson(resp, output) {
+    resp.writeHead(200, "OK", {
+        'Content-Type': 'application/json',
+        'content-encoding': 'deflate'
+    });
+
+    zlib.deflate(output, function (err, buf) {
+        resp.end(buf);
+    });
+}
 
 function sendHTML(resp, output) {
     resp.writeHead(200, "OK", {'Content-Type': 'text/html'});
@@ -30,5 +40,6 @@ function sendImage(resp, file) {
 }
 
 module.exports.sendJson = sendJson;
+module.exports.sendTrueJson = sendTrueJson;
 module.exports.sendHTML = sendHTML;
 module.exports.sendImage = sendImage;

@@ -1,13 +1,6 @@
 "use strict";
 require('./libs.js');
-let backendUrl = settings.server.backendUrl;
-let ip = settings.server.ip;
-let port = settings.server.port;
-let assort = "/client/trading/api/getTraderAssort/";
-let prices = "/client/trading/api/getUserAssortPrice/trader/";
-let getTrader = "/client/trading/api/getTrader/";
-let localeGlobal = "/client/locale/";
-let localeMenu = "/client/menu/locale/";
+
 let gameVer = "";
 
 function joinMatch(info) {
@@ -100,8 +93,20 @@ function get(req, body) {
         case "/":
             output = index_f.index();
             break;
+        case "/inv":
+			output = "";
+			let inv = itm_hf.recheckInventoryFreeSpace(profile.getCharacterData())
+			output += "<style>td{border:1px solid #aaa;}</style>Inventory Stash Usage:<br><table><tr><td>-</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9<br>";
+			for(let y=0; y<inv.length;y++){
+				output += '<tr><td>' + y + "</td>";
+				for(let x=0; x<inv[0].length;x++)
+					output += '<td ' + ((inv[y][x] === 1)?'style="background:#aaa"':'') + '>' + inv[y][x] + "</td>"
+				output += "</tr>"
+			}
+			output += "</table>"
+            break;
         case "/errortest":
-            throw new Error('testing error handling. response.js - line 123');
+            throw new Error('testing error handling. response.js - line 101');
 
         case "/client/friend/list":
             output = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
@@ -109,6 +114,7 @@ function get(req, body) {
 
         case "/client/game/profile/items/moving":
             output = item.moving(info);
+			console.log(output);
             break;
 
         case "/client/languages":
@@ -116,7 +122,9 @@ function get(req, body) {
             break;
 
         case "/client/game/login":
-            output = profile.find(info, backendUrl);
+				let x = profile.find(info, backendUrl);
+				console.log(x);
+            output = x;
             break;
 
         case "/client/queue/status":
@@ -167,7 +175,13 @@ function get(req, body) {
         case "/client/game/bot/generate":
             // TODO: TheMaoci Dont forget to remove this later says TheMaoci - its for testing if bots are generating if you cann get response from webbrowser
             if (body === "{}")
-                body = "{\"conditions\":[{\"Role\":\"assalut\",\"Limit\":30,\"Difficulty\":\"normal\"}]}";
+                body = "{\"conditions\":[{\"Role\":\"assault\",\"Limit\":30,\"Difficulty\":\"normal\"}]}";
+            output = JSON.stringify({"err": 0, "errmsg": null, "data": bots.generate(JSON.parse(body))});
+            break;
+		case "/bottest":
+            // TODO: TheMaoci Dont forget to remove this later says TheMaoci - its for testing if bots are generating if you cann get response from webbrowser
+            if (body === "{}")
+                body = "{\"conditions\":[{\"Role\":\"assault\",\"Limit\":30,\"Difficulty\":\"normal\"},{\"Role\":\"assault\",\"Limit\":30,\"Difficulty\":\"hard\"}]}";
             output = JSON.stringify({"err": 0, "errmsg": null, "data": bots.generate(JSON.parse(body))});
             break;
 

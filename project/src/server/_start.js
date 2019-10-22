@@ -50,8 +50,10 @@ function sendResponse(req, resp, body) {
 		return;
 	}
 
-	if (req.url === "/") {
+	if (req.url === "/" || req.url === "/inv") {
 		header_f.sendHTML(resp, output);
+	} else if (req.url === "/bottest") {
+		header_f.sendTrueJson(resp, output);
 	} else {
 		header_f.sendJson(resp, output);
 	}
@@ -118,9 +120,9 @@ function handleRequest(req, resp) {
 
 function start() {
 	let server = http.createServer();
-	let port = settings.server.port;
+	port = settings.server.port;
 	
-	let ip = settings.server.ip;
+	ip = settings.server.ip;
 	if (settings.server.generateIp == true)
     {
         ip = utility.getLocalIpAddress();
@@ -128,6 +130,7 @@ function start() {
 	// set the ip and backendurl 
 	settings.server.ip = ip; 
 	settings.server.backendUrl = "http://" + ip + ":" + port; 
+	backendUrl = settings.server.backendUrl;
 	utility.writeJson("server.config.json", settings); 
 	// show our watermark
 	console.log("  └─ JustEmuTarkov " + constants.serverVersion() + " ─┘", "cyan", "");

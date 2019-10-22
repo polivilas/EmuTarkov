@@ -3,7 +3,15 @@
 const utility = require('../utility.js');
 
 //// ---- FUNCTIONS BELOW ---- ////
-
+/*
+Wind // 0 - 1
+WindDirection // 1 - 8
+CloudDensity // -1 - 1
+Fog // 0 - 1 ??
+fallingWater // 0 - 1
+LyingWater // 0 - 1 
+Temperature -50 - 50
+*/
 function main() { // TODO: Use weather API
     let time = utility.getTime().replace("-", ":").replace("-", ":");
     let date = utility.getDate();

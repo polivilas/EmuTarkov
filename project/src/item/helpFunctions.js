@@ -22,25 +22,33 @@ function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
     for (let item of tmpList.data[1].Inventory.items) {
         // hideout  // added proper stash ID older was "5c71b934354682353958ea35"
-        if (item.parentId === tmpList.data[1].Inventory.stash && item.location !== undefined) {
+        if (item.parentId === tmpList.data[1].Inventory.stash && typeof item.location != "undefined") {
             // let tmpItem = getItem(item._tpl)[1];
             let tmpSize = getSize(item._tpl, item._id, tmpList.data[1].Inventory.items);
             //			x
             let iW = tmpSize[0];
             //			y
             let iH = tmpSize[1];
-            let fH = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iW : iH);
-            let fW = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iH : iW);
 			if(typeof item.upd != "undefined")
 				if(typeof item.upd.Foldable != "undefined")
 					if(item.upd.Foldable.Folded){
 						iW -= 1;
 					}
+			
+            let fH = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iW : iH);
+            let fW = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iH : iW);
+			
 
             for (let y = 0; y < fH; y++) {
-                if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) { // fixed filling out of bound
+				if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) { // fixed filling out of bound
                     let FillTo = ((item.location.x + fW >= PlayerStash[0]) ? PlayerStash[0] : item.location.x + fW);
-                    Stash2D[item.location.y + y].fill(1, item.location.x, FillTo);
+					try
+					{
+						Stash2D[item.location.y + y].fill(1, item.location.x, FillTo);
+					} catch(e)
+					{ 
+						console.log("[OOB] for item " + item._id + " [" + item._id + "] with error message: " + e);
+					}
                 }
             }
         }
@@ -96,25 +104,26 @@ function fromRUB(value, currency) {
 function payMoney(tmpList, moneyObject, body, trad = "") {
 	output = item.getOutput();
     let value = 0;
-    for (let item of tmpList.data[1].Inventory.items) {
-        for (let i = 0; i < moneyObject.length; i++) {
-            if (typeof item.upd !== "undefined")
-                if (item._id === moneyObject[i]._id && item.upd.StackObjectsCount > body.scheme_items[i].count) {
+    for (let i = 0; i < moneyObject.length; i++) {
+		for (let index in tmpList.data[1].Inventory.items) {
+			let itm = tmpList.data[1].Inventory.items[index];
+            if (typeof itm.upd !== "undefined")
+                if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
-                    item.upd.StackObjectsCount -= body.scheme_items[i].count;
+                    itm.upd.StackObjectsCount -= body.scheme_items[i].count;
                     output.data.items.change.push({
-                        "_id": item._id,
-                        "_tpl": item._tpl,
-                        "parentId": item.parentId,
-                        "slotId": item.slotId,
-                        "location": item.location,
-                        "upd": {"StackObjectsCount": item.upd.StackObjectsCount}
+                        "_id": itm._id,
+                        "_tpl": itm._tpl,
+                        "parentId": itm.parentId,
+                        "slotId": itm.slotId,
+                        "location": itm.location,
+                        "upd": {"StackObjectsCount": itm.upd.StackObjectsCount}
                     });
-                } else if (item._id === moneyObject[i]._id && item.upd.StackObjectsCount === body.scheme_items[i].count) {
+                } else if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
-                    delete tmpList.data[1].Inventory.items[item];
-                    output.data.items.del.push({"_id": item._id});
-                } else if (item._id === moneyObject[i].id && item.upd.StackObjectsCount < body.scheme_items[i].count)
+                    tmpList.data[1].Inventory.items.splice(index, 1);// just slice item from )
+                    output.data.items.del.push({"_id": itm._id});
+                } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count)
                     return false;
         }
     }
@@ -250,53 +259,103 @@ function getItem(template) { // -> Gets item from <input: _tpl>
 * outputs [width, height]
 * */
 function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and height returns [sizeX, sizeY]
-    let toDo = [itemID];
-    let tmpItem = getItem(itemtpl)[1];
+    let toDo = [itemID],
+		rootItem = itemID,
+		tmpItem = getItem(itemtpl)[1],
+		isFolded = false,
+		isMagazine = false, 
+		isGrip = false,
+		isMainBaseHasis = false,
+		isBarrel = false,
+		BxH_diffrence_stock = 0,
+		BxH_diffrence_barrel = 0;
+			
+			
+			
+		   
+    let outX = tmpItem._props.Width;
+    let outY = tmpItem._props.Height;
+	let skipThisItems = ["5448e53e4bdc2d60728b4567", "566168634bdc2d144c8b456c", "5795f317245977243854e041"];
+	
+	if(skipThisItems.indexOf(tmpItem._parent) === -1){ // containers big no no
+		while (true) {
+			if (typeof toDo[0] === "undefined") {
+				break;
+			}
+			for (let tmpKey in InventoryItem) {
+				if (InventoryItem.hasOwnProperty(tmpKey)) {
+					if(InventoryItem[tmpKey]._id == toDo[0]){
+						if(typeof InventoryItem[tmpKey].upd != "undefined")
+							if(typeof InventoryItem[tmpKey].upd.Foldable != "undefined")
+								if(InventoryItem[tmpKey].upd.Foldable.Folded === true)
+									isFolded = true;
+					}
+					if (InventoryItem[tmpKey].parentId === toDo[0]) {
+						let itm = getItem(InventoryItem[tmpKey]._tpl)[1];
+						//if(rootItem === InventoryItem[tmpKey].parentId || itm._props.ExtraSizeForceAdd == true) {
+						if(InventoryItem[tmpKey].slotId != "mod_handguard"){
+							if(InventoryItem[tmpKey].slotId == "mod_magazine"){ 
+								if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
+									isMagazine = true;
+								}
+							}
+							if(InventoryItem[tmpKey].slotId == "mod_pistol_grip" || InventoryItem[tmpKey].slotId == "mod_pistolgrip"){
+																							  
+								isGrip = true;
+							}
+							if(InventoryItem[tmpKey].slotId == "mod_stock"){
+								if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
+									isGrip = true;
+								}
+							}
+							if(InventoryItem[tmpKey].slotId == "mod_stock"){
+								if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
+									BxH_diffrence_stock = itm._props.ExtraSizeLeft;
+									isMainBaseHasis = true;
+								}
+							}
+							if(InventoryItem[tmpKey].slotId == "mod_barrel"){
+								if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
+									BxH_diffrence_barrel = itm._props.ExtraSizeLeft;
+									isBarrel = true;
+								}
+							}
+							if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
+								if (InventoryItem[tmpKey].slotId == "mod_barrel" && itm._props.ExtraSizeLeft > 1 || InventoryItem[tmpKey].slotId != "mod_barrel")
+								outX += itm._props.ExtraSizeLeft;
+							}
 
-    var outL = 0, outR = 0, outU = 0, outD = 0, tmpL = 0, tmpR = 0, tmpU = 0, tmpD = 0;
+							if (typeof itm._props.ExtraSizeRight !== "undefined" && itm._props.ExtraSizeRight > 0) {
+								outX += itm._props.ExtraSizeRight;
+							}
 
-    var outX = tmpItem._props.Width;
-    var outY = tmpItem._props.Height;
+							if (typeof itm._props.ExtraSizeUp !== "undefined" && itm._props.ExtraSizeUp > 0) {
+								outY += itm._props.ExtraSizeUp;
+							}
 
-    while (true) {
-        if (typeof toDo[0] === "undefined") {
-            break;
-        }
-        for (let tmpKey in InventoryItem) {
-            if (InventoryItem.hasOwnProperty(tmpKey)) {
-                if (InventoryItem[tmpKey].parentId === toDo[0]) {
-                    toDo.push(InventoryItem[tmpKey]._id);
-                    let itm = getItem(InventoryItem[tmpKey]._tpl)[1];
-
-                    if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-                        tmpL += itm._props.ExtraSizeLeft;
-                    }
-
-                    if (typeof itm._props.ExtraSizeRight !== "undefined" && itm._props.ExtraSizeRight > 0) {
-                        tmpR += itm._props.ExtraSizeRight;
-                    }
-
-                    if (typeof itm._props.ExtraSizeUp !== "undefined" && itm._props.ExtraSizeUp > 0) {
-                        tmpU += itm._props.ExtraSizeUp;
-                    }
-
-                    if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-                        tmpD += itm._props.ExtraSizeDown;
-                    }
-                }
-            }
-        }
-        outL = outL + tmpL;
-        outR = outR + tmpR;
-        outU = outU + tmpU;
-        outD = outD + tmpD;
-        tmpL = 0;
-        tmpR = 0;
-        tmpU = 0;
-        tmpD = 0;
-        toDo.splice(0, 1);
-    }
-    return [(outX + outL + outR), (outY + outU + outD)];
+							if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
+								outY += itm._props.ExtraSizeDown;
+							}
+						}
+						//console.log(InventoryItem[tmpKey]._id + " - " + outX + " - " + outY );
+						toDo.push(InventoryItem[tmpKey]._id);
+					}
+				}
+			}
+			toDo.splice(0, 1);
+		}
+	}
+	if(isBarrel && isMainBaseHasis){
+		let calculate = Math.abs(BxH_diffrence_stock - BxH_diffrence_barrel);
+		calculate = ((BxH_diffrence_stock > BxH_diffrence_barrel)?BxH_diffrence_stock:BxH_diffrence_barrel) - calculate;
+		outX -= calculate;
+	}
+	if(isMagazine && isGrip)
+		outY -= 1;
+	if(isFolded)
+		outX -= 1;
+	//console.log("-EndSize= "+rootItem+" >" + outX + " - " + outY);
+    return [outX, outY];
 }
 /* Find And Return Children (TRegular)
 * input: PlayerData, InitialItem._id
