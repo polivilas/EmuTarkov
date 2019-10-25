@@ -105,6 +105,9 @@ function get(req, body) {
 			}
 			output += "</table>"
             break;
+		case "/random":
+			output = utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId();
+			break;
         case "/errortest":
             throw new Error('testing error handling. response.js - line 101');
 

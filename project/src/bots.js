@@ -499,6 +499,5 @@ function generatePlayerScav() {
 }
 
 //module.exports.calculateChance = calculateChance;
-module.exports.testRandomItems = testRandomItems;
 module.exports.generate = generate;
 module.exports.generatePlayerScav = generatePlayerScav;

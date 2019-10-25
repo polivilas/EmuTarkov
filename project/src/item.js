@@ -120,7 +120,6 @@ function moving(info) { // main move handling function
     return output;
 }
 
-module.exports.GenItemID = utility.generateNewItemId; // hy hreplace everything that uses that with the utility thing TODO!
 module.exports.getOutput = getOutput;
 module.exports.setOutput = setOutput;
 module.exports.resetOutput = resetOutput;

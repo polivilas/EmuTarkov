@@ -50,7 +50,7 @@ function sendResponse(req, resp, body) {
 		return;
 	}
 
-	if (req.url === "/" || req.url === "/inv") {
+	if (req.url === "/" || req.url === "/inv" || req.url === "/random") {
 		header_f.sendHTML(resp, output);
 	} else if (req.url === "/bottest") {
 		header_f.sendTrueJson(resp, output);
