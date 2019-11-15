@@ -9,6 +9,7 @@ require('../libs.js');
 /client/game/profile/items/moving
 {"data":[{"Action":"CustomizationBuy","offer":"5d1f661686f7744bcb0adfb5","items":[{"id":"5dc46753a815f81bc7014370","count":25000,"del":false}]}],"tm":1}
 */
+
 function wearClothing(tmpList, body){
 	let suits_to_set = body.suites; // just to shorten future names and simplyfied them
 
@@ -20,22 +21,26 @@ function wearClothing(tmpList, body){
 			tmpList.data[1].Customization.Feet = costume_data._props.Feet;//do only feet
 		}
 		//this parent reffers to Upper Node
-		if(costume_data._parent == "5cd944ca1388ce03a44dc2a4"){
-			tmpList.data[1].Customization.Body = costume_data._props.Body;//do only feet
-			tmpList.data[1].Customization.Hands = costume_data._props.Hands;//do only feet
-			//do only body and hands
+		if(costume_data._parent == "5cd944ca1388ce03a44dc2a4"){	//do only body and hands
+			tmpList.data[1].Customization.Body = costume_data._props.Body;
+			tmpList.data[1].Customization.Hands = costume_data._props.Hands;
+			
 		}
 	}
 	profile.setCharacterData(tmpList); // save profile after change
-	return "OK";
+
+    item.resetOutput();
+	return item.getOutput();
 }
 function buyClothing(tmpList, body){
 	let output = ""
 		item.resetOutput();
 		output = item.getOutput();
-	let ragmanOffer = body.offer;
+
+	//let ragmanOffer = body.offer; <- no 
+
 	let item_toPay = body.items;
-	let customization_storage = utility.readJson("data/configs/client.trading.customization.storage.json");
+	let customization_storage = JSON.parse( utility.readJson("data/configs/customization/storage.json") );
 	for(let i = 0; i < item_toPay.length; i++){
 		for(let item in tmpList.data[1].Inventory.items){
 			if(tmpList.data[1].Inventory.items[item]._id == item_toPay[i].id){
@@ -58,8 +63,16 @@ function buyClothing(tmpList, body){
 			}
 		}
 	}
-	customization_storage.data.suites.push(ragmanOffer);
-	utility.writeJson("data/configs/client.trading.customization.storage.json", customization_storage);
+
+	var customization_offers = JSON.parse( utility.readJson("data/configs/customization/offers.json") );
+	for(var offer of customization_offers.data)
+	{
+		if(body.offer == offer._id)
+		{
+			customization_storage.data.suites.push(offer.suiteId);
+		}
+	}
+	utility.writeJson("data/configs/customization/storage.json", customization_storage);
 	profile.setCharacterData(tmpList); // save profile after change
 	return output;
 }
