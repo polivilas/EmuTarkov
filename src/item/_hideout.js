@@ -46,7 +46,8 @@ function HideoutUpgrade(tmplist,body)
 					var ctime = hideout_areas_config.data[hideout_stage].stages[ tmplist.data[1].Hideout.Areas[hideoutArea].level + 1 ].constructionTime;
 					if(ctime > 0 )
 					{	
-						tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = Date.now() + ctime;
+						var timestamp = Math.floor(Date.now() / 1000);
+						tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = timestamp + ctime ;
 						tmplist.data[1].Hideout.Areas[hideoutArea].constructing = true;
 					}
 				}				
@@ -69,6 +70,7 @@ function HideoutUpgradeComplete(tmplist,body)
 		if(tmplist.data[1].Hideout.Areas[hideoutArea].type == body.areaType)
 		{
 			tmplist.data[1].Hideout.Areas[hideoutArea].level++;	
+			tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = 0;
 			tmplist.data[1].Hideout.Areas[hideoutArea].constructing = false;		
 		}
 	}
@@ -93,6 +95,7 @@ function HideoutPutItemsInAreaSlots(tmplist,body)
 		if(itemToMove.id == tmplist.data[1].Invetory.Items[inventoryItem]._id )
 		{
 			//move to area slot
+			console.log("yo put that item in the hideout!"); //dump it too
 
 		}
 	}
@@ -118,7 +121,7 @@ function HideoutToggleArea(tmplist,body)
 		}
 	}
 
-	//profile.setCharacterData(tmplist);
+	profile.setCharacterData(tmplist);
 	item.resetOutput();		
 	return item.getOutput();
 }
@@ -133,7 +136,7 @@ function HideoutSingleProductionStart(tmplist,body)
 	{
 		if(body.recipeId == receipe._id)
 		{
-			console.log("found the receipe ! register it in profile");
+			console.log("found the receipe ! register it in profile"); //dump this
 
 			for(var itemToDelete of body.items)
 			{
