@@ -109,12 +109,6 @@ function handleMoving(body) { // handling Action function
 
         case "RagFairBuyOffer":
             return trade_f.confirmRagfairTrading(tmpList, body);
-        
-		case "CustomizationWear":
-            return customization_f.wearClothing(tmpList, body);
-        
-		case "CustomizationBuy":
-            return customization_f.buyClothing(tmpList, body);
 
         default:
             console.log("[UNHANDLED ACTION] " + body.Action, "white", "red");

@@ -127,9 +127,10 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
                     return false;
         }
     }
+
+    /*
     // this script will not override data if something goes wrong aka return false;
     // keep track of trader changing
-	/* TODO: This needs rework ¬TheMaoci¬
     if (body.tid !== "91_everythingTrader" && body.tid !== "92_SecretTrader")
         if (trad === "") {
             let tmpTrader = trader.get(body.tid);
@@ -148,7 +149,8 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
             // update trader data also in profile
 
             tmpList.data[1].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
-        }
+        }*/
+        
     profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);
 	item.setOutput(output);
@@ -216,7 +218,8 @@ function getMoney(tmpList, amount, body, output_temp) {
             }
         }
     }
-	  /* TODO: This needs rework ¬TheMaoci¬
+
+    /*
     let traderLoyalty = tmpTraderInfo.data.loyalty;
     traderLoyalty.currentSalesSum += value;
     trader.get(body.tid).data.loyalty = traderLoyalty;
@@ -228,6 +231,8 @@ function getMoney(tmpList, amount, body, output_temp) {
     }
     if (body.tid !== "91_everythingTrader" && body.tid !== "92_SecretTrader")
         tmpList.data[1].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
+    */
+    
     profile.setCharacterData(tmpList);
     return output_temp;
 }

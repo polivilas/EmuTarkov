@@ -222,9 +222,7 @@ function getPurchasesData() {
     //themaoci fix for offline raid selling ;) selling for 0.9 times of regular price for now
     //load files
     let multiplier = 0.9;
-    let data = JSON.parse(
-        utility.readJson("data/profiles/character_" + constants.getActiveID() + ".json")
-    );
+    let data = JSON.parse(  utility.readJson("data/profiles/character_" + constants.getActiveID() + ".json")  );
     items = utility.prepareItemsFile();
     //prepared vars
     let equipment = data.Inventory.equipment;

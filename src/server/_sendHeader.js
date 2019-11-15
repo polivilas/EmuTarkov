@@ -14,11 +14,6 @@ function sendJson(resp, output) {
     });
     //resp.end(output);
 }
-function sendMapData(resp, output) {
-    resp.writeHead(200, "OK", {'Content-Type': 'text/plain'});
-    resp.end(output);
-}
-
 function sendTrueJson(resp, output) {
     resp.writeHead(200, "OK", {
         'Content-Type': 'application/json',
@@ -47,6 +42,5 @@ function sendImage(resp, file) {
 
 module.exports.sendJson = sendJson;
 module.exports.sendTrueJson = sendTrueJson;
-module.exports.sendMapData = sendMapData;
 module.exports.sendHTML = sendHTML;
 module.exports.sendImage = sendImage;

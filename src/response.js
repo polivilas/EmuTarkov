@@ -59,11 +59,7 @@ function get(req, body) {
     }
 
     // game images
-    if (url.includes("/api/location")) {
-        return "MAPCONFIG";
-    }
-    // game images
-    if (url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
+    if (url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook")) {
         return "IMAGE";
     }
     if (url.includes("/notifierBase") || url.includes("/notifierServer")) { // notifier custom link
@@ -109,6 +105,11 @@ function get(req, body) {
 			}
 			output += "</table>"
             break;
+		case "/random":
+			output = utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId() + "<br>" + utility.generateNewItemId();
+			break;
+        case "/errortest":
+            throw new Error('testing error handling. response.js - line 101');
 
         case "/client/friend/list":
             output = '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
@@ -166,7 +167,7 @@ function get(req, body) {
             output = utility.readJson('data/configs/templates.json');
             break;
 
-        case "/client/quest/list":
+        case "/client/quest/list": 
             output = JSON.stringify(quests, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
             break;
 
@@ -175,14 +176,15 @@ function get(req, body) {
             break;
 
         case "/client/game/bot/generate":
-            output = JSON.stringify(bots.generate(body));
+                output = JSON.stringify( bots.generate(body) ) ;
+                
+                //output = utility.readJson('data/configs/bots/botdump.json');
             break;
-
 		case "/bottest":
             // TODO: TheMaoci Dont forget to remove this later says TheMaoci - its for testing if bots are generating if you cann get response from webbrowser
             if (body === "{}")
-                body = '{"conditions":[{"Role":"assault","Limit":30,"Difficulty":"normal"},{"Role":"assault","Limit":30,"Difficulty":"hard"}]}';
-            output = JSON.stringify(bots.generate(JSON.parse(body)));
+                body = "{\"conditions\":[{\"Role\":\"assault\",\"Limit\":30,\"Difficulty\":\"normal\"},{\"Role\":\"assault\",\"Limit\":30,\"Difficulty\":\"hard\"}]}";
+            output = JSON.stringify({"err": 0, "errmsg": null, "data": bots.generate(JSON.parse(body))});
             break;
 
         case "/client/trading/api/getTradersList":
@@ -262,6 +264,98 @@ function get(req, body) {
             output = '{"err":0,"errmsg":null,"data":{"msg":"OK"}}';
             break;
         case "/client/game/version/validate":
+
+            /*
+            var botWeaponPresets = JSON.parse( utility.readJson("data/configs/bots/botWeapons.json") );
+            var gameWeaponPresets = JSON.parse( utility.readJson("data/configs/globals.json") );
+            var found = false;
+            for(var gameWP in gameWeaponPresets.data.ItemPresets )
+            {
+                found = false;
+                for(var botWP in botWeaponPresets.data )
+                {
+                    if(gameWeaponPresets.data.ItemPresets[gameWP]._name ==  botWeaponPresets.data[botWP]._name )
+                    {
+                       found = true;
+                    }
+                }
+
+                if(found == false)
+                {
+                    botWeaponPresets.data.push( gameWeaponPresets.data.ItemPresets[gameWP] )
+                }
+
+
+            }*/
+
+            /* //everything trader generator
+            var itemsjson = JSON.parse( utility.readJson("data/configs/itemsCache.json") );
+
+            var generated_trader = JSON.parse( '{"err":0,"errmsg":null,"data":{ "items":[],"barter_scheme":{},"loyal_level_items":{} } }' );
+
+            for(var someitem in itemsjson.data )
+            {
+                var a =
+                {
+                    "_id": itemsjson.data[someitem]._id,
+                    "_tpl": itemsjson.data[someitem]._id,
+                    "parentId": "hideout",
+                    "slotId": "hideout",
+                    "upd": {
+                        "StackObjectsCount": 1337
+                    }
+                };               
+
+                generated_trader.data.items.push(a);
+                generated_trader.data.barter_scheme[itemsjson.data[someitem]._id] = [[{ "count": 1,"_tpl": "5449016a4bdc2d6f028b456f"}]];
+                generated_trader.data.loyal_level_items[itemsjson.data[someitem]._id] = 1;
+
+            }
+            utility.writeJson("testtrader.json", generated_trader );
+            */
+
+            /*
+            //presettrader generator
+            var allpresets = JSON.parse( utility.readJson("data/configs/globals.json") );
+            var generated_trader = JSON.parse( '{"err":0,"errmsg":null,"data":{ "items":[],"barter_scheme":{},"loyal_level_items":{} } }' );
+            var loops = 0;
+            for(var somepreset in allpresets.data.ItemPresets )
+            {
+                loops++;
+                var generated_id = "weapon_preset_" + loops;
+
+                for(var itempreset of allpresets.data.ItemPresets[somepreset]._items)
+                {
+        
+                    if(allpresets.data.ItemPresets[somepreset]._parent == itempreset._id)
+                    {
+                        generated_trader.data.items.push(
+                        {
+
+                            "_id": generated_id,
+                            "_tpl": itempreset._tpl,
+                            "parentId": "hideout",
+                            "slotId": "hideout",
+                            "upd":{ "StackObjectsCount": 1337}
+                        });
+                        generated_trader.data.barter_scheme[generated_id] = [[{ "count": 1,"_tpl": "5449016a4bdc2d6f028b456f"}]];
+                        generated_trader.data.loyal_level_items[generated_id] = 1;
+                    }
+                    else
+                    {
+                        
+                        if(allpresets.data.ItemPresets[somepreset]._parent == itempreset.parentId )
+                        {       
+                            itempreset.parentId = generated_id; 
+                        }
+                        itempreset._id = utility.generateNewItemId();
+                        generated_trader.data.items.push(itempreset)
+                    }
+                }
+            }
+
+            utility.writeJson("testtrader2.json", generated_trader );*/
+
             constants.setVersion(info.version.major);
             output = '{"err":0,"errmsg":null,"data":null}';
             break;
@@ -270,10 +364,6 @@ function get(req, body) {
 			break;
 		case "/client/customization":
 			output = utility.readJson('data/configs/customization.json');
-			break;
-		case "/client/trading/customization/5ac3b934156ae10c4430e83c/offers": // old ragman 
-		case "/client/trading/customization/7_ragman/offers": // new ragman
-			output = utility.readJson('data/configs/client.trading.customization.1_ragman.offers.json');
 			break;
 		case "/client/trading/customization/storage":
 			output = utility.readJson('data/configs/client.trading.customization.storage.json');
@@ -314,11 +404,10 @@ function get(req, body) {
 		if(typeof info.crc != "undefined"){
 			let crctest = JSON.parse(output);
 			if(typeof crctest.crc != "undefined"){
-				if(info.crc.toString() === crctest.crc.toString() && settings.debug.debugMode != true){
-					console.log("[Loading From Cache Files]", "", "", true);
-					output = '{"err":0, "errmsg":null, "data":null}';
-				} else {
+				if(info.crc !== crctest.crc){
+					crctest.crc = utility.adlerGen(output.replace(/\s\s+/g, ''));
 					output = JSON.stringify(crctest).replace(/\s\s+/g, '');
+					console.log("[NewCRC:" + crctest.crc + "]", "", "", true);
 				}
 			}
 		}
