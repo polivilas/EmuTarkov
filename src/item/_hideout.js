@@ -47,7 +47,7 @@ function HideoutUpgrade(tmplist,body)
 					if(ctime > 0 )
 					{	
 						var timestamp = Math.floor(Date.now() / 1000);
-						tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = timestamp + ctime ;
+						tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = timestamp + 60 ;
 						tmplist.data[1].Hideout.Areas[hideoutArea].constructing = true;
 					}
 				}				
@@ -71,7 +71,9 @@ function HideoutUpgradeComplete(tmplist,body)
 		{
 			tmplist.data[1].Hideout.Areas[hideoutArea].level++;	
 			tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = 0;
-			tmplist.data[1].Hideout.Areas[hideoutArea].constructing = false;		
+			tmplist.data[1].Hideout.Areas[hideoutArea].constructing = false;
+
+			//and then apply bonusses from hideout upgrades or its automatic ? 		
 		}
 	}
 
@@ -88,18 +90,17 @@ function HideoutPutItemsInAreaSlots(tmplist,body)
 {
 	for(var itemToMove in body.items)
 	{
-		//console.log(itemToMove.id)
-	}
-	for(var inventoryItem of tmplist.data[1].Invetory.Items)
-	{
-		if(itemToMove.id == tmplist.data[1].Invetory.Items[inventoryItem]._id )
+	
+		for(var inventoryItem of tmplist.data[1].Inventory.items)
 		{
-			//move to area slot
-			console.log("yo put that item in the hideout!"); //dump it too
+			if(body.items[itemToMove].id == inventoryItem._id )
+			{
+				//move to area slot
+				console.log("yo put this fucking Graphics card  in your farm dude!"); //dump it too
 
+			}
 		}
 	}
-
 
 	//profile.setCharacterData(tmplist);
 	item.resetOutput();		
