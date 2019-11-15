@@ -1,0 +1,595 @@
+{
+	"Enabled": true,
+	"Locked": false,
+	"Insurance": false,
+	"Name": "Customs",
+	"Description": "Very Big Map",
+	"Scene": {
+	  "path": "maps\/customs_preset.bundle",
+	  "rcid": "bigmap.scenespreset.asset"
+	},
+	"Area": 0,
+	"RequiredPlayerLevel": 0,
+	"surv_gather_minutes": 1,
+	"MinPlayers": 6,
+	"MaxPlayers": 12,
+	"sav_gather_minutes": 1,
+	"exit_count": 2,
+	"exit_access_time": 60,
+	"exit_time": 1,
+	"Preview": {
+	  "path": "",
+	  "rcid": ""
+	},
+	"IconX": 456,
+	"IconY": 443,
+	"filter_ex": [
+	  
+	],
+	"waves": [
+	  {
+		"number": 0,
+		"time_min": 0,
+		"time_max": 1,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneBrige",
+		"BotSide": "Savage",
+		"BotPreset": "easy",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 1,
+		"time_min": 20,
+		"time_max": 30,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneCrossRoad",
+		"BotSide": "Savage",
+		"BotPreset": "easy",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 2,
+		"time_min": 30,
+		"time_max": 60,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneDormitory",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 3,
+		"time_min": 30,
+		"time_max": 31,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneGasStation",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 4,
+		"time_min": 350,
+		"time_max": 380,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneFactoryCenter",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 5,
+		"time_min": 400,
+		"time_max": 410,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneFactorySide",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 6,
+		"time_min": 420,
+		"time_max": 600,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneOldAZS",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 7,
+		"time_min": 10,
+		"time_max": 30,
+		"slots_min": 1,
+		"slots_max": 1,
+		"SpawnPoints": "ZoneSnipeBrige",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "marksman",
+		"isPlayers": false
+	  },
+	  {
+		"number": 8,
+		"time_min": 40,
+		"time_max": 50,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneSnipeTower",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "marksman",
+		"isPlayers": false
+	  },
+	  {
+		"number": 9,
+		"time_min": 10,
+		"time_max": 30,
+		"slots_min": 0,
+		"slots_max": 1,
+		"SpawnPoints": "ZoneSnipeFactory",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "marksman",
+		"isPlayers": false
+	  },
+	  {
+		"number": 10,
+		"time_min": 301,
+		"time_max": 350,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneBlockPost",
+		"BotSide": "Savage",
+		"BotPreset": "easy",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 11,
+		"time_min": 2,
+		"time_max": 3,
+		"slots_min": 0,
+		"slots_max": 1,
+		"SpawnPoints": "ZoneBlockPostSniper",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "marksman",
+		"isPlayers": false
+	  },
+	  {
+		"number": 13,
+		"time_min": 2,
+		"time_max": 4,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneBlockPostSniper3",
+		"BotSide": "Savage",
+		"BotPreset": "easy",
+		"WildSpawnType": "marksman",
+		"isPlayers": false
+	  },
+	  {
+		"number": 14,
+		"time_min": 500,
+		"time_max": 550,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneCrossRoad",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 15,
+		"time_min": 700,
+		"time_max": 740,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneBlockPost",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 16,
+		"time_min": 0,
+		"time_max": 55,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneTankSquare",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 17,
+		"time_min": 0,
+		"time_max": 55,
+		"slots_min": 0,
+		"slots_max": 0,
+		"SpawnPoints": "ZoneWade",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 0,
+		"time_min": 0,
+		"time_max": 30,
+		"slots_min": 2,
+		"slots_max": 5,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "easy",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 0,
+		"time_min": 500,
+		"time_max": 750,
+		"slots_min": 1,
+		"slots_max": 5,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 0,
+		"time_min": 750,
+		"time_max": 1000,
+		"slots_min": 1,
+		"slots_max": 5,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "assault",
+		"isPlayers": true
+	  },
+	  {
+		"number": 0,
+		"time_min": 200,
+		"time_max": 400,
+		"slots_min": 1,
+		"slots_max": 4,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "easy",
+		"WildSpawnType": "assault",
+		"isPlayers": true
+	  },
+	  {
+		"number": 0,
+		"time_min": 1200,
+		"time_max": 2000,
+		"slots_min": 1,
+		"slots_max": 5,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 0,
+		"time_min": 600,
+		"time_max": 1000,
+		"slots_min": 0,
+		"slots_max": 2,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "hard",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 0,
+		"time_min": 70,
+		"time_max": 120,
+		"slots_min": 0,
+		"slots_max": 2,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": true
+	  },
+	  {
+		"number": 0,
+		"time_min": 0,
+		"time_max": 20,
+		"slots_min": 1,
+		"slots_max": 5,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": false
+	  },
+	  {
+		"number": 0,
+		"time_min": 140,
+		"time_max": 180,
+		"slots_min": 0,
+		"slots_max": 2,
+		"SpawnPoints": "",
+		"BotSide": "Savage",
+		"BotPreset": "normal",
+		"WildSpawnType": "assault",
+		"isPlayers": true
+	  }
+	],
+	"limits": [
+	  
+	],
+	"AveragePlayTime": 25,
+	"AveragePlayerLevel": 15,
+	"escape_time_limit": 50,
+	"Rules": "AvoidAllPmc",
+	"IsSecret": false,
+	"doors": [
+	  
+	],
+	"ExitZones": "{BROKEN_LINK}",
+	"tmp_location_field_remove_me": 0,
+	"MinDistToExitPoint": 30,
+	"MaxDistToFreePoint": 550,
+	"MinDistToFreePoint": 110,
+	"MaxBotPerZone": 5,
+	"OpenZones": "ZoneBrige,ZoneCrossRoad,ZoneFactorySide,ZoneOldAZS,ZoneBlock,Post,ZoneTankSquare,ZoneCustoms",
+	"OcculsionCullingEnabled": false,
+	"GlobalLootChanceModifier": 1,
+	"OldSpawn": true,
+	"NewSpawn": false,
+	"BotMax": 0,
+	"BotStart": 0,
+	"BotStop": 0,
+	"BotMaxTimePlayer": 0,
+	"BotSpawnTimeOnMin": 0,
+	"BotSpawnTimeOnMax": 0,
+	"BotSpawnTimeOffMin": 0,
+	"BotSpawnTimeOffMax": 0,
+	"BotMaxPlayer": 0,
+	"BotEasy": 0,
+	"BotNormal": 0,
+	"BotHard": 0,
+	"BotImpossible": 0,
+	"BotAssault": 0,
+	"BotMarksman": 0,
+	"DisabledScavExits": "",
+	"AccessKeys": [
+	  
+	],
+	"MinMaxBots": [
+	  {
+		"min": 2,
+		"max": 10,
+		"WildSpawnType": "marksman"
+	  }
+	],
+	"BotLocationModifier": {
+	  "AccuracySpeed": 0.9,
+	  "Scattering": 0.9,
+	  "GainSight": 0.8,
+	  "MarksmanAccuratyCoef": 1,
+	  "VisibleDistance": 1,
+	  "DistToActivate": 255,
+	  "DistToSleep": 300,
+	  "MagnetPower": 44
+	},
+	"exits": [
+	  {
+		"Name": "Crossroads",
+		"EntryPoints": "Boiler Tanks",
+		"Chance": 100,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "Smuggler's Boat",
+		"EntryPoints": "Boiler Tanks",
+		"Chance": 50,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "RUAF Roadblock",
+		"EntryPoints": "Boiler Tanks",
+		"Chance": 50,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "ZB-1012",
+		"EntryPoints": "Customs",
+		"Chance": 50,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "ZB-1011",
+		"EntryPoints": "Customs",
+		"Chance": 100,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "Trailer Park",
+		"EntryPoints": "Boiler Tanks",
+		"Chance": 100,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "Old Gas Station",
+		"EntryPoints": "Customs",
+		"Chance": 50,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 0,
+		"ExfiltrationTime": 8,
+		"PassageRequirement": "None",
+		"ExfiltrationType": "Individual",
+		"Id": "",
+		"Count": 0,
+		"RequirementTip": ""
+	  },
+	  {
+		"Name": "Dorms V-Ex",
+		"EntryPoints": "Customs, Boiler Tanks",
+		"Chance": 66,
+		"MinTime": 0,
+		"MaxTime": 0,
+		"PlayersCount": 4,
+		"ExfiltrationTime": 60,
+		"PassageRequirement": "TransferItem",
+		"ExfiltrationType": "SharedTimer",
+		"Id": "5449016a4bdc2d6f028b456f",
+		"Count": 3000,
+		"RequirementTip": "EXFIL_Item"
+	  }
+	],
+	"DisabledForScav": true,
+	"BossLocationSpawn": [
+	  {
+		"BossName": "bossBully",
+		"BossChance": 35,
+		"BossZone": "ZoneDormitory,ZoneGasStation",
+		"BossPlayer": false,
+		"BossDifficult": "normal",
+		"BossEscortType": "followerBully",
+		"BossEscortDifficult": "normal",
+		"BossEscortAmount": "4",
+		"Time": 1
+	  }
+	],
+	"Id": "bigmap",
+	"_Id": "56f40101d2720b2a4d8b45d6",
+	"Loot": [
+	  
+	],
+	"SpawnAreas": [
+	  
+	],
+	"Banners": [
+	  {
+		"id": "5464e0404bdc2d2a708b4567",
+		"pic": {
+		  "path": "CONTENT\/banners\/banner_usec.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5464e0454bdc2d06708b4567",
+		"pic": {
+		  "path": "CONTENT\/banners\/banner_bear.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5803a58524597710ca36fcb2",
+		"pic": {
+		  "path": "CONTENT\/banners\/banner_terragroup.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5807bfe124597742a92e0a4c",
+		"pic": {
+		  "path": "CONTENT\/banners\/norvinskzone.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5807c3f124597746bf2db2ce",
+		"pic": {
+		  "path": "CONTENT\/banners\/banner_scav.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5807be8924597742c603fa19",
+		"pic": {
+		  "path": "CONTENT\/banners\/banner_tarkov.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5805f617245977100b2c1f41",
+		"pic": {
+		  "path": "CONTENT\/banners\/tglabs.jpg",
+		  "rcid": ""
+		}
+	  },
+	  {
+		"id": "5c1b857086f77465f465faa4",
+		"pic": {
+		  "path": "CONTENT\/banners\/banner_scavraider.jpg",
+		  "rcid": ""
+		}
+	  }
+	]
+  }
