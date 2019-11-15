@@ -38,12 +38,8 @@ global.server = require('./server/_start.js');				// server/_start
 global.constants = require('./server/_constants.js');		// server/_constants
 global.header_f = require('./server/_sendHeader.js');		// server/_sendHeader
 global.profile = require('./profile.js');					// profile
-
 global.bots = require('./bots.js');							// bots
-
-					// bots
 global.itm_hf = require('./item/helpFunctions.js');			// item/helpFunctions
-global.hideout_f = require('./item/_hideout.js'); 			// item/_hideout
 global.quest_f = require('./item/_quest.js'); 				// item/_quest
 global.note_f = require('./item/_notes.js'); 				// item/_notes
 global.move_f = require('./item/_move.js'); 				// item/_move
@@ -51,6 +47,8 @@ global.status_f = require('./item/_status.js'); 			// item/_status
 global.wishList_f = require('./item/_wishList.js'); 		// item/_wishList
 global.character_f = require('./item/_character.js');		// item/_character
 global.trade_f = require('./item/_trade.js'); 				// item/_trade
+global.customization_f = require('./item/_customization.js');// item/_customization
+global.hideout_f = require('./item/_hideout.js'); 			// item/_hideout
 global.item = require('./item.js');							// items
 global.trader = require('./trader.js');						// trader
 global.ragfair = require('./ragfair.js');					// ragfair
@@ -58,12 +56,15 @@ global.ragfair = require('./ragfair.js');					// ragfair
 global.locations = locations_f.prepareLocations();
 global.quests = quests_f.prepareQuests();
 
-/*
-global.presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
-global.weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
-global.presets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcPresets.json"));
-global.weaponPresets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcWeapons.json"));
 
-*/
+//global.backpackLootTable = JSON.parse(utility.readJson("data/configs/bots/botBackpackLootTable.json")).BackpackLootTable;
+//global.presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
+//global.weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
+//global.presets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcPresets.json"));
+//global.weaponPresets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcWeapons.json"));
+global.globalSettings = JSON.parse(utility.readJson("data/configs/globals.json"));
+global.customization_m = JSON.parse(utility.readJson("data/configs/customization.json"));
+
+
 
 /* Made by TheMaoci - Load only once */
