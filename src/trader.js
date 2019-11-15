@@ -20,14 +20,9 @@ var assortDir = "data/configs/assort/";
 var traders = [];
 var assorts = [];
 
-function loadAllTraders() 
-{
- 
-    var tg =   JSON.parse( utility.readJson("data/configs/getTradersList.json") );
-    traders = tg.data;
-    /*
+function loadAllTraders() {
     let traderFiles = fs.readdirSync(tradersDir);
-    traders = []
+    traders = [];
     // load trader files
     for (let file in tradersDir) {
         if (tradersDir.hasOwnProperty(file)) {
@@ -39,7 +34,7 @@ function loadAllTraders()
                 }
             }
         }
-    }*/
+    }
 }
 
 function checkTraders(traderFiles, file) {

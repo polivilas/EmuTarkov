@@ -30,7 +30,15 @@ function sendResponse(req, resp, body) {
 	} else {
 		output = response.get(req, "{}");
 	}
-
+	if(output === "MAPCONFIG"){
+		//output = '{"err":0, "errmsg":null, "data":null}';
+		let mapname = req.url.replace("/api/location/", "");
+		console.log("[MAP.config]: " + mapname);
+		let RandomPreset = utility.getRandomInt(1,6);
+		let data_response = utility.readJson("data/configs/map_api_presets/" + mapname + "" + RandomPreset + ".json");
+		header_f.sendMapData(resp, data_response);
+		return;
+	}
 	// prepare message to send
 	if (output === "DONE" || output === "NULLGET") {
 		return;
@@ -38,14 +46,20 @@ function sendResponse(req, resp, body) {
 
 	if (output === "CONTENT") {
 		let image = req.url.replace('/uploads/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
-		console.log("[IMG]:" + image);
+		console.log("[IMG.content]:" + image);
 		header_f.sendImage(resp, image);
 		return;
 	}
 
 	if (output === "IMAGE") {
-		if (req.url.includes("/files/quest") || req.url.includes("/files/handbook"))
+		if (req.url.includes("/files/quest") || req.url.includes("/files/handbook")){
+			console.log("[IMG.special]:" + image);		
 			req.url = req.url.replace("/files", "/data/images");
+		} else if (req.url.includes("/files/trader/avatar")){
+			req.url = req.url.replace("files/trader/avatar", "data/images/traders");
+		} else {
+			console.log("[IMG.regular]:" + image);
+		}
 		header_f.sendImage(resp, "." + req.url);
 		return;
 	}

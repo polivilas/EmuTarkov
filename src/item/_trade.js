@@ -235,13 +235,11 @@ function confirmRagfairTrading(tmpList, body) {
     body.type = "buy_from_trader";
     body.tid = "91_everythingTrader";
     body.item_id = body.offers[0].id;
-    body.count = body.offers[0].count;
     body.scheme_id = 0;
     body.scheme_items = body.offers[0].items;
 
     return confirmTrading(tmpList, body, "ragfair");
 }
-
 
 //// ---- EXPORT LIST ---- ////
 

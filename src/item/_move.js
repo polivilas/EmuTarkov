@@ -55,9 +55,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
     //output = item.resetOutput();
     var toDo = [body.item];
     //Find the item and all of it's relates
-
-    if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") 
-    {
+    if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
         let ids_toremove = itm_hf.findAndReturnChildren(tmpList, toDo[0]); //get all ids related to this item, +including this item itself
         for (let i in ids_toremove) { //remove one by one all related items and itself
             output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
@@ -69,9 +67,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
         }
         profile.setCharacterData(tmpList); //save tmplist to profile
         return output;
-    } 
-    else 
-    {
+    } else {
         console.log("item id is not vaild");
         return "BAD"
         //maybe return something because body.item id wasn't valid.

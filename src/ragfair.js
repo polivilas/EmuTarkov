@@ -26,10 +26,34 @@ let cat_granades = ["5b5f7a2386f774093f2ed3c4"];
 //skip
 let skipThisId = ["56e294cdd2720b603a8b4575", "59e8936686f77467ce798647", "58ac60eb86f77401897560ff", "544901bf4bdc2ddf018b456d"];
 
-function prepareCatItems(categ) 
-{
-
-    return [true,1];
+function prepareCatItems(categ) {
+	if(settings.debug.debugMode != true){
+		let flag_itsOKtoAdd = false;
+		let multiplier = 1;
+		if (cat_cloth.indexOf(categ.ParentId) !== -1 || cat_maps.indexOf(categ.ParentId) !== -1) {
+			multiplier = 1.5;
+			flag_itsOKtoAdd = true;
+		} else if (cat_mod_gear.indexOf(categ.ParentId) !== -1 || cat_mod_vital.indexOf(categ.ParentId) !== -1 || cat_mod_func.indexOf(categ.ParentId) !== -1) {
+			multiplier = 1.5;
+			flag_itsOKtoAdd = true;
+		} else if (cat_barter.indexOf(categ.ParentId) !== -1) {
+			multiplier = 2;
+			flag_itsOKtoAdd = true;
+		} else if (cat_meds.indexOf(categ.ParentId) !== -1) {
+			multiplier = 1.3;
+			flag_itsOKtoAdd = true;
+		} else if (cat_ammo.indexOf(categ.ParentId) !== -1 || cat_money.indexOf(categ.ParentId) !== -1 || cat_food.indexOf(categ.ParentId) !== -1) {
+			multiplier = 1.05;
+			flag_itsOKtoAdd = true;
+		} else if (cat_granades.indexOf(categ.ParentId) !== -1) {
+			multiplier = 1.2;
+			flag_itsOKtoAdd = true;
+		}
+		
+		return [flag_itsOKtoAdd, multiplier];
+	} else {
+		return [true,1];
+	}
 }
 
 function getOffers(request) {
@@ -39,38 +63,29 @@ function getOffers(request) {
     if (request.handbookId !== "") {
         let isCateg = false;
 
-        for (let categ of handbook.data.Categories) 
-        {
+        for (let categ of handbook.data.Categories) {
+            //if (category allowed add item else continue)
             // find the category in the handbook
-            if (categ.Id === request.handbookId) 
-            {
+            if (categ.Id === request.handbookId || settings.debug.debugMode) {
                 isCateg = true;
 
                 // list all item of the category
-                for (let item of handbook.data.Items) 
-                {
+                for (let item of handbook.data.Items) {
                     let prep_it = prepareCatItems(item);
-                    if (prep_it[0] === true) 
-                    {
-                        if (item.ParentId === categ.Id && skipThisId.indexOf(item.Id) === -1) 
-                        {
+                    if (prep_it[0] === true) {
+                        if (item.ParentId === categ.Id && skipThisId.indexOf(item.Id) === -1 || settings.debug.debugMode) {
                             response.data.offers.push(createOffer(item.Id, (item.Price * prep_it[1])));
                         }
                     }
                 }
 
                 // recursive loops for sub categories
-                for (let categ2 of handbook.data.Categories) 
-                {
-                    if (categ2.ParentId === categ.Id) 
-                    {
-                        for (let item of handbook.data.Items) 
-                        {
+                for (let categ2 of handbook.data.Categories) {
+                    if (categ2.ParentId === categ.Id || settings.debug.debugMode) {
+                        for (let item of handbook.data.Items) {
                             let prep_it = prepareCatItems(item);
-                            if (prep_it[0] === true) 
-                            {
-                                if (item.ParentId === categ2.Id && skipThisId.indexOf(item.Id) === -1) 
-                                {
+                            if (prep_it[0] === true) {
+                                if (item.ParentId === categ2.Id && skipThisId.indexOf(item.Id) === -1 || settings.debug.debugMode) {
                                     response.data.offers.push(createOffer(item.Id, (item.Price * prep_it[1])));
                                 }
                             }
@@ -100,21 +115,14 @@ function getOffers(request) {
     // linked search
     if (request.linkedSearchId !== "") {
         let itemLink = items.data[request.linkedSearchId];
-        if (typeof itemLink._props.Slots !== "undefined") 
-        {
-            for (let itemSlot of itemLink._props.Slots) 
-            {
-                for (let itemSlotFilter of itemSlot._props.filters) 
-                {
-                    for (let mod of itemSlotFilter.Filter) 
-                    {
-                        for (let someitem of handbook.data.Items) 
-                        {
+        if (typeof itemLink._props.Slots !== "undefined") {
+            for (let itemSlot of itemLink._props.Slots) {
+                for (let itemSlotFilter of itemSlot._props.filters) {
+                    for (let mod of itemSlotFilter.Filter) {
+                        for (let someitem of handbook.data.Items) {
                             let prep_it = prepareCatItems(someitem);
-                            if (prep_it[0] === true) 
-                            {
-                                if (someitem.Id === mod && skipThisId.indexOf(someitem.Id) === -1) 
-                                {
+                            if (prep_it[0] === true) {
+                                if (someitem.Id === mod && skipThisId.indexOf(someitem.Id) === -1 || settings.debug.debugMode) {
                                     response.data.offers.push(createOffer(mod, (someitem.Price * prep_it[1])));
                                 }
                             }
