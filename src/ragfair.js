@@ -28,7 +28,7 @@ function getOffers(request) {
                     let prep_it = prepareCatItems(item);
                     if (prep_it[0] === true) 
                     {
-                        if (item.ParentId === categ.Id && skipThisId.indexOf(item.Id) === -1) 
+                        if (item.ParentId === categ.Id) 
                         {
                             response.data.offers.push(createOffer(item.Id, (item.Price * prep_it[1])));
                         }
@@ -45,7 +45,7 @@ function getOffers(request) {
                             let prep_it = prepareCatItems(item);
                             if (prep_it[0] === true) 
                             {
-                                if (item.ParentId === categ2.Id && skipThisId.indexOf(item.Id) === -1) 
+                                if (item.ParentId === categ2.Id) 
                                 {
                                     response.data.offers.push(createOffer(item.Id, (item.Price * prep_it[1])));
                                 }
@@ -62,7 +62,8 @@ function getOffers(request) {
                     for (let someitem of handbook.data.Items) {
                         let prep_it = prepareCatItems(someitem);
                         if (prep_it[0] === true) {
-                            if (someitem.Id === request.handbookId && skipThisId.indexOf(someitem.Id) === -1) {
+                            if (someitem.Id === request.handbookId) 
+                            {
                                 response.data.offers.push(createOffer(curItem, (someitem.Price * prep_it[1])));
                             }
                         }

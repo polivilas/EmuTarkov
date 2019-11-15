@@ -58,10 +58,12 @@ function get(req, body) {
         return JSON.stringify(trader.getAssort(url.replace(assort, '')));
     }
 
-    // game images
+    
+    /*
     if (url.includes("/api/location")) {
         return "MAPCONFIG";
-    }
+    }*/
+
     // game images
     if (url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
         return "IMAGE";
@@ -269,14 +271,13 @@ function get(req, body) {
 			output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "5c71b934354682353958e984", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 			break;
 		case "/client/customization":
-			output = utility.readJson('data/configs/customization.json');
+			output = utility.readJson('data/configs/customization/customization.json');
 			break;
 		case "/client/trading/customization/5ac3b934156ae10c4430e83c/offers": // old ragman 
-		case "/client/trading/customization/7_ragman/offers": // new ragman
-			output = utility.readJson('data/configs/client.trading.customization.1_ragman.offers.json');
+			output = utility.readJson('data/configs/customization/offers.json');
 			break;
 		case "/client/trading/customization/storage":
-			output = utility.readJson('data/configs/client.trading.customization.storage.json');
+			output = utility.readJson('data/configs/customization/storage.json');
 			break;
 		case "/client/hideout/production/recipes":
 			output = utility.readJson('data/configs/hideout/production_recipes.json');
