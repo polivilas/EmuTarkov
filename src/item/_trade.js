@@ -230,15 +230,23 @@ function confirmRagfairTrading(tmpList, body) {
     /*
     { Action: 'RagFairBuyOffer',  offerId: '56d59d3ad2720bdb418b4577',  count: 1,  items: [ { id: '1566757577968610909', count: 42 } ] }
     */
-    body.Action = "TradingConfirm";
-    body.type = "buy_from_trader";
-    body.tid = "91_everythingTrader";
-    body.item_id = body.offers[0].id;
-    body.count = body.offers[0].count;
-    body.scheme_id = 0;
-    body.scheme_items = body.offers[0].items;
 
-    return confirmTrading(tmpList, body, "ragfair");
+    var ragfairOffers = body.offers
+
+    for(var oneOffer of ragfairOffers)
+    {
+        body.Action = "TradingConfirm";
+        body.type = "buy_from_trader";
+        body.tid = "91_everythingTrader";
+        body.item_id = oneOffer.id;
+        body.count = oneOffer.count;
+        body.scheme_id = 0;
+        body.scheme_items = oneOffer.items;
+
+        confirmTrading(tmpList, body, "ragfair");
+    }
+
+    return item.getOutput();
 }
 
 

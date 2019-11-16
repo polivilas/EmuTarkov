@@ -10,7 +10,7 @@ function SaveBuild(tmpList,body)
 	savedBuilds.data.push(body);
 	utility.writeJson('data/configs/userBuilds.json',savedBuilds);
 
-	return "OK";
+	return "OK"; //i don't knowwhat to return here ... ?
 }
 
 function RemoveBuild(tmpList,body)

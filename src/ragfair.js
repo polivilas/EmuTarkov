@@ -6,8 +6,11 @@ const handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 function getOffers(request) {
     let response = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
 
-    // request an item or a category of items
-    if (request.handbookId !== "") 
+    if( Object.entries(request.buildItems).length != 0 )
+    {
+        createOfferFromBuild(request.buildItems,response);
+    }
+    else if (request.handbookId !== "") // request an item or a category of items
     {
         let isCateg = false;
 
@@ -46,7 +49,8 @@ function getOffers(request) {
             }
         }
         // its a specific item searched then
-        if (isCateg === false) {
+        if (isCateg === false) 
+        {
             for (let curItem in items.data) {
                 if (curItem === request.handbookId) {
                     for (let someitem of handbook.data.Items) 
@@ -90,7 +94,34 @@ function getOffers(request) {
     return JSON.stringify(response);
 }
 
-function createOffer(template, price) {
+
+function createOfferFromBuild(buildItems,response)
+{
+    for(var itemFromBuild in buildItems)
+    {
+        for (let curItem in items.data) 
+        {
+            if (curItem === itemFromBuild) 
+            {
+                for (let someitem of handbook.data.Items) 
+                {                       
+                    if (someitem.Id === itemFromBuild) 
+                    {
+                        response.data.offers.push(createOffer(curItem, (someitem.Price)));
+                        break;
+                    }
+                    
+                }
+
+                break;
+            }
+        }
+    }
+    return response
+}
+
+function createOffer(template, price) 
+{
     let offerBase = JSON.parse(utility.readJson("data/configs/ragfair/offerBase.json"));
     offerBase._id = template;
     offerBase.items[0]._tpl = template;
