@@ -49,6 +49,7 @@ global.character_f = require('./item/_character.js');		// item/_character
 global.trade_f = require('./item/_trade.js'); 				// item/_trade
 global.customization_f = require('./item/_customization.js');// item/_customization
 global.hideout_f = require('./item/_hideout.js'); 			// item/_hideout
+global.weaponBuilds_f = require('./item/_weaponBuilds.js'); 	// item/_weaponBuilds
 global.item = require('./item.js');							// items
 global.trader = require('./trader.js');						// trader
 global.ragfair = require('./ragfair.js');					// ragfair
@@ -63,7 +64,7 @@ global.quests = quests_f.prepareQuests();
 //global.presets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcPresets.json"));
 //global.weaponPresets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcWeapons.json"));
 global.globalSettings = JSON.parse(utility.readJson("data/configs/globals.json"));
-global.customization_m = JSON.parse(utility.readJson("data/configs/customization.json"));
+global.customization_m = JSON.parse(utility.readJson("data/configs/customization/customization.json"));
 
 
 

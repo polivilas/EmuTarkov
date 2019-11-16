@@ -3,16 +3,12 @@
 require('./libs.js');
 const handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
-function prepareCatItems(categ) 
-{
-    return [true,1];
-}
-
 function getOffers(request) {
     let response = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
 
     // request an item or a category of items
-    if (request.handbookId !== "") {
+    if (request.handbookId !== "") 
+    {
         let isCateg = false;
 
         for (let categ of handbook.data.Categories) 
@@ -25,13 +21,9 @@ function getOffers(request) {
                 // list all item of the category
                 for (let item of handbook.data.Items) 
                 {
-                    let prep_it = prepareCatItems(item);
-                    if (prep_it[0] === true) 
+                    if (item.ParentId === categ.Id) 
                     {
-                        if (item.ParentId === categ.Id) 
-                        {
-                            response.data.offers.push(createOffer(item.Id, (item.Price * prep_it[1])));
-                        }
+                        response.data.offers.push(createOffer(item.Id, (item.Price)));
                     }
                 }
 
@@ -42,14 +34,12 @@ function getOffers(request) {
                     {
                         for (let item of handbook.data.Items) 
                         {
-                            let prep_it = prepareCatItems(item);
-                            if (prep_it[0] === true) 
+
+                            if (item.ParentId === categ2.Id) 
                             {
-                                if (item.ParentId === categ2.Id) 
-                                {
-                                    response.data.offers.push(createOffer(item.Id, (item.Price * prep_it[1])));
-                                }
+                                response.data.offers.push(createOffer(item.Id, (item.Price)));
                             }
+                            
                         }
                     }
                 }
@@ -59,14 +49,13 @@ function getOffers(request) {
         if (isCateg === false) {
             for (let curItem in items.data) {
                 if (curItem === request.handbookId) {
-                    for (let someitem of handbook.data.Items) {
-                        let prep_it = prepareCatItems(someitem);
-                        if (prep_it[0] === true) {
-                            if (someitem.Id === request.handbookId) 
-                            {
-                                response.data.offers.push(createOffer(curItem, (someitem.Price * prep_it[1])));
-                            }
+                    for (let someitem of handbook.data.Items) 
+                    {                       
+                        if (someitem.Id === request.handbookId) 
+                        {
+                            response.data.offers.push(createOffer(curItem, (someitem.Price)));
                         }
+                        
                     }
 
                     break;
@@ -74,8 +63,8 @@ function getOffers(request) {
             }
         }
     }
-    // linked search
-    if (request.linkedSearchId !== "") {
+    else if (request.linkedSearchId !== "") 
+    {
         let itemLink = items.data[request.linkedSearchId];
         if (typeof itemLink._props.Slots !== "undefined") 
         {
@@ -87,14 +76,11 @@ function getOffers(request) {
                     {
                         for (let someitem of handbook.data.Items) 
                         {
-                            let prep_it = prepareCatItems(someitem);
-                            if (prep_it[0] === true) 
+                            if (someitem.Id === mod) 
                             {
-                                if (someitem.Id === mod && skipThisId.indexOf(someitem.Id) === -1) 
-                                {
-                                    response.data.offers.push(createOffer(mod, (someitem.Price * prep_it[1])));
-                                }
+                                response.data.offers.push(createOffer(mod, (someitem.Price)));
                             }
+                            
                         }
                     }
                 }

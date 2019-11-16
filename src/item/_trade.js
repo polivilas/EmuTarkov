@@ -227,7 +227,6 @@ function confirmTrading(tmpList, body, trader = "") {
 
 // Ragfair trading
 function confirmRagfairTrading(tmpList, body) {
-    console.log(body, "", "", true);
     /*
     { Action: 'RagFairBuyOffer',  offerId: '56d59d3ad2720bdb418b4577',  count: 1,  items: [ { id: '1566757577968610909', count: 42 } ] }
     */

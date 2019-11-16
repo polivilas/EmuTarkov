@@ -26,6 +26,13 @@ function handleMoving(body) { // handling Action function
     let tmpList = profile.getCharacterData();
 
     switch (body.Action) {
+
+        case "SaveBuild":
+            return weaponBuilds_f.saveBuild(tmpList, body);
+
+        case "RemoveBuild":
+            return weaponBuilds_f.removeBuild(tmpList, body);
+
         case "HideoutUpgrade":
             return hideout_f.hideoutUpgrade(tmpList, body);
 

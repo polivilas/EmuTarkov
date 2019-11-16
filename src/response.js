@@ -292,7 +292,8 @@ function get(req, body) {
 			output = utility.readJson('data/configs/hideout/production_scavcase_recipes.json');
 			break;
 		case "/client/handbook/builds/my/list":
-			output = '{"err":0, "errmsg":null, "data":[]}';
+			output = utility.readJson('data/configs/userBuilds.json');
+            //output = '{"err":0, "errmsg":null, "data":[]}';
 			break;
         case "/client/notifier/channel/create":
             output = '{"err":0,"errmsg":null,"data":{"notifier":{"server":"' + backendUrl + '","channel_id":"testChannel","url":"' + backendUrl + '/notifierBase"},"notifierServer":"' + backendUrl + '/notifierServer"}}';

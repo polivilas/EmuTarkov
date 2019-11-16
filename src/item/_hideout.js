@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-const hideout_areas_config = JSON.parse( utility.readJson("data/configs/hideout_areas.json" ) );
+const hideout_areas_config = JSON.parse( utility.readJson("data/configs/hideout/areas.json" ) );
 
 //upgrading can take times,the first step is to pay what needed for upgrade and start construction
 function HideoutUpgrade(tmplist,body)
@@ -73,7 +73,7 @@ function HideoutUpgradeComplete(tmplist,body)
 			tmplist.data[1].Hideout.Areas[hideoutArea].completeTime = 0;
 			tmplist.data[1].Hideout.Areas[hideoutArea].constructing = false;
 
-			//and then apply bonusses from hideout upgrades or its automatic ? 		
+			//and then apply bonusses or its auo ? 		
 		}
 	}
 
