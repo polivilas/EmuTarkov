@@ -23,7 +23,6 @@ function HideoutUpgrade(tmplist,body)
 				}
 				else //if its construction/barter items
 				{	
-
 					move_f.removeItem(tmplist, { "Action":"Remove", "item" : tmplist.data[1].Inventory.items[inventoryItem]._id } );
 				}		
 			}
@@ -58,8 +57,7 @@ function HideoutUpgrade(tmplist,body)
 	profile.setCharacterData(tmplist);	
 
 	item.resetOutput();
-    let output = item.getOutput();
-	return output;
+	return item.getOutput();
 }
 
 //validating the upgrade

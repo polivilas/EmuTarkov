@@ -10,7 +10,7 @@ function SaveBuild(tmpList,body)
 	savedBuilds.data.push(body);
 	utility.writeJson('data/configs/userBuilds.json',savedBuilds);
 
-	return "OK"; //i don't knowwhat to return here ... ?
+	return "OK"; //need to respond something specific here, otherwise game stuck
 }
 
 function RemoveBuild(tmpList,body)

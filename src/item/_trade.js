@@ -26,7 +26,7 @@ function buyItem(tmpList, body, trad = "") { // Buying item from trader
     //check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
     let moneyObject = itm_hf.findMoney(tmpList, moneyID);
     if (typeof moneyObject[0] === "undefined") {
-        console.log("Error something goes wrong (not found Money) - stop cheating :)");
+        console.log("Error something goes wrong (not found Money)");
         return "";
     }
 
@@ -231,9 +231,9 @@ function confirmRagfairTrading(tmpList, body) {
     { Action: 'RagFairBuyOffer',  offerId: '56d59d3ad2720bdb418b4577',  count: 1,  items: [ { id: '1566757577968610909', count: 42 } ] }
     */
 
-    var ragfairOffers = body.offers
+    let ragfairOffers = body.offers
 
-    for(var oneOffer of ragfairOffers)
+    for(let oneOffer of ragfairOffers)
     {
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";
@@ -243,9 +243,8 @@ function confirmRagfairTrading(tmpList, body) {
         body.scheme_id = 0;
         body.scheme_items = oneOffer.items;
 
-        confirmTrading(tmpList, body, "ragfair");
+        output = confirmTrading(tmpList, body, "ragfair");
     }
-
     return item.getOutput();
 }
 

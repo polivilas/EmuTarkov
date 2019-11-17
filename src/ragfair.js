@@ -4,20 +4,124 @@ require('./libs.js');
 const handbook = JSON.parse(utility.readJson('data/configs/templates.json'));
 
 function getOffers(request) {
-    let response = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
+
+    var response = JSON.parse(utility.readJson("data/configs/ragfair/search.json"));
 
     if( Object.entries(request.buildItems).length != 0 )
     {
         createOfferFromBuild(request.buildItems,response);
     }
-    else if (request.handbookId !== "") // request an item or a category of items
+    else if (request.handbookId !== "" && request.linkedSearchId !== "") //list specific category from a linked search
     {
-        let isCateg = false;
+        let linkedSearch = getLinkedSearchList(request.linkedSearchId,response );
+        let categorySearch = getCategoryList(request.handbookId);
 
+        for( let p1 in categorySearch)
+        {
+            for(let search in linkedSearch)
+            {
+                if(p1 == search)
+                {
+                    response.data.offers.push( createOffer( search ,linkedSearch[search] ));
+                }
+            }
+            
+        }
+
+    }
+    else if (request.linkedSearchId !== "") 
+    {
+        let offers = getLinkedSearchList(request.linkedSearchId,response );
+        for( let price in offers ){ response.data.offers.push( createOffer( price ,offers[price] )); }
+        
+    }
+    else if (request.handbookId !== "")
+    {
+        let offers = getCategoryList(request.handbookId);
+        for( let price in offers ) { response.data.offers.push( createOffer(price , offers[price] )); }
+        
+    }
+
+    return JSON.stringify(response);
+}
+
+function getLinkedSearchList(linkedSearchId,response)
+{
+    let tableOfItems = {};
+    response.data.categories = {};
+    let itemLink = items.data[linkedSearchId];
+    if (typeof itemLink._props.Slots !== "undefined") 
+    {
+        for (let itemSlot of itemLink._props.Slots) 
+        {
+            for (let itemSlotFilter of itemSlot._props.filters) 
+            {
+                for (let mod of itemSlotFilter.Filter) 
+                {
+                    for (let someitem of handbook.data.Items) 
+                    {
+                        if (someitem.Id === mod) 
+                        {
+                            tableOfItems[mod] = someitem.Price;
+                            response.data.categories[mod] = 1;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    if (typeof itemLink._props.Chambers !== "undefined") 
+    {
+        for(let patron of itemLink._props.Chambers[0]._props.filters[0].Filter)
+        {
+            for (let someitem of handbook.data.Items) 
+            {
+                if (someitem.Id === patron) 
+                {
+                    tableOfItems[patron] = someitem.Price;
+                    response.data.categories[patron] = 1;
+                }
+                
+            }
+
+        }
+    }
+    return tableOfItems;
+}
+
+function getCategoryList(handbookId)
+{
+    let tableOfItems = {};
+
+    let isCateg = false;
+    if(handbookId == "5b5f71a686f77447ed5636ab")//if its "mods" great-parent category, do double recursive loop
+    {
+        for (let categ2 of handbook.data.Categories) 
+        {
+            if (categ2.ParentId === "5b5f71a686f77447ed5636ab") 
+            {
+                for (let categ3 of handbook.data.Categories) 
+                {
+                    if(categ3.ParentId == categ2.Id)
+                    { 
+                        for (let item of handbook.data.Items) 
+                        {
+                            if (item.ParentId === categ3.Id) 
+                            {
+                                tableOfItems[item.Id] = item.Price;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }else{
         for (let categ of handbook.data.Categories) 
         {
             // find the category in the handbook
-            if (categ.Id === request.handbookId) 
+            if (categ.Id === handbookId) 
             {
                 isCateg = true;
 
@@ -26,7 +130,7 @@ function getOffers(request) {
                 {
                     if (item.ParentId === categ.Id) 
                     {
-                        response.data.offers.push(createOffer(item.Id, (item.Price)));
+                        tableOfItems[item.Id] = item.Price;
                     }
                 }
 
@@ -35,29 +139,33 @@ function getOffers(request) {
                 {
                     if (categ2.ParentId === categ.Id) 
                     {
+                        
                         for (let item of handbook.data.Items) 
                         {
 
                             if (item.ParentId === categ2.Id) 
                             {
-                                response.data.offers.push(createOffer(item.Id, (item.Price)));
+                                tableOfItems[item.Id] = item.Price;
                             }
                             
                         }
+                        
+
                     }
                 }
             }
+
         }
         // its a specific item searched then
         if (isCateg === false) 
         {
             for (let curItem in items.data) {
-                if (curItem === request.handbookId) {
+                if (curItem === handbookId) {
                     for (let someitem of handbook.data.Items) 
                     {                       
-                        if (someitem.Id === request.handbookId) 
+                        if (someitem.Id === handbookId) 
                         {
-                            response.data.offers.push(createOffer(curItem, (someitem.Price)));
+                            tableOfItems[curItem] = item.Price;
                         }
                         
                     }
@@ -66,34 +174,11 @@ function getOffers(request) {
                 }
             }
         }
-    }
-    else if (request.linkedSearchId !== "") 
-    {
-        let itemLink = items.data[request.linkedSearchId];
-        if (typeof itemLink._props.Slots !== "undefined") 
-        {
-            for (let itemSlot of itemLink._props.Slots) 
-            {
-                for (let itemSlotFilter of itemSlot._props.filters) 
-                {
-                    for (let mod of itemSlotFilter.Filter) 
-                    {
-                        for (let someitem of handbook.data.Items) 
-                        {
-                            if (someitem.Id === mod) 
-                            {
-                                response.data.offers.push(createOffer(mod, (someitem.Price)));
-                            }
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return JSON.stringify(response);
-}
 
+    }
+    return tableOfItems;
+
+}
 
 function createOfferFromBuild(buildItems,response)
 {
