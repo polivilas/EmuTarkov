@@ -82,41 +82,64 @@ function HideoutUpgradeComplete(tmplist,body)
 }
 
 
-
 //move items from hideout
 function HideoutPutItemsInAreaSlots(tmplist,body)
 {
 	for(var itemToMove in body.items)
 	{
-	
 		for(var inventoryItem of tmplist.data[1].Inventory.items)
 		{
 			if(body.items[itemToMove].id == inventoryItem._id )
 			{
-				//move to area slot
-				console.log("yo put this fucking Graphics card  in your farm dude!"); //dump it too
-
+				for( let area in tmplist.data[1].Hideout.Areas)
+				{
+					if( tmplist.data[1].Hideout.Areas[area].type == body.areaType)
+					{
+						let slot_to_add = 
+						{
+							"item":[{
+								"_id": inventoryItem._id,
+								"_tpl":inventoryItem._tpl,
+								"upd": inventoryItem.upd
+							}]
+						}
+						tmplist.data[1].Hideout.Areas[area].slots.push(slot_to_add);
+						move_f.removeItem(tmplist, { "Action":"Remove", "item" : inventoryItem._id } );
+					}
+				}
 			}
 		}
 	}
 
-	//profile.setCharacterData(tmplist);
-	item.resetOutput();		
+	profile.setCharacterData(tmplist);	
 	return item.getOutput();
 
 }
 
+function HideoutTakeItemsFromAreaSlots(tmplist,body)
+{
+	for( let area in tmplist.data[1].Hideout.Areas)
+	{
+		if( tmplist.data[1].Hideout.Areas[area].type == body.areaType)
+		{
+			//should use body.slots[0] to get the array index but since its not managed like that, its different
+			//move this to inventory with new location -->  tmplist.data[1].Hideout.Areas[area].slots[0].item[0]
+			//then manual remove --> tmplist.data[1].Hideout.Areas[area].slots.splice(0,1);
+		}
+	}
+	//profile.setCharacterData(tmplist);
+	item.resetOutput();		
+	return item.getOutput();
+}
 
 function HideoutToggleArea(tmplist,body)
 {
 
 	for(var area in tmplist.data[1].Hideout.Areas)
 	{
-		if( area.type == body.areaType )
+		if( tmplist.data[1].Hideout.Areas[area].type == body.areaType )
 		{	
-			console.log(tmplist.data[1].Hideout.Areas[index].active);
-			tmplist.data[1].Hideout.Areas[index].active = body.enabled;
-			console.log(tmplist.data[1].Hideout.Areas[index].active);
+			tmplist.data[1].Hideout.Areas[area].active = body.enabled;
 		}
 	}
 
@@ -154,5 +177,6 @@ function HideoutSingleProductionStart(tmplist,body)
 module.exports.hideoutUpgrade = HideoutUpgrade;
 module.exports.hideoutUpgradeComplete = HideoutUpgradeComplete;
 module.exports.hideoutPutItemsInAreaSlots = HideoutPutItemsInAreaSlots
+module.exports.hideoutTakeItemsFromAreaSlots = HideoutTakeItemsFromAreaSlots
 module.exports.hideoutToggleArea = HideoutToggleArea
 module.exports.hideoutSingleProductionStart  = HideoutSingleProductionStart
