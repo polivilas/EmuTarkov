@@ -1,0 +1,112 @@
+{
+	"_id": "5ae449c386f7744bde357697",
+	"traderId": "7_ragman",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5ae4a76086f774455f7d62d2.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "19800",
+				"id": "5c95118086f7743285178ae1",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d12",
+				"value": "35000",
+				"id": "5ae9e49d86f77440d37ce047",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d12",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 35000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.09",
+				"id": "5bcf11a686f7742ce2243a3b",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796d13",
+				"value": "2",
+				"id": "5ae9e4b786f77443f2500fe0",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d13",
+						"_tpl": "5ab8ebf186f7742d8b372e80",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "30",
+					"index": 0,
+					"parentId": "",
+					"id": "5af4196886f7742a2627a4be"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "7",
+					"type": "Completion",
+					"counter": {
+						"id": "5ae9e44f86f7746b6a466a8d",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5ae9e46686f77440d37ce046"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5bb60cc688a4507f2f385a76"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bb60cbc88a45011a8235cc5"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

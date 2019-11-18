@@ -1,0 +1,134 @@
+{
+	"_id": "596a218586f77420d232807c",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/5979d3f986f7746d08051ce0.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7600",
+				"id": "5c95068b86f774551757f060",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.08",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5a2fee8786f7745c452292b2"
+			},
+			{
+				"target": "5d34df2788a4504526796c53",
+				"value": "1500",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2fee9486f7745c4236d2e2",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c53",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 1500
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c54",
+				"value": "2",
+				"type": "Item",
+				"index": 3,
+				"id": "597afde186f7741ce2755ebf",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c54",
+						"_tpl": "590c657e86f77412b013051d",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5733279d245977289b77ec24"
+					],
+					"value": "4",
+					"index": 0,
+					"parentId": "",
+					"id": "596b46d886f77457ca186189",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"590a3c0a86f774385a33c450"
+					],
+					"value": "8",
+					"index": 1,
+					"parentId": "",
+					"id": "596b46ec86f77457c7006f89",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5733279d245977289b77ec24"
+					],
+					"value": "4",
+					"index": 2,
+					"parentId": "",
+					"id": "596b470c86f77457ca18618a",
+					"visibilityConditions": [],
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590a3c0a86f774385a33c450"
+					],
+					"value": "8",
+					"index": 3,
+					"parentId": "",
+					"id": "596b472686f77457c7006f8a",
+					"visibilityConditions": [],
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

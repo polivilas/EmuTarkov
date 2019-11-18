@@ -1,0 +1,99 @@
+{
+	"_id": "5ae4490786f7744ca822adcc",
+	"traderId": "7_ragman",
+	"location": "any",
+	"image": "/files/quest/icon/5ae4a74386f7744748710d72.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10200",
+				"id": "5c9510a786f7743285178ae0",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796dd0",
+				"value": "21000",
+				"id": "5ae9ad9086f7743a4f5b99da",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dd0",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 21000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.07",
+				"id": "5bcf0f9786f77423c13fb057",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796dd1",
+				"value": "1",
+				"id": "5ae9add286f7743a46263f54",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dd1",
+						"_tpl": "5ab8e79e86f7742d8b372e78",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59e7708286f7742cbd762753"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5ae4543686f7742dc043c903",
+					"visibilityConditions": []
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5aa2b9ede5b5b000137b758b"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "5ae454a086f7742be909a81a",
+					"visibilityConditions": [],
+					"maxDurability": 0
+				}
+			}
+		],
+		"Fail": []
+	}
+}

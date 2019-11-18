@@ -1,0 +1,113 @@
+{
+	"_id": "5bc4836986f7740c0152911c",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20300",
+				"id": "5c950f5086f774551528def8",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5bcf255886f7746a464c5680",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796d9b",
+				"value": "50000",
+				"id": "5bcf258186f774378e266a34",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d9b",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d9c",
+				"value": "1",
+				"id": "5bcf259a86f7746a45695b05",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d9c",
+						"_tpl": "5bbdb870d4351e00367fb67d",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d9d",
+				"id": "5bcf25a586f7746a464c5682",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 3,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d9d",
+						"_tpl": "5bbdb870d4351e00367fb67d"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "10",
+					"type": "Elimination",
+					"counter": {
+						"id": "5bc483ba86f77415034ba8cf",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"savageRole": [
+										"marksman"
+									],
+									"id": "5bc489ec86f7746b7978fe69"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bc483ba86f77415034ba8d0"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

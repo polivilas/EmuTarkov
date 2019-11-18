@@ -1,0 +1,79 @@
+{
+	"_id": "5a68667486f7742607157d28",
+	"traderId": "2_therapist",
+	"location": "any",
+	"image": "/files/quest/icon/59c2742286f77475ec568d92.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10200",
+				"id": "5c95073c86f77455192fa432",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c90",
+				"value": "2",
+				"id": "5a68871286f77430c15bc4c9",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c90",
+						"_tpl": "590c657e86f77412b013051d",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c91",
+				"value": "29000",
+				"id": "5a68872c86f77472c17ca5cf",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c91",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 29000
+						}
+					}
+				]
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.09",
+				"id": "5bcf181f86f774378e266912",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "Skill",
+				"_props": {
+					"target": "Health",
+					"compareMethod": ">=",
+					"value": "7",
+					"index": 0,
+					"parentId": "",
+					"id": "5a6878e886f7745e65687985"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

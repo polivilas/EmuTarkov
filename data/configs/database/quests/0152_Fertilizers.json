@@ -1,0 +1,143 @@
+{
+	"_id": "5c1128e386f7746565181106",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4db0986f77442000164dd.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "19500",
+				"id": "5c950e9686f77455192fa44a",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796def",
+				"value": "65000",
+				"id": "5c18bf7e86f77467be0572e9",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796def",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 65000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796df0",
+				"value": "3",
+				"id": "5c18bfa086f774397f043e31",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796df0",
+						"_tpl": "59faff1d86f7746c51718c9c",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.06",
+				"id": "5c18bfca86f77467bf065207",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "30",
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fb46386f7744a184fb3c2"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5c06779c86f77426e00dd782"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5ca719ef86f7740a78020783",
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5c06782b86f77426df5407d2"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5ca71a1e86f7740f5a5b88a2",
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5c06779c86f77426e00dd782"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5c1129ed86f7746569440e88",
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5c06782b86f77426df5407d2"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "5c112a1b86f774656777d1ae",
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

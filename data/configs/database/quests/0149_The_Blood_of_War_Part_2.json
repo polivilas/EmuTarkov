@@ -1,0 +1,111 @@
+{
+	"_id": "5b47876e86f7744d1c353205",
+	"traderId": "7_ragman",
+	"location": "any",
+	"image": "/files/quest/icon/5b4787d086f7744d184ecb35.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "15600",
+				"id": "5c9511ad86f7745516178642",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.07",
+				"id": "5bcf11d686f77423c05cad73",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796dea",
+				"value": "20000",
+				"id": "5b48a4f386f7747a8d6b2e3a",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dea",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 20000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796deb",
+				"value": "1",
+				"id": "5b48a51286f7747a8d6b2e3b",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796deb",
+						"_tpl": "5b40e3f35acfc40016388218",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "23",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0c7b86f77479ee584ab0"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5b43575a86f77424f443fe62"
+					],
+					"value": "6",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5b47884886f7744d1c35327d",
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5b43575a86f77424f443fe62"
+					],
+					"value": "6",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5b47886986f7744d1a393e65",
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

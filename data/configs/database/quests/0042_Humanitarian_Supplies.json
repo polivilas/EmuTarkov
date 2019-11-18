@@ -1,0 +1,276 @@
+{
+	"_id": "5a27b87686f77460de0252a8",
+	"traderId": "5_peacekeeper",
+	"location": "any",
+	"image": "/files/quest/icon/5979d3da86f774719f309082.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 11,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7400",
+				"id": "5c9509e686f774551528def4",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1b5e86f7746a49593327",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796bf0",
+				"value": "800",
+				"id": "5a28005d86f7741e20754241",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bf0",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 800
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bf1",
+				"id": "5ac66c4f86f77403df401d38",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 2,
+				"traderId": "4_skier",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bf1",
+						"_tpl": "593d493f86f7745e6b2ceb22"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "11",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a71e386f7745a9e0647d0"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_005_N1",
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "5a28017786f77452f6318b1b",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_005_N2",
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "5a2801f986f774531b679875",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"590c5f0d86f77413997acfab"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": false,
+					"index": 2,
+					"parentId": "",
+					"id": "5cb5fd3d86f7746ef64ca33c"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590c5f0d86f77413997acfab"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5a28023f86f774528903dd1e",
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": false
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c939f2186f774122b6e7853",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5c939f3c86f7741228714be5"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c939f4886f774122a7ac1a5"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5c939f2186f774122b6e7854",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a28017786f77452f6318b1b",
+								"id": "5c939f8586f774122a7ac1a6"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a2801f986f774531b679875",
+								"id": "5c939f9386f774122c346f87"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5c9a170386f77438c80164eb",
+								"id": "5c9b7e0e86f7744aa8646183"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "10",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c94cd4886f77436285a96bd",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5c94cd8286f7743625245201"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5aa7d03ae5b5b00016327db5",
+											"5ab8e4ed86f7742d8e50c7fa"
+										]
+									],
+									"id": "5c94cdc986f77436285a96c2"
+								}
+							}
+						]
+					},
+					"index": 5,
+					"parentId": "",
+					"id": "5c9a170386f77438c80164eb"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba47986f7744df8667504",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_005_N1",
+									"value": "1",
+									"id": "5a3ba48386f7745ab1081124"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "5a28017786f77452f6318b1b",
+					"id": "5a3ba47986f7744df8667505"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba4ba86f7744df759b1e4",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_005_N2",
+									"value": "1",
+									"id": "5a3ba4c486f7744d795d3117"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "5a2801f986f774531b679875",
+					"id": "5a3ba4ba86f7744df759b1e5"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

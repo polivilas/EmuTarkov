@@ -1,0 +1,88 @@
+{
+	"_id": "5c0bdb5286f774166e38eed4",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/5ae4a7dd86f77448464ed2b2.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20000",
+				"id": "5c95002886f7743285178ad0",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d26",
+				"value": "150000",
+				"id": "5c17c12786f77430a70d197d",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d26",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 150000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d27",
+				"id": "5c17c1a986f77418e53fc52f",
+				"type": "AssortmentUnlock",
+				"index": 2,
+				"loyaltyLevel": 4,
+				"traderId": "4_skier",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d27",
+						"_tpl": "5bffdd7e0db834001b734a1a"
+					}
+				]
+			},
+			{
+				"target": "4_skier",
+				"value": "0.08",
+				"id": "5c17c1c586f77430a56d12a0",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "35",
+					"index": 0,
+					"parentId": "",
+					"id": "5c1faac986f77410894b63f5"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "Skill",
+				"_props": {
+					"target": "StressResistance",
+					"compareMethod": ">=",
+					"value": "13",
+					"index": 0,
+					"parentId": "",
+					"id": "5c0bdbb586f774166e38eed5"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

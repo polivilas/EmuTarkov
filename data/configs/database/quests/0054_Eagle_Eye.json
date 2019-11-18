@@ -1,0 +1,211 @@
+{
+	"_id": "5a27b80086f774429a5d7e20",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/59675e7b86f77414b25fb049.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 11,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7300",
+				"id": "5c9509da86f7743285178ad7",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1b4a86f774378e266913",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c32",
+				"value": "900",
+				"id": "5a27fde286f77477cd733d92",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c32",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 900
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c33",
+				"value": "1",
+				"id": "5a3a447a86f7745ed8731053",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c33",
+						"_tpl": "544a3a774bdc2d3a388b4567",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c34",
+				"value": "1",
+				"id": "5a606d4f86f77465241848a5",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c34",
+						"_tpl": "57aca93d2459771f2c7e26db",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "11",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a71d586f7745a7e19f646"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba34286f7744eb2404069",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_004_N1",
+									"value": "1",
+									"id": "5a3ba35f86f7743af1475c03"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5a3ba34286f7744eb240406a"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5a294d7c86f7740651337cf9"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5a27ffb186f774192932b3d5"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5a294d7c86f7740651337cf9"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5a27ffc786f77415ca58ae47",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a3ba34286f7744eb240406a",
+								"id": "5a60aa7b86f77456b73f3ba8"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba3b086f7745ab1081100",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_004_N2",
+									"value": "1",
+									"id": "5a3ba3c086f7745ab1081106"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5a3ba3b086f7745ab1081101"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5a294d8486f774068638cd93"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "5a294f1686f774340c7b7e4a"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5a294d8486f774068638cd93"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 6,
+					"parentId": "",
+					"id": "5a294f3386f77433e923f9cd",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a294f1686f774340c7b7e4a",
+								"id": "5a60aa8986f77456b73f3bae"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

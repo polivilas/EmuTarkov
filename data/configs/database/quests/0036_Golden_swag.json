@@ -1,0 +1,193 @@
+{
+	"_id": "5979eee086f774311955e614",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/5979ef2a86f77431185415c3.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796bd5",
+				"value": "1",
+				"id": "59c4dbae86f77473ed2cc3a5",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bd5",
+						"_tpl": "5913611c86f77479e0084092",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "4600",
+				"id": "5c94fea786f77455185027f0",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.10",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf1cd986f774378e266915"
+			},
+			{
+				"target": "5d34df2788a4504526796bd6",
+				"value": "1",
+				"id": "59a9255d86f77474225c4cef",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bd6",
+						"_tpl": "57c44b372459772d2b39b8ce",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796bd7",
+						"_tpl": "57c44dd02459772d2e0ae249",
+						"parentId": "5d34df2788a4504526796bd6",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796bd8",
+						"_tpl": "57c44f4f2459772d2c627113",
+						"parentId": "5d34df2788a4504526796bd6",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796bd9",
+						"_tpl": "57838f9f2459774a150289a0",
+						"parentId": "5d34df2788a4504526796bd6",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796bda",
+						"_tpl": "57c44fa82459772d2d75e415",
+						"parentId": "5d34df2788a4504526796bd6",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796bdb",
+						"_tpl": "57c450252459772d28133253",
+						"parentId": "5d34df2788a4504526796bd6",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796bdc",
+						"_tpl": "57c44e7b2459772d28133248",
+						"parentId": "5d34df2788a4504526796bd7",
+						"slotId": "mod_sight_rear"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bdd",
+				"value": "3",
+				"type": "Item",
+				"index": 3,
+				"id": "597afde186f7741ce2755ed2",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bdd",
+						"_tpl": "57838f9f2459774a150289a0",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bde",
+				"value": "17000",
+				"id": "5a2e628686f7741d1e5b9016",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bde",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 17000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bdf",
+				"id": "5ac667f686f77403df401d1d",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 2,
+				"traderId": "4_skier",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bdf",
+						"_tpl": "584984812459776a704a82a6"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "8",
+					"index": 0,
+					"parentId": "",
+					"id": "59a9254086f7747ab1774af3"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5939a00786f7742fe8132936"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5979ef4586f77431307dc513"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5939a00786f7742fe8132936"
+					],
+					"zoneId": "extraction_zone_zibbo",
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5979ef7986f77431307dc514",
+					"dogtagLevel": 0,
+					"plantTime": 30
+				}
+			}
+		],
+		"Fail": []
+	}
+}

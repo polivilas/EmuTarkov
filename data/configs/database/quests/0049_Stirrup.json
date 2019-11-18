@@ -1,0 +1,195 @@
+{
+	"_id": "596b455186f77457cb50eccb",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/5979e80986f77437584fb8b2.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "4_skier",
+				"value": "0.12",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5bcf1c4886f7746a4959332d"
+			},
+			{
+				"target": "1_prapor",
+				"value": "-0.12",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bd188d986f774758c5c2813"
+			},
+			{
+				"target": "2_therapist",
+				"value": "-0.05",
+				"type": "TraderStanding",
+				"index": 2,
+				"id": "5a4ba2ad88a4504dd35e8494"
+			},
+			{
+				"target": "5d34df2788a4504526796c18",
+				"value": "65000",
+				"type": "Item",
+				"index": 3,
+				"id": "5a2e5d0b86f77452ee40c4b2",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c18",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 65000
+						}
+					}
+				]
+			},
+			{
+				"value": "4700",
+				"id": "5c94fe7886f77455185027ef",
+				"type": "Experience",
+				"index": 4
+			},
+			{
+				"target": "5d34df2788a4504526796c19",
+				"value": "1",
+				"id": "5a2e5dc086f77452ee40c4b3",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c19",
+						"_tpl": "545cdae64bdc2d39198b4568",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c1a",
+				"id": "5ac6676e86f774056634a230",
+				"type": "AssortmentUnlock",
+				"index": 6,
+				"loyaltyLevel": 1,
+				"traderId": "4_skier",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c1a",
+						"_tpl": "59e6687d86f77411d949b251",
+						"parentId": "hideout",
+						"slotId": "hideout"
+					},
+					{
+						"_id": "5d34df2788a4504526796c1b",
+						"_tpl": "59e649f986f77411d949b246",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5d34df2788a4504526796c1c",
+						"_tpl": "59e8a00d86f7742ad93b569c",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796c1d",
+						"_tpl": "59e6318286f77444dd62c4cc",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796c1e",
+						"_tpl": "59e6449086f7746c9f75e822",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796c1f",
+						"_tpl": "59e8977386f77415a553c453",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796c20",
+						"_tpl": "59e89d0986f77427600d226e",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796c21",
+						"_tpl": "59d625f086f774661516605d",
+						"parentId": "5d34df2788a4504526796c1a",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796c22",
+						"_tpl": "59e898ee86f77427614bd225",
+						"parentId": "5d34df2788a4504526796c1b",
+						"slotId": "mod_handguard"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "8",
+					"index": 0,
+					"parentId": "",
+					"id": "59a9250d86f7747aa94283f3"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "6",
+					"type": "Elimination",
+					"counter": {
+						"id": "596b45e786f77457c7006f87",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5a7ae0c351dfba0017554310",
+										"576a581d2459771e7b1bc4f1",
+										"5448bd6b4bdc2dfc2f8b4569",
+										"5a17f98cfcdbcb0980087290",
+										"579204f224597773d619e051",
+										"5b1fa9b25acfc40018633c01",
+										"5abccb7dd8ce87001773e277",
+										"56d59856d2720bd8418b456a",
+										"59f98b4986f7746f546d2cef",
+										"5b3b713c5acfc4330140bd8d",
+										"56e0598dd2720bb5668b45a6",
+										"571a12c42459771f627b58a0"
+									],
+									"id": "5979e7fe86f774311955e613"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c9b5e3f86f7744aab7329b5"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

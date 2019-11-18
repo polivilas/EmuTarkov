@@ -1,0 +1,185 @@
+{
+	"_id": "5a68665c86f774255929b4c7",
+	"traderId": "2_therapist",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/59c2742286f77475ec568d92.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9400",
+				"id": "5c95071786f7743285178ad3",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c8d",
+				"value": "2",
+				"id": "5ac6658a86f77403df401d13",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c8d",
+						"_tpl": "544fb3f34bdc2d03748b456a",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c8e",
+				"value": "26000",
+				"id": "5a68869386f7745fa7410407",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c8e",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 26000
+						}
+					}
+				]
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.09",
+				"id": "5bcf180886f7746a49593323",
+				"type": "TraderStanding",
+				"index": 3
+			},
+			{
+				"target": "5d34df2788a4504526796c8f",
+				"id": "5ac6659886f774066f04bd4d",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 4,
+				"traderId": "2_therapist",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c8f",
+						"_tpl": "544fb3f34bdc2d03748b456a"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a68770f86f774747d4b0d8a",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "ter_015_area_1",
+									"value": "1",
+									"id": "5a68772286f774284429b156"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5a68770f86f774747d4b0d8b"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5a687e7886f7740c4a5133fb"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5a68776786f774759f1f55f6"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5a687e7886f7740c4a5133fb"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5a68777586f774747d4b0d9e",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a68776786f774759f1f55f6",
+								"id": "5a68777b86f77474c4269f5f"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5a68778c86f77423391f38ef",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "5a68779586f77474c4269f64"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a68779d86f774284429b169"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5a68778c86f77423391f38f0",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a68776786f774759f1f55f6",
+								"id": "5a6877a986f774759f1f5600"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

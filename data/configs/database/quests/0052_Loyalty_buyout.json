@@ -1,0 +1,43 @@
+{
+	"_id": "59c93e8e86f7742a406989c4",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/59c274ae86f77475060a9341.jpg",
+	"type": "Loyalty",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "4_skier",
+				"value": "0.3",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5a2fbc6786f774769635db1e"
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5449016a4bdc2d6f028b456f"
+					],
+					"value": "1000000",
+					"index": 0,
+					"parentId": "",
+					"id": "596a10d886f7741ddf11dbf0",
+					"minDurability": 0
+				}
+			}
+		],
+		"Fail": []
+	}
+}

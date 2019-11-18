@@ -6,11 +6,12 @@ require('../libs.js');
 
 function prepareLocations() {
 
-	if(!fs.existsSync('data/configs/locationsCache.json')){
+	if(!fs.existsSync('data/configs/cache_locations.json')){
+		console.log("rebuilding locations cache...");
 		let locationsTable = [];
-		let locationsDir = "data/configs/maps/";
+		let locationsDir = "data/configs/database/maps/";
 		let locations_base = fs.readdirSync(locationsDir);
-		let locations_maps = JSON.parse(utility.readJson('data/configs/locations.json'));
+		let locations_maps = JSON.parse(utility.readJson('data/configs/database/locationsBase.json'));
 		let locations = locations_maps.data.locations;
 		for (let file in locationsDir) {
 			if (locationsDir.hasOwnProperty(file)) {
@@ -30,11 +31,11 @@ function prepareLocations() {
 				locations_maps.data.paths.splice(location_path, 1);
 			}
 		}
-		utility.writeJson('data/configs/locationsCache.json', locations_maps);	
+		utility.writeJson('data/configs/cache_locations.json', locations_maps);	
 		return locations_maps;
 	} else {
 		if(locations == "")
-			return JSON.parse(utility.readJson('data/configs/locationsCache.json'));
+			return JSON.parse(utility.readJson('data/configs/cache_locations.json'));
 		else
 			return locations;
 	}

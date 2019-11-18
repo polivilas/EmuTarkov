@@ -1,0 +1,164 @@
+{
+	"_id": "59c50a9e86f7745fef66f4ff",
+	"traderId": "1_prapor",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5968ec2986f7741ddf17db83.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10800",
+				"id": "5c94f1ee86f7743285178ac2",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.08",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf133586f77423bf711c2d"
+			},
+			{
+				"target": "5d34df2788a4504526796b7a",
+				"value": "40000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2fb0db86f7747694379ad2",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b7a",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 40000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b7b",
+				"value": "1",
+				"id": "5a2fb0f286f774769732daa4",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b7b",
+						"_tpl": "545cdb794bdc2d3a198b456a",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b7c",
+				"id": "5ac65e0c86f77403dd390d1a",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 3,
+				"traderId": "1_prapor",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b7c",
+						"_tpl": "55801eed4bdc2d89578b4588",
+						"parentId": "hideout",
+						"slotId": "hideout"
+					},
+					{
+						"_id": "5d34df2788a4504526796b7d",
+						"_tpl": "559ba5b34bdc2d1f1a8b4582",
+						"parentId": "5d34df2788a4504526796b7c",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796b7e",
+						"_tpl": "56083e1b4bdc2dc8488b4572",
+						"parentId": "5d34df2788a4504526796b7c",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796b7f",
+						"_tpl": "56083eab4bdc2d26448b456a",
+						"parentId": "5d34df2788a4504526796b7c",
+						"slotId": "mod_tactical"
+					},
+					{
+						"_id": "5d34df2788a4504526796b80",
+						"_tpl": "560e620e4bdc2d724b8b456b",
+						"parentId": "5d34df2788a4504526796b7c",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796b81",
+						"_tpl": "56ea8222d2720b69698b4567",
+						"parentId": "5d34df2788a4504526796b7c",
+						"slotId": "mod_bipod"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "17",
+					"index": 0,
+					"parentId": "",
+					"id": "59a926b186f774753c5479a2"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "25",
+					"type": "Elimination",
+					"counter": {
+						"id": "59674d5186f77446b032d2f1",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5abcbc27d8ce8700182eceeb",
+										"59d6088586f774275f37482f",
+										"59ff346386f77477562ff5e2",
+										"5a0ec13bfcdbcb00165aa685"
+									],
+									"id": "59674d5586f72226b62554e7"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "59c52b3e86f7745fed319382"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "59674d5186f00443b872d5f7"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

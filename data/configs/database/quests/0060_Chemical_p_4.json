@@ -1,0 +1,203 @@
+{
+	"_id": "597a0f5686f774273b74f676",
+	"traderId": "4_skier",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/5998365786f7745cb22fea42.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796c45",
+				"value": "1",
+				"id": "59983ed086f7740a8a2bd18c",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c45",
+						"_tpl": "5991b51486f77447b112d44f",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "6600",
+				"id": "5c94ff2986f77455192fa42c",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.10",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf1d9b86f774378e266918"
+			},
+			{
+				"target": "5d34df2788a4504526796c46",
+				"value": "75000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2e7a4886f7741b57301c44",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c46",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 75000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c47",
+				"id": "5ac6699186f77403de1f5cf1",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 3,
+				"traderId": "7_ragman",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c47",
+						"_tpl": "5aa7e4a4e5b5b000137b76f2"
+					}
+				]
+			}
+		],
+		"Fail": [
+			{
+				"target": "4_skier",
+				"value": "-0.3",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5a2e7bbd86f7741a972d4ee2"
+			}
+		]
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "11",
+					"index": 0,
+					"parentId": "",
+					"id": "59b95cda86f77418424a36ce"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3fbc9586f77459d52a16c3",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "gazel",
+									"value": "1",
+									"id": "5a3fbcb286f7745b44117b91"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3fbc9586f77459d52a16c4"
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "gazel",
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "59b242ea86f7741e6e0e7a86",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "59b95de686f77418457056ee",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "59b95df386f7741b653edfd3"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "59b95df686f774184302e219"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "59b95de686f77418457056ef",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "59b242ea86f7741e6e0e7a86",
+								"id": "5a57798086f774411f6c320b"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a171586f77405ba6887d3",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "597a19ff86f774792c2e36f2"
+				}
+			},
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a160786f77477531d39d2",
+					"status": 4,
+					"index": 1,
+					"parentId": "",
+					"id": "597a1a0486f774779c70e8a6"
+				}
+			}
+		]
+	}
+}

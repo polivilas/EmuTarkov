@@ -1,0 +1,129 @@
+{
+	"_id": "5a27bc1586f7741f6d40fa2f",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5967532b86f77461fb2f333a.jpg",
+	"type": "Exploration",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 14,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9900",
+				"id": "5c950b3c86f774592a470255",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.06",
+				"id": "5bcf1d2386f7746a486b8434",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b54",
+				"value": "1500",
+				"id": "5a28245e86f77459775b38b2",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b54",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 1500
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "14",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a72e886f7745b18478f1d"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3baa2586f7745b791b72f9",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_010_3",
+									"value": "1",
+									"id": "5a3baa3886f7743c452c8896"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3baa2586f7745b791b72fa"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5a37db0c86f7745b8f4be689",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5a37db4a86f7745cdd0f7a8a"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a37db5386f7743b3d3fcfdf"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5a37db0c86f7745b8f4be68a",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a3baa2586f7745b791b72fa",
+								"id": "5a60a8aa86f77455b416fb76"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

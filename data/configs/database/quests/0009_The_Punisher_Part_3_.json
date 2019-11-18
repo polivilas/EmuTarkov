@@ -1,0 +1,163 @@
+{
+	"_id": "59c512ad86f7741f0d09de9b",
+	"traderId": "1_prapor",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/57e4f1852459772a15635633.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "12400",
+				"id": "5c94f22986f77455185027e8",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.08",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf13db86f77423bf711c2f"
+			},
+			{
+				"target": "5d34df2788a4504526796b49",
+				"value": "2500",
+				"id": "59c5171a86f774443b4896f0",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b49",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 2500
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b4a",
+				"value": "1",
+				"unknown": true,
+				"id": "59c62ae086f7745d8d52e20e",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b4a",
+						"_tpl": "588892092459774ac91d4b11",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796b4b",
+						"_tpl": "5888988e24597752fe43a6fa",
+						"parentId": "5d34df2788a4504526796b4a",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796b4c",
+						"_tpl": "5888956924597752983e182d",
+						"parentId": "5d34df2788a4504526796b4a",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796b4d",
+						"_tpl": "57c55f172459772d27602381",
+						"parentId": "5d34df2788a4504526796b4a",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796b4e",
+						"_tpl": "58889d0c2459775bc215d981",
+						"parentId": "5d34df2788a4504526796b4a",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796b4f",
+						"_tpl": "5888996c24597754281f9419",
+						"parentId": "5d34df2788a4504526796b4c",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796b50",
+						"_tpl": "5888976c24597754281f93f5",
+						"parentId": "5d34df2788a4504526796b4c",
+						"slotId": "mod_handguard"
+					}
+				]
+			},
+			{
+				"target": "4_skier",
+				"value": "0.05",
+				"id": "5a2fb2b886f774769635db14",
+				"type": "TraderStanding",
+				"index": 4
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "19",
+					"index": 0,
+					"parentId": "",
+					"id": "59a926b186f774753c5479a2"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "50",
+					"type": "Elimination",
+					"counter": {
+						"id": "59674d5186f27446b872d5f6",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"583990e32459771419544dd2",
+										"5839a40f24597726f856b511",
+										"57dc2fa62459775949412633"
+									],
+									"id": "59674d5586f27446b62554e2"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "59ca27a486f77445a90e6958"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "59674d5186f77446b852d5f7"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

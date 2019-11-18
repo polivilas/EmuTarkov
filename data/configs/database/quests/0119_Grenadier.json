@@ -1,0 +1,141 @@
+{
+	"_id": "5c0d190cd09282029f5390d8",
+	"traderId": "1_prapor",
+	"location": "any",
+	"image": "/files/quest/icon/5c1e35cf86f7743b6242fe05.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "21300",
+				"id": "5c94f39686f7745516178629",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d64",
+				"value": "50000",
+				"id": "5c17c35386f77430a41a095c",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d64",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d65",
+				"value": "7",
+				"id": "5c17c36f86f77430a70d1980",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d65",
+						"_tpl": "5710c24ad2720bc3458b45a3",
+						"upd": {
+							"StackObjectsCount": 7
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d66",
+				"value": "240",
+				"id": "5c17c39386f77430a56d12a2",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d66",
+						"_tpl": "56dff061d2720bb5668b4567",
+						"upd": {
+							"StackObjectsCount": 240
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d67",
+				"id": "5c17c40786f77430a41a095e",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 4,
+				"traderId": "1_prapor",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d67",
+						"_tpl": "5c1260dc86f7746b106e8748"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "30",
+					"index": 0,
+					"parentId": "",
+					"id": "5c1fab4186f77431f74f0de5"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "12",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c0d1961d0928202b25db5d0",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5710c24ad2720bc3458b45a3",
+										"58d3db5386f77426186285a0",
+										"5a2a57cfc4a2826c6e06d44a",
+										"5448be9a4bdc2dfd2f8b456a"
+									],
+									"bodyPart": [
+										"Head",
+										"Chest",
+										"Stomach",
+										"LeftArm",
+										"RightArm",
+										"LeftLeg",
+										"RightLeg"
+									],
+									"id": "5c0d1a47d09282029e2fffb7"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c1b760686f77412780211a3"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

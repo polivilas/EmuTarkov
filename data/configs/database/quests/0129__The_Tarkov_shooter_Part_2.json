@@ -1,0 +1,153 @@
+{
+	"_id": "5bc479e586f7747f376c7da3",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "19200",
+				"id": "5c950f1486f774551617863c",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d98",
+				"value": "65000",
+				"id": "5bcf21cc86f7746a45695a71",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d98",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 65000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.05",
+				"id": "5bcf220086f7746a464c5674",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796d99",
+				"id": "5bcf222b86f774378e26691b",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 1,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d99",
+						"_tpl": "5bc5a372d4351e44f824d17f"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d9a",
+				"value": "1",
+				"id": "5bcf2c4686f774722e666716",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d9a",
+						"_tpl": "5bc5a372d4351e44f824d17f",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "7",
+					"type": "Elimination",
+					"counter": {
+						"id": "5bd983d886f7747ba73fc245",
+						"conditions": [
+							{
+								"_parent": "Shots",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"distance": {
+										"compareMethod": ">=",
+										"value": 80
+									},
+									"bodyPart": [
+										"LeftLeg",
+										"RightLeg"
+									],
+									"id": "5bd983f286f7740ab2382707"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5bd983d886f7747ba73fc246"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "5",
+					"type": "Elimination",
+					"counter": {
+						"id": "5bd9944f86f774035c4877f2",
+						"conditions": [
+							{
+								"_parent": "Shots",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"5bfd297f0db834001a669119",
+										"5ae08f0a5acfc408fb1398a1"
+									],
+									"distance": {
+										"compareMethod": ">=",
+										"value": 80
+									},
+									"bodyPart": [
+										"Head"
+									],
+									"id": "5bd9948586f774035c4877f4"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5bd9944f86f774035c4877f3"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

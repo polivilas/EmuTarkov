@@ -1,0 +1,204 @@
+{
+	"_id": "5ac3475486f7741d6224abd3",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4d9aa86f7744784484abf.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9000",
+				"id": "5c950d5386f77455192fa445",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796de0",
+				"value": "300",
+				"id": "5acb7b7a86f7747a5a561a40",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796de0",
+						"_tpl": "569668774bdc2da2298b4568",
+						"upd": {
+							"StackObjectsCount": 300
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf297186f774722e666712",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796de1",
+				"value": "1",
+				"id": "5ad0ad8686f774499550511e",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796de1",
+						"_tpl": "5a17f98cfcdbcb0980087290",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796de2",
+						"_tpl": "5a17fb03fcdbcbcae668728f",
+						"parentId": "5d34df2788a4504526796de1",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796de3",
+						"_tpl": "5a17fc70fcdbcb0176308b3d",
+						"parentId": "5d34df2788a4504526796de1",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796de4",
+						"_tpl": "5aba62f8d8ce87001943946b",
+						"parentId": "5d34df2788a4504526796de1",
+						"slotId": "mod_sight_front"
+					},
+					{
+						"_id": "5d34df2788a4504526796de5",
+						"_tpl": "5aba637ad8ce87001773e17f",
+						"parentId": "5d34df2788a4504526796de1",
+						"slotId": "mod_sight_rear"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf3c3086f77418d851688f"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"573476d324597737da2adc13"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5ac5ee9986f7746e7a509a26",
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"573476d324597737da2adc13"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5ac5eee986f77401fd341c9e",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5734770f24597738025ee254"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5ac5ef2a86f7741c5804f9f5",
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5734770f24597738025ee254"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "5ac5ef5686f77416ca60f644",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"573476f124597737e04bf328"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "5ac5ef9886f7746e7a509a2d",
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"573476f124597737e04bf328"
+					],
+					"value": "7",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "5ac5eff886f7740f43322559",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

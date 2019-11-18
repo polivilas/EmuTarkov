@@ -1,0 +1,123 @@
+{
+	"_id": "5bc480a686f7741af0342e29",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "16400",
+				"id": "5c950f2f86f774551617863d",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796cc8",
+				"value": "57000",
+				"id": "5bcf22e686f7746a472ad9ed",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cc8",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 57000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf230e86f7746a464c5676",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796cc9",
+				"id": "5bcf233486f7746a486b84c4",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 2,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cc9",
+						"_tpl": "5bbdb811d4351e45020113c7"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cca",
+				"id": "5bcf235486f7746a45695afc",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 2,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cca",
+						"_tpl": "5bbde41ed4351e003562b038"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796ccb",
+				"value": "1",
+				"id": "5bcf2b8f86f774722d789e55",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796ccb",
+						"_tpl": "5bbdb811d4351e45020113c7",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796ccc",
+				"value": "1",
+				"id": "5bcf2ba086f774723055e995",
+				"type": "Item",
+				"index": 6,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796ccc",
+						"_tpl": "5bbde41ed4351e003562b038",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "Skill",
+				"_props": {
+					"target": "Sniper",
+					"compareMethod": ">=",
+					"value": "5",
+					"index": 0,
+					"parentId": "",
+					"id": "5bc4813886f774226045cb9a"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

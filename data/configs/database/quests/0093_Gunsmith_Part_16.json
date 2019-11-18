@@ -1,0 +1,251 @@
+{
+	"_id": "5b47825886f77468074618d3",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5b4786c586f7744d184ecabd.jpg",
+	"type": "WeaponAssembly",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 14,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "28500",
+				"id": "5c950e4d86f774551617863a",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.06",
+				"id": "5b48777586f77443394a8956",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796cd6",
+				"value": "2500",
+				"id": "5b4f0d2786f7742abd44cd44",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cd6",
+						"_tpl": "569668774bdc2da2298b4568",
+						"upd": {
+							"StackObjectsCount": 2500
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cd7",
+				"value": "1",
+				"id": "5b4877e986f7746eb62fc175",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cd7",
+						"_tpl": "5447a9cd4bdc2dbd208b4567",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796cd8",
+						"_tpl": "5a33e75ac4a2826c6e06d759",
+						"parentId": "5d34df2788a4504526796cd7",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796cd9",
+						"_tpl": "59c1383d86f774290a37e0ca",
+						"parentId": "5d34df2788a4504526796cd7",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796cda",
+						"_tpl": "55d355e64bdc2d962f8b4569",
+						"parentId": "5d34df2788a4504526796cd7",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796cdb",
+						"_tpl": "5649be884bdc2d79388b4577",
+						"parentId": "5d34df2788a4504526796cd7",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796cdc",
+						"_tpl": "56ea7165d2720b6e518b4583",
+						"parentId": "5d34df2788a4504526796cd7",
+						"slotId": "mod_charge"
+					},
+					{
+						"_id": "5d34df2788a4504526796cdd",
+						"_tpl": "5a1ead28fcdbcb001912fa9f",
+						"parentId": "5d34df2788a4504526796cda",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "5d34df2788a4504526796cde",
+						"_tpl": "55d35ee94bdc2d61338b4568",
+						"parentId": "5d34df2788a4504526796cda",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796cdf",
+						"_tpl": "595cf16b86f77427440c32e2",
+						"parentId": "5d34df2788a4504526796cda",
+						"slotId": "mod_handguard"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce0",
+						"_tpl": "5a1eaa87fcdbcb001865f75e",
+						"parentId": "5d34df2788a4504526796cdd",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce1",
+						"_tpl": "5943ee5a86f77413872d25ec",
+						"parentId": "5d34df2788a4504526796cde",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce2",
+						"_tpl": "56eabcd4d2720b66698b4574",
+						"parentId": "5d34df2788a4504526796cde",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce3",
+						"_tpl": "5649a2464bdc2d91118b45a8",
+						"parentId": "5d34df2788a4504526796cdf",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce4",
+						"_tpl": "59e0bed186f774156f04ce84",
+						"parentId": "5d34df2788a4504526796cdf",
+						"slotId": "mod_mount_000"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce5",
+						"_tpl": "59e0be5d86f7742d48765bd2",
+						"parentId": "5d34df2788a4504526796cdf",
+						"slotId": "mod_mount_003"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce6",
+						"_tpl": "5a33b2c9c4a282000c5a9511",
+						"parentId": "5d34df2788a4504526796ce3",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce7",
+						"_tpl": "5a7dbfc1159bd40016548fde",
+						"parentId": "5d34df2788a4504526796ce4",
+						"slotId": "mod_foregrip"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce8",
+						"_tpl": "5a7b483fe899ef0016170d15",
+						"parentId": "5d34df2788a4504526796ce5",
+						"slotId": "mod_tactical"
+					},
+					{
+						"_id": "5d34df2788a4504526796ce9",
+						"_tpl": "5a32aa8bc4a2826c6e06d737",
+						"parentId": "5d34df2788a4504526796ce6",
+						"slotId": "mod_scope"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "35",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0ce686f77429c16dcb63"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "WeaponAssembly",
+				"_props": {
+					"target": [
+						"5447a9cd4bdc2dbd208b4567"
+					],
+					"value": "1",
+					"durability": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"ergonomics": {
+						"value": 70,
+						"compareMethod": ">="
+					},
+					"baseAccuracy": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"recoil": {
+						"value": 280,
+						"compareMethod": "<="
+					},
+					"muzzleVelocity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"weight": {
+						"value": 5,
+						"compareMethod": "<="
+					},
+					"magazineCapacity": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"width": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"height": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"effectiveDistance": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"emptyTacticalSlot": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"hasItemFromCategory": [],
+					"containsItems": [
+						"57dbb57e2459774673234890",
+						"5b2cfa535acfc432ff4db7a0",
+						"5a1eaa87fcdbcb001865f75e"
+					],
+					"index": 0,
+					"parentId": "",
+					"id": "5b4783ba86f7744d1c353185"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

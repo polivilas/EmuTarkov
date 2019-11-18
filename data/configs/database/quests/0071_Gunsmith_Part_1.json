@@ -1,0 +1,187 @@
+{
+	"_id": "5ac23c6186f7741247042bad",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4dc0486f77442000164e5.jpg",
+	"type": "WeaponAssembly",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "6500",
+				"id": "5c950c7586f774551757f066",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c77",
+				"value": "20000",
+				"id": "5acb7fb386f77417d0797dd2",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c77",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 20000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf26c686f7746a486b85ee",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796c78",
+				"value": "1",
+				"id": "5ace117586f774217b103d71",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c78",
+						"_tpl": "5a7ae0c351dfba0017554310",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c79",
+						"_tpl": "5a6b5f868dc32e000a311389",
+						"parentId": "5d34df2788a4504526796c78",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796c7a",
+						"_tpl": "5a6f5e048dc32e00094b97da",
+						"parentId": "5d34df2788a4504526796c78",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796c7b",
+						"_tpl": "5a718b548dc32e000d46d262",
+						"parentId": "5d34df2788a4504526796c78",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796c7c",
+						"_tpl": "5a6f5d528dc32e00094b97d9",
+						"parentId": "5d34df2788a4504526796c7a",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796c7d",
+						"_tpl": "5a6f58f68dc32e000a311390",
+						"parentId": "5d34df2788a4504526796c7a",
+						"slotId": "mod_sight_front"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c7e",
+				"value": "50",
+				"id": "5acb802f86f7746bb831a26f",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c7e",
+						"_tpl": "56d59d3ad2720bdb418b4577",
+						"upd": {
+							"StackObjectsCount": 50
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "10",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf375f86f7741bb8377ff7"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "WeaponAssembly",
+				"_props": {
+					"target": [
+						"54491c4f4bdc2db1078b4568"
+					],
+					"value": "1",
+					"durability": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"ergonomics": {
+						"value": 55,
+						"compareMethod": ">="
+					},
+					"baseAccuracy": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"recoil": {
+						"value": 950,
+						"compareMethod": "<="
+					},
+					"muzzleVelocity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"weight": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"magazineCapacity": {
+						"value": 5,
+						"compareMethod": ">="
+					},
+					"width": {
+						"value": 4,
+						"compareMethod": "<="
+					},
+					"height": {
+						"value": 1,
+						"compareMethod": "<="
+					},
+					"effectiveDistance": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"emptyTacticalSlot": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"hasItemFromCategory": [
+						"55818b164bdc2ddc698b456c"
+					],
+					"index": 0,
+					"parentId": "",
+					"id": "5accd5e386f77463027e9397",
+					"containsItems": []
+				}
+			}
+		],
+		"Fail": []
+	}
+}

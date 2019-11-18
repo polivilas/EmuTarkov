@@ -1,0 +1,126 @@
+{
+	"_id": "5c0bd01e86f7747cdd799e56",
+	"traderId": "1_prapor",
+	"location": "any",
+	"image": "/files/quest/icon/5a27cafa86f77424e20615d6.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "18900",
+				"id": "5c94f34186f77455185027e9",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d5a",
+				"value": "85000",
+				"id": "5c17c4d986f77430a64c6a14",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d5a",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 85000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d5b",
+				"value": "3",
+				"id": "5c17c4ae86f77430a70d1982",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d5b",
+						"_tpl": "5c0696830db834001d23f5da",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d5c",
+				"value": "3",
+				"id": "5c17c4ca86f77418e53fc532",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d5c",
+						"_tpl": "560d657b4bdc2da74d8b4572",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c0d190cd09282029f5390d8",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c17d05e86f77430a64c6c66"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "30",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c0bd05586f77422c8027f3c",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"bodyPart": [
+										"Head",
+										"Chest",
+										"Stomach",
+										"LeftArm",
+										"RightArm",
+										"LeftLeg",
+										"RightLeg"
+									],
+									"daytime": {
+										"from": 23,
+										"to": 4
+									},
+									"id": "5c0bd06d86f77468767bec62"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c1242fa86f7742aa04fed52"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

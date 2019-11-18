@@ -1,0 +1,172 @@
+{
+	"_id": "5a27bc6986f7741c7358402b",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5967532b86f77461fb2f333a.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 14,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10200",
+				"id": "5c950b6a86f7743285178ad9",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.06",
+				"id": "5bcf1d5b86f7746a49593333",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b8e",
+				"value": "1600",
+				"id": "5a28247b86f774324d692e4c",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b8e",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 1600
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b8f",
+				"id": "5ac66f1c86f77405cd5462db",
+				"type": "AssortmentUnlock",
+				"index": 3,
+				"loyaltyLevel": 4,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b8f",
+						"_tpl": "5a367e5dc4a282000e49738f",
+						"parentId": "hideout",
+						"slotId": "hideout"
+					},
+					{
+						"_id": "5d34df2788a4504526796b90",
+						"_tpl": "5a339805c4a2826c6e06d73d",
+						"parentId": "5d34df2788a4504526796b8f",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796b91",
+						"_tpl": "5a3501acc4a282000d72293a",
+						"parentId": "5d34df2788a4504526796b8f",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796b92",
+						"_tpl": "5a33ca0fc4a282000d72292f",
+						"parentId": "5d34df2788a4504526796b8f",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796b93",
+						"_tpl": "5a329052c4a28200741e22d3",
+						"parentId": "5d34df2788a4504526796b8f",
+						"slotId": "mod_handguard"
+					},
+					{
+						"_id": "5d34df2788a4504526796b94",
+						"_tpl": "5a34fae7c4a2826c6e06d760",
+						"parentId": "5d34df2788a4504526796b8f",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796b95",
+						"_tpl": "58dd3ad986f77403051cba8f",
+						"parentId": "5d34df2788a4504526796b91",
+						"slotId": "cartridges",
+						"location": 0,
+						"upd": {
+							"StackObjectsCount": 20
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796b96",
+						"_tpl": "5a33cae9c4a28232980eb086",
+						"parentId": "5d34df2788a4504526796b92",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796b97",
+						"_tpl": "5a34fd2bc4a282329a73b4c5",
+						"parentId": "5d34df2788a4504526796b94",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796b98",
+						"_tpl": "5a34fbadc4a28200741e230a",
+						"parentId": "5d34df2788a4504526796b94",
+						"slotId": "mod_gas_block"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "14",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a730586f7745aa21a06e5"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5a29276886f77435ed1b117c"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5a2e958d86f77416be092111"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5a29276886f77435ed1b117c"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5a2822de86f7740a245249ce",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a2e958d86f77416be092111",
+								"id": "5a60ae9386f7742b4659eb6d"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

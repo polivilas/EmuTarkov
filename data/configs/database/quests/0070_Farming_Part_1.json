@@ -1,0 +1,146 @@
+{
+	"_id": "5ac345dc86f774288030817f",
+	"traderId": "6_mechanic",
+	"location": "55f2d3fd4bdc2d5f408b4567",
+	"image": "/files/quest/icon/5ac4db0986f77442000164dd.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "8000",
+				"id": "5c950ce386f774551757f069",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c76",
+				"value": "25000",
+				"id": "5acb7e4a86f7747a5a562023",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c76",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 25000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.04",
+				"id": "5bcf28a186f774378e266a40",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf388786f7741cdb2f7ef9"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"590c2e1186f77425357b6124"
+					],
+					"zoneId": "place_SADOVOD_01_1",
+					"value": "1",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 0,
+					"parentId": "",
+					"id": "5ac7a4ba86f77409f3423628"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"590c2e1186f77425357b6124"
+					],
+					"zoneId": "place_SADOVOD_01_2",
+					"value": "1",
+					"minDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 1,
+					"parentId": "",
+					"id": "5ac7a51a86f774738a4ffc96"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5ac7a5d586f774383111ee62",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5ac7a5e086f774383054c362"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"factory4_day",
+										"factory4_night"
+									],
+									"id": "5b7ff33786f7744b99464500"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5ac7a5d586f774383111ee63",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ac7a4ba86f77409f3423628",
+								"id": "5ac7a5f486f774382e6fce02"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ac7a51a86f774738a4ffc96",
+								"id": "5ac7a5fb86f7743e1e142464"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,116 @@
+{
+	"_id": "5b478ff486f7744d184ecbbf",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/5b478eda86f77470315db899.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "17200",
+				"id": "5c94ff8886f774592a47024b",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.12",
+				"id": "5bcf1f2786f7746a45695a6d",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796ded",
+				"value": "40000",
+				"id": "5b4873a086f7744a1434392d",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796ded",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 40000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796dee",
+				"value": "5",
+				"id": "5b4873ad86f7741cba3d59b1",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dee",
+						"_tpl": "544fb3f34bdc2d03748b456a",
+						"upd": {
+							"StackObjectsCount": 5
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"59e7715586f7742ee5789605"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 0,
+					"parentId": "",
+					"id": "5cb5ffd986f7746ef55de2c7"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"59e7715586f7742ee5789605"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "5b47905886f7746807461fe2",
+					"visibilityConditions": [],
+					"onlyFoundInRaid": true
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5b4335ba86f7744d2837a264"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "5b4790a886f774563c7a489f"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

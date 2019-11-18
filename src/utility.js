@@ -2,7 +2,6 @@
 
 require("./libs.js");
 
-let itemsCatched = settings.server.itemsCached;
 // ----------- ONLY STATIC FUNCTIONS -------------- //
 
 function readJson(file) { //read json file with deleting all tabulators and new lines
@@ -23,42 +22,6 @@ function adlerGen(s){
 
 function generateCRC(s){ // generate CRC from Server Version
   return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
-}
-/* Load Items Data 
-* load them from small files if they are not cached and flag tells we dont need to cache
-* also if file cached exist load from there always save into temp variable 
-* and after its loaded Quickly load from there
-* input: null
-* output: items.json formated data
-**/
-function prepareItemsFile() {
-	if(!itemsCatched || !fs.existsSync('data/configs/itemsCache.json')){
-		let itemsDir = ["data/configs/items_default/", "data/configs/items_mods/"];
-		let items_BaseJSON = JSON.parse(readJson('data/configs/itemsBase.json'));
-		let items_data = items_BaseJSON.data;
-		for(let i = 0; i< itemsDir.length; i++){
-			let items_List = fs.readdirSync(itemsDir[i]);
-			// load trader files
-			for (let file in items_List) {
-				if (typeof items_List[file] != "undefined") {
-							let temp_fileData = JSON.parse(readJson(itemsDir[i] + items_List[file]));
-							items_data[temp_fileData._id] = temp_fileData;
-				}
-			}
-		}
-		items_BaseJSON.data = items_data;
-		items = items_BaseJSON;
-		writeJson('data/configs/itemsCache.json', items_BaseJSON);
-		settings.server.itemsCached = true;
-		writeJson("server.config.json", settings);
-		return items_BaseJSON;
-	} else {
-		if(items == "")
-			return JSON.parse(readJson('data/configs/itemsCache.json'));
-		else
-			return items;
-	}
-	
 }
 
 function getRandomInt(min = 0, max = 100) { // random number from given range
@@ -160,7 +123,6 @@ function getLocalIpAddress() {
 
 // Module exporting
 module.exports.getLocalIpAddress = getLocalIpAddress;
-module.exports.prepareItemsFile = prepareItemsFile;
 module.exports.clearString = clearString;
 module.exports.adlerGen = adlerGen;
 module.exports.generateCRC = generateCRC;

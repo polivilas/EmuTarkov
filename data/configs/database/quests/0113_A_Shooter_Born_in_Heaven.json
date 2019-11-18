@@ -1,0 +1,339 @@
+{
+	"_id": "5c0bde0986f77479cf22c2f8",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5a27cafa86f77424e20615d6.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "39500",
+				"id": "5c950ea586f7743285178adc",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796d2f",
+				"value": "100000",
+				"id": "5c18c08186f77467bf06520a",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d2f",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 100000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d30",
+				"value": "4",
+				"id": "5c18d5e886f774397f043e99",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d30",
+						"_tpl": "5bae13ded4351e44f824bf38",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d31",
+				"value": "100",
+				"id": "5c18d6e686f77467c1502b07",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d31",
+						"_tpl": "560d61e84bdc2da74d8b4571",
+						"upd": {
+							"StackObjectsCount": 100
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d32",
+				"value": "1",
+				"id": "5c18dc5c86f77467c259d53b",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d32",
+						"_tpl": "5ae08f0a5acfc408fb1398a1",
+						"upd": {
+							"FireMode": {
+								"FireMode": "single"
+							},
+							"StackObjectsCount": 1
+						},
+						"parentId": "hideout",
+						"slotId": "hideout"
+					},
+					{
+						"_id": "5d34df2788a4504526796d33",
+						"_tpl": "5bae13ded4351e44f824bf38",
+						"parentId": "5d34df2788a4504526796d32",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796d34",
+						"_tpl": "5bae13bad4351e00320204af",
+						"parentId": "5d34df2788a4504526796d32",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796d35",
+						"_tpl": "5ae09bff5acfc4001562219d",
+						"parentId": "5d34df2788a4504526796d32",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796d36",
+						"_tpl": "5ae099875acfc4001714e593",
+						"parentId": "5d34df2788a4504526796d35",
+						"slotId": "mod_sight_front"
+					},
+					{
+						"_id": "5d34df2788a4504526796d37",
+						"_tpl": "5bbdb811d4351e45020113c7",
+						"parentId": "5d34df2788a4504526796d35",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796d38",
+						"_tpl": "5aa66a9be5b5b0214e506e89",
+						"parentId": "5d34df2788a4504526796d37",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "5d34df2788a4504526796d39",
+						"_tpl": "5aa66be6e5b5b0214e506e97",
+						"parentId": "5d34df2788a4504526796d38",
+						"slotId": "mod_scope"
+					},
+					{
+						"_id": "5d34df2788a4504526796d3a",
+						"_tpl": "5b86a0e586f7745b600ccb23",
+						"parentId": "5d34df2788a4504526796d35",
+						"slotId": "mod_muzzle"
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.06",
+				"id": "5c19215786f77401b1301f33",
+				"type": "TraderStanding",
+				"index": 5
+			},
+			{
+				"target": "5d34df2788a4504526796d3b",
+				"id": "5c20cc1086f7740cfb37b111",
+				"type": "AssortmentUnlock",
+				"index": 6,
+				"loyaltyLevel": 3,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d3b",
+						"_tpl": "5c127c4486f7745625356c13"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5c1128e386f7746565181106",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5c20009b86f7742b3c0a8fd9"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "3",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c0bdf2c86f7746f016734a7",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"distance": {
+										"compareMethod": ">=",
+										"value": 100
+									},
+									"bodyPart": [
+										"Head"
+									],
+									"id": "5c0bdf4286f77454f5264f06"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "5c0be31986f774467a116592"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c0bdf2c86f7746f016734a8"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "3",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c137b8886f7747ae3220ff3",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"distance": {
+										"compareMethod": ">=",
+										"value": 100
+									},
+									"bodyPart": [
+										"Head"
+									],
+									"id": "5c137baa86f774288427ab60"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5c137bb486f7747ae43f97b3"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5c137b8886f7747ae3220ff4"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "3",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c137ef386f7747ae10a821d",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"distance": {
+										"compareMethod": ">=",
+										"value": 100
+									},
+									"bodyPart": [
+										"Head"
+									],
+									"id": "5c137f1086f7747ae43f97bc"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c137f4586f7747ae3220ff5"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5c137ef386f7747ae10a821e"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "3",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c137f5286f7747ae267d8a2",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"distance": {
+										"compareMethod": ">=",
+										"value": 100
+									},
+									"bodyPart": [
+										"Head"
+									],
+									"id": "5c137f7c86f7747ae07c5491"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5c137fc486f7747ae10a8257"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5c137f5286f7747ae267d8a3"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

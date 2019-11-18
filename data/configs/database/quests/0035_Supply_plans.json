@@ -1,0 +1,158 @@
+{
+	"_id": "596a0e1686f7741ddf17dbee",
+	"traderId": "2_therapist",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/5979d37886f7746d0b3e3fdb.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "7700",
+				"id": "5c95062686f774592a47024f",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.09",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf13e186f77423c25c50af"
+			},
+			{
+				"target": "5d34df2788a4504526796bd4",
+				"value": "70000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2fb93986f7742eb03f362b",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bd4",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 70000
+						}
+					}
+				]
+			}
+		],
+		"Fail": [
+			{
+				"target": "2_therapist",
+				"value": "-0.1",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5a578a8f86f7741e6366896b"
+			}
+		]
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "13",
+					"index": 0,
+					"parentId": "",
+					"id": "59a9292d86f7747a6202256b"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5938878586f7741b797c562f"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "596a0e7086f7741ddf17dbef"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "596a0eaf86f774576d4c957e",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "596a0eb286f7741dde183ab8"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a577bd786f774730e0a1697"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "596a0eaf86f774576d4c957f",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "596a0e7086f7741ddf17dbef",
+								"id": "5a57773386f7740adb5ca738"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5938878586f7741b797c562f"
+					],
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "596a0e8086f7741ddd6c104c",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "596a0eaf86f774576d4c957f",
+								"id": "5a57774286f7740ad907c5ac"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "596a101f86f7741ddb481582",
+					"status": "4",
+					"index": 0,
+					"parentId": "",
+					"id": "596a113d86f7741ddd6c104d"
+				}
+			}
+		]
+	}
+}

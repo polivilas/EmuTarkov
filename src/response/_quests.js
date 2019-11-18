@@ -6,8 +6,9 @@ let quests = "";
 
 function prepareQuests() {
 	
-	if(!fs.existsSync('data/configs/questsCache.json')){
-		let questsDir = "data/configs/quests/";
+	if(!fs.existsSync('data/configs/cache_quests.json')){
+		console.log("rebuilding quests cache...");
+		let questsDir = "data/configs/database/quests/";
 		let quest_BaseJSON = JSON.parse('{"err":0,"errmsg":null,"data":[]}');
 		let quest_data = quest_BaseJSON.data;
 		let quest_List = fs.readdirSync(questsDir);
@@ -19,12 +20,11 @@ function prepareQuests() {
 		}
 		quest_BaseJSON.data = quest_data;
 		quests = quest_BaseJSON;
-		utility.writeJson('data/configs/questsCache.json', quest_BaseJSON);
+		utility.writeJson('data/configs/cache_quests.json', quest_BaseJSON);
 		return quest_BaseJSON;
-		
 	} else {
 		if(quests == "")
-			return JSON.parse(utility.readJson('data/configs/questsCache.json'));
+			return JSON.parse(utility.readJson('data/configs/cache_quests.json'));
 		else
 			return quests;
 	}

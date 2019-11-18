@@ -1,0 +1,254 @@
+{
+	"_id": "5ae448e586f7744dcf0c2a67",
+	"traderId": "7_ragman",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5ae4a76086f774455f7d62d2.jpg",
+	"type": "Exploration",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "8900",
+				"id": "5c95108c86f7743285178adf",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796dc7",
+				"value": "17000",
+				"id": "5ae9ace486f77458b06d561f",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc7",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 17000
+						}
+					}
+				]
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.07",
+				"id": "5bcf0f4986f77423bf711c23",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5d34df2788a4504526796dc8",
+				"value": "1",
+				"id": "5ae9ad0286f7743a46263f46",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796dc8",
+						"_tpl": "545cdae64bdc2d39198b4568",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ae4508386f7741250488336",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_SALE_03_AVOKADO",
+									"value": "1",
+									"id": "5ae4509b86f774282006e469"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5ae4508386f7741250488337"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ae450db86f7741250488358",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_SALE_03_KOSTIN",
+									"value": "1",
+									"id": "5ae450e286f7740f6409d278"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5ae450db86f7741250488359"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ae450ee86f7740f9307859c",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_SALE_03_TREND",
+									"value": "1",
+									"id": "5ae450f686f774125048835f"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5ae450ee86f7740f9307859d"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ae4510786f7740fa614399e",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_SALE_03_DINO",
+									"value": "1",
+									"id": "5ae4511086f7740f6409d289"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5ae4510786f7740fa614399f"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ae4511d86f7740ffc31ccb4",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_SALE_03_TOPBRAND",
+									"value": "1",
+									"id": "5ae4512686f774400872565c"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5ae4511d86f7740ffc31ccb5"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5ae4514986f7740e915d218b",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5ae4515086f7741250488375"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Interchange"
+									],
+									"id": "5ae4516386f774282006e4ad"
+								}
+							}
+						]
+					},
+					"index": 5,
+					"parentId": "",
+					"id": "5ae4514986f7740e915d218c",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae4508386f7741250488337",
+								"id": "5ae4516f86f7740e915d2196"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae450db86f7741250488359",
+								"id": "5ae4517386f774282006e4b3"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae450ee86f7740f9307859d",
+								"id": "5ae4517786f774282006e4b5"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae4510786f7740fa614399f",
+								"id": "5ae4517c86f7740fa61439c0"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5ae4511d86f7740ffc31ccb5",
+								"id": "5ae4518286f7740ffc31ccd8"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

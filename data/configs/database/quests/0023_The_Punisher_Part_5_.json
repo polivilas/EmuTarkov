@@ -1,0 +1,241 @@
+{
+	"_id": "59ca29fb86f77445ab465c87",
+	"traderId": "1_prapor",
+	"location": "any",
+	"image": "/files/quest/icon/59ca2e4186f77445e4732b22.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "19300",
+				"id": "5c94f29186f77455192fa425",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "1_prapor",
+				"value": "0.12",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf148f86f77423c05cad7e"
+			},
+			{
+				"target": "5d34df2788a4504526796bb0",
+				"value": "5000",
+				"unknown": true,
+				"id": "59ca2d0b86f7740fe95c3e53",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb0",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 5000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb1",
+				"value": "1",
+				"unknown": true,
+				"id": "59ca2d1c86f77445ac1da7bb",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb1",
+						"_tpl": "567143bf4bdc2d1a0f8b4567",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb2",
+				"value": "1",
+				"unknown": true,
+				"id": "59ca2d3386f77445ab465c88",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb2",
+						"_tpl": "590c60fc86f77412b13fddcf",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb3",
+				"id": "5ac65fe886f77403e00e14e2",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 3,
+				"traderId": "1_prapor",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb3",
+						"_tpl": "59e0d99486f7744a32234762"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "20",
+					"index": 0,
+					"parentId": "",
+					"id": "59a926b186f774753c5479a2"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5644bd2b4bdc2d3b4c8b4572"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "59ca293c86f77445a80ed147",
+					"maxDurability": 0,
+					"dogtagLevel": 0
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5644bd2b4bdc2d3b4c8b4572"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "59ca29ab86f77445ab133c86",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"dogtagLevel": 0
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5447a9cd4bdc2dbd208b4567"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 2,
+					"parentId": "",
+					"id": "59ca2bdc86f77445a80ed148"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5447a9cd4bdc2dbd208b4567"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"index": 3,
+					"parentId": "",
+					"id": "59ca2c3086f77445aa0ddc15",
+					"visibilityConditions": []
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5448bd6b4bdc2dfc2f8b4569"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"index": 4,
+					"parentId": "",
+					"id": "59ca2c9e86f77428ea721232",
+					"maxDurability": 0,
+					"dogtagLevel": 0
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5448bd6b4bdc2dfc2f8b4569"
+					],
+					"value": "5",
+					"minDurability": 0,
+					"index": 5,
+					"parentId": "",
+					"id": "59ca2cbe86f7740fe95c3e52",
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"dogtagLevel": 0
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "15",
+					"type": "Elimination",
+					"counter": {
+						"id": "5c922dde86f77438500a0feb",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5c9df2ea86f77469941a4c92"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentInclusive": [
+										[
+											"5648a7494bdc2d9d488b4583",
+											"5aa7cfc0e5b5b00015693143"
+										],
+										[
+											"5648a7494bdc2d9d488b4583",
+											"5a7c4850e899ef00150be885"
+										]
+									],
+									"id": "5cb32c1188a4503d684dd1b5"
+								}
+							}
+						]
+					},
+					"index": 6,
+					"parentId": "",
+					"id": "5c922dde86f77438500a0fec"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

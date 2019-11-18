@@ -1,0 +1,123 @@
+{
+	"_id": "5ac242ab86f77412464f68b4",
+	"traderId": "6_mechanic",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4e06086f774623122ae42.jpg",
+	"type": "WeaponAssembly",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 10,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "13900",
+				"id": "5c950ca486f774551757f068",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5d34df2788a4504526796c43",
+				"value": "200000",
+				"id": "5acb826b86f77456255bad89",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c43",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 200000
+						}
+					}
+				]
+			},
+			{
+				"target": "6_mechanic",
+				"value": "0.06",
+				"id": "5bcf274486f7746a45695b0d",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "17",
+					"index": 0,
+					"parentId": "",
+					"id": "5acf381a86f7741ce21f9aee"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "WeaponAssembly",
+				"_props": {
+					"target": [
+						"588892092459774ac91d4b11"
+					],
+					"value": "1",
+					"durability": {
+						"value": 60,
+						"compareMethod": ">="
+					},
+					"ergonomics": {
+						"value": 37,
+						"compareMethod": ">="
+					},
+					"baseAccuracy": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"recoil": {
+						"value": 400,
+						"compareMethod": "<="
+					},
+					"muzzleVelocity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"weight": {
+						"value": 6.6,
+						"compareMethod": "<="
+					},
+					"magazineCapacity": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"width": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"height": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"effectiveDistance": {
+						"value": 2000,
+						"compareMethod": ">="
+					},
+					"emptyTacticalSlot": {
+						"value": 0,
+						"compareMethod": ">="
+					},
+					"hasItemFromCategory": [
+						"55818b164bdc2ddc698b456c"
+					],
+					"index": 0,
+					"parentId": "",
+					"id": "5acce08b86f7745f8521fa64",
+					"containsItems": []
+				}
+			}
+		],
+		"Fail": []
+	}
+}

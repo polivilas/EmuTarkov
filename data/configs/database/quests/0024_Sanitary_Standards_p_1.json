@@ -1,0 +1,149 @@
+{
+	"_id": "59689ee586f7740d1570bbd5",
+	"traderId": "2_therapist",
+	"location": "55f2d3fd4bdc2d5f408b4567",
+	"image": "/files/quest/icon/59689f8f86f7740d121082d7.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "2200",
+				"id": "5c9505bd86f7743285178ad1",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.09",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf12ae86f77423c25c50ac"
+			},
+			{
+				"target": "5d34df2788a4504526796bb4",
+				"value": "2",
+				"type": "Item",
+				"index": 2,
+				"id": "597afde186f7741ce2755ea2",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb4",
+						"_tpl": "590c661e86f7741e566b646a",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb5",
+				"value": "14000",
+				"id": "5a2fb5d886f7747694379ad6",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb5",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 14000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bb6",
+				"id": "5ac6616a86f77403dd390d29",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 1,
+				"traderId": "2_therapist",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bb6",
+						"_tpl": "590c661e86f7741e566b646a"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 0,
+					"parentId": "",
+					"id": "59a9289f86f77477925e27d3"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5ca6026286f77446d87abec2",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "pumproom",
+									"value": "1",
+									"id": "5ca6027986f77444b42c8f92"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "5cb6f32986f7746ef55e17a0",
+					"id": "5ca6026286f77446d87abec3"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"590a3efd86f77437d351a25b"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 1,
+					"parentId": "",
+					"id": "5cb6f32986f7746ef55e17a0"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590a3efd86f77437d351a25b"
+					],
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "59689f7586f7740d14064726",
+					"visibilityConditions": [],
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true
+				}
+			}
+		],
+		"Fail": []
+	}
+}

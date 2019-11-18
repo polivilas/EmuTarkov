@@ -1,0 +1,215 @@
+{
+	"_id": "5a27bb5986f7741dfb660900",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/597a172486f774799e5cd153.jpg",
+	"type": "Multi",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10700",
+				"id": "5c950b0286f77455185027f6",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1cde86f7746a486b8432",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c27",
+				"value": "900",
+				"id": "5a281ab686f77460d76ef746",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c27",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 900
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c28",
+				"value": "1",
+				"id": "5a37ed3586f77466ba2cae3e",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c28",
+						"_tpl": "5926bb2186f7744b1c6c6e60",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c29",
+						"_tpl": "5926c3b286f774640d189b6b",
+						"parentId": "5d34df2788a4504526796c28",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796c2a",
+						"_tpl": "5926c0df86f77462f647f764",
+						"parentId": "5d34df2788a4504526796c28",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796c2b",
+						"_tpl": "5926c32286f774616e42de99",
+						"parentId": "5d34df2788a4504526796c28",
+						"slotId": "mod_charge"
+					},
+					{
+						"_id": "5d34df2788a4504526796c2c",
+						"_tpl": "58864a4f2459770fcc257101",
+						"parentId": "5d34df2788a4504526796c29",
+						"slotId": "cartridges",
+						"location": 0,
+						"upd": {
+							"StackObjectsCount": 30
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c2d",
+						"_tpl": "5926c36d86f77467a92a8629",
+						"parentId": "5d34df2788a4504526796c2a",
+						"slotId": "mod_handguard"
+					},
+					{
+						"_id": "5d34df2788a4504526796c2e",
+						"_tpl": "5926d2be86f774134d668e4e",
+						"parentId": "5d34df2788a4504526796c2a",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796c2f",
+						"_tpl": "5926d3c686f77410de68ebc8",
+						"parentId": "5d34df2788a4504526796c2a",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796c30",
+						"_tpl": "5926e16e86f7742f5a0f7ecb",
+						"parentId": "5d34df2788a4504526796c2a",
+						"slotId": "mod_muzzle"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c31",
+				"value": "3",
+				"id": "5a281b0586f774632c17205e",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c31",
+						"_tpl": "5926c3b286f774640d189b6b",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a72ba86f7745a9d6892fd"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba7db86f7744f0e568c9b",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_009_3_N1",
+									"value": "1",
+									"id": "5a3ba7e386f7744df8669f41"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3ba7db86f7744f0e568c9c"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5a37de5486f7741535394d68",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5a37de5f86f77415714477ac"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a37de6586f774150a3820f1"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "5a37de5486f7741535394d69",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a3ba7db86f7744f0e568c9c",
+								"id": "5a60a8d086f77455b416fb7e"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

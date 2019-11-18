@@ -1,0 +1,137 @@
+{
+	"_id": "5a27ba1c86f77461ea5a3c56",
+	"traderId": "5_peacekeeper",
+	"location": "any",
+	"image": "/files/quest/icon/5a29222486f77456f50d09e7.jpg",
+	"type": "Exploration",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "8200",
+				"id": "5c950a0486f774592a470253",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1b8f86f7746a49593329",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b9f",
+				"value": "850",
+				"id": "5a2805ee86f774291b083f8f",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b9f",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 850
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796ba0",
+				"value": "3",
+				"id": "5a2805f986f7740ec52b74ef",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796ba0",
+						"_tpl": "590a3efd86f77437d351a25b",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796ba1",
+				"value": "3",
+				"id": "5a28060686f7740ec52b74f1",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796ba1",
+						"_tpl": "5672cb724bdc2dc2088b456b",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a720886f7745aa21a06cd"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_007_N1",
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "5a2806b386f77420062f0fbd",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_007_2_N2",
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "5a2806e086f774291b084041",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "place_peacemaker_007_2_N3",
+					"value": "1",
+					"index": 3,
+					"parentId": "",
+					"id": "5a2806f886f774513d3e69f5",
+					"plantTime": 30
+				}
+			}
+		],
+		"Fail": []
+	}
+}

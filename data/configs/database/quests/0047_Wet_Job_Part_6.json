@@ -1,0 +1,142 @@
+{
+	"_id": "5a27bc8586f7741b543d8ea4",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5967532b86f77461fb2f333a.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 14,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10400",
+				"id": "5c950b7b86f77455192fa440",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.06",
+				"id": "5bcf1d6e86f7746a49593334",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c0b",
+				"value": "3500",
+				"id": "5a36631886f7745d8c4c5f18",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c0b",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 3500
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c0c",
+				"value": "1",
+				"id": "5a36643686f7745d8d3df63c",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c0c",
+						"_tpl": "588892092459774ac91d4b11",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796c0d",
+						"_tpl": "5888988e24597752fe43a6fa",
+						"parentId": "5d34df2788a4504526796c0c",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796c0e",
+						"_tpl": "5888945a2459774bf43ba385",
+						"parentId": "5d34df2788a4504526796c0c",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796c0f",
+						"_tpl": "57c55f172459772d27602381",
+						"parentId": "5d34df2788a4504526796c0c",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796c10",
+						"_tpl": "58889d0c2459775bc215d981",
+						"parentId": "5d34df2788a4504526796c0c",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796c11",
+						"_tpl": "58889c7324597754281f9439",
+						"parentId": "5d34df2788a4504526796c0e",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796c12",
+						"_tpl": "5888961624597754281f93f3",
+						"parentId": "5d34df2788a4504526796c0e",
+						"slotId": "mod_bipod"
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796c13",
+				"id": "5b42257186f774370c728550",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 4,
+				"traderId": "5_peacekeeper",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c13",
+						"_tpl": "5a6086ea4f39f99cd479502f"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "14",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a731486f7745a7e19f66e"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "Skill",
+				"_props": {
+					"target": "Sniper",
+					"compareMethod": ">=",
+					"value": "9",
+					"index": 0,
+					"parentId": "",
+					"id": "5a28235e86f7741da250b438"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

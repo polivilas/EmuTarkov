@@ -1,0 +1,57 @@
+{
+	"_id": "59ca1a6286f774509a270942",
+	"traderId": "1_prapor",
+	"location": "any",
+	"image": "/files/quest/icon/59c273da86f77459b8017e7b.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "1_prapor",
+				"value": "0.4",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5a3fa42f86f774455b0f3423"
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"58d3db5386f77426186285a0"
+					],
+					"value": "10",
+					"minDurability": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "59ca1b1b86f7741b067dba42"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"58d3db5386f77426186285a0"
+					],
+					"value": "10",
+					"minDurability": 0,
+					"index": 1,
+					"parentId": "",
+					"id": "59ca1b4f86f774509a270943",
+					"visibilityConditions": []
+				}
+			}
+		],
+		"Fail": []
+	}
+}

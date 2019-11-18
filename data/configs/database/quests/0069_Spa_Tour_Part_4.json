@@ -1,0 +1,159 @@
+{
+	"_id": "5a03296886f774569778596a",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5a27c50f86f7740b3d65e16a.jpg",
+	"type": "Discover",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9300",
+				"id": "5c950a4786f7745516178634",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1be686f7746a472ad84b",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796c75",
+				"value": "1100",
+				"id": "5a280d8386f77456a46b8b5f",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796c75",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 1100
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a724986f7745a9e0647df"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba62786f7742c9d4f5ee8",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_008_4_N1",
+									"value": "1",
+									"id": "5a3ba63c86f7744d39436d81"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3ba62786f7742c9d4f5ee9"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3ba65f86f7743af1475f10",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "place_peacemaker_008_4_N2",
+									"value": "1",
+									"id": "5a3ba66786f7742c9d4f5ef1"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5a3ba65f86f7743af1475f11"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Discover",
+					"counter": {
+						"id": "5c94f65286f77455185027ed",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5c94f68386f7743285178acc"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5c94f69086f774551528dee8"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5c94f65286f77455185027ee",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a3ba62786f7742c9d4f5ee9",
+								"id": "5c94f6a186f774551757f048"
+							}
+						},
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5a3ba65f86f7743af1475f11",
+								"id": "5c94f6a886f77455192fa429"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,133 @@
+{
+	"_id": "5968eb3186f7741dde183a4d",
+	"traderId": "2_therapist",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/5968ec2986f7741ddf17db83.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "3400",
+				"id": "5c9505f586f7743285178ad2",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.09",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf136186f77423be21610d"
+			},
+			{
+				"target": "4_skier",
+				"value": "-0.08",
+				"type": "TraderStanding",
+				"index": 2,
+				"id": "5a2fb72c86f7747694379ad8"
+			},
+			{
+				"target": "5d34df2788a4504526796bbd",
+				"value": "15000",
+				"type": "Item",
+				"index": 3,
+				"id": "5a2fb73786f774769635db18",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bbd",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 15000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bbe",
+				"value": "3",
+				"id": "5ac661f386f77403e116102d",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bbe",
+						"_tpl": "5751a25924597722c463c472",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796bbf",
+				"id": "5ac661fc86f774056c780955",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 2,
+				"traderId": "2_therapist",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bbf",
+						"_tpl": "5751a25924597722c463c472"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "6",
+					"index": 0,
+					"parentId": "",
+					"id": "59a928e886f7747a683e4149"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "15",
+					"type": "Elimination",
+					"counter": {
+						"id": "5968eb9b86f7741ddb481542",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5968eba286f7741ddf17db82"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "59a928f186f7747b375626e3"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5968eb9b86f7741ddb481543"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

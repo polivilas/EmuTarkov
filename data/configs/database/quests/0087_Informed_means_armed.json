@@ -1,0 +1,145 @@
+{
+	"_id": "5b47926a86f7747ccc057c15",
+	"traderId": "4_skier",
+	"location": "any",
+	"image": "/files/quest/icon/59c274ae86f77475060a9341.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [
+			{
+				"target": "5d34df2788a4504526796cbf",
+				"id": "5b48ea4a86f774496621e087",
+				"type": "AssortmentUnlock",
+				"index": 0,
+				"loyaltyLevel": 1,
+				"traderId": "6_mechanic",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cbf",
+						"_tpl": "5b4391a586f7745321235ab2"
+					}
+				]
+			}
+		],
+		"Success": [
+			{
+				"value": "15900",
+				"id": "5c94ff9f86f7743285178acf",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "4_skier",
+				"value": "0.10",
+				"id": "5bcf1f9286f7746a464c566f",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796cc0",
+				"value": "45000",
+				"id": "5b4873de86f77449bc7bc99d",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cc0",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 45000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796cc1",
+				"value": "2",
+				"id": "5b4873f686f7741cba3d59bb",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796cc1",
+						"_tpl": "5b04473a5acfc40018632f70",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "24",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0c0986f77453572f54e0"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5b4391a586f7745321235ab2"
+					],
+					"zoneId": "place_skier_11_1",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 0,
+					"parentId": "",
+					"id": "5b47932586f7747cc908b5dd"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5b4391a586f7745321235ab2"
+					],
+					"zoneId": "place_skier_11_2",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 1,
+					"parentId": "",
+					"id": "5b47936686f77427fd044025"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5b4391a586f7745321235ab2"
+					],
+					"zoneId": "place_skier_11_3",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 2,
+					"parentId": "",
+					"id": "5b47938086f7747ccc057c22"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

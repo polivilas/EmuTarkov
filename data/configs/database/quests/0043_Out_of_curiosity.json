@@ -1,0 +1,161 @@
+{
+	"_id": "597a160786f77477531d39d2",
+	"traderId": "2_therapist",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/59c2742286f77475ec568d92.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "8300",
+				"id": "5c95066086f774551617862f",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "2_therapist",
+				"value": "0.3",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5a2fbbe686f77432ea548a8a"
+			},
+			{
+				"target": "5d34df2788a4504526796bf2",
+				"value": "170000",
+				"type": "Item",
+				"index": 2,
+				"id": "597afde186f7741ce2755ee8",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796bf2",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 170000
+						}
+					}
+				]
+			}
+		],
+		"Fail": [
+			{
+				"target": "2_therapist",
+				"value": "-0.3",
+				"type": "TraderStanding",
+				"index": 0,
+				"id": "5a578ab886f7741e63668973"
+			}
+		]
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3fc1f286f7744ccc15d642",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "gazel",
+									"value": "1",
+									"id": "5a3fc20386f7744cd808dd37"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5a3fc1f286f7744ccc15d643"
+				}
+			},
+			{
+				"_parent": "PlaceBeacon",
+				"_props": {
+					"target": [
+						"5991b51486f77447b112d44f"
+					],
+					"zoneId": "gazel",
+					"value": "1",
+					"index": 2,
+					"parentId": "",
+					"id": "5998366886f77455853b2d9f",
+					"plantTime": 30
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "597a166d86f774779c70e8a3",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a577aaa86f7743e797f6dcb"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5a577abe86f7743e84764c96"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "597a166d86f774779c70e8a4",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5998366886f77455853b2d9f",
+								"id": "5a5777bd86f7740ad907c6e9"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a0f5686f774273b74f676",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "597a16e386f77477531d39d5"
+				}
+			},
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a171586f77405ba6887d3",
+					"status": 4,
+					"index": 1,
+					"parentId": "",
+					"id": "597a1a3186f77475b4612032"
+				}
+			}
+		]
+	}
+}

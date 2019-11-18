@@ -1,0 +1,144 @@
+{
+	"_id": "5b478b1886f7744d1b23c57d",
+	"traderId": "7_ragman",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5ae4a74386f7744748710d72.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "25000",
+				"id": "5c9511fd86f7745516178644",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "7_ragman",
+				"value": "0.09",
+				"id": "5bcf122c86f7742ce2243a3e",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796d00",
+				"value": "55000",
+				"id": "5b48a6b586f7744b1229f6e9",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d00",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 55000
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d01",
+				"value": "1",
+				"id": "5b48a6c486f774036c1b7b39",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d01",
+						"_tpl": "5b44cd8b86f774503d30cba2",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796d02",
+				"id": "5b48e60086f774393165818a",
+				"type": "AssortmentUnlock",
+				"index": 4,
+				"loyaltyLevel": 4,
+				"traderId": "7_ragman",
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796d02",
+						"_tpl": "5b44cd8b86f774503d30cba2"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "29",
+					"index": 0,
+					"parentId": "",
+					"id": "5b4f0c9086f77453572f5538"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5645bcc04bdc2d363b8b4572"
+					],
+					"zoneId": "place_merch_020_1",
+					"value": "2",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 30,
+					"index": 0,
+					"parentId": "",
+					"id": "5b478c4c86f7744d1a393fac"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5a7c4850e899ef00150be885"
+					],
+					"zoneId": "place_merch_020_1",
+					"value": "2",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 30,
+					"index": 1,
+					"parentId": "",
+					"id": "5b478c7386f7744d1a393fb1"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5ab8e79e86f7742d8b372e78"
+					],
+					"zoneId": "place_merch_020_2",
+					"value": "2",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 30,
+					"index": 2,
+					"parentId": "",
+					"id": "5b478cb586f7744d1a393fb5"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

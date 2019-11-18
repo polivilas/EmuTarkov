@@ -1,0 +1,208 @@
+{
+	"_id": "5a03153686f77442d90e2171",
+	"traderId": "5_peacekeeper",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5a27c50f86f7740b3d65e16a.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 12,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "8900",
+				"id": "5c950a1586f77455192fa43b",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5_peacekeeper",
+				"value": "0.07",
+				"id": "5bcf1ba286f7746a472ad849",
+				"type": "TraderStanding",
+				"index": 1
+			},
+			{
+				"target": "5d34df2788a4504526796b30",
+				"value": "950",
+				"id": "5a28081186f774567976ed33",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b30",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 950
+						}
+					}
+				]
+			},
+			{
+				"target": "5d34df2788a4504526796b31",
+				"value": "1",
+				"id": "5a28087586f774560f1860e6",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5d34df2788a4504526796b31",
+						"_tpl": "58948c8e86f77409493f7266",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5d34df2788a4504526796b32",
+						"_tpl": "5894a51286f77426d13baf02",
+						"parentId": "5d34df2788a4504526796b31",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5d34df2788a4504526796b33",
+						"_tpl": "5894a05586f774094708ef75",
+						"parentId": "5d34df2788a4504526796b31",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5d34df2788a4504526796b34",
+						"_tpl": "5894a5b586f77426d2590767",
+						"parentId": "5d34df2788a4504526796b31",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5d34df2788a4504526796b35",
+						"_tpl": "58ac1bf086f77420ed183f9f",
+						"parentId": "5d34df2788a4504526796b31",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796b36",
+						"_tpl": "58949fac86f77409483e16aa",
+						"parentId": "5d34df2788a4504526796b31",
+						"slotId": "mod_charge"
+					},
+					{
+						"_id": "5d34df2788a4504526796b37",
+						"_tpl": "58aeaaa886f7744fc1560f81",
+						"parentId": "5d34df2788a4504526796b34",
+						"slotId": "mod_barrel"
+					},
+					{
+						"_id": "5d34df2788a4504526796b38",
+						"_tpl": "5894a42086f77426d2590762",
+						"parentId": "5d34df2788a4504526796b34",
+						"slotId": "mod_handguard"
+					},
+					{
+						"_id": "5d34df2788a4504526796b39",
+						"_tpl": "5894a81786f77427140b8347",
+						"parentId": "5d34df2788a4504526796b34",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5d34df2788a4504526796b3a",
+						"_tpl": "57ade1442459771557167e15",
+						"parentId": "5d34df2788a4504526796b35",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5d34df2788a4504526796b3b",
+						"_tpl": "58aeac1b86f77457c419f475",
+						"parentId": "5d34df2788a4504526796b37",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5d34df2788a4504526796b3c",
+						"_tpl": "5894a73486f77426d259076c",
+						"parentId": "5d34df2788a4504526796b38",
+						"slotId": "mod_sight_front"
+					},
+					{
+						"_id": "5d34df2788a4504526796b3d",
+						"_tpl": "58a56f8d86f774651579314c",
+						"parentId": "5d34df2788a4504526796b38",
+						"slotId": "mod_mount_000"
+					},
+					{
+						"_id": "5d34df2788a4504526796b3e",
+						"_tpl": "58a5c12e86f7745d585a2b9e",
+						"parentId": "5d34df2788a4504526796b38",
+						"slotId": "mod_mount_001"
+					},
+					{
+						"_id": "5d34df2788a4504526796b3f",
+						"_tpl": "58a56f8d86f774651579314c",
+						"parentId": "5d34df2788a4504526796b38",
+						"slotId": "mod_mount_002"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Level",
+				"_props": {
+					"compareMethod": ">=",
+					"value": "12",
+					"index": 0,
+					"parentId": "",
+					"id": "5a3a721986f7745b18478f01"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "15",
+					"type": "Elimination",
+					"counter": {
+						"id": "5a03167c86f774430d7b1e82",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"weapon": [
+										"576165642459773c7a400233",
+										"54491c4f4bdc2db1078b4568",
+										"56dee2bdd2720bc8328b4567",
+										"5580223e4bdc2d1c128b457f",
+										"5a7828548dc32e5a9c28b516"
+									],
+									"bodyPart": [
+										"Head"
+									],
+									"id": "5a03169186f77451f779ece6"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Shoreline"
+									],
+									"id": "5a0316a886f77451f779ece9"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5c9a17c686f7747dbe2da3c1"
+				}
+			}
+		],
+		"Fail": []
+	}
+}
