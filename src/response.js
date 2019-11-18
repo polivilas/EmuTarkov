@@ -58,11 +58,9 @@ function get(req, body) {
         return JSON.stringify(trader.getAssort(url.replace(assort, '')));
     }
 
-    
-    /*
     if (url.includes("/api/location")) {
         return "MAPCONFIG";
-    }*/
+    }
 
     // game images
     if (url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
