@@ -35,7 +35,10 @@ function sendResponse(req, resp, body) {
 		let mapname = req.url.replace("/api/location/", "");
 		console.log("[MAP.config]: " + mapname);
 		let RandomPreset = utility.getRandomInt(1,6);
-		let data_response = utility.readJson("data/configs/api/location/" + mapname + "" + RandomPreset + ".json");
+		let data_response = utility.readJson("data/configs/api/location/" + mapname + "6.json");
+		
+		//data_response = locations_f.LootGenerator( JSON.parse(data_response) );
+
 		header_f.sendMapData(resp, data_response);
 		return;
 	}
