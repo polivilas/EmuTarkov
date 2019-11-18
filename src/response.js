@@ -136,7 +136,7 @@ function get(req, body) {
             break;
 
         case "/client/items":
-            output = JSON.stringify(utility.prepareItemsFile());
+            output = JSON.stringify(items_f.prepareItems());
             break;
 
         case "/client/globals":
