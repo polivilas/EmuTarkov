@@ -223,7 +223,7 @@ function getPurchasesData() {
     //load files
     let multiplier = 0.9;
     let data = JSON.parse( utility.readJson("data/profiles/character_" + constants.getActiveID() + ".json") );
-    items = utility.prepareItemsFile();
+    items = items_f.prepareItems();
     //prepared vars
     let equipment = data.Inventory.equipment;
     let stash = data.Inventory.stash;
