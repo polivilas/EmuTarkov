@@ -19,7 +19,7 @@ function setOutput(data) { // get output to client
 }
 
 function resetOutput() { // reset client output
-    output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[]}}');
+    output = JSON.parse('{"err":0, "errmsg":null, "data":{"items":{"new":[], "change":[], "del":[]}, "badRequest":[], "quests":[], "ragFairOffers":[], "builds":[]}}');
 }
 
 function handleMoving(body) { // handling Action function
@@ -41,6 +41,9 @@ function handleMoving(body) { // handling Action function
 
         case "HideoutPutItemsInAreaSlots":
             return hideout_f.hideoutPutItemsInAreaSlots(tmpList, body);
+
+        case "HideoutTakeItemsFromAreaSlots":
+            return hideout_f.hideoutTakeItemsFromAreaSlots(tmpList, body);
 
         case "HideoutToggleArea":
             return hideout_f.hideoutToggleArea(tmpList, body);  

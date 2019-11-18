@@ -165,11 +165,9 @@ function getCategoryList(handbookId)
                     {                       
                         if (someitem.Id === handbookId) 
                         {
-                            tableOfItems[curItem] = item.Price;
+                            tableOfItems[curItem] = someitem.Price;
                         }
-                        
                     }
-
                     break;
                 }
             }

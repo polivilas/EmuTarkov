@@ -10,8 +10,12 @@ function SaveBuild(tmpList,body)
 	savedBuilds.data.push(body);
 	utility.writeJson('data/configs/userBuilds.json',savedBuilds);
 
-	return "OK"; //need to respond something specific here, otherwise game stuck
+	item.resetOutput();
+	let output = item.getOutput();
+	output.data.builds.push(body)
+    return output; //YES ! 
 }
+
 
 function RemoveBuild(tmpList,body)
 {
