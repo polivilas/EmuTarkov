@@ -63,7 +63,7 @@ function get(req, body) {
     }
 
     // game images
-    if (url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
+    if (url.includes(".jpg") || url.includes(".png") || url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
         return "IMAGE";
     }
     if (url.includes("/notifierBase") || url.includes("/notifierServer")) { // notifier custom link
@@ -186,7 +186,7 @@ function get(req, body) {
             break;
 
         case "/client/trading/api/getTradersList":
-            output = JSON.stringify(trader.getList());
+            output = JSON.stringify(trader.loadAllTraders());
             break;
 
         case "/client/server/list":
@@ -266,7 +266,9 @@ function get(req, body) {
             output = '{"err":0,"errmsg":null,"data":null}';
             break;
 		case "/client/game/config":
-			output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "5c71b934354682353958e984", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
+			let tempUrl = backendUrl;
+			output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "5c71b934354682353958e984", "nickname": "user", "backend": {"Trading":"' + tempUrl + '", "Messaging":"' + tempUrl + '", "Main":"' + tempUrl + '", "RagFair":"' + tempUrl + '"}, "totalInGame": 0}}';
+			console.log(output);
 			break;
 		case "/client/customization":
 			output = utility.readJson('data/configs/customization/customization.json');

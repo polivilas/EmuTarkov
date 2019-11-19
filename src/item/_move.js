@@ -205,7 +205,18 @@ function swapItem(tmpList, body) {
     profile.setCharacterData(tmpList);
     return output;
 }
-
+/* Give Item
+* its used for "add" item like gifts etc.
+* */
+function addItem(tmpList, body) {
+    item.resetOutput();
+    let output = item.getOutput();
+	
+	
+	tmpList.data[1].Inventory.items.push(new_item);
+    profile.setCharacterData(tmpList);
+    return output;
+}
 //// ---- EXPORT LIST ---- ////
 module.exports.moveItem = moveItem;
 module.exports.removeItem = removeItem;
@@ -213,4 +224,3 @@ module.exports.splitItem = splitItem;
 module.exports.mergeItem = mergeItem;
 module.exports.transferItem = transferItem;
 module.exports.swapItem = swapItem;
-//module.exports.moveItem = moveItem;

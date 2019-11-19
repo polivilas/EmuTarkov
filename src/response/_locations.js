@@ -41,31 +41,6 @@ function prepareLocations() {
 	}
 }
 
-function LootGenerator(location)
-{
-
-    let itemsKeys_ = Object.keys(items.data);
-
-	for(let lootspawn in location.Loot)
-	{
-		if(location.Loot[lootspawn].IsStatic == false)
-		{
-			location.Loot[lootspawn].Items = [];
-
-			let newitem = {
-				"_id": utility.generateNewItemId(),
-				"_tpl": itemsKeys_[utility.getRandomIntEx(itemsKeys_.length)]
-			};
-
-			location.Loot[lootspawn].Items.push(newitem);
-			location.Loot[lootspawn].Root = newitem._id;
-		}
-	}
-	utility.writeJson("debug_map_generator.json",location.Loot);
-	//return JSON.stringify(location);
-}
-
 //// ---- EXPORT LIST ---- ////
 
 module.exports.prepareLocations = prepareLocations;
-module.exports.LootGenerator = LootGenerator;

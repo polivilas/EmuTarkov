@@ -35,10 +35,7 @@ function sendResponse(req, resp, body) {
 		let mapname = req.url.replace("/api/location/", "");
 		console.log("[MAP.config]: " + mapname);
 		let RandomPreset = utility.getRandomInt(1,6);
-		let data_response = utility.readJson("data/configs/api/location/" + mapname + "6.json");
-		
-		//data_response = locations_f.LootGenerator( JSON.parse(data_response) );
-
+		let data_response = utility.readJson("data/configs/api/location/" + mapname + "" + RandomPreset + ".json");
 		header_f.sendMapData(resp, data_response);
 		return;
 	}
@@ -55,11 +52,15 @@ function sendResponse(req, resp, body) {
 	}
 
 	if (output === "IMAGE") {
-		if (req.url.includes("/files/quest") || req.url.includes("/files/handbook")){
-			console.log("[IMG.special]:" + image);		
+		if (req.url.includes("/files/quest")){ 
+			console.log("[IMG.quests]:" + req.url);		
+			req.url = req.url.replace("/files", "/data/images");
+		} else if (req.url.includes("/files/handbook")){
+			console.log("[IMG.handbook]:" + req.url);		
 			req.url = req.url.replace("/files", "/data/images");
 		} else if (req.url.includes("/files/trader/avatar")){
-			req.url = req.url.replace("files/trader/avatar", "data/images/traders");
+			console.log("[IMG.trader]:" + req.url);		
+			req.url = "/data/images" + req.url;
 		} else {
 			console.log("[IMG.regular]:" + image);
 		}
@@ -136,7 +137,6 @@ function handleRequest(req, resp) {
 }
 
 function start() {
-	let server = http.createServer();
 	port = settings.server.port;
 	const options = {
 	  key: fs.readFileSync("server.key"),
@@ -146,9 +146,9 @@ function start() {
 	if (settings.server.generateIp == true)
     {
         ip = utility.getLocalIpAddress();
+		settings.server.ip = ip; 
     }
 	// set the ip and backendurl 
-	settings.server.ip = ip; 
 	settings.server.backendUrl = "https://" + ip; 
 	backendUrl = settings.server.backendUrl;
 	utility.writeJson("server.config.json", settings); 
@@ -159,29 +159,20 @@ function start() {
 	{
 		logger.separator();
 	}
-	server = https.createServer(options).listen(port, function(){
-		console.log("» Starting listening on " + backendUrl, "green", "", true);
-		console.log(" ","","",true)
+	let serverHTTPS = https.createServer(options, (req, res) => {
+		handleRequest(req, res);
+	}).listen(port, function(){
+		console.log("» Server: " + backendUrl, "green", "", true);
 	});
 	
-	// check if port is already being listened to 
-	server.on('error', function (e) {
+	// ERROR ON CREATION - HTTPS
+	serverHTTPS.on('error', function (e) {
 		console.log(e);
 		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
 		if(settings.debug.debugMode == true)
 			require('child_process').exec('start "" "' + __dirname.substring(0, __dirname.length - 3) + 'errorLogs"');
-    });
+    });	
 
-
-	// listen to port on ip
-	/*server.listen(port, function() {
-		
-	});*/
-	
-	// handle request 
-	server.on('request', function(req, resp) {
-		handleRequest(req, resp);
-	});
 	
 
 }

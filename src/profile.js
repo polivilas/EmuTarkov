@@ -19,7 +19,7 @@ function loadTraderStandings(playerData = "") {
     // get trader data and update by profile info
     let dynTrader;
     // Check if trader standing data exists
-    if (profileCharData.hasOwnProperty("TraderStandings")) {
+    /*if (profileCharData.hasOwnProperty("TraderStandings")) {
         for (dynTrader of trader.getDynamicTraders()) {
             let profileStanding = profileCharData.TraderStandings[dynTrader];
             let traderLoyality = trader.get(dynTrader).data.loyalty;
@@ -46,7 +46,7 @@ function loadTraderStandings(playerData = "") {
         // save profile
         profileData.data[1] = profileCharData;
         setCharacterData(profileData);
-    }
+    }*/
 	if(playerData != "")
 		return profileData;
 }
