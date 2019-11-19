@@ -65,7 +65,7 @@ function loadAssort(trader) {
     // load assort files
     for (let file in assortDir) {
 		if(assortFiles[file] == (selectedTrader + ".json"))
-			return JSON.parse(utility.readJson(assortDir + assortFiles[file]));
+			return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(assortDir + assortFiles[file]))};
     }
 	console.log("Couldn't find assort of ID " + trader, "white", "red");
     return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
@@ -75,12 +75,12 @@ function get(id, flea = false) {
     // find the trader
 	if(id == "91_everythingTrader" && flea) 
     { // always return everything trader
-		return JSON.parse(utility.readJson(tradersDir + id + ".json"));
+		return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(tradersDir + id + ".json"))};
 	} 
     else 
     {
 		if(typeof traders_connected[id] != "undefined")
-			return JSON.parse(utility.readJson(tradersDir + traders_connected[id] + ".json"));
+			return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(tradersDir + traders_connected[id] + ".json")) };
 	}
     // trader not found
     console.log("Couldn't find trader of ID " + id, "white", "red");
