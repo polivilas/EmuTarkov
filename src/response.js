@@ -62,6 +62,10 @@ function get(req, body) {
         return "MAPCONFIG";
     }
 
+    // raid banners
+    if (url.includes("files/CONTENT/banners")) {
+        return "CONTENT";
+    }
     // game images
     if (url.includes(".jpg") || url.includes(".png") || url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
         return "IMAGE";
@@ -73,10 +77,7 @@ function get(req, body) {
         return 'NULLGET';
     }
 
-    // raid banners
-    if (url.includes("/uploads/")) {
-        return "CONTENT";
-    }
+
 
     // menu localisation
     if (url.includes(localeMenu)) {

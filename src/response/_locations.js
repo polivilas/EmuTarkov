@@ -59,7 +59,6 @@ function LootGenerator(location)
 	//utility.writeJson("debug_map_generator.json",location.Loot);
 	return location;
 }
-
 //// ---- EXPORT LIST ---- ////
 
 module.exports.prepareLocations = prepareLocations;

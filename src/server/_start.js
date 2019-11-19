@@ -45,8 +45,8 @@ function sendResponse(req, resp, body) {
 	}
 
 	if (output === "CONTENT") {
-		let image = req.url.replace('/uploads/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
-		console.log("[IMG.content]:" + image);
+		let image = req.url.replace('/files/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
+		console.log("[IMG.banners]:" + image);
 		header_f.sendImage(resp, image);
 		return;
 	}
@@ -62,7 +62,7 @@ function sendResponse(req, resp, body) {
 			console.log("[IMG.trader]:" + req.url);		
 			req.url = "/data/images" + req.url;
 		} else {
-			console.log("[IMG.regular]:" + image);
+			console.log("[IMG.regular]:" + req.url);
 		}
 		header_f.sendImage(resp, "." + req.url);
 		return;
