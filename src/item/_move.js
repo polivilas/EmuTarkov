@@ -15,8 +15,8 @@ function moveItem(tmpList, body) {
     //cartriges handler start
     if (body.to.container === 'cartridges') {
         let tmp_counter = 0;
-        for (let item_ammo in tmpList.data[1].Inventory.items) {
-            if (body.to.id === tmpList.data[1].Inventory.items[item_ammo].parentId) {
+        for (let item_ammo in tmpList.data[0].Inventory.items) {
+            if (body.to.id === tmpList.data[0].Inventory.items[item_ammo].parentId) {
                 tmp_counter++;
             }
         }
@@ -24,7 +24,7 @@ function moveItem(tmpList, body) {
     }
     //cartriges handler end
 
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.parentId = body.to.id;
             item.slotId = body.to.container;
@@ -59,9 +59,9 @@ function removeItem(tmpList, body, output = item.getOutput()) {
         let ids_toremove = itm_hf.findAndReturnChildren(tmpList, toDo[0]); //get all ids related to this item, +including this item itself
         for (let i in ids_toremove) { //remove one by one all related items and itself
             output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
-            for (let a in tmpList.data[1].Inventory.items) {	//find correct item by id and delete it
-                if (tmpList.data[1].Inventory.items[a]._id === ids_toremove[i]) {
-                    tmpList.data[1].Inventory.items.splice(a, 1);  //remove item from tmplist
+            for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
+                if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
+                    tmpList.data[0].Inventory.items.splice(a, 1);  //remove item from tmplist
                 }
             }
         }
@@ -82,13 +82,13 @@ function splitItem(tmpList, body) { // -> Spliting item / Create new item with s
     let location = body.container.location;
     if (typeof body.container.location === "undefined" && body.container.container === "cartridges") {
         let tmp_counter = 0;
-        for (let item_ammo in tmpList.data[1].Inventory.items) {
-            if (tmpList.data[1].Inventory.items[item_ammo].parentId === body.container.id)
+        for (let item_ammo in tmpList.data[0].Inventory.items) {
+            if (tmpList.data[0].Inventory.items[item_ammo].parentId === body.container.id)
                 tmp_counter++;
         }
         location = tmp_counter;//wrong location for first cartrige
     }
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.StackObjectsCount -= body.count;
             let newItem = utility.generateNewItemId();
@@ -100,7 +100,7 @@ function splitItem(tmpList, body) { // -> Spliting item / Create new item with s
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
-            tmpList.data[1].Inventory.items.push({
+            tmpList.data[0].Inventory.items.push({
                 "_id": newItem,
                 "_tpl": item._tpl,
                 "parentId": body.container.id,
@@ -121,25 +121,25 @@ function splitItem(tmpList, body) { // -> Spliting item / Create new item with s
 function mergeItem(tmpList, body) {
     item.resetOutput();
     let output = item.getOutput();
-    for (let key in tmpList.data[1].Inventory.items) {
-        if (tmpList.data[1].Inventory.items.hasOwnProperty(key)) {
-            if (tmpList.data[1].Inventory.items[key]._id && tmpList.data[1].Inventory.items[key]._id === body.with) {
-                for (let key2 in tmpList.data[1].Inventory.items) {
-                    if (tmpList.data[1].Inventory.items[key2]._id && tmpList.data[1].Inventory.items[key2]._id === body.item) {
+    for (let key in tmpList.data[0].Inventory.items) {
+        if (tmpList.data[0].Inventory.items.hasOwnProperty(key)) {
+            if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id === body.with) {
+                for (let key2 in tmpList.data[0].Inventory.items) {
+                    if (tmpList.data[0].Inventory.items[key2]._id && tmpList.data[0].Inventory.items[key2]._id === body.item) {
                         let stackItem0 = 1;
                         let stackItem1 = 1;
-                        if (typeof tmpList.data[1].Inventory.items[key].upd !== "undefined")
-                            stackItem0 = tmpList.data[1].Inventory.items[key].upd.StackObjectsCount;
-                        if (typeof tmpList.data[1].Inventory.items[key2].upd !== "undefined")
-                            stackItem1 = tmpList.data[1].Inventory.items[key2].upd.StackObjectsCount;
+                        if (typeof tmpList.data[0].Inventory.items[key].upd !== "undefined")
+                            stackItem0 = tmpList.data[0].Inventory.items[key].upd.StackObjectsCount;
+                        if (typeof tmpList.data[0].Inventory.items[key2].upd !== "undefined")
+                            stackItem1 = tmpList.data[0].Inventory.items[key2].upd.StackObjectsCount;
 
                         if (stackItem0 === 1)
-                            Object.assign(tmpList.data[1].Inventory.items[key], {"upd": {"StackObjectsCount": 1}});
+                            Object.assign(tmpList.data[0].Inventory.items[key], {"upd": {"StackObjectsCount": 1}});
 
-                        tmpList.data[1].Inventory.items[key].upd.StackObjectsCount = stackItem0 + stackItem1;
+                        tmpList.data[0].Inventory.items[key].upd.StackObjectsCount = stackItem0 + stackItem1;
 
-                        output.data.items.del.push({"_id": tmpList.data[1].Inventory.items[key2]._id});
-                        tmpList.data[1].Inventory.items.splice(key2, 1);
+                        output.data.items.del.push({"_id": tmpList.data[0].Inventory.items[key2]._id});
+                        tmpList.data[0].Inventory.items.splice(key2, 1);
 
                         profile.setCharacterData(tmpList);
                         return output;
@@ -157,7 +157,7 @@ function mergeItem(tmpList, body) {
 function transferItem(tmpList, body) {
     item.resetOutput();
     let output = item.getOutput();
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         // From item
         if (item._id === body.item) {
             let stackItem = 1;
@@ -190,7 +190,7 @@ function transferItem(tmpList, body) {
 function swapItem(tmpList, body) {
     item.resetOutput();
     let output = item.getOutput();
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._id === body.item) {
             item.parentId = body.to.id;         // parentId
             item.slotId = body.to.container;    // slotId
@@ -213,7 +213,7 @@ function addItem(tmpList, body) {
     let output = item.getOutput();
 	
 	
-	tmpList.data[1].Inventory.items.push(new_item);
+	tmpList.data[0].Inventory.items.push(new_item);
     profile.setCharacterData(tmpList);
     return output;
 }

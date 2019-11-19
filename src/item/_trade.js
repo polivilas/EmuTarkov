@@ -96,16 +96,16 @@ function buyItem(tmpList, body, trad = "") { // Buying item from trader
                             output.data.items.new.push({
                                 "_id": newItem,
                                 "_tpl": item._tpl,
-                                "parentId": tmpList.data[1].Inventory.stash,
+                                "parentId": tmpList.data[0].Inventory.stash,
                                 "slotId": "hideout",
                                 "location": {"x": x, "y": y, "r": 0},
                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                             });
 
-                            tmpList.data[1].Inventory.items.push({
+                            tmpList.data[0].Inventory.items.push({
                                 "_id": newItem,
                                 "_tpl": item._tpl,
-                                "parentId": tmpList.data[1].Inventory.stash,
+                                "parentId": tmpList.data[0].Inventory.stash,
                                 "slotId": "hideout",
                                 "location": {"x": x, "y": y, "r": 0},
                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
@@ -130,7 +130,7 @@ function buyItem(tmpList, body, trad = "") { // Buying item from trader
                                                 "location": {"x": x, "y": y, "r": "Horizontal"},
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
-                                            tmpList.data[1].Inventory.items.push({
+                                            tmpList.data[0].Inventory.items.push({
                                                 "_id": newItem,
                                                 "_tpl": tmpTrader.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
@@ -146,7 +146,7 @@ function buyItem(tmpList, body, trad = "") { // Buying item from trader
                                                 "slotId": SlotID,
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
-                                            tmpList.data[1].Inventory.items.push({
+                                            tmpList.data[0].Inventory.items.push({
                                                 "_id": newItem,
                                                 "_tpl": tmpTrader.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
@@ -182,7 +182,7 @@ function sellItem(tmpList, body) {
     // find the items
     for (let i in body.items) { // items to sell
         console.log("selling item" + JSON.stringify(body.items[i]), "", "", true); // print item trying to sell
-        for (let item of tmpList.data[1].Inventory.items) { // profile inventory, look into it if item exist
+        for (let item of tmpList.data[0].Inventory.items) { // profile inventory, look into it if item exist
             let isThereSpace = body.items[i].id.search(" ");
             let checkID = body.items[i].id;
             if (isThereSpace !== -1)

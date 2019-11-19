@@ -18,12 +18,12 @@ function wearClothing(tmpList, body){
 		let costume_data = customization_m.data[suits_to_set[i]];
 		//this parent reffers to Lower Node
 		if(costume_data._parent == "5cd944d01388ce000a659df9"){
-			tmpList.data[1].Customization.Feet = costume_data._props.Feet;//do only feet
+			tmpList.data[0].Customization.Feet = costume_data._props.Feet;//do only feet
 		}
 		//this parent reffers to Upper Node
 		if(costume_data._parent == "5cd944ca1388ce03a44dc2a4"){	//do only body and hands
-			tmpList.data[1].Customization.Body = costume_data._props.Body;
-			tmpList.data[1].Customization.Hands = costume_data._props.Hands;
+			tmpList.data[0].Customization.Body = costume_data._props.Body;
+			tmpList.data[0].Customization.Hands = costume_data._props.Hands;
 			
 		}
 	}
@@ -42,23 +42,23 @@ function buyClothing(tmpList, body){
 	let item_toPay = body.items;
 	let customization_storage = JSON.parse( utility.readJson("data/configs/customization/storage.json") );
 	for(let i = 0; i < item_toPay.length; i++){
-		for(let item in tmpList.data[1].Inventory.items){
-			if(tmpList.data[1].Inventory.items[item]._id == item_toPay[i].id){
-				if(tmpList.data[1].Inventory.items[item].upd.StackObjectsCount > item_toPay[i].count){
+		for(let item in tmpList.data[0].Inventory.items){
+			if(tmpList.data[0].Inventory.items[item]._id == item_toPay[i].id){
+				if(tmpList.data[0].Inventory.items[item].upd.StackObjectsCount > item_toPay[i].count){
 					//now change cash
-					tmpList.data[1].Inventory.items[item].upd.StackObjectsCount = tmpList.data[1].Inventory.items[item].upd.StackObjectsCount - item_toPay[i].count;
+					tmpList.data[0].Inventory.items[item].upd.StackObjectsCount = tmpList.data[0].Inventory.items[item].upd.StackObjectsCount - item_toPay[i].count;
 					output.data.items.change.push({
-                        "_id": tmpList.data[1].Inventory.items[item]._id,
-                        "_tpl": tmpList.data[1].Inventory.items[item]._tpl,
-                        "parentId": tmpList.data[1].Inventory.items[item].parentId,
-                        "slotId": tmpList.data[1].Inventory.items[item].slotId,
-                        "location": tmpList.data[1].Inventory.items[item].location,
-                        "upd": {"StackObjectsCount": tmpList.data[1].Inventory.items[item].upd.StackObjectsCount}
+                        "_id": tmpList.data[0].Inventory.items[item]._id,
+                        "_tpl": tmpList.data[0].Inventory.items[item]._tpl,
+                        "parentId": tmpList.data[0].Inventory.items[item].parentId,
+                        "slotId": tmpList.data[0].Inventory.items[item].slotId,
+                        "location": tmpList.data[0].Inventory.items[item].location,
+                        "upd": {"StackObjectsCount": tmpList.data[0].Inventory.items[item].upd.StackObjectsCount}
                     });
 					break; // break from inventory loop
-				} else if(tmpList.data[1].Inventory.items[item].upd.StackObjectsCount == item_toPay[i].count && item_toPay[i].del == true){
+				} else if(tmpList.data[0].Inventory.items[item].upd.StackObjectsCount == item_toPay[i].count && item_toPay[i].del == true){
 					output.data.items.del.push({"_id": item_toPay[i].id}); // Tell client to remove this from live game
-                    tmpList.data[1].Inventory.items.splice(item, 1);  //remove item from tmplist					
+                    tmpList.data[0].Inventory.items.splice(item, 1);  //remove item from tmplist					
 				}
 			}
 		}

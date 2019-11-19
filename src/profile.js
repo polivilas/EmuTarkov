@@ -197,7 +197,7 @@ function getStashType() {
 
 function setCharacterData(data) {
     if (typeof data.data !== "undefined") {
-        data = data.data[1];
+        data = data.data[0];
     }
     utility.writeJson("data/profiles/character_" + constants.getActiveID() + ".json", data);
 }
@@ -386,8 +386,8 @@ function changeNickname(info) {
     }
 
     // change nickname
-    tmpList.data[1].Info.Nickname = info.nickname;
-    tmpList.data[1].Info.LowerNickname = info.nickname.toLowerCase();
+    tmpList.data[0].Info.Nickname = info.nickname;
+    tmpList.data[0].Info.LowerNickname = info.nickname.toLowerCase();
 
     setCharacterData(tmpList);
     return (
@@ -400,7 +400,7 @@ function changeNickname(info) {
 function changeVoice(info) {
     let tmpList = getCharacterData();
 
-    tmpList.data[1].Info.Voice = info.voice;
+    tmpList.data[0].Info.Voice = info.voice;
 
     setCharacterData(tmpList);
 }

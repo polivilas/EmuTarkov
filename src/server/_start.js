@@ -169,8 +169,8 @@ function start() {
 	serverHTTPS.on('error', function (e) {
 		console.log(e);
 		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
-		if(settings.debug.debugMode == true)
-			require('child_process').exec('start "" "' + __dirname.substring(0, __dirname.length - 3) + 'errorLogs"');
+		//if(settings.debug.debugMode == true) // this is kindabullshit
+			//require('child_process').exec('start "" "' + __dirname.substring(0, __dirname.length - 3) + '/errorLogs"');
     });	
 
 	

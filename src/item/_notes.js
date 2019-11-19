@@ -5,7 +5,7 @@ const profile = require('../profile.js');
 //// ---- FUNCTIONS BELOW ---- ////
 
 function addNote(tmpList, body) { // -> Note ADD
-    tmpList.data[1].Notes.Notes.push({
+    tmpList.data[0].Notes.Notes.push({
 		"Time": body.note.Time, 
 		"Text": body.note.Text
 	});
@@ -14,7 +14,7 @@ function addNote(tmpList, body) { // -> Note ADD
 }
 
 function editNode(tmpList, body) { // -> Note Edit
-    tmpList.data[1].Notes.Notes[body.index] = {
+    tmpList.data[0].Notes.Notes[body.index] = {
 		"Time": body.note.Time, 
 		"Text": body.note.Text
 	};
@@ -23,7 +23,7 @@ function editNode(tmpList, body) { // -> Note Edit
 }
 
 function deleteNote(tmpList, body) { // -> Note Delete
-    tmpList.data[1].Notes.Notes.splice(body.index, 1);
+    tmpList.data[0].Notes.Notes.splice(body.index, 1);
     profile.setCharacterData(tmpList);
     return "OK";
 }

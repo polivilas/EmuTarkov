@@ -481,13 +481,12 @@ function generateFollowerGluharScout(botBase)
 
 function generatePlayerScav() 
 {
-
 	let character = profile.getCharacterData();
 	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]});
 	
 	playerscav[0].Info.Settings = {};
 	playerscav[0]._id = "5c71b934354682353958e983";
-	character.data[0] = playerscav[0];
+	character.data[1] = playerscav[0];
 	
 	profile.setCharacterData(character);
 }

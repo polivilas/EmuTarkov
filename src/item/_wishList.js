@@ -10,14 +10,14 @@ const itm_hf = require('./helpFunctions.js');	// additional functions
 *  output: OK (saved profile)
 * */
 function addToWishList(tmpList, body) {
-    for (let item in tmpList.data[1]['Wishlist']) {
+    for (let item in tmpList.data[0]['Wishlist']) {
         // don't add the item
-        if (tmpList.data[1].WishList[item] === body['templateId']) {
+        if (tmpList.data[0].WishList[item] === body['templateId']) {
             return "OK";
         }
     }
     // add the item to the wishlist
-    tmpList.data[1].WishList.push(body['templateId']);
+    tmpList.data[0].WishList.push(body['templateId']);
     profile.setCharacterData(tmpList);
     return "OK";
 }
@@ -26,9 +26,9 @@ function addToWishList(tmpList, body) {
 *  output: OK (saved profile)
 * */
 function removeFromWishList(tmpList, body) {
-    for (let item in tmpList.data[1]['Wishlist']) {
-        if (tmpList.data[1].WishList[item] === body['templateId']) {
-            tmpList.data[1].WishList.splice(item, 1);
+    for (let item in tmpList.data[0]['Wishlist']) {
+        if (tmpList.data[0].WishList[item] === body['templateId']) {
+            tmpList.data[0].WishList.splice(item, 1);
         }
     }
     profile.setCharacterData(tmpList);
@@ -39,7 +39,7 @@ function removeFromWishList(tmpList, body) {
 *  output: none
 * */
 function resetWishList(tmpList){
-    tmpList.data[1].WishList = [];
+    tmpList.data[0].WishList = [];
     profile.setCharacterData(tmpList);
 }
 

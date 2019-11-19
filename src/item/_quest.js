@@ -7,7 +7,7 @@ var AllQuests = quests;
 //// ---- FUNCTIONS BELOW ---- ////
 
 function acceptQuest(tmpList, body) { // -> Accept quest
-    tmpList.data[1].Quests.push({
+    tmpList.data[0].Quests.push({
 		"qid": body.qid.toString(), 
 		"startTime": utility.getTimestamp(), 
 		"status": 2
@@ -25,7 +25,7 @@ function acceptQuest(tmpList, body) { // -> Accept quest
 }
 
 function completeQuest(tmpList, body) { // -> Complete quest (need rework for giving back quests)
-    for (let quest of tmpList.data[1].Quests) {
+    for (let quest of tmpList.data[0].Quests) {
         if (quest.qid === body.qid) {
             quest.status = 4;
             break;
@@ -45,18 +45,18 @@ function completeQuest(tmpList, body) { // -> Complete quest (need rework for gi
                     let traderLoyalty = tmpTraderInfo.data.loyalty;
                     traderLoyalty.currentStanding += parseFloat(reward.value);
                     trader.get(reward.target).data.loyalty = traderLoyalty;
-                    let newLvlTraders = trader.lvlUp(tmpList.data[1].Info.Level);
+                    let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
 
                     for (let lvlUpTrader in newLvlTraders) 
                     {
-                        tmpList.data[1].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
+                        tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
                     }
 
-                    tmpList.data[1].TraderStandings[reward.target].currentStanding += parseFloat(reward.value);
+                    tmpList.data[0].TraderStandings[reward.target].currentStanding += parseFloat(reward.value);
 
                 } else if (reward.type === "Experience") 
                 { // get Exp reward
-                    tmpList.data[1].Info.Experience += parseInt(reward.value);
+                    tmpList.data[0].Info.Experience += parseInt(reward.value);
                 }
             }
         }
@@ -84,17 +84,17 @@ function handoverQuest(tmpList, body) { // -> Quest handover items
 		});
     }
 
-    for (let backendCounter in tmpList.data[1].BackendCounters) 
+    for (let backendCounter in tmpList.data[0].BackendCounters) 
     {
         if (backendCounter === body.conditionId) 
         {
-            tmpList.data[1].BackendCounters[body.conditionId].value += counter;
+            tmpList.data[0].BackendCounters[body.conditionId].value += counter;
             found = true;
         }
     }
 
     if (!found) {
-        tmpList.data[1].BackendCounters[body.conditionId] = {
+        tmpList.data[0].BackendCounters[body.conditionId] = {
 			"id": body.conditionId, 
 			"qid": body.qid, 
 			"value": counter

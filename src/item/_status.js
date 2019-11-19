@@ -5,7 +5,7 @@ const profile = require('../profile.js');
 //// ---- FUNCTIONS BELOW ---- ////
 
 function foldItem(tmpList, body) { // -> Fold item / generally weapon
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Foldable = {"Folded": body.value};
             profile.setCharacterData(tmpList);
@@ -16,7 +16,7 @@ function foldItem(tmpList, body) { // -> Fold item / generally weapon
 }
 
 function toggleItem(tmpList, body) { // -> Toggle item / flashlight, laser etc.
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Togglable = {"On": body.value};
             profile.setCharacterData(tmpList);
@@ -27,7 +27,7 @@ function toggleItem(tmpList, body) { // -> Toggle item / flashlight, laser etc.
 }
 
 function tagItem(tmpList, body) { // -> Tag item / Taggs item with given name and color
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._id === body.item) {
             if (item.upd !== null &&
                 item.upd !== undefined &&
@@ -53,15 +53,15 @@ function tagItem(tmpList, body) { // -> Tag item / Taggs item with given name an
 }
 
 function bindItem(tmpList, body) { // -> Binds item to quick bar
-    for (let index in tmpList.data[1].Inventory.fastPanel) {
+    for (let index in tmpList.data[0].Inventory.fastPanel) {
         // if binded items is already in fastPanel
-        if (tmpList.data[1].Inventory.fastPanel[index] === body.item) {
+        if (tmpList.data[0].Inventory.fastPanel[index] === body.item) {
             // we need to remove index before re-adding somewhere else
-            tmpList.data[1].Inventory.fastPanel[index] = "";
+            tmpList.data[0].Inventory.fastPanel[index] = "";
         }
     }
 
-    tmpList.data[1].Inventory.fastPanel[body.index] = body.item;
+    tmpList.data[0].Inventory.fastPanel[body.index] = body.item;
     profile.setCharacterData(tmpList);
     return "OK";
 }
@@ -83,7 +83,7 @@ function examineItem(tmpList, body) { // examine item and adds it to examined li
     }
     // player inventory
     if (returned === "BAD") {
-        for (let item of tmpList.data[1].Inventory.items) {
+        for (let item of tmpList.data[0].Inventory.items) {
             if (item._id === body.item) {
                 console.log("Found equipment examing item: " + item._id, "", "", true);
                 returned = item._tpl;
@@ -100,7 +100,7 @@ function examineItem(tmpList, body) { // examine item and adds it to examined li
 
     // item found
     console.log("EXAMINED: " + returned, "white", "green", true);
-    tmpList.data[1].Encyclopedia[returned] = true;
+    tmpList.data[0].Encyclopedia[returned] = true;
     profile.setCharacterData(tmpList);
 
     return "OK";

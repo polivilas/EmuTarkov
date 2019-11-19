@@ -20,11 +20,11 @@ function setInternalOutput(data){
 function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
 	let PlayerStash = getPlayerStash();
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         // hideout  // added proper stash ID older was "5c71b934354682353958ea35"
-        if (item.parentId === tmpList.data[1].Inventory.stash && typeof item.location != "undefined") {
+        if (item.parentId === tmpList.data[0].Inventory.stash && typeof item.location != "undefined") {
             // let tmpItem = getItem(item._tpl)[1];
-            let tmpSize = getSize(item._tpl, item._id, tmpList.data[1].Inventory.items);
+            let tmpSize = getSize(item._tpl, item._id, tmpList.data[0].Inventory.items);
             //			x
             let iW = tmpSize[0];
             //			y
@@ -105,8 +105,8 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
 	output = item.getOutput();
     let value = 0;
     for (let i = 0; i < moneyObject.length; i++) {
-		for (let index in tmpList.data[1].Inventory.items) {
-			let itm = tmpList.data[1].Inventory.items[index];
+		for (let index in tmpList.data[0].Inventory.items) {
+			let itm = tmpList.data[0].Inventory.items[index];
             if (typeof itm.upd !== "undefined")
                 if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
@@ -121,7 +121,7 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
                     });
                 } else if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
-                    tmpList.data[1].Inventory.items.splice(index, 1);// just slice item from )
+                    tmpList.data[0].Inventory.items.splice(index, 1);// just slice item from )
                     output.data.items.del.push({"_id": itm._id});
                 } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count)
                     return false;
@@ -138,16 +138,16 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
             value = inRUB(value, traderCurrency);
             traderLoyalty.currentSalesSum += value;
             trader.get(body.tid).data.loyalty = traderLoyalty;
-            let newLvlTraders = trader.lvlUp(tmpList.data[1].Info.Level);
+            let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
             for (let lvlUpTrader in newLvlTraders) {
-                if (tmpList.data[1].TraderStandings.hasOwnProperty(lvlUpTrader)) {
-                    tmpList.data[1].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
+                if (tmpList.data[0].TraderStandings.hasOwnProperty(lvlUpTrader)) {
+                    tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
                 }
             }
             // if everything goes OK save profile
             // update trader data also in profile
 
-            tmpList.data[1].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
+            tmpList.data[0].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
         }*/
     profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);
@@ -160,7 +160,7 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
 * */
 function findMoney(tmpList, barter_itemID) { // find required items to take after buying (handles multiple items)
     let prepareReturn = [];
-    for (let item of tmpList.data[1].Inventory.items)
+    for (let item of tmpList.data[0].Inventory.items)
         for (let i = 0; i < barter_itemID.length; i++)
             if (item._id === barter_itemID[i])
                 prepareReturn[i] = item;
@@ -176,7 +176,7 @@ function getMoney(tmpList, amount, body, output_temp) {
     let value = inRUB(amount, currency);
     let calcAmount = fromRUB(amount, currency);
     let skip = false;
-    for (let item of tmpList.data[1].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         if (item._tpl === currency) {
             item.upd.StackObjectsCount += calcAmount;
             output_temp.data.items.change.push(item);
@@ -202,12 +202,12 @@ function getMoney(tmpList, amount, body, output_temp) {
                         {
                             "_id": utility.generateNewItemId(),
                             "_tpl": currency,
-                            "parentId": tmpList.data[1].Inventory.stash,
+                            "parentId": tmpList.data[0].Inventory.stash,
                             "slotId": "hideout",
                             "location": {x: Mx, y: My, r: "Horizontal"},
                             "upd": {"StackObjectsCount": calcAmount}
                         };
-                    tmpList.data[1].Inventory.items.push(MoneyItem);
+                    tmpList.data[0].Inventory.items.push(MoneyItem);
                     output_temp.data.items.new.push(MoneyItem);
                     console.log("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
                     break addedMoney;
@@ -220,14 +220,14 @@ function getMoney(tmpList, amount, body, output_temp) {
     let traderLoyalty = tmpTraderInfo.data.loyalty;
     traderLoyalty.currentSalesSum += value;
     trader.get(body.tid).data.loyalty = traderLoyalty;
-    let newLvlTraders = trader.lvlUp(tmpList.data[1].Info.Level);
+    let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
     for (let lvlUpTrader in newLvlTraders) {
-        if (tmpList.data[1].TraderStandings.hasOwnProperty(lvlUpTrader)) {
-            tmpList.data[1].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
+        if (tmpList.data[0].TraderStandings.hasOwnProperty(lvlUpTrader)) {
+            tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
         }
     }
     if (body.tid !== "91_everythingTrader" && body.tid !== "92_SecretTrader")
-        tmpList.data[1].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
+        tmpList.data[0].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
 	*/
     profile.setCharacterData(tmpList);
     return output_temp;
@@ -368,7 +368,7 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * */
 function findAndReturnChildren(tmpList, itemid) {
     let list = [];
-    for (let childitem of tmpList.data[1].Inventory.items) {
+    for (let childitem of tmpList.data[0].Inventory.items) {
         if (childitem.parentId === itemid) {
             list.push.apply(list, findAndReturnChildren(tmpList, childitem._id));
         }
