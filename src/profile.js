@@ -175,8 +175,8 @@ function getCharacterData() {
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
     let ret = {err: 0, errmsg: null, data: []};
-    ret.data.push(scavData);
     ret.data.push(playerData);
+    ret.data.push(scavData);
  	//ret = loadTraderStandings(ret);
    return ret;
 }
