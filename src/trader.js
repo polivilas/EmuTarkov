@@ -64,8 +64,9 @@ function loadAssort(trader) {
 	let selectedTrader = ((typeof traders_connected[trader] != "undefined")?traders_connected[trader]:trader);
     // load assort files
     for (let file in assortDir) {
-		if(assortFiles[file] == (selectedTrader + ".json"))
-			return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(assortDir + assortFiles[file]))};
+		if(assortFiles[file] == (selectedTrader + ".json")){
+			return JSON.parse(utility.readJson(assortDir + assortFiles[file]));
+		}
     }
 	console.log("Couldn't find assort of ID " + trader, "white", "red");
     return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
