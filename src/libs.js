@@ -62,12 +62,4 @@ global.ragfair = require('./ragfair.js');					// ragfair
 global.globalSettings = JSON.parse(utility.readJson("data/configs/globals.json"));
 global.customization_m = JSON.parse(utility.readJson("data/configs/customization/customization.json"));
 
-/* NOT USED ANYMORE */
-//global.backpackLootTable = JSON.parse(utility.readJson("data/configs/bots/botBackpackLootTable.json")).BackpackLootTable;
-//global.presets = JSON.parse(utility.readJson("data/configs/bots/botPresets.json"));
-//global.weaponPresets = JSON.parse(utility.readJson("data/configs/bots/botWeapons.json"));
-//global.presets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcPresets.json"));
-//global.weaponPresets_PMC = JSON.parse(utility.readJson("data/configs/bots/pmcWeapons.json"));
-
-
 /* Made by TheMaoci - Load only once */
