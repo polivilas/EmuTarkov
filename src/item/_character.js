@@ -7,12 +7,30 @@ const move_f = require('./_move.js'); 			// move item 	handling functions
 
 //// ---- FUNCTIONS BELOW ---- ////
 
-function eatItem(tmpList, body) { // -> Eat item and get benefits // maybe for future features
-    /*for (let item of tmpList.data[0].Inventory.items) {
-        if (item._id === body.item) {
-            let effects = getItem(item._tpl)[1]._props.effects_health; // TODO: Its used to remove Fracture effect etc. on body part / its not implemented so its not used
+function eatItem(tmpList, body) { // -> Eat item and get benefits
+
+    for (let item in tmpList.data[0].Inventory.items) 
+    {
+        if (tmpList.data[0].Inventory.items[item]._id === body.item)
+        {
+            var maxResource = itm_hf.getItem(tmpList.data[0].Inventory.items[item]._tpl)[1]._props.MaxResource;
+            var effects = itm_hf.getItem(tmpList.data[0].Inventory.items[item]._tpl)[1]._props.effects_health; 
+            var todelete = false;
+
+            if( maxResource > 1 )
+            {   
+                if( typeof tmpList.data[0].Inventory.items[item].upd.FoodDrink === 'undefined')
+                {
+                    tmpList.data[0].Inventory.items[item].upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
+
+                }else
+                {
+                    tmpList.data[0].Inventory.items[item].upd.FoodDrink.HpPercent -= body.count; 
+                    if( tmpList.data[0].Inventory.items[item].upd.FoodDrink.HpPercent < 1 ){todelete = true;}
+                }  
+            }
         }
-    }*/
+    }
 
     let hydration = tmpList.data[0].Health.Hydration;
     let energy = tmpList.data[0].Health.Energy;
@@ -29,8 +47,16 @@ function eatItem(tmpList, body) { // -> Eat item and get benefits // maybe for f
     }
 
     profile.setCharacterData(tmpList);
-    move_f.removeItem(tmpList, {Action: 'Remove', item: body.item});
-    return "OK";
+
+    if(maxResource == 1 || todelete == true)
+    {
+        move_f.removeItem(tmpList, {Action: 'Remove', item: body.item});
+    }
+    else
+    {
+        item.resetOutput();
+    }
+    return item.getOutput();
 }
 
 function healPlayer(tmpList, body) { // -> Healing
