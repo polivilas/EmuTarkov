@@ -1,5 +1,4 @@
 //"use strict";
-//const express = require('express');
 global.fs = require('fs');
 global.path = require('path');
 global.util = require('util');
@@ -8,7 +7,6 @@ global.https = require('https');
 global.zlib = require('zlib');
 global.adler32 = require('adler32');
 global.os = require('os');
-//global.app = express();
 
 global.settings = JSON.parse( (fs.readFileSync("server.config.json", 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '') );
 global.backendUrl = settings.server.backendUrl;
