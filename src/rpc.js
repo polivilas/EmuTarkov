@@ -31,14 +31,14 @@ function getResponse(req, body) {
     // handle dynamic requests
     for (var key in dynamicRPC) {
         if (url.includes(key)) {
-            return dynamicRPC[key](info);
+            return dynamicRPC[key](url, info);
         }
     }
 
     // handle static requests
     for (var key in staticRPC) {      
         if (url === key) {
-            output = staticRPC[key](info);
+            output = staticRPC[key](url, info);
             break;
         }
     }
@@ -52,7 +52,7 @@ function getResponse(req, body) {
     // load from cache when server is in release mode
     if (typeof info.crc != "undefined") {
         let crctest = JSON.parse(output);
-        
+
         if (typeof crctest.crc != "undefined") {
             if (info.crc.toString() === crctest.crc.toString() && settings.debug.debugMode != true) {
                 console.log("[Loading From Cache Files]", "", "", true);

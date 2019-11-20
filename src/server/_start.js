@@ -27,9 +27,9 @@ function sendResponse(req, resp, body) {
 
 	// get response
 	if (req.method === "POST") {
-		output = responseHandler.getResponse(req, body);
+		output = rpc.getResponse(req, body);
 	} else {
-		output = responseHandler.getResponse(req, "{}");
+		output = rpc.getResponse(req, "{}");
 	}
 	
 	if (output === "MAPCONFIG") {
