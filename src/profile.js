@@ -434,101 +434,6 @@ function find(info, backendUrl) {
     );
 }
 
-function remove(info) {
-    let profiles = getProfiles();
-    let ID = exist(info);
-    // check if profile exists
-    if (ID === -1) {
-        console.log("Profile does not exists");
-        return;
-    }
-    // remove profile directory
-    utility.removeDir("./data/profiles/" + ID);
-    // remove profile
-    for (let i in profiles) {
-        if (profiles.hasOwnProperty(i)) {
-            if (profiles[i].id === ID) {
-                profiles.splice(i, 1);
-            }
-        }
-    }
-    setProfiles(profiles);
-    console.log("Profile " + ID + " deleted");
-}
-
-function create(info) {
-    let profiles = getProfiles();
-    let ID = findUnusedID();
-    if (exist(info) !== -1) {
-        console.log("Profile already exists");
-        return;
-    }
-    profiles.push({
-        email: info.email,
-        password: info.pass,
-        id: ID,
-        timestamp: 0,
-        online: false
-    });
-    setProfiles(profiles);
-    let profileFile = "./data/profiles/character_" + ID + ".json";
-    let characterSide = {};
-    switch (info.side) {
-        case "bear":
-            characterSide = JSON.parse(
-                utility.readJson("./data/profiles/default/bear.json")
-            );
-            break;
-        case "usec":
-            characterSide = JSON.parse(
-                utility.readJson("./data/profiles/default/usec.json")
-            );
-            break;
-        default:
-            console.log("Invalid side");
-            remove(info);
-            return;
-    }
-    utility.writeJson(profileFile, characterSide);
-    console.log("Profile " + ID + " created");
-}
-
-function changeEmail(info) {
-    let profiles = getProfiles();
-    for (let profile of profiles) {
-        if (
-            info.email === profile.email &&
-            (info.pass === profile.password || info.pass === profile.password_md5)
-        ) {
-            profile.email = info.newEmail;
-            setProfiles(profiles);
-            console.log(
-                "Profile " + profile.id + " changed email to " + info.newEmail
-            );
-            return;
-        }
-    }
-    console.log("Profile not found");
-}
-
-function changePassword(info) {
-    let profiles = getProfiles();
-    for (let profile of profiles) {
-        if (
-            info.email === profile.email &&
-            (info.pass === profile.password || info.pass === profile.password_md5)
-        ) {
-            profile.password = info.newPass;
-            setProfiles(profiles);
-            console.log(
-                "Profile " + profile.id + " changed password to " + info.newPass
-            );
-            return;
-        }
-    }
-    console.log("Profile not found");
-}
-
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
 module.exports.getPurchasesData = getPurchasesData;
@@ -536,8 +441,4 @@ module.exports.getStashType = getStashType;
 module.exports.changeNickname = changeNickname;
 module.exports.changeVoice = changeVoice;
 module.exports.find = find;
-module.exports.delete = remove;
-module.exports.create = create;
-module.exports.changeEmail = changeEmail;
-module.exports.changePassword = changePassword;
 module.exports.saveProfileProgress = saveProfileProgress;

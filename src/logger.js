@@ -1,3 +1,4 @@
+"use strict";
 
 require('./libs.js');
 
@@ -27,7 +28,6 @@ const colorData = [
 
 var fileStream = undefined;
 
-printf = console.log;
 console.log = function (data, colorFront, colorBack, isLog = false) {
     let setColors = "";
     let colors = ["", ""];

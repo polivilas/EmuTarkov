@@ -7,13 +7,15 @@ function sendJson(resp, output) {
 		'Content-Type': 'text/plain', 
 		'content-encoding' : 'deflate', 
 		'Set-Cookie' : 'PHPSESSID=' + constants.getActiveID()
-		});
+	});
 
     zlib.deflate(output, function (err, buf) {
         resp.end(buf);
     });
+
     //resp.end(output);
 }
+
 function sendMapData(resp, output) {
     resp.writeHead(200, "OK", {'Content-Type': 'text/plain'});
     resp.end(output);
@@ -45,7 +47,8 @@ function sendImage(resp, file) {
 		png: 'image/png',
 		svg: 'image/svg+xml',
 		js: 'application/javascript'
-	};
+    };
+    
 	let pathSlic = file.split("/");
     let type = mime[pathSlic[pathSlic.length -1].split(".")[1]] || 'text/plain';
     let fileStream = fs.createReadStream(file);

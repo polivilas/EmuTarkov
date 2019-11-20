@@ -30,13 +30,14 @@ global.locations = locations_f.prepareLocations();			// prepare locations only o
 // Temp Quests
 global.quests_f = require('./response/_quests.js');			// response/_locations
 global.quests = quests_f.prepareQuests();					// prepare quests only once
-
+global.printf = console.log;
 global.logger = require('./logger.js');						// logger
 global.locale = require('./locale.js');						// locale changer function
 global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
 global.weather_f = require('./response/_weather.js');			// response/_weather
 global.repair_f = require('./response/_repair.js');				// response/_repair
 global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
+global.rpc = require('./rpc.js');
 global.response = require('./response.js');					// response
 global.server = require('./server/_start.js');					// server/_start
 global.constants = require('./server/_constants.js');			// server/_constants
