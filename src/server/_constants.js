@@ -1,5 +1,5 @@
 "use strict";
-let sever = '0.8.0-alpha';
+let server = '0.8.0-alpha';
 let game = 'Not Started';
 let profileActiveId = 0;
 
