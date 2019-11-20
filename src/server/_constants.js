@@ -1,23 +1,26 @@
 "use strict";
-let version = '0.7.6';
+let sever = '0.8.0-alpha';
 let game = 'Not Started';
-let ProfileActiveId = 0;
+let profileActiveId = 0;
 
 function serverVersion() {
-    return version;
+	return server;
 }
+
 function gameVersion() {
 	return game;
 }
-function setVersion(setTo) {
-	game = setTo;
+
+function setVersion(version) {
+	game = version;
 }
+
 function getActiveID() {
-	return ProfileActiveId;
+	return profileActiveId;
 }
 
 function setActiveID(ID) {
-	ProfileActiveId = ID ? ID : 0;
+	profileActiveId = ID ? ID : 0;
 }
 
 module.exports.getActiveID = getActiveID;
@@ -25,4 +28,3 @@ module.exports.setActiveID = setActiveID;
 module.exports.serverVersion = serverVersion;
 module.exports.gameVersion = gameVersion;
 module.exports.setVersion = setVersion;
-
