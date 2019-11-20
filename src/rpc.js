@@ -1,9 +1,15 @@
 "use strict";
+
 require('./libs.js');
 
+let dynamicRPC = {};
 let staticRPC = {};
 
-function addResponse(url, func) {
+function addDynamicResponse(url, func) {
+    dynamicRPC[url] = func;
+}
+
+function addStaticResponse(url, func) {
     staticRPC[url] = func;
 }
 
@@ -22,65 +28,17 @@ function getResponse(req, body) {
         url = url.split("?retry=")[0];
     }
 
-    // player bought items
-    if (url.includes(prices)) {
-        return profile.getPurchasesData();
+    // handle dynamic requests
+    for (var key in dynamicRPC) {
+        if (url.includes(key)) {
+            return dynamicRPC[key](info);
+        }
     }
 
-    // trader profile
-    if (url.includes(getTrader)) {
-        return JSON.stringify(trader.get(url.replace(getTrader, '')));
-    }
-
-    // trader assortiment
-    if (url.includes(assort)) {
-        return JSON.stringify(trader.getAssort(url.replace(assort, '')));
-    }
-
-    // map location
-    if (url.includes("/api/location")) {
-        return "MAPCONFIG";
-    }
-
-    // raid banners
-    if (url.includes("files/CONTENT/banners")) {
-        return "CONTENT";
-    }
-
-    // game images
-    if (url.includes(".jpg") || url.includes(".png") || url.includes("/data/images/") || url.includes("/files/quest") || url.includes("/files/handbook") || url.includes("/files/trader/avatar")) {
-        return "IMAGE";
-    }
-    
-    // notifier base
-    if (url.includes("/notifierBase") || url.includes("/notifierServer")) { // notifier custom link
-        return '{"err":0, "errmsg":null, "data":[]}';
-    }
-    
-    // notifier custom link
-    if (url.includes("/?last_id")) {
-        return 'NULLGET';
-    }
-
-    // menu localisation
-    if (url.includes(localeMenu)) {
-        return locale.getMenu(url.replace(localeMenu, ''));
-    }
-
-    // global localisation
-    if (url.includes(localeGlobal)) {
-        return locale.getGlobal(url.replace(localeGlobal, ''));
-    }
-
-    // push notifier
-    if (url.includes("/push/notifier/get/")) {
-        return '{"err":0, "errmsg":null, "data":[]}';
-    }
-
-    // handle static RPC here
+    // handle static requests
     for (var key in staticRPC) {      
         if (url === key) {
-            output = staticRPC[url](info, body);
+            output = staticRPC[key](info);
             break;
         }
     }
@@ -94,6 +52,7 @@ function getResponse(req, body) {
     // load from cache when server is in release mode
     if (typeof info.crc != "undefined") {
         let crctest = JSON.parse(output);
+        
         if (typeof crctest.crc != "undefined") {
             if (info.crc.toString() === crctest.crc.toString() && settings.debug.debugMode != true) {
                 console.log("[Loading From Cache Files]", "", "", true);
@@ -107,5 +66,6 @@ function getResponse(req, body) {
     return output;
 }
 
-module.exports.addResponse = addResponse;
+module.exports.addDynamicResponse = addDynamicResponse;
+module.exports.addStaticResponse = addStaticResponse;
 module.exports.getResponse = getResponse;

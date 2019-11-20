@@ -1,10 +1,10 @@
 "use strict";
 
 const botnames = JSON.parse(utility.readJson("data/configs/bots/botNames.json") );
+
 function generate(databots) 
 {
 	var generatedBots = [];
-	databots = JSON.parse(databots);
 	
 	for(var condition of databots.conditions)
 	{	

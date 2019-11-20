@@ -1,4 +1,3 @@
-//"use strict";
 global.fs = require('fs');
 global.path = require('path');
 global.util = require('util');
@@ -12,11 +11,6 @@ global.settings = JSON.parse( (fs.readFileSync("server.config.json", 'utf8')).re
 global.backendUrl = settings.server.backendUrl;
 global.ip = settings.server.ip;
 global.port = settings.server.port;
-global.assort = "/client/trading/api/getTraderAssort/";
-global.prices = "/client/trading/api/getUserAssortPrice/trader/";
-global.getTrader = "/client/trading/api/getTrader/";
-global.localeGlobal = "/client/locale/";
-global.localeMenu = "/client/menu/locale/";
 global.items = "";
 global.quests = "";
 global.locations = "";

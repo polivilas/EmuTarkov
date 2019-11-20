@@ -44,7 +44,7 @@ function sendResponse(req, resp, body) {
 	}
 
 	// prepare message to send
-	if (output === "DONE" || output === "NULLGET") {
+	if (output === "DONE") {
 		return;
 	}
 
@@ -188,7 +188,7 @@ function start() {
 	}
 
 	let serverHTTPS = https.createServer(options, (req, res) => {
-		response.setupStaticRPC();
+		response.setupRPC();
 		handleRequest(req, res);
 	}).listen(port, function(){
 		console.log("» Server: " + backendUrl, "green", "", true);

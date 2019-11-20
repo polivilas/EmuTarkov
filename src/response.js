@@ -1,19 +1,19 @@
 "use strict";
 require('./libs.js');
 
-function nullResponse(info, body) {
+function nullResponse(info) {
     return '{"err":0, "errmsg":null, "data":null}';
 }
 
-function nullArrayResponse(info, body) {
+function nullArrayResponse(info) {
     return '{"err":0, "errmsg":null, "data":[]}';
 }
 
-function showIndex(info, body) {
+function showIndex(info) {
     return index_f.index();
 }
 
-function showInventoryChecker(info, body) {
+function showInventoryChecker(info) {
     let output = "";
 	let inv = itm_hf.recheckInventoryFreeSpace(profile.getCharacterData());
     
@@ -33,93 +33,93 @@ function showInventoryChecker(info, body) {
     return output;
 }
 
-function getFriendList(info, body) {
+function getFriendList(info) {
     return '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
 }
 
-function handleItems(info, body) {
+function handleItems(info) {
     let output = item.moving(info);
 
     console.log(output);
     return output;
 }
 
-function getLocale(info, body) {
+function getLocale(info) {
     return locale.getLanguages();
 }
 
-function loginUser(info, body) {
+function loginUser(info) {
     let output = profile.find(info, backendUrl);
     
     console.log(output);
     return output;
 }
 
-function getQueueStatus(info, body) {
+function getQueueStatus(info) {
     return '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
 }
 
-function getItems(info, body) {
+function getItems(info) {
     return JSON.stringify(items_f.prepareItems());
 }
 
-function getGlobals(info, body) {
+function getGlobals(info) {
     return utility.readJson('data/configs/globals.json');
 }
 
-function getProfileData(info, body) {
+function getProfileData(info) {
     return JSON.stringify(profile.getCharacterData());
 }
 
-function selectProfile(info, body) {
+function selectProfile(info) {
     return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 }
 
-function getProfileStatus(info, body) {
+function getProfileStatus(info) {
     return '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 }
 
-function getWeather(info, body) {
+function getWeather(info) {
     return weather_f.main();
 }
 
-function getLocations(info, body) {
+function getLocations(info) {
     return JSON.stringify(locations, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
 }
 
-function getTemplates(info, body) {
+function getTemplates(info) {
     return utility.readJson('data/configs/templates.json');
 }
 
-function getQuests(info, body) {
+function getQuests(info) {
     return JSON.stringify(quests, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
 }
 
-function getMetrics(info, body) {
+function getMetrics(info) {
     return utility.readJson('data/configs/metricsConfig.json');
 }
 
-function getBots(info, body) {
-    return JSON.stringify(bots.generate(body));
+function getBots(info) {
+    return JSON.stringify(bots.generate(info));
 }
 
-function getTraderList(info, body) {
+function getTraderList(info) {
     return JSON.stringify(trader.loadAllTraders());
 }
 
-function getServer(info, body) {
+function getServer(info) {
     return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + port + '"}]}';
 }
 
-function searchRagfair(info, body) {
+function searchRagfair(info) {
     return ragfair.getOffers(info);
 }
 
-function getAvailableMatch(info, body) {
+function getAvailableMatch(info) {
     return '{"err":404, "errmsg":"JustEmuTarkov Not supports online matching. Please use offline match.\n", "data":false}';
 }
 
-function joinMatch(info, body) {
+function joinMatch(info) {
     let shortid = "";
 
     // check if the player is a scav
@@ -145,135 +145,191 @@ function joinMatch(info, body) {
     });
 }
 
-function getChatServerList(info, body) {
+function getChatServerList(info) {
     return '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
 }
 
-function changeNickname(info, body) {
+function changeNickname(info) {
     return profile.changeNickname(info);
 }
 
-function changeVoice(info, body) {
+function changeVoice(info) {
     profile.changeVoice(info);
     return '{"err":0, "errmsg":null, "data":null}';
 }
 
-function getGroupStatus(info, body) {
+function getGroupStatus(info) {
     return '{ "err": 0, "errmsg": null, "data": { "players": [], "invite": [], "group": [] } }';
 }
 
-function handleRepair(info, body) {
+function handleRepair(info) {
     return repair_f.main(info);
 }
 
-function handleKeepAlive(info, body) {
+function handleKeepAlive(info) {
     // updates trader refresh time only
     keepAlive_f.main();
     return '{"err":0,"errmsg":null,"data":{"msg":"OK"}}';
 }
 
-function validateGameVersion(info, body) {
+function validateGameVersion(info) {
     constants.setVersion(info.version.major);
     return '{"err":0,"errmsg":null,"data":null}';
 }
 
-function setupConnection(info, body) {
+function setupConnection(info) {
     let output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "5c71b934354682353958e984", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 
     console.log(output);
     return output;
 }
 
-function getCustomization(info, body) {
+function getCustomization(info) {
     return utility.readJson('data/configs/customization/customization.json');
 }
 
-function getCustomizationOffers(info, body) {
+function getCustomizationOffers(info) {
     return utility.readJson('data/configs/customization/offers.json');
 }
 
-function getCustomizationStorage(info, body) {
+function getCustomizationStorage(info) {
     return utility.readJson('data/configs/customization/storage.json');
 }
 
-function getHideoutRecipes(info, body) {
+function getHideoutRecipes(info) {
     return utility.readJson('data/configs/hideout/production_recipes.json');
 }
 
-function getHideoutSettings(info, body) {
+function getHideoutSettings(info) {
     return utility.readJson('data/configs/hideout/settings.json');
 }
 
-function getHideoutAreas(info, body) {
+function getHideoutAreas(info) {
     return utility.readJson('data/configs/hideout/areas.json');
 }
 
-function getScavcaseRecipes(info, body) {
+function getScavcaseRecipes(info) {
     return utility.readJson('data/configs/hideout/production_scavcase_recipes.json');
 }
 
-function getHandbookUserlist(info, body) {
+function getHandbookUserlist(info) {
     return utility.readJson('data/configs/userBuilds.json');
 }
 
-function createNotifierChannel(info, body) {
+function createNotifierChannel(info) {
     return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"' + backendUrl + '","channel_id":"testChannel","url":"' + backendUrl + '/notifierBase"},"notifierServer":"' + backendUrl + '/notifierServer"}}';
 }
 
-function setupStaticRPC() {
-    rpc.addResponse("/", showIndex);
-    rpc.addResponse("/inv", showInventoryChecker);
-    rpc.addResponse("/client/friend/list", getFriendList);
-    rpc.addResponse("/client/game/profile/items/moving", handleItems);
-    rpc.addResponse("/client/languages", getLocale);
-    rpc.addResponse("/client/game/login", loginUser);
-    rpc.addResponse("/client/queue/status", getQueueStatus);
-    rpc.addResponse("/client/items", getItems);
-    rpc.addResponse("/client/globals", getGlobals);
-    rpc.addResponse("/client/game/profile/list", getProfileData);
-    rpc.addResponse("/client/game/profile/select", selectProfile);
-    rpc.addResponse("/client/profile/status", getProfileStatus);
-    rpc.addResponse("/client/weather", getWeather);
-    rpc.addResponse("/client/locations", getLocations);
-    rpc.addResponse("/client/handbook/templates", getTemplates);
-    rpc.addResponse("/client/quest/list", getQuests);
-    rpc.addResponse("/client/getMetricsConfig", getMetrics);
-    rpc.addResponse("/client/game/bot/generate", getBots);
-    rpc.addResponse("/client/trading/api/getTradersList", getTraderList);
-    rpc.addResponse("/client/server/list", getServer);
-    rpc.addResponse("/client/ragfair/search", searchRagfair);
-    rpc.addResponse("/client/match/available", getAvailableMatch);
-    rpc.addResponse("/client/match/join", joinMatch);
-    rpc.addResponse("/client/chatServer/list", getChatServerList);
-    rpc.addResponse("/client/game/profile/nickname/change", changeNickname);
-    rpc.addResponse("/client/game/profile/voice/change", changeVoice);
-    rpc.addResponse("/client/match/group/status", getGroupStatus);
-    rpc.addResponse("/client/repair/exec", handleRepair);
-    rpc.addResponse("/client/game/keepalive", handleKeepAlive);
-    rpc.addResponse("/client/game/version/validate", validateGameVersion);
-    rpc.addResponse("/client/game/config", setupConnection);
-    rpc.addResponse("/client/customization" , getCustomization);
-    rpc.addResponse("/client/trading/customization/5ac3b934156ae10c4430e83c/offers", getCustomizationOffers);
-    rpc.addResponse("/client/trading/customization/storage", getCustomizationStorage);
-    rpc.addResponse("/client/hideout/production/recipes", getHideoutRecipes);
-    rpc.addResponse("/client/hideout/settings", getHideoutSettings);
-    rpc.addResponse("/client/hideout/areas", getHideoutAreas);
-    rpc.addResponse("/client/hideout/production/scavcase/recipes", getScavcaseRecipes);
-    rpc.addResponse("/client/handbook/builds/my/list", getHandbookUserlist);
-    rpc.addResponse("/client/notifier/channel/create", createNotifierChannel);
-
-    // NULL responses
-    rpc.addResponse("/favicon.ico", nullResponse);
-    rpc.addResponse("/client/game/logout", nullResponse);
-    rpc.addResponse("/client/putMetrics", nullResponse);
-    rpc.addResponse("/client/match/group/looking/stop", nullResponse);
-    rpc.addResponse("/client/match/group/exit_from_menu", nullResponse);
-    rpc.addResponse("/client/match/exit", nullResponse);
-    rpc.addResponse("/client/match/updatePing", nullResponse);
-    rpc.addResponse("/client/game/profile/savage/regenerate", nullResponse);
-    rpc.addResponse("/client/mail/dialog/list", nullArrayResponse);
-    rpc.addResponse("/client/friend/request/list/outbox", nullArrayResponse);
-    rpc.addResponse("/client/friend/request/list/inbox", nullArrayResponse);
+function getMapLocation(info) {
+    return "MAPCONFIG";
 }
 
-module.exports.setupStaticRPC = setupStaticRPC;
+function getRaidBanners(info) {
+    return "CONTENT";
+}
+
+function getImage(info) {
+    return "IMAGE";
+}
+
+function handleNotifierCustomLink(info) {
+    return 'DONE';
+}
+
+function getProfilePurchases(info) {
+    return profile.getPurchasesData();
+}
+
+function getTrader(info) {
+    return JSON.stringify(trader.get(url.replace(getTrader, '')));
+}
+
+function getAssort(info) {
+    return JSON.stringify(trader.getAssort(url.replace(assort, '')));
+}
+
+function getMenuLocale(info) {
+    return locale.getMenu(url.replace(localeMenu, ''));
+}
+
+function getGlobalLocale(info) {
+    return locale.getGlobal(url.replace(localeGlobal, ''));
+}
+
+function setupRPC() {
+    // static responses
+    rpc.addStaticResponse("/", showIndex);
+    rpc.addStaticResponse("/inv", showInventoryChecker);
+    rpc.addStaticResponse("/client/friend/list", getFriendList);
+    rpc.addStaticResponse("/client/game/profile/items/moving", handleItems);
+    rpc.addStaticResponse("/client/languages", getLocale);
+    rpc.addStaticResponse("/client/game/login", loginUser);
+    rpc.addStaticResponse("/client/queue/status", getQueueStatus);
+    rpc.addStaticResponse("/client/items", getItems);
+    rpc.addStaticResponse("/client/globals", getGlobals);
+    rpc.addStaticResponse("/client/game/profile/list", getProfileData);
+    rpc.addStaticResponse("/client/game/profile/select", selectProfile);
+    rpc.addStaticResponse("/client/profile/status", getProfileStatus);
+    rpc.addStaticResponse("/client/weather", getWeather);
+    rpc.addStaticResponse("/client/locations", getLocations);
+    rpc.addStaticResponse("/client/handbook/templates", getTemplates);
+    rpc.addStaticResponse("/client/quest/list", getQuests);
+    rpc.addStaticResponse("/client/getMetricsConfig", getMetrics);
+    rpc.addStaticResponse("/client/game/bot/generate", getBots);
+    rpc.addStaticResponse("/client/trading/api/getTradersList", getTraderList);
+    rpc.addStaticResponse("/client/server/list", getServer);
+    rpc.addStaticResponse("/client/ragfair/search", searchRagfair);
+    rpc.addStaticResponse("/client/match/available", getAvailableMatch);
+    rpc.addStaticResponse("/client/match/join", joinMatch);
+    rpc.addStaticResponse("/client/chatServer/list", getChatServerList);
+    rpc.addStaticResponse("/client/game/profile/nickname/change", changeNickname);
+    rpc.addStaticResponse("/client/game/profile/voice/change", changeVoice);
+    rpc.addStaticResponse("/client/match/group/status", getGroupStatus);
+    rpc.addStaticResponse("/client/repair/exec", handleRepair);
+    rpc.addStaticResponse("/client/game/keepalive", handleKeepAlive);
+    rpc.addStaticResponse("/client/game/version/validate", validateGameVersion);
+    rpc.addStaticResponse("/client/game/config", setupConnection);
+    rpc.addStaticResponse("/client/customization" , getCustomization);
+    rpc.addStaticResponse("/client/trading/customization/5ac3b934156ae10c4430e83c/offers", getCustomizationOffers);
+    rpc.addStaticResponse("/client/trading/customization/storage", getCustomizationStorage);
+    rpc.addStaticResponse("/client/hideout/production/recipes", getHideoutRecipes);
+    rpc.addStaticResponse("/client/hideout/settings", getHideoutSettings);
+    rpc.addStaticResponse("/client/hideout/areas", getHideoutAreas);
+    rpc.addStaticResponse("/client/hideout/production/scavcase/recipes", getScavcaseRecipes);
+    rpc.addStaticResponse("/client/handbook/builds/my/list", getHandbookUserlist);
+    rpc.addStaticResponse("/client/notifier/channel/create", createNotifierChannel);
+
+    // dynamic responses
+    rpc.addDynamicResponse("/api/location", getMapLocation);
+    rpc.addDynamicResponse("files/CONTENT/banners", getRaidBanners);
+    rpc.addDynamicResponse(".jpg", getImage);
+    rpc.addDynamicResponse(".png", getImage);
+    rpc.addDynamicResponse("/data/images/", getImage);
+    rpc.addDynamicResponse("/files/quest", getImage);
+    rpc.addDynamicResponse("/files/handbook", getImage);
+    rpc.addDynamicResponse("/files/trader/avatar", getImage);
+    rpc.addDynamicResponse("/?last_id", handleNotifierCustomLink);
+    rpc.addDynamicResponse("/client/trading/api/getUserAssortPrice/trader/", getProfilePurchases);
+    rpc.addDynamicResponse("/client/trading/api/getTrader/", getTrader);
+    rpc.addDynamicResponse("/client/trading/api/getTraderAssort/", getAssort);
+    rpc.addDynamicResponse("/client/menu/locale/", getMenuLocale);
+    rpc.addDynamicResponse("/client/locale/", getGlobalLocale);
+
+    // null responses
+    rpc.addStaticResponse("/favicon.ico", nullResponse);
+    rpc.addStaticResponse("/client/game/logout", nullResponse);
+    rpc.addStaticResponse("/client/putMetrics", nullResponse);
+    rpc.addStaticResponse("/client/match/group/looking/stop", nullResponse);
+    rpc.addStaticResponse("/client/match/group/exit_from_menu", nullResponse);
+    rpc.addStaticResponse("/client/match/exit", nullResponse);
+    rpc.addStaticResponse("/client/match/updatePing", nullResponse);
+    rpc.addStaticResponse("/client/game/profile/savage/regenerate", nullResponse);
+    rpc.addStaticResponse("/client/mail/dialog/list", nullArrayResponse);
+    rpc.addStaticResponse("/client/friend/request/list/outbox", nullArrayResponse);
+    rpc.addStaticResponse("/client/friend/request/list/inbox", nullArrayResponse);
+    rpc.addDynamicResponse("/notifierBase", nullArrayResponse);
+    rpc.addDynamicResponse("/notifierServer", nullArrayResponse);
+    rpc.addDynamicResponse("/push/notifier/get/", nullArrayResponse);
+}
+
+module.exports.setupRPC = setupRPC;
