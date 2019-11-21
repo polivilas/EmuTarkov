@@ -2,8 +2,6 @@
 
 require('./libs.js');
 
-const utility = require('../utility.js');
-
 //// ---- FUNCTIONS BELOW ---- ////
 /*
 Wind // 0 - 1
