@@ -24,13 +24,13 @@ function getResponse(req, body) {
     }
     
     // remove ?retry=X from URL
-    if (url.includes("?retry=")) {
+    if (url.indexOf("?retry=") != -1) {
         url = url.split("?retry=")[0];
     }
 
     // handle dynamic requests
     for (var key in dynamicRPC) {
-        if (url.includes(key)) {
+        if (url.indexOf(key) != -1) {
             return dynamicRPC[key](url, info);
         }
     }
