@@ -33,13 +33,12 @@ function sendResponse(req, resp, body) {
 	}
 	
 	if (output === "MAPCONFIG") {
-		let mapname = req.url.replace("/api/location/", "");
-		console.log("[MAP.config]: " + mapname);
-		
+		let mapname = req.url.replace("/api/location/", "");		
 		let RandomPreset = utility.getRandomInt(1,6);
 		let data_response = utility.readJson("data/configs/api/location/" + mapname + "" + RandomPreset + ".json");
 		
-		header_f.sendMapData(resp, data_response);
+		console.log("[MAP.config]: " + mapname);
+		header_f.sendTextJson(resp, data_response);
 		return;
 	}
 
@@ -52,7 +51,7 @@ function sendResponse(req, resp, body) {
 		let image = req.url.replace('/files/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
 
 		console.log("[IMG.banners]:" + image);
-		header_f.sendImage(resp, image);
+		header_f.sendFile(resp, image);
 		return;
 	}
 
@@ -70,16 +69,14 @@ function sendResponse(req, resp, body) {
 			console.log("[IMG.regular]:" + req.url);
 		}
 
-		header_f.sendImage(resp, "." + req.url);
+		header_f.sendFile(resp, "." + req.url);
 		return;
 	}
 
 	if (req.url === "/" || req.url === "/inv" || req.url === "/random") {
 		header_f.sendHTML(resp, output);
-	} else if (req.url === "/bottest") {
-		header_f.sendTrueJson(resp, output);
 	} else {
-		header_f.sendJson(resp, output);
+		header_f.sendZlibJson(resp, output);
 	}
 
 	constants.setActiveID(0);
