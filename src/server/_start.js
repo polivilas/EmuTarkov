@@ -32,6 +32,11 @@ function sendResponse(req, resp, body) {
 		output = rpc.getResponse(req, "{}");
 	}
 	
+	// prepare message to send
+	if (output === "DONE") {
+		return;
+	}
+	
 	if (output === "MAPCONFIG") {
 		let mapname = req.url.replace("/api/location/", "");		
 		let RandomPreset = utility.getRandomInt(1,6);
@@ -39,19 +44,6 @@ function sendResponse(req, resp, body) {
 		
 		console.log("[MAP.config]: " + mapname);
 		header_f.sendTextJson(resp, data_response);
-		return;
-	}
-
-	// prepare message to send
-	if (output === "DONE") {
-		return;
-	}
-
-	if (output === "CONTENT") {
-		let image = req.url.replace('/files/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
-
-		console.log("[IMG.banners]:" + image);
-		header_f.sendFile(resp, image);
 		return;
 	}
 
@@ -65,6 +57,9 @@ function sendResponse(req, resp, body) {
 		} else if (req.url.includes("/files/trader/avatar")) {
 			console.log("[IMG.trader]:" + req.url);
 			req.url = "/data/images" + req.url;
+		} else if (req.url.includes("/files/CONTENT/banners/")) {
+			console.log("[IMG.banners]:" + req.url);
+			req.url = req.url.replace('/files/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
 		} else {
 			console.log("[IMG.regular]:" + req.url);
 		}
@@ -73,7 +68,7 @@ function sendResponse(req, resp, body) {
 		return;
 	}
 
-	if (req.url === "/" || req.url === "/inv" || req.url === "/random") {
+	if (req.url === "/" || req.url === "/inv") {
 		header_f.sendHTML(resp, output);
 	} else {
 		header_f.sendZlibJson(resp, output);
