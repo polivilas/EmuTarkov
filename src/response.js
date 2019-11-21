@@ -303,11 +303,7 @@ function setupRPC() {
     rpc.addDynamicResponse("/api/location", getMapLocation);
     rpc.addDynamicResponse("files/CONTENT/banners", getRaidBanners);
     rpc.addDynamicResponse(".jpg", getImage);
-    rpc.addDynamicResponse(".png", getImage); // because we got .jpg and .png search fro an image then we will know when image will be cause game dont use diffrent image types
-    //rpc.addDynamicResponse("/data/images/", getImage);
-    //rpc.addDynamicResponse("/files/quest", getImage);
-    //rpc.addDynamicResponse("/files/handbook", getImage);
-    //rpc.addDynamicResponse("/files/trader/avatar", getImage);
+    rpc.addDynamicResponse(".png", getImage);
     rpc.addDynamicResponse("/?last_id", handleNotifierCustomLink);
     rpc.addDynamicResponse("/client/trading/api/getUserAssortPrice/trader/", getProfilePurchases);
     rpc.addDynamicResponse("/client/trading/api/getTrader/", getTrader);
