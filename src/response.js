@@ -224,10 +224,6 @@ function getMapLocation(url, info) {
     return "MAPCONFIG";
 }
 
-function getRaidBanners(url, info) {
-    return "CONTENT";
-}
-
 function getImage(url, info) {
     return "IMAGE";
 }
@@ -301,7 +297,6 @@ function setupRPC() {
 
     // dynamic responses
     rpc.addDynamicResponse("/api/location", getMapLocation);
-    rpc.addDynamicResponse("files/CONTENT/banners", getRaidBanners);
     rpc.addDynamicResponse(".jpg", getImage);
     rpc.addDynamicResponse(".png", getImage);
     rpc.addDynamicResponse("/?last_id", handleNotifierCustomLink);
