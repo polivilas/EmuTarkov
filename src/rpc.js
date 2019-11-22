@@ -27,11 +27,11 @@ function getResponse(req, body) {
     if (url.indexOf("?retry=") != -1) {
         url = url.split("?retry=")[0];
     }
-    // handle static requests // thats not work like someone told you No;Hurry cause its an object not array ...
-	for (let key in staticResp) {
-        if (url === key) {
-            return staticResp[key](url, info);
-        }
+
+    // handle static requests
+    // NoHurry: fair enough, this _seems_ to work tho, would reduce overhad alot if it really does  ;)
+	if (staticResp[url] !== undefined) {
+        return staticResp[url](url, info);
     }
 	
     // handle dynamic requests
@@ -40,8 +40,6 @@ function getResponse(req, body) {
             return dynamicResp[key](url, info);
         }
     }
-
-
 
     // request couldn't be handled
     if (output === "") {
