@@ -153,8 +153,8 @@ function handleRequest(req, resp) {
 
 function start() {
 	const options = {
-		key: fs.readFileSync("data/bin/server.key");
-		cert: fs.readFileSync("data/bin/server.cert");
+		key: fs.readFileSync("data/bin/server.key"),
+		cert: fs.readFileSync("data/bin/server.cert")
 	};
 
 	port = settings.server.port;
