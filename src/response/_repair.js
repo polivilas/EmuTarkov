@@ -48,7 +48,7 @@ function main(info) {
                                                     data.data[1].Inventory.items[inventory].upd.Repairable.MaxDurability = calculateDurability;
                                                     output.data.items.change.push(data.data[1].Inventory.items[inventory]);
                                                     output.data.currentSalesSums[info.tid] = data.data[1].TraderStandings[info.tid].currentSalesSum + Math.floor(itemRepairCost);
-													console.log(output.data.items.change[1].upd);
+													console.log(JSON.stringify(output.data.items.change[1].upd));
                                                     cnt++;
                                                 }
                                             }

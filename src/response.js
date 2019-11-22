@@ -275,6 +275,7 @@ function setupRPC() {
     rpc.addStaticResponse("/client/trading/api/getTradersList", getTraderList);
     rpc.addStaticResponse("/client/server/list", getServer);
     rpc.addStaticResponse("/client/ragfair/search", searchRagfair);
+    rpc.addStaticResponse("/client/ragfair/find", searchRagfair); // linked search
     rpc.addStaticResponse("/client/match/available", getAvailableMatch);
     rpc.addStaticResponse("/client/match/join", joinMatch);
     rpc.addStaticResponse("/client/chatServer/list", getChatServerList);
