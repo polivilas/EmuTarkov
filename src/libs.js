@@ -1,5 +1,6 @@
-module.exports = function(isFirstLaunch = "no", time = 0){
+module.exports = function(isFirstLaunch = "no", time = 0) {
 	let StartingTimeTemporalVariable = time;
+	
 	global.fs = require('fs');
 	global.path = require('path');
 	global.util = require('util');
@@ -8,7 +9,10 @@ module.exports = function(isFirstLaunch = "no", time = 0){
 	global.zlib = require('zlib');
 	global.adler32 = require('adler32');
 	global.os = require('os');
-	if(isFirstLaunch == "first"){console.log("Main require() files loaded... [%dms]", new Date() - StartingTimeTemporalVariable);}
+	
+	if (isFirstLaunch == "first") {
+		console.log("Main require() files loaded... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
 
 	global.settings = JSON.parse( (fs.readFileSync("server.config.json", 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '') );
 	global.ended_at = 0;
@@ -19,21 +23,25 @@ module.exports = function(isFirstLaunch = "no", time = 0){
 	global.quests = "";
 	global.locations = "";
 	global.weathers = '{}';
-	if(isFirstLaunch == "first"){console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);}
+	
+	if (isFirstLaunch == "first") {
+		console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
 
-	global.utility = require('./utility.js');					// utility // no other files required for it
-	// Temp Items
+	global.utility = require('./utility.js');					// utility, no other files required for it
+	// Items
 	global.items_f = require('./response/_items.js');			// response/_locations
 	global.items = items_f.prepareItems();						// prepare items only once
-	// Temp Locations
+	// Locations
 	global.locations_f = require('./response/_locations.js');	// response/_locations
 	global.locations = locations_f.prepareLocations();			// prepare locations only once
-	// Temp Weather
+	// Weather
 	global.weather_f = require('./response/_weather.js');		// repsonse/_weather
 	global.weathers = weather_f.prepareWeather();				// prepare weather only once
-	// Temp Quests
+	// Quests
 	global.quests_f = require('./response/_quests.js');			// response/_locations
 	global.quests = quests_f.prepareQuests();					// prepare quests only once
+	// Other
 	global.printf = console.log;
 	global.logger = require('./logger.js');						// logger
 	global.locale = require('./locale.js');						// locale changer function
@@ -61,9 +69,10 @@ module.exports = function(isFirstLaunch = "no", time = 0){
 	global.item = require('./item.js');							// items
 	global.trader = require('./trader.js');						// trader
 	global.ragfair = require('./ragfair.js');					// ragfair
-	if(isFirstLaunch == "first"){printf("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);}
-
-	// load data
+	
+	if (isFirstLaunch == "first") {
+		printf("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
 
 	// yea this is tough but loads only once
 	global.names = JSON.parse(utility.readJson("data/configs/bots/botNames.json"));
@@ -98,12 +107,12 @@ module.exports = function(isFirstLaunch = "no", time = 0){
 		marksman: JSON.parse(utility.readJson("data/configs/bots/inventory/marksman.json")),
 		pmcBot: JSON.parse(utility.readJson("data/configs/bots/inventory/pmcBot.json"))
 	}
-
 	global.globalSettings = JSON.parse(utility.readJson("data/configs/globals.json"));
 	global.customization_m = JSON.parse(utility.readJson("data/configs/customization/customization.json"));
-	if(isFirstLaunch == "first"){printf("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);}
 	
+	if (isFirstLaunch == "first") {
+		printf("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
 }
-
 
 /* Made by TheMaoci - Load only once */
