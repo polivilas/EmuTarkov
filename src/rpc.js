@@ -2,15 +2,15 @@
 
 require('./libs.js');
 
-let dynamicRPC = {};
-let staticRPC = {};
+let dynamicResp = {};
+let staticResp = {};
 
 function addDynamicResponse(url, func) {
-    dynamicRPC[url] = func;
+    staticResp[url] = func;
 }
 
 function addStaticResponse(url, func) {
-    staticRPC[url] = func;
+    staticResp[url] = func;
 }
 
 function getResponse(req, body) {
@@ -29,15 +29,15 @@ function getResponse(req, body) {
     }
 
     // handle dynamic requests
-    for (var key in dynamicRPC) {
+    for (var key in dynamicResp) {
         if (url.indexOf(key) != -1) {
-            return dynamicRPC[key](url, info);
+            return dynamicResp[key](url, info);
         }
     }
 
     // handle static requests
     if (url === key) {
-        output = staticRPC[key](url, info);
+        output = staticResp[key](url, info);
         break;
     }
 
