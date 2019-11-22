@@ -9,7 +9,7 @@ function prepareItems() {
 		console.log("rebuilding items cache...");
 
 		let itemsDir = ["database/configs/items/", "database/configs/items_modded/"];
-		let items_BaseJSON = JSON.parse(utility.readJson('database/configs/items/itemsBase.json'));
+		let items_BaseJSON = JSON.parse(utility.readJson('database/configs/itemsBase.json'));
 		let items_data = items_BaseJSON.data;
 
 		for (let i = 0; i< itemsDir.length; i++) {
