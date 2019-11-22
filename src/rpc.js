@@ -36,7 +36,7 @@ function getResponse(req, body) {
     }
 
     // handle static requests
-    if (url === key) {
+    if (staticResp.includes(url)) {
         output = staticResp[key](url, info);
         break;
     }
