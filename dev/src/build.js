@@ -6,25 +6,25 @@ const { compile } = require('nexe');
 console.log(">>>STARTING BUILD...");
 compile({
 	input: 'src/main.js',
-    	output: 'out/JustEmuTarkov-Server',
+    	output: 'JustEmuTarkov-Server',
 	build: false,
 	ico: 'dev/res/icon.ico'
 }).then(function(err) {
 	console.log(">>>Changing ICON...");
 	childProcess.execFile('dev/bin/ResourceHacker.exe', [
 		'-open',
-		'out/JustEmuTarkov-Server.exe',
+		'JustEmuTarkov-Server.exe',
 		'-save',
-		'out/JustEmuTarkov-Server.exe',
+		'JustEmuTarkov-Server.exe',
 		'-action',
 		'addoverwrite',
 		'-res',
-		'bin/icon.ico',
+		'dev/res/icon.ico',
 		'-mask',
 		'ICONGROUP,MAINICON,'
 	], function(err) {
 		console.log(">>>Compressing Executable...");
-		UPX('out/JustEmuTarkov-Server.exe')
+		UPX('JustEmuTarkov-Server.exe')
 		.output('JustEmuTarkov-Server.exe')
 		.start().then(function(stats) {
 			console.log(stats);

@@ -4,8 +4,8 @@
   "version": "0.8.0",
   "main": "src/main.js",
   "scripts": {
-    "test": "node dev/test.js",
-    "build": "node dev/build.js",
+    "test": "node dev/src/test.js",
+    "build": "node dev/src/build.js",
     "start": "node src/main.js"
   },
   "repository": {
@@ -36,6 +36,8 @@
   },
   "homepage": "https://justemutarkov.github.io",
   "dependencies": {
+    "upx": "^1.0.0",
+    "nexe": "^3.3.0",
     "adler32": "^0.1.7",
     "fs": "0.0.1-security",
     "http": "0.0.0",
