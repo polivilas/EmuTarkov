@@ -21,6 +21,9 @@ global.items = items_f.prepareItems();						// prepare items only once
 // Temp Locations
 global.locations_f = require('./response/_locations.js');	// response/_locations
 global.locations = locations_f.prepareLocations();			// prepare locations only once
+// Temp Weather
+global.weather_f = require('./response/_weather.js');		// repsonse/_weather
+global.weather = weather_f.prepareWeather();				// prepare weather only once
 // Temp Quests
 global.quests_f = require('./response/_quests.js');			// response/_locations
 global.quests = quests_f.prepareQuests();					// prepare quests only once
@@ -28,7 +31,6 @@ global.printf = console.log;
 global.logger = require('./logger.js');						// logger
 global.locale = require('./locale.js');						// locale changer function
 global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
-global.weather_f = require('./response/_weather.js');			// response/_weather
 global.repair_f = require('./response/_repair.js');				// response/_repair
 global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
 global.rpc = require('./rpc.js');

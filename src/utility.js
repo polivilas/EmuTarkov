@@ -21,23 +21,26 @@ function adlerGen(s){
 }
 
 function generateCRC(s){ // generate CRC from Server Version
-  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
+    return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
 }
 
 function getRandomInt(min = 0, max = 100) { // random number from given range
     min = Math.ceil(min);
     max = Math.floor(max);
-    if (max > min)
+
+    if (max > min) {
         return Math.floor(Math.random() * (max - min + 1) + min);
-    else
+    } else {
         return min;
+    }
 }
 
 function getRandomIntEx(max) { // random number from 1 to max if 1 given return 1
-    if (max > 1)
+    if (max > 1) {
         return Math.floor(Math.random() * (max - 2) + 1);
-    else
+    } else {
         return 1;
+    }
 }
 
 function removeDir(dir) {
@@ -56,6 +59,7 @@ function removeDir(dir) {
 
 function getTimestamp() {
     let time = new Date();
+
     return Math.floor(time.getTime() / 1000);
 }
 
@@ -72,7 +76,6 @@ function getDate() {
     let today = new Date();
     let day = ("0" + today.getDate()).substr(-2);
     let month = ("0" + (today.getMonth() + 1)).substr(-2);
-    // let year = ("000" + (today.getYear() + 1)).substr(-4);
 
     return today.getFullYear() + "-" + month + "-" + day;
 }
@@ -81,13 +84,15 @@ function getDate() {
  * @return {string}
  */
 function MakeSign(length) {
-   let result           = '';
+    let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
-   for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
+    
+    for (let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    
+    return result;
 }
 
 function generateNewItemId() { // --> Generate ID ultra not repeatable tested for 10.000.000 generates on same time it wasnt duplicated so im assume its ok
@@ -99,9 +104,9 @@ function generateNewItemId() { // --> Generate ID ultra not repeatable tested fo
 	let second = getTime.getSeconds().toString();
 	let random = getRandomInt(1000000000, 9999999999).toString();
 	let retVal = "I" + (month + date + hour + minute + second + random).toString();
-	let sign = MakeSign(24 - retVal.length).toString()
-	retVal = retVal + sign;
-    return retVal;
+    let sign = MakeSign(24 - retVal.length).toString();
+    
+    return retVal + sign;
 }
 
 function getLocalIpAddress() {
