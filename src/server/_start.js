@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 require('../libs.js');
 
 function getCookies(req) {
@@ -153,7 +153,7 @@ function handleRequest(req, resp) {
 
 function start() {
 	const options = {
-		key: fs.readFileSync("data/bin/server.key"),
+		key: fs.readFileSync("data/bin/server.key");
 		cert: fs.readFileSync("data/bin/server.cert");
 	};
 
