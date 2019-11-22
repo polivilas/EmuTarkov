@@ -1,4 +1,4 @@
 @echo off
-node testServer.js
+node build/test.js
 echo Test Finished!!
 pause
