@@ -8,8 +8,8 @@ function prepareItems() {
 	if (!fs.existsSync("appdata/cache/cache_items.json")) {
 		console.log("rebuilding items cache...");
 
-		let itemsDir = ["data/configs/database/items_stock/", "data/configs/database/items_modded/"];
-		let items_BaseJSON = JSON.parse(utility.readJson('data/configs/database/itemsBase.json'));
+		let itemsDir = ["database/configs/items/", "database/configs/items_modded/"];
+		let items_BaseJSON = JSON.parse(utility.readJson('database/configs/items/itemsBase.json'));
 		let items_data = items_BaseJSON.data;
 
 		for (let i = 0; i< itemsDir.length; i++) {

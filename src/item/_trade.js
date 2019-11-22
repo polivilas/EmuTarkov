@@ -16,7 +16,7 @@ function buyItem(tmpList, body, trad = "") { // Buying item from trader
     if (trad === "")
         tmpTrader = trader.getAssort(body.tid);
     else
-        tmpTrader = JSON.parse(utility.readJson("data/configs/assort/91_everythingTrader.json"));// its for fleamarket only
+        tmpTrader = JSON.parse(utility.readJson("database/configs/assort/91_everythingTrader.json"));// its for fleamarket only
     //no exceptions possible here
     let moneyID = [];
     //prepare barter items as money (roubles are counted there as well)

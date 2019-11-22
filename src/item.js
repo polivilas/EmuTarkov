@@ -2,7 +2,7 @@
 
 require('./libs.js');
 
-var templates = JSON.parse(utility.readJson('data/configs/templates.json'));
+var templates = JSON.parse(utility.readJson('database/configs/templates.json'));
 var AllQuests = quests;
 var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc

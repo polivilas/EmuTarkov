@@ -64,7 +64,7 @@ function getItems(url, info) {
 }
 
 function getGlobals(url, info) {
-    return utility.readJson('data/configs/globals.json');
+    return utility.readJson('database/configs/globals.json');
 }
 
 function getProfileData(url, info) {
@@ -88,7 +88,7 @@ function getLocations(url, info) {
 }
 
 function getTemplates(url, info) {
-    return utility.readJson('data/configs/templates.json');
+    return utility.readJson('database/configs/templates.json');
 }
 
 function getQuests(url, info) {
@@ -96,7 +96,7 @@ function getQuests(url, info) {
 }
 
 function getMetrics(url, info) {
-    return utility.readJson('data/configs/metricsConfig.json');
+    return utility.readJson('database/configs/metricsConfig.json');
 }
 
 function getBots(url, info) {
@@ -185,39 +185,39 @@ function setupConnection(url, info) {
 }
 
 function getCustomization(info) {
-    return utility.readJson('data/configs/customization/customization.json');
+    return utility.readJson('database/configs/customization/customization.json');
 }
 
 function getCustomizationOffers(url, info) {
-    return utility.readJson('data/configs/customization/offers.json');
+    return utility.readJson('database/configs/customization/offers.json');
 }
 
 function getAllCustomizationOffers(url, info) {
-    return utility.readJson('data/configs/customization/FenceOffers.json');
+    return utility.readJson('database/configs/customization/FenceOffers.json');
 }
 
 function getCustomizationStorage(url, info) {
-    return utility.readJson('data/configs/customization/storage.json');
+    return utility.readJson('database/configs/customization/storage.json');
 }
 
 function getHideoutRecipes(url, info) {
-    return utility.readJson('data/configs/hideout/production_recipes.json');
+    return utility.readJson('database/configs/hideout/production_recipes.json');
 }
 
 function getHideoutSettings(url, info) {
-    return utility.readJson('data/configs/hideout/settings.json');
+    return utility.readJson('database/configs/hideout/settings.json');
 }
 
 function getHideoutAreas(url, info) {
-    return utility.readJson('data/configs/hideout/areas.json');
+    return utility.readJson('database/configs/hideout/areas.json');
 }
 
 function getScavcaseRecipes(url, info) {
-    return utility.readJson('data/configs/hideout/production_scavcase_recipes.json');
+    return utility.readJson('database/configs/hideout/production_scavcase_recipes.json');
 }
 
 function getHandbookUserlist(url, info) {
-    return utility.readJson('data/configs/userBuilds.json');
+    return utility.readJson('database/configs/userBuilds.json');
 }
 
 function createNotifierChannel(url, info) {

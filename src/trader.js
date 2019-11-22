@@ -27,8 +27,8 @@ const traders_connected =
     "8_PresetTrader": 			"8_PresetTrader",  		//Holds only weapon presets
     "91_everythingTrader": 		"91_everythingTrader"  	//Holds all items
 };
-var tradersDir = "data/configs/traders/";
-var assortDir = "data/configs/assort/";
+var tradersDir = "database/configs/traders/";
+var assortDir = "database/configs/assort/";
 var traders = [];
 var assorts = [];
 

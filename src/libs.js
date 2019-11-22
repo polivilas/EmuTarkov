@@ -75,40 +75,40 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	}
 
 	// yea this is tough but loads only once
-	global.names = JSON.parse(utility.readJson("data/configs/bots/botNames.json"));
-	global.botBase = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
+	global.names = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
+	global.botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
 	global.bots_outfits_db = 
 	{
-		assault: JSON.parse(utility.readJson("data/configs/bots/customization/assault.json")),
-		bossBully: JSON.parse(utility.readJson("data/configs/bots/customization/bossBully.json")),
-		bossGluhar: JSON.parse(utility.readJson("data/configs/bots/customization/bossGluhar.json")),
-		bossKilla: JSON.parse(utility.readJson("data/configs/bots/customization/bossKilla.json")),
-		bossKojaniy: JSON.parse(utility.readJson("data/configs/bots/customization/bossKojaniy.json")),
-		followerBully: JSON.parse(utility.readJson("data/configs/bots/customization/followerBully.json")),
-		followerGluharAssault: JSON.parse(utility.readJson("data/configs/bots/customization/followerGluharAssault.json")),
-		followerGluharScout: JSON.parse(utility.readJson("data/configs/bots/customization/followerGluharScout.json")),
-		followerGluharSecurity: JSON.parse(utility.readJson("data/configs/bots/customization/followerGluharSecurity.json")),
-		followerKojaniy: JSON.parse(utility.readJson("data/configs/bots/customization/followerKojaniy.json")),
-		marksman: JSON.parse(utility.readJson("data/configs/bots/customization/marksman.json")),
-		pmcBot: JSON.parse(utility.readJson("data/configs/bots/customization/pmcBot.json"))
+		assault: JSON.parse(utility.readJson("database/configs/bots/customization/assault.json")),
+		bossBully: JSON.parse(utility.readJson("database/configs/bots/customization/bossBully.json")),
+		bossGluhar: JSON.parse(utility.readJson("database/configs/bots/customization/bossGluhar.json")),
+		bossKilla: JSON.parse(utility.readJson("database/configs/bots/customization/bossKilla.json")),
+		bossKojaniy: JSON.parse(utility.readJson("database/configs/bots/customization/bossKojaniy.json")),
+		followerBully: JSON.parse(utility.readJson("database/configs/bots/customization/followerBully.json")),
+		followerGluharAssault: JSON.parse(utility.readJson("database/configs/bots/customization/followerGluharAssault.json")),
+		followerGluharScout: JSON.parse(utility.readJson("database/configs/bots/customization/followerGluharScout.json")),
+		followerGluharSecurity: JSON.parse(utility.readJson("database/configs/bots/customization/followerGluharSecurity.json")),
+		followerKojaniy: JSON.parse(utility.readJson("database/configs/bots/customization/followerKojaniy.json")),
+		marksman: JSON.parse(utility.readJson("database/configs/bots/customization/marksman.json")),
+		pmcBot: JSON.parse(utility.readJson("database/configs/bots/customization/pmcBot.json"))
 	};
 	global.bots_inventory_db = 
 	{
-		assault: JSON.parse(utility.readJson("data/configs/bots/inventory/assault.json")),
-		bossBully: JSON.parse(utility.readJson("data/configs/bots/inventory/bossBully.json")),
-		bossGluhar: JSON.parse(utility.readJson("data/configs/bots/inventory/bossGluhar.json")),
-		bossKilla: JSON.parse(utility.readJson("data/configs/bots/inventory/bossKilla.json")),
-		bossKojaniy: JSON.parse(utility.readJson("data/configs/bots/inventory/bossKojaniy.json")),
-		followerBully: JSON.parse(utility.readJson("data/configs/bots/inventory/followerBully.json")),
-		followerGluharAssault: JSON.parse(utility.readJson("data/configs/bots/inventory/followerGluharAssault.json")),
-		followerGluharScout: JSON.parse(utility.readJson("data/configs/bots/inventory/followerGluharScout.json")),
-		followerGluharSecurity: JSON.parse(utility.readJson("data/configs/bots/inventory/followerGluharSecurity.json")),
-		followerKojaniy: JSON.parse(utility.readJson("data/configs/bots/inventory/followerKojaniy.json")),
-		marksman: JSON.parse(utility.readJson("data/configs/bots/inventory/marksman.json")),
-		pmcBot: JSON.parse(utility.readJson("data/configs/bots/inventory/pmcBot.json"))
+		assault: JSON.parse(utility.readJson("database/configs/bots/inventory/assault.json")),
+		bossBully: JSON.parse(utility.readJson("database/configs/bots/inventory/bossBully.json")),
+		bossGluhar: JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json")),
+		bossKilla: JSON.parse(utility.readJson("database/configs/bots/inventory/bossKilla.json")),
+		bossKojaniy: JSON.parse(utility.readJson("database/configs/bots/inventory/bossKojaniy.json")),
+		followerBully: JSON.parse(utility.readJson("database/configs/bots/inventory/followerBully.json")),
+		followerGluharAssault: JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json")),
+		followerGluharScout: JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json")),
+		followerGluharSecurity: JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json")),
+		followerKojaniy: JSON.parse(utility.readJson("database/configs/bots/inventory/followerKojaniy.json")),
+		marksman: JSON.parse(utility.readJson("database/configs/bots/inventory/marksman.json")),
+		pmcBot: JSON.parse(utility.readJson("database/configs/bots/inventory/pmcBot.json"))
 	}
-	global.globalSettings = JSON.parse(utility.readJson("data/configs/globals.json"));
-	global.customization_m = JSON.parse(utility.readJson("data/configs/customization/customization.json"));
+	global.globalSettings = JSON.parse(utility.readJson("database/configs/globals.json"));
+	global.customization_m = JSON.parse(utility.readJson("database/configs/customization/customization.json"));
 	
 	if (isFirstLaunch == "first") {
 		printf("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);

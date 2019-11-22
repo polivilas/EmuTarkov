@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-const hideout_areas_config = JSON.parse( utility.readJson("data/configs/hideout/areas.json" ) );
+const hideout_areas_config = JSON.parse( utility.readJson("database/configs/hideout/areas.json" ) );
 
 //upgrading can take times,the first step is to pay what needed for upgrade and start construction
 function HideoutUpgrade(tmplist,body)

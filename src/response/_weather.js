@@ -7,10 +7,10 @@ require('../libs.js');
 function prepareWeather() {
     let i = 0;
     let data = [];
-    let files = fs.readdirSync("data/configs/weather/");
+    let files = fs.readdirSync("database/configs/weather/");
 
     for (let file in files) {
-        data[i++] = JSON.parse(utility.readJson("data/configs/weather/" + files[file]));
+        data[i++] = JSON.parse(utility.readJson("database/configs/weather/" + files[file]));
     }
 
     return data;

@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-const templates = JSON.parse(utility.readJson('data/configs/templates.json'));
+const templates = JSON.parse(utility.readJson('database/configs/templates.json'));
 const AllQuests = quests;
 var output = "";
 
@@ -392,5 +392,3 @@ module.exports.getSize = getSize;
 module.exports.findAndReturnChildren = findAndReturnChildren;
 module.exports.returnOutput = returnOutput;
 module.exports.setInternalOutput = setInternalOutput;
-
-//module.exports.getSize = getSize;

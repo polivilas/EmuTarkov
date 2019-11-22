@@ -9,9 +9,9 @@ function prepareLocations() {
 		console.log("rebuilding locations cache...");
 
 		let locationsTable = [];
-		let locationsDir = "data/configs/database/maps/";
+		let locationsDir = "database/configs/maps/";
 		let locations_base = fs.readdirSync(locationsDir);
-		let locations_maps = JSON.parse(utility.readJson('data/configs/database/locationsBase.json'));
+		let locations_maps = JSON.parse(utility.readJson('database/configs/maps/locationsBase.json'));
 		let locations = locations_maps.data.locations;
 
 		for (let file in locationsDir) {

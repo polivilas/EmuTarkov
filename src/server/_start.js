@@ -40,7 +40,7 @@ function sendResponse(req, resp, body) {
 	if (output === "MAPCONFIG") {
 		let mapname = req.url.replace("/api/location/", "");		
 		let RandomPreset = utility.getRandomInt(1,6);
-		let data_response = utility.readJson("data/configs/api/location/" + mapname + "" + RandomPreset + ".json");
+		let data_response = utility.readJson("database/configs/api/location/" + mapname + "" + RandomPreset + ".json");
 		
 		console.log("[MAP.config]: " + mapname);
 		header_f.sendTextJson(resp, data_response);
@@ -66,7 +66,7 @@ function sendResponse(req, resp, body) {
 			console.log("[IMG.regular]:" + req.url);
 			additionalPath = "/other";
 		}
-		req.url = "/data/images" + additionalPath + "/" + url_array[url_array.length-1];
+		req.url = "/database/images" + additionalPath + "/" + url_array[url_array.length-1];
 
 		header_f.sendFile(resp, "." + req.url);
 		return;
@@ -154,8 +154,8 @@ function handleRequest(req, resp) {
 
 function start() {
 	const options = {
-		key: fs.readFileSync("bin/server.key"),
-		cert: fs.readFileSync("bin/server.cert")
+		key: fs.readFileSync("binaries/server.key"),
+		cert: fs.readFileSync("binaries/server.cert")
 	};
 
 	// set the ip and backendurl 

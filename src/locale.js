@@ -2,7 +2,7 @@
 
 require('./libs.js');
 
-var localePath = "data/configs/locale/";
+var localePath = "database/configs/locale/";
 
 function getLanguages() {
     return utility.readJson(localePath + "languages.json");

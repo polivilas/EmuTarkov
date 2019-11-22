@@ -10,7 +10,7 @@ function prepareQuests() {
 	if (!fs.existsSync("appdata/cache/cache_quests.json")) {
 		console.log("rebuilding quests cache...");
 
-		let questsDir = "data/configs/database/quests/";
+		let questsDir = "database/configs/quests/";
 		let quest_BaseJSON = JSON.parse('{"err":0,"errmsg":null,"data":[]}');
 		let quest_data = quest_BaseJSON.data;
 		let quest_List = fs.readdirSync(questsDir);

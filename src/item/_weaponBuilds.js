@@ -6,9 +6,9 @@ function SaveBuild(tmpList,body)
 {
 	delete body.Action;
 	body.id = utility.generateNewItemId();
-	var savedBuilds = JSON.parse( utility.readJson('data/configs/userBuilds.json') );
+	var savedBuilds = JSON.parse( utility.readJson('database/configs/userBuilds.json') );
 	savedBuilds.data.push(body);
-	utility.writeJson('data/configs/userBuilds.json',savedBuilds);
+	utility.writeJson('database/configs/userBuilds.json',savedBuilds);
 
 	item.resetOutput();
 	let output = item.getOutput();
@@ -20,7 +20,7 @@ function SaveBuild(tmpList,body)
 function RemoveBuild(tmpList,body)
 {
 	
-	var savedBuilds = JSON.parse( utility.readJson('data/configs/userBuilds.json') );
+	var savedBuilds = JSON.parse( utility.readJson('database/configs/userBuilds.json') );
 	
 	for(var wBuild of savedBuilds.data)
 	{
@@ -36,7 +36,7 @@ function RemoveBuild(tmpList,body)
 			}
 		}
 	}
-	utility.writeJson('data/configs/userBuilds.json',savedBuilds);
+	utility.writeJson('database/configs/userBuilds.json',savedBuilds);
 
 	item.resetOutput();
     return item.getOutput();

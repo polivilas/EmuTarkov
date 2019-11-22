@@ -70,7 +70,7 @@ function saveProfileProgress(offRaidData) {
     var string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
     //replace all these GClasses shit
-    let replaceConfig = JSON.parse(utility.readJson("data/configs/offlineProgressionReplacer.json"));
+    let replaceConfig = JSON.parse(utility.readJson("database/configs/offlineProgressionReplacer.json"));
     var keys = Object.keys(replaceConfig);
     for (let iterate = 0; iterate < keys.length; iterate++) {
         string_inventory = string_inventory.replace(new RegExp(keys[iterate], 'g'), replaceConfig[keys[iterate]]);

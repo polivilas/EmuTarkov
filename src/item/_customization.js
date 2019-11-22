@@ -40,7 +40,7 @@ function buyClothing(tmpList, body){
 	//let ragmanOffer = body.offer; <- no 
 
 	let item_toPay = body.items;
-	let customization_storage = JSON.parse( utility.readJson("data/configs/customization/storage.json") );
+	let customization_storage = JSON.parse( utility.readJson("database/configs/customization/storage.json") );
 	for(let i = 0; i < item_toPay.length; i++){
 		for(let item in tmpList.data[0].Inventory.items){
 			if(tmpList.data[0].Inventory.items[item]._id == item_toPay[i].id){
@@ -64,7 +64,7 @@ function buyClothing(tmpList, body){
 		}
 	}
 
-	var customization_offers = JSON.parse( utility.readJson("data/configs/customization/offers.json") );
+	var customization_offers = JSON.parse( utility.readJson("database/configs/customization/offers.json") );
 	for(var offer of customization_offers.data)
 	{
 		if(body.offer == offer._id)
@@ -72,7 +72,7 @@ function buyClothing(tmpList, body){
 			customization_storage.data.suites.push(offer.suiteId);
 		}
 	}
-	utility.writeJson("data/configs/customization/storage.json", customization_storage);
+	utility.writeJson("database/configs/customization/storage.json", customization_storage);
 	profile.setCharacterData(tmpList); // save profile after change
 	return output;
 }
