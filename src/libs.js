@@ -14,6 +14,7 @@ global.port = settings.server.port;
 global.items = "";
 global.quests = "";
 global.locations = "";
+global.weathers = '{}';
 global.utility = require('./utility.js');					// utility // no other files required for it
 // Temp Items
 global.items_f = require('./response/_items.js');			// response/_locations
@@ -23,7 +24,7 @@ global.locations_f = require('./response/_locations.js');	// response/_locations
 global.locations = locations_f.prepareLocations();			// prepare locations only once
 // Temp Weather
 global.weather_f = require('./response/_weather.js');		// repsonse/_weather
-global.weather = weather_f.prepareWeather();				// prepare weather only once
+global.weathers = weather_f.prepareWeather();				// prepare weather only once
 // Temp Quests
 global.quests_f = require('./response/_quests.js');			// response/_locations
 global.quests = quests_f.prepareQuests();					// prepare quests only once

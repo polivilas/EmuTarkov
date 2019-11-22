@@ -23,13 +23,13 @@ function change() {
     let output = weathers[utility.getRandomInt(0, weathers.length)];
 
     // replace date and time
-    output.data.weather.timestamp = Math.floor(new Date() / 1000);
-    output.data.weather.date = date;
-    output.data.weather.time = datetime;
-    output.data.date = date;
-    output.data.time = time;
+    output.weather.timestamp = Math.floor(new Date() / 1000);
+    output.weather.date = date;
+    output.weather.time = datetime;
+    output.date = date;
+    output.time = time;
 
-    return JSON.stringify(output);
+    return '{"err": 0, "errmsg": null, "data": ' + JSON.stringify(output) + '}';
 }
 
 //// ---- EXPORT LIST ---- ////
