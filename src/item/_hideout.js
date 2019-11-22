@@ -150,31 +150,51 @@ function HideoutToggleArea(tmplist,body)
 
 function HideoutSingleProductionStart(tmplist,body)
 {	
-	var crafting_receipes = JSON.parse( utility.readJson("data/configs/hideout/production_recipes.json" ) );
+	registerProduction(tmplist, body);
 
-	for(var receipe in crafting_receipes.data)
+	for(var itemToDelete of body.items)
 	{
-		if(body.recipeId == receipe._id)
-		{
-			console.log("found the receipe ! register it in profile"); //dump this
-
-			for(var itemToDelete of body.items)
-			{
-				//move_f.removeItem(tmplist, { "Action":"Remove", "item" : itemToDelete.id } );
-			}
-			
-		}
+		move_f.removeItem(tmplist, { "Action":"Remove", "item" : itemToDelete.id } );
 	}
 
-	//profile.setCharacterData(tmplist);
+	item.resetOutput();		
+	return item.getOutput();
+}
+
+function HideoutContinuousProductionStart(tmplist, body)
+{
+	registerProduction(tmplist, body);
+
 	item.resetOutput();		
 	return item.getOutput();
 }
 
 
+function registerProduction(tmplist, body)//internal function used for 3 requets
+{
+	var crafting_receipes = JSON.parse( utility.readJson("data/configs/hideout/production_recipes.json" ) );
+
+	for(var receipe in crafting_receipes.data)
+	{	
+		if(body.recipeId == crafting_receipes.data[receipe]._id)
+		{
+			tmplist.data[0].Hideout.Production[crafting_receipes.data[receipe].areaType] = { 
+				"Progress":0,
+				"inProgress": true,
+           		"RecipeId": body.recipeId,
+        		"Products": [],
+        		"StartTime": body.timestamp
+        	};
+		}
+	}
+	profile.setCharacterData(tmplist);
+	return "done";
+}
+
 module.exports.hideoutUpgrade = HideoutUpgrade;
 module.exports.hideoutUpgradeComplete = HideoutUpgradeComplete;
-module.exports.hideoutPutItemsInAreaSlots = HideoutPutItemsInAreaSlots
-module.exports.hideoutTakeItemsFromAreaSlots = HideoutTakeItemsFromAreaSlots
-module.exports.hideoutToggleArea = HideoutToggleArea
-module.exports.hideoutSingleProductionStart  = HideoutSingleProductionStart
+module.exports.hideoutPutItemsInAreaSlots = HideoutPutItemsInAreaSlots;
+module.exports.hideoutTakeItemsFromAreaSlots = HideoutTakeItemsFromAreaSlots;
+module.exports.hideoutToggleArea = HideoutToggleArea;
+module.exports.hideoutSingleProductionStart  = HideoutSingleProductionStart;
+module.exports.hideoutContinuousProductionStart = HideoutContinuousProductionStart;
