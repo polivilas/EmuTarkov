@@ -192,6 +192,10 @@ function getCustomizationOffers(url, info) {
     return utility.readJson('data/configs/customization/offers.json');
 }
 
+function getAllCustomizationOffers(url, info) {
+    return utility.readJson('data/configs/customization/FenceOffers.json');
+}
+
 function getCustomizationStorage(url, info) {
     return utility.readJson('data/configs/customization/storage.json');
 }
@@ -288,6 +292,7 @@ function setupRPC() {
     rpc.addStaticResponse("/client/game/config", setupConnection);
     rpc.addStaticResponse("/client/customization" , getCustomization);
     rpc.addStaticResponse("/client/trading/customization/5ac3b934156ae10c4430e83c/offers", getCustomizationOffers);
+    rpc.addStaticResponse("/client/trading/customization/579dc571d53a0658a154fbec/offers", getAllCustomizationOffers);
     rpc.addStaticResponse("/client/trading/customization/storage", getCustomizationStorage);
     rpc.addStaticResponse("/client/hideout/production/recipes", getHideoutRecipes);
     rpc.addStaticResponse("/client/hideout/settings", getHideoutSettings);
