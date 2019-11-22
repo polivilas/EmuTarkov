@@ -5,7 +5,7 @@ const { compile } = require('nexe');
 // compile the application
 console.log(">>>STARTING BUILD...");
 compile({
-	input: 'src/main.js',
+	input: 'scripts/main.js',
     	output: 'JustEmuTarkov-Server',
 	build: false,
 	ico: 'dev/res/icon.ico'
