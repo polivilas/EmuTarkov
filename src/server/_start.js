@@ -152,13 +152,12 @@ function handleRequest(req, resp) {
 }
 
 function start() {
-	port = settings.server.port;
-
 	const options = {
-	  key: fs.readFileSync("server.key"),
-	  cert: fs.readFileSync("server.cert")
+		key: fs.readFileSync("data/bin/server.key"),
+		cert: fs.readFileSync("data/bin/server.cert");
 	};
 
+	port = settings.server.port;
 	ip = settings.server.ip;
 	
 	if (settings.server.generateIp == true) {
@@ -167,7 +166,7 @@ function start() {
 	}
 	
 	// set the ip and backendurl 
-	settings.server.backendUrl = "https://" + ip; 
+	settings.server.backendUrl = "https://" + ip;
 	backendUrl = settings.server.backendUrl;
 	utility.writeJson("server.config.json", settings);
 
@@ -182,7 +181,7 @@ function start() {
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		response.setupRPC();
 		handleRequest(req, res);
-	}).listen(port, function(){
+	}).listen(port, function() {
 		console.log("» Server: " + backendUrl, "green", "", true);
 	});
 	
