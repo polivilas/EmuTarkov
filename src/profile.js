@@ -168,7 +168,7 @@ function getCharacterData() {
     let playerData = JSON.parse(
         utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json")
     );
-    let scavData = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
+    let scavData = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
     let ret = {err: 0, errmsg: null, data: []};
