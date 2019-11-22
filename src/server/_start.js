@@ -130,13 +130,10 @@ function handleRequest(req, resp) {
 					body = ((body !== null && body != "" && body != "{}")?body.toString():"{}");
 
 					// get the IP address of the client
-					let IP = "[" + req.connection.remoteAddress.replace("::ffff:","") + "]";
-					let URL = "[Req:" + req.url + "]";
-					console.log(IP + URL + ActiveProfile + "~", "cyan");
-
-					if (settings.debug.debugMode == true) {
-						console.log(body);
-					}
+					//let IP = "[" + req.connection.remoteAddress.replace("::ffff:","") + "]";
+					let URL = "" + req.url + "";//"[Req:" + req.url + "]";
+					let displayBody = ((settings.debug.debugMode === true)?body:"");
+					console.log(URL + " -> " + displayBody, "cyan");
 
 					sendResponse(req, resp, body);
 				});
@@ -171,8 +168,26 @@ function start() {
 	utility.writeJson("server.config.json", settings);
 
 	// show our watermark
-	console.log("  └─ JustEmuTarkov " + constants.serverVersion() + " ─┘", "cyan", "");
-	console.log("■ https://justemutarkov.github.io/", "cyan", "");
+	let text_1 = "JustEmuTarkov " + constants.serverVersion();
+	let text_2 = "Website: https://justemutarkov.github.io/";
+	let diffrence = Math.abs(text_1.length - text_2.length);
+	let whichIsLonger = ((text_1.length >= text_2.length)?text_1.length:text_2.length);
+	let box_spacing_between_1 = "";
+	let box_spacing_between_2 = "";
+	if(text_1.length >= text_2.length)
+	{
+		for (let i = 0; i < diffrence; i++){box_spacing_between_2 += " ";}
+	}
+	 else
+	{
+		for (let i = 0; i < diffrence; i++){box_spacing_between_1 += " ";}
+	}
+	let box_width = "";
+		for (let i = 0; i < whichIsLonger; i++){box_width += "═";}
+	console.log("╔═" + box_width + "═╗", "cyan", "");
+	console.log("║ " + text_1 + box_spacing_between_1 + " ║", "cyan", "");
+	console.log("║ " + text_2 + box_spacing_between_2 + " ║", "cyan", "");
+	console.log("╚═" + box_width + "═╝", "cyan", "");
 
 	if (settings.debug.showSeparator === true) {
 		logger.separator();
@@ -182,7 +197,7 @@ function start() {
 		response.setupRPC();
 		handleRequest(req, res);
 	}).listen(port, function() {
-		console.log("» Server: " + backendUrl, "green", "", true);
+		console.log("» Server url: " + backendUrl, "green", "", true);
 	});
 	
 	// ERROR ON CREATION - HTTPS

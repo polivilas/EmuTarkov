@@ -1,20 +1,17 @@
 "use strict";
-
+var isFirstLaunch = "first";
 let start0 = new Date();
-console.log('[Starting Application]  %dms', new Date() - start0);
+console.log('[Starting Application]','','');
 
-require("./libs.js");
+require("./libs.js")(isFirstLaunch, start0);
+ended_at = new Date() - start0;
+console.info('[Library Loaded]  %dms', ended_at);
+if(settings.debug.loadingDisplayer == false)
+	process.stdout.write('\x1Bc');
+process.stdout.write(
+	String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " + constants.serverVersion() + String.fromCharCode(7)
+);
 
-console.info('[Library Loaded]  %dms', new Date() - start0);
-
-
-function setTitle(title) {
-	process.stdout.write(
-		String.fromCharCode(27) + ']0;' + title + String.fromCharCode(7)
-	);
-}
-
-setTitle("JustEmuTarkov Server " + constants.serverVersion());
 logger.start();
 server.start();
 trader.load();
