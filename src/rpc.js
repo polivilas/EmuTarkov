@@ -36,11 +36,9 @@ function getResponse(req, body) {
     }
 
     // handle static requests
-    for (var key in staticRPC) {      
-        if (url === key) {
-            output = staticRPC[key](url, info);
-            break;
-        }
+    if (url === key) {
+        output = staticRPC[key](url, info);
+        break;
     }
 
     // request couldn't be handled
