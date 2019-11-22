@@ -30,7 +30,7 @@ function getResponse(req, body) {
 
     // handle static requests
     // NoHurry: fair enough, this _seems_ to work tho, would reduce overhad alot if it really does  ;)
-	if (staticResp[url] !== undefined) {
+	if (typeof staticResp[url] !== "undefined") {
         return staticResp[url](url, info);
     }
 	
