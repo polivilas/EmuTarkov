@@ -16,7 +16,7 @@ function generate(databots) {
 			tempBot.Info.Settings.Role = condition.Role;
 			tempBot.Info.Settings.BotDifficulty = condition.Difficulty;
 			tempBot.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-			generatedBots.push(generateBotGeneric(tempBot, condition.Role, condition.Difficulty));
+			generatedBots.push(generateBotGeneric(tempBot, condition.Role));
 		}
 	}
 
@@ -54,7 +54,7 @@ function RandomName(type, role) {
  * ~~output: Single Bot
  * @return {string}
  */
-function generateBotGeneric(botBase,role) {
+function generateBotGeneric(botBase, role) {
 	let nameType = "boss";
 
 	switch (role) {
