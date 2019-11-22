@@ -85,7 +85,7 @@ function center(text) {
 
 function start() {
     let file = utility.getTime() + "_" + utility.getDate() + ".log";
-    let folder = "./logs";
+    let folder = "appdata/logs/";
     let filepath = path.join(folder, file);
 
     // create log folder

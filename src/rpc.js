@@ -59,6 +59,7 @@ function getResponse(req, body) {
             } else {
                 output = JSON.stringify(crctest).replace(/\s\s+/g, '');
             }
+            
 			return output;
         }
     }

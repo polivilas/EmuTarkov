@@ -14,7 +14,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 		console.log("Main require() files loaded... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
 
-	global.settings = JSON.parse( (fs.readFileSync("server.config.json", 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '') );
+	global.settings = JSON.parse( (fs.readFileSync("appdata/server.config.json", 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '') );
 	global.ended_at = 0;
 	global.backendUrl = settings.server.backendUrl;
 	global.ip = settings.server.ip;

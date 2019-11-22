@@ -3,7 +3,7 @@
 require("./libs.js");
 
 function getProfiles() {
-    return JSON.parse(utility.readJson("data/profiles/profiles.json"));
+    return JSON.parse(utility.readJson("appdata/profiles/profiles.json"));
 }
 
 function loadTraderStandings(playerData = "") {
@@ -166,7 +166,7 @@ function saveProfileProgress(offRaidData) {
 function getCharacterData() {
     // create full profile data from simplified character data
     let playerData = JSON.parse(
-        utility.readJson("data/profiles/character_" + constants.getActiveID() + ".json")
+        utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json")
     );
     let scavData = JSON.parse(utility.readJson("data/configs/bots/botBase.json"));
     scavData._id = playerData.savage;
@@ -180,7 +180,7 @@ function getCharacterData() {
 
 function getStashType() {
     let temp = JSON.parse(
-        utility.readJson("data/profiles/character_" + constants.getActiveID() + ".json")
+        utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json")
     );
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key)) {
@@ -196,7 +196,7 @@ function setCharacterData(data) {
     if (typeof data.data !== "undefined") {
         data = data.data[0];
     }
-    utility.writeJson("data/profiles/character_" + constants.getActiveID() + ".json", data);
+    utility.writeJson("appdata/profiles/character_" + constants.getActiveID() + ".json", data);
 }
 
 function addChildPrice(data, parentID, childPrice) {
@@ -219,7 +219,7 @@ function getPurchasesData() {
     //themaoci fix for offline raid selling ;) selling for 0.9 times of regular price for now
     //load files
     let multiplier = 0.9;
-    let data = JSON.parse( utility.readJson("data/profiles/character_" + constants.getActiveID() + ".json") );
+    let data = JSON.parse( utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json") );
     items = items_f.prepareItems();
     //prepared vars
     let equipment = data.Inventory.equipment;
@@ -365,7 +365,7 @@ function nicknameExist(info) {
 
     for (let i = 0; i < profiles.length; i++) {
         let profile = JSON.parse(
-            utility.readJson("data/profiles/character_" + i + ".json")
+            utility.readJson("appdata/profiles/character_" + i + ".json")
         );
         if (profile.Info.Nickname === info.nickname) {
             return true;
@@ -403,7 +403,6 @@ function changeVoice(info) {
 }
 
 function find(info, backendUrl) {
-    // let profiles = getProfiles();
     let ID = exist(info);
 
     // profile doesn't exist

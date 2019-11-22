@@ -154,10 +154,11 @@ function handleRequest(req, resp) {
 
 function start() {
 	const options = {
-		key: fs.readFileSync("data/bin/server.key"),
-		cert: fs.readFileSync("data/bin/server.cert")
+		key: fs.readFileSync("bin/server.key"),
+		cert: fs.readFileSync("bin/server.cert")
 	};
 
+	// set the ip and backendurl 
 	port = settings.server.port;
 	ip = settings.server.ip;
 	
@@ -166,10 +167,9 @@ function start() {
 		settings.server.ip = ip; 
 	}
 	
-	// set the ip and backendurl 
 	settings.server.backendUrl = "https://" + ip;
 	backendUrl = settings.server.backendUrl;
-	utility.writeJson("server.config.json", settings);
+	utility.writeJson("appdata/server.config.json", settings);
 
 	// show our watermark
 	let text_1 = "JustEmuTarkov " + constants.serverVersion();
@@ -178,16 +178,22 @@ function start() {
 	let whichIsLonger = ((text_1.length >= text_2.length)?text_1.length:text_2.length);
 	let box_spacing_between_1 = "";
 	let box_spacing_between_2 = "";
-	if(text_1.length >= text_2.length)
-	{
-		for (let i = 0; i < diffrence; i++){box_spacing_between_2 += " ";}
-	}
-	 else
-	{
-		for (let i = 0; i < diffrence; i++){box_spacing_between_1 += " ";}
-	}
 	let box_width = "";
-		for (let i = 0; i < whichIsLonger; i++){box_width += "═";}
+
+	if (text_1.length >= text_2.length) {
+		for (let i = 0; i < diffrence; i++) {
+			box_spacing_between_2 += " ";
+		}
+	} else {
+		for (let i = 0; i < diffrence; i++) {
+			box_spacing_between_1 += " ";
+		}
+	}
+	
+	for (let i = 0; i < whichIsLonger; i++) {
+		box_width += "═";
+	}
+	
 	console.log("╔═" + box_width + "═╗", "cyan", "");
 	console.log("║ " + text_1 + box_spacing_between_1 + " ║", "cyan", "");
 	console.log("║ " + text_2 + box_spacing_between_2 + " ║", "cyan", "");
@@ -197,6 +203,7 @@ function start() {
 		logger.separator();
 	}
 
+	// create server
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		response.setupRPC();
 		handleRequest(req, res);

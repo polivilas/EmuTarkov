@@ -1,16 +1,19 @@
 "use strict";
-var isFirstLaunch = "first";
+
+let isFirstLaunch = "first";
 let start0 = new Date();
 console.log('[Starting Application]','','');
 
 require("./libs.js")(isFirstLaunch, start0);
+
 ended_at = new Date() - start0;
 console.info('[Library Loaded]  %dms', ended_at);
-if(settings.debug.loadingDisplayer == false)
-	process.stdout.write('\x1Bc');
-process.stdout.write(
-	String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " + constants.serverVersion() + String.fromCharCode(7)
-);
+
+if (settings.debug.loadingDisplayer == false) {
+    process.stdout.write('\x1Bc');
+}
+
+process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " + constants.serverVersion() + String.fromCharCode(7));
 
 logger.start();
 server.start();

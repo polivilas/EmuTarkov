@@ -2,39 +2,43 @@
 
 require('../libs.js');
 
-let itemsCatched = settings.server.itemsCached; // its only flag to recreate items
-
 //// ---- FUNCTIONS BELOW ---- ////
 
 function prepareItems() {
-	if(!fs.existsSync('data/configs/cache_items.json')){
+	if (!fs.existsSync("appdata/cache/cache_items.json")) {
 		console.log("rebuilding items cache...");
+
 		let itemsDir = ["data/configs/database/items_stock/", "data/configs/database/items_modded/"];
 		let items_BaseJSON = JSON.parse(utility.readJson('data/configs/database/itemsBase.json'));
 		let items_data = items_BaseJSON.data;
-		for(let i = 0; i< itemsDir.length; i++){
+
+		for (let i = 0; i< itemsDir.length; i++) {
 			let items_List = fs.readdirSync(itemsDir[i]);
+
 			// load trader files
 			for (let file in items_List) {
 				if (typeof items_List[file] != "undefined") {
-							let temp_fileData = JSON.parse(utility.readJson(itemsDir[i] + items_List[file]));
-							if(settings.debug.ExaminedByDefault === true && typeof temp_fileData._props.ExaminedByDefault != "undefined")
-							{
-								temp_fileData._props.ExaminedByDefault = true;
-							}
-							items_data[temp_fileData._id] = temp_fileData;
+					let temp_fileData = JSON.parse(utility.readJson(itemsDir[i] + items_List[file]));
+
+					if (settings.debug.ExaminedByDefault === true && typeof temp_fileData._props.ExaminedByDefault != "undefined") {
+						temp_fileData._props.ExaminedByDefault = true;
+					}
+
+					items_data[temp_fileData._id] = temp_fileData;
 				}
 			}
 		}
+
 		items_BaseJSON.data = items_data;
 		items = items_BaseJSON;
-		utility.writeJson('data/configs/cache_items.json', items_BaseJSON);
+		utility.writeJson("appdata/cache/cache_items.json", items_BaseJSON);
 		return items_BaseJSON;
 	} else {
-		if(items == "")
-			return JSON.parse(utility.readJson('data/configs/cache_items.json'));
-		else
+		if (items == "") {
+			return JSON.parse(utility.readJson("appdata/cache/cache_items.json"));
+		} else {
 			return items;
+		}
 	}
 }
 
