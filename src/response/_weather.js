@@ -20,7 +20,7 @@ function change() {
     let time = utility.getTime().replace("-", ":").replace("-", ":");
     let date = utility.getDate();
     let datetime = date + " " + time;
-    let output = weathers[utility.getRandomInt(0, weathers.length)];
+    let output = weathers[utility.getRandomInt(0, weathers.length - 1)];
 
     // replace date and time
     output.weather.timestamp = Math.floor(new Date() / 1000);
