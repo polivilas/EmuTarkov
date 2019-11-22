@@ -48,21 +48,25 @@ function sendResponse(req, resp, body) {
 	}
 
 	if (output === "IMAGE") {
-		if (req.url.includes("/files/quest")) {
+		let url_array = req.url.split("/");
+		let additionalPath = "";
+		if (req.url.indexOf("/quest") != -1) {
 			console.log("[IMG.quests]:" + req.url);
-			req.url = req.url.replace("/files", "/data/images");
-		} else if (req.url.includes("/files/handbook")) {
+			additionalPath = "/quest";
+		} else if (req.url.indexOf("/handbook") != -1) {
 			console.log("[IMG.handbook]:" + req.url);
-			req.url = req.url.replace("/files", "/data/images");
-		} else if (req.url.includes("/files/trader/avatar")) {
+			additionalPath = "/handbook";
+		} else if (req.url.indexOf("/avatar") != -1) {
 			console.log("[IMG.trader]:" + req.url);
-			req.url = "/data/images" + req.url;
-		} else if (req.url.includes("/files/CONTENT/banners/")) {
+			additionalPath = "/trader";
+		} else if (req.url.indexOf("/banners") != -1) {
 			console.log("[IMG.banners]:" + req.url);
-			req.url = req.url.replace('/files/CONTENT/banners/', './data/images/banners/').replace('banner_', '');
+			additionalPath = "/banners";
 		} else {
 			console.log("[IMG.regular]:" + req.url);
+			additionalPath = "/other";
 		}
+		req.url = "/data/images" + additionalPath + "/" + url_array[url_array.length-1];
 
 		header_f.sendFile(resp, "." + req.url);
 		return;
