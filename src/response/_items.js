@@ -18,6 +18,8 @@ function prepareItems() {
 			for (let file in items_List) {
 				if (typeof items_List[file] != "undefined") {
 							let temp_fileData = JSON.parse(utility.readJson(itemsDir[i] + items_List[file]));
+							if(settings.debug.ExaminedByDefault === true)
+								temp_fileData._props.ExaminedByDefault = true;
 							items_data[temp_fileData._id] = temp_fileData;
 				}
 			}
