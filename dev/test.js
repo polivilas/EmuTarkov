@@ -1,4 +1,4 @@
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; // ignore selfsigned ssl certificate
+﻿process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; // ignore selfsigned ssl certificate
 const request = require('request');
 const zlib = require('zlib');
 const https = require('https');
@@ -20,6 +20,7 @@ function send(url, _port = 443, path, data, type = "POST"){
 			  'GClient-RequestId': 	integer
 		  } 
 		};
+
 		integer++; // add integer number to request counting requests and also making their stupid RequestId Counter
 		zlib.deflate(data, function (err, buffer) { // this is kinda working
 			const req = https.request(options, (res) => { // request https data with options above
@@ -48,6 +49,7 @@ function send(url, _port = 443, path, data, type = "POST"){
 		});
 	});
 }
+
 async function testServer(){
 	console.log("\nSERVER TESTER STARTING...");
 	const path = [
@@ -115,4 +117,5 @@ async function testServer(){
 		
 	}
 }
+
 testServer();

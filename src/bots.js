@@ -5,11 +5,11 @@
  * ~~output: Bots list response
  * @return {string}
  */
-function generate(databots)  {
-	var generatedBots = [];
+function generate(databots) {
+	let generatedBots = [];
 	
-	for(var condition of databots.conditions) {
-		for (var i = 0; i < condition.Limit; i++) {
+	for (let condition of databots.conditions) {
+		for (let i = 0; i < condition.Limit; i++) {
 			let tempBot = botBase;
 
 			tempBot._id = "bot" + i + "x" + utility.getRandomIntEx(99999);

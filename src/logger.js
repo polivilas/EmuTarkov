@@ -31,10 +31,14 @@ var fileStream = undefined;
 console.log = function (data, colorFront, colorBack, isLog = false) {
     let setColors = "";
     let colors = ["", ""];
-    if (typeof colorFront !== "undefined")
+
+    if (typeof colorFront !== "undefined") {
         colors[0] = colorFront;
-    if (typeof colorBack !== "undefined")
+    }
+
+    if (typeof colorBack !== "undefined") {
         colors[1] = colorBack;
+    }
 
     // properly set colorString indicator
     for (let i = 0; i < colors.length; i++) {
@@ -51,40 +55,49 @@ console.log = function (data, colorFront, colorBack, isLog = false) {
     }
 
     // write the logged data to the file - if debugmode on write everything
-    if (isLog === false || settings.debug.debugMode === true)
-        if (typeof fileStream !== "undefined")
+    if (isLog === false || settings.debug.debugMode === true) {
+        if (typeof fileStream !== "undefined") {
             fileStream.write(util.format(data) + '\n');
+        }
+    }
 };
 
 function separator() {
     let s = '';
+
     for (let i = 0; i < process.stdout.columns - 1; i++) {
         s = s + '-';
     }
+
     console.log(s);
 }
 
 function center(text) {
     let count = (process.stdout.columns - text.length) / 2;
     let space = '';
+
     for (let i = 0; i < count; i++) {
         space += ' ';
     }
+
     return space + text + space;
 }
 
 function start() {
     let file = utility.getTime() + "_" + utility.getDate() + ".log";
-    let folder = "./errorLogs";
+    let folder = "./appdata/logs";
     let filepath = path.join(folder, file);
+
     // create log folder
     if (!fs.existsSync(folder)) {
         fs.mkdirSync(folder);
     }
+
     // create log file
     if (!fs.existsSync(filepath)) {
         fs.writeFileSync(filepath);
     }
+
     fileStream = fs.createWriteStream(filepath, {flags: 'w'});
 }
 
@@ -97,19 +110,19 @@ process.on('uncaughtException',
         console.log(err);
         console.log("[ERROR] - Ends displaying", "red");
         console.log("[INFO] - opening error logs folder", "red");
+
         if (settings.debug.disableLogsDisplayer === false) {
             require('child_process').exec('start "" "' + __dirname.substring(0, __dirname.length - 3) + 'errorLogs"');
         }
 
-        setTimeout
-        (
+        setTimeout (
             function () {
                 console.log("[KILLING PROCESS]", "red", "", true);
                 return process.kill(process.pid);
             },
-            timeout * 1000
+            
+            timeout * 1000;
         );
-
     }
 );*/
 

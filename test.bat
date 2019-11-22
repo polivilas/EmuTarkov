@@ -1,4 +1,4 @@
 @echo off
-node build/test.js
-echo Test Finished!!
+npm run test
+echo Test finished
 pause

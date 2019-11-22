@@ -1,19 +1,29 @@
-﻿{
+{
   "name": "JustEmuTarkov-Server",
   "description": "EscapeFromTarkov server emulator",
   "version": "0.8.0",
   "main": "src/main.js",
   "scripts": {
-    "info": "echo \"its still bugged so i will take a look on this later - themaoci\" && exit 1"
+    "test": "node dev/test.js",
+    "build": "node dev/build.js",
+    "start": "node src/main.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/justemutarkov/EmuTarkov-Server.git"
   },
-  "keywords": ["JET", "JustEmuTarkov", "jet-server", "EmuTarkov", "emutarkov-server", "emutarkov", "emulator"],
+  "keywords": [
+    "JET",
+    "JustEmuTarkov",
+    "jet-server",
+    "EmuTarkov",
+    "emutarkov-server",
+    "emutarkov",
+    "emulator"
+  ],
   "author": "JustEmuTarkov Team",
   "contributors": [
-	"TheMaoci",
+    "TheMaoci",
     "InNoHurryToCode",
     "BALIST0N",
     "Macmillanic",

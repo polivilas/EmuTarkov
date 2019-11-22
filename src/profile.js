@@ -1,12 +1,9 @@
 "use strict";
+
 require("./libs.js");
 
 function getProfiles() {
     return JSON.parse(utility.readJson("data/profiles/profiles.json"));
-}
-
-function setProfiles(data) {
-    return utility.writeJson("data/profiles/profiles.json", data);
 }
 
 function loadTraderStandings(playerData = "") {
