@@ -36,6 +36,10 @@ function handleMoving(body) { // handling Action function
         case "HideoutUpgrade":
             return hideout_f.hideoutUpgrade(tmpList, body);
 
+        case "HideoutContinuousProductionStart":
+				resetOutput();
+            return output;
+
         case "HideoutUpgradeComplete":
             return hideout_f.hideoutUpgradeComplete(tmpList, body);
 

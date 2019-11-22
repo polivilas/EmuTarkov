@@ -6,7 +6,7 @@ let dynamicResp = {};
 let staticResp = {};
 
 function addDynamicResponse(url, func) {
-    staticResp[url] = func;
+    dynamicResp[url] = func;
 }
 
 function addStaticResponse(url, func) {
@@ -27,24 +27,27 @@ function getResponse(req, body) {
     if (url.indexOf("?retry=") != -1) {
         url = url.split("?retry=")[0];
     }
-
+    // handle static requests // thats not work like someone told you No;Hurry cause its an object not array ...
+	for (let key in staticResp) {
+        if (url === key) {
+            return staticResp[key](url, info);
+        }
+    }
+	
     // handle dynamic requests
-    for (var key in dynamicResp) {
+    for (let key in dynamicResp) {
         if (url.indexOf(key) != -1) {
             return dynamicResp[key](url, info);
         }
     }
 
-    // handle static requests
-    if (staticResp.indexOf(url) != -1) {
-        output = staticResp[key](url, info);
-        break;
-    }
+
 
     // request couldn't be handled
     if (output === "") {
         console.log("[UNHANDLED][" + url + "] request data: " + JSON.stringify(info), "white", "red");
         output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: '+ url + '", "data":null}';
+		return output;
     }
 
     // load from cache when server is in release mode
@@ -58,6 +61,7 @@ function getResponse(req, body) {
             } else {
                 output = JSON.stringify(crctest).replace(/\s\s+/g, '');
             }
+			return output;
         }
     }
 
