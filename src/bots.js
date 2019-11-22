@@ -89,10 +89,13 @@ function generateBotGeneric(botBase, role) {
 
 	let botsCustomizationLength = bots_outfits_db[role].length - 1;
 	
+	/*
 	botBase.Customization.Head = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Head;
 	botBase.Customization.Body = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Body;
 	botBase.Customization.Feet = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Feet;
 	botBase.Customization.Hands = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Hands;
+	*/
+	
 	botBase.Inventory = bots_inventory_db[role][utility.getRandomInt(0,bots_inventory_db[role].length - 1)];
 
 	return botBase;
