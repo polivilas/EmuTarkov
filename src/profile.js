@@ -332,16 +332,6 @@ function findID(ID) {
     return false;
 }
 
-function findUnusedID() {
-    let profiles = getProfiles();
-    for (let profile of profiles) {
-        if (!findID(profile.id + 1)) {
-            return profile.id + 1;
-        }
-    }
-    return profiles.length;
-}
-
 function exist(info) {
     let profiles = getProfiles();
     for (let profile of profiles) {
