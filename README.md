@@ -5,13 +5,5 @@ The Escape From Tarkov server emulator
 - See the wiki for more information
 
 ## Credits
-Project originator: Polivilas
-
-The JustEmuTarkov team:
-- TheMaoci
-- InNoHurryToCode
-- BALIST0N
-- Macmillanic
-- Mr RUSS
-- Windel
-- Йуpасзка
+Project originator: Polivilas <br/>
+The JustEmuTarkov team (see package.json for all names)
