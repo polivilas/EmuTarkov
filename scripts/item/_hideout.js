@@ -9,9 +9,9 @@ function HideoutUpgrade(tmplist,body)
 {
 	
     //pay money or delete items
-	for(var itemToPay of body.items )
+	for(let itemToPay of body.items )
 	{
-		for(var inventoryItem in tmplist.data[0].Inventory.items)
+		for(let inventoryItem in tmplist.data[0].Inventory.items)
 		{
 			if(tmplist.data[0].Inventory.items[inventoryItem]._id == itemToPay.id )//find the specific item in inventory
 			{
@@ -28,22 +28,22 @@ function HideoutUpgrade(tmplist,body)
 	}
 
 	//time construction management
-	for(var hideoutArea in tmplist.data[0].Hideout.Areas)
+	for(let hideoutArea in tmplist.data[0].Hideout.Areas)
 	{	
 		//find areaType in profile
 		if(tmplist.data[0].Hideout.Areas[hideoutArea].type == body.areaType)
 		{
 
-			for( var hideout_stage in hideout_areas_config.data)
+			for( let hideout_stage in hideout_areas_config.data)
 			{	
 				//find the  good stage from config
 				if( hideout_areas_config.data[hideout_stage].type == body.areaType)
 				{
 					//get construction time
-					var ctime = hideout_areas_config.data[hideout_stage].stages[ tmplist.data[0].Hideout.Areas[hideoutArea].level + 1 ].constructionTime;
+					let ctime = hideout_areas_config.data[hideout_stage].stages[ tmplist.data[0].Hideout.Areas[hideoutArea].level + 1 ].constructionTime;
 					if(ctime > 0 )
 					{	
-						var timestamp = Math.floor(Date.now() / 1000);
+						let timestamp = Math.floor(Date.now() / 1000);
 						tmplist.data[0].Hideout.Areas[hideoutArea].completeTime = timestamp + ctime ;
 						tmplist.data[0].Hideout.Areas[hideoutArea].constructing = true;
 					}
@@ -61,7 +61,7 @@ function HideoutUpgrade(tmplist,body)
 //validating the upgrade
 function HideoutUpgradeComplete(tmplist,body)
 {
-	for(var hideoutArea in tmplist.data[0].Hideout.Areas)
+	for(let hideoutArea in tmplist.data[0].Hideout.Areas)
 	{
 		if(tmplist.data[0].Hideout.Areas[hideoutArea].type == body.areaType)
 		{
@@ -83,9 +83,9 @@ function HideoutUpgradeComplete(tmplist,body)
 //move items from hideout
 function HideoutPutItemsInAreaSlots(tmplist,body)
 {
-	for(var itemToMove in body.items)
+	for(let itemToMove in body.items)
 	{
-		for(var inventoryItem of tmplist.data[0].Inventory.items)
+		for(let inventoryItem of tmplist.data[0].Inventory.items)
 		{
 			if(body.items[itemToMove].id == inventoryItem._id )
 			{
@@ -135,7 +135,7 @@ function HideoutTakeItemsFromAreaSlots(tmplist,body)
 function HideoutToggleArea(tmplist,body)
 {
 
-	for(var area in tmplist.data[0].Hideout.Areas)
+	for(let area in tmplist.data[0].Hideout.Areas)
 	{
 		if( tmplist.data[0].Hideout.Areas[area].type == body.areaType )
 		{	
@@ -153,7 +153,7 @@ function HideoutSingleProductionStart(tmplist,body)
 {	
 	registerProduction(tmplist, body);
 
-	for(var itemToDelete of body.items)
+	for(let itemToDelete of body.items)
 	{
 		move_f.removeItem(tmplist, { "Action":"Remove", "item" : itemToDelete.id } );
 	}
@@ -165,9 +165,9 @@ function HideoutSingleProductionStart(tmplist,body)
 function HideoutScavCaseProductionStart(tmplist,body)
 {	
 	//take money before registering prod (registering save also that money change)
-	for(var moneyToEdit of body.items)
+	for(let moneyToEdit of body.items)
 	{
-		for(var item in tmplist.data[0].Inventory.items)
+		for(let item in tmplist.data[0].Inventory.items)
 		{
 			if(tmplist.data[0].Inventory.items[item]._id == moneyToEdit.id)
 			{
@@ -201,9 +201,9 @@ function HideoutTakeProduction(tmplist, body)
 
 function registerProduction(tmplist, body)//internal function used for 3 requests
 {
-	var crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
+	let crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
 
-	for(var receipe in crafting_receipes.data)
+	for(let receipe in crafting_receipes.data)
 	{	
 		if(body.recipeId == crafting_receipes.data[receipe]._id)
 		{
