@@ -1,10 +1,14 @@
 ﻿process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; // ignore selfsigned ssl certificate
+const fs = require('fs');
 const request = require('request');
 const zlib = require('zlib');
 const https = require('https');
 let integer = 0;
 var gameVersion = '0.12.0.5054';
 
+function readJson(file) { //read json file with deleting all tabulators and new lines
+    return (fs.readFileSync(file, 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '');
+}
 function send(url, _port = 443, path, data, type = "POST"){
 	return new Promise ((resolve, reject) => {
 		const options = { // options for https data it must stay like this
@@ -104,8 +108,9 @@ async function testServer(){
 	/* 22	*/	'{}'//,
 	/* 	*/	//'{}'
 	];
-	const url = "127.0.0.1";
-	const port = 443;
+	let settings = JSON.parse(readJson(__dirname + "/../../appdata/server.config.json"));
+	const url = settings.server.ip;
+	const port = settings.server.port;
 	for(let i = 0; i < path.length; i++){
 		try {
 			let res = await send(url, port, path[i], data[i]);
