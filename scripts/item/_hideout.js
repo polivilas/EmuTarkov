@@ -167,16 +167,38 @@ function HideoutScavCaseProductionStart(tmplist,body)
 	//take money before registering prod (registering save also that money change)
 	for(let moneyToEdit of body.items)
 	{
-		for(let item in tmplist.data[0].Inventory.items)
+		for(let inventoryItem in tmplist.data[0].Inventory.items)
 		{
-			if(tmplist.data[0].Inventory.items[item]._id == moneyToEdit.id)
+			if(tmplist.data[0].Inventory.items[inventoryItem]._id == moneyToEdit.id)
 			{
-				tmplist.data[0].Inventory.items[item].upd.StackObjectsCount -= moneyToEdit.count;
+				tmplist.data[0].Inventory.items[inventoryItem].upd.StackObjectsCount -= moneyToEdit.count;
 			}
 		}
 	}
 
-	registerProduction(tmplist, body);
+	let crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_scavcase_recipes.json" ) );
+
+	let products = {};
+	for(let dataitem of items)
+	{
+
+	}
+
+
+	for(let receipe in crafting_receipes.data)
+	{	
+		if(body.recipeId == crafting_receipes.data[receipe]._id)
+		{
+			tmplist.data[0].Hideout.Production["14"] = { 
+				"Progress":0,
+				"inProgress": true,
+           		"RecipeId": body.recipeId,
+        		"Products": [], //register here how products are stored
+        		"StartTime": body.timestamp
+        	};
+		}
+	}
+	profile.setCharacterData(tmplist);
 
 	item.resetOutput();
 	return item.getOutput();
@@ -186,7 +208,7 @@ function HideoutContinuousProductionStart(tmplist, body)
 {
 	registerProduction(tmplist, body);
 
-	item.resetOutput();		
+	item.resetOutput();
 	return item.getOutput();
 }
 
@@ -199,7 +221,7 @@ function HideoutTakeProduction(tmplist, body)
 	return item.getOutput();
 }
 
-function registerProduction(tmplist, body)//internal function used for 3 requests
+function registerProduction(tmplist, body,isScavCase)
 {
 	let crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
 
