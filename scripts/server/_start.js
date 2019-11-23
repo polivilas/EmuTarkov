@@ -206,7 +206,7 @@ function start() {
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		response.setupRPC();
 		handleRequest(req, res);
-	}).listen(port, function() {
+	}).listen(port, ip, function() {
 		console.log("» Server url: " + backendUrl, "green", "", true);
 	});
 	
