@@ -117,7 +117,7 @@ function handleRequest(req, resp) {
 					let profile_data = utility.readJson(parseBody.game + "\\SavedProfile.json");
 
 					// get the IP address of the client
-					console.log(IP + URL + "[SAVE_PROFILE][ProfileID:" + parseBody.aid + "]" + ActiveProfile, "cyan");
+					console.log("[SAVE_PROFILE][ProfileID:" + parseBody.aid + "]" + ActiveProfile, "cyan");
 
 					if (settings.debug.debugMode == true) {
 						console.log(parseBody);
@@ -144,10 +144,9 @@ function handleRequest(req, resp) {
 			}
 		});
 	} else {
-		let IP = "[" + req.connection.remoteAddress.replace("::ffff:","") + "]";
-		let URL = "[GET:" + req.url + "]";
+		//let IP = "[" + req.connection.remoteAddress.replace("::ffff:","") + "]";
 
-		console.log(IP + URL, "cyan");
+		console.log(req.url, "cyan");
 		sendResponse(req, resp, null);
 	}
 }

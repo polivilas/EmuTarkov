@@ -172,7 +172,7 @@ function HideoutContinuousProductionStart(tmplist, body)
 
 function registerProduction(tmplist, body)//internal function used for 3 requets
 {
-	var crafting_receipes = JSON.parse( utility.readJson("data/configs/hideout/production_recipes.json" ) );
+	var crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
 
 	for(var receipe in crafting_receipes.data)
 	{	

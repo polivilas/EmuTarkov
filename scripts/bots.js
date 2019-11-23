@@ -7,7 +7,7 @@
  */
 function generate(databots) {
 	let generatedBots = [];
-	
+	console.log(databots)
 	for (let condition of databots.conditions) {
 		for (let i = 0; i < condition.Limit; i++) {
 			let tempBot = botBase;
@@ -28,25 +28,8 @@ function generate(databots) {
  * ~~output: FullName
  * @return {string}
  */
-function RandomName(type, role) {
-	let tmpNames = "UNKNOWN";
-	
-    switch (type) {
-        case "scav":
-            tmpNames = names['scav'].name[utility.getRandomInt(0,names['scav'].name.length-1)] + " " + names['scav']['surname'][utility.getRandomInt(0,names['scav']['surname'].length-1)];
-            break;
-        case "pmc":
-            tmpNames = names['pmc'][utility.getRandomInt(0,names['pmc'].length-1)];
-            break;
-        case "follower":
-            tmpNames = names['follower'][utility.getRandomInt(0,names['follower'].length-1)];
-            break;
-		default:
-			tmpNames = role.replace("boss", "");
-			break;
-	}
-	
-    return tmpNames;
+function RandomName(role) {
+    return names[role][utility.getRandomInt(0,names[role].length-1)];
 }
 
 /** ~ Generate Bot Full Name
@@ -55,46 +38,18 @@ function RandomName(type, role) {
  * @return {string}
  */
 function generateBotGeneric(botBase, role) {
-	let nameType = "boss";
 
-	switch (role) {
-		case "assault":
-		case "marksman":
-			nameType = "scav";
-			break;
-
-		case "pmcbot":
-			nameType = "pmc";
-			break;
-
-		case "followerBully":
-		case "followerKojaniy":
-		case "followerGluharAssault":
-		case "followerGluharSecurity":
-		case "followerGluharScout":
-			nameType = "follower";
-			break;
-
-		default:
-			// add error message here!
-			break;
-	}
-
-	botBase.Info.Nickname = RandomName(nameType, role);
+	botBase.Info.Nickname = RandomName(role);
 
 	// replacer here to load shitters from proper file
 	if (role == "cursedAssault") {
 		role = "assault";
 	}
-
-	let botsCustomizationLength = bots_outfits_db[role].length - 1;
 	
-	/*
-	botBase.Customization.Head = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Head;
-	botBase.Customization.Body = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Body;
-	botBase.Customization.Feet = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Feet;
-	botBase.Customization.Hands = bots_outfits_db[role][utility.getRandomInt(0,botsCustomizationLength)].Hands;
-	*/
+	botBase.Customization.Head = bots_outfits_db[role].Head[utility.getRandomInt(0,bots_outfits_db[role].Head.length - 1)];
+	botBase.Customization.Body = bots_outfits_db[role].Body[utility.getRandomInt(0,bots_outfits_db[role].Body.length - 1)];
+	botBase.Customization.Feet = bots_outfits_db[role].Feet[utility.getRandomInt(0,bots_outfits_db[role].Feet.length - 1)];
+	botBase.Customization.Hands = bots_outfits_db[role].Hands[utility.getRandomInt(0,bots_outfits_db[role].Hands.length - 1)];
 	
 	botBase.Inventory = bots_inventory_db[role][utility.getRandomInt(0,bots_inventory_db[role].length - 1)];
 
