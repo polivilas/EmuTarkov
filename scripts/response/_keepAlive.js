@@ -26,9 +26,38 @@ function main() {
             trader.setTrader(tradersToUpdateList[i]);
         }
     }
+
+
+
     return; // not finished
 }
 
+//each time keep alive is called, we need to update construction time, produtions time, resource left of everything in the hideout
+function updatePlayerHideout()
+{
+    var profile = profile.getCharacterData();
+
+    for(var prod in profile[0].Hideout.Production)
+    {
+
+    }
+
+    for(var area in profile[0].Hideout.Areas)
+    {
+        if(profile[0].Hideout.Areas[area].constructing == true)
+        {
+
+        }
+        
+        if(profile[0].Hideout.Areas[area].slots.length > 0)
+        {
+
+        }
+
+    }
+
+    
+}
 //// ---- EXPORT LIST ---- ////
 
 module.exports.main = main;
