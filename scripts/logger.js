@@ -101,31 +101,6 @@ function start() {
     fileStream = fs.createWriteStream(filepath, {flags: 'w'});
 }
 
-/* TODO unused for now TheMaoci
-process.on('uncaughtException',
-    function (err) {
-        const timeout = 5; // extra time. auto-close on crash... -> 1 = 1sec
-        console.log("SERVER CRASHED!");
-        console.log("[ERROR] - Start displaying", "red");
-        console.log(err);
-        console.log("[ERROR] - Ends displaying", "red");
-        console.log("[INFO] - opening error logs folder", "red");
-
-        if (settings.debug.disableLogsDisplayer === false) {
-            require('child_process').exec('start "" "' + __dirname.substring(0, __dirname.length - 3) + 'errorLogs"');
-        }
-
-        setTimeout (
-            function () {
-                console.log("[KILLING PROCESS]", "red", "", true);
-                return process.kill(process.pid);
-            },
-            
-            timeout * 1000;
-        );
-    }
-);*/
-
 module.exports.separator = separator;
 module.exports.center = center;
 module.exports.start = start;

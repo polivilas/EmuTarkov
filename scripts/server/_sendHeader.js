@@ -16,7 +16,7 @@ const mime = {
 
 function sendZlibJson(resp, output) {
     resp.writeHead(200, "OK", {
-		'Content-Type': mime['txt'], 
+		'Content-Type': mime['json'], 
 		'content-encoding' : 'deflate', 
 		'Set-Cookie' : 'PHPSESSID=' + constants.getActiveID()
 	});
@@ -27,7 +27,7 @@ function sendZlibJson(resp, output) {
 }
 
 function sendTextJson(resp, output) {
-    resp.writeHead(200, "OK", {'Content-Type': mime['txt']});
+    resp.writeHead(200, "OK", {'Content-Type': mime['json']});
     resp.end(output);
 }
 
