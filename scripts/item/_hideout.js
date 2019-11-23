@@ -44,7 +44,7 @@ function HideoutUpgrade(tmplist,body)
 					if(ctime > 0 )
 					{	
 						var timestamp = Math.floor(Date.now() / 1000);
-						tmplist.data[0].Hideout.Areas[hideoutArea].completeTime = timestamp + 60 ;
+						tmplist.data[0].Hideout.Areas[hideoutArea].completeTime = timestamp + ctime ;
 						tmplist.data[0].Hideout.Areas[hideoutArea].constructing = true;
 					}
 				}				
@@ -116,17 +116,19 @@ function HideoutPutItemsInAreaSlots(tmplist,body)
 
 function HideoutTakeItemsFromAreaSlots(tmplist,body)
 {
+	item.resetOutput();	
+
 	for( let area in tmplist.data[0].Hideout.Areas)
 	{
 		if( tmplist.data[0].Hideout.Areas[area].type == body.areaType)
 		{
 			//should use body.slots[0] to get the array index but since its not managed like that, its different
-			//move this to inventory with new location -->  tmplist.data[0].Hideout.Areas[area].slots[0].item[0]
+			//move tmplist.data[0].Hideout.Areas[area].slots[0].item[0] to inventory with new location --> special function needed 
 			//then manual remove --> tmplist.data[0].Hideout.Areas[area].slots.splice(0,1);
 		}
 	}
-	//profile.setCharacterData(tmplist);
-	item.resetOutput();		
+	
+	//profile.setCharacterData(tmplist);	
 	return item.getOutput();
 }
 
@@ -147,7 +149,6 @@ function HideoutToggleArea(tmplist,body)
 }
 
 
-
 function HideoutSingleProductionStart(tmplist,body)
 {	
 	registerProduction(tmplist, body);
@@ -157,7 +158,27 @@ function HideoutSingleProductionStart(tmplist,body)
 		move_f.removeItem(tmplist, { "Action":"Remove", "item" : itemToDelete.id } );
 	}
 
-	item.resetOutput();		
+	item.resetOutput();
+	return item.getOutput();
+}
+
+function HideoutScavCaseProductionStart(tmplist,body)
+{	
+	//take money before registering prod (registering save also that money change)
+	for(var moneyToEdit of body.items)
+	{
+		for(var item in tmplist.data[0].Inventory.items)
+		{
+			if(tmplist.data[0].Inventory.items[item]._id == moneyToEdit.id)
+			{
+				tmplist.data[0].Inventory.items[item].upd.StackObjectsCount -= moneyToEdit.count;
+			}
+		}
+	}
+
+	registerProduction(tmplist, body);
+
+	item.resetOutput();
 	return item.getOutput();
 }
 
@@ -169,8 +190,16 @@ function HideoutContinuousProductionStart(tmplist, body)
 	return item.getOutput();
 }
 
+function HideoutTakeProduction(tmplist, body)
+{
+	item.resetOutput();	
 
-function registerProduction(tmplist, body)//internal function used for 3 requets
+	//call the adding item function
+	//profile.setCharacterData(tmplist);
+	return item.getOutput();
+}
+
+function registerProduction(tmplist, body)//internal function used for 3 requests
 {
 	var crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
 
@@ -188,7 +217,6 @@ function registerProduction(tmplist, body)//internal function used for 3 requets
 		}
 	}
 	profile.setCharacterData(tmplist);
-	return "done";
 }
 
 module.exports.hideoutUpgrade = HideoutUpgrade;
@@ -198,3 +226,5 @@ module.exports.hideoutTakeItemsFromAreaSlots = HideoutTakeItemsFromAreaSlots;
 module.exports.hideoutToggleArea = HideoutToggleArea;
 module.exports.hideoutSingleProductionStart  = HideoutSingleProductionStart;
 module.exports.hideoutContinuousProductionStart = HideoutContinuousProductionStart;
+module.exports.hideoutScavCaseProductionStart = HideoutScavCaseProductionStart;
+module.exports.hideoutTakeProduction = HideoutTakeProduction;

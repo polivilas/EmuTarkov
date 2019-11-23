@@ -36,11 +36,20 @@ function handleMoving(body) { // handling Action function
         case "HideoutUpgrade":
             return hideout_f.hideoutUpgrade(tmpList, body);
 
+        case "HideoutUpgradeComplete":
+            return hideout_f.hideoutUpgradeComplete(tmpList, body);
+
         case "HideoutContinuousProductionStart":
 			return hideout_f.hideoutContinuousProductionStart(tmpList, body);
 
-        case "HideoutUpgradeComplete":
-            return hideout_f.hideoutUpgradeComplete(tmpList, body);
+        case "HideoutSingleProductionStart":
+            return hideout_f.hideoutSingleProductionStart(tmpList, body);
+
+        case "HideoutScavCaseProductionStart":
+            return hideout_f.hideoutScavCaseProductionStart(tmpList, body); 
+
+        case "HideoutTakeProduction":
+            return hideout_f.hideoutTakeProduction(tmpList, body); 
 
         case "HideoutPutItemsInAreaSlots":
             return hideout_f.hideoutPutItemsInAreaSlots(tmpList, body);
@@ -49,10 +58,7 @@ function handleMoving(body) { // handling Action function
             return hideout_f.hideoutTakeItemsFromAreaSlots(tmpList, body);
 
         case "HideoutToggleArea":
-            return hideout_f.hideoutToggleArea(tmpList, body);  
-
-        case "HideoutSingleProductionStart":
-            return hideout_f.hideoutSingleProductionStart(tmpList, body);  
+            return hideout_f.hideoutToggleArea(tmpList, body);
 
         case "QuestAccept":
             return quest_f.acceptQuest(tmpList, body);
