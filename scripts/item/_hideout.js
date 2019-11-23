@@ -164,7 +164,6 @@ function HideoutSingleProductionStart(tmplist,body)
 
 function HideoutScavCaseProductionStart(tmplist,body)
 {	
-	//take money before registering prod (registering save also that money change)
 	for(let moneyToEdit of body.items)
 	{
 		for(let inventoryItem in tmplist.data[0].Inventory.items)
@@ -178,22 +177,45 @@ function HideoutScavCaseProductionStart(tmplist,body)
 
 	let crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_scavcase_recipes.json" ) );
 
-	let products = {};
-	for(let dataitem of items)
-	{
-
-	}
-
-
 	for(let receipe in crafting_receipes.data)
 	{	
 		if(body.recipeId == crafting_receipes.data[receipe]._id)
 		{
+			let rarityItemCounter = {};
+			for(let rarity in crafting_receipes.data[receipe].EndProducts)
+			{
+				if(crafting_receipes.data[receipe].EndProducts[rarity].max > 0)
+				{
+					rarityItemCounter[rarity] = crafting_receipes.data[receipe].EndProducts[rarity].max;
+				}
+			}
+
+			let products = [];
+
+			/*
+			for(let rarityType in rarityItemCounter)
+			{
+				while(rarityItemCounter[rarityType] != 0)
+				{	
+					let tempItem = items.data[Object.keys(items.data)[utility.getRandomIntEx( Object.keys(items.data).length])]
+					if( tempItem.Rarity == rarityType )
+					{
+						//products are not registered correctly
+						products.push({ 
+							"_id" : utility.generateNewItemId(),
+							"_tpl":tempItem._id
+						});
+
+						rarityItemCounter[rarityType] -= 1; 
+					}
+				}
+			}*/
+
 			tmplist.data[0].Hideout.Production["14"] = { 
-				"Progress":0,
+				"Progress":7460, //set to 0 when testing is done
 				"inProgress": true,
            		"RecipeId": body.recipeId,
-        		"Products": [], //register here how products are stored
+        		"Products": products,
         		"StartTime": body.timestamp
         	};
 		}
