@@ -8,7 +8,6 @@
  
 function generate(databots) {
 	let generatedBots = [];
-	console.log(databots)
 	for (let condition of databots.conditions) {
 		for (let i = 0; i < condition.Limit; i++) {
 			let tempBot = botBase;
@@ -83,13 +82,10 @@ function generateBotGeneric(botBase, role) {
 }
 
 function generatePlayerScav() {
-	let character = profile.getCharacterData();	
-	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]});	
-
-	playerscav[0].Info.Settings = {};	
-	playerscav[0]._id = "5c71b934354682353958e983";	
-	character.data[1] = playerscav[0];	
-	profile.setCharacterData(character);	
+	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]}).data;	
+	playerscav[0].Info.Settings = {};
+	playerscav[0]._id = "5c71b934354682353958e983";
+	return playerscav[0];
 }
 
 module.exports.generate = generate;
