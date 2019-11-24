@@ -70,7 +70,7 @@ function HideoutUpgradeComplete(tmplist,body)
 			tmplist.data[0].Hideout.Areas[hideoutArea].completeTime = 0;
 			tmplist.data[0].Hideout.Areas[hideoutArea].constructing = false;
 
-			//and then apply bonusses or its auo ? 		
+			//and then apply bonusses or its auto ? 		
 		}
 	}
 
@@ -126,10 +126,20 @@ function HideoutTakeItemsFromAreaSlots(tmplist,body)
 			//should use body.slots[0] to get the array index but since its not managed like that, its different
 			//move tmplist.data[0].Hideout.Areas[area].slots[0].item[0] to inventory with new location --> special function needed 
 			//then manual remove --> tmplist.data[0].Hideout.Areas[area].slots.splice(0,1);
+
+			let newReq = {};
+    		newReq.item_id = tmplist.data[0].Hideout.Areas[area].slots[0].item[0]._tpl;
+    		newReq.count = 1;
+
+			profile.addItemToStash(tmplist, newReq);
+
+			tmplist = profile.getCharacterData();
+			tmplist.data[0].Hideout.Areas[area].slots.splice(0,1);
+			profile.setCharacterData(tmplist);	
 		}
 	}
 	
-	//profile.setCharacterData(tmplist);	
+	
 	return item.getOutput();
 }
 
