@@ -28,35 +28,39 @@ function main()
             trader.setTrader(tradersToUpdateList[i]);
         }
     }
+    updatePlayerHideout();
     return; // not finished
 }
 
-//each time keep alive is called, we need to update construction time, produtions time, resource left of everything in the hideout
+//each time keep alive is called, we need to update produtions time, resource left of everything in the hideout
 function updatePlayerHideout()
 {
-    var profile = profile.getCharacterData();
-    console.log(profile[0].Info.Nickname);
-
-    for(var prod in profile[0].Hideout.Production)
+    let ply = profile.getCharacterData();
+    if(ply !== undefined)
     {
+        let hideout_areas_config = JSON.parse( utility.readJson("database/configs/hideout/areas.json" ) );
 
-    }
-
-    for(var area in profile[0].Hideout.Areas)
-    {
-        if(profile[0].Hideout.Areas[area].constructing == true)
-        {
-
+        for(let prod in ply.data[0].Hideout.Production)//update production time
+        { 
+            let time_elapsed = Math.floor( Date.now()/1000) - ply.data[0].Hideout.Production[prod].StartTime;
+            ply.data[0].Hideout.Production[prod].Progress = time_elapsed; 
         }
-        
-        if(profile[0].Hideout.Areas[area].slots.length > 0)
-        {
-
-        }
-
-    }
-
     
+        for(let area in ply.data[0].Hideout.Areas)
+        {            
+            if(ply.data[0].Hideout.Areas[area].slots.length > 0)//update ressource of first slot
+            {
+                //hmmm ...? 
+            }
+
+        }
+    }
+    else
+    {
+        consle.log("ply is undefined");
+    } 
+
+    profile.setCharacterData(ply); 
 }
 //// ---- EXPORT LIST ---- ////
 
