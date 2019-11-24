@@ -4,7 +4,9 @@ const trader = require('../trader.js');
 
 //// ---- FUNCTIONS BELOW ---- ////
 
-function main() {
+function main() 
+{
+
     let update_per = 3600;// update each hour
     let tradersToUpdateList = trader.loadAllTraders();
     let flag = false;
@@ -26,9 +28,6 @@ function main() {
             trader.setTrader(tradersToUpdateList[i]);
         }
     }
-
-
-
     return; // not finished
 }
 
@@ -36,6 +35,7 @@ function main() {
 function updatePlayerHideout()
 {
     var profile = profile.getCharacterData();
+    console.log(profile[0].Info.Nickname);
 
     for(var prod in profile[0].Hideout.Production)
     {

@@ -192,14 +192,17 @@ function HideoutScavCaseProductionStart(tmplist,body)
 			}
 
 			let products = [];
-
-			/*
+			
 			for(let rarityType in rarityItemCounter)
 			{
 				while(rarityItemCounter[rarityType] != 0)
 				{	
-					let tempItem = items.data[Object.keys(items.data)[utility.getRandomIntEx( Object.keys(items.data).length])]
-					if( tempItem.Rarity == rarityType )
+
+					let random = utility.getRandomIntEx( Object.keys(items.data).length) //1 to items length
+					let randomKey = Object.keys(items.data)[random];
+					let tempItem = items.data[randomKey];
+					
+					if( tempItem._props.Rarity == rarityType )
 					{
 						//products are not registered correctly
 						products.push({ 
@@ -207,13 +210,13 @@ function HideoutScavCaseProductionStart(tmplist,body)
 							"_tpl":tempItem._id
 						});
 
-						rarityItemCounter[rarityType] -= 1; 
+						rarityItemCounter[rarityType] -= 1;
 					}
 				}
-			}*/
+			}
 
 			tmplist.data[0].Hideout.Production["14"] = { 
-				"Progress":7460, //set to 0 when testing is done
+				"Progress":0,
 				"inProgress": true,
            		"RecipeId": body.recipeId,
         		"Products": products,
@@ -260,21 +263,55 @@ function HideoutTakeProduction(tmplist, body)
         		newReq.count = crafting_receipes.data[receipe].count;
 
 				profile.addItemToStash(tmplist, newReq);
+
+				return item.getOutput();
 			}	
 		}
 
+		let allOutput = item.getOutput()
 		if(found == false)//its a scavcase production then manage it differently
 		{
+
+			let scavcase_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_scavcase_recipes.json" ) );
+
 			for(let receipe in scavcase_receipes.data)
 			{
 				if(body.recipeId == scavcase_receipes.data[receipe]._id)
 				{
 					found = true;
+
+					for(let prod in tmplist.data[0].Hideout.Production)
+					{
+						if(tmplist.data[0].Hideout.Production[prod].RecipeId == body.recipeId )
+						{
+							//give items BEFORE deleting the production
+							for(let itemProd of tmplist.data[0].Hideout.Production[prod].Products )
+							{
+								tmplist = profile.getCharacterData();
+
+								let newReq = {};
+        						newReq.item_id = itemProd._tpl;
+        						newReq.count = 1;
+			
+								let tempOutput = profile.addItemToStash(tmplist, newReq);
+								for(let newItem of tempOutput.data.items.new)
+						        {
+						            allOutput.data.items.new.push(newItem);
+						        }
+
+							}
+
+							delete tmplist.data[0].Hideout.Production[prod]
+							profile.setCharacterData(tmplist);
+
+							return allOutput;
+						}
+					}
 				}
 			}
 		}
 
-		return item.getOutput();
+		return "";
 		
 }
 
