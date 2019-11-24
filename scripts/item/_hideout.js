@@ -135,7 +135,7 @@ function HideoutTakeItemsFromAreaSlots(tmplist,body)
 
 			tmplist = profile.getCharacterData();
 			tmplist.data[0].Hideout.Areas[area].slots.splice(0,1);
-			profile.setCharacterData(tmplist);	
+			profile.setCharacterData(tmplist);
 		}
 	}
 	
@@ -230,7 +230,7 @@ function HideoutScavCaseProductionStart(tmplist,body)
 				"inProgress": true,
            		"RecipeId": body.recipeId,
         		"Products": products,
-        		"StartTime": body.timestamp
+        		"StartTime":  Math.floor(Date.now()/1000)
         	};
 		}
 	}
@@ -336,7 +336,7 @@ function registerProduction(tmplist, body,isScavCase)
 				"inProgress": true,
            		"RecipeId": body.recipeId,
         		"Products": [],
-        		"StartTime": body.timestamp
+        		"StartTime": Math.floor(Date.now()/1000)
         	};
 		}
 	}
