@@ -5,6 +5,7 @@
  * ~~output: Bots list response
  * @return {string}
  */
+ 
 function generate(databots) {
 	let generatedBots = [];
 	console.log(databots)
@@ -32,6 +33,30 @@ function RandomName(role) {
     return names[role][utility.getRandomInt(0,names[role].length-1)];
 }
 
+let health_controller = { // controller storage health of each bot
+	"assault": 					[35,80,70,60,60,65,65],
+	"bossBully": 				[62,138,120,100,100,110,110],
+	"bossGluhar": 				[70,200,140,145,145,145,145],
+	"bossKilla": 				[70,210,170,100,100,120,120],
+	"bossKojaniy": 				[62,160,150,100,100,110,110],
+	"followerBully": 			[50,110,100,80,80,85,85],
+	"followerGluharAssault": 	[45,150,125,100,100,120,120],
+	"followerGluharScout": 		[35,80,70,60,60,65,65],
+	"followerGluharSecurity": 	[40,145,100,100,100,100,100],
+	"followerKojaniy": 			[62,138,120,100,100,110,110],
+	"marksman": 				[35,80,70,60,60,65,65],
+	"pmcBot": 					[35,150,120,100,100,110,110],
+};
+/** ~ Generate Bot Health dependent on bot role
+ * ~~input: bot role
+ * ~~output: Health
+ * @return {object}
+ */
+function SetHealth(role){
+	let hc = health_controller[role];
+	return {"Hydration": {"Current": 100,"Maximum": 100},"Energy": {"Current": 100,"Maximum": 100},"BodyParts": {"Head": {"Health": {"Current": hc[0],"Maximum": hc[0]}},"Chest": {"Health": {"Current": hc[1],"Maximum": hc[1]}},"Stomach": {"Health": {"Current": hc[2],"Maximum": hc[2]}},"LeftArm": {"Health": {"Current": hc[3],"Maximum": hc[3]}},"RightArm": {"Health": {"Current": hc[4],"Maximum": hc[4]}},"LeftLeg": {"Health": {"Current": hc[5],"Maximum": hc[5]}},"RightLeg": {"Health": {"Current": hc[6],"Maximum": hc[6]}}}};
+	
+}
 /** ~ Generate Bot Full Name
  * ~~input: tempBaseBotBody, Role
  * ~~output: Single Bot
@@ -40,7 +65,8 @@ function RandomName(role) {
 function generateBotGeneric(botBase, role) {
 
 	botBase.Info.Nickname = RandomName(role);
-
+	botBase.Health = SetHealth(role);
+	
 	// replacer here to load shitters from proper file
 	if (role == "cursedAssault") {
 		role = "assault";
