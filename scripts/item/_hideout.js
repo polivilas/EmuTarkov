@@ -3,6 +3,7 @@
 require('../libs.js');
 
 const hideout_areas_config = JSON.parse( utility.readJson("database/configs/hideout/areas.json" ) );
+const crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
 
 //upgrading can take times,the first step is to pay what needed for upgrade and start construction
 function HideoutUpgrade(tmplist,body)
@@ -175,18 +176,18 @@ function HideoutScavCaseProductionStart(tmplist,body)
 		}
 	}
 
-	let crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_scavcase_recipes.json" ) );
+	let scavcase_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_scavcase_recipes.json" ) );
 
-	for(let receipe in crafting_receipes.data)
+	for(let receipe in scavcase_receipes.data)
 	{	
-		if(body.recipeId == crafting_receipes.data[receipe]._id)
+		if(body.recipeId == scavcase_receipes.data[receipe]._id)
 		{
 			let rarityItemCounter = {};
-			for(let rarity in crafting_receipes.data[receipe].EndProducts)
+			for(let rarity in scavcase_receipes.data[receipe].EndProducts)
 			{
-				if(crafting_receipes.data[receipe].EndProducts[rarity].max > 0)
+				if(scavcase_receipes.data[receipe].EndProducts[rarity].max > 0)
 				{
-					rarityItemCounter[rarity] = crafting_receipes.data[receipe].EndProducts[rarity].max;
+					rarityItemCounter[rarity] = scavcase_receipes.data[receipe].EndProducts[rarity].max;
 				}
 			}
 
@@ -236,17 +237,49 @@ function HideoutContinuousProductionStart(tmplist, body)
 
 function HideoutTakeProduction(tmplist, body)
 {
-	item.resetOutput();	
+		let found = false;
+		for(let receipe in crafting_receipes.data)
+		{	
 
-	//call the adding item function
-	//profile.setCharacterData(tmplist);
-	return item.getOutput();
+			if(body.recipeId == crafting_receipes.data[receipe]._id)
+			{
+				found = true;
+				//delete the production in profile Hideout.Production
+				for(let prod in tmplist.data[0].Hideout.Production)
+				{
+					if(tmplist.data[0].Hideout.Production[prod].RecipeId == body.recipeId )
+					{
+						delete tmplist.data[0].Hideout.Production[prod]
+						profile.setCharacterData(tmplist);
+					}
+				}
+
+				//create item and throw it into profile
+				let newReq = {};
+        		newReq.item_id = crafting_receipes.data[receipe].endProduct;
+        		newReq.count = crafting_receipes.data[receipe].count;
+
+				profile.addItemToStash(tmplist, newReq);
+			}	
+		}
+
+		if(found == false)//its a scavcase production then manage it differently
+		{
+			for(let receipe in scavcase_receipes.data)
+			{
+				if(body.recipeId == scavcase_receipes.data[receipe]._id)
+				{
+					found = true;
+				}
+			}
+		}
+
+		return item.getOutput();
+		
 }
 
 function registerProduction(tmplist, body,isScavCase)
 {
-	let crafting_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_recipes.json" ) );
-
 	for(let receipe in crafting_receipes.data)
 	{	
 		if(body.recipeId == crafting_receipes.data[receipe]._id)
@@ -262,6 +295,7 @@ function registerProduction(tmplist, body,isScavCase)
 	}
 	profile.setCharacterData(tmplist);
 }
+
 
 module.exports.hideoutUpgrade = HideoutUpgrade;
 module.exports.hideoutUpgradeComplete = HideoutUpgradeComplete;
