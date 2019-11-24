@@ -231,10 +231,14 @@ function confirmRagfairTrading(tmpList, body) {
     { Action: 'RagFairBuyOffer',  offerId: '56d59d3ad2720bdb418b4577',  count: 1,  items: [ { id: '1566757577968610909', count: 42 } ] }
     */
 
-    let ragfairOffers = body.offers
-
+    let ragfairOffers = body.offers;
+    item.resetOutput();
+    let allOutput = item.getOutput()
+    
     for(let oneOffer of ragfairOffers)
     {
+        tmpList = profile.getCharacterData();
+        body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";
         body.tid = "91_everythingTrader";
@@ -243,9 +247,13 @@ function confirmRagfairTrading(tmpList, body) {
         body.scheme_id = 0;
         body.scheme_items = oneOffer.items;
 
-        output = confirmTrading(tmpList, body, "ragfair");
+        let tempOutput = confirmTrading(tmpList, body, "ragfair");
+        for(let newItem of tempOutput.data.items.new)
+        {
+            allOutput.data.items.new.push(newItem);
+        }
     }
-    return item.getOutput();
+    return allOutput;
 }
 
 
