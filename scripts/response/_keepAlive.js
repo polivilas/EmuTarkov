@@ -43,7 +43,7 @@ function updatePlayerHideout()
         for(let prod in ply.data[0].Hideout.Production)//update production time
         { 
             let time_elapsed = Math.floor( Date.now()/1000) - ply.data[0].Hideout.Production[prod].StartTime;
-            ply.data[0].Hideout.Production[prod].progress = time_elapsed; 
+            ply.data[0].Hideout.Production[prod].Progress = time_elapsed; 
         }
     
         for(let area in ply.data[0].Hideout.Areas)
