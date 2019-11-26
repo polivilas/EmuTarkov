@@ -3,7 +3,7 @@
 const botnames = JSON.parse(utility.readJson("database/configs/bots/botNames.json") );
 const bot_outfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json") );
 
-let health_controller = { // controller storage health of each bot
+const health_controller = { // controller storage health of each bot
 	"assault": 					[35,80,70,60,60,65,65],
 	"bossBully": 				[62,138,120,100,100,110,110],
 	"bossGluhar": 				[70,200,140,145,145,145,145],
@@ -18,7 +18,7 @@ let health_controller = { // controller storage health of each bot
 	"pmcBot": 					[35,150,120,100,100,110,110],
 };
 
-let pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
+const pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
 
 function generate(databots) 
 {
