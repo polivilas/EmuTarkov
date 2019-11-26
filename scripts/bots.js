@@ -22,8 +22,8 @@ let pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
 
 function generate(databots) 
 {
-	var generatedBots = [];
-	//databots = JSON.parse(databots);
+	var generatedBots = []; //make it persistant otherwise its fucked up
+
 	
 	for(let condition of databots.conditions)
 	{	
@@ -256,7 +256,7 @@ function generateGluhkar(botBase)
 	botBase.Customization.Feet = "5d5e7f2a86f77427997cfb80";
 	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
-	var allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json") );	
+	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json") );	
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
 
 	return botBase;
@@ -271,7 +271,7 @@ function generateFollowerGluharAssault(botBase)
 	botBase.Health = SetHealth("followerGluharAssault");
 	botBase.Customization = SetOutfit("followerGluharAssault");
 	
-	var allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json") );	
+	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json") );	
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
 
 	return botBase;
@@ -286,7 +286,7 @@ function generateFollowerGluharSecurity(botBase)
 	botBase.Health = SetHealth("followerGluharSecurity");
 	botBase.Customization = SetOutfit("followerGluharSecurity");
 	
-	var allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json") );	
+	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json") );	
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
 
 	return botBase;
@@ -301,7 +301,7 @@ function generateFollowerGluharScout(botBase)
 	botBase.Health = SetHealth("followerGluharScout");
 	botBase.Customization = SetOutfit("followerGluharScout");
 	
-	var allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json") );	
+	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json") );	
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
 
 	return botBase;
