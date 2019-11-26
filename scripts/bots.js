@@ -1,8 +1,8 @@
 "use strict";
 
-const botnames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
+const botNames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
 const botOutfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
-const pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
+const pmcbotVoices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
 const healthController = {		// controller storage health of each bot
 	"assault": 					[35,80,70,60,60,65,65],
 	"bossBully": 				[62,138,120,100,100,110,110],
@@ -27,7 +27,7 @@ const bossOutfit = {
 let generator = {};
 
 function addGenerator(role, worker) {
-	generator.Add[role] = worker;
+	generator[role] = worker;
 }
 
 function setHealth(role) {
@@ -54,7 +54,7 @@ function setOutfit(role) {
 }
 
 function generateBotGeneric(botBase, role) {
-	botBase.Info.Nickname = botnames.scav[utility.getRandomInt(0, botnames.scav.length)];
+	botBase.Info.Nickname = botNames.scav[utility.getRandomInt(0, botNames.scav.length)];
 	botBase.Customization = setOutfit("scav");
 
 	let allInventories = [];
@@ -70,9 +70,9 @@ function generateBotGeneric(botBase, role) {
 }
 
 function generateRaider(botBase, role) {
-	botBase.Info.Nickname = botnames.pmcBot[utility.getRandomInt(0, botnames.pmcBot.length)];
+	botBase.Info.Nickname = botNames.pmcBot[utility.getRandomInt(0, botNames.pmcBot.length)];
 	botBase.Info.Settings.Experience = 500;
-	botBase.Info.Voice = pmcbot_voices[utility.getRandomInt(0, pmcbot_voices.length)];
+	botBase.Info.Voice = pmcbotVoices[utility.getRandomInt(0, pmcbotVoices.length)];
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
 	
@@ -95,7 +95,7 @@ function generateReshala(botBase, role) {
 }
 
 function generateFollowerReshala(botBase, role)  {
-	botBase.Info.Nickname = botnames.followerBully[utility.getRandomInt(0, botnames.followerBully.length)] + " Zavodskoy";
+	botBase.Info.Nickname = botNames.followerBully[utility.getRandomInt(0, botNames.followerBully.length)] + " Zavodskoy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
@@ -131,7 +131,7 @@ function generateKojaniy(botBase, role) {
 }
 
 function generateFollowerKojaniy(botBase, role) {
-	botBase.Info.Nickname = botnames.followerKojaniy[utility.getRandomInt(0, botnames.followerKojaniy.length)] + " Svetloozerskiy";
+	botBase.Info.Nickname = botNames.followerKojaniy[utility.getRandomInt(0, botNames.followerKojaniy.length)] + " Svetloozerskiy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
@@ -157,7 +157,7 @@ function generateGluhkar(botBase, role) {
 }
 
 function generateFollowerGluharAssault(botBase, role) {
-	botBase.Info.Nickname = botnames.followerGluharAssault[utility.getRandomInt(0, botnames.followerGluharAssault.length)];
+	botBase.Info.Nickname = botNames.followerGluharAssault[utility.getRandomInt(0, botNames.followerGluharAssault.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
@@ -169,7 +169,7 @@ function generateFollowerGluharAssault(botBase, role) {
 }
 
 function generateFollowerGluharSecurity(botBase, role) {
-	botBase.Info.Nickname = botnames.followerGluharSecurity[utility.getRandomInt(0, botnames.followerGluharSecurity.length)];
+	botBase.Info.Nickname = botNames.followerGluharSecurity[utility.getRandomInt(0, botNames.followerGluharSecurity.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
@@ -181,7 +181,7 @@ function generateFollowerGluharSecurity(botBase, role) {
 }
 
 function generateFollowerGluharScout(botBase, role) {
-	botBase.Info.Nickname = botnames.followerGluharScout[utility.getRandomInt(0, botnames.followerGluharScout.length)];
+	botBase.Info.Nickname = botNames.followerGluharScout[utility.getRandomInt(0, botNames.followerGluharScout.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
