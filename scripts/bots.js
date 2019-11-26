@@ -2,9 +2,8 @@
 
 const botnames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
 const bot_outfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
-
-// controller storage health of each bot
-const health_controller = {
+const pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
+const health_controller = {		// controller storage health of each bot
 	"assault": 					[35,80,70,60,60,65,65],
 	"bossBully": 				[62,138,120,100,100,110,110],
 	"bossGluhar": 				[70,200,140,145,145,145,145],
@@ -18,81 +17,10 @@ const health_controller = {
 	"marksman": 				[35,80,70,60,60,65,65],
 	"pmcBot": 					[35,150,120,100,100,110,110],
 };
+let generator = {};
 
-const pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
-
-function generate(databots) {
-	// make it persistant otherwise its fucked up
-	var generatedBots = [];
-
-	for (let condition of databots.conditions) {	
-		for (let i = 0; i < condition.Limit; i++) { 
-			// var is intended here
-			var botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
-
-			botBase._id = "" + utility.getRandomIntEx(99999999);
-			botBase.Info.Settings.Role = condition.Role;
-			botBase.Info.Settings.BotDifficulty = condition.Difficulty;
-			botBase.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-			botBase.Health = SetHealth(condition.Role);
-
-			switch (condition.Role) {
-				case "cursedAssault":
-					generatedBots.push(generateBotGeneric(botBase,"cursedAssault"));
-					break;
-
-				case "assault":
-					generatedBots.push(generateBotGeneric(botBase,"assault"));
-					break;
-
-				case "marksman":
-					generatedBots.push(generateBotGeneric(botBase,"marksman"));
-					break;
-
-				case "pmcBot":
-					generatedBots.push(generateRaider(botBase));
-					break;
-
-				case "bossBully":
-					generatedBots.push(generateReshala(botBase));
-					break;
-
-				case "followerBully":
-					generatedBots.push(generateFollowerReshala(botBase));
-					break;
-
-				case "bossKilla":
-					generatedBots.push(generateKilla(botBase));
-					break;
-
-				case "bossKojaniy":
-					generatedBots.push(generateKojaniy(botBase));
-					break;
-
-				case "followerKojaniy":
-					generatedBots.push(generateFollowerKojaniy(botBase));
-					break;
-
-				case "bossGluhar":
-					generatedBots.push(generateGluhkar(botBase));
-					break;
-
-				case "followerGluharAssault":
-					generatedBots.push(generateFollowerGluharAssault(botBase));
-					break;
-
-				case "followerGluharSecurity":
-					generatedBots.push(generateFollowerGluharSecurity(botBase));
-					break;
-
-				case "followerGluharScout":
-					generatedBots.push(generateFollowerGluharScout(botBase));
-					break;
-			}
-		} 
-	}
-
-	return { "err": 0,"errmsg": null, "data": generatedBots };
+function addGenerator(role, worker) {
+	generator.Add[role] = worker;
 }
 
 function SetHealth(role) {
@@ -112,7 +40,7 @@ function SetOutfit(role) {
 	}
 }
 
-function generateBotGeneric(botBase,role) {
+function generateBotGeneric(botBase, role) {
 	botBase.Info.Nickname = botnames.scav[utility.getRandomInt(0,botnames.scav.length)];
 	botBase.Customization = SetOutfit("scav");
 
@@ -128,7 +56,7 @@ function generateBotGeneric(botBase,role) {
 	return botBase;
 }
 
-function generateRaider(botBase) {
+function generateRaider(botBase, role) {
 	botBase.Info.Nickname = botnames.pmcBot[utility.getRandomInt(0,botnames.pmcBot.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Info.Voice = pmcbot_voices[utility.getRandomInt(0,pmcbot_voices.length)];
@@ -141,7 +69,7 @@ function generateRaider(botBase) {
 	return botBase;
 }
 
-function generateReshala(botBase) {
+function generateReshala(botBase, role) {
 	botBase.Info.Nickname = "Reshala";
 	botBase.Info.Settings.Experience = 800;
 	botBase.Health = SetHealth("bossBully");
@@ -156,7 +84,7 @@ function generateReshala(botBase) {
 	return botBase;
 }
 
-function generateFollowerReshala(botBase)  {
+function generateFollowerReshala(botBase, role)  {
 	botBase.Info.Nickname = botnames.followerBully[utility.getRandomInt(0,botnames.followerBully.length)] + " Zavodskoy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerBully");
@@ -168,7 +96,7 @@ function generateFollowerReshala(botBase)  {
 	return botBase;
 }
 
-function generateKilla(botBase) {
+function generateKilla(botBase, role) {
 	botBase.Info.Nickname = "Killa";
 	botBase.Info.Settings.Experience = 1000;
 	botBase.Health = SetHealth("bossKilla");
@@ -183,7 +111,7 @@ function generateKilla(botBase) {
 	return botBase;
 }
 
-function generateKojaniy(botBase) {
+function generateKojaniy(botBase, role) {
 	botBase.Info.Nickname = "Shturman";
 	botBase.Info.Settings.Experience = 1100;
 	botBase.Health = SetHealth("bossKojaniy");
@@ -198,7 +126,7 @@ function generateKojaniy(botBase) {
 	return botBase;
 }
 
-function generateFollowerKojaniy(botBase) {
+function generateFollowerKojaniy(botBase, role) {
 	botBase.Info.Nickname = botnames.followerKojaniy[utility.getRandomInt(0,botnames.followerKojaniy.length)] + " Svetloozerskiy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerKojaniy");
@@ -210,7 +138,7 @@ function generateFollowerKojaniy(botBase) {
 	return botBase;
 }
 
-function generateGluhkar(botBase) {
+function generateGluhkar(botBase, role) {
 	botBase.Info.Nickname = "Gluhkar";
 	botBase.Info.Settings.Experience = 1000;
 	botBase.Health = SetHealth("bossGluhar");
@@ -227,7 +155,7 @@ function generateGluhkar(botBase) {
 	return botBase;
 }
 
-function generateFollowerGluharAssault(botBase) {
+function generateFollowerGluharAssault(botBase, role) {
 	botBase.Info.Nickname = botnames.followerGluharAssault[utility.getRandomInt(0,botnames.followerGluharAssault.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerGluharAssault");
@@ -239,7 +167,7 @@ function generateFollowerGluharAssault(botBase) {
 	return botBase;
 }
 
-function generateFollowerGluharSecurity(botBase) {
+function generateFollowerGluharSecurity(botBase, role) {
 	botBase.Info.Nickname = botnames.followerGluharSecurity[utility.getRandomInt(0,botnames.followerGluharSecurity.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerGluharSecurity");
@@ -251,7 +179,7 @@ function generateFollowerGluharSecurity(botBase) {
 	return botBase;
 }
 
-function generateFollowerGluharScout(botBase) {
+function generateFollowerGluharScout(botBase, role) {
 	botBase.Info.Nickname = botnames.followerGluharScout[utility.getRandomInt(0,botnames.followerGluharScout.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerGluharScout");
@@ -263,6 +191,46 @@ function generateFollowerGluharScout(botBase) {
 	return botBase;
 }
 
+function setupGenerator() {
+	addGenerator("cursedAssault", generateBotGeneric);
+	addGenerator("assault", generateBotGeneric);
+	addGenerator("marksman", generateBotGeneric);
+	addGenerator("pmcBot", generateRaider);
+	addGenerator("bossBully", generateReshala);
+	addGenerator("followerBully", generateFollowerReshala);
+	addGenerator("bossKilla", generateKilla);
+	addGenerator("bossKojaniy", generateKojaniy);
+	addGenerator("followerKojaniy", generateFollowerKojaniy);
+	addGenerator("bossGluhar", generateGluhkar);
+	addGenerator("followerGluharAssault", generateFollowerGluharAssault);
+	addGenerator("followerGluharSecurity", generateFollowerGluharSecurity);
+	addGenerator("followerGluharScout", generateFollowerGluharScout);
+}
+
+function generate(databots) {
+	// make it persistant otherwise its fucked up
+	var generatedBots = [];
+
+	for (let condition of databots.conditions) {	
+		for (let i = 0; i < condition.Limit; i++) { 
+			// var is intended here
+			var botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
+
+			botBase._id = "" + utility.getRandomIntEx(99999999);
+			botBase.Info.Settings.Role = condition.Role;
+			botBase.Info.Settings.BotDifficulty = condition.Difficulty;
+			botBase.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
+			botBase.Health = SetHealth(condition.Role);
+
+			if (typeof generator[condition.Role] !== "undefined") {
+				generatedBots.push(botBase, condition.Role);
+			}
+		} 
+	}
+
+	return { "err": 0,"errmsg": null, "data": generatedBots };
+}
+
 function generatePlayerScav() {
 	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]}).data;
 
@@ -271,5 +239,6 @@ function generatePlayerScav() {
 	return playerscav[0];
 }
 
+module.exports.setupGenerator = setupGenerator;
 module.exports.generate = generate;
 module.exports.generatePlayerScav = generatePlayerScav;
