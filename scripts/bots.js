@@ -224,7 +224,7 @@ function generate(databots) {
 			botBase.Health = setHealth(condition.Role);
 
 			if (typeof generator[condition.Role] !== "undefined") {
-				generatedBots.push(botBase, condition.Role);
+				generatedBots.push(generator(botBase, condition.Role));
 			}
 		} 
 	}
