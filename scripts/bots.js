@@ -17,6 +17,7 @@ const health_controller = {		// controller storage health of each bot
 	"marksman": 				[35,80,70,60,60,65,65],
 	"pmcBot": 					[35,150,120,100,100,110,110],
 };
+
 let generator = {};
 
 function addGenerator(role, worker) {
@@ -41,31 +42,31 @@ function SetOutfit(role) {
 }
 
 function generateBotGeneric(botBase, role) {
-	botBase.Info.Nickname = botnames.scav[utility.getRandomInt(0,botnames.scav.length)];
+	botBase.Info.Nickname = botnames.scav[utility.getRandomInt(0, botnames.scav.length)];
 	botBase.Customization = SetOutfit("scav");
 
-	let allInventorys = [];
+	let allInventories = [];
 
 	if (role == "marksman") {
-		allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/marksman.json"));
+		allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/marksman.json"));
 	} else {
-		allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/assault.json"));
+		allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/assault.json"));
 	}
 	
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
 function generateRaider(botBase, role) {
-	botBase.Info.Nickname = botnames.pmcBot[utility.getRandomInt(0,botnames.pmcBot.length)];
+	botBase.Info.Nickname = botnames.pmcBot[utility.getRandomInt(0, botnames.pmcBot.length)];
 	botBase.Info.Settings.Experience = 500;
-	botBase.Info.Voice = pmcbot_voices[utility.getRandomInt(0,pmcbot_voices.length)];
+	botBase.Info.Voice = pmcbot_voices[utility.getRandomInt(0, pmcbot_voices.length)];
 	botBase.Health = SetHealth("pmcBot");
 	botBase.Customization = SetOutfit("pmcBot");
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/pmcBot.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/pmcBot.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
@@ -78,21 +79,21 @@ function generateReshala(botBase, role) {
 	botBase.Customization.Feet = "5d28b3a186f7747f7e69ab8c";
 	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossBully.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossBully.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
 function generateFollowerReshala(botBase, role)  {
-	botBase.Info.Nickname = botnames.followerBully[utility.getRandomInt(0,botnames.followerBully.length)] + " Zavodskoy";
+	botBase.Info.Nickname = botnames.followerBully[utility.getRandomInt(0, botnames.followerBully.length)] + " Zavodskoy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerBully");
 	botBase.Customization = SetOutfit("followerBully");
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerBully.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerBully.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
@@ -105,9 +106,9 @@ function generateKilla(botBase, role) {
 	botBase.Customization.Feet = "5cdea3c47d6c8b0475341734"
 	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290"
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKilla.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKilla.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
@@ -120,21 +121,21 @@ function generateKojaniy(botBase, role) {
 	botBase.Customization.Feet = "5d5e7f3c86f7742797262063";
 	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKojaniy.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKojaniy.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
 function generateFollowerKojaniy(botBase, role) {
-	botBase.Info.Nickname = botnames.followerKojaniy[utility.getRandomInt(0,botnames.followerKojaniy.length)] + " Svetloozerskiy";
+	botBase.Info.Nickname = botnames.followerKojaniy[utility.getRandomInt(0, botnames.followerKojaniy.length)] + " Svetloozerskiy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerKojaniy");
 	botBase.Customization = SetOutfit("followerKojaniy");
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerKojaniy.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerKojaniy.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
@@ -149,45 +150,45 @@ function generateGluhkar(botBase, role) {
 	botBase.Customization.Feet = "5d5e7f2a86f77427997cfb80";
 	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
 function generateFollowerGluharAssault(botBase, role) {
-	botBase.Info.Nickname = botnames.followerGluharAssault[utility.getRandomInt(0,botnames.followerGluharAssault.length)];
+	botBase.Info.Nickname = botnames.followerGluharAssault[utility.getRandomInt(0, botnames.followerGluharAssault.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerGluharAssault");
 	botBase.Customization = SetOutfit("followerGluharAssault");
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
 function generateFollowerGluharSecurity(botBase, role) {
-	botBase.Info.Nickname = botnames.followerGluharSecurity[utility.getRandomInt(0,botnames.followerGluharSecurity.length)];
+	botBase.Info.Nickname = botnames.followerGluharSecurity[utility.getRandomInt(0, botnames.followerGluharSecurity.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerGluharSecurity");
 	botBase.Customization = SetOutfit("followerGluharSecurity");
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
 function generateFollowerGluharScout(botBase, role) {
-	botBase.Info.Nickname = botnames.followerGluharScout[utility.getRandomInt(0,botnames.followerGluharScout.length)];
+	botBase.Info.Nickname = botnames.followerGluharScout[utility.getRandomInt(0, botnames.followerGluharScout.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = SetHealth("followerGluharScout");
 	botBase.Customization = SetOutfit("followerGluharScout");
 	
-	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json"));
+	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json"));
 
-	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
+	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
 }
 
