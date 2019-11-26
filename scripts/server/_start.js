@@ -205,8 +205,9 @@ function start() {
 	// create server
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		// setup server
-		response.setupRPC();
-		bots.setupGenerator();
+		response.setupRoutes();
+		bots.setupRoutes();
+		item.setupRoutes();
 
 		// handle requests
 		handleRequest(req, res);

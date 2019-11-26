@@ -2,15 +2,15 @@
 
 require('./libs.js');
 
-let dynamicResp = {};
-let staticResp = {};
+let dynamicRoutes = {};
+let staticRoutes = {};
 
-function addDynamicResponse(url, func) {
-    dynamicResp[url] = func;
+function addDynamicRoute(url, func) {
+    dynamicRoutes[url] = func;
 }
 
-function addStaticResponse(url, func) {
-    staticResp[url] = func;
+function addStaticRoute(url, func) {
+    staticRoutes[url] = func;
 }
 
 function getResponse(req, body) {
@@ -30,14 +30,14 @@ function getResponse(req, body) {
 
     // handle static requests
     // NoHurry: fair enough, this _seems_ to work tho, would reduce overhad alot if it really does  ;)
-	if (typeof staticResp[url] !== "undefined") {
-        return staticResp[url](url, info);
+	if (typeof staticRoutes[url] !== "undefined") {
+        return staticRoutes[url](url, info);
     }
 	
     // handle dynamic requests
-    for (let key in dynamicResp) {
+    for (let key in dynamicRoutes) {
         if (url.indexOf(key) != -1) {
-            return dynamicResp[key](url, info);
+            return dynamicRoutes[key](url, info);
         }
     }
 
@@ -67,6 +67,6 @@ function getResponse(req, body) {
     return output;
 }
 
-module.exports.addDynamicResponse = addDynamicResponse;
-module.exports.addStaticResponse = addStaticResponse;
+module.exports.addDynamicRoute = addDynamicRoute;
+module.exports.addStaticRoute = addStaticRoute;
 module.exports.getResponse = getResponse;

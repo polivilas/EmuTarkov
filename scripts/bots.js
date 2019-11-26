@@ -2,20 +2,21 @@
 
 const botNames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
 const botOutfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
-const pmcbotVoices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
+const botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
+const pmcbotVoices = ["Bear_1", "Bear_1", "Usec_1", "Usec_2", "Usec_3"];
 const healthController = {		// controller storage health of each bot
-	"assault": 					[35,80,70,60,60,65,65],
-	"bossBully": 				[62,138,120,100,100,110,110],
-	"bossGluhar": 				[70,200,140,145,145,145,145],
-	"bossKilla": 				[70,210,170,100,100,120,120],
-	"bossKojaniy": 				[62,160,150,100,100,110,110],
-	"followerBully": 			[50,110,100,80,80,85,85],
-	"followerGluharAssault": 	[45,150,125,100,100,120,120],
-	"followerGluharScout": 		[35,80,70,60,60,65,65],
-	"followerGluharSecurity": 	[40,145,100,100,100,100,100],
-	"followerKojaniy": 			[62,138,120,100,100,110,110],
-	"marksman": 				[35,80,70,60,60,65,65],
-	"pmcBot": 					[35,150,120,100,100,110,110],
+	"assault": 					[35, 80, 70, 60, 60, 65, 65],
+	"bossBully": 				[62, 138, 120, 100, 100, 110, 110],
+	"bossGluhar": 				[70, 200, 140, 145, 145, 145, 145],
+	"bossKilla": 				[70, 210, 170, 100, 100, 120, 120],
+	"bossKojaniy": 				[62, 160, 150, 100, 100, 110, 110],
+	"followerBully": 			[50, 110, 100, 80, 80, 85, 85],
+	"followerGluharAssault": 	[45, 150, 125, 100, 100, 120, 120],
+	"followerGluharScout": 		[35, 80, 70, 60, 60, 65, 65],
+	"followerGluharSecurity": 	[40, 145, 100, 100, 100, 100, 100],
+	"followerKojaniy": 			[62, 138, 120, 100, 100, 110, 110],
+	"marksman": 				[35, 80, 70, 60, 60, 65, 65],
+	"pmcBot": 					[35, 150, 120, 100, 100, 110, 110]
 };
 const bossOutfit = {
 	"bossBully":				["5d28b01486f77429242fc898", "5d28adcb86f77429242fc893", "5d28b3a186f7747f7e69ab8c", "5cc2e68f14c02e28b47de290"],
@@ -24,10 +25,10 @@ const bossOutfit = {
 	"bossGluhar":				["5d5e805d86f77439eb4c2d0e", "5d5e7dd786f7744a7a274322", "5d5e7f2a86f77427997cfb80", "5cc2e68f14c02e28b47de290"]
 };
 
-let generator = {};
+let staticRoutes = {};
 
-function addGenerator(role, worker) {
-	generator[role] = worker;
+function addStaticRoute(role, worker) {
+	staticRoutes[role] = worker;
 }
 
 function setHealth(role) {
@@ -94,7 +95,7 @@ function generateReshala(botBase, role) {
 	return botBase;
 }
 
-function generateFollowerReshala(botBase, role)  {
+function generateFollowerReshala(botBase, role) {
 	botBase.Info.Nickname = botNames.followerBully[utility.getRandomInt(0, botNames.followerBully.length)] + " Zavodskoy";
 	botBase.Info.Settings.Experience = 500;
 	botBase.Health = setHealth(role);
@@ -192,39 +193,39 @@ function generateFollowerGluharScout(botBase, role) {
 	return botBase;
 }
 
-function setupGenerator() {
-	addGenerator("cursedAssault", generateBotGeneric);
-	addGenerator("assault", generateBotGeneric);
-	addGenerator("marksman", generateBotGeneric);
-	addGenerator("pmcBot", generateRaider);
-	addGenerator("bossBully", generateReshala);
-	addGenerator("followerBully", generateFollowerReshala);
-	addGenerator("bossKilla", generateKilla);
-	addGenerator("bossKojaniy", generateKojaniy);
-	addGenerator("followerKojaniy", generateFollowerKojaniy);
-	addGenerator("bossGluhar", generateGluhkar);
-	addGenerator("followerGluharAssault", generateFollowerGluharAssault);
-	addGenerator("followerGluharSecurity", generateFollowerGluharSecurity);
-	addGenerator("followerGluharScout", generateFollowerGluharScout);
+function setupRoutes() {
+	addStaticRoute("cursedAssault", generateBotGeneric);
+	addStaticRoute("assault", generateBotGeneric);
+	addStaticRoute("marksman", generateBotGeneric);
+	addStaticRoute("pmcBot", generateRaider);
+	addStaticRoute("bossBully", generateReshala);
+	addStaticRoute("followerBully", generateFollowerReshala);
+	addStaticRoute("bossKilla", generateKilla);
+	addStaticRoute("bossKojaniy", generateKojaniy);
+	addStaticRoute("followerKojaniy", generateFollowerKojaniy);
+	addStaticRoute("bossGluhar", generateGluhkar);
+	addStaticRoute("followerGluharAssault", generateFollowerGluharAssault);
+	addStaticRoute("followerGluharSecurity", generateFollowerGluharSecurity);
+	addStaticRoute("followerGluharScout", generateFollowerGluharScout);
 }
 
 function generate(databots) {
 	// make it persistant otherwise its fucked up
 	var generatedBots = [];
 
-	for (let condition of databots.conditions) {	
-		for (let i = 0; i < condition.Limit; i++) { 
-			// var is intended here
-			var botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
+	for (let condition of databots.conditions) {
+		for (let i = 0; i < condition.Limit; i++) {
+			// make it persistent otherwise bots are all the same
+			var bot = botBase;
 
-			botBase._id = "" + utility.getRandomIntEx(99999999);
-			botBase.Info.Settings.Role = condition.Role;
-			botBase.Info.Settings.BotDifficulty = condition.Difficulty;
-			botBase.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-			botBase.Health = setHealth(condition.Role);
+			bot._id = "" + utility.getRandomIntEx(99999999);
+			bot.Info.Settings.Role = condition.Role;
+			bot.Info.Settings.BotDifficulty = condition.Difficulty;
+			bot.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
+			bot.Health = setHealth(condition.Role);
 
-			if (typeof generator[condition.Role] !== "undefined") {
-				generatedBots.push(generator[condition.Role](botBase, condition.Role));
+			if (typeof staticRoutes[condition.Role] !== "undefined") {
+				generatedBots.push(staticRoutes[condition.Role](bot, condition.Role));
 			}
 		} 
 	}
@@ -240,6 +241,6 @@ function generatePlayerScav() {
 	return playerscav[0];
 }
 
-module.exports.setupGenerator = setupGenerator;
+module.exports.setupRoutes = setupRoutes;
 module.exports.generate = generate;
 module.exports.generatePlayerScav = generatePlayerScav;

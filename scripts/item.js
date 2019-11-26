@@ -8,6 +8,51 @@ var stashX = 10; // fix for your stash size
 var stashY = 66; // ^ if you edited it ofc
 var output = "";
 
+let staticRoutes = {};
+
+function addStaticRoute(url, worker) {
+	staticRoutes[url] = worker;
+}
+
+function setupRoutes() {
+    addStaticRoute("SaveBuild", weaponBuilds_f.saveBuild);
+    addStaticRoute("RemoveBuild", weaponBuilds_f.removeBuild);
+    addStaticRoute("HideoutUpgrade", hideout_f.hideoutUpgrade);
+    addStaticRoute("HideoutUpgradeComplete", hideout_f.hideoutUpgradeComplete);
+    addStaticRoute("HideoutContinuousProductionStart", hideout_f.hideoutContinuousProductionStart);
+    addStaticRoute("HideoutSingleProductionStart", hideout_f.hideoutSingleProductionStart);
+    addStaticRoute("HideoutScavCaseProductionStart", hideout_f.hideoutScavCaseProductionStart);
+    addStaticRoute("HideoutTakeProduction", hideout_f.hideoutTakeProduction);
+    addStaticRoute("HideoutPutItemsInAreaSlots", hideout_f.hideoutPutItemsInAreaSlots);
+    addStaticRoute("HideoutTakeItemsFromAreaSlots", hideout_f.hideoutTakeItemsFromAreaSlots);
+    addStaticRoute("HideoutToggleArea", hideout_f.hideoutToggleArea);
+    addStaticRoute("QuestAccept", quest_f.acceptQuest);
+    addStaticRoute("QuestComplete", quest_f.completeQuest);
+    addStaticRoute("QuestHandover", quest_f.handoverQuest);
+    addStaticRoute("AddNote", note_f.addNote);
+    addStaticRoute("EditNote", note_f.editNode);
+    addStaticRoute("DeleteNote", note_f.deleteNote);
+    addStaticRoute("Move", move_f.moveItem);
+    addStaticRoute("Remove", move_f.removeItem);
+    addStaticRoute("Split", move_f.splitItem);
+    addStaticRoute("Merge", move_f.mergeItem);
+    addStaticRoute("Fold", status_f.foldItem);
+    addStaticRoute("Toggle", status_f.toggleItem);
+    addStaticRoute("Tag", status_f.tagItem);
+    addStaticRoute("Bind", status_f.bindItem);
+    addStaticRoute("Examine", status_f.examineItem);
+    addStaticRoute("Eat", character_f.eatItem);
+    addStaticRoute("Heal", character_f.healPlayer);
+    addStaticRoute("Transfer", move_f.transferItem);
+    addStaticRoute("Swap", move_f.swapItem);
+    addStaticRoute("AddToWishList", wishList_f.addToWishList);
+    addStaticRoute("RemoveFromWishList", wishList_f.removeFromWishList);
+    addStaticRoute("TradingConfirm", trade_f.confirmTrading);
+    addStaticRoute("RagFairBuyOffer", trade_f.confirmRagfairTrading);
+    addStaticRoute("CustomizationWear", customization_f.wearClothing);
+    addStaticRoute("CustomizationBuy", customization_f.buyClothing);
+}
+
 // --------------------------------------------------------------------------------------------------------------------- //
 
 // --- REQUEST HANDLING BELOW --- //
@@ -25,119 +70,10 @@ function resetOutput() { // reset client output
 function handleMoving(body) { // handling Action function
     let tmpList = profile.getCharacterData();
 
-    switch (body.Action) {
-
-        case "SaveBuild":
-            return weaponBuilds_f.saveBuild(tmpList, body);
-
-        case "RemoveBuild":
-            return weaponBuilds_f.removeBuild(tmpList, body);
-
-        case "HideoutUpgrade":
-            return hideout_f.hideoutUpgrade(tmpList, body);
-
-        case "HideoutUpgradeComplete":
-            return hideout_f.hideoutUpgradeComplete(tmpList, body);
-
-        case "HideoutContinuousProductionStart":
-			return hideout_f.hideoutContinuousProductionStart(tmpList, body);
-
-        case "HideoutSingleProductionStart":
-            return hideout_f.hideoutSingleProductionStart(tmpList, body);
-
-        case "HideoutScavCaseProductionStart":
-            return hideout_f.hideoutScavCaseProductionStart(tmpList, body); 
-
-        case "HideoutTakeProduction":
-            return hideout_f.hideoutTakeProduction(tmpList, body); 
-
-        case "HideoutPutItemsInAreaSlots":
-            return hideout_f.hideoutPutItemsInAreaSlots(tmpList, body);
-
-        case "HideoutTakeItemsFromAreaSlots":
-            return hideout_f.hideoutTakeItemsFromAreaSlots(tmpList, body);
-
-        case "HideoutToggleArea":
-            return hideout_f.hideoutToggleArea(tmpList, body);
-
-        case "QuestAccept":
-            return quest_f.acceptQuest(tmpList, body);
-
-        case "QuestComplete":
-            return quest_f.completeQuest(tmpList, body);
-
-        case "QuestHandover":
-            return quest_f.handoverQuest(tmpList, body);
-
-        case "AddNote":
-            return note_f.addNote(tmpList, body);
-
-        case "EditNote":
-            return note_f.editNode(tmpList, body);
-
-        case "DeleteNote":
-            return note_f.deleteNote(tmpList, body);
-
-        case "Move":
-            return move_f.moveItem(tmpList, body);
-
-        case "Remove":
-            return move_f.removeItem(tmpList, body);
-
-        case "Split":
-            return move_f.splitItem(tmpList, body);
-
-        case "Merge":
-            return move_f.mergeItem(tmpList, body);
-
-        case "Fold":
-            return status_f.foldItem(tmpList, body);
-
-        case "Toggle":
-            return status_f.toggleItem(tmpList, body);
-
-        case "Tag":
-            return status_f.tagItem(tmpList, body);
-
-        case "Bind":
-            return status_f.bindItem(tmpList, body);
-
-        case "Examine":
-            return status_f.examineItem(tmpList, body);
-
-        case "Eat":
-            return character_f.eatItem(tmpList, body);
-
-        case "Heal":
-            return character_f.healPlayer(tmpList, body);
-
-        case "Transfer":
-            return move_f.transferItem(tmpList, body);
-
-        case "Swap":
-            return move_f.swapItem(tmpList, body);
-
-        case "AddToWishList":
-            return wishList_f.addToWishList(tmpList, body);
-
-        case "RemoveFromWishList":
-            return wishList_f.removeFromWishList(tmpList, body);
-
-        case "TradingConfirm":
-            return trade_f.confirmTrading(tmpList, body);
-
-        case "RagFairBuyOffer":
-            return trade_f.confirmRagfairTrading(tmpList, body);
-        
-		case "CustomizationWear":
-            return customization_f.wearClothing(tmpList, body);
-        
-		case "CustomizationBuy":
-            return customization_f.buyClothing(tmpList, body);
-
-        default:
-            console.log("[UNHANDLED ACTION] " + body.Action, "white", "red");
-            return "";
+    if (typeof staticRoutes[body.Action] !== "undefined") {
+        return staticRoutes[body.Action](tmpList, body);
+    } else {
+        console.log("[UNHANDLED ACTION] " + body.Action, "white", "red");
     }
 }
 
@@ -164,5 +100,6 @@ module.exports.getOutput = getOutput;
 module.exports.setOutput = setOutput;
 module.exports.resetOutput = resetOutput;
 module.exports.moving = moving;
+module.exports.setupRoutes = setupRoutes;
 module.exports.moveItem = move_f.moveItem;
 module.exports.PrepareItemsList = itm_hf.PrepareItemsList;
