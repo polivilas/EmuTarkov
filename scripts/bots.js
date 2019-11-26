@@ -1,9 +1,10 @@
 "use strict";
 
-const botnames = JSON.parse(utility.readJson("database/configs/bots/botNames.json") );
-const bot_outfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json") );
+const botnames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
+const bot_outfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
 
-const health_controller = { // controller storage health of each bot
+// controller storage health of each bot
+const health_controller = {
 	"assault": 					[35,80,70,60,60,65,65],
 	"bossBully": 				[62,138,120,100,100,110,110],
 	"bossGluhar": 				[70,200,140,145,145,145,145],
@@ -33,7 +34,7 @@ function generate(databots) {
 			botBase.Info.Settings.Role = condition.Role;
 			botBase.Info.Settings.BotDifficulty = condition.Difficulty;
 			botBase.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-			botBase.Health = SetHealth(condition.Role)
+			botBase.Health = SetHealth(condition.Role);
 
 			switch (condition.Role) {
 				case "cursedAssault":
@@ -257,7 +258,7 @@ function generateFollowerGluharScout(botBase) {
 	botBase.Customization = SetOutfit("followerGluharScout");
 	
 	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json"));
-	
+
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
 	return botBase;
 }
