@@ -2,27 +2,26 @@
 
 const botNames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
 const botOutfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
-const botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
 const pmcbotVoices = ["Bear_1", "Bear_1", "Usec_1", "Usec_2", "Usec_3"];
+
 const healthController = {		// controller storage health of each bot
-	"assault": 					[35, 80, 70, 60, 60, 65, 65],
+	"default": 					[35, 80, 70, 60, 60, 65, 65],
 	"bossBully": 				[62, 138, 120, 100, 100, 110, 110],
+	"followerBully": 			[50, 110, 100, 80, 80, 85, 85],
 	"bossGluhar": 				[70, 200, 140, 145, 145, 145, 145],
 	"bossKilla": 				[70, 210, 170, 100, 100, 120, 120],
 	"bossKojaniy": 				[62, 160, 150, 100, 100, 110, 110],
-	"followerBully": 			[50, 110, 100, 80, 80, 85, 85],
-	"followerGluharAssault": 	[45, 150, 125, 100, 100, 120, 120],
-	"followerGluharScout": 		[35, 80, 70, 60, 60, 65, 65],
-	"followerGluharSecurity": 	[40, 145, 100, 100, 100, 100, 100],
 	"followerKojaniy": 			[62, 138, 120, 100, 100, 110, 110],
-	"marksman": 				[35, 80, 70, 60, 60, 65, 65],
+	"followerGluharAssault": 	[45, 150, 125, 100, 100, 120, 120],
+	"followerGluharSecurity": 	[40, 145, 100, 100, 100, 100, 100],
 	"pmcBot": 					[35, 150, 120, 100, 100, 110, 110]
 };
+
 const bossOutfit = {
-	"bossBully":				["5d28b01486f77429242fc898", "5d28adcb86f77429242fc893", "5d28b3a186f7747f7e69ab8c", "5cc2e68f14c02e28b47de290"],
-	"bossKilla":				["5d28b03e86f7747f7e69ab8a", "5cdea33e7d6c8b0474535dac", "5cdea3c47d6c8b0475341734", "5cc2e68f14c02e28b47de290"],
-	"bossKojaniy":				["5d5f8ba486f77431254e7fd2", "5d5e7c9186f774393602d6f9", "5d5e7f3c86f7742797262063", "5cc2e68f14c02e28b47de290"],
-	"bossGluhar":				["5d5e805d86f77439eb4c2d0e", "5d5e7dd786f7744a7a274322", "5d5e7f2a86f77427997cfb80", "5cc2e68f14c02e28b47de290"]
+	"bossBully": ["5d28b01486f77429242fc898", "5d28adcb86f77429242fc893", "5d28b3a186f7747f7e69ab8c", "5cc2e68f14c02e28b47de290"],
+	"bossKilla": ["5d28b03e86f7747f7e69ab8a", "5cdea33e7d6c8b0474535dac", "5cdea3c47d6c8b0475341734", "5cc2e68f14c02e28b47de290"],
+	"bossKojaniy": ["5d5f8ba486f77431254e7fd2", "5d5e7c9186f774393602d6f9", "5d5e7f3c86f7742797262063", "5cc2e68f14c02e28b47de290"],
+	"bossGluhar": ["5d5e805d86f77439eb4c2d0e", "5d5e7dd786f7744a7a274322", "5d5e7f2a86f77427997cfb80", "5cc2e68f14c02e28b47de290"]
 };
 
 let staticRoutes = {};
@@ -45,7 +44,6 @@ function setBossOutfit(role) {
 
 function setOutfit(role) {
 	let outfits =  botOutfits[role];
-
 	return {
 		"Head" : outfits.Head[utility.getRandomInt(0, outfits.Head.length - 1)],
 		"Body" : outfits.Body[utility.getRandomInt(0, outfits.Body.length - 1)],
@@ -57,6 +55,7 @@ function setOutfit(role) {
 function generateBotGeneric(botBase, role) {
 	botBase.Info.Nickname = botNames.scav[utility.getRandomInt(0, botNames.scav.length)];
 	botBase.Customization = setOutfit("scav");
+	botBase.Health = setHealth("default");
 
 	let allInventories = [];
 
@@ -184,8 +183,9 @@ function generateFollowerGluharSecurity(botBase, role) {
 function generateFollowerGluharScout(botBase, role) {
 	botBase.Info.Nickname = botNames.followerGluharScout[utility.getRandomInt(0, botNames.followerGluharScout.length)];
 	botBase.Info.Settings.Experience = 500;
-	botBase.Health = setHealth(role);
+	botBase.Health = setHealth("default");
 	botBase.Customization = setOutfit(role);
+
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json"));
 
@@ -210,24 +210,26 @@ function setupRoutes() {
 }
 
 function generate(databots) {
-	// make it persistant otherwise its fucked up
-	var generatedBots = [];
 
-	for (let condition of databots.conditions) {
-		for (let i = 0; i < condition.Limit; i++) {
-			// make it persistent otherwise bots are all the same
-			var bot = botBase;
+	let generatedBots = []; 
+	let i = 0;
+	for (let condition of databots.conditions) 
+	{
+		for (i = 0; i < condition.Limit; i++) 
+		{
+			var bot = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));// DONT MOVE THIS, there was a scope problem
 
-			bot._id = "" + utility.getRandomIntEx(99999999);
+			bot._id = "bot" + utility.getRandomIntEx(99999999);
 			bot.Info.Settings.Role = condition.Role;
 			bot.Info.Settings.BotDifficulty = condition.Difficulty;
 			bot.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-			bot.Health = setHealth(condition.Role);
 
-			if (typeof staticRoutes[condition.Role] !== "undefined") {
-				generatedBots.push(staticRoutes[condition.Role](bot, condition.Role));
+			if (typeof staticRoutes[condition.Role] !== "undefined") 
+			{	
+				bot = staticRoutes[condition.Role](bot, condition.Role);
+				generatedBots.unshift(bot);
 			}
-		} 
+		}
 	}
 
 	return { "err": 0,"errmsg": null, "data": generatedBots };
