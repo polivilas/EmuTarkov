@@ -35,8 +35,14 @@ function generate(databots)
 			botBase.Info.Settings.Role = condition.Role;
 			botBase.Info.Settings.BotDifficulty = condition.Difficulty;
 			botBase.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-
 			botBase.Health = SetHealth(condition.Role)
+
+			// customization is randomly generated except for bosses
+			// bosses override these
+			botBase.Customization.Head = "5d28b01486f77429242fc898";
+			botBase.Customization.Body = "5d28adcb86f77429242fc893";
+			botBase.Customization.Feet = "5d28b3a186f7747f7e69ab8c";
+			botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 
 			switch(condition.Role)
 			{
@@ -114,7 +120,6 @@ function SetOutfit(role)
 		"Feet" : outfits.Feet[utility.getRandomInt(0, outfits.Feet.length - 1)],
 		"Hands" : outfits.Hands[utility.getRandomInt(0,outfits.Hands.length - 1)]
 	}
-
 }
 
 
@@ -162,11 +167,6 @@ function generateReshala(botBase)
 	botBase.Info.Settings.Experience = 800; 
 
 	botBase.Health = SetHealth("bossBully");
-
-	botBase.Customization.Head = "5d28b01486f77429242fc898";
-	botBase.Customization.Body = "5d28adcb86f77429242fc893";
-	botBase.Customization.Feet = "5d28b3a186f7747f7e69ab8c";
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
 	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossBully.json") );
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
@@ -196,11 +196,6 @@ function generateKilla(botBase)
 	botBase.Info.Settings.Experience = 1000; 
 
 	botBase.Health = SetHealth("bossKilla");
-
-	botBase.Customization.Head = "5d28b03e86f7747f7e69ab8a"
-	botBase.Customization.Body = "5cdea33e7d6c8b0474535dac"
-	botBase.Customization.Feet = "5cdea3c47d6c8b0475341734"
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290"
 	
 	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKilla.json") );
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
@@ -215,11 +210,6 @@ function generateKojaniy(botBase)
 	botBase.Info.Settings.Experience = 1100; 
 
 	botBase.Health = SetHealth("bossKojaniy");
-
-	botBase.Customization.Head = "5d5f8ba486f77431254e7fd2";
-	botBase.Customization.Body = "5d5e7c9186f774393602d6f9";
-	botBase.Customization.Feet = "5d5e7f3c86f7742797262063";
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
 	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKojaniy.json") );	
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
@@ -249,12 +239,6 @@ function generateGluhkar(botBase)
 	botBase.Info.Settings.Experience = 1000; 
 
 	botBase.Health = SetHealth("bossGluhar");
-
-	//looks like the game randomize itself appearance
-	botBase.Customization.Head = "5d5e805d86f77439eb4c2d0e";
-	botBase.Customization.Body = "5d5e7dd786f7744a7a274322";
-	botBase.Customization.Feet = "5d5e7f2a86f77427997cfb80";
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
 	
 	let allInventorys = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json") );	
 	botBase.Inventory = allInventorys[utility.getRandomInt(0,allInventorys.length)];
