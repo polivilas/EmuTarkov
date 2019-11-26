@@ -1,9 +1,9 @@
 "use strict";
 
 const botnames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
-const bot_outfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
+const botOutfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
 const pmcbot_voices = ["Bear_1","Bear_1","Usec_1","Usec_2","Usec_3"];
-const health_controller = {		// controller storage health of each bot
+const healthController = {		// controller storage health of each bot
 	"assault": 					[35,80,70,60,60,65,65],
 	"bossBully": 				[62,138,120,100,100,110,110],
 	"bossGluhar": 				[70,200,140,145,145,145,145],
@@ -17,6 +17,12 @@ const health_controller = {		// controller storage health of each bot
 	"marksman": 				[35,80,70,60,60,65,65],
 	"pmcBot": 					[35,150,120,100,100,110,110],
 };
+const bossOutfit = {
+	"bossBully":				["5d28b01486f77429242fc898", "5d28adcb86f77429242fc893", "5d28b3a186f7747f7e69ab8c", "5cc2e68f14c02e28b47de290"],
+	"bossKilla":				["5d28b03e86f7747f7e69ab8a", "5cdea33e7d6c8b0474535dac", "5cdea3c47d6c8b0475341734", "5cc2e68f14c02e28b47de290"],
+	"bossKojaniy":				["5d5f8ba486f77431254e7fd2", "5d5e7c9186f774393602d6f9", "5d5e7f3c86f7742797262063", "5cc2e68f14c02e28b47de290"],
+	"bossGluhar":				["5d5e805d86f77439eb4c2d0e", "5d5e7dd786f7744a7a274322", "5d5e7f2a86f77427997cfb80", "5cc2e68f14c02e28b47de290"]
+};
 
 let generator = {};
 
@@ -24,14 +30,20 @@ function addGenerator(role, worker) {
 	generator.Add[role] = worker;
 }
 
-function SetHealth(role) {
-	let hc = health_controller[role];
+function setHealth(role) {
+	let hc = healthController[role];
 
 	return {"Hydration": {"Current": 100,"Maximum": 100},"Energy": {"Current": 100,"Maximum": 100},"BodyParts": {"Head": {"Health": {"Current": hc[0],"Maximum": hc[0]}},"Chest": {"Health": {"Current": hc[1],"Maximum": hc[1]}},"Stomach": {"Health": {"Current": hc[2],"Maximum": hc[2]}},"LeftArm": {"Health": {"Current": hc[3],"Maximum": hc[3]}},"RightArm": {"Health": {"Current": hc[4],"Maximum": hc[4]}},"LeftLeg": {"Health": {"Current": hc[5],"Maximum": hc[5]}},"RightLeg": {"Health": {"Current": hc[6],"Maximum": hc[6]}}}};
 }
 
-function SetOutfit(role) {
-	let outfits =  bot_outfits[role];
+function setBossOutfit(role) {
+	let cc = bossOutfit[role];
+
+	return {"Head": cc[0], "Body": cc[1], "Feet": cc[2], "Hands": cc[3]};
+}
+
+function setOutfit(role) {
+	let outfits =  botOutfits[role];
 
 	return {
 		"Head" : outfits.Head[utility.getRandomInt(0, outfits.Head.length - 1)],
@@ -43,7 +55,7 @@ function SetOutfit(role) {
 
 function generateBotGeneric(botBase, role) {
 	botBase.Info.Nickname = botnames.scav[utility.getRandomInt(0, botnames.scav.length)];
-	botBase.Customization = SetOutfit("scav");
+	botBase.Customization = setOutfit("scav");
 
 	let allInventories = [];
 
@@ -61,8 +73,8 @@ function generateRaider(botBase, role) {
 	botBase.Info.Nickname = botnames.pmcBot[utility.getRandomInt(0, botnames.pmcBot.length)];
 	botBase.Info.Settings.Experience = 500;
 	botBase.Info.Voice = pmcbot_voices[utility.getRandomInt(0, pmcbot_voices.length)];
-	botBase.Health = SetHealth("pmcBot");
-	botBase.Customization = SetOutfit("pmcBot");
+	botBase.Health = setHealth(role);
+	botBase.Customization = setOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/pmcBot.json"));
 
@@ -73,11 +85,8 @@ function generateRaider(botBase, role) {
 function generateReshala(botBase, role) {
 	botBase.Info.Nickname = "Reshala";
 	botBase.Info.Settings.Experience = 800;
-	botBase.Health = SetHealth("bossBully");
-	botBase.Customization.Head = "5d28b01486f77429242fc898";
-	botBase.Customization.Body = "5d28adcb86f77429242fc893";
-	botBase.Customization.Feet = "5d28b3a186f7747f7e69ab8c";
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
+	botBase.Health = setHealth(role);
+	botBase.Customization = setBossOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossBully.json"));
 
@@ -88,8 +97,8 @@ function generateReshala(botBase, role) {
 function generateFollowerReshala(botBase, role)  {
 	botBase.Info.Nickname = botnames.followerBully[utility.getRandomInt(0, botnames.followerBully.length)] + " Zavodskoy";
 	botBase.Info.Settings.Experience = 500;
-	botBase.Health = SetHealth("followerBully");
-	botBase.Customization = SetOutfit("followerBully");
+	botBase.Health = setHealth(role);
+	botBase.Customization = setOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerBully.json"));
 
@@ -100,11 +109,8 @@ function generateFollowerReshala(botBase, role)  {
 function generateKilla(botBase, role) {
 	botBase.Info.Nickname = "Killa";
 	botBase.Info.Settings.Experience = 1000;
-	botBase.Health = SetHealth("bossKilla");
-	botBase.Customization.Head = "5d28b03e86f7747f7e69ab8a"
-	botBase.Customization.Body = "5cdea33e7d6c8b0474535dac"
-	botBase.Customization.Feet = "5cdea3c47d6c8b0475341734"
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290"
+	botBase.Health = setHealth(role);
+	botBase.Customization = setBossOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKilla.json"));
 
@@ -115,11 +121,8 @@ function generateKilla(botBase, role) {
 function generateKojaniy(botBase, role) {
 	botBase.Info.Nickname = "Shturman";
 	botBase.Info.Settings.Experience = 1100;
-	botBase.Health = SetHealth("bossKojaniy");
-	botBase.Customization.Head = "5d5f8ba486f77431254e7fd2";
-	botBase.Customization.Body = "5d5e7c9186f774393602d6f9";
-	botBase.Customization.Feet = "5d5e7f3c86f7742797262063";
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
+	botBase.Health = setHealth(role);
+	botBase.Customization = setBossOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKojaniy.json"));
 
@@ -130,8 +133,8 @@ function generateKojaniy(botBase, role) {
 function generateFollowerKojaniy(botBase, role) {
 	botBase.Info.Nickname = botnames.followerKojaniy[utility.getRandomInt(0, botnames.followerKojaniy.length)] + " Svetloozerskiy";
 	botBase.Info.Settings.Experience = 500;
-	botBase.Health = SetHealth("followerKojaniy");
-	botBase.Customization = SetOutfit("followerKojaniy");
+	botBase.Health = setHealth(role);
+	botBase.Customization = setOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerKojaniy.json"));
 
@@ -142,13 +145,10 @@ function generateFollowerKojaniy(botBase, role) {
 function generateGluhkar(botBase, role) {
 	botBase.Info.Nickname = "Gluhkar";
 	botBase.Info.Settings.Experience = 1000;
-	botBase.Health = SetHealth("bossGluhar");
+	botBase.Health = setHealth(role);
 
-	//looks like the game randomize itself appearance
-	botBase.Customization.Head = "5d5e805d86f77439eb4c2d0e";
-	botBase.Customization.Body = "5d5e7dd786f7744a7a274322";
-	botBase.Customization.Feet = "5d5e7f2a86f77427997cfb80";
-	botBase.Customization.Hands = "5cc2e68f14c02e28b47de290";
+	// looks like the game randomize itself appearance
+	botBase.Customization = setBossOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json"));
 
@@ -159,8 +159,8 @@ function generateGluhkar(botBase, role) {
 function generateFollowerGluharAssault(botBase, role) {
 	botBase.Info.Nickname = botnames.followerGluharAssault[utility.getRandomInt(0, botnames.followerGluharAssault.length)];
 	botBase.Info.Settings.Experience = 500;
-	botBase.Health = SetHealth("followerGluharAssault");
-	botBase.Customization = SetOutfit("followerGluharAssault");
+	botBase.Health = setHealth(role);
+	botBase.Customization = setOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json"));
 
@@ -171,8 +171,8 @@ function generateFollowerGluharAssault(botBase, role) {
 function generateFollowerGluharSecurity(botBase, role) {
 	botBase.Info.Nickname = botnames.followerGluharSecurity[utility.getRandomInt(0, botnames.followerGluharSecurity.length)];
 	botBase.Info.Settings.Experience = 500;
-	botBase.Health = SetHealth("followerGluharSecurity");
-	botBase.Customization = SetOutfit("followerGluharSecurity");
+	botBase.Health = setHealth(role);
+	botBase.Customization = setOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json"));
 
@@ -183,8 +183,8 @@ function generateFollowerGluharSecurity(botBase, role) {
 function generateFollowerGluharScout(botBase, role) {
 	botBase.Info.Nickname = botnames.followerGluharScout[utility.getRandomInt(0, botnames.followerGluharScout.length)];
 	botBase.Info.Settings.Experience = 500;
-	botBase.Health = SetHealth("followerGluharScout");
-	botBase.Customization = SetOutfit("followerGluharScout");
+	botBase.Health = setHealth(role);
+	botBase.Customization = setOutfit(role);
 	
 	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json"));
 
@@ -221,7 +221,7 @@ function generate(databots) {
 			botBase.Info.Settings.Role = condition.Role;
 			botBase.Info.Settings.BotDifficulty = condition.Difficulty;
 			botBase.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
-			botBase.Health = SetHealth(condition.Role);
+			botBase.Health = setHealth(condition.Role);
 
 			if (typeof generator[condition.Role] !== "undefined") {
 				generatedBots.push(botBase, condition.Role);
