@@ -56,7 +56,7 @@ function loadAllTraders()
 }
 
 function checkTraders(traderFiles, file) {
-    return settings.debug.debugMode === true || ((settings.debug.debugMode === false || settings.debug.debugMode === undefined) && traderFiles[file] !== "91_everythingTrader.json" && traderFiles[file] !== "92_SecretTrader.json");
+    return settings.debug.debugMode === true || ((settings.debug.debugMode === false || settings.debug.debugMode === undefined) && traderFiles[file] !== "everything.json");
 }
 
 function loadAssort(trader) {
