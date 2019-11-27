@@ -8,8 +8,10 @@ function prepareWeather() {
     let i = 0;
     let data = [];
 
-    for (let file of fileRoutes.weather) {
-        data[i++] = JSON.parse(utility.readJson(file));
+    for (let file in fileRoutes.weather) {
+        if (fileRoutes.weather.hasOwnProperty(file)) {
+            data[i++] = JSON.parse(utility.readJson(fileRoutes.weather[file]));
+        }
     }
 
     return data;
