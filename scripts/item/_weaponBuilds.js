@@ -2,46 +2,42 @@
 
 require('../libs.js');
 
-function SaveBuild(tmpList,body)
+function SaveBuild(tmpList, body)
 {
 	delete body.Action;
 	body.id = utility.generateNewItemId();
-	var savedBuilds = JSON.parse( utility.readJson('database/configs/userBuilds.json') );
-	savedBuilds.data.push(body);
-	utility.writeJson('database/configs/userBuilds.json',savedBuilds);
 
+	let savedBuilds = JSON.parse(utility.readJson(fileRoutes.others.userBuilds));
+	
+	savedBuilds.data.push(body);
+	utility.writeJson(fileRoutes.others.userBuilds,savedBuilds);
 	item.resetOutput();
+
 	let output = item.getOutput();
+	
 	output.data.builds.push(body)
-    return output; //YES ! 
+    return output;
 }
 
 
-function RemoveBuild(tmpList,body)
-{
+function RemoveBuild(tmpList, body) {
+	let savedBuilds = JSON.parse(utility.readJson(fileRoutes.others.userBuilds));
 	
-	var savedBuilds = JSON.parse( utility.readJson('database/configs/userBuilds.json') );
-	
-	for(var wBuild of savedBuilds.data)
-	{
-		if(wBuild.id == body.id)
-		{
-			for( var i = 0; i < savedBuilds.data.length; i++)
-			{ 
-		   		if ( savedBuilds.data[i] === wBuild) 
-		   		{
+	for (let wBuild of savedBuilds.data) {
+		if (wBuild.id == body.id) {
+			for (let i = 0; i < savedBuilds.data.length; i++) { 
+		   		if (savedBuilds.data[i] === wBuild) {
 			    	savedBuilds.data.splice(i, 1); 
 			    	i--;
 			  	}
 			}
 		}
 	}
-	utility.writeJson('database/configs/userBuilds.json',savedBuilds);
 
+	utility.writeJson(fileRoutes.others.userBuilds, savedBuilds);
 	item.resetOutput();
     return item.getOutput();
 }
-
 
 module.exports.saveBuild = SaveBuild;
 module.exports.removeBuild = RemoveBuild;

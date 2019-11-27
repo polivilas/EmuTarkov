@@ -1,8 +1,10 @@
 "use strict";
 
-const botNames = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
-const botOutfits = JSON.parse(utility.readJson("database/configs/bots/bot_outfits.json"));
-const botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
+/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
+
+const botNames = JSON.parse(utility.readJson(fileRoutes.bots.names));
+const botOutfits = JSON.parse(utility.readJson(fileRoutes.bots.outfits));
+const botBase = JSON.parse(utility.readJson(fileRoutes.bots.base));
 const pmcbotVoices = ["Bear_1", "Bear_1", "Usec_1", "Usec_2", "Usec_3"];
 const healthController = {		// controller storage health of each bot
 	"assault": 					[35, 80, 70, 60, 60, 65, 65],

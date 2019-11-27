@@ -3,15 +3,16 @@
 require('../libs.js');
 
 //// ---- FUNCTIONS BELOW ---- ////
+/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
 
 function prepareLocations() {
-	if (!fs.existsSync("appdata/cache/cache_locations.json")){
+	if (!fs.existsSync(fileRoutes.cache.locations)) {
 		console.log("rebuilding locations cache...");
 
 		let locationsTable = [];
 		let locationsDir = "database/configs/maps/";
 		let locations_base = fs.readdirSync(locationsDir);
-		let locations_maps = JSON.parse(utility.readJson('database/configs/maps/locationsBase.json'));
+		let locations_maps = JSON.parse(utility.readJson(fileRoutes.others.locationsBase));
 		let locations = locations_maps.data.locations;
 
 		for (let file in locationsDir) {
@@ -36,11 +37,11 @@ function prepareLocations() {
 			}
 		}
 
-		utility.writeJson("appdata/cache/cache_locations.json", locations_maps);	
+		utility.writeJson(fileRoutes.cache.locations, locations_maps);	
 		return locations_maps;
 	} else {
 		if (locations == "") {
-			return JSON.parse(utility.readJson("appdata/cache/cache_locations.json"));
+			return JSON.parse(utility.readJson(fileRoutes.cache.locations));
 		} else {
 			return locations;
 		}
@@ -51,8 +52,7 @@ function prepareLocations() {
 * input: location as object
 * output: location as object
 * */
-function LootGenerator(location)
-{
+function LootGenerator(location) {
 	let itemsKeys_ = Object.keys(items.data);
 	
 	for (let lootspawn in location.Loot) {

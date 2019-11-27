@@ -2,31 +2,31 @@
 
 require('./libs.js');
 
-// NO FUCKING TEMPING TRADERS CAUSE ITS FUCKING STUPID !!!!!!
-const dynamicTraders = 
-[
-    "54cb50c76803fa8b248b4571", //prapor
-    "54cb57776803fa99248b456e", //therapist
-    "579dc571d53a0658a154fbec", //fence
-    "58330581ace78e27b8b10cee", //skier
-    "5935c25fb3acc3127c3d8cd9", //peacekeeper
-    "5a7c2eca46aef81a7ca2145d", //mechanic
-    "5ac3b934156ae10c4430e83c", //ragman
-    "5c0647fdd443bc2504c2d371"  //jaeger
+/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
+
+const dynamicTraders = [
+    "54cb50c76803fa8b248b4571", // prapor
+    "54cb57776803fa99248b456e", // therapist
+    "579dc571d53a0658a154fbec", // fence
+    "58330581ace78e27b8b10cee", // skier
+    "5935c25fb3acc3127c3d8cd9", // peacekeeper
+    "5a7c2eca46aef81a7ca2145d", // mechanic
+    "5ac3b934156ae10c4430e83c", // ragman
+    "5c0647fdd443bc2504c2d371"  // jaeger
 ];
-const traders_connected = 
-{
-    "54cb50c76803fa8b248b4571": "1_prapor", 	//prapor
-    "54cb57776803fa99248b456e": "2_therapist", 	//therapist
-    "579dc571d53a0658a154fbec": "3_fence", 		//fence
-    "58330581ace78e27b8b10cee": "4_skier", 		//skier
-    "5935c25fb3acc3127c3d8cd9": "5_peacekeeper",//peacekeeper
-    "5a7c2eca46aef81a7ca2145d": "6_mechanic", 	//mechanic
-    "5ac3b934156ae10c4430e83c": "7_ragman", 	//ragman
-    "5c0647fdd443bc2504c2d371": "8_jaeger", 	//jaeger
-    "8_PresetTrader": 			"8_PresetTrader",  		//Holds only weapon presets
-    "91_everythingTrader": 		"91_everythingTrader"  	//Holds all items
+const traders_connected = {
+    "54cb50c76803fa8b248b4571": "prapor", 	    // prapor
+    "54cb57776803fa99248b456e": "therapist", 	// therapist
+    "579dc571d53a0658a154fbec": "fence", 		// fence
+    "58330581ace78e27b8b10cee": "skier", 		// skier
+    "5935c25fb3acc3127c3d8cd9": "peacekeeper",  // peacekeeper
+    "5a7c2eca46aef81a7ca2145d": "mechanic", 	// mechanic
+    "5ac3b934156ae10c4430e83c": "ragman", 	    // ragman
+    "5c0647fdd443bc2504c2d371": "jaeger", 	    // jaeger
+    "preset": 			        "preset",  		// Holds only weapon presets
+    "everythingTrader": 		"everything"  	// Holds all items
 };
+
 var tradersDir = "database/configs/traders/";
 var assortDir = "database/configs/assort/";
 var traders = [];
@@ -74,7 +74,7 @@ function loadAssort(trader) {
 
 function get(id, flea = false) {
     // find the trader
-	if(id == "91_everythingTrader" && flea) 
+	if(id == "everything" && flea) 
     { // always return everything trader
 		return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(tradersDir + id + ".json"))};
 	} 
@@ -89,7 +89,7 @@ function get(id, flea = false) {
 }
 
 function getAssort(id, flea = false) {
-	if(id == "91_everythingTrader" && flea) { // always return everything trader
+	if(id == "everything" && flea) { // always return everything trader
 		return JSON.parse(utility.readJson(assortDir + id + ".json"));
 	} else {
 		return loadAssort(id);

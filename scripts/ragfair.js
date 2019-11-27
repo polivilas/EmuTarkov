@@ -1,11 +1,11 @@
 "use strict";
 
 require('./libs.js');
-const handbook = JSON.parse(utility.readJson('database/configs/templates.json'));
+const handbook = JSON.parse(utility.readJson(fileRoutes.others.templates));
 
 function getOffers(request) {
 
-    var response = JSON.parse(utility.readJson("database/configs/ragfair/search.json"));
+    var response = JSON.parse(utility.readJson(fileRoutes.ragfair.search));
 
     if( Object.entries(request.buildItems).length != 0 )
     {
@@ -205,7 +205,7 @@ function createOfferFromBuild(buildItems,response)
 
 function createOffer(template, price) 
 {
-    let offerBase = JSON.parse(utility.readJson("database/configs/ragfair/offerBase.json"));
+    let offerBase = JSON.parse(utility.readJson(fileRoutes.ragfair.offerBase));
     offerBase._id = template;
     offerBase.items[0]._tpl = template;
     offerBase.requirements[0].count = price;

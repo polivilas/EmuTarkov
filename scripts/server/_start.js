@@ -168,7 +168,7 @@ function start() {
 	
 	settings.server.backendUrl = "https://" + ip;
 	backendUrl = settings.server.backendUrl;
-	utility.writeJson("appdata/server.config.json", settings);
+	utility.writeJson(fileRoutes.server.config, settings);
 
 	// show our watermark
 	let text_1 = "JustEmuTarkov " + constants.serverVersion();

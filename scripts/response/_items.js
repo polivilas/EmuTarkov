@@ -3,9 +3,10 @@
 require('../libs.js');
 
 //// ---- FUNCTIONS BELOW ---- ////
+/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
 
 function prepareItems() {
-	if (!fs.existsSync("appdata/cache/cache_items.json")) {
+	if (!fs.existsSync(fileRoutes.cache.items)) {
 		console.log("rebuilding items cache...");
 
 		let itemsDir = ["database/configs/items/", "database/configs/items_modded/"];
@@ -33,11 +34,11 @@ function prepareItems() {
 
 		items_BaseJSON.data = items_data;
 		items = items_BaseJSON;
-		utility.writeJson("appdata/cache/cache_items.json", items_BaseJSON);
+		utility.writeJson(fileRoutes.cache.items, items_BaseJSON);
 		return items_BaseJSON;
 	} else {
 		if (items == "") {
-			return JSON.parse(utility.readJson("appdata/cache/cache_items.json"));
+			return JSON.parse(utility.readJson(fileRoutes.cache.items));
 		} else {
 			return items;
 		}

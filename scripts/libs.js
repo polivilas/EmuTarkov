@@ -13,8 +13,11 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	if (isFirstLaunch == "first") {
 		console.log("Main require() files loaded... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
+	
+	global.utility = require('./utility.js');					// utility, no other files required for it
+	global.fileRoutes = JSON.parse(utility.readJson("appdata/cache/fileRoutes.json"));
 
-	global.settings = JSON.parse( (fs.readFileSync("appdata/server.config.json", 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '') );
+	global.settings = JSON.parse(utility.readJson(fileRoutes.server.config));
 	global.ended_at = 0;
 	global.backendUrl = settings.server.backendUrl;
 	global.ip = settings.server.ip;
@@ -28,7 +31,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 		console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
 
-	global.utility = require('./utility.js');					// utility, no other files required for it
 	// Items
 	global.items_f = require('./response/_items.js');			// response/_locations
 	global.items = items_f.prepareItems();						// prepare items only once
@@ -75,11 +77,11 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	}
 
 	// yea this is tough but loads only once
-	global.names = JSON.parse(utility.readJson("database/configs/bots/botNames.json"));
-	global.botBase = JSON.parse(utility.readJson("database/configs/bots/botBase.json"));
+	global.names = JSON.parse(utility.readJson(fileRoutes.bots.names));
+	global.botBase = JSON.parse(utility.readJson(fileRoutes.bots.base));
 
-	global.globalSettings = JSON.parse(utility.readJson("database/configs/globals.json"));
-	global.customization_m = JSON.parse(utility.readJson("database/configs/customization/customization.json"));
+	global.globalSettings = JSON.parse(utility.readJson(fileRoutes.others.globals));
+	global.customization_m = JSON.parse(utility.readJson(fileRoutes.customization.customization));
 	
 	if (isFirstLaunch == "first") {
 		printf("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);

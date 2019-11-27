@@ -5,9 +5,10 @@ require('../libs.js');
 let quests = "";
 
 //// ---- FUNCTIONS BELOW ---- ////
+/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
 
 function prepareQuests() {
-	if (!fs.existsSync("appdata/cache/cache_quests.json")) {
+	if (!fs.existsSync(fileRoutes.cache.quests)) {
 		console.log("rebuilding quests cache...");
 
 		let questsDir = "database/configs/quests/";
@@ -25,11 +26,11 @@ function prepareQuests() {
 
 		quest_BaseJSON.data = quest_data;
 		quests = quest_BaseJSON;
-		utility.writeJson("appdata/cache/cache_quests.json", quest_BaseJSON);
+		utility.writeJson(fileRoutes.cache.quests, quest_BaseJSON);
 		return quest_BaseJSON;
 	} else {
 		if (quests == "") {
-			return JSON.parse(utility.readJson("appdata/cache/cache_quests.json"));
+			return JSON.parse(utility.readJson(fileRoutes.cache.quests));
 		} else {
 			return quests;
 		}

@@ -64,7 +64,7 @@ function getItems(url, info) {
 }
 
 function getGlobals(url, info) {
-    return utility.readJson('database/configs/globals.json');
+    return utility.readJson(fileRoutes.others.globals);
 }
 
 function getProfileData(url, info) {
@@ -88,7 +88,7 @@ function getLocations(url, info) {
 }
 
 function getTemplates(url, info) {
-    return utility.readJson('database/configs/templates.json');
+    return utility.readJson(fileRoutes.others.templates);
 }
 
 function getQuests(url, info) {
@@ -96,7 +96,7 @@ function getQuests(url, info) {
 }
 
 function getMetrics(url, info) {
-    return utility.readJson('database/configs/metricsConfig.json');
+    return utility.readJson(fileRoutes.others.metricsConfig);
 }
 
 function getBots(url, info) {
@@ -185,39 +185,39 @@ function setupConnection(url, info) {
 }
 
 function getCustomization(info) {
-    return utility.readJson('database/configs/customization/customization.json');
+    return utility.readJson(fileRoutes.customization.customization);
 }
 
 function getCustomizationOffers(url, info) {
-    return utility.readJson('database/configs/customization/offers.json');
+    return utility.readJson(fileRoutes.customization.offers.json);
 }
 
 function getAllCustomizationOffers(url, info) {
-    return utility.readJson('database/configs/customization/FenceOffers.json');
+    return utility.readJson(fileRoutes.customization.fenceOffers);
 }
 
 function getCustomizationStorage(url, info) {
-    return utility.readJson('database/configs/customization/storage.json');
+    return utility.readJson(fileRoutes.customization.storage);
 }
 
 function getHideoutRecipes(url, info) {
-    return utility.readJson('database/configs/hideout/production_recipes.json');
+    return utility.readJson(fileRoutes.hideout.productionRecipes);
 }
 
 function getHideoutSettings(url, info) {
-    return utility.readJson('database/configs/hideout/settings.json');
+    return utility.readJson(fileRoutes.hideout.settings);
 }
 
 function getHideoutAreas(url, info) {
-    return utility.readJson('database/configs/hideout/areas.json');
+    return utility.readJson(fileRoutes.hideout.areas);
 }
 
 function getScavcaseRecipes(url, info) {
-    return utility.readJson('database/configs/hideout/production_scavcase_recipes.json');
+    return utility.readJson(fileRoutes.hideout.productionScavcaseRecipes);
 }
 
 function getHandbookUserlist(url, info) {
-    return utility.readJson('database/configs/userBuilds.json');
+    return utility.readJson(fileRoutes.others.userBuilds);
 }
 
 function createNotifierChannel(url, info) {

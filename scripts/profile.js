@@ -3,7 +3,7 @@
 require("./libs.js");
 
 function getProfiles() {
-    return JSON.parse(utility.readJson("appdata/profiles/profiles.json"));
+    return JSON.parse(utility.readJson(fileRoutes.profiles.list));
 }
 
 function loadTraderStandings(playerData = "") {
@@ -429,7 +429,7 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
     item.resetOutput();
     let output = item.getOutput();
 
-    let tmpTrader = JSON.parse(utility.readJson("database/configs/assort/91_everythingTrader.json"));
+    let tmpTrader = JSON.parse(utility.readJson(fileRoutes.assorts.everything));
 
     for (let item of tmpTrader.data.items) {
         if (item._id === body.item_id) {
