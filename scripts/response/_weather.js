@@ -21,14 +21,14 @@ function change() {
     let time = utility.getTime().replace("-", ":").replace("-", ":");
     let date = utility.getDate();
     let datetime = date + " " + time;
-    let output = weathers[utility.getRandomInt(0, weathers.length - 1)].data;
+    let output = weathers[utility.getRandomInt(0, weathers.length - 1)];
 
     // replace date and time
-    output.weather.timestamp = Math.floor(new Date() / 1000);
-    output.weather.date = date;
-    output.weather.time = datetime;
-    output.date = date;
-    output.time = time;
+    output.data.weather.timestamp = Math.floor(new Date() / 1000);
+    output.data.weather.date = date;
+    output.data.weather.time = datetime;
+    output.data.date = date;
+    output.data.time = time;
 
     return JSON.stringify(output);
 }
