@@ -30,7 +30,7 @@ function change() {
     output.date = date;
     output.time = time;
 
-    return '{"err": 0, "errmsg": null, "data": ' + JSON.stringify(output) + '}';
+    return JSON.stringify(output);
 }
 
 //// ---- EXPORT LIST ---- ////
