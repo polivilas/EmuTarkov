@@ -13,23 +13,19 @@ function showIndex(url, info) {
     return index_f.index();
 }
 
+// FIXED - Inventory Displayer
 function showInventoryChecker(url, info) {
     let output = "";
 	let inv = itm_hf.recheckInventoryFreeSpace(profile.getCharacterData());
-    
     output += "<style>td{border:1px solid #aaa;}</style>Inventory Stash Usage:<br><table><tr><td>-</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9<br>";
-    
     for (let y = 0; y < inv.length; y++) {
         output += '<tr><td>' + y + "</td>";
-        
 		for (let x = 0; x < inv[0].length; x++) {
             output += '<td ' + ((inv[y][x] === 1)?'style="background:#aaa"':'') + '>' + inv[y][x] + "</td>";
-            output += "</tr>";
         }
-        
-        output += "</table>";
+        output += "</tr>";
     }
-
+    output += "</table>";
     return output;
 }
 

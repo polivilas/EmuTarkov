@@ -25,7 +25,7 @@ compile({
 	], function(err) {
 		console.log(">>>Compressing Executable...");
 		UPX('JustEmuTarkov-Server.exe')
-		.output('JustEmuTarkov-Server.exe')
+		.output('JustEmuTarkov-Server_compressed.exe')
 		.start().then(function(stats) {
 			console.log(stats);
 		}).catch(function (err) {
