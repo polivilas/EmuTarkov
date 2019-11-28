@@ -13,9 +13,6 @@ const dynamicTraders = {
     "5c0647fdd443bc2504c2d371": "jaeger", 	    // jaeger
 };
 
-var traders = [];
-var assorts = [];
-
 /* loadAllTraders - create getTraderList.json off it and return all response
 * input: null
 * output: "{err: 0, errmsg: null, data: [traderdata]}"
