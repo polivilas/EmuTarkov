@@ -1,7 +1,5 @@
 "use strict";
 
-/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
-
 const botNames = JSON.parse(utility.readJson(fileRoutes.bots.names));
 const botOutfits = JSON.parse(utility.readJson(fileRoutes.bots.outfits));
 const pmcbotVoices = ["Bear_1", "Bear_1", "Usec_1", "Usec_2", "Usec_3"];
@@ -62,9 +60,9 @@ function generateBotGeneric(botBase, role) {
 	let allInventories = [];
 
 	if (role == "marksman") {
-		allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/marksman.json"));
+		allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.marksman));
 	} else {
-		allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/assault.json"));
+		allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.assault));
 	}
 	
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
@@ -78,7 +76,7 @@ function generateRaider(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/pmcBot.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.pmcBot));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -90,7 +88,7 @@ function generateReshala(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setBossOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossBully.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.bossBully));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -102,7 +100,7 @@ function generateFollowerReshala(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerBully.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.followerBully));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -114,7 +112,7 @@ function generateKilla(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setBossOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKilla.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.bossKilla));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -126,7 +124,7 @@ function generateKojaniy(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setBossOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossKojaniy.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.bossKojaniy));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -138,7 +136,7 @@ function generateFollowerKojaniy(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerKojaniy.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.followerKojaniy));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -152,7 +150,7 @@ function generateGluhkar(botBase, role) {
 	// looks like the game randomize itself appearance
 	botBase.Customization = setBossOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/bossGluhar.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.bossGluhar));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -164,7 +162,7 @@ function generateFollowerGluharAssault(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharAssault.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.followerGluharAssault));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -176,7 +174,7 @@ function generateFollowerGluharSecurity(botBase, role) {
 	botBase.Health = setHealth(role);
 	botBase.Customization = setOutfit(role);
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharSecurity.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.followerGluharSecurity));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
@@ -189,7 +187,7 @@ function generateFollowerGluharScout(botBase, role) {
 	botBase.Customization = setOutfit(role);
 
 	
-	let allInventories = JSON.parse(utility.readJson("database/configs/bots/inventory/followerGluharScout.json"));
+	let allInventories = JSON.parse(utility.readJson(fileRoutes.bots.inventory.followerGluharScout));
 
 	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
 	return botBase;
