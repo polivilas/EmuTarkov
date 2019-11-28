@@ -39,6 +39,37 @@ function completeQuest(tmpList, body) { // -> Complete quest (need rework for gi
         {
             for (let reward of quest.rewards.Success) 
             {
+                switch(reward.type)
+                {
+
+                    case "Item":
+
+                        for(let rewardItem of reward.items)
+                        {
+                            if(rewardItem.parentId == "hideout" || rewardItem.parentId === undefined )
+                            {
+                                let newReq = {};
+                                newReq.item_id = item._tpl;
+                                newReq.count = reward.value;
+                    
+                                profile.addItemToStash(tmpList, newReq);
+                            }
+                            else
+                            {
+                                tmpList.Inventory.items.push(rewardItem);
+                            }
+                        }
+                        break;
+
+                    case "Experience":
+                        tmpList.data[0].Info.Experience += parseInt(reward.value);
+                        break;
+
+                    case "TraderStanding":
+                        break;
+
+                }
+                /*
                 let tmpTraderInfo = trader.get(reward.target);
                 if (tmpTraderInfo.err === 0) 
                 {
@@ -53,16 +84,15 @@ function completeQuest(tmpList, body) { // -> Complete quest (need rework for gi
                     }
 
                     tmpList.data[0].TraderStandings[reward.target].currentStanding += parseFloat(reward.value);
-
+                    
                 } else if (reward.type === "Experience") 
                 { // get Exp reward
                     tmpList.data[0].Info.Experience += parseInt(reward.value);
                 }
+                */
             }
         }
     }
-
-    //send reward to the profile : if quest_list.id === bodyqid then quest_list.succes
 
     profile.setCharacterData(tmpList);
 
