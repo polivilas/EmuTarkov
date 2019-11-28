@@ -1,4 +1,4 @@
-# JustEmuTarkov-Server
+# EmuTarkov-Server
 The Escape From Tarkov server emulator
 
 ## Getting started
