@@ -2,19 +2,7 @@
 
 require('./libs.js');
 
-/////////////////////////////////// TODO: REWRITE TO FULLY USE FILEROUTES.JSON ///////////////////////////////////
-
-const dynamicTraders = [
-    "54cb50c76803fa8b248b4571", // prapor
-    "54cb57776803fa99248b456e", // therapist
-    "579dc571d53a0658a154fbec", // fence
-    "58330581ace78e27b8b10cee", // skier
-    "5935c25fb3acc3127c3d8cd9", // peacekeeper
-    "5a7c2eca46aef81a7ca2145d", // mechanic
-    "5ac3b934156ae10c4430e83c", // ragman
-    "5c0647fdd443bc2504c2d371"  // jaeger
-];
-const connectedTraders = {
+const dynamicTraders = {
     "54cb50c76803fa8b248b4571": "prapor", 	    // prapor
     "54cb57776803fa99248b456e": "therapist", 	// therapist
     "579dc571d53a0658a154fbec": "fence", 		// fence
@@ -50,7 +38,7 @@ function checkTraders(file) {
 }
 
 function getTraderName(id) {
-    return ((typeof connectedTraders[id] != "undefined") ? connectedTraders[id] : id);
+    return ((typeof dynamicTraders[id] != "undefined") ? dynamicTraders[id] : id);
 }
 
 function get(id, flea = false) {
@@ -96,8 +84,13 @@ function setTrader(data) {
 function lvlUp(playerLvl) {
     let lvlUpTraders = [];
 
-    for (let dynTrader of dynamicTraders) {
-        let traderLoyality = get(dynTrader).data.loyalty;
+    for (let trader in fileRoutes.traders) {
+        // trader is not dynamic
+        if (!dynamicTraders.hasOwnProperty(trader)) {
+            continue;
+        }
+
+        let traderLoyality = get(trader).data.loyalty;
 
         // check traders from counting from 0
         if (traderLoyality.currentLevel < (Object.keys(traderLoyality.loyaltyLevels).length - 1)) {
@@ -109,10 +102,10 @@ function lvlUp(playerLvl) {
 
                 // lvl up trader
                 traderLoyality.currentLevel += 1;
-                get(dynTrader).data.loyalty = traderLoyality;
+                get(trader).data.loyalty = traderLoyality;
 
                 // add to return value
-                lvlUpTraders.push(dynTrader);
+                lvlUpTraders.push(trader);
             }
         }
     }
