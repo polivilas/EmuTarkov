@@ -57,7 +57,7 @@ function get(id, flea = false) {
     let selectedTrader = getTraderName(id);
 
     // find the trader
-	if (id == "everything" && flea) {
+	if (selectedTrader == "everything" && flea) {
 		return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(fileRoutes.traders.everything))};
 	} else {
 		if (fileRoutes.traders.hasOwnProperty(selectedTrader)) {
@@ -74,7 +74,7 @@ function getAssort(id, flea = false) {
     let selectedTrader = getTraderName(id);
 
     // always return everything trader
-	if (id == "everything" && flea) {
+	if (selectedTrader == "everything" && flea) {
 		return JSON.parse(utility.readJson(fileRoutes.assort.everything));
 	} else {
         if (fileRoutes.assort.hasOwnProperty(selectedTrader)) {
