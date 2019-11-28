@@ -81,6 +81,7 @@ function setTrader(data) {
 function lvlUp(playerLvl) {
     let lvlUpTraders = [];
 
+	/*
     for (let trader in fileRoutes.traders) {
         // trader is not dynamic
         if (!dynamicTraders.hasOwnProperty(trader)) {
@@ -106,6 +107,7 @@ function lvlUp(playerLvl) {
             }
         }
     }
+	*/
 
     return lvlUpTraders;
 }
