@@ -74,7 +74,7 @@ function getAssort(id, flea = false) {
     let selectedTrader = getTraderName(id);
 
     // always return everything trader
-	if (id == selectedTrader && flea) {
+	if (id == "everything" && flea) {
 		return JSON.parse(utility.readJson(fileRoutes.assort.everything));
 	} else {
         if (fileRoutes.assort.hasOwnProperty(selectedTrader)) {
