@@ -17,7 +17,6 @@ process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " +
 
 logger.start();
 server.start();
-trader.load();
 
 process.on('uncaughtException', (error, promise) => {
     console.log("[ERROR] Server: " + constants.serverVersion(), "red");

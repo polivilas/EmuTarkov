@@ -14,7 +14,7 @@ const dynamicTraders = [
     "5ac3b934156ae10c4430e83c", // ragman
     "5c0647fdd443bc2504c2d371"  // jaeger
 ];
-const traders_connected = {
+const connectedTraders = {
     "54cb50c76803fa8b248b4571": "prapor", 	    // prapor
     "54cb57776803fa99248b456e": "therapist", 	// therapist
     "579dc571d53a0658a154fbec": "fence", 		// fence
@@ -23,12 +23,8 @@ const traders_connected = {
     "5a7c2eca46aef81a7ca2145d": "mechanic", 	// mechanic
     "5ac3b934156ae10c4430e83c": "ragman", 	    // ragman
     "5c0647fdd443bc2504c2d371": "jaeger", 	    // jaeger
-    "preset": 			        "preset",  		// Holds only weapon presets
-    "everythingTrader": 		"everything"  	// Holds all items
 };
 
-var tradersDir = "database/configs/traders/";
-var assortDir = "database/configs/assort/";
 var traders = [];
 var assorts = [];
 
@@ -36,99 +32,96 @@ var assorts = [];
 * input: null
 * output: "{err: 0, errmsg: null, data: [traderdata]}"
 * */
-function loadAllTraders() 
-{
-    let traderFiles = fs.readdirSync(tradersDir);
-    let traders = []
+function loadAllTraders() {
+    let traders = [];
+
     // load trader files
-    for (let file in tradersDir) {
-        if (tradersDir.hasOwnProperty(file)) {
-            if (traderFiles[file] !== undefined) {
-                if (traderFiles.hasOwnProperty(file)) {
-                    if (checkTraders(traderFiles, file)) {
-                        traders.push(JSON.parse(utility.readJson(tradersDir + traderFiles[file])));
-                    }
-                }
-            }
+    for (let file in fileRoutes.traders) {
+        if (fileRoutes.traders.hasOwnProperty(file) && checkTraders(file)) {
+            traders.push(JSON.parse(utility.readJson(fileRoutes.traders[file])));
         }
     }
+
 	return {err: 0, errmsg: null, data: traders};
 }
 
-function checkTraders(traderFiles, file) {
-    return settings.debug.debugMode === true || ((settings.debug.debugMode === false || settings.debug.debugMode === undefined) && traderFiles[file] !== "everything.json");
+function checkTraders(file) {
+    return settings.debug.debugMode === true || ((settings.debug.debugMode === false || settings.debug.debugMode === undefined) && file !== "everything");
 }
 
-function loadAssort(trader) {
-    let assortFiles = fs.readdirSync(assortDir);
-	let selectedTrader = ((typeof traders_connected[trader] != "undefined")?traders_connected[trader]:trader);
-    // load assort files
-    for (let file in assortDir) {
-		if(assortFiles[file] == (selectedTrader + ".json")){
-			return JSON.parse(utility.readJson(assortDir + assortFiles[file]));
-		}
-    }
-	console.log("Couldn't find assort of ID " + trader, "white", "red");
-    return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
+function getTraderName(id) {
+    return ((typeof connectedTraders[id] != "undefined") ? connectedTraders[id] : id);
 }
 
 function get(id, flea = false) {
+    let selectedTrader = getTraderName(id);
+
     // find the trader
-	if(id == "everything" && flea) 
-    { // always return everything trader
-		return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(tradersDir + id + ".json"))};
-	} 
-    else 
-    {
-		if(typeof traders_connected[id] != "undefined")
-			return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(tradersDir + traders_connected[id] + ".json")) };
-	}
+	if (id == "everything" && flea) {
+		return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(fileRoutes.traders.everything))};
+	} else {
+		if (fileRoutes.traders.hasOwnProperty(selectedTrader)) {
+            return {err: 0, errmsg: "", data: JSON.parse(utility.readJson(fileRoutes.traders[selectedTrader]))};
+        }
+    }
+    
     // trader not found
     console.log("Couldn't find trader of ID " + id, "white", "red");
     return {err: 999, errmsg: "Couldn't find trader of ID " + id, data: null};
 }
 
 function getAssort(id, flea = false) {
-	if(id == "everything" && flea) { // always return everything trader
-		return JSON.parse(utility.readJson(assortDir + id + ".json"));
-	} else {
-		return loadAssort(id);
-	}
-}
+    let selectedTrader = getTraderName(id);
 
-function load() {
+    // always return everything trader
+	if (id == selectedTrader && flea) {
+		return JSON.parse(utility.readJson(fileRoutes.assort.everything));
+	} else {
+        if (fileRoutes.assort.hasOwnProperty(selectedTrader)) {
+            return JSON.parse(utility.readJson(fileRoutes.assort[selectedTrader]));
+        }
+    }
+    
+    // assort not found
+    console.log("Couldn't find assort of ID " + trader, "white", "red");
+    return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
 }
 
 function setTrader(data) {
-    return utility.writeJson(tradersDir + traders_connected[data._id] + ".json", data);
+    let selectedTrader = getTraderName(data._id);
+
+    return utility.writeJson(fileRoutes.traders[selectedTrader], data);
 }
 
 function lvlUp(playerLvl) {
     let lvlUpTraders = [];
+
     for (let dynTrader of dynamicTraders) {
         let traderLoyality = get(dynTrader).data.loyalty;
-        if (traderLoyality.currentLevel < (Object.keys(traderLoyality.loyaltyLevels).length - 1)) { //check traders from counting from 0
 
+        // check traders from counting from 0
+        if (traderLoyality.currentLevel < (Object.keys(traderLoyality.loyaltyLevels).length - 1)) {
             let newLvl = traderLoyality.currentLevel + 1;
+
             if ((playerLvl >= traderLoyality.loyaltyLevels[newLvl].minLevel) &&
                 (traderLoyality.currentSalesSum >= traderLoyality.loyaltyLevels[newLvl].minSalesSum) &&
                 (traderLoyality.currentStanding >= traderLoyality.loyaltyLevels[newLvl].minStanding)) {
+
                 // lvl up trader
                 traderLoyality.currentLevel += 1;
                 get(dynTrader).data.loyalty = traderLoyality;
+
                 // add to return value
                 lvlUpTraders.push(dynTrader);
             }
         }
     }
+
     return lvlUpTraders;
 }
 
 module.exports.loadAllTraders = loadAllTraders;
-//module.exports.getList = getList;
 module.exports.get = get;
 module.exports.getAssort = getAssort;
 module.exports.setTrader = setTrader;
-module.exports.load = load;
-//module.exports.getDynamicTraders = getDynamicTraders;
 module.exports.lvlUp = lvlUp;
