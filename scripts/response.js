@@ -185,11 +185,21 @@ function getCustomization(info) {
 }
 
 function getCustomizationOffers(url, info) {
-    return utility.readJson(fileRoutes.customization.offers.json);
+    
+    let tempoffers = [];
+    let allOffers = JSON.parse(utility.readJson(fileRoutes.customization.offers));
+    
+    for(let oneOffer of allOffers.data )
+    {
+        if(oneOffer.tid == "7_ragman"){ tempoffers.push(oneOffer); }
+    }
+
+    allOffers.data = tempoffers;
+    return JSON.stringify(allOffers);
 }
 
 function getAllCustomizationOffers(url, info) {
-    return utility.readJson(fileRoutes.customization.fenceOffers);
+    return utility.readJson(fileRoutes.customization.offers);
 }
 
 function getCustomizationStorage(url, info) {
