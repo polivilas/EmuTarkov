@@ -38,10 +38,34 @@ function updatePlayerHideout()
     let ply = profile.getCharacterData();
     if(ply !== undefined)
     {
-        let hideout_areas_config = JSON.parse( utility.readJson("database/configs/hideout/areas.json" ) );
+        let hideout_areas_config = JSON.parse( utility.readJson(fileRoutes.hideout.areas) );
 
         for(let prod in ply.data[0].Hideout.Production)//update production time
         { 
+            /* bitcoin farm : manage multiples bitcoins but fuck this shit
+            for(let keyObj of  Object.keys(ply.data[0].Hideout.Production) )
+            {
+                if(keyObj == '20')
+                {
+                    let time_elapsed = Math.floor( Date.now()/1000) - ply.data[0].Hideout.Production[prod].StartTime;
+                                       
+                    //then check what level of upgrade the player btc farm is
+                    //if lvl = 1 : do nothing
+                    //if level = 2 or 3 then see how many bitcoins are already farmed, 
+                    //then check time elapsed, and count how many bitcoins were farmed
+                    //if farm is full, cut the production "inProgreess" = false
+                }
+            }
+            */
+
+            /*
+                this need more checks too
+                if production need fuel, or generator turned on, check  both of these
+
+                if fuel = 0 then generator = disabled 
+                if production needs gennerator activated true, then check if generator activated == true
+
+            */
             let time_elapsed = Math.floor( Date.now()/1000) - ply.data[0].Hideout.Production[prod].StartTime;
             ply.data[0].Hideout.Production[prod].Progress = time_elapsed; 
         }

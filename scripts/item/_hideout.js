@@ -5,7 +5,7 @@ require('../libs.js');
 const hideout_areas_config = JSON.parse(utility.readJson(fileRoutes.hideout.areas));
 const crafting_receipes = JSON.parse(utility.readJson(fileRoutes.hideout.productionRecipes));
 
-/////////////////////////////////// TURN THIS FROM MOM SPAGHETTI TO LASAGNE CODE ///////////////////////////////////
+//dude don't blame my code, its the game who is spaghetti
 
 // upgrading can take times,the first step is to pay what needed for upgrade and start construction
 function HideoutUpgrade(tmplist,body) {
@@ -149,7 +149,7 @@ function HideoutScavCaseProductionStart(tmplist,body) {
 		}
 	}
 
-	let scavcase_receipes = JSON.parse( utility.readJson("database/configs/hideout/production_scavcase_recipes.json" ) );
+	let scavcase_receipes = JSON.parse( utility.readJson(fileRoutes.hideout.productionScavcaseRecipes) );
 
 	for (let receipe in scavcase_receipes.data) {	
 		if (body.recipeId == scavcase_receipes.data[receipe]._id) {
@@ -227,7 +227,7 @@ function HideoutTakeProduction(tmplist, body) {
 		}	
 	}
 
-	let allOutput = item.getOutput()
+	let allOutput = item.getOutput();
 
 	// its a scavcase production then manage it differently
 	if (found == false) {
