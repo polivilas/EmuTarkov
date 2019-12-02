@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-var AllQuests = quests;
+
 
 //// ---- FUNCTIONS BELOW ---- ////
 
@@ -24,32 +24,40 @@ function acceptQuest(tmpList, body) { // -> Accept quest
 
 }
 
-function completeQuest(tmpList, body) { // -> Complete quest (need rework for giving back quests)
-    for (let quest of tmpList.data[0].Quests) {
-        if (quest.qid === body.qid) {
+function completeQuest(tmpList, body) 
+{ // -> Complete quest (need rework for giving back quests)
+    
+    item.resetOutput();
+
+    for (let quest of tmpList.data[0].Quests) 
+    {
+        if (quest.qid === body.qid) 
+        {
             quest.status = 4;
+            profile.setCharacterData(tmpList);
+            tmpList = profile.getCharacterData();
             break;
         }
     }
+
     // find Quest data and update trader loyalty
-    for (let index in AllQuests.data)
+    for (let quest of quests.data)
     {
-		let quest = AllQuests.data[index];
         if (quest._id === body.qid) 
         {
             for (let reward of quest.rewards.Success) 
             {
                 switch(reward.type)
                 {
-
                     case "Item":
 
                         for(let rewardItem of reward.items)
                         {
+                            /*
                             if(rewardItem.parentId == "hideout" || rewardItem.parentId === undefined )
                             {
                                 let newReq = {};
-                                newReq.item_id = item._tpl;
+                                newReq.item_id = rewardItem._tpl;
                                 newReq.count = reward.value;
                     
                                 profile.addItemToStash(tmpList, newReq);
@@ -58,11 +66,23 @@ function completeQuest(tmpList, body) { // -> Complete quest (need rework for gi
                             {
                                 tmpList.Inventory.items.push(rewardItem);
                             }
+                            */
+
+                            let newReq = {};
+                            newReq.item_id = rewardItem._tpl;
+                            newReq.count = reward.value;
+                    
+                            profile.addItemToStash(tmpList, newReq);
+                            tmpList = profile.getCharacterData(); //update it everytime otherwise every given items are deleted
+
                         }
                         break;
 
                     case "Experience":
                         tmpList.data[0].Info.Experience += parseInt(reward.value);
+                        profile.setCharacterData(tmpList);
+                        tmpList = profile.getCharacterData();// update it because it will be overrided otherwise
+
                         break;
 
                     case "TraderStanding":
@@ -94,10 +114,8 @@ function completeQuest(tmpList, body) { // -> Complete quest (need rework for gi
         }
     }
 
-    profile.setCharacterData(tmpList);
-
-    item.resetOutput();
     return item.getOutput();
+     
 }
 
 function handoverQuest(tmpList, body) { // -> Quest handover items
