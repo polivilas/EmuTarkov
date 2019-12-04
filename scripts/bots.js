@@ -2,7 +2,7 @@
 
 const botNames = JSON.parse(utility.readJson(fileRoutes.bots.names));
 const botOutfits = JSON.parse(utility.readJson(fileRoutes.bots.outfits));
-const pmcbotVoices = ["Bear_1", "Bear_1", "Usec_1", "Usec_2", "Usec_3"];
+const pmcbotVoices = ["Bear_1", "Bear_2", "Usec_1", "Usec_2", "Usec_3"];
 
 const healthController = {		// controller storage health of each bot
 	"default": 					[35, 80, 70, 60, 60, 65, 65],
