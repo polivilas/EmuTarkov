@@ -4,7 +4,9 @@ const botNames = JSON.parse(utility.readJson(fileRoutes.bots.names));
 const botOutfits = JSON.parse(utility.readJson(fileRoutes.bots.outfits));
 const pmcbotVoices = ["Bear_1", "Bear_2", "Usec_1", "Usec_2", "Usec_3"];
 
-const healthController = {		// controller storage health of each bot
+// health of each bot
+const healthController = {
+	// "botType": [head, chest, stomach, leftarm, rightarm, leftleg, rightleg]
 	"default": 					[35, 80, 70, 60, 60, 65, 65],
 	"bossBully": 				[62, 138, 120, 100, 100, 110, 110],
 	"followerBully": 			[50, 110, 100, 80, 80, 85, 85],
@@ -18,6 +20,7 @@ const healthController = {		// controller storage health of each bot
 };
 
 const bossOutfit = {
+	// "botType": [head, body, feet, hands]
 	"bossBully": ["5d28b01486f77429242fc898", "5d28adcb86f77429242fc893", "5d28b3a186f7747f7e69ab8c", "5cc2e68f14c02e28b47de290"],
 	"bossKilla": ["5d28b03e86f7747f7e69ab8a", "5cdea33e7d6c8b0474535dac", "5cdea3c47d6c8b0475341734", "5cc2e68f14c02e28b47de290"],
 	"bossKojaniy": ["5d5f8ba486f77431254e7fd2", "5d5e7c9186f774393602d6f9", "5d5e7f3c86f7742797262063", "5cc2e68f14c02e28b47de290"],
