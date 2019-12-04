@@ -134,19 +134,16 @@ function handleRequest(req, resp) {
 					body = ((body !== null && body != "" && body != "{}")?body.toString():"{}");
 
 					// get the IP address of the client
-					//let IP = "[" + req.connection.remoteAddress.replace("::ffff:","") + "]";
-					let URL = "" + req.url + "";//"[Req:" + req.url + "]";
+					let URL = "" + req.url + "";
 					let displayBody = ((settings.debug.debugMode === true)?body:"");
-					console.log(URL + " -> " + displayBody, "cyan");
+					console.log("[" + constants.getActiveID() + "][" + IP + "] " + URL + " -> " + displayBody, "cyan");
 
 					sendResponse(req, resp, body);
 				});
 			}
 		});
 	} else {
-		//let IP = "[" + req.connection.remoteAddress.replace("::ffff:","") + "]";
-
-		console.log(req.url, "cyan");
+		console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");
 		sendResponse(req, resp, null);
 	}
 }
