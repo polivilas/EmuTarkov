@@ -51,7 +51,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.repair_f = require('./response/_repair.js');				// response/_repair
 	global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
 	global.rpc = require('./rpc.js');
-	global.response = require('./response.js');					// response
 	global.server = require('./server/_start.js');					// server/_start
 	global.constants = require('./server/_constants.js');			// server/_constants
 	global.header_f = require('./server/_sendHeader.js');			// server/_sendHeader
@@ -71,6 +70,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.item = require('./item.js');							// items
 	global.trader = require('./trader.js');						// trader
 	global.ragfair = require('./ragfair.js');					// ragfair
+	global.response = require('./response.js');					// response
 	
 	if (isFirstLaunch == "first") {
 		printf("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);

@@ -29,8 +29,7 @@
     },
     "customization": {
         "customization": "database/configs/customization/customization.json",
-        "offers": "database/configs/customization/offers.json",
-        "storage": "database/configs/customization/storage.json"
+        "offers": "database/configs/customization/offers.json"
     },
     "hideout": {
         "areas": "database/configs/hideout/areas.json",
@@ -66,8 +65,10 @@
         "quests": "appdata/cache/quests.json"
     },
     "profiles": {
-        "list": "appdata/profiles/profiles.json",
-        "character_0": "appdata/profiles/character_0.json"
+        "list": "appdata/profiles/list.json",
+        "character": "appdata/profiles/replaceme/character.json",
+        "storage": "appdata/profiles/replaceme/storage.json",
+        "userBuilds": "appdata/profiles/replaceme/userBuilds.json"
     },
     "server": {
         "config": "appdata/server.config.json"
@@ -78,7 +79,6 @@
         "locationsBase": "database/configs/locationsBase.json",
         "metricsConfig": "database/configs/metricsConfig.json",
         "offlineProgressionReplacer": "database/configs/offlineProgressionReplacer.json",
-        "templates": "database/configs/templates.json",
-        "userBuilds": "database/configs/userBuilds.json"
+        "templates": "database/configs/templates.json"
     }
 }

@@ -97,7 +97,6 @@ function handleRequest(req, resp) {
 
 		// received data
 		let IP = req.connection.remoteAddress.replace("::ffff:","");
-		let URL = "[Req:" + req.url + "]";
 
         req.on('data', function (data) {
             // prevent flood attack
@@ -114,8 +113,6 @@ function handleRequest(req, resp) {
 					//get aid from requested profile and set it to active profile
 					constants.setActiveID(parseBody.aid);
 
-					let profile_data = utility.readJson(parseBody.game + "\\SavedProfile.json");
-
 					// get the IP address of the client
 					console.log("[SAVE_PROFILE][ProfileID:" + parseBody.aid + "]" + ActiveProfile, "cyan");
 
@@ -130,7 +127,6 @@ function handleRequest(req, resp) {
 			} else {
 				// extract data
 				zlib.inflate(data, function(err, body) {
-					// SHOW BODY ONLY ON POST REQUESTS AND IF NOT SAVE PROGRESS
 					body = ((body !== null && body != "" && body != "{}")?body.toString():"{}");
 
 					// get the IP address of the client

@@ -189,9 +189,10 @@ function getCustomizationOffers(url, info) {
     let tempoffers = [];
     let allOffers = JSON.parse(utility.readJson(fileRoutes.customization.offers));
     
-    for(let oneOffer of allOffers.data )
-    {
-        if(oneOffer.tid == "7_ragman"){ tempoffers.push(oneOffer); }
+    for (let oneOffer of allOffers.data) {
+        if (oneOffer.tid == "7_ragman") {
+            tempoffers.push(oneOffer);
+        }
     }
 
     allOffers.data = tempoffers;
@@ -203,7 +204,7 @@ function getAllCustomizationOffers(url, info) {
 }
 
 function getCustomizationStorage(url, info) {
-    return utility.readJson(fileRoutes.customization.storage);
+    return utility.readJson(customization_f.getCustomizationStoragePath());
 }
 
 function getHideoutRecipes(url, info) {
@@ -223,7 +224,7 @@ function getScavcaseRecipes(url, info) {
 }
 
 function getHandbookUserlist(url, info) {
-    return utility.readJson(fileRoutes.others.userBuilds);
+    return utility.readJson(weaponBuilds_f.getUserBuildsPath());
 }
 
 function createNotifierChannel(url, info) {

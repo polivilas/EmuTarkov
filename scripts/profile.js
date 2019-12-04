@@ -6,15 +6,24 @@ function getProfiles() {
     return JSON.parse(utility.readJson(fileRoutes.profiles.list));
 }
 
+function getProfileDataPath() {
+    let profilePath = fileRoutes.profiles.character;
+    return profilePath.replace("replaceme", constants.getActiveID());
+}
+
 function loadTraderStandings(playerData = "") {
     // get profile Data
-	let profileData = playerData;
-	if(playerData == "")
-		profileData = getCharacterData();
+    let profileData = playerData;
+    
+	if (playerData == "") {
+        profileData = getCharacterData();
+    }
 	
     let profileCharData = profileData.data[1];
+
     // get trader data and update by profile info
     let dynTrader;
+
     // Check if trader standing data exists
     /*if (profileCharData.hasOwnProperty("TraderStandings")) {
         for (dynTrader of trader.getDynamicTraders()) {
@@ -44,14 +53,17 @@ function loadTraderStandings(playerData = "") {
         profileData.data[1] = profileCharData;
         setCharacterData(profileData);
     }*/
-	if(playerData != "")
-		return profileData;
+
+	if (playerData != "") {
+        return profileData;
+    }
 }
 
 function saveProfileProgress(offRaidData) {
     let profile_data = JSON.parse(utility.readJson(offRaidData.game + "\\SavedProfile.json"));
     let offRaidProfile = profile_data;
     let currentProfile = getCharacterData();
+
     //replace data below
     currentProfile.data[1].Info.Experience = offRaidProfile.Info.Experience;
     currentProfile.data[1].Info.Level = offRaidProfile.Info.Level;
@@ -65,16 +77,17 @@ function saveProfileProgress(offRaidData) {
     currentProfile.data[1].Quests = offRaidProfile.Quests;
     //currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
 
-
     //work with a string instead of looping through data, less code, less ressources, faster
-    var string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
+    let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
     //replace all these GClasses shit
     let replaceConfig = JSON.parse(utility.readJson("database/configs/offlineProgressionReplacer.json"));
-    var keys = Object.keys(replaceConfig);
+    let keys = Object.keys(replaceConfig);
+    
     for (let iterate = 0; iterate < keys.length; iterate++) {
         string_inventory = string_inventory.replace(new RegExp(keys[iterate], 'g'), replaceConfig[keys[iterate]]);
     }
+
     /* version 3333 - offlineProgressionReplacer.json
     {
         "GClass798": "Sight",
@@ -106,10 +119,12 @@ function saveProfileProgress(offRaidData) {
             ) {
                 let old_id = offRaidProfile.Inventory.items[recalID]._id;
                 let new_id = utility.generateNewItemId();
+
                 string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
             }
         }
     }
+
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
     //remove previous equippement & other, KEEP ONLY THE STASH
@@ -131,6 +146,7 @@ function saveProfileProgress(offRaidData) {
     //but if the player get killed, he loose almost everything
     if (offRaidData.status !== "Survived" && offRaidData.status !== "Runner") {
         let inventoryitem;
+
         for (inventoryitem in currentProfile.data[1].Inventory.items) {
             if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === currentProfile.data[1].Inventory.equipment
                 && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
@@ -155,39 +171,40 @@ function saveProfileProgress(offRaidData) {
         }
 
         //finally delete them
-        for (var item_to_delete in items_to_delete) {
+        for (let item_to_delete in items_to_delete) {
             move_f.removeItem(currentProfile, {Action: 'Remove', item: items_to_delete[item_to_delete]});
         }
     }
+
     utility.writeJson(offRaidData.game + "\\SavedProfile.json", "{}");
     setCharacterData(currentProfile);
 }
 
 function getCharacterData() {
     // create full profile data from simplified character data
-    let playerData = JSON.parse(
-        utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json")
-    );
+    let playerData = JSON.parse(utility.readJson(getProfileDataPath()));
     let scavData = bots.generatePlayerScav();
+    
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
+
     let ret = {err: 0, errmsg: null, data: []};
+    
     ret.data.push(playerData);
     ret.data.push(scavData);
  	//ret = loadTraderStandings(ret);
-   return ret;
+    return ret;
 }
 
 function getStashType() {
-    let temp = JSON.parse(
-        utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json")
-    );
+    let temp = JSON.parse(utility.readJson(getProfileDataPath()));
+    
     for (let key in temp.Inventory.items) {
-        if (temp.Inventory.items.hasOwnProperty(key)) {
-            if (temp.Inventory.items[key]._id === temp.Inventory.stash)
-                return temp.Inventory.items[key]._tpl;
+        if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
+            return temp.Inventory.items[key]._tpl;
         }
     }
+
     console.log("Not found Stash: error check character.json", "red");
     return "NotFound Error";
 }
@@ -196,31 +213,31 @@ function setCharacterData(data) {
     if (typeof data.data !== "undefined") {
         data = data.data[0];
     }
-    utility.writeJson("appdata/profiles/character_" + constants.getActiveID() + ".json", data);
+
+    utility.writeJson(getProfileDataPath(), data);
 }
 
 function addChildPrice(data, parentID, childPrice) {
     for (let invItems in data) {
-        if (data.hasOwnProperty(invItems)) {
-            if (data[invItems]._id === parentID) {
-                if (data[invItems].hasOwnProperty("childPrice")) {
-                    data[invItems].childPrice += childPrice;
-                } else {
-                    data[invItems].childPrice = childPrice;
-                    break;
-                }
+        if (data.hasOwnProperty(invItems) && data[invItems]._id === parentID) {
+            if (data[invItems].hasOwnProperty("childPrice")) {
+                data[invItems].childPrice += childPrice;
+            } else {
+                data[invItems].childPrice = childPrice;
+                break;
             }
         }
     }
+
     return data;
 }
 
 function getPurchasesData() {
-    //themaoci fix for offline raid selling ;) selling for 0.9 times of regular price for now
-    //load files
     let multiplier = 0.9;
-    let data = JSON.parse( utility.readJson("appdata/profiles/character_" + constants.getActiveID() + ".json") );
+    let data = JSON.parse(utility.readJson(getProfileDataPath()));
+    
     items = items_f.prepareItems();
+
     //prepared vars
     let equipment = data.Inventory.equipment;
     let stash = data.Inventory.stash;
@@ -254,16 +271,8 @@ function getPurchasesData() {
                         data[invItems].parentId !== questStashItems
                     ) {
                         let templateId = data[invItems]._tpl;
-                        let itemCount =
-                            typeof data[invItems].upd !== "undefined"
-                                ? typeof data[invItems].upd.StackObjectsCount !== "undefined"
-                                ? data[invItems].upd.StackObjectsCount
-                                : 1
-                                : 1;
-                        let basePrice =
-                            items.data[templateId]._props.CreditsPrice >= 1
-                                ? items.data[templateId]._props.CreditsPrice
-                                : 1;
+                        let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
+                        let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
                         data = addChildPrice(
                             data,
                             data[invItems].parentId,
@@ -275,8 +284,10 @@ function getPurchasesData() {
         }
     }
 
-    let purchaseOutput = '{"err": 0,"errmsg":null,"data":{'; //start output string here
+    //start output string here
+    let purchaseOutput = '{"err": 0,"errmsg":null,"data":{';
     let i = 0;
+
     for (let invItems in data) {
         if (data.hasOwnProperty(invItems)) {
             if (
@@ -291,59 +302,35 @@ function getPurchasesData() {
                 } else {
                     i++;
                 }
-                let itemCount =
-                    typeof data[invItems].upd !== "undefined"
-                        ? typeof data[invItems].upd.StackObjectsCount !== "undefined"
-                        ? data[invItems].upd.StackObjectsCount
-                        : 1
-                        : 1;
+
+                let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
                 let templateId = data[invItems]._tpl;
-                let basePrice =
-                    items.data[templateId]._props.CreditsPrice >= 1
-                        ? items.data[templateId]._props.CreditsPrice
-                        : 1;
+                let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
+
                 if (data[invItems].hasOwnProperty("childPrice")) {
                     basePrice += data[invItems].childPrice;
                 }
+
                 let preparePrice = basePrice * multiplier * itemCount;
-                preparePrice = preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1;
-                purchaseOutput +=
-                    '"' +
-                    data[invItems]._id +
-                    '":[[{"_tpl": "' +
-                    data[invItems]._tpl +
-                    '","count": ' +
-                    preparePrice.toFixed(0) +
-                    "}]]";
+
+                preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
+                purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' +  data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
             }
         }
     }
+
     purchaseOutput += "}}"; // end output string here
     return purchaseOutput;
 }
 
-function findID(ID) {
-    let profiles = getProfiles();
-    for (let profile of profiles) {
-        if (profile.id === ID) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function exist(info) {
     let profiles = getProfiles();
+
     for (let profile of profiles) {
-        if (info.email === profile.email) {
-            if (
-                info.pass === profile.password ||
-                info.pass === profile.password_md5
-            ) {
-                return profile.id;
-            } else {
-                return -3;
-            }
+        if (info.email === profile.email && info.pass === profile.password) {
+            return profile.id;
+        } else {
+            return -3;
         }
     }
 
@@ -354,9 +341,8 @@ function nicknameExist(info) {
     let profiles = getProfiles();
 
     for (let i = 0; i < profiles.length; i++) {
-        let profile = JSON.parse(
-            utility.readJson("appdata/profiles/character_" + i + ".json")
-        );
+        let profile = JSON.parse(utility.readJson(getProfileDataPath()));
+
         if (profile.Info.Nickname === info.nickname) {
             return true;
         }
@@ -367,6 +353,7 @@ function nicknameExist(info) {
 
 function changeNickname(info) {
     let tmpList = getCharacterData();
+
     // check if the nickname exists
     if (nicknameExist(info)) {
         return '{"err":225, "errmsg":"this nickname is already in use", "data":null}';
@@ -375,51 +362,32 @@ function changeNickname(info) {
     // change nickname
     tmpList.data[0].Info.Nickname = info.nickname;
     tmpList.data[0].Info.LowerNickname = info.nickname.toLowerCase();
-
     setCharacterData(tmpList);
-    return (
-        '{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' +
-        Math.floor(new Date() / 1000) +
-        "}}"
-    );
+    return ('{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + "}}");
 }
 
 function changeVoice(info) {
     let tmpList = getCharacterData();
 
     tmpList.data[0].Info.Voice = info.voice;
-
     setCharacterData(tmpList);
 }
 
 function find(info, backendUrl) {
     let ID = exist(info);
 
-    // profile doesn't exist
     if (ID === -1) {
         return '{"err":206, "errmsg":"account not found", "data":null}';
     }
+
     if (ID === -3) {
         return '{"err":206, "errmsg":"wrong password", "data":null}';
     }
-    constants.setActiveID(ID);
-    return (
-        '{"err":0, "errmsg":null, "data":{"token":"token_' +
-        ID +
-        '", "aid":' +
-        ID +
-        ', "lang":"en", "languages":{"en": "English","ru": "Русский","de": "Deutsch"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"' +
-        backendUrl +
-        '", "Messaging":"' +
-        backendUrl +
-        '", "Main":"' +
-        backendUrl +
-        '", "RagFair":"' +
-        backendUrl +
-        '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}'
-    );
-}
 
+    constants.setActiveID(ID);
+    
+    return ('{"err":0, "errmsg":null, "data":{"token":"token_' + ID + '", "aid":' + ID + ', "lang":"en", "languages":{"en": "English","ru": "Русский","de": "Deutsch"}, "ndaFree":true, "queued":false, "taxonomy":341, "activeProfileId":"5c71b934354682353958e984", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}');
+}
 
 function addItemToStash(tmpList, body, trad = "")// Buying item from trader
 { 

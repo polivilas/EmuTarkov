@@ -3,6 +3,11 @@
 require('../libs.js');
 
 //// ---- FUNCTIONS BELOW ---- ////
+function getCustomizationStoragePath() {
+	let storagePath = fileRoutes.profiles.storage;
+	return storagePath.replace("replaceme", constants.getActiveID());
+}
+
 function wearClothing(tmpList, body) {
 	// in case there is more suites to be wear
 	for (let i = 0; i < body.suites.length; i++) {
@@ -32,7 +37,7 @@ function buyClothing(tmpList, body) {
 
 	let output = item.getOutput();
 	let item_toPay = body.items;
-	let customization_storage = JSON.parse( utility.readJson(fileRoutes.customization.storage));
+	let customization_storage = JSON.parse(utility.readJson(getCustomizationStoragePath()));
 
 	for (let i = 0; i < item_toPay.length; i++) {
 		for (let item in tmpList.data[0].Inventory.items) {
@@ -65,11 +70,12 @@ function buyClothing(tmpList, body) {
 		}
 	}
 
-	utility.writeJson(fileRoutes.customization.storage, customization_storage);
+	utility.writeJson(getCustomizationStoragePath(), customization_storage);
 	profile.setCharacterData(tmpList);
 	return output;
 }
 
 //// ---- EXPORT LIST ---- ////
+module.exports.getCustomizationStoragePath = getCustomizationStoragePath;
 module.exports.wearClothing = wearClothing;
 module.exports.buyClothing = buyClothing;
