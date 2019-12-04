@@ -225,8 +225,7 @@ function generate(databots) {
 			bot.Info.Settings.BotDifficulty = condition.Difficulty;
 			bot.Info.Voice = "Scav_" + utility.getRandomIntEx(6);
 
-			if (typeof staticRoutes[condition.Role] !== "undefined") 
-			{	
+			if (typeof staticRoutes[condition.Role] !== "undefined") {	
 				bot = staticRoutes[condition.Role](bot, condition.Role);
 				generatedBots.unshift(bot);
 			}
