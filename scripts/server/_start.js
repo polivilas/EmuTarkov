@@ -83,12 +83,14 @@ function sendResponse(req, resp, body) {
 
 function handleRequest(req, resp) {
 	// separate request in the log
+
 	if (settings.debug.showSeparator === true) {
 		logger.separator();
 	}
 	
 	let ActiveProfile = "";
-
+	let IP = req.connection.remoteAddress.replace("::ffff:","");
+	
 	if (req.method == "POST") {
 		if (req.url != "/OfflineRaidSave") {
 			constants.setActiveID(getCookies(req)['PHPSESSID']);
@@ -96,7 +98,7 @@ function handleRequest(req, resp) {
 		}
 
 		// received data
-		let IP = req.connection.remoteAddress.replace("::ffff:","");
+		
 
         req.on('data', function (data) {
             // prevent flood attack
