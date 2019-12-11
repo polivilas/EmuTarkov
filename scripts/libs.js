@@ -67,6 +67,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.customization_f = require('./item/_customization.js');	// item/_customization
 	global.hideout_f = require('./item/_hideout.js'); 				// item/_hideout
 	global.weaponBuilds_f = require('./item/_weaponBuilds.js'); 	// item/_weaponBuilds
+	global.examine_f = require('./item/_examine.js');		// item/_examine
 	global.item = require('./item.js');							// items
 	global.trader = require('./trader.js');						// trader
 	global.ragfair = require('./ragfair.js');					// ragfair
