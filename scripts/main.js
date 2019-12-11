@@ -1,5 +1,8 @@
 "use strict";
 
+// set encoding, has to be set before anything else
+process.stdout.setEncoding('utf8');
+
 let isFirstLaunch = "first";
 let start0 = new Date();
 console.log('[Starting Application]','','');

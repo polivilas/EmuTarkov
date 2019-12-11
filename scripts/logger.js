@@ -99,9 +99,6 @@ function start() {
     }
 
     fileStream = fs.createWriteStream(filepath, {flags: 'w'});
-
-    // set encoding
-    process.stdout.setEncoding('utf8');
 }
 
 module.exports.separator = separator;
