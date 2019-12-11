@@ -51,6 +51,7 @@ function setupRoutes() {
     addStaticRoute("RagFairBuyOffer", trade_f.confirmRagfairTrading);
     addStaticRoute("CustomizationWear", customization_f.wearClothing);
     addStaticRoute("CustomizationBuy", customization_f.buyClothing);
+    addStaticRoute("ExamineItem", examine_f.examineItem);
 }
 
 // --------------------------------------------------------------------------------------------------------------------- //
