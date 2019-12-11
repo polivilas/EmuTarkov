@@ -52,6 +52,7 @@ function setupRoutes() {
     addStaticRoute("CustomizationWear", customization_f.wearClothing);
     addStaticRoute("CustomizationBuy", customization_f.buyClothing);
     addStaticRoute("Examine", examine_f.examineItem);
+    addStaticRoute("ReadEncyclopedia", examine_f.readEncyclopedia);
 }
 
 // --------------------------------------------------------------------------------------------------------------------- //
@@ -60,6 +61,7 @@ function setupRoutes() {
 function getOutput() { // get output to client
     return output;
 }
+
 function setOutput(data) { // get output to client
     output = data;
 }

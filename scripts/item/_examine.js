@@ -9,4 +9,9 @@ function examineItem(tmpList, body) {
 	return "OK";
 }
 
+function readEncyclopedia(tmpList, body) {
+	return "OK";
+}
+
 module.exports.examineItem = examineItem;
+module.exports.readEncyclopedia = readEncyclopedia;
