@@ -5,8 +5,9 @@ const profile = require('../profile.js');
 
 function examineItem(tmpList, body) {
 	for (let item of tmpList.data[0].Inventory.items) {
-		if (item._id == body.id) {
+		if (item._id == body.id && tmpList.data[0].Encyclopedia[item._tpl] == undefined) {
 			tmpList.data[0].Encyclopedia[item._tpl] = true;
+			// tmpList.data[0].Info.Experience += json.parse(json.read("db/items/" + item._tpl + ".json"))._props.ExaminedExperience;
 			break;
 		}
 	}
