@@ -6,7 +6,7 @@ const profile = require('../profile.js');
 function examineItem(tmpList, body) {
 	for (let item of tmpList.data[0].Inventory.items) {
 		if (item._id == body.id) {
-			tmpList.data[0].Encyclopedia[item._tpl] = false;
+			tmpList.data[0].Encyclopedia[item._tpl] = true;
 			break;
 		}
 	}
