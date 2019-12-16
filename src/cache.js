@@ -31,6 +31,10 @@ function setFilePath(type, fileName, filePath) {
 }
 
 function exist() {
+    if (settings.debug.rebuildCache) {
+        return false;
+    }
+
     if (!fs.existsSync("user/cache/filepaths.json")) {
         return false;
     }
@@ -85,6 +89,11 @@ function genericCacher(type, basepath, cachename) {
 
             case "items":
                 fileName = fileData._id;
+
+                if (settings.debug.examinedByDefault) {
+                    fileData._props.ExaminedByDefault = true;
+                }
+
                 base.data[fileName] = fileData;
                 break;
 

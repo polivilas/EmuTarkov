@@ -154,6 +154,7 @@ function start() {
 	// set the ip and backendurl 
 	port = settings.server.port;
 	ip = settings.server.ip;
+	settings.debug.rebuildCache = false;
 	
 	if (settings.server.generateIp == true) {
         ip = utility.getLocalIpAddress();

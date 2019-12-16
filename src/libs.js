@@ -21,6 +21,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	// setup cache
 	global.cache = require('./cache.js');
 	global.filepaths = json.parse(json.read("db/cache/filepaths.json"));
+	global.settings = json.parse(json.read("user/server.config.json"));
 
 	if (!cache.exist()) {
 		console.log("Cache doesn't exist");
@@ -30,7 +31,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.filepaths = json.parse(json.read("user/cache/filepaths.json"));
 
 	// setup server
-	global.settings = json.parse(json.read(filepaths.user.config));
 	global.ended_at = 0;
 	global.backendUrl = settings.server.backendUrl;
 	global.ip = settings.server.ip;
