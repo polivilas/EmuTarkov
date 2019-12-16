@@ -1,2 +1,3 @@
 @echo off
-npm run test
+node dev/src/test.js
+pause

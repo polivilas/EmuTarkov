@@ -1,2 +1,3 @@
 @echo off
-npm run start
+node src/main.js
+pause

@@ -5,7 +5,7 @@ const { compile } = require('nexe');
 // compile the application
 console.log(">>>STARTING BUILD...");
 compile({
-	input: 'scripts/main.js',
+	input: 'src/main.js',
     	output: 'EmuTarkov-Server',
 	build: false,
 	ico: 'dev/res/icon.ico'
@@ -25,7 +25,7 @@ compile({
 	], function(err) {
 		console.log(">>>Compressing Executable...");
 		UPX('EmuTarkov-Server.exe')
-		.output('EmuTarkov-Server_compressed.exe')
+		.output('EmuTarkov-Server-Compressed.exe')
 		.start().then(function(stats) {
 			console.log(stats);
 		}).catch(function (err) {

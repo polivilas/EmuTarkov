@@ -1,2 +1,3 @@
 @echo off
-npm run build
+node dev/src/build.js
+pause

@@ -108,7 +108,7 @@ async function testServer(){
 	/* 22	*/	'{}'//,
 	/* 	*/	//'{}'
 	];
-	let settings = JSON.parse(readJson(__dirname + "/../../appdata/server.config.json"));
+	let settings = JSON.parse(readJson(__dirname + "/../../user/server.config.json"));
 	const url = settings.server.ip;
 	const port = settings.server.port;
 	for(let i = 0; i < path.length; i++){
