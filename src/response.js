@@ -261,7 +261,7 @@ function getCustomizationOffers(url, info) {
     let allOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
     
     for (let oneOffer of allOffers.data) {
-        if (oneOffer.tid == "7_ragman") {
+        if (oneOffer.tid == "5ac3b934156ae10c4430e83c") {
             tempoffers.push(oneOffer);
         }
     }
