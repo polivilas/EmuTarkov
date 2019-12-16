@@ -4,7 +4,6 @@ require('./libs.js');
 const handbook = json.parse(json.read(filepaths.user.cache.templates));
 
 function getOffers(request) {
-
     var response = json.parse(json.read(filepaths.ragfair.search));
 
     if( Object.entries(request.buildItems).length != 0 )
@@ -205,7 +204,7 @@ function createOfferFromBuild(buildItems,response)
 
 function createOffer(template, price) 
 {
-    let offerBase = json.parse(json.read(filepaths.ragfair.offerBase));
+    let offerBase = json.parse(json.read(filepaths.ragfair.offer));
     offerBase._id = template;
     offerBase.items[0]._tpl = template;
     offerBase.requirements[0].count = price;
