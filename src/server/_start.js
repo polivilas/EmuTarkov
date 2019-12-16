@@ -48,18 +48,19 @@ function sendResponse(req, resp, body) {
 	}
 
 	if (output === "IMAGE") {
+		let splittedUrl = req.url.split("/");
+		let file = splittedUrl[file.length - 1].replace(".jpg", "").replace(".png", "");
 		let filepath = "";
-		let file = req.url.replace(settings.server.backendUrl, "").replace("/files/trader/avatar/", "").replace(".jpg", "").replace(".png", "");
 
 		if (req.url.includes("/quest")) {
 			console.log("[IMG.quests]:" + req.url);
-			filepath = filepaths.quest.banners[file];
+			filepath = filepaths.images.quest[file];
 		} else if (req.url.includes("/handbook")) {
 			console.log("[IMG.handbook]:" + req.url);
-			filepath = filepaths.handbook.banners[file];
+			filepath = filepaths.images.handbook[file];
 		} else if (req.url.includes("/avatar")) {
 			console.log("[IMG.trader]:" + req.url);
-			filepath = filepaths.trader.banners[file];
+			filepath = filepaths.images.trader[file];
 		} else if (req.url.includes("/banners")) {
 			console.log("[IMG.banners]:" + req.url);
 			filepath = filepaths.images.banners[file];
