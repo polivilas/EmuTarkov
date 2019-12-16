@@ -48,11 +48,8 @@ function sendResponse(req, resp, body) {
 	}
 
 	if (output === "IMAGE") {
-		let url_array = req.url.split("/");
 		let filepath = "";
-		let file = url_array[url_array.length-1];
-		
-		file = file.replace(".jpg", "").replace(".png", "");
+		let file = req.url.replace("/files/trader/avatar/", "").replace(".jpg", "").replace(".png", "");
 
 		if (req.url.includes("/quest")) {
 			console.log("[IMG.quests]:" + req.url);
