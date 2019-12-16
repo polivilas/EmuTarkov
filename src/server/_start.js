@@ -49,7 +49,7 @@ function sendResponse(req, resp, body) {
 
 	if (output === "IMAGE") {
 		let filepath = "";
-		let file = req.url.replace.(settings.server.backendUrl, "").replace("/files/trader/avatar/", "").replace(".jpg", "").replace(".png", "");
+		let file = req.url.replace(settings.server.backendUrl, "").replace("/files/trader/avatar/", "").replace(".jpg", "").replace(".png", "");
 
 		if (req.url.includes("/quest")) {
 			console.log("[IMG.quests]:" + req.url);
