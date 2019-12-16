@@ -338,6 +338,7 @@ function others() {
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
     filepaths.user.profiles.userBuilds = "user/profiles/__REPLACEME__/userBuilds.json";
     filepaths.globals = "db/globals.json";
+    filepaths.hideout.settings = "db/hideout/settings.json";
     filepaths.ragfair.offer = "db/ragfair/offer.json";
     filepaths.ragfair.search = "db/ragfair/search.json";
     filepaths.cert.server.cert = "cert/server.cert";
