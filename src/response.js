@@ -36,7 +36,7 @@ const staticRoutes = {
     "/client/game/config": setupConnection,
     "/client/customization": getCustomization,
     "/client/trading/customization/5ac3b934156ae10c4430e83c/offers": getCustomizationOffers,
-    "/client/trading/customization/579dc571d53a0658a154fbec/offers": getAllCustomizationOffers,
+    "/client/trading/customization/579dc571d53a0658a154fbec/offers": getCustomizationOffers,
     "/client/trading/customization/storage": getCustomizationStorage,
     "/client/hideout/production/recipes": getHideoutRecipes,
     "/client/hideout/settings": getHideoutSettings,
@@ -255,23 +255,19 @@ function getCustomization(info) {
     return json.read(filepaths.user.cache.customization_outfits);
 }
 
-function getCustomizationOffers(url, info) {
-    
+function getCustomizationOffers(url, info) {  
     let tempoffers = [];
     let allOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
-    
+    let splittedUrl = url.split('/');
+
     for (let oneOffer of allOffers.data) {
-        if (oneOffer.tid == "5ac3b934156ae10c4430e83c") {
+        if (oneOffer.tid == splittedUrl[splittedUrl.length - 2]) {
             tempoffers.push(oneOffer);
         }
     }
 
     allOffers.data = tempoffers;
     return JSON.stringify(allOffers);
-}
-
-function getAllCustomizationOffers(url, info) {
-    return json.read(filepaths.user.cache.customization_offers);
 }
 
 function getCustomizationStorage(url, info) {
