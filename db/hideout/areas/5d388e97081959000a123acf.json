@@ -1,0 +1,130 @@
+{
+	"_id": "5d388e97081959000a123acf",
+	"type": 5,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 25000,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 4,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "EnergyRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 50000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"skillName": "Endurance",
+					"skillLevel": 2,
+					"type": "Skill"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"areaType": 5,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 8,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "EnergyRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 7200,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"templateId": "5d1c774f86f7746d6620f8db",
+					"count": 8,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c06779c86f77426e00dd782",
+					"count": 8,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"traderId": "5ac3b934156ae10c4430e83c",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 5,
+					"requiredLevel": 2,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 12,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "EnergyRegeneration"
+				},
+				{
+					"value": -50,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "DebuffEndDelay"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 28800,
+			"description": ""
+		}
+	}
+}

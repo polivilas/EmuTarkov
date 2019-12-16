@@ -1,0 +1,63 @@
+{
+	"_id": "5d494a175b56502f18c98a04",
+	"type": 14,
+	"enabled": true,
+	"needsFuel": false,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 11,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "59e3639286f7741777737013",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d235a5986f77443f6329bc6",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5734758f24597738025ee253",
+					"count": 6,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59faf7ca86f7740dbe19f6c2",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d6282d64e7f7ccdcb940567",
+					"icon": "/files/Hideout/icon_hideout_scavitem.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 129600,
+			"description": ""
+		}
+	}
+}

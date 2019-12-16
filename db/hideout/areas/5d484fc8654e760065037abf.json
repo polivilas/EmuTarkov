@@ -1,0 +1,188 @@
+{
+	"_id": "5d484fc8654e760065037abf",
+	"type": 6,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "59e35cbb86f7741778269d83",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c5b245977448d35f6e1",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c77245977448d35f6e2",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 1,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"templateId": "57347c1124597737fb1379e3",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 10,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HydrationRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 7200,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"templateId": "59e35cbb86f7741778269d83",
+					"count": 6,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b2fa286f77425227d1674",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590c2e1186f77425357b6124",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"skillName": "Attention",
+					"skillLevel": 3,
+					"type": "Skill"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 6,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"traderId": "5c0647fdd443bc2504c2d371",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 20,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HydrationRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 28800,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 125000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5c0647fdd443bc2504c2d371",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5af04b6486f774195a3ebb49",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590c35a486f774273531c822",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 6,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 5,
+					"requiredLevel": 3,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 30,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HydrationRegeneration"
+				},
+				{
+					"value": 1,
+					"passive": true,
+					"production": false,
+					"visible": false,
+					"filter": [
+						"5d1b385e86f774252167b98a"
+					],
+					"type": "AdditionalSlots"
+				},
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d836517a57db3778f31fde7",
+					"icon": "/files/Hideout/icon_hideout_createitem_generic.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 57600,
+			"description": ""
+		}
+	}
+}

@@ -1,0 +1,167 @@
+{
+	"_id": "5d3b396e33c48f02b81cd9f3",
+	"type": 4,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 100000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 1,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 2,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"filter": [
+						"5d1b371186f774253763a656",
+						"5d1b36a186f7742523398433"
+					],
+					"icon": "/files/Hideout/icon_hideout_fuelslots.png",
+					"type": "AdditionalSlots"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"areaType": 1,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5d1b313086f77425227d1678",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b2fa286f77425227d1674",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c06779c86f77426e00dd782",
+					"count": 15,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 2,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"filter": [
+						"5d1b371186f774253763a656",
+						"5d1b36a186f7742523398433"
+					],
+					"icon": "/files/Hideout/icon_hideout_fuelslots.png",
+					"type": "AdditionalSlots"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 18000,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 1,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5d1b313086f77425227d1678",
+					"count": 6,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b2fa286f77425227d1674",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590a3c0a86f774385a33c450",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c2e24597744902c94a1",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5a7c2eca46aef81a7ca2145d",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 2,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"filter": [
+						"5d1b371186f774253763a656",
+						"5d1b36a186f7742523398433"
+					],
+					"icon": "/files/Hideout/icon_hideout_fuelslots.png",
+					"type": "AdditionalSlots"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 57600,
+			"description": ""
+		}
+	}
+}

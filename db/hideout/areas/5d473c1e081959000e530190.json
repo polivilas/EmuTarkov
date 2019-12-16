@@ -1,0 +1,102 @@
+{
+	"_id": "5d473c1e081959000e530190",
+	"type": 0,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 25000,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"templateId": "5d1b2fa286f77425227d1674",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5733279d245977289b77ec24",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 10800,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5d1b2fa286f77425227d1674",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c06779c86f77426e00dd782",
+					"count": 8,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590a3b0486f7743954552bdb",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5733279d245977289b77ec24",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"skillName": "Strength",
+					"skillLevel": 3,
+					"type": "Skill"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 2,
+					"type": "Area"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 36000,
+			"description": ""
+		}
+	}
+}

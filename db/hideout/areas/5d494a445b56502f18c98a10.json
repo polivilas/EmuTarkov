@@ -1,0 +1,187 @@
+{
+	"_id": "5d494a445b56502f18c98a10",
+	"type": 20,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 11,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5734779624597737e04bf329",
+					"count": 10,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c2e24597744902c94a1",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e36c6f86f774176c10a2a7",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35de086f7741778269d84",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 10,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"filter": [
+						"57347ca924597744596b4e71"
+					],
+					"icon": "/files/Hideout/icon_hideout_videocardslots.png",
+					"type": "AdditionalSlots"
+				},
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d8b8310270eff88e1f47beb",
+					"icon": "/files/Hideout/icon_hideout_createitem_bitcoin.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 86400,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"areaType": 20,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5734779624597737e04bf329",
+					"count": 15,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c2e24597744902c94a1",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590a3b0486f7743954552bdb",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b313086f77425227d1678",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 15,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"filter": [
+						"57347ca924597744596b4e71"
+					],
+					"icon": "/files/Hideout/icon_hideout_videocardslots.png",
+					"type": "AdditionalSlots"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 129600,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 20,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 18,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"areaType": 6,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5734779624597737e04bf329",
+					"count": 25,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b39a386f774252339976f",
+					"count": 10,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b2fa286f77425227d1674",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b327086f7742525194449",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 25,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"filter": [
+						"57347ca924597744596b4e71"
+					],
+					"icon": "/files/Hideout/icon_hideout_unlocked.png",
+					"type": "AdditionalSlots"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 259200,
+			"description": ""
+		}
+	}
+}

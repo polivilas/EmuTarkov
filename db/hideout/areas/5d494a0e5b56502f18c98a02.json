@@ -1,0 +1,56 @@
+{
+	"_id": "5d494a0e5b56502f18c98a02",
+	"type": 13,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 9,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 400000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"skillName": "Memory",
+					"skillLevel": 8,
+					"type": "Skill"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 15,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "ExperienceRate"
+				},
+				{
+					"value": 30,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"skillType": "Practical",
+					"type": "SkillGroupLevelingBoost"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 136800,
+			"description": ""
+		}
+	}
+}

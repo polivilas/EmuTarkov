@@ -1,0 +1,71 @@
+{
+	"_id": "5d494a385b56502f18c98a0c",
+	"type": 18,
+	"enabled": true,
+	"needsFuel": false,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "569668774bdc2da2298b4568",
+					"count": 15000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5935c25fb3acc3127c3d8cd9",
+					"loyaltyLevel": 4,
+					"type": "TraderLoyalty"
+				},
+				{
+					"templateId": "5d0375ff86f774186372f685",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d03775b86f774203e7e0c4b",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d0378d486f77420421a5ff4",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": -50,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "FuelConsumption"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 223200,
+			"description": ""
+		}
+	}
+}

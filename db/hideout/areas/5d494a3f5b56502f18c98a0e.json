@@ -1,0 +1,68 @@
+{
+	"_id": "5d494a3f5b56502f18c98a0e",
+	"type": 19,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 6,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 8,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5d1b39a386f774252339976f",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b32c186f774252167a530",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b327086f7742525194449",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35cbb86f7741778269d83",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d8b82b854358e8b7383cf4f",
+					"icon": "/files/Hideout/icon_hideout_createitem_generic.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 172800,
+			"description": ""
+		}
+	}
+}

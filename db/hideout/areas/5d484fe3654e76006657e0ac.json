@@ -1,0 +1,63 @@
+{
+	"_id": "5d484fe3654e76006657e0ac",
+	"type": 12,
+	"enabled": true,
+	"needsFuel": false,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 15,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "590c31c586f774245e3141b2",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c77245977448d35f6e2",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c5b245977448d35f6e1",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c1124597737fb1379e3",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d6282a3b9c45949bb2992d6",
+					"icon": "/files/hideout/icon_hideout_shootingrangeunlock.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 3600,
+			"description": ""
+		}
+	}
+}

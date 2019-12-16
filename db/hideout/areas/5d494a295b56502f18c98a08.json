@@ -1,0 +1,54 @@
+{
+	"_id": "5d494a295b56502f18c98a08",
+	"type": 16,
+	"enabled": false,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 11,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 9,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 3,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 20000000,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 100,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"skillType": "Special",
+					"type": "SkillGroupLevelingBoost"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 345600,
+			"description": ""
+		}
+	}
+}

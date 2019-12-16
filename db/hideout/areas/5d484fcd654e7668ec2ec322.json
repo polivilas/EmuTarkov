@@ -1,0 +1,165 @@
+{
+	"_id": "5d484fcd654e7668ec2ec322",
+	"type": 7,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 20000,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 6,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HealthRegeneration"
+				},
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d8b89addfc57a648453e89d",
+					"icon": "/files/Hideout/icon_hideout_createitem_meds.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 50000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"skillName": "Health",
+					"skillLevel": 2,
+					"type": "Skill"
+				},
+				{
+					"traderId": "54cb57776803fa99248b456e",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				},
+				{
+					"templateId": "5b4335ba86f7744d2837a264",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e3606886f77417674759a5",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 7,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 12,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HealthRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 10800,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 150000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "54cb57776803fa99248b456e",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				},
+				{
+					"traderId": "58330581ace78e27b8b10cee",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 2,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "59e3606886f77417674759a5",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c0530ee86f774697952d952",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 7,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"skillName": "Vitality",
+					"skillLevel": 3,
+					"type": "Skill"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 20,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HealthRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 43200,
+			"description": ""
+		}
+	}
+}

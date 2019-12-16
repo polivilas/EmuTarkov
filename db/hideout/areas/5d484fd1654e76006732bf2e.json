@@ -1,0 +1,172 @@
+{
+	"_id": "5d484fd1654e76006732bf2e",
+	"type": 8,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 25000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b313086f77425227d1678",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 10,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "EnergyRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"areaType": 2,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "590c311186f77424d1667482",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35cbb86f7741778269d83",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59faf98186f774067b6be103",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 8,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"templateId": "5d1b313086f77425227d1678",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 20,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "EnergyRegeneration"
+				},
+				{
+					"value": 7,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HealthRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 14400,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 2,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 3,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 125000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"skillName": "Metabolism",
+					"skillLevel": 3,
+					"type": "Skill"
+				},
+				{
+					"areaType": 8,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5af0484c86f7740f02001f7f",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35abd86f7741778269d82",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 30,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "EnergyRegeneration"
+				},
+				{
+					"value": 20,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"type": "HydrationRegeneration"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 50400,
+			"description": ""
+		}
+	}
+}

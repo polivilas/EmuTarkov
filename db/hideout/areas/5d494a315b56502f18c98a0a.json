@@ -1,0 +1,64 @@
+{
+	"_id": "5d494a315b56502f18c98a0a",
+	"type": 17,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5696686a4bdc2da3298b456a",
+					"count": 10000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "58330581ace78e27b8b10cee",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 40,
+					"passive": false,
+					"production": true,
+					"visible": true,
+					"skillType": "Physical",
+					"type": "SkillGroupLevelingBoost"
+				},
+				{
+					"value": 3,
+					"passive": true,
+					"production": false,
+					"visible": false,
+					"filter": [
+						"5d1b2f3f86f774252167a52c"
+					],
+					"type": "AdditionalSlots"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 172800,
+			"description": ""
+		}
+	}
+}

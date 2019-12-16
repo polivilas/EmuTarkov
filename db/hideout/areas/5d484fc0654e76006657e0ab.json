@@ -1,0 +1,201 @@
+{
+	"_id": "5d484fc0654e76006657e0ab",
+	"type": 3,
+	"enabled": true,
+	"needsFuel": false,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"templateId": "566abbc34bdc2d92178b4576",
+					"type": "StashSize"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"templateId": "5d1b317c86f7742523398392",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35ef086f7741777737012",
+					"count": 7,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590c5bbd86f774785762df04",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 0,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 3500000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 3,
+					"requiredLevel": 0,
+					"type": "Area"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"templateId": "5811ce572459770cba1a34ea",
+					"type": "StashSize"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 86400,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 0,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 5,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "59e35de086f7741778269d84",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35ef086f7741777737012",
+					"count": 8,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 8500000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "54cb50c76803fa8b248b4571",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 3,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"traderId": "5ac3b934156ae10c4430e83c",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"templateId": "5811ce662459770f6f490f32",
+					"type": "StashSize"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 172800,
+			"description": ""
+		},
+		"4": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"areaType": 5,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "569668774bdc2da2298b4568",
+					"count": 150000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5935c25fb3acc3127c3d8cd9",
+					"loyaltyLevel": 4,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 3,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 11,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"traderId": "5ac3b934156ae10c4430e83c",
+					"loyaltyLevel": 4,
+					"type": "TraderLoyalty"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"templateId": "5811ce772459770e9e5f9532",
+					"type": "StashSize"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 345600,
+			"description": ""
+		}
+	}
+}

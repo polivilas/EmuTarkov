@@ -1,0 +1,100 @@
+{
+	"_id": "5d494a205b56502f18c98a06",
+	"type": 15,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 10000,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"templateId": "5d1b392c86f77425243e98fe",
+					"count": 14,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c06779c86f77426e00dd782",
+					"count": 5,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 4,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"areaType": 15,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"areaType": 15,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"traderId": "5a7c2eca46aef81a7ca2145d",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 50000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c06782b86f77426df5407d2",
+					"count": 7,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 21600,
+			"description": ""
+		}
+	}
+}

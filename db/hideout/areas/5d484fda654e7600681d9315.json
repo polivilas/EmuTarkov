@@ -1,0 +1,146 @@
+{
+	"_id": "5d484fda654e7600681d9315",
+	"type": 10,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "57347c77245977448d35f6e2",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c5b245977448d35f6e1",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "544fb5454bdc2df8738b456a",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [
+				{
+					"value": 1,
+					"passive": true,
+					"production": false,
+					"visible": false,
+					"type": "UnlockWeaponModification"
+				},
+				{
+					"value": 0,
+					"passive": true,
+					"production": false,
+					"visible": true,
+					"id": "5d78c1461d79cb822a38b5f7",
+					"icon": "/files/Hideout/icon_hideout_unlocked.png",
+					"type": "TextBonus"
+				}
+			],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"areaType": 15,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "590c2e1186f77425357b6124",
+					"count": 3,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "59e35de086f7741778269d84",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "57347c5b245977448d35f6e1",
+					"count": 6,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5a7c2eca46aef81a7ca2145d",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 10800,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 4,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"areaType": 3,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 195000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5a7c2eca46aef81a7ca2145d",
+					"loyaltyLevel": 3,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 10,
+					"requiredLevel": 2,
+					"type": "Area"
+				},
+				{
+					"templateId": "5af04b6486f774195a3ebb49",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5bc9b355d4351e6d1509862a",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 39600,
+			"description": ""
+		}
+	}
+}

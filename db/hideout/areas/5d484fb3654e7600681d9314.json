@@ -1,0 +1,106 @@
+{
+	"_id": "5d484fb3654e7600681d9314",
+	"type": 1,
+	"enabled": true,
+	"needsFuel": true,
+	"takeFromSlotLocked": false,
+	"stages": {
+		"0": {
+			"requirements": [],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"1": {
+			"requirements": [
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 20000,
+					"isFunctional": false,
+					"type": "Item"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 0,
+			"description": ""
+		},
+		"2": {
+			"requirements": [
+				{
+					"areaType": 15,
+					"requiredLevel": 1,
+					"type": "Area"
+				},
+				{
+					"skillName": "Endurance",
+					"skillLevel": 2,
+					"type": "Skill"
+				},
+				{
+					"templateId": "5449016a4bdc2d6f028b456f",
+					"count": 45000,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"areaType": 1,
+					"requiredLevel": 1,
+					"type": "Area"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 10800,
+			"description": ""
+		},
+		"3": {
+			"requirements": [
+				{
+					"areaType": 15,
+					"requiredLevel": 3,
+					"type": "Area"
+				},
+				{
+					"templateId": "5d1b304286f774253763a528",
+					"count": 2,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5c06779c86f77426e00dd782",
+					"count": 4,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "5d1b2ffd86f77425243e8d17",
+					"count": 8,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"templateId": "590c392f86f77444754deb29",
+					"count": 1,
+					"isFunctional": false,
+					"type": "Item"
+				},
+				{
+					"traderId": "5a7c2eca46aef81a7ca2145d",
+					"loyaltyLevel": 2,
+					"type": "TraderLoyalty"
+				},
+				{
+					"areaType": 1,
+					"requiredLevel": 2,
+					"type": "Area"
+				}
+			],
+			"bonuses": [],
+			"slots": 0,
+			"constructionTime": 61200,
+			"description": ""
+		}
+	}
+}
