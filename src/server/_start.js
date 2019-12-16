@@ -49,27 +49,28 @@ function sendResponse(req, resp, body) {
 
 	if (output === "IMAGE") {
 		let url_array = req.url.split("/");
-		let file = url_array[url_array.length-1]
+		let file = url_array[url_array.length-1];
+		let filepath = "";
 
 		if (req.url.includes("/quest")) {
 			console.log("[IMG.quests]:" + req.url);
-			req.url = filepaths.quest.banners[file];
+			filepath = filepaths.quest.banners[file];
 		} else if (req.url.includes("/handbook")) {
 			console.log("[IMG.handbook]:" + req.url);
-			req.url = filepaths.handbook.banners[file];
+			filepath = filepaths.handbook.banners[file];
 		} else if (req.url.includes("/avatar")) {
 			console.log("[IMG.trader]:" + req.url);
-			req.url = filepaths.trader.banners[file];
+			filepath = filepaths.trader.banners[file];
 		} else if (req.url.includes("/banners")) {
 			console.log("[IMG.banners]:" + req.url);
-			req.url = filepaths.images.banners[file];
+			filepath = filepaths.images.banners[file];
 		} else {
 			// hideout
 			console.log("[IMG.hideout]:" + req.url);
-			req.url = filepaths.images.hideout[file];
+			filepath = filepaths.images.hideout[file];
 		}
 
-		header_f.sendFile(resp, req.url);
+		header_f.sendFile(resp, filepath);
 		return;
 	}
 
