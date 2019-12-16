@@ -3,7 +3,7 @@
 require('./libs.js');
 
 function getLanguages() {
-    return json.read(filepaths.user.languages);
+    return json.read(filepaths.user.cache.locale_languages);
 }
 
 function getMenu(lang) {

@@ -1,13 +1,13 @@
-"use strict";
+﻿"use strict";
 
 require("./libs.js");
 
 function getProfiles() {
-    return json.parse(json.read(filepaths.profiles.list));
+    return json.parse(json.read(filepaths.user.profiles.list));
 }
 
 function getProfileDataPath() {
-    let profilePath = filepaths.profiles.character;
+    let profilePath = filepaths.user.profiles.character;
     return profilePath.replace("__REPLACEME__", constants.getActiveID());
 }
 

@@ -87,7 +87,7 @@ async function testServer(){
 	/* 1	*/	'{"crc":0}',
 	/* 2	*/	'{"crc":0}',
 	/* 3	*/	'{"version":{"major":"0.11.7.4174","minor":"live","game":"live","backend":"6","taxonomy":"341"},"develop":true}',
-	/* 4	*/	'{"email":"user0@jet.com","pass":"password","version":{"major":"0.11.7.4174","minor":"live","game":"live","backend":"6","taxonomy":"341"},"device_id":"7ae28fd31fd437b6085385aede3141ae","develop":true,"sec":1}',
+	/* 4	*/	'{"email":"user0@jet.com","pass":"5f4dcc3b5aa765d61d8327deb882cf99","version":{"major":"0.11.7.4174","minor":"live","game":"live","backend":"6","taxonomy":"341"},"device_id":"7ae28fd31fd437b6085385aede3141ae","develop":true,"sec":1}',
 	/* 5	*/	'{}',
 	/* 6	*/	'{"crc":1074351527}',
 	/* 7	*/	'{"crc":0}',
