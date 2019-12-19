@@ -30,7 +30,7 @@ function setFilePath(type, fileName, filePath) {
 }
 
 function exist() {
-    if (settings.debug.rebuildCache) {
+    if (settings.mods.rebuildCache) {
         return false;
     }
 
