@@ -27,6 +27,12 @@ function getRandomIntEx(max) {
     return (max > 1) ? Math.floor(Math.random() * (max - 2) + 1) : 1;
 }
 
+function getDirList(path) {
+    return fs.readdirSync(path).filter(function (file) {
+        return fs.statSync(path+'/'+file).isDirectory();
+    });
+}
+
 function removeDir(dir) {
     for (file of fs.readdirSync(dir)) {
         let curPath = path.join(dir, file);
@@ -112,6 +118,7 @@ module.exports.adlerGen = adlerGen;
 module.exports.generateCRC = generateCRC;
 module.exports.getRandomInt = getRandomInt;
 module.exports.getRandomIntEx = getRandomIntEx;
+module.exports.getDirList = getDirList;
 module.exports.removeDir = removeDir;
 module.exports.getTimestamp = getTimestamp;
 module.exports.getTime = getTime;

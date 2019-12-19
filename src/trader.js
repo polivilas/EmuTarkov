@@ -41,10 +41,10 @@ function getAssort(id, flea = false) {
 
     // always return everything trader
 	if (selectedTrader == "everything" && flea) {
-		return json.parse(json.read(filepaths.assort.everything));
+		return json.parse(json.read(filepaths.user.cache.assort_everything));
 	} else {
-        if (filepaths.assort.hasOwnProperty(selectedTrader)) {
-            return json.parse(json.read(filepaths.assort[selectedTrader]));
+        if (filepaths.user.cache.hasOwnProperty("assort_" + selectedTrader)) {
+            return json.parse(json.read(filepaths.user.cache["assort_" + selectedTrader]));
         }
     }
     
