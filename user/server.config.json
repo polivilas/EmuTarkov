@@ -7,12 +7,17 @@
 	},
 	"debug": {
 		"debugMode": true,
-		"examinedByDefault": true
-	}
+		"examinedByDefault": true,
+		"rebuildCache": false
+	},
 	"mods": {
 		"rebuildCache": false,
 		"list": [
-			"TheMaoci-DebugItems": "1.0.0"
+			{
+				"name": "TheMaoci-DebugItems",
+				"version": "1.0.0",
+				"enabled": true
+			}
 		]
 	}
 }
