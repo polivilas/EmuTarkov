@@ -11,6 +11,12 @@ function getProfileDataPath() {
     return profilePath.replace("replaceme", constants.getActiveID());
 }
 
+function GetProfileByID(profileID)
+{
+    let profilePath = fileRoutes.profiles.character;
+    return playerData = JSON.parse(utility.readJson( profilePath.replace("replaceme", profileID) ));
+}
+
 function loadTraderStandings(playerData = "") {
     // get profile Data
     let profileData = playerData;
@@ -541,3 +547,4 @@ module.exports.changeVoice = changeVoice;
 module.exports.find = find;
 module.exports.saveProfileProgress = saveProfileProgress;
 module.exports.addItemToStash = addItemToStash;
+module.exports.getProfileByID = GetProfileByID

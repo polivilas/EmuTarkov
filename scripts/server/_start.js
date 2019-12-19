@@ -37,6 +37,16 @@ function sendResponse(req, resp, body) {
 		return;
 	}
 	
+	if(output === "GetProfileByID")
+	{
+		let profileIdRequested = req.url.replace("/server/profile/get/", '');
+   		let profileData = profile.getProfileByID(profileIdRequested);
+
+   		console.log("Profile Requested By the game : " + profileIdRequested);
+   		header_f.sendTextJson(resp, profileData);
+   		return;
+	}
+
 	if (output === "MAPCONFIG") {
 		let mapname = req.url.replace("/api/location/", "");		
 		let RandomPreset = utility.getRandomInt(1,6);

@@ -263,6 +263,12 @@ function getGlobalLocale(url, info) {
     return locale.getGlobal(url.replace("/client/locale/", ''));
 }
 
+function GetProfileByID(url, info) 
+{
+    return "GetProfileByID";
+}
+
+
 function setupRoutes() {
     // static responses
     rpc.addStaticRoute("/", showIndex);
@@ -318,6 +324,7 @@ function setupRoutes() {
     rpc.addDynamicRoute("/client/trading/api/getTraderAssort/", getAssort);
     rpc.addDynamicRoute("/client/menu/locale/", getMenuLocale);
     rpc.addDynamicRoute("/client/locale/", getGlobalLocale);
+    rpc.addDynamicRoute("/server/profile/get/", getProfileByID);
 
     // null responses
     rpc.addStaticRoute("/favicon.ico", nullResponse);
