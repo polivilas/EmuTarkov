@@ -435,5 +435,64 @@ function splitAssort() {
 }
 */
 
+function loadMod() {
+    let dirList = utility.getDirList("user/mods/");
+
+    for (let dir in dirList) {
+        let mod = json.parse(json.read("user/mods/" + dirList[dir] + "/"))
+
+        // assort
+        for (let assort in mod.files.assort) {
+            if (mod.files.assort[assort] == null) {
+                delete filepaths.assort[assort];
+                continue;
+            }
+
+            if (!filepaths.assort.hasOwnProperty(mod.files.assort[assort])) {
+                filepaths.assort[assort] = mod.files.assort[assort];
+                continue;
+            }
+            
+            let activeAssort = mods.files.assort
+
+            // assort items
+            for (let item in activeAssort.items) {
+                if (activeAssort.items[item] == "delete") {
+                    delete filepaths.assort[assort].items[item];
+                }
+
+                filepaths.assort[assort].items[item] = activeAssort.items[item];
+            }
+
+            // assort barter_scheme
+            for (let item in activeAssort.items) {
+                if (activeAssort.barter_scheme[item] == "delete") {
+                    delete filepaths.assort[assort].barter_scheme[item];
+                }
+
+                filepaths.assort[assort].barter_scheme[item] = activeAssort.barter_scheme[item];
+            }
+
+            // assort loyal_level_items
+            for (let item in activeAssort.items) {
+                if (activeAssort.loyal_level_items[item] == "delete") {
+                    delete filepaths.assort[assort].loyal_level_items[item];
+                }
+
+                filepaths.assort[assort].loyal_level_items[item] = activeAssort.loyal_level_items[item];
+            }
+        }
+
+        // items
+        for (let item in mod.files.items) {
+            if (mod.files.items[item] == "delete") {
+                delete filepaths.items[item];
+            }
+
+            filepaths.items[item] = mod.files.items[item];
+        }
+;    }
+}
+
 module.exports.exist = exist;
 module.exports.all = all;
