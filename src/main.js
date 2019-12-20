@@ -11,6 +11,7 @@ require("./libs.js")(isFirstLaunch, start0);
 
 ended_at = new Date() - start0;
 console.info('[Library Loaded]  %dms', ended_at);
+console.info("[Mods loaded] ", settings.mods.list);
 process.stdout.write('\x1Bc');
 
 process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " + constants.serverVersion() + String.fromCharCode(7));

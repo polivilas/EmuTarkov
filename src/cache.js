@@ -414,10 +414,10 @@ function loadMods() {
 
     for (let element in modList) {
         if (!modList[element].enabled) {
-            console.log("Skipping mod " + modList[element].name + " " + modList[element].version);
+            console.log("Skipping mod " + modList[element].name + " v" + modList[element].version);
             continue;
         } else {
-            console.log("Loading mod " + modList[element].name + " " + modList[element].version);
+            console.log("Loading mod " + modList[element].name + " v" + modList[element].version);
         }
 
         let mod = json.parse(json.read("user/mods/" + modList[element].name + "/mod.config.json"))
