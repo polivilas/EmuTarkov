@@ -40,7 +40,7 @@ function sendResponse(req, resp, body) {
 	if (output === "MAPCONFIG") {
 		let mapname = req.url.replace("/api/location/", "");		
 		let RandomPreset = utility.getRandomInt(1, 6);
-		let map = json.read(filepaths.maps[mapname + RandomPreset]);
+		let map = json.read(filepaths.maps[mapname.toLowerCase() + RandomPreset]);
 		
 		console.log("[MAP.config]: " + mapname);
 		header_f.sendTextJson(resp, map);
