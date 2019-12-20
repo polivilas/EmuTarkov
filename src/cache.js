@@ -402,44 +402,25 @@ function all() {
     images();
     others();
 
+    // load server mods
+    loadMods()
+
     dumpFilepaths();
     console.log("Done: caching files");
 }
 
-// todo: add this to devtools
-/*
-function splitAssort() {
-    let inputDir = "db/assort/";
-    let inputFiles = fs.readdirSync(inputDir);
+function loadMods() {
+    let modList = settings.mods.list;
 
-    for (let file in inputFiles) {
-        let filePath = inputDir + inputFiles[file];
-        let fileName = inputFiles[file].replace(".json", "");
-        let base = json.parse(json.read(filePath));
-
-        // assort.items
-        for (let item in base.data.items) {
-            json.write(inputDir + fileName + "/" + "items" + "/" + base.data.items[item]._id + ".json", base.data.items[item]);
+    for (let element in modList) {
+        if (!modList[element].enabled) {
+            console.log("Skipping mod " + modList[element].name + " " + modList[element].version);
+            continue;
+        } else {
+            console.log("Loading mod " + modList[element].name + " " + modList[element].version);
         }
 
-        // assort.barter_scheme
-        for (let item in base.data.barter_scheme) {
-            json.write(inputDir + fileName + "/" + "barter" + "/" + item + ".json", base.data.barter_scheme[item]);
-        }
-
-        // assort.loyal_level_items
-        for (let item in base.data.loyal_level_items) {
-            json.write(inputDir + fileName + "/" + "loyalty" + "/" + item + ".json", base.data.loyal_level_items[item]);
-        }
-    }
-}
-*/
-
-function loadMod() {
-    let dirList = utility.getDirList("user/mods/");
-
-    for (let dir in dirList) {
-        let mod = json.parse(json.read("user/mods/" + dirList[dir] + "/"))
+        let mod = json.parse(json.read("user/mods/" + modList[element].name + "/mod.config.json"))
 
         // assort
         for (let assort in mod.files.assort) {
@@ -491,7 +472,7 @@ function loadMod() {
 
             filepaths.items[item] = mod.files.items[item];
         }
-;    }
+    }
 }
 
 module.exports.exist = exist;
