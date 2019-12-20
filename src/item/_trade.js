@@ -17,7 +17,7 @@ function buyItem(tmpList, body, trad = "") {
         tmpTrader = trader.getAssort(body.tid);
     } else {
         // its for fleamarket only
-        tmpTrader = json.parse(json.read(filepaths.assort.everything));
+        tmpTrader = json.parse(json.read(filepaths.user.cache.assort_everything));
     }
 
     // no exceptions possible here
