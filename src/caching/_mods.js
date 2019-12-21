@@ -3,6 +3,10 @@
 require('../libs.js');
 
 function items(mod) {
+    if (!mod.files.hasOwnProperty("items")) {
+        return;
+    }
+
     let inputNames = Object.keys(mod.files.items);
     let i = 0;
 
@@ -16,7 +20,83 @@ function items(mod) {
     }
 }
 
+function quests(mod) {
+    if (!mod.files.hasOwnProperty("quests")) {
+        return;
+    }
+
+    let inputNames = Object.keys(mod.files.quests);
+    let i = 0;
+
+    for (let item in mod.files.quests) {
+        if (mod.files.quests[item] == "delete") {
+            delete filepaths.quests[inputNames[i++]];
+            continue;
+        }
+
+        filepaths.quests[inputNames[i++]] = mod.files.quests[item];
+    }
+}
+
+function traders(mod) {
+    if (!mod.files.hasOwnProperty("traderss")) {
+        return;
+    }
+
+    let inputNames = Object.keys(mod.files.traders);
+    let i = 0;
+
+    for (let item in mod.files.traders) {
+        if (mod.files.traders[item] == "delete") {
+            delete filepaths.traders[inputNames[i++]];
+            continue;
+        }
+
+        filepaths.traders[inputNames[i++]] = mod.files.traders[item];
+    }
+}
+
+function locations(mod) {
+    if (!mod.files.hasOwnProperty("locations")) {
+        return;
+    }
+
+    let inputNames = Object.keys(mod.files.locations);
+    let i = 0;
+
+    for (let item in mod.files.locations) {
+        if (mod.files.locations[item] == "delete") {
+            delete filepaths.locations[inputNames[i++]];
+            continue;
+        }
+
+        filepaths.locations[inputNames[i++]] = mod.files.locations[item];
+    }
+}
+
+function languages(mod) {
+    if (!mod.files.hasOwnProperty("locales") || !mod.files.locales.hasOwnProperty("languages")) {
+        return;
+    }
+
+    let inputNames = Object.keys(mod.files.locales.languages);
+    let i = 0;
+
+    for (let item in mod.files.locales.languages) {
+        if (mod.files.locales.languages[item] == "delete") {
+            delete filepaths.locales.languages[inputNames[i++]];
+            continue;
+        }
+
+        filepaths.locales.languages[inputNames[i++]] = mod.files.locales.languages[item];
+    }
+}
+
 function assort(mod) {
+    if (!mod.files.hasOwnProperty("assort")) {
+        return;
+    }
+
     let inputNames = Object.keys(mod.files.assort);
     let i = 0;
 
@@ -91,8 +171,12 @@ function load() {
 
         // apply mod
         console.log("Loading mod " + modList[element].name + " v" + modList[element].version);
-        assort(mod);
         items(mod);
+        quests(mod);
+        traders(mod);
+        locations(mod);
+        languages(mod);
+        assort(mod);
     }
 }
 
