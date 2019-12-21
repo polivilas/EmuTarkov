@@ -29,9 +29,14 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.locations = "";
 	global.weathers = '{}';
 
+	if (isFirstLaunch == "first") {
+		console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
+
 	// setup routes
 	global.filepaths = json.parse(json.read("db/cache/filepaths.json"));
-	global.route = require('./route.js');
+	global.mods = require('./caching/_mods.js');
+	global.route = require('./caching/_route.js');
 	route.all();
 
 	if (isFirstLaunch == "first") {
@@ -39,15 +44,11 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	}
 
 	// setup cache
-	global.cache = require('./cache.js');
+	global.cache = require('./caching/_cache.js');
 	cache.all();
 
 	if (isFirstLaunch == "first") {
 		console.log("Files cached... [%dms]", new Date() - StartingTimeTemporalVariable);
-	}
-	
-	if (isFirstLaunch == "first") {
-		console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
 
 	// Items

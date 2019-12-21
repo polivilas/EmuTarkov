@@ -1,6 +1,6 @@
 "use strict";
 
-require('./libs.js');
+require('../libs.js');
 
 function flush() {
     filepaths = json.parse(json.read("db/cache/filepaths.json"));
@@ -288,90 +288,6 @@ function cache() {
     }
 }
 
-function loadMods() {
-    let modList = settings.mods.list;
-    let inputNames = [];
-    let i = 0;
-
-    for (let element in modList) {
-        if (!modList[element].enabled) {
-            console.log("Skipping mod " + modList[element].name + " v" + modList[element].version);
-            continue;
-        } else {
-            console.log("Loading mod " + modList[element].name + " v" + modList[element].version);
-        }
-
-        let mod = json.parse(json.read("user/mods/" + modList[element].name + "/mod.config.json"))
-
-        // assort
-        for (let assort in mod.files.assort) {
-            if (mod.files.assort[assort] == null) {
-                delete filepaths.assort[assort];
-                continue;
-            }
-
-            if (!filepaths.assort.hasOwnProperty(mod.files.assort[assort])) {
-                filepaths.assort[assort] = mod.files.assort[assort];
-                continue;
-            }
-            
-            let activeAssort = mods.files.assort;
-
-            // assort items
-            inputNames = Object.keys(activeAssort.items);
-            i = 0;
-
-            for (let item in activeAssort.items) {
-                if (activeAssort.items[item] == "delete") {
-                    delete filepaths.assort[assort].items[inputNames[i++]];
-                    continue
-                }
-
-                filepaths.assort[assort].items[inputNames[i++]] = activeAssort.items[item];
-            }
-
-            // assort barter_scheme
-            inputNames = Object.keys(activeAssort.barter_scheme);
-            i = 0;
-
-            for (let item in activeAssort.barter_scheme) {
-                if (activeAssort.barter_scheme[item] == "delete") {
-                    delete filepaths.assort[assort].barter_scheme[inputNames[i++]];
-                    continue;
-                }
-
-                filepaths.assort[assort].barter_scheme[inputNames[i++]] = activeAssort.barter_scheme[item];
-            }
-
-            // assort loyal_level_items
-            inputNames = Object.keys(activeAssort.loyal_level_items);
-            i = 0;
-
-            for (let item in activeAssort.loyal_level_items) {
-                if (activeAssort.loyal_level_items[item] == "delete") {
-                    delete filepaths.assort[assort].loyal_level_items[inputNames[i++]];
-                    continue;
-                }
-
-                filepaths.assort[assort].loyal_level_items[inputNames[i++]] = activeAssort.loyal_level_items[item];
-            }
-        }
-
-        // items
-        inputNames = Object.keys(mod.files.items);
-        i = 0;
-
-        for (let item in mod.files.items) {
-            if (mod.files.items[item] == "delete") {
-                delete filepaths.items[inputNames[i++]];
-                continue;
-            }
-
-            filepaths.items[inputNames[i++]] = mod.files.items[item];
-        }
-    }
-}
-
 function routeDatabase() {
     flush();
     items();
@@ -402,7 +318,7 @@ function all() {
     // routes are not routed
     if (force || !fs.existsSync("user/cache/filepaths.json")) {
         routeDatabase();
-        loadMods();
+        mods.load();
         dump();
     }
 

@@ -1,58 +1,50 @@
 "use strict";
 
-require('./libs.js');
+require('../libs.js');
 
-function genericCacher(type, basepath, cachename) {
+function genericCacher(cachename, filepathNode) {
     console.log("Caching: " + cachename);
 
     let base = json.parse(json.read("db/cache/" + cachename));
-    let inputDir = basepath + "/";
-    let inputFiles = fs.readdirSync(inputDir);
+    let inputFiles = filepathNode;
+    let inputNames = Object.keys(inputFiles);
+    let i = 0;
 
     for (let file in inputFiles) {
-        let filePath = inputDir + inputFiles[file];
+        let filePath = inputFiles[file];
         let fileData = json.parse(json.read(filePath));
         let fileName = "";
 
-        switch (type) {
-            case "customOffers":
-            case "hideoutAreas":
-            case "hideoutProd":
-            case "hideoutScav":
-                fileName = inputFiles[file].replace(".json", "");
+        switch (cachename) {
+            case "quests.json":
+            case "traders.json":
+            case "locale_languages.json":
+            case "customization_offers.json":
+            case "hideout_areas.json":
+            case "hideout_production.json":
+            case "hideout_scavcase.json":
                 base.data.push(fileData);
-                break;
+            break;
 
-            case "quests":
-            case "traders":
-                fileName = fileData._id;
-                base.data.push(fileData);
-                break;
-
-            case "items":
+            case "items.json":
                 fileName = fileData._id;
 
                 if (settings.debug.examinedByDefault) {
                     fileData._props.ExaminedByDefault = true;
                 }
-
+        
                 base.data[fileName] = fileData;
-                break;
+            break;
 
-            case "locations":
-                fileName = inputFiles[file].replace(".json", "");
+            case "locations.json":
+                filename = inputNames[i++];
                 base.data.locations[fileName] = fileData;
-                break;
-            
-            case "languages":
-                fileName = fileData.ShortName;
-                base.data.push(fileData);
-                break;
+            break;
 
-            case "customOutfits":
-                fileName = inputFiles[file].replace(".json", "");
+            case "customization_outfits.json":
+                filename = inputNames[i++];
                 base.data[fileName] = fileData;
-                break;
+            break;
         }
     }
 
@@ -60,43 +52,43 @@ function genericCacher(type, basepath, cachename) {
 }
 
 function items() {
-    genericCacher("items", "db/items", "items.json");
+    genericCacher("items.json", filepaths.items);
 }
 
 function quests() {
-    genericCacher("quests", "db/quests", "quests.json");
+    genericCacher("quests.json", filepaths.quests);
 }
 
 function traders() {
-    genericCacher("traders", "db/traders", "traders.json");
+    genericCacher("traders.json", filepaths.traders);
 }
 
 function locations() {
-    genericCacher("locations", "db/locations", "locations.json");
+    genericCacher("locations.json", filepaths.locations);
 }
 
 function languages() {
-    genericCacher("languages", "db/locales/languages", "locale_languages.json");
+    genericCacher("db/cache/locale_languages.json", filepaths.locales.languages);
 }
 
 function customizationOutfits() {
-    genericCacher("customOutfits", "db/customization/outfits", "customization_outfits.json");
+    genericCacher("db/cache/customization_outfits.json", filepaths.customization.outfits);
 }
 
 function customizationOffers() {
-    genericCacher("customOffers", "db/customization/offers", "customization_offers.json");
+    genericCacher("db/cache/customization_offers.json", filepaths.customization.offers);
 }
 
 function hideoutAreas() {
-    genericCacher("hideoutAreas", "db/hideout/areas", "hideout_areas.json");
+    genericCacher("db/cache/hideout_areas.json", filepaths.hideout.areas);
 }
 
 function hideoutProduction() {
-    genericCacher("hideoutProd", "db/hideout/production", "hideout_production.json");
+    genericCacher("db/cache/hideout_production.json", filepaths.hideout.production);
 }
 
 function hideoutScavcase() {
-    genericCacher("hideoutScav", "db/hideout/scavcase", "hideout_scavcase.json");
+    genericCacher("db/cache/hideout_scavcase.json", filepaths.hideout.scavcase);
 }
 
 function templates() {
