@@ -278,7 +278,7 @@ function all() {
     }
 
     for (let assort in assortList) {
-        if (force || !fs.existsSync("user/cache/assort_" + localesList[assort] + ".json")) {
+        if (force || !fs.existsSync("user/cache/assort_" + assortList[assort] + ".json")) {
             assorts();
             break;
         }
