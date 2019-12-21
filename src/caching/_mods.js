@@ -17,7 +17,7 @@ function items(mod) {
 }
 
 function assort(mod) {
-    let inputNames = Object.keys(mod.files.items);
+    let inputNames = Object.keys(mod.files.assort);
     let i = 0;
 
     for (let assort in mod.files.assort) {
@@ -28,11 +28,12 @@ function assort(mod) {
         }
 
         // create assort
-        //if (!filepaths.assort.hasOwnProperty(mod.files.assort[assort])) {
-        //    filepaths.assort[assort] = mod.files.assort[assort];
-        //    continue;
-        //}
+        if (!filepaths.assort.hasOwnProperty(inputNames[i])) {
+            filepaths.assort[inputNames[i++]] = mod.files.assort[assort];
+            continue;
+        }
         
+        // set active assort
         let activeAssort = mod.files.assort[assort];
 
         // assort items
