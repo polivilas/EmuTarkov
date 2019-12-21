@@ -280,7 +280,7 @@ function cache() {
     filepaths.user.cache.templates = "user/cache/templates.json";
 
     for (let assort in assortList) {
-        filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + localesList[assort] + ".json";
+        filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + assortList[assort] + ".json";
     }
 
     for (let locale in localesList) {
