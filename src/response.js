@@ -143,7 +143,7 @@ function selectProfile(url, info) {
 }
 
 function getProfileStatus(url, info) {
-    return '{"err":0, "errmsg":null, "data":[{"profileid":"5c71b934354682353958e983", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"5c71b934354682353958e984", "status":"Free", "sid":"", "ip":"", "port":0}]}';
+    return '{"err":0, "errmsg":null, "data":[{"profileid":"scavuser' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"pmcuser' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 }
 
 function getWeather(url, info) {
