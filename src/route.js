@@ -290,6 +290,8 @@ function cache() {
 
 function loadMods() {
     let modList = settings.mods.list;
+    let inputNames = [];
+    let i = 0;
 
     for (let element in modList) {
         if (!modList[element].enabled) {
@@ -316,40 +318,56 @@ function loadMods() {
             let activeAssort = mods.files.assort;
 
             // assort items
+            inputNames = Object.keys(activeAssort.items);
+            i = 0;
+
             for (let item in activeAssort.items) {
                 if (activeAssort.items[item] == "delete") {
-                    delete filepaths.assort[assort].items[item];
+                    delete filepaths.assort[assort].items[inputNames[i++]];
+                    continue
                 }
 
-                filepaths.assort[assort].items[item] = activeAssort.items[item];
+                filepaths.assort[assort].items[inputNames[i++]] = activeAssort.items[item];
             }
 
             // assort barter_scheme
-            for (let item in activeAssort.items) {
+            inputNames = Object.keys(activeAssort.barter_scheme);
+            i = 0;
+
+            for (let item in activeAssort.barter_scheme) {
                 if (activeAssort.barter_scheme[item] == "delete") {
-                    delete filepaths.assort[assort].barter_scheme[item];
+                    delete filepaths.assort[assort].barter_scheme[inputNames[i++]];
+                    continue;
                 }
 
-                filepaths.assort[assort].barter_scheme[item] = activeAssort.barter_scheme[item];
+                filepaths.assort[assort].barter_scheme[inputNames[i++]] = activeAssort.barter_scheme[item];
             }
 
             // assort loyal_level_items
-            for (let item in activeAssort.items) {
+            inputNames = Object.keys(activeAssort.loyal_level_items);
+            i = 0;
+
+            for (let item in activeAssort.loyal_level_items) {
                 if (activeAssort.loyal_level_items[item] == "delete") {
-                    delete filepaths.assort[assort].loyal_level_items[item];
+                    delete filepaths.assort[assort].loyal_level_items[inputNames[i++]];
+                    continue;
                 }
 
-                filepaths.assort[assort].loyal_level_items[item] = activeAssort.loyal_level_items[item];
+                filepaths.assort[assort].loyal_level_items[inputNames[i++]] = activeAssort.loyal_level_items[item];
             }
         }
 
         // items
+        inputNames = Object.keys(mod.files.items);
+        i = 0;
+
         for (let item in mod.files.items) {
             if (mod.files.items[item] == "delete") {
-                delete filepaths.items[item];
+                delete filepaths.items[inputNames[i++]];
+                continue;
             }
 
-            filepaths.items[item] = mod.files.items[item];
+            filepaths.items[inputNames[i++]] = mod.files.items[item];
         }
     }
 }
