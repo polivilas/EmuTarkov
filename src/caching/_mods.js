@@ -28,12 +28,12 @@ function assort(mod) {
         }
 
         // create assort
-        if (!filepaths.assort.hasOwnProperty(mod.files.assort[assort])) {
-            filepaths.assort[assort] = mod.files.assort[assort];
-            continue;
-        }
+        //if (!filepaths.assort.hasOwnProperty(mod.files.assort[assort])) {
+        //    filepaths.assort[assort] = mod.files.assort[assort];
+        //    continue;
+        //}
         
-        let activeAssort = mods.files.assort;
+        let activeAssort = mod.files.assort[assort];
 
         // assort items
         inputNames = Object.keys(activeAssort.items);
