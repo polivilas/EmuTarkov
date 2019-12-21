@@ -130,7 +130,7 @@ function assorts() {
     let dirList = utility.getDirList("db/assort/");
 
     for (let trader in dirList) {
-        console.log("Caching: assort_" + dirList[trader]);
+        console.log("Caching: assort_" + dirList[trader] + ".json");
 
         let base = json.parse(json.read("db/cache/assort.json"));
         let inputNode = filepaths.assort[dirList[trader]]
@@ -143,10 +143,11 @@ function assorts() {
         for (let path in inputDir) {
             let inputFiles = inputNode[inputDir[path]];
             let inputNames = Object.keys(inputFiles);
-            
+            let i = 0;
+
             for (let file in inputFiles) {
                 let filePath = inputFiles[file];
-                let fileName = inputNames[file];
+                let fileName = inputNames[i++];
                 let fileData = json.parse(json.read(filePath));
 
                 if (path == 0) {
@@ -194,11 +195,12 @@ function locales() {
         for (let path in inputDir) {
             let inputFiles = inputNode[inputDir[path]];
             let inputNames = Object.keys(inputFiles);
+            let i = 0;
 
             for (let file in inputFiles) {
                 let filePath = inputFiles[file];
                 let fileData = json.parse(json.read(filePath));
-                let fileName = inputNames[file];
+                let fileName = inputNames[i++];
 
                 if (path == 0) {
                     base.data.mail[fileName] = fileData;

@@ -161,7 +161,7 @@ function locales() {
             "db/locales/" + locale + "/trading/",
         ];
 
-        console.log("Routing: db/locales" + locale + "/");
+        console.log("Routing: db/locales/" + locale + "/");
         
         localeFilepath.menu = "db/locales/" + locale + "/menu.json";
         localeFilepath.interface = "db/locales/" + locale + "/interface.json";
@@ -313,7 +313,7 @@ function loadMods() {
                 continue;
             }
             
-            let activeAssort = mods.files.assort
+            let activeAssort = mods.files.assort;
 
             // assort items
             for (let item in activeAssort.items) {
