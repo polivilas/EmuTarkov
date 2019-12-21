@@ -19,7 +19,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.utility = require('./utility.js');
 
 	// setup server
-	global.filepaths = json.parse(json.read("db/cache/filepaths.json"));
 	global.settings = json.parse(json.read("user/server.config.json"));
 	global.ended_at = 0;
 	global.backendUrl = settings.server.backendUrl;
@@ -30,12 +29,22 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.locations = "";
 	global.weathers = '{}';
 
-	// setup routes and cache
-	global.cache = require('./cache.js');
-	global.route = require('./routes.js');
-	
+	// setup routes
+	global.filepaths = json.parse(json.read("db/cache/filepaths.json"));
+	global.route = require('./route.js');
 	route.all();
+
+	if (isFirstLaunch == "first") {
+		console.log("Files routed... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
+
+	// setup cache
+	global.cache = require('./cache.js');
 	cache.all();
+
+	if (isFirstLaunch == "first") {
+		console.log("Files cached... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
 	
 	if (isFirstLaunch == "first") {
 		console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);

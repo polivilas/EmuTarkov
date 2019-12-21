@@ -6,8 +6,8 @@ function genericCacher(type, basepath, cachename) {
     console.log("Caching: " + cachename);
 
     let base = json.parse(json.read("db/cache/" + cachename));
-    //let inputDir = basepath + "/";
-    //let inputFiles = fs.readdirSync(inputDir);
+    let inputDir = basepath + "/";
+    let inputFiles = fs.readdirSync(inputDir);
 
     for (let file in inputFiles) {
         let filePath = inputDir + inputFiles[file];
@@ -104,17 +104,16 @@ function templates() {
 
     let base = json.parse(json.read("db/cache/templates.json"));
     let inputDir = [
-        "db/templates/Categories/",
-        "db/templates/Items/"
+        "categories",
+        "items"
     ];
 
     for (let path in inputDir) {
-        let inputFiles = fs.readdirSync(inputDir[path]);
+        let inputFiles = filepaths.templates[inputDir[path]];
 
         for (let file in inputFiles) {
-            let filePath = inputDir[path] + inputFiles[file];
+            let filePath = inputFiles[file];
             let fileData = json.parse(json.read(filePath));
-            let fileName = inputFiles[file].replace(".json", "");
 
             if (path == 0) {
                 base.data.Categories.push(fileData);
@@ -127,25 +126,27 @@ function templates() {
     json.write("user/cache/templates.json", base, true);
 }
 
-function assort() {
+function assorts() {
     let dirList = utility.getDirList("db/assort/");
 
     for (let trader in dirList) {
         console.log("Caching: assort_" + dirList[trader]);
 
         let base = json.parse(json.read("db/cache/assort.json"));
+        let inputNode = filepaths.assort[dirList[trader]]
         let inputDir = [
-            "db/assort/" + dirList[trader] + "/items/",
-            "db/assort/" + dirList[trader] + "/barter/",
-            "db/assort/" + dirList[trader] + "/loyalty/"
+            "items",
+            "barter_scheme",
+            "loyal_level_items"
         ];
 
         for (let path in inputDir) {
-            let inputFiles = fs.readdirSync(inputDir[path]);
-
+            let inputFiles = inputNode[inputDir[path]];
+            let inputNames = Object.keys(inputFiles);
+            
             for (let file in inputFiles) {
-                let filePath = inputDir[path] + inputFiles[file];
-                let fileName = inputFiles[file].replace(".json", "");
+                let filePath = inputFiles[file];
+                let fileName = inputNames[file];
                 let fileData = json.parse(json.read(filePath));
 
                 if (path == 0) {
@@ -172,30 +173,32 @@ function locales() {
 
         let base = json.parse(json.read("db/cache/locale.json"));
         let locale = dirList[dir];
+        let inputNode = filepaths.locales[locale];
         let inputDir = [
-            "db/locales/" + locale + "/mail/",
-            "db/locales/" + locale + "/quest/",
-            "db/locales/" + locale + "/preset/",
-            "db/locales/" + locale + "/handbook/",
-            "db/locales/" + locale + "/season/",
-            "db/locales/" + locale + "/templates/",
-            "db/locales/" + locale + "/locations/",
-            "db/locales/" + locale + "/banners/",
-            "db/locales/" + locale + "/trading/",
+            "mail",
+            "quest",
+            "preset",
+            "handbook",
+            "season",
+            "templates",
+            "locations",
+            "banners",
+            "trading",
         ];
 
         console.log("Caching: locale_" + locale + ".json");
 
-        base.data.interface = json.parse(json.read("db/locales/" + locale + "/interface.json"));
-        base.data.error = json.parse(json.read("db/locales/" + locale + "/error.json"));
+        base.data.interface = json.parse(json.read(inputNode.interface));
+        base.data.error = json.parse(json.read(inputNode.error));
 
         for (let path in inputDir) {
-            let inputFiles = fs.readdirSync(inputDir[path]);
-            
+            let inputFiles = inputNode[inputDir[path]];
+            let inputNames = Object.keys(inputFiles);
+
             for (let file in inputFiles) {
-                let filePath = inputDir[path] + inputFiles[file];
+                let filePath = inputFiles[file];
                 let fileData = json.parse(json.read(filePath));
-                let fileName = inputFiles[file].replace(".json", "");
+                let fileName = inputNames[file];
 
                 if (path == 0) {
                     base.data.mail[fileName] = fileData;
@@ -228,53 +231,53 @@ function all() {
     let assortList = utility.getDirList("db/assort/");
     let localesList = utility.getDirList("db/locales/");
 
-    if (force || !fs.existSync("user/cache/items.json")) {
+    if (force || !fs.existsSync("user/cache/items.json")) {
         items();
     }
 
-    if (force || !fs.existSync("user/cache/quests.json")) {
+    if (force || !fs.existsSync("user/cache/quests.json")) {
         quests();
     }
 
-    if (force || !fs.existSync("user/cache/traders.json")) {
+    if (force || !fs.existsSync("user/cache/traders.json")) {
         traders();
     }
 
-    if (force || !fs.existSync("user/cache/locations.json")) {
+    if (force || !fs.existsSync("user/cache/locations.json")) {
         locations();
     }
 
-    if (force || !fs.existSync("user/cache/locale_languages.json")) {
+    if (force || !fs.existsSync("user/cache/locale_languages.json")) {
         languages();
     }
 
-    if (force || !fs.existSync("user/cache/customization_outfits.json")) {
+    if (force || !fs.existsSync("user/cache/customization_outfits.json")) {
         customizationOutfits();
     }
 
-    if (force || !fs.existSync("user/cache/customization_offers.json")) {
+    if (force || !fs.existsSync("user/cache/customization_offers.json")) {
         customizationOffers();
     }
 
-    if (force || !fs.existSync("user/cache/hideout_areas.json")) {
+    if (force || !fs.existsSync("user/cache/hideout_areas.json")) {
         hideoutAreas();
     }
 
-    if (force || !fs.existSync("user/cache/hideout_production.json")) {
+    if (force || !fs.existsSync("user/cache/hideout_production.json")) {
         hideoutProduction();
     }
 
-    if (force || !fs.existSync("user/cache/hideout_scavcase.json")) {
+    if (force || !fs.existsSync("user/cache/hideout_scavcase.json")) {
         hideoutScavcase();
     }
 
-    if (force || !fs.existSync("user/cache/templates.json")) {
+    if (force || !fs.existsSync("user/cache/templates.json")) {
         templates();
     }
 
     for (let assort in assortList) {
-        if (force || !fs.existSync("user/cache/assort_" + localesList[assort] + ".json")) {
-            assort();
+        if (force || !fs.existsSync("user/cache/assort_" + localesList[assort] + ".json")) {
+            assorts();
             break;
         }
     }
@@ -284,7 +287,7 @@ function all() {
             continue;
         }
 
-        if (force || !fs.existSync("user/cache/locale_" + localesList[locale] + ".json")) {
+        if (force || !fs.existsSync("user/cache/locale_" + localesList[locale] + ".json")) {
             locales();
             break;
         }

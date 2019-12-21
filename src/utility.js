@@ -28,8 +28,8 @@ function getRandomIntEx(max) {
 }
 
 function getDirList(path) {
-    return fs.readdirSync(path).filter(function (file) {
-        return fs.statSync(path+'/'+file).isDirectory();
+    return fs.readdirSync(path).filter(function(file) {
+        return fs.statSync(path + '/' + file).isDirectory();
     });
 }
 

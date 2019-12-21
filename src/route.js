@@ -80,7 +80,7 @@ function hideoutScavcase() {
 }
 
 function templates() {
-    console.log("Caching: templates.json");
+    console.log("Routing: db/templates/");
 
     let inputDir = [
         "db/templates/Categories/",
@@ -107,7 +107,7 @@ function assort() {
     let dirList = utility.getDirList("db/assort/");
 
     for (let trader in dirList) {
-        console.log("Caching: assort_" + dirList[trader]);
+        console.log("Routing: db/assort/" + dirList[trader] + "/");
 
         let assortFilePath = {"items":{}, "barter_scheme":{}, "loyal_level_items":{}};
         let inputDir = [
@@ -135,7 +135,6 @@ function assort() {
         }
 
         filepaths.assort[dirList[trader]] = assortFilePath;
-        filepaths.user.cache["assort_" + dirList[trader]] = "user/cache/assort_" + dirList[trader] + ".json";
     }
 }
 
@@ -162,7 +161,7 @@ function locales() {
             "db/locales/" + locale + "/trading/",
         ];
 
-        console.log("Routing: locale_" + locale + ".json");
+        console.log("Routing: db/locales" + locale + "/");
         
         localeFilepath.menu = "db/locales/" + locale + "/menu.json";
         localeFilepath.interface = "db/locales/" + locale + "/interface.json";
@@ -281,11 +280,11 @@ function cache() {
     filepaths.user.cache.templates = "user/cache/templates.json";
 
     for (let assort in assortList) {
-        filepaths.user.cache[assortList[assort]] = "user/cache/assort_" + localesList[assort] + ".json";
+        filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + localesList[assort] + ".json";
     }
 
     for (let locale in localesList) {
-        filepaths.user.cache[localesList[locale]] = "user/cache/locale_" + localesList[locale] + ".json";
+        filepaths.user.cache["locale_" + localesList[locale]] = "user/cache/locale_" + localesList[locale] + ".json";
     }
 }
 
@@ -356,6 +355,7 @@ function loadMods() {
 }
 
 function routeDatabase() {
+    flush();
     items();
     quests();
     traders();
@@ -384,29 +384,8 @@ function all() {
     // routes are not routed
     if (force || !fs.existsSync("user/cache/filepaths.json")) {
         routeDatabase();
-        dump();
-    }
-
-    // mods haven't been added
-    if (force || settings.mods.currList.length > 0 && settings.mods.prevList == 0) {
-        settings.mods.prevList = settings.mods.currList;
         loadMods();
         dump();
-    }
-
-    // modlist has changed
-    for (let mod in settings.mods.currList) {
-        if (force) {
-            break;
-        }
-
-        if (settings.mods.currList[mod].name != settings.mods.prevList[mod].name || settings.mods.currList[mod].version != settings.mods.prevList[mod].version) {4
-            settings.mods.prevList = settings.mods.currList;
-            routeDatabase();
-            loadMods();
-            dump();
-            break;
-        }
     }
 
     filepaths = json.parse(json.read("user/cache/filepaths.json"));
