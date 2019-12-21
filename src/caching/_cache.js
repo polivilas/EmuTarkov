@@ -118,106 +118,97 @@ function templates() {
     json.write("user/cache/templates.json", base, true);
 }
 
-function assorts() {
-    let dirList = utility.getDirList("db/assort/");
+function assorts(trader) {
+    console.log("Caching: assort_" + trader + ".json");
 
-    for (let trader in dirList) {
-        console.log("Caching: assort_" + dirList[trader] + ".json");
+    let base = json.parse(json.read("db/cache/assort.json"));
+    let inputNode = filepaths.assort[trader]
+    let inputDir = [
+        "items",
+        "barter_scheme",
+        "loyal_level_items"
+    ];
 
-        let base = json.parse(json.read("db/cache/assort.json"));
-        let inputNode = filepaths.assort[dirList[trader]]
-        let inputDir = [
-            "items",
-            "barter_scheme",
-            "loyal_level_items"
-        ];
+    for (let path in inputDir) {
+        let inputFiles = inputNode[inputDir[path]];
+        let inputNames = Object.keys(inputFiles);
+        let i = 0;
 
-        for (let path in inputDir) {
-            let inputFiles = inputNode[inputDir[path]];
-            let inputNames = Object.keys(inputFiles);
-            let i = 0;
+        for (let file in inputFiles) {
+            let filePath = inputFiles[file];
+            let fileName = inputNames[i++];
+            let fileData = json.parse(json.read(filePath));
 
-            for (let file in inputFiles) {
-                let filePath = inputFiles[file];
-                let fileName = inputNames[i++];
-                let fileData = json.parse(json.read(filePath));
-
-                if (path == 0) {
-                    base.data.items.push(fileData);
-                } else if (path == 1) {
-                    base.data.barter_scheme[fileName] = fileData;
-                } else if (path == 2) {
-                    base.data.loyal_level_items[fileName] = fileData;
-                }
+            if (path == 0) {
+                base.data.items.push(fileData);
+            } else if (path == 1) {
+                base.data.barter_scheme[fileName] = fileData;
+            } else if (path == 2) {
+                base.data.loyal_level_items[fileName] = fileData;
             }
         }
-
-        json.write("user/cache/assort_" + dirList[trader] + ".json", base);
     }
+
+    json.write("user/cache/assort_" + trader + ".json", base);
 }
 
-function locales() {
-    let dirList = utility.getDirList("db/locales/");
+function locales(locale) {
+    if (locale == "languages") {
+        return;
+    }
 
-    for (let dir in dirList) {
-        if (dirList[dir] == "languages") {
-            continue;
-        }
+    let base = json.parse(json.read("db/cache/locale.json"));
+    let inputNode = filepaths.locales[locale];
+    let inputDir = [
+        "mail",
+        "quest",
+        "preset",
+        "handbook",
+        "season",
+        "templates",
+        "locations",
+        "banners",
+        "trading",
+    ];
 
-        let base = json.parse(json.read("db/cache/locale.json"));
-        let locale = dirList[dir];
-        let inputNode = filepaths.locales[locale];
-        let inputDir = [
-            "mail",
-            "quest",
-            "preset",
-            "handbook",
-            "season",
-            "templates",
-            "locations",
-            "banners",
-            "trading",
-        ];
+    console.log("Caching: locale_" + locale + ".json");
 
-        console.log("Caching: locale_" + locale + ".json");
+    base.data.interface = json.parse(json.read(inputNode.interface));
+    base.data.error = json.parse(json.read(inputNode.error));
 
-        base.data.interface = json.parse(json.read(inputNode.interface));
-        base.data.error = json.parse(json.read(inputNode.error));
+    for (let path in inputDir) {
+        let inputFiles = inputNode[inputDir[path]];
+        let inputNames = Object.keys(inputFiles);
+        let i = 0;
 
-        for (let path in inputDir) {
-            let inputFiles = inputNode[inputDir[path]];
-            let inputNames = Object.keys(inputFiles);
-            let i = 0;
+        for (let file in inputFiles) {
+            let filePath = inputFiles[file];
+            let fileData = json.parse(json.read(filePath));
+            let fileName = inputNames[i++];
 
-            for (let file in inputFiles) {
-                let filePath = inputFiles[file];
-                let fileData = json.parse(json.read(filePath));
-                let fileName = inputNames[i++];
-
-                if (path == 0) {
-                    base.data.mail[fileName] = fileData;
-                } else if (path == 1) {
-                    base.data.quest[fileName] = fileData;
-                } else if (path == 2) {
-                    base.data.preset[fileName] = fileData;
-                } else if (path == 3) {
-                    base.data.handbook[fileName] = fileData;
-                } else if (path == 4) {
-                    base.data.season[fileName] = fileData;
-                } else if (path == 5) {
-                    base.data.templates[fileName] = fileData;
-                } else if (path == 6) {
-                    base.data.locations[fileName] = fileData;
-                } else if (path == 7) {
-                    base.data.banners[fileName] = fileData;
-                } else if (path == 8) {
-                    base.data.trading[fileName] = fileData;
-                }
+            if (path == 0) {
+                base.data.mail[fileName] = fileData;
+            } else if (path == 1) {
+                base.data.quest[fileName] = fileData;
+            } else if (path == 2) {
+                base.data.preset[fileName] = fileData;
+            } else if (path == 3) {
+                base.data.handbook[fileName] = fileData;
+            } else if (path == 4) {
+                base.data.season[fileName] = fileData;
+            } else if (path == 5) {
+                base.data.templates[fileName] = fileData;
+            } else if (path == 6) {
+                base.data.locations[fileName] = fileData;
+            } else if (path == 7) {
+                base.data.banners[fileName] = fileData;
+            } else if (path == 8) {
+                base.data.trading[fileName] = fileData;
             }
         }
-
-        json.write("user/cache/locale_" + locale + ".json", base, true);
     }
+
+    json.write("user/cache/locale_" + locale + ".json", base, true);
 }
 
 function all() {
@@ -271,8 +262,7 @@ function all() {
 
     for (let assort in assortList) {
         if (force || !fs.existsSync("user/cache/assort_" + assortList[assort] + ".json")) {
-            assorts();
-            break;
+            assorts(assortList[assort]);
         }
     }
 
@@ -282,8 +272,7 @@ function all() {
         }
 
         if (force || !fs.existsSync("user/cache/locale_" + localesList[locale] + ".json")) {
-            locales();
-            break;
+            locales(localesList[locale]);
         }
     }
 
