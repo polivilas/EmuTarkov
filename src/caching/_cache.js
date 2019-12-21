@@ -37,12 +37,12 @@ function genericCacher(cachename, filepathNode) {
             break;
 
             case "locations.json":
-                filename = inputNames[i++];
+                fileName = inputNames[i++];
                 base.data.locations[fileName] = fileData;
             break;
 
             case "customization_outfits.json":
-                filename = inputNames[i++];
+                fileName = inputNames[i++];
                 base.data[fileName] = fileData;
             break;
         }
@@ -68,27 +68,27 @@ function locations() {
 }
 
 function languages() {
-    genericCacher("db/cache/locale_languages.json", filepaths.locales.languages);
+    genericCacher("locale_languages.json", filepaths.locales.languages);
 }
 
 function customizationOutfits() {
-    genericCacher("db/cache/customization_outfits.json", filepaths.customization.outfits);
+    genericCacher("customization_outfits.json", filepaths.customization.outfits);
 }
 
 function customizationOffers() {
-    genericCacher("db/cache/customization_offers.json", filepaths.customization.offers);
+    genericCacher("customization_offers.json", filepaths.customization.offers);
 }
 
 function hideoutAreas() {
-    genericCacher("db/cache/hideout_areas.json", filepaths.hideout.areas);
+    genericCacher("hideout_areas.json", filepaths.hideout.areas);
 }
 
 function hideoutProduction() {
-    genericCacher("db/cache/hideout_production.json", filepaths.hideout.production);
+    genericCacher("hideout_production.json", filepaths.hideout.production);
 }
 
 function hideoutScavcase() {
-    genericCacher("db/cache/hideout_scavcase.json", filepaths.hideout.scavcase);
+    genericCacher("hideout_scavcase.json", filepaths.hideout.scavcase);
 }
 
 function templates() {
