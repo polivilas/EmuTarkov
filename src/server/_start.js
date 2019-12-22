@@ -23,7 +23,9 @@ function sendResponse(req, resp, body) {
 	
 	let output = "";
 
-	constants.setActiveID(getCookies(req)['PHPSESSID']);
+	// in 0.12 game/profile/login is not called, set manually
+	//constants.setActiveID(getCookies(req)['PHPSESSID']);
+	constants.setActiveID(settings.debug.activeId);
 
 	// get response
 	if (req.method === "POST") {
@@ -82,8 +84,6 @@ function sendResponse(req, resp, body) {
 	} else {
 		header_f.sendZlibJson(resp, output);
 	}
-
-	constants.setActiveID(0);
 }
 
 function handleRequest(req, resp) {
