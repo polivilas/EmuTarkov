@@ -5,10 +5,8 @@
 		"port": 443,
 		"generateIp": false
 	},
-	"debug": {
-		"debugMode": true,
-		"examinedByDefault": true,
-		"rebuildCache": false
+	"bots": {
+		"randomized": true
 	},
 	"mods": {
 		"rebuildCache": false,
@@ -20,5 +18,10 @@
 				"enabled": true
 			}
 		]
+	},
+	"debug": {
+		"debugMode": true,
+		"examinedByDefault": true,
+		"rebuildCache": false
 	}
 }
