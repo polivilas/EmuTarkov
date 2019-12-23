@@ -21,14 +21,15 @@ function create(info) {
     let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
     let character = json.parse(json.read("db/profile/character.json"));
     let storage = json.parse(json.read("db/profile/storage.json"));
-    let userBuilds = json.parse(json.read("db/profile/userBuild.json"));
+    let userBuilds = json.parse(json.read("db/profile/userBuilds.json"));
 
-    character._id = '"aid' + constants.getActiveID() + 'pmc"';
-    character.aid = '"' + constants.getActiveID() + '"';
-    character.savage = '"aid' + constants.getActiveID() + 'scav"';
+    character._id = "user" + constants.getActiveID() + "pmc";
+    character.aid = "user" + constants.getActiveID();
+    character.savage = "user" + constants.getActiveID() + "scav";
     character.Info.Nickname = info.nickname;
     character.Info.LowerNickname = info.nickname.toLowerCase();
-    storage.data._id = '"user' + constants.getActiveID() + 'pmc"';
+
+    storage.data._id = "user" + constants.getActiveID() + "pmc";
     
     switch (info.side) {
         case "Bear":
@@ -38,7 +39,7 @@ function create(info) {
             character.Customization.Head = "5cc084dd14c02e000b0550a3";
 
             // storage
-            storage.data.suits = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
+            storage.data.suites = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
         break;
 
         case "Usec":
@@ -48,7 +49,7 @@ function create(info) {
             character.Customization.Head = "5cc084dd14c02e000b0550a3";
 
             //storage
-            storage.data.suits = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
+            storage.data.suites = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
         break;
     }
 
@@ -57,7 +58,6 @@ function create(info) {
     json.write(accountFolder + "storage.json", storage);
     json.write(accountFolder + "userBuilds.json", userBuilds);
     
-
     // don't wipe profile again
     profiles[constants.getActiveID()].wipe = false;
     json.write(filepaths.user.profiles.list, profiles);
@@ -396,7 +396,6 @@ function exist(info) {
 
 function getReservedNickname() {
     let profiles = getProfiles();
-    console.log(profiles[constants.getActiveID()].nickname);
     return profiles[constants.getActiveID()].nickname;
 }
 
