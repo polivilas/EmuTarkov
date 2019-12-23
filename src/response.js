@@ -33,7 +33,7 @@ const staticRoutes = {
     "/client/repair/exec": handleRepair,
     "/client/game/keepalive": handleKeepAlive,
     "/client/game/version/validate": validateGameVersion,
-    "/client/game/config": setupConnection,
+    "/client/game/config": loginUser,
     "/client/customization": getCustomization,
     "/client/trading/customization/5ac3b934156ae10c4430e83c/offers": getCustomizationOffers,
     "/client/trading/customization/579dc571d53a0658a154fbec/offers": getCustomizationOffers,
@@ -124,10 +124,7 @@ function getLocale(url, info) {
 }
 
 function loginUser(url, info) {
-    let output = profile.find(info, backendUrl);
-    
-    console.log(output);
-    return output;
+    return profile.find();
 }
 
 function getQueueStatus(url, info) {
@@ -251,13 +248,6 @@ function handleKeepAlive(url, info) {
 function validateGameVersion(url, info) {
     constants.setVersion(info.version.major);
     return '{"err":0,"errmsg":null,"data":null}';
-}
-
-function setupConnection(url, info) {
-    let output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
-
-    console.log(output);
-    return output;
 }
 
 function getCustomization(info) {

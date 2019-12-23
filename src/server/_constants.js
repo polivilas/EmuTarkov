@@ -20,7 +20,7 @@ function getActiveID() {
 }
 
 function setActiveID(ID) {
-	profileActiveId = ID ? ID : 0;
+	profileActiveId = ID;
 }
 
 module.exports.getActiveID = getActiveID;

@@ -23,9 +23,7 @@ function sendResponse(req, resp, body) {
 	
 	let output = "";
 
-	// in 0.12 game/profile/login is not called, set manually
-	//constants.setActiveID(getCookies(req)['PHPSESSID']);
-	constants.setActiveID(settings.debug.activeId);
+	constants.setActiveID(getCookies(req)['PHPSESSID']);
 
 	// get response
 	if (req.method === "POST") {
