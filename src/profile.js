@@ -397,7 +397,7 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
     item.resetOutput();
     let output = item.getOutput();
 
-    let tmpTrader = json.parse(json.read(filepaths.assort.everything));
+    let tmpTrader = json.parse(json.read(filepaths.user.cache.assort_everything));
 
     for (let item of tmpTrader.data.items) {
         if (item._id === body.item_id) {

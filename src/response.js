@@ -183,7 +183,8 @@ function searchRagfair(url, info) {
 }
 
 function getAvailableMatch(url, info) {
-    return '{"err":404, "errmsg":"JustEmuTarkov Not supports online matching. Please use offline match.\n", "data":false}';
+    return '{"err":404, "errmsg":"EmuTarkov-0.8.0 does not supports online raids. Please use offline match.\n", "data":false}';
+    //return '{"err":0, "errmsg":null, "data":true}';
 }
 
 function joinMatch(url, info) {
