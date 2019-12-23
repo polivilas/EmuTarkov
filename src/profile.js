@@ -137,29 +137,12 @@ function saveProfileProgress(offRaidData) {
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
     //replace all these GClasses shit
-    let replaceConfig = ""; //json.parse(json.read(("database/configs/offlineProgressionReplacer.json"));
+    let replaceConfig = json.parse(json.read("db/offlineProgression.json"));
     let keys = Object.keys(replaceConfig);
     
     for (let iterate = 0; iterate < keys.length; iterate++) {
         string_inventory = string_inventory.replace(new RegExp(keys[iterate], 'g'), replaceConfig[keys[iterate]]);
     }
-
-    /* version 3333 - offlineProgressionReplacer.json
-    {
-        "GClass798": "Sight",
-        "GClass795": "Repairable",
-        "GClass780": "Foldable",
-        "GClass779": "FireMode",
-        "GClass791": "MedKit",
-        "GClass781": "FoodDrink",
-        "GClass778": "FaceShield",
-        "GClass800": "Togglable",
-        "GClass786": "Keycard",
-        "GClass799": "Tag",
-        "GClass788": "Light",
-        "GClass000": "Dogtag" ??? unknownGCLASS for 3333 version
-    }
-    */
 
     //and then re-parse the string into an object preparing to replace ID fix
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);

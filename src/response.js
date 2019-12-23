@@ -54,7 +54,7 @@ const staticRoutes = {
     "/client/match/group/exit_from_menu": nullResponse,
     "/client/match/exit": nullResponse,
     "/client/match/updatePing": nullResponse,
-    "/client/game/profile/savage/regenerate": nullResponse,
+    "/client/game/profile/savage/save": nullResponse,
     "/client/mail/dialog/list": nullArrayResponse,
     "/client/friend/request/list/outbox": nullArrayResponse,
     "/client/friend/request/list/inbox": nullArrayResponse

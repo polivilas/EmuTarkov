@@ -174,7 +174,7 @@ function start() {
 
 	// show our watermark
 	let text_1 = "JustEmuTarkov " + constants.serverVersion();
-	let text_2 = "Website: https://justemutarkov.github.io/";
+	let text_2 = "https://justemutarkov.github.io/";
 	let diffrence = Math.abs(text_1.length - text_2.length);
 	let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length:text_2.length);
 	let box_spacing_between_1 = "";
@@ -204,14 +204,14 @@ function start() {
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		handleRequest(req, res);
 	}).listen(443, ip, function() {
-		console.log("» Server url: " + "https://" + ip, "green", "", true);
+		console.log("» 0.12.1.5208 server url: " + "https://" + ip, "green", "", true);
 	});
 
 	// create HTTP server (port 80)
 	let serverHTTP = http.createServer(options, (req, res) => {
 		handleRequest(req, res);
 	}).listen(80, ip, function() {
-		console.log("» Server url: " + "http://" + ip, "green", "", true);
+		console.log("» 0.11.7.4711 server url: " + "http://" + ip, "green", "", true);
 	});
 	
 	// server already running
