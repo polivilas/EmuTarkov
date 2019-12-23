@@ -46,7 +46,7 @@ function create(info) {
             // profile
             character.Info.Side = "Usec";
             character.Info.Voice = "Usec_1";
-            character.Customization.Head = "5cc084dd14c02e000b0550a3";
+            character.Customization.Head = "5cde96047d6c8b20b577f016";
 
             //storage
             storage.data.suites = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];

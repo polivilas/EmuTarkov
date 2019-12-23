@@ -150,7 +150,7 @@ function selectProfile(url, info) {
 }
 
 function getProfileStatus(url, info) {
-    return '{"err":0, "errmsg":null, "data":[{"profileid":"scavuser' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"pmcuser' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}]}';
+    return '{"err":0, "errmsg":null, "data":[{"profileid":"user' + constants.getActiveID() + 'scav", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"user' + constants.getActiveID() + 'pmc", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 }
 
 function getWeather(url, info) {
@@ -252,17 +252,8 @@ function validateGameVersion(url, info) {
     return '{"err":0,"errmsg":null,"data":null}';
 }
 
-/*
 function setupConnection(url, info) {
-    let output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "5c71b934354682353958e984", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
-
-    console.log(output);
-    return output;
-}
-*/
-
-function setupConnection(url, info) {
-    let output = '{"err":0,"errmsg":null,"data":{"aid":"user' + constants.getActiveID() + '","lang":"en","languages":{"en":"English","fr":"French","ge":"German","ru":"Русский"},"ndaFree":false,"taxonomy":341,"activeProfileId":"user' + constants.getActiveID() + 'pmc","backend":{"Trading":"' + backendUrl + '","Messaging":"' + backendUrl + '","Main":"' + backendUrl + '","RagFair":"' + backendUrl + '"},"utc_time":1576515757.485,"totalInGame":0,"twitchEventMember":false}}';
+    let output = '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 
     console.log(output);
     return output;
@@ -358,7 +349,8 @@ function validateNickname(url, info) {
 
 function createProfile(url, info) {
     profile.create(info);
-    return '{"err":0,"errmsg":null,"data":{"uid":"' + constants.getActiveID() + '"';
+    console.log('{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}')
+    return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
 }
 
 function getResponse(req, body) {
