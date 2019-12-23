@@ -114,8 +114,6 @@ function getFriendList(url, info) {
 
 function handleItems(url, info) {
     let output = item.moving(info);
-
-    console.log(output);
     return output;
 }
 
@@ -308,7 +306,6 @@ function validateNickname(url, info) {
 
 function createProfile(url, info) {
     profile.create(info);
-    console.log('{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}')
     return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
 }
 
