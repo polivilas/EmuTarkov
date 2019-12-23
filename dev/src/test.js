@@ -1,14 +1,15 @@
 ﻿process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; // ignore selfsigned ssl certificate
+
 const fs = require('fs');
-const request = require('request');
 const zlib = require('zlib');
 const https = require('https');
 let integer = 0;
-var gameVersion = '0.12.0.5054';
+let gameVersion = '0.12.1.5208';
 
 function readJson(file) { //read json file with deleting all tabulators and new lines
     return (fs.readFileSync(file, 'utf8')).replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '');
 }
+
 function send(url, _port = 443, path, data, type = "POST"){
 	return new Promise ((resolve, reject) => {
 		const options = { // options for https data it must stay like this
@@ -26,9 +27,9 @@ function send(url, _port = 443, path, data, type = "POST"){
 		};
 
 		integer++; // add integer number to request counting requests and also making their stupid RequestId Counter
+
 		zlib.deflate(data, function (err, buffer) { // this is kinda working
 			const req = https.request(options, (res) => { // request https data with options above
-				
 				console.log("  ["+integer+"]"+((integer < 10)?" ":"")+"> [Response Status Code]: " + res.statusCode + " »»" + path);
 
 				if(res.statusCode != 200){ 
@@ -36,26 +37,33 @@ function send(url, _port = 443, path, data, type = "POST"){
 				}
 				
 				let chunks = [];
+
 				res.on('data', (d) => {
 					chunks.push(d);
 				});
+
 				res.on('end', function(){
 					resolve(Buffer.concat(chunks));
 				});
-				
 			});
+
 			// return error if error on request
 			req.on('error', err => {
 				reject(err); 
 			});
+
 			req.write(buffer);
 			req.end();
 		});
 	});
 }
 
-async function testServer(){
+async function testServer() {
 	console.log("\nSERVER TESTER STARTING...");
+
+	let settings = JSON.parse(readJson(__dirname + "/../../user/server.config.json"));
+	const url = settings.server.ip;
+	const port = 443;
 	const path = [
 	/* 0	*/	"/",
 	/* 1	*/	"/client/languages",
@@ -79,15 +87,14 @@ async function testServer(){
 	/* 19	*/	"/client/friend/request/list/inbox",
 	/* 20	*/	"/client/friend/request/list/outbox",
 	/* 21	*/	"/client/server/list",
-	/* 22	*/	"/client/trading/api/getTradersList"//,
-	/* 	*/ //	""
+	/* 22	*/	"/client/trading/api/getTradersList"
 	];
 	const data = [
 	/* 0	*/	"",
 	/* 1	*/	'{"crc":0}',
 	/* 2	*/	'{"crc":0}',
-	/* 3	*/	'{"version":{"major":"0.11.7.4174","minor":"live","game":"live","backend":"6","taxonomy":"341"},"develop":true}',
-	/* 4	*/	'{"email":"user0@jet.com","pass":"5f4dcc3b5aa765d61d8327deb882cf99","version":{"major":"0.11.7.4174","minor":"live","game":"live","backend":"6","taxonomy":"341"},"device_id":"7ae28fd31fd437b6085385aede3141ae","develop":true,"sec":1}',
+	/* 3	*/	'{"version":{"major":"' + gameVersion + '","minor":"live","game":"live","backend":"6","taxonomy":"341"},"develop":true}',
+	/* 4	*/	'{"email":"user@jet.com","pass":"5f4dcc3b5aa765d61d8327deb882cf99","version":{"major":"' + gameVersion + '","minor":"live","game":"live","backend":"6","taxonomy":"341"},"device_id":"7ae28fd31fd437b6085385aede3141ae","develop":true,"sec":1}',
 	/* 5	*/	'{}',
 	/* 6	*/	'{"crc":1074351527}',
 	/* 7	*/	'{"crc":0}',
@@ -105,13 +112,10 @@ async function testServer(){
 	/* 19	*/	'{}',
 	/* 20	*/	'{}',
 	/* 21	*/	'{}',
-	/* 22	*/	'{}'//,
-	/* 	*/	//'{}'
+	/* 22	*/	'{}'
 	];
-	let settings = JSON.parse(readJson(__dirname + "/../../user/server.config.json"));
-	const url = settings.server.ip;
-	const port = settings.server.port;
-	for(let i = 0; i < path.length; i++){
+
+	for (let i = 0; i < path.length; i++) {
 		try {
 			let res = await send(url, port, path[i], data[i]);
 			console.log("  Status of request: " + ((res.length > 0)?"[OK] ":"[BAD]"));
@@ -119,7 +123,6 @@ async function testServer(){
 		} catch (err) {
 			console.log("»SCRIPT ERROR » " + path[i], err);
 		}
-		
 	}
 }
 
