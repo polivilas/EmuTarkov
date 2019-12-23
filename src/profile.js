@@ -6,9 +6,61 @@ function getProfiles() {
     return json.parse(json.read(filepaths.user.profiles.list));
 }
 
+function isProfileWiped() {
+    let profiles = getProfiles();
+    return !profiles[constants.getActiveID()].wipe;
+}
+
 function getProfileDataPath() {
     let profilePath = filepaths.user.profiles.character;
     return profilePath.replace("__REPLACEME__", constants.getActiveID());
+}
+
+function create(info) {
+    let profiles = getProfiles();
+    let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
+    let character = json.parse(json.read("db/profile/character.json"));
+    let storage = json.parse(json.read("db/profile/storage.json"));
+    let userBuilds = json.parse(json.read("db/profile/userBuild.json"));
+
+    character._id = '"aid' + constants.getActiveID() + 'pmc"';
+    character.aid = '"' + constants.getActiveID() + '"';
+    character.savage = '"aid' + constants.getActiveID() + 'scav"';
+    character.Info.Nickname = info.nickname;
+    character.Info.LowerNickname = info.nickname.toLowerCase();
+    storage.data._id = '"user' + constants.getActiveID() + 'pmc"';
+    
+    switch (info.side) {
+        case "Bear":
+            // profile
+            character.Info.Side = "Bear";
+            character.Info.Voice = "Bear_1";
+            character.Customization.Head = "5cc084dd14c02e000b0550a3";
+
+            // storage
+            storage.data.suits = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
+        break;
+
+        case "Usec":
+            // profile
+            character.Info.Side = "Usec";
+            character.Info.Voice = "Usec_1";
+            character.Customization.Head = "5cc084dd14c02e000b0550a3";
+
+            //storage
+            storage.data.suits = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
+        break;
+    }
+
+    // create profile
+    json.write(accountFolder + "character.json", character);
+    json.write(accountFolder + "storage.json", storage);
+    json.write(accountFolder + "userBuilds.json", userBuilds);
+    
+
+    // don't wipe profile again
+    profiles[constants.getActiveID()].wipe = false;
+    json.write(filepaths.user.profiles.list, profiles);
 }
 
 function loadTraderStandings(playerData = "") {
@@ -181,18 +233,23 @@ function saveProfileProgress(offRaidData) {
 }
 
 function getCharacterData() {
+    let ret = {err: 0, errmsg: null, data: []}; 
+
+    // creating profile for first time
+    if (!isProfileWiped()) {
+        return ret;
+    }
+
     // create full profile data from simplified character data
     let playerData = json.parse(json.read(getProfileDataPath()));
     let scavData = bots.generatePlayerScav();
     
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
-
-    let ret = {err: 0, errmsg: null, data: []};
-    
     ret.data.push(playerData);
-    ret.data.push(scavData);
- 	//ret = loadTraderStandings(ret);
+    ret.data.push(scavData);     
+    ret = loadTraderStandings(ret);
+
     return ret;
 }
 
@@ -335,6 +392,12 @@ function exist(info) {
     }
 
     return -1;
+}
+
+function getReservedNickname() {
+    let profiles = getProfiles();
+    console.log(profiles[constants.getActiveID()].nickname);
+    return profiles[constants.getActiveID()].nickname;
 }
 
 function nicknameExist(info) {
@@ -532,10 +595,13 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
     return "";
 }
 
+module.exports.isProfileWiped = isProfileWiped;
+module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
 module.exports.getPurchasesData = getPurchasesData;
 module.exports.getStashType = getStashType;
+module.exports.getReservedNickname = getReservedNickname;
 module.exports.changeNickname = changeNickname;
 module.exports.changeVoice = changeVoice;
 module.exports.find = find;
