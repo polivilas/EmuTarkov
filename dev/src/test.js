@@ -73,7 +73,7 @@ async function testServer() {
 	/* 5	*/	"/client/game/keepalive",
 	/* 6	*/	"/client/items",
 	/* 7	*/	"/client/globals",
-	/* 8	*/	"/client/game/profile/list",
+//	/* 8	*/	"/client/game/profile/list",
 	/* 9	*/	"/client/locations",
 	/* 10	*/	"/client/weather",
 	/* 11	*/	"/client/locale/en",
