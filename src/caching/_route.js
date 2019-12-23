@@ -83,8 +83,8 @@ function templates() {
     console.log("Routing: db/templates/");
 
     let inputDir = [
-        "db/templates/Categories/",
-        "db/templates/Items/"
+        "db/templates/categories/",
+        "db/templates/items/"
     ];
 
     for (let path in inputDir) {
