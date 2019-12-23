@@ -70,6 +70,7 @@ const dynamicRoutes = {
     "/client/trading/api/getTraderAssort/": getAssort,
     "/client/menu/locale/": getMenuLocale,
     "/client/locale/": getGlobalLocale,
+    "/server/profile/get/": getProfileById,
     "/notifierBase": nullArrayResponse,
     "/notifierServer": nullArrayResponse,
     "/push/notifier/get/": nullArrayResponse
@@ -306,6 +307,21 @@ function createNotifierChannel(url, info) {
     return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"' + backendUrl + '","channel_id":"testChannel","url":"' + backendUrl + '/notifierBase"},"notifierServer":"' + backendUrl + '/notifierServer"}}';
 }
 
+function getReservedNickname(url, info) {
+    return '{"err":0,"errmsg":null,"data":"' + profile.getReservedNickname() + '"}';
+}
+
+function validateNickname(url, info) {
+    // todo: validate nickname properly
+    return '{"err":0,"errmsg":null,"data":{"status":"ok"}}';
+}
+
+function createProfile(url, info) {
+    profile.create(info);
+    console.log('{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}')
+    return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
+}
+
 function getMapLocation(url, info) {
     return "MAPCONFIG";
 }
@@ -338,19 +354,8 @@ function getGlobalLocale(url, info) {
     return locale.getGlobal(url.replace("/client/locale/", ''));
 }
 
-function getReservedNickname(url, info) {
-    return '{"err":0,"errmsg":null,"data":"' + profile.getReservedNickname() + '"}';
-}
-
-function validateNickname(url, info) {
-    // todo: validate nickname properly
-    return '{"err":0,"errmsg":null,"data":{"status":"ok"}}';
-}
-
-function createProfile(url, info) {
-    profile.create(info);
-    console.log('{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}')
-    return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
+function getProfileById(url, body) {
+    return "GETPROFILEBYID";
 }
 
 function getResponse(req, body) {

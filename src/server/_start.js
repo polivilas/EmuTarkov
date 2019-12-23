@@ -38,17 +38,6 @@ function sendResponse(req, resp, body) {
 	if (output === "DONE") {
 		return;
 	}
-	
-	if (output === "MAPCONFIG") {
-		let mapname = req.url.replace("/api/location/", "");		
-		let RandomPreset = utility.getRandomInt(1, 6);
-		console.log(mapname.toLowerCase());
-		let map = json.read(filepaths.maps[mapname.toLowerCase() + RandomPreset]);
-		
-		console.log("[MAP.config]: " + mapname);
-		header_f.sendTextJson(resp, map);
-		return;
-	}
 
 	if (output === "IMAGE") {
 		let splittedUrl = req.url.split('/');
@@ -77,6 +66,26 @@ function sendResponse(req, resp, body) {
 
 		header_f.sendFile(resp, filepath);
 		return;
+	}
+
+	if (output === "MAPCONFIG") {
+		let mapname = req.url.replace("/api/location/", "");		
+		let RandomPreset = utility.getRandomInt(1, 6);
+		console.log(mapname.toLowerCase());
+		let map = json.read(filepaths.maps[mapname.toLowerCase() + RandomPreset]);
+		
+		console.log("[MAP.config]: " + mapname);
+		header_f.sendTextJson(resp, map);
+		return;
+	}
+
+	if (output === "GETPROFILEBYID") {
+		let profileIdRequested = req.url.replace("/server/profile/get/", '');
+   		let profileData = profile.getProfileByID(profileIdRequested);
+
+   		console.log("Profile Requested By the game : " + profileIdRequested);
+   		header_f.sendTextJson(resp, profileData);
+   		return;
 	}
 
 	if (req.url === "/" || req.url === "/inv") {

@@ -11,9 +11,14 @@ function isProfileWiped() {
     return !profiles[constants.getActiveID()].wipe;
 }
 
-function getProfileDataPath() {
+function getProfile() {
     let profilePath = filepaths.user.profiles.character;
     return profilePath.replace("__REPLACEME__", constants.getActiveID());
+}
+
+function getProfileById(profileID) {
+    let profilePath = filepaths.user.profiles.character;
+    return json.parse(json.read(profilePath.replace("__REPLACEME__", profileID)));
 }
 
 function create(info) {
@@ -241,7 +246,7 @@ function getCharacterData() {
     }
 
     // create full profile data from simplified character data
-    let playerData = json.parse(json.read(getProfileDataPath()));
+    let playerData = json.parse(json.read(getProfile()));
     let scavData = bots.generatePlayerScav();
     
     scavData._id = playerData.savage;
@@ -254,7 +259,7 @@ function getCharacterData() {
 }
 
 function getStashType() {
-    let temp = json.parse(json.read(getProfileDataPath()));
+    let temp = json.parse(json.read(getProfile()));
     
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
@@ -271,7 +276,7 @@ function setCharacterData(data) {
         data = data.data[0];
     }
 
-    json.write(getProfileDataPath(), data);
+    json.write(getProfile(), data);
 }
 
 function addChildPrice(data, parentID, childPrice) {
@@ -291,7 +296,7 @@ function addChildPrice(data, parentID, childPrice) {
 
 function getPurchasesData() {
     let multiplier = 0.9;
-    let data = json.parse(json.read(getProfileDataPath()));
+    let data = json.parse(json.read(getProfile()));
     
     items = items_f.prepareItems();
 
@@ -403,7 +408,7 @@ function nicknameExist(info) {
     let profiles = getProfiles();
 
     for (let i = 0; i < profiles.length; i++) {
-        let profile = json.parse(json.read(getProfileDataPath()));
+        let profile = json.parse(json.read(getProfile()));
 
         if (profile.Info.Nickname === info.nickname) {
             return true;
@@ -595,6 +600,7 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
 }
 
 module.exports.isProfileWiped = isProfileWiped;
+module.exports.getProfileById = getProfileById;
 module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
