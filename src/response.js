@@ -142,7 +142,12 @@ function getProfileData(url, info) {
 }
 
 function selectProfile(url, info) {
-    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"' + backendUrl + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+    if (constants.gameVersion() === "0.12.1.5208") {
+        return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+    } else if (constants.gameVersion() === "0.11.7.4711") {
+        return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"http://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+    }
+    
 }
 
 function getProfileStatus(url, info) {
@@ -178,6 +183,14 @@ function getTraderList(url, info) {
 }
 
 function getServer(url, info) {
+    let port = 0;
+
+    if (constants.gameVersion() === "0.12.1.5208") {
+        port = 443;
+    } else if (constants.gameVersion() === "0.11.7.4711") {
+        port = 80;
+    }
+
     return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + port + '"}]}';
 }
 
@@ -192,28 +205,18 @@ function getAvailableMatch(url, info) {
 
 function joinMatch(url, info) {
     let shortid = "";
+    let profileId = "";
 
     // check if the player is a scav
     if (info.savage === true) {
         shortid = "3XR5";
+        profileId = "user" + constants.getActiveID() + "scav";
     } else {
         shortid = "3SRC";
+        profileId = "user" + constants.getActiveID() + "pmc";
     }
 
-    return JSON.stringify({
-        "err": 0,
-        "errmsg": null,
-        "data": [{
-            "profileid": "5c71b934354682353958e983",
-            "status": "busy",
-            "ip": "",
-            "port": 0,
-            "location": info.location,
-            "sid": "",
-            "gamemode": "deathmatch",
-            "shortid": shortid
-        }]
-    });
+    return JSON.stringify({"err": 0, "errmsg": null, "data": [{"profileid": profileId, "status": "busy", "ip": "", "port": 0, "location": info.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid}]});
 }
 
 function getChatServerList(url, info) {
@@ -292,7 +295,11 @@ function getHandbookUserlist(url, info) {
 }
 
 function createNotifierChannel(url, info) {
-    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"' + backendUrl + '","channel_id":"testChannel","url":"' + backendUrl + '/notifierBase"},"notifierServer":"' + backendUrl + '/notifierServer"}}';
+    if (constants.gameVersion() === "0.12.1.5208") {
+        return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '","channel_id":"testChannel","url":"https://' + ip + '/notifierBase"},"notifierServer":"https://' + ip + '/notifierServer"}}';
+    } else if (constants.gameVersion() === "0.11.7.4711") {
+        return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"http://' + ip + '","channel_id":"testChannel","url":"http://' + ip + '/notifierBase"},"notifierServer":"http://' + ip + '/notifierServer"}}';
+    }
 }
 
 function getReservedNickname(url, info) {
@@ -361,7 +368,6 @@ function getResponse(req, body) {
     }
 
     // handle static requests
-    // NoHurry: fair enough, this _seems_ to work tho, would reduce overhad alot if it really does  ;)
 	if (typeof staticRoutes[url] !== "undefined") {
         return staticRoutes[url](url, info);
     }

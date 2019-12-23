@@ -1,8 +1,6 @@
 {
 	"server": {
-		"backendUrl": "https://127.0.0.1",
 		"ip": "127.0.0.1",
-		"port": 443,
 		"generateIp": false
 	},
 	"bots": {
@@ -15,13 +13,13 @@
 			{
 				"name": "Duelo-M4HoneyBadger",
 				"version": "1.1.0",
-				"enabled": true
+				"enabled": false
 			}
 		]
 	},
 	"debug": {
 		"debugMode": true,
-		"examinedByDefault": true,
+		"examinedByDefault": false,
 		"rebuildCache": false,
 		"activeId": 1
 	}

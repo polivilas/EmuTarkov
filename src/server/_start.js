@@ -162,18 +162,14 @@ function start() {
 		key: fs.readFileSync(filepaths.cert.server.key)
 	};
 
-	// set the ip and backendurl 
-	port = settings.server.port;
+	// set the ip
 	ip = settings.server.ip;
-	settings.debug.rebuildCache = false;
 	
 	if (settings.server.generateIp == true) {
         ip = utility.getLocalIpAddress();
 		settings.server.ip = ip; 
 	}
-	
-	settings.server.backendUrl = "https://" + ip;
-	backendUrl = settings.server.backendUrl;
+
 	json.write(filepaths.user.config, settings);
 
 	// show our watermark
@@ -204,17 +200,29 @@ function start() {
 	console.log("║ " + text_2 + box_spacing_between_2 + " ║", "cyan", "");
 	console.log("╚═" + box_width + "═╝", "cyan", "");
 
-	// create server
+	// create HTTPS server (port 443)
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		handleRequest(req, res);
-	}).listen(port, ip, function() {
-		console.log("» Server url: " + backendUrl, "green", "", true);
+	}).listen(443, ip, function() {
+		console.log("» Server url: " + "https://" + ip, "green", "", true);
+	});
+
+	// create HTTP server (port 80)
+	let serverHTTP = http.createServer(options, (req, res) => {
+		handleRequest(req, res);
+	}).listen(80, ip, function() {
+		console.log("» Server url: " + "http://" + ip, "green", "", true);
 	});
 	
-	// ERROR ON CREATION - HTTPS
+	// server already running
 	serverHTTPS.on('error', function (e) {
 		console.log(e);
-		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
+		console.log("» Port " + 443 + " is already in use. Check if console isnt already open or change port", "red", "");
+	});
+	
+	serverHTTP.on('error', function (e) {
+		console.log(e);
+		console.log("» Port " + 80 + " is already in use. Check if console isnt already open or change port", "red", "");
     });
 }
 
