@@ -133,14 +133,9 @@ function saveProfileProgress(offRaidData) {
     currentProfile.data[1].Quests = offRaidProfile.Quests;
     //currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
 
-    //work with a string instead of looping through data, less code, less ressources, faster
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
-    //and then re-parse the string into an object preparing to replace ID fix
-    offRaidProfile.Inventory.items = JSON.parse(string_inventory);
-
-    // replace bsg shit long ID with proper one
     for (let recalID in offRaidProfile.Inventory.items) {
         if (offRaidProfile.Inventory.items.hasOwnProperty(recalID)) {
             //do not replace important ID's
