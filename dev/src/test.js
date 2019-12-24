@@ -87,7 +87,8 @@ async function testServer() {
 	/* 19	*/	"/client/friend/request/list/inbox",
 	/* 20	*/	"/client/friend/request/list/outbox",
 	/* 21	*/	"/client/server/list",
-	/* 22	*/	"/client/trading/api/getTradersList"
+	/* 22	*/	"/client/trading/api/getTradersList",
+	/* 23	*/	"/OfflineRaidSave"
 	];
 	const data = [
 	/* 0	*/	"",
@@ -112,7 +113,8 @@ async function testServer() {
 	/* 19	*/	'{}',
 	/* 20	*/	'{}',
 	/* 21	*/	'{}',
-	/* 22	*/	'{}'
+	/* 22	*/	'{}',
+	/* 23	*/	readJson(__dirname + "/../db/offlineRaidProfile.json")
 	];
 
 	for (let i = 0; i < path.length; i++) {
