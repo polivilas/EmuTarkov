@@ -35,32 +35,35 @@ function sendResponse(req, resp, body) {
 		let splittedUrl = req.url.split('/');
 		let filepath = "";
 		let file = splittedUrl[splittedUrl.length - 1];
+		let baseNode = undefined;
 
 		file = file.replace(".jpg", "").replace(".png", "");
 
 		if (req.url.indexOf("/quest") != -1) {
 			console.log("[IMG.quests]:" + req.url);
+			baseNode = filepaths.images.quest;
 		} else if (req.url.indexOf("/handbook") != -1) {
 			console.log("[IMG.handbook]:" + req.url);
+			baseNode = filepaths.images.handbook;
 		} else if (req.url.indexOf("/avatar") != -1) {
 			console.log("[IMG.trader]:" + req.url);
+			baseNode = filepaths.images.trader;
 		} else if (req.url.indexOf("/banners") != -1) {
 			console.log("[IMG.banners]:" + req.url);
+			baseNode = filepaths.images.banners;
 		} else {
-			// hideout
 			console.log("[IMG.hideout]:" + req.url);
+			baseNode = filepaths.images.hideout;
 		}
 
-		// traders
-		let keys = Object.keys(filepaths.images.trader);
+		let keys = Object.keys(baseNode);
 
 		for (let i = 0; i < keys.length; i++) {
 			let key = keys[i];
-			console.log(key, " ", filepaths.images.trader[key]);
+			console.log(key, " ", baseNode[key]);
 
 			if (key == file) {
-				console.log("file matches!")
-				filepath = filepaths.images.trader[key];
+				filepath = baseNode[key];
 				break;
 			}
 		}
