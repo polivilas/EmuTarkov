@@ -40,20 +40,27 @@ function sendResponse(req, resp, body) {
 
 		if (req.url.indexOf("/quest") != -1) {
 			console.log("[IMG.quests]:" + req.url);
-			filepath = filepaths.images.quest[file];
 		} else if (req.url.indexOf("/handbook") != -1) {
 			console.log("[IMG.handbook]:" + req.url);
-			filepath = filepaths.images.handbook[file];
 		} else if (req.url.indexOf("/avatar") != -1) {
 			console.log("[IMG.trader]:" + req.url);
-			filepath = filepaths.images.trader[file];
 		} else if (req.url.indexOf("/banners") != -1) {
 			console.log("[IMG.banners]:" + req.url);
-			filepath = filepaths.images.banners[file];
 		} else {
 			// hideout
 			console.log("[IMG.hideout]:" + req.url);
-			filepath = filepaths.images.hideout[file];
+		}
+
+		// traders
+		let keys = Object.keys(yourObject);
+
+		for (let i = 0; i < keys.length; i++){
+			let key = keys[i];
+			console.log(key, filepaths.images.trader[key]);
+
+			if (key == file) {
+				filepath = filepaths.images.trader[key];
+			}
 		}
 
 		header_f.sendFile(resp, filepath);
