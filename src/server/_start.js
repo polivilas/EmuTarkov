@@ -119,24 +119,20 @@ function handleRequest(req, resp) {
 			// extract data
 			zlib.inflate(data, function(err, body) {
 				if (req.url == "/OfflineRaidSave") {
-					// save loot if lootSaving is enabled - created on community requests
-					if (settings.server.lootSaving == true) {
-						let PreparedStringData = data.toString().replace(/(\\r\\n)+/g, "").replace(/(\\)+/g, "");
-						let parseBody = JSON.parse(PreparedStringData);
+					let PreparedStringData = body.toString().replace(/(\\r\\n)+/g, "").replace(/(\\)+/g, "");
+					let parseBody = JSON.parse(PreparedStringData);
 
-						//get aid from requested profile and set it to active profile
-						constants.setActiveID(parseBody.aid);
+					//get aid from requested profile and set it to active profile
+					constants.setActiveID(parseBody.aid);
 
-						// get the IP address of the client
-						console.log("[SAVE_PROFILE][ProfileID:" + parseBody.aid + "]" + ActiveProfile, "cyan");
+					// get the IP address of the client
+					console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");
 
-						if (settings.debug.debugMode == true) {
-							console.log(parseBody);
-						}
-
-						profile.saveProfileProgress(parseBody);
+					if (settings.debug.debugMode == true) {
+						console.log(parseBody);
 					}
 
+					profile.saveProfileProgress(parseBody);
 					return;
 				} else {
 					body = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
