@@ -164,9 +164,21 @@ function start() {
 	}).listen(port, ip, function() {
 		console.log("» 0.12.1.5208 server url: " + "https://" + ip + "/", "green", "", true);
 	});
+
+	// create HTTP server for image handling
+	let serverHTTP = http.createServer(options, (req, res) => {
+		handleRequest(req, res);
+	}).listen(80, ip, function() {
+		console.log("» 0.12.1.5208 server url: " + "https://" + ip + "/", "green", "", true);
+	});
 	
 	// server already running
 	serverHTTPS.on('error', function (e) {
+		console.log(e);
+		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
+	});
+
+	serverHTTP.on('error', function (e) {
 		console.log(e);
 		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
 	});
