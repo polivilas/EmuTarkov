@@ -139,7 +139,7 @@ function handleRequest(req, resp) {
 			} else {
 				// extract data
 				zlib.inflate(data, function(err, body) {
-					body = ((body !== null && body != "" && body != "{}")?body.toString():"{}");
+					body = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
 					// get the IP address of the client
 					let URL = "" + req.url + "";
