@@ -162,14 +162,14 @@ function start() {
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		handleRequest(req, res);
 	}).listen(port, ip, function() {
-		console.log("» 0.12.1.5208 server url: " + "https://" + ip + "/", "green", "", true);
+		console.log("» game server url: " + "https://" + ip + "/", "green", "", true);
 	});
 
 	// create HTTP server for image handling
 	let serverHTTP = http.createServer(options, (req, res) => {
 		handleRequest(req, res);
 	}).listen(80, ip, function() {
-		console.log("» 0.12.1.5208 server url: " + "https://" + ip + "/", "green", "", true);
+		console.log("» image server url: " + "http://" + ip + "/", "green", "", true);
 	});
 	
 	// server already running
@@ -180,7 +180,7 @@ function start() {
 
 	serverHTTP.on('error', function (e) {
 		console.log(e);
-		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
+		console.log("» Port " + 80 + " is already in use. Check if console isnt already open or change port", "red", "");
 	});
 }
 
