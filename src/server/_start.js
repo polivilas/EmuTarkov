@@ -16,14 +16,8 @@ function getCookies(req) {
     return found;
 }
 
-function sendResponse(req, resp, body) {
-	if (req.url === "/OfflineRaidSave") {
-		return;
-	}
-	
+function sendResponse(req, resp, body) {	
 	let output = "";
-
-	constants.setActiveID(getCookies(req)['PHPSESSID']);
 
 	// get response
 	if (req.method === "POST") {
@@ -33,7 +27,7 @@ function sendResponse(req, resp, body) {
 	}
 	
 	// prepare message to send
-	if (output === "DONE") {
+	if (output === "DONE" || req.url === "/OfflineRaidSave") {
 		return;
 	}
 
