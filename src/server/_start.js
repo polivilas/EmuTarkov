@@ -103,7 +103,7 @@ function handleRequest(req, resp) {
 			zlib.inflate(data, function(err, body) {
 				if (req.url == "/OfflineRaidSave" && settings.server.lootSaving) {
 					//get aid from requested profile and set it to active profile
-					parsedBody = JSON.parse(parsedBody);
+					let parsedBody = JSON.parse(parsedBody);
 
 					constants.setActiveID(parsedBody.aid.replace("user", ""));
 
