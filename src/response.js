@@ -315,7 +315,7 @@ function offlineRaidSave(url, info) {
         return "DONE";
     }
 
-    constants.setActiveID(info.aid.replace("user", ""));
+    constants.setActiveID(info.profile.aid.replace("user", ""));
     profile.saveProfileProgress(info);
     return "DONE";
 }
