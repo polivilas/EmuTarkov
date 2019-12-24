@@ -78,34 +78,23 @@ function completeQuest(tmpList, body)
                         tmpList.data[0].Info.Experience += parseInt(reward.value);
                         profile.setCharacterData(tmpList);
                         tmpList = profile.getCharacterData();// update it because it will be overrided otherwise
-
                         break;
 
                     case "TraderStanding":
+                        let traderLoyalty = tmpTraderInfo.data.loyalty;
+
+                        traderLoyalty.currentStanding += parseFloat(reward.value);
+                        trader.get(reward.target).data.loyalty = traderLoyalty;
+    
+                        let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
+    
+                        for (let lvlUpTrader in newLvlTraders) {
+                            tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
+                        }
+    
+                        tmpList.data[0].TraderStandings[reward.target].currentStanding += reward.value;
                         break;
-
                 }
-                /*
-                let tmpTraderInfo = trader.get(reward.target);
-                if (tmpTraderInfo.err === 0) 
-                {
-                    let traderLoyalty = tmpTraderInfo.data.loyalty;
-                    traderLoyalty.currentStanding += parseFloat(reward.value);
-                    trader.get(reward.target).data.loyalty = traderLoyalty;
-                    let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
-
-                    for (let lvlUpTrader in newLvlTraders) 
-                    {
-                        tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
-                    }
-
-                    tmpList.data[0].TraderStandings[reward.target].currentStanding += parseFloat(reward.value);
-                    
-                } else if (reward.type === "Experience") 
-                { // get Exp reward
-                    tmpList.data[0].Info.Experience += parseInt(reward.value);
-                }
-                */
             }
         }
     }
