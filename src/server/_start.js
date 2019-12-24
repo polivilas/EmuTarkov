@@ -52,9 +52,9 @@ function sendResponse(req, resp, body) {
 		}
 
 		// traders
-		let keys = Object.keys(yourObject);
+		let keys = Object.keys(filepaths.images.trader);
 
-		for (let i = 0; i < keys.length; i++){
+		for (let i = 0; i < keys.length; i++) {
 			let key = keys[i];
 			console.log(key, filepaths.images.trader[key]);
 
