@@ -109,7 +109,7 @@ function handleRequest(req, resp) {
 					constants.setActiveID(parseBody.aid.replace("user", ""));
 
 					// get the IP address of the client
-					console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");
+					console.log("[" + constants.getActiveID() + "][" + IP + "][LOOT SAVING]", "cyan");
 
 					if (settings.debug.debugMode == true) {
 						console.log(parseBody);
@@ -121,9 +121,8 @@ function handleRequest(req, resp) {
 					body = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
 					// get the IP address of the client
-					let URL = "" + req.url + "";
 					let displayBody = ((settings.debug.debugMode === true) ? body : "");
-					console.log("[" + constants.getActiveID() + "][" + IP + "] " + URL + " -> " + displayBody, "cyan");
+					console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + displayBody, "cyan");
 
 					sendResponse(req, resp, body);
 				}
