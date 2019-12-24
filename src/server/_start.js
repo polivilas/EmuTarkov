@@ -123,7 +123,7 @@ function handleRequest(req, resp) {
 					let parseBody = JSON.parse(PreparedStringData);
 
 					//get aid from requested profile and set it to active profile
-					constants.setActiveID(parseBody.aid);
+					constants.setActiveID(parseBody.aid.replace("user", ""));
 
 					// get the IP address of the client
 					console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");

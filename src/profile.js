@@ -215,7 +215,6 @@ function saveProfileProgress(offRaidData) {
         }
     }
 
-    json.write(offRaidData.game + "\\SavedProfile.json", "{}");
     setCharacterData(currentProfile);
 }
 
