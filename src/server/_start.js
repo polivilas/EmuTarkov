@@ -103,17 +103,15 @@ function handleRequest(req, resp) {
 			zlib.inflate(data, function(err, body) {
 				if (req.url == "/OfflineRaidSave" && settings.server.lootSaving) {
 					//get aid from requested profile and set it to active profile
-					let parsedBody = JSON.parse(parsedBody);
-
-					constants.setActiveID(parsedBody.aid.replace("user", ""));
-
-					// get the IP address of the client
-					console.log("[" + constants.getActiveID() + "][" + IP + "][LOOT SAVING]", "cyan");
+					let parsedBody = JSON.parse(body);
 
 					if (settings.debug.debugMode == true) {
 						console.log(parsedBody);
 					}
 
+					// get the IP address of the client
+					constants.setActiveID(parsedBody.aid.replace("user", ""));
+					console.log("[" + constants.getActiveID() + "][" + IP + "][LOOT SAVING]", "cyan");
 					profile.saveProfileProgress(parsedBody);
 					return;
 				} else {
