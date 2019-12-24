@@ -118,8 +118,6 @@ function loadTraderStandings(playerData = "") {
 function saveProfileProgress(offRaidProfile) {
     let currentProfile = getCharacterData();
 
-    console.log(currentProfile);
-
     //replace data below
     currentProfile.data[0].Info.Experience = offRaidProfile.Info.Experience;
     currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
@@ -166,38 +164,37 @@ function saveProfileProgress(offRaidProfile) {
         }
     }
 
-    //but if the player get killed, he loose almost everything
-    if (offRaidData.status !== "Survived" && offRaidData.status !== "Runner") {
-        let pocketid = "";
-        let items_to_delete = [];
+    // set the inventory
+    let pocketid = "";
+    let items_to_delete = [];
 
-        for (let inventoryitem in currentProfile.data[0].Inventory.items) {
-            if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === currentProfile.data[0].Inventory.equipment
-                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
-                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Scabbard"
-                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Pockets") {
-                //store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
-            }
+    for (let inventoryitem in currentProfile.data[0].Inventory.items) {
+        if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === currentProfile.data[0].Inventory.equipment
+            && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
+            && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Scabbard"
+            && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Pockets") {
 
-            //we need pocket id for later, its working differently
-            if (currentProfile.data[0].Inventory.items[inventoryitem].slotId === "Pockets") {
-                pocketid = currentProfile.data[0].Inventory.items[inventoryitem]._id;
-            }
+            //store it and delete later because i dont know its not working otherwiswe
+            items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
         }
 
-        //and then delete inside pockets
-        for (let inventoryitem in currentProfile.data[0].Inventory.items) {
-            if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === pocketid) {
-                //store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
-            }
+        // we need pocket id for later, its working differently
+        if (currentProfile.data[0].Inventory.items[inventoryitem].slotId === "Pockets") {
+            pocketid = currentProfile.data[0].Inventory.items[inventoryitem]._id;
         }
+    }
 
-        //finally delete them
-        for (let item_to_delete in items_to_delete) {
-            move_f.removeItem(currentProfile, {Action: 'Remove', item: items_to_delete[item_to_delete]});
+    // and then delete inside pockets
+    for (let inventoryitem in currentProfile.data[0].Inventory.items) {
+        if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === pocketid) {
+            // store it and delete later because i dont know its not working otherwiswe
+            items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
         }
+    }
+
+    // finally delete them
+    for (let item_to_delete in items_to_delete) {
+        move_f.removeItem(currentProfile, {Action: 'Remove', item: items_to_delete[item_to_delete]});
     }
 
     setCharacterData(currentProfile);

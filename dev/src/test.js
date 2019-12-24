@@ -120,7 +120,7 @@ async function testServer() {
 	for (let i = 0; i < path.length; i++) {
 		try {
 			let res = await send(url, port, path[i], data[i]);
-			console.log("  Status of request: " + ((res.length > 0)?"[OK] ":"[BAD]"));
+			console.log("  Status of request: " + ((res.length > 0 || url != "/OfflineRaidSave") ? "[OK]" : "[BAD]"));
 			console.log("");
 		} catch (err) {
 			console.log("»SCRIPT ERROR » " + path[i], err);
