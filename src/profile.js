@@ -115,9 +115,7 @@ function loadTraderStandings(playerData = "") {
     }
 }
 
-function saveProfileProgress(offRaidData) {
-    let profile_data = json.parse(json.read(offRaidData.game + "\\SavedProfile.json"));
-    let offRaidProfile = profile_data;
+function saveProfileProgress(offRaidProfile) {
     let currentProfile = getCharacterData();
 
     //replace data below
