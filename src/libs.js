@@ -22,6 +22,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.settings = json.parse(json.read("user/server.config.json"));
 	global.ended_at = 0;
 	global.ip = settings.server.ip;
+	global.port = 443;
 	global.items = "";
 	global.quests = "";
 	global.locations = "";

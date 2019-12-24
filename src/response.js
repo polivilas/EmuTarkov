@@ -183,15 +183,6 @@ function getTraderList(url, info) {
 }
 
 function getServer(url, info) {
-    let port = 0;
-        
-    if (constants.gameVersion() === "0.11.7.4711") {
-        port = 80;
-    } else {
-        // assume client is 0.12.x.xxxx
-        port = 443;
-    }
-
     return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + port + '"}]}';
 }
 
@@ -201,6 +192,8 @@ function searchRagfair(url, info) {
 
 function getAvailableMatch(url, info) {
     return '{"err":404, "errmsg":"EmuTarkov-0.8.0 does not supports online raids. Please use offline match.\n", "data":false}';
+    
+    // use this for online lan testing
     //return '{"err":0, "errmsg":null, "data":true}';
 }
 
@@ -242,7 +235,6 @@ function handleRepair(url, info) {
 }
 
 function handleKeepAlive(url, info) {
-    // updates trader refresh time only
     keepAlive_f.main();
     return '{"err":0,"errmsg":null,"data":{"msg":"OK"}}';
 }

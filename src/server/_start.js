@@ -122,9 +122,7 @@ function start() {
 		key: fs.readFileSync(filepaths.cert.server.key)
 	};
 
-	// set the ip
-	ip = settings.server.ip;
-	
+	// set the ip	
 	if (settings.server.generateIp == true) {
         ip = utility.getLocalIpAddress();
 		settings.server.ip = ip; 
@@ -163,27 +161,15 @@ function start() {
 	// create HTTPS server (port 443)
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		handleRequest(req, res);
-	}).listen(443, ip, function() {
-		console.log("» 0.12.1.5208 server url: " + "https://" + ip, "green", "", true);
-	});
-
-	// create HTTP server (port 80)
-	let serverHTTP = http.createServer(options, (req, res) => {
-		handleRequest(req, res);
-	}).listen(80, ip, function() {
-		console.log("» 0.11.7.4711 server url: " + "http://" + ip, "green", "", true);
+	}).listen(port, ip, function() {
+		console.log("» 0.12.1.5208 server url: " + "https://" + ip + "/", "green", "", true);
 	});
 	
 	// server already running
 	serverHTTPS.on('error', function (e) {
 		console.log(e);
-		console.log("» Port " + 443 + " is already in use. Check if console isnt already open or change port", "red", "");
+		console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
 	});
-	
-	serverHTTP.on('error', function (e) {
-		console.log(e);
-		console.log("» Port " + 80 + " is already in use. Check if console isnt already open or change port", "red", "");
-    });
 }
 
 module.exports.start = start;
