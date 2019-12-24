@@ -118,7 +118,7 @@ function handleRequest(req, resp) {
 
 			// extract data
 			zlib.inflate(data, function(err, body) {
-				if (req.url == "/OfflineRaidSave") {
+				if (req.url == "/OfflineRaidSave" && settings.server.lootSaving) {
 					let PreparedStringData = body.toString().replace(/(\\r\\n)+/g, "").replace(/(\\)+/g, "");
 					let parseBody = JSON.parse(PreparedStringData);
 
