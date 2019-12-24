@@ -120,10 +120,10 @@ function saveProfileProgress(offRaidData) {
     let offRaidProfile = offRaidData.profile;
     let currentProfile = getCharacterData();
 
-    //replace data below
+    // replace data
     currentProfile.data[0].Info.Experience = offRaidProfile.Info.Experience;
     currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
-    //currentProfile.data[0].Health = offRaidProfile.Health;
+    currentProfile.data[0].Health = offRaidProfile.Health;
     currentProfile.data[0].Skills = offRaidProfile.Skills;
     currentProfile.data[0].Stats.SessionCounters = offRaidProfile.Stats.SessionCounters;
     currentProfile.data[0].Stats.OverallCounters = offRaidProfile.Stats.OverallCounters;
@@ -131,7 +131,7 @@ function saveProfileProgress(offRaidData) {
     currentProfile.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
     currentProfile.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
     currentProfile.data[0].Quests = offRaidProfile.Quests;
-    //currentProfile.data[0].TraderStandings = offRaidProfile.TraderStandings;
+    currentProfile.data[0].TraderStandings = offRaidProfile.TraderStandings;
 
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
@@ -154,12 +154,12 @@ function saveProfileProgress(offRaidData) {
 
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
-    //remove previous equippement & other, KEEP ONLY THE STASH
+    // set profile equipment to the raid equipment
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.equipment});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
 
-    //and then fill with offline raid equipement
+    
     for (let inventoryitem in offRaidProfile.Inventory.items) {
         if (offRaidProfile.Inventory.items.hasOwnProperty(inventoryitem)) {
             currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);
