@@ -115,22 +115,23 @@ function loadTraderStandings(playerData = "") {
     }
 }
 
-function saveProfileProgress(offRaidData) {
-    let offRaidProfile = offRaidData;
+function saveProfileProgress(offRaidProfile) {
     let currentProfile = getCharacterData();
 
+    console.log(currentProfile);
+
     //replace data below
-    currentProfile.data[1].Info.Experience = offRaidProfile.Info.Experience;
-    currentProfile.data[1].Info.Level = offRaidProfile.Info.Level;
-    //currentProfile.data[1].Health = offRaidProfile.Health;
-    currentProfile.data[1].Skills = offRaidProfile.Skills;
-    currentProfile.data[1].Stats.SessionCounters = offRaidProfile.Stats.SessionCounters;
-    currentProfile.data[1].Stats.OverallCounters = offRaidProfile.Stats.OverallCounters;
-    currentProfile.data[1].Stats.LastSessionDate = offRaidProfile.Stats.LastSessionDate;
-    currentProfile.data[1].Encyclopedia = offRaidProfile.Encyclopedia;
-    currentProfile.data[1].ConditionCounters = offRaidProfile.ConditionCounters;
-    currentProfile.data[1].Quests = offRaidProfile.Quests;
-    //currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
+    currentProfile.data[0].Info.Experience = offRaidProfile.Info.Experience;
+    currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
+    //currentProfile.data[0].Health = offRaidProfile.Health;
+    currentProfile.data[0].Skills = offRaidProfile.Skills;
+    currentProfile.data[0].Stats.SessionCounters = offRaidProfile.Stats.SessionCounters;
+    currentProfile.data[0].Stats.OverallCounters = offRaidProfile.Stats.OverallCounters;
+    currentProfile.data[0].Stats.LastSessionDate = offRaidProfile.Stats.LastSessionDate;
+    currentProfile.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
+    currentProfile.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
+    currentProfile.data[0].Quests = offRaidProfile.Quests;
+    //currentProfile.data[0].TraderStandings = offRaidProfile.TraderStandings;
 
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
@@ -154,14 +155,14 @@ function saveProfileProgress(offRaidData) {
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
     //remove previous equippement & other, KEEP ONLY THE STASH
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.equipment});
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questRaidItems});
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questStashItems});
+    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.equipment});
+    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
+    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
 
     //and then fill with offline raid equipement
     for (let inventoryitem in offRaidProfile.Inventory.items) {
         if (offRaidProfile.Inventory.items.hasOwnProperty(inventoryitem)) {
-            currentProfile.data[1].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);
+            currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);
         }
     }
 
@@ -170,26 +171,26 @@ function saveProfileProgress(offRaidData) {
         let pocketid = "";
         let items_to_delete = [];
 
-        for (let inventoryitem in currentProfile.data[1].Inventory.items) {
-            if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === currentProfile.data[1].Inventory.equipment
-                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
-                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Scabbard"
-                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Pockets") {
+        for (let inventoryitem in currentProfile.data[0].Inventory.items) {
+            if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === currentProfile.data[0].Inventory.equipment
+                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
+                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Scabbard"
+                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Pockets") {
                 //store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(currentProfile.data[1].Inventory.items[inventoryitem]._id);
+                items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
             }
 
             //we need pocket id for later, its working differently
-            if (currentProfile.data[1].Inventory.items[inventoryitem].slotId === "Pockets") {
-                pocketid = currentProfile.data[1].Inventory.items[inventoryitem]._id;
+            if (currentProfile.data[0].Inventory.items[inventoryitem].slotId === "Pockets") {
+                pocketid = currentProfile.data[0].Inventory.items[inventoryitem]._id;
             }
         }
 
         //and then delete inside pockets
-        for (let inventoryitem in currentProfile.data[1].Inventory.items) {
-            if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === pocketid) {
+        for (let inventoryitem in currentProfile.data[0].Inventory.items) {
+            if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === pocketid) {
                 //store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(currentProfile.data[1].Inventory.items[inventoryitem]._id);
+                items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
             }
         }
 

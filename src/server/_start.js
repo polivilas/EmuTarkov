@@ -27,7 +27,7 @@ function sendResponse(req, resp, body) {
 	}
 	
 	// prepare message to send
-	if (output === "DONE" || req.url === "/OfflineRaidSave") {
+	if (output === "DONE") {
 		return;
 	}
 
@@ -101,28 +101,13 @@ function handleRequest(req, resp) {
 
 			// extract data
 			zlib.inflate(data, function(err, body) {
-				if (req.url == "/OfflineRaidSave" && settings.server.lootSaving) {
-					//get aid from requested profile and set it to active profile
-					let parsedBody = JSON.parse(body);
+				let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
-					if (settings.debug.debugMode == true) {
-						console.log(parsedBody);
-					}
+				// get the IP address of the client
+				let displayBody = ((settings.debug.debugMode === true) ? jsonData : "");
+				console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + displayBody, "cyan");
 
-					// get the IP address of the client
-					constants.setActiveID(parsedBody.aid.replace("user", ""));
-					console.log("[" + constants.getActiveID() + "][" + IP + "][LOOT SAVING]", "cyan");
-					profile.saveProfileProgress(parsedBody);
-					return;
-				} else {
-					body = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
-
-					// get the IP address of the client
-					let displayBody = ((settings.debug.debugMode === true) ? body : "");
-					console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + displayBody, "cyan");
-
-					sendResponse(req, resp, body);
-				}
+				sendResponse(req, resp, jsonData);
 			});
 		});
 	} else {

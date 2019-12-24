@@ -47,6 +47,7 @@ const staticRoutes = {
     "/client/game/profile/nickname/reserved": getReservedNickname,
     "/client/game/profile/nickname/validate": validateNickname,
     "/client/game/profile/create": createProfile,
+    "/OfflineRaidSave": offlineRaidSave,
     "/favicon.ico": nullResponse,
     "/client/game/logout": nullResponse,
     "/client/putMetrics": nullResponse,
@@ -315,6 +316,16 @@ function validateNickname(url, info) {
 function createProfile(url, info) {
     profile.create(info);
     return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
+}
+
+function offlineRaidSave(url, info) {
+    if (!settings.server.lootSaving) {
+        return "DONE";
+    }
+
+    constants.setActiveID(info.aid.replace("user", ""));
+    profile.saveProfileProgress(info);
+    return "DONE";
 }
 
 function getMapLocation(url, info) {
