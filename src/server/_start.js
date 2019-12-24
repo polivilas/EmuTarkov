@@ -116,29 +116,29 @@ function handleRequest(req, resp) {
 				request.connection.destroy();
 			}
 
-			if (req.url == "/OfflineRaidSave") {
-				// save loot if lootSaving is enabled - created on community requests
-				if (settings.server.lootSaving == true) {
-					let PreparedStringData = data.toString().replace(/(\\r\\n)+/g, "").replace(/(\\)+/g, "");
-					let parseBody = JSON.parse(PreparedStringData);
+			// extract data
+			zlib.inflate(data, function(err, body) {
+				if (req.url == "/OfflineRaidSave") {
+					// save loot if lootSaving is enabled - created on community requests
+					if (settings.server.lootSaving == true) {
+						let PreparedStringData = data.toString().replace(/(\\r\\n)+/g, "").replace(/(\\)+/g, "");
+						let parseBody = JSON.parse(PreparedStringData);
 
-					//get aid from requested profile and set it to active profile
-					constants.setActiveID(parseBody.aid);
+						//get aid from requested profile and set it to active profile
+						constants.setActiveID(parseBody.aid);
 
-					// get the IP address of the client
-					console.log("[SAVE_PROFILE][ProfileID:" + parseBody.aid + "]" + ActiveProfile, "cyan");
+						// get the IP address of the client
+						console.log("[SAVE_PROFILE][ProfileID:" + parseBody.aid + "]" + ActiveProfile, "cyan");
 
-					if (settings.debug.debugMode == true) {
-						console.log(parseBody);
+						if (settings.debug.debugMode == true) {
+							console.log(parseBody);
+						}
+
+						profile.saveProfileProgress(parseBody);
 					}
 
-					profile.saveProfileProgress(parseBody);
-				}
-
-				return;
-			} else {
-				// extract data
-				zlib.inflate(data, function(err, body) {
+					return;
+				} else {
 					body = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
 					// get the IP address of the client
@@ -147,8 +147,8 @@ function handleRequest(req, resp) {
 					console.log("[" + constants.getActiveID() + "][" + IP + "] " + URL + " -> " + displayBody, "cyan");
 
 					sendResponse(req, resp, body);
-				});
-			}
+				}
+			});
 		});
 	} else {
 		console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");
