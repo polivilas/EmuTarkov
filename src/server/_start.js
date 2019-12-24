@@ -51,6 +51,20 @@ function sendResponse(req, resp, body) {
 			console.log("[IMG.hideout]:" + req.url);
 		}
 
+		// traders
+		let keys = Object.keys(filepaths.images.trader);
+
+		for (let i = 0; i < keys.length; i++) {
+			let key = keys[i];
+			console.log(key, " ", filepaths.images.trader[key]);
+
+			if (key == file) {
+				console.log("file matches!")
+				filepath = filepaths.images.trader[key];
+				break;
+			}
+		}
+
 		header_f.sendFile(resp, filepath);
 		return;
 	}
