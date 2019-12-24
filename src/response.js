@@ -183,11 +183,12 @@ function getTraderList(url, info) {
 
 function getServer(url, info) {
     let port = 0;
-
-    if (constants.gameVersion() === "0.12.1.5208") {
-        port = 443;
-    } else if (constants.gameVersion() === "0.11.7.4711") {
+        
+    if (constants.gameVersion() === "0.11.7.4711") {
         port = 80;
+    } else {
+        // assume client is 0.12.x.xxxx
+        port = 443;
     }
 
     return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + port + '"}]}';
@@ -294,11 +295,12 @@ function getHandbookUserlist(url, info) {
 }
 
 function createNotifierChannel(url, info) {
-    if (constants.gameVersion() === "0.12.1.5208") {
-        return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '","channel_id":"testChannel","url":"https://' + ip + '/notifierBase"},"notifierServer":"https://' + ip + '/notifierServer"}}';
-    } else if (constants.gameVersion() === "0.11.7.4711") {
+    if (constants.gameVersion() == "0.11.7.4711") {
         return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"http://' + ip + '","channel_id":"testChannel","url":"http://' + ip + '/notifierBase"},"notifierServer":"http://' + ip + '/notifierServer"}}';
     }
+
+    // assume client is 0.12.x.xxxx
+    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '","channel_id":"testChannel","url":"https://' + ip + '/notifierBase"},"notifierServer":"https://' + ip + '/notifierServer"}}';
 }
 
 function getReservedNickname(url, info) {
