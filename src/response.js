@@ -143,11 +143,7 @@ function getProfileData(url, info) {
 }
 
 function selectProfile(url, info) {
-    if (constants.gameVersion() === "0.12.1.5208") {
-        return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
-    } else if (constants.gameVersion() === "0.11.7.4711") {
-        return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"http://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
-    }
+    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 }
 
 function getProfileStatus(url, info) {

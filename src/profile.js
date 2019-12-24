@@ -411,15 +411,7 @@ function find() {
     settings = json.parse(json.read(filepaths.user.config));
     constants.setActiveID(settings.debug.activeId);
 
-    let backendUrl = "";
-
-    if (constants.gameVersion() === "0.11.7.4711") {
-        backendUrl = "http://" + ip;
-        return '{"err":0, "errmsg":null, "data":{"token": "token_' + constants.getActiveID() + '", "aid": "user' + constants.getActiveID() + '", "lang":"en", "languages":{"en": "English","ru": "Русский","de": "Deutsch","fr":"Français"}, "ndaFree":false, "queued":false, "taxonomy":341, "user' + constants.getActiveID() + 'pmc", "backend":{"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "utc_time":1337, "totalInGame":0, "twitchEventMember":false}}';
-    }
-
-    // assume client is 0.12.x.xxxx
-    backendUrl = "https://" + ip;
+    let backendUrl = "https://" + ip;
     return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';  
 }
 
