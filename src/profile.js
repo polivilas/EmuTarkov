@@ -134,15 +134,8 @@ function saveProfileProgress(offRaidData) {
     //currentProfile.data[1].TraderStandings = offRaidProfile.TraderStandings;
 
     //work with a string instead of looping through data, less code, less ressources, faster
+    // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
-
-    //replace all these GClasses shit
-    let replaceConfig = json.parse(json.read("db/offlineProgression.json"));
-    let keys = Object.keys(replaceConfig);
-    
-    for (let iterate = 0; iterate < keys.length; iterate++) {
-        string_inventory = string_inventory.replace(new RegExp(keys[iterate], 'g'), replaceConfig[keys[iterate]]);
-    }
 
     //and then re-parse the string into an object preparing to replace ID fix
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
@@ -171,7 +164,6 @@ function saveProfileProgress(offRaidData) {
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questRaidItems});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[1].Inventory.questStashItems});
 
-
     //and then fill with offline raid equipement
     for (let inventoryitem in offRaidProfile.Inventory.items) {
         if (offRaidProfile.Inventory.items.hasOwnProperty(inventoryitem)) {
@@ -179,14 +171,12 @@ function saveProfileProgress(offRaidData) {
         }
     }
 
-    let pocketid = "";
-    let items_to_delete = [];
-
     //but if the player get killed, he loose almost everything
     if (offRaidData.status !== "Survived" && offRaidData.status !== "Runner") {
-        let inventoryitem;
+        let pocketid = "";
+        let items_to_delete = [];
 
-        for (inventoryitem in currentProfile.data[1].Inventory.items) {
+        for (let inventoryitem in currentProfile.data[1].Inventory.items) {
             if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === currentProfile.data[1].Inventory.equipment
                 && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
                 && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Scabbard"
@@ -202,7 +192,7 @@ function saveProfileProgress(offRaidData) {
         }
 
         //and then delete inside pockets
-        for (inventoryitem in currentProfile.data[1].Inventory.items) {
+        for (let inventoryitem in currentProfile.data[1].Inventory.items) {
             if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === pocketid) {
                 //store it and delete later because i dont know its not working otherwiswe
                 items_to_delete.push(currentProfile.data[1].Inventory.items[inventoryitem]._id);

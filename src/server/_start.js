@@ -69,7 +69,6 @@ function sendResponse(req, resp, body) {
 	if (output === "MAPCONFIG") {
 		let mapname = req.url.replace("/api/location/", "");		
 		let RandomPreset = utility.getRandomInt(1, 6);
-		console.log(mapname.toLowerCase());
 		let map = json.read(filepaths.maps[mapname.toLowerCase() + RandomPreset]);
 		
 		console.log("[MAP.config]: " + mapname);
@@ -94,21 +93,11 @@ function sendResponse(req, resp, body) {
 }
 
 function handleRequest(req, resp) {
-	// separate request in the log
-
-	if (settings.debug.showSeparator === true) {
-		logger.separator();
-	}
-	
-	let ActiveProfile = "";
 	let IP = req.connection.remoteAddress.replace("::ffff:","");
+
+	constants.setActiveID(getCookies(req)['PHPSESSID']);
 	
 	if (req.method == "POST") {
-		if (req.url != "/OfflineRaidSave") {
-			constants.setActiveID(getCookies(req)['PHPSESSID']);
-			ActiveProfile = "[ActiveProfile:" + constants.getActiveID() + "]";
-		}
-
 		// received data
         req.on('data', function (data) {
             // prevent flood attack

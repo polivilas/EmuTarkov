@@ -147,7 +147,6 @@ function selectProfile(url, info) {
     } else if (constants.gameVersion() === "0.11.7.4711") {
         return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"http://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
     }
-    
 }
 
 function getProfileStatus(url, info) {
