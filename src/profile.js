@@ -131,7 +131,6 @@ function saveProfileProgress(offRaidData) {
     currentProfile.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
     currentProfile.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
     currentProfile.data[0].Quests = offRaidProfile.Quests;
-    currentProfile.data[0].TraderStandings = offRaidProfile.TraderStandings;
 
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
