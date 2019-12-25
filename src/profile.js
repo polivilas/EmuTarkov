@@ -62,6 +62,19 @@ function create(info) {
     json.write(accountFolder + "storage.json", storage);
     json.write(accountFolder + "userBuilds.json", userBuilds);
 
+    // create traders
+    let inputFiles = filepaths.traders;
+    let inputNames = Object.keys(inputFiles);
+    let i = 0;
+
+    for (let file in inputFiles) {
+        let filePath = inputFiles[file];
+        let fileData = json.parse(json.read(filePath));
+        let fileName = inputNames[i++];
+
+        json.write(accountFolder + "traders/" + fileName + ".json", fileData);
+    }
+
     // don't wipe profile again
     profiles[constants.getActiveID()].wipe = false;
     json.write(filepaths.user.profiles.list, profiles);
@@ -166,8 +179,7 @@ function saveProfileProgress(offRaidData) {
     }
 
     // remove inventory if player died
-    const diedStatuses = ["MissingInAction", "Left", "Killed"];
-    if (diedStatuses.indexOf(offRaidExit) > -1) {
+    if (offRaidExit !== "survived" && offRaidExit !== "runner") {
         let pocketid = "";
         let items_to_delete = [];
 

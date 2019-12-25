@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function genericCacher(cachename, filepathNode) {
+function genericCacher(cachename, filepathNode, output = "") {
     console.log("Caching: " + cachename);
 
     let base = json.parse(json.read("db/cache/" + cachename));
@@ -48,7 +48,11 @@ function genericCacher(cachename, filepathNode) {
         }
     }
 
-    json.write("user/cache/" + cachename, base, true);
+    if (output == "") {
+        json.write("user/cache/" + cachename, base, true);
+    } else {
+        json.write(output + cachename, base, true);
+    }
 }
 
 function items() {
@@ -279,4 +283,5 @@ function all() {
     settings.mods.rebuildCache = false;
 }
 
+module.exports.genericCacher = genericCacher;
 module.exports.all = all;

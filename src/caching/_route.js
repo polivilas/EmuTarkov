@@ -35,6 +35,7 @@ function genericFilepathCacher(type, basepath) {
             case "maps": filepaths.maps[fileName] = filePath; break;
             case "botsInv": filepaths.bots.inventory[fileName] = filePath; break;
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
+            case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
         }
     }
 }
@@ -49,6 +50,7 @@ function quests() {
 
 function traders() {
     genericFilepathCacher("traders", "db/traders");
+    genericFilepathCacher("profileTraders", "db/traders");
 }
 
 function locations() {
