@@ -1,22 +1,19 @@
 "use strict";
 
-const trader = require('../trader.js');
+require('../libs.js');
 
-//// ---- FUNCTIONS BELOW ---- ////
-
-function main() 
-{
-    updateTraders();
-
+function main() {
     if (!profile.isProfileWiped) {
+        updateTraders();
         updatePlayerHideout();
     }
 
-    return; // not finished
+    return;
 }
 
 function updateTraders() {
-    let update_per = 3600;// update each hour
+    // update each hour
+    let update_per = 3600;
     let timeNow = Math.floor(Date.now() / 1000);
     let tradersToUpdateList = trader.loadAllTraders();
 
