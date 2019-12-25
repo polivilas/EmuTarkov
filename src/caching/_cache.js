@@ -63,9 +63,11 @@ function quests() {
     genericCacher("quests.json", filepaths.quests);
 }
 
+/*
 function traders() {
     genericCacher("traders.json", filepaths.traders);
 }
+*/
 
 function locations() {
     genericCacher("locations.json", filepaths.locations);
@@ -228,9 +230,11 @@ function all() {
         quests();
     }
 
+    /*
     if (force || !fs.existsSync("user/cache/traders.json")) {
         traders();
     }
+    */
 
     if (force || !fs.existsSync("user/cache/locations.json")) {
         locations();

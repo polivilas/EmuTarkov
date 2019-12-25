@@ -171,7 +171,6 @@ function saveProfileProgress(offRaidData) {
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
 
-
     for (let inventoryitem in offRaidProfile.Inventory.items) {
         if (offRaidProfile.Inventory.items.hasOwnProperty(inventoryitem)) {
             currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);

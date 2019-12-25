@@ -81,23 +81,13 @@ function completeQuest(tmpList, body)
                         break;
 
                     case "TraderStanding":
-                        // requires trader loading revamp, traders need to be stored in profile
-                        // then getAllTraders should generate data on the spot rather than caching it
-                        /*
-                        let tmpTraderInfo = quest.traderId;
-                        let traderLoyalty = tmpTraderInfo.loyalty;
+                        let tmpTraderInfo = trader.get(quest.traderId);
 
-                        traderLoyalty.currentStanding += parseFloat(reward.value);
-                        trader.get(reward.target).data.loyalty = traderLoyalty;
+                        tmpTraderInfo.loyalty.currentStanding += reward.value;
     
-                        let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
-    
-                        for (let lvlUpTrader in newLvlTraders) {
-                            tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
-                        }
-    
-                        tmpList.data[0].TraderStandings[reward.target].currentStanding += reward.value;
-                        */
+                        // set trader level here
+
+                        trader.setTrader(tmpTraderInfo);
                         break;
                 }
             }

@@ -2,13 +2,18 @@
 
 require('./libs.js');
 
+function getPath(id) {
+    let traderPath = filepaths.user.profiles.traders[id];
+    return traderPath.replace("__REPLACE__", constants.getActiveID());
+}
+
 function loadAllTraders() {
     let traders = [];
 
     // load trader files
     for (let file in filepaths.traders) {
         if (filepaths.traders.hasOwnProperty(file) && checkTraders(file)) {
-            traders.push(json.parse(json.read(filepaths.traders[file])));
+            traders.push(json.parse(json.read(getPath(file))));
         }
     }
 
@@ -27,7 +32,7 @@ function get(id, flea = false) {
 		return {err: 0, errmsg: "", data: json.parse(json.read(filepaths.traders.everything))};
 	} else {
 		if (filepaths.traders.hasOwnProperty(selectedTrader)) {
-            return {err: 0, errmsg: "", data: json.parse(json.read(filepaths.traders[selectedTrader]))};
+            return {err: 0, errmsg: "", data: json.parse(json.read(getPath(selectedTrader)))};
         }
     }
     
@@ -54,17 +59,14 @@ function getAssort(id, flea = false) {
 }
 
 function setTrader(data) {
-    let selectedTrader = data._id;
-
-    return json.write(filepaths.traders[selectedTrader], data);
+    return json.write(getPath(data._id), data);
 }
 
 function lvlUp(playerLvl) {
-    let lvlUpTraders = [];
-
-    return lvlUpTraders;
+    return [];
 }
 
+module.exports.getPath = getPath;
 module.exports.loadAllTraders = loadAllTraders;
 module.exports.get = get;
 module.exports.getAssort = getAssort;
