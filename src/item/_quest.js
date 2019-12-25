@@ -75,13 +75,17 @@ function completeQuest(tmpList, body)
                         break;
 
                     case "Experience":
-                        tmpList.data[0].Info.Experience += parseInt(reward.value);
+                        tmpList.data[0].Info.Experience += reward.value;
                         profile.setCharacterData(tmpList);
                         tmpList = profile.getCharacterData();// update it because it will be overrided otherwise
                         break;
 
                     case "TraderStanding":
-                        let traderLoyalty = tmpTraderInfo.data.loyalty;
+                        // requires trader loading revamp, traders need to be stored in profile
+                        // then getAllTraders should generate data on the spot rather than caching it
+                        /*
+                        let tmpTraderInfo = quest.traderId;
+                        let traderLoyalty = tmpTraderInfo.loyalty;
 
                         traderLoyalty.currentStanding += parseFloat(reward.value);
                         trader.get(reward.target).data.loyalty = traderLoyalty;
@@ -93,6 +97,7 @@ function completeQuest(tmpList, body)
                         }
     
                         tmpList.data[0].TraderStandings[reward.target].currentStanding += reward.value;
+                        */
                         break;
                 }
             }
@@ -100,7 +105,6 @@ function completeQuest(tmpList, body)
     }
 
     return item.getOutput();
-     
 }
 
 function handoverQuest(tmpList, body) {
