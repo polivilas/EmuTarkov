@@ -39,6 +39,7 @@ function sendResponse(req, resp, body) {
 
 		file = file.replace(".jpg", "").replace(".png", "");
 
+		// get images to look through
 		if (req.url.indexOf("/quest") != -1) {
 			console.log("[IMG.quests]:" + req.url);
 			baseNode = filepaths.images.quest;
@@ -56,11 +57,11 @@ function sendResponse(req, resp, body) {
 			baseNode = filepaths.images.hideout;
 		}
 
+		// get image
 		let keys = Object.keys(baseNode);
 
 		for (let i = 0; i < keys.length; i++) {
 			let key = keys[i];
-			console.log(key, " ", baseNode[key]);
 
 			if (key == file) {
 				filepath = baseNode[key];
@@ -68,6 +69,11 @@ function sendResponse(req, resp, body) {
 			}
 		}
 
+		if (filepath === "") {
+			// throw an error here
+		}
+
+		// send image
 		header_f.sendFile(resp, filepath);
 		return;
 	}
