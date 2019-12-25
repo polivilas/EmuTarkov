@@ -279,6 +279,10 @@ function confirmRagfairTrading(tmpList, body) {
 
         let tempOutput = confirmTrading(tmpList, body, "ragfair");
 
+        if (tempOutput == "") {
+            break;
+        }
+
         for (let newItem of tempOutput.data.items.new) {
             allOutput.data.items.new.push(newItem);
         }
