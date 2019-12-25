@@ -167,7 +167,7 @@ function saveProfileProgress(offRaidData) {
     }
 
     // remove inventory if player died
-    if (offRaidExit !== "alive") {
+    if (offRaidExit !== "Survived" || offRaidExit !== "Runner") {
         let pocketid = "";
         let items_to_delete = [];
 
@@ -422,7 +422,6 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
     let stashX = PlayerStash[0];
     item.resetOutput();
     let output = item.getOutput();
-
     let tmpTrader = json.parse(json.read(filepaths.user.cache.assort_everything));
 
     for (let item of tmpTrader.data.items) {
