@@ -166,7 +166,7 @@ function saveProfileProgress(offRaidData) {
     }
 
     // remove inventory if player died
-    if (offRaidExit !== "Survived" || offRaidExit !== "Runner") {
+    if (offRaidExit != "Survived" || offRaidExit != "Runner") {
         let pocketid = "";
         let items_to_delete = [];
 
