@@ -34,7 +34,7 @@ function create(info) {
     character.Info.Nickname = info.nickname;
     character.Info.LowerNickname = info.nickname.toLowerCase();
     storage.data._id = "user" + constants.getActiveID() + "pmc";
-    
+
     switch (info.side) {
         case "Bear":
             character.Info.Side = "Bear";
@@ -44,7 +44,7 @@ function create(info) {
             character.Customization.Feet = "5cc085bb14c02e000e67a5c5";
             character.Customization.Hands = "5cc0876314c02e000c6bea6b";
             storage.data.suites = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
-        break;
+            break;
 
         case "Usec":
             character.Info.Side = "Usec";
@@ -54,14 +54,14 @@ function create(info) {
             character.Customization.Feet = "5cde95ef7d6c8b04713c4f2d";
             character.Customization.Hands = "5cde95fa7d6c8b04737c2d13";
             storage.data.suites = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
-        break;
+            break;
     }
 
     // create profile
     json.write(accountFolder + "character.json", character);
     json.write(accountFolder + "storage.json", storage);
     json.write(accountFolder + "userBuilds.json", userBuilds);
-    
+
     // don't wipe profile again
     profiles[constants.getActiveID()].wipe = false;
     json.write(filepaths.user.profiles.list, profiles);
@@ -70,11 +70,11 @@ function create(info) {
 function loadTraderStandings(playerData = "") {
     // get profile Data
     let profileData = playerData;
-    
-	if (playerData == "") {
+
+    if (playerData == "") {
         profileData = getCharacterData();
     }
-	
+
     let profileCharData = profileData.data[1];
 
     // get trader data and update by profile info
@@ -110,7 +110,7 @@ function loadTraderStandings(playerData = "") {
         setCharacterData(profileData);
     }*/
 
-	if (playerData != "") {
+    if (playerData != "") {
         return profileData;
     }
 }
@@ -158,7 +158,7 @@ function saveProfileProgress(offRaidData) {
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
 
-    
+
     for (let inventoryitem in offRaidProfile.Inventory.items) {
         if (offRaidProfile.Inventory.items.hasOwnProperty(inventoryitem)) {
             currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);
@@ -166,7 +166,8 @@ function saveProfileProgress(offRaidData) {
     }
 
     // remove inventory if player died
-    if (offRaidExit != "Survived" || offRaidExit != "Runner") {
+    const diedStatuses = ["MissingInAction", "Left", "Killed"];
+    if (diedStatuses.indexOf(offRaidExit) > -1) {
         let pocketid = "";
         let items_to_delete = [];
 
@@ -204,7 +205,7 @@ function saveProfileProgress(offRaidData) {
 }
 
 function getCharacterData() {
-    let ret = {err: 0, errmsg: null, data: []}; 
+    let ret = {err: 0, errmsg: null, data: []};
 
     // creating profile for first time
     if (!isProfileWiped()) {
@@ -214,11 +215,11 @@ function getCharacterData() {
     // create full profile data from simplified character data
     let playerData = json.parse(json.read(getProfile()));
     let scavData = bots.generatePlayerScav();
-    
+
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
     ret.data.push(playerData);
-    ret.data.push(scavData);     
+    ret.data.push(scavData);
     ret = loadTraderStandings(ret);
 
     return ret;
@@ -226,7 +227,7 @@ function getCharacterData() {
 
 function getStashType() {
     let temp = json.parse(json.read(getProfile()));
-    
+
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
             return temp.Inventory.items[key]._tpl;
@@ -263,7 +264,7 @@ function addChildPrice(data, parentID, childPrice) {
 function getPurchasesData() {
     let multiplier = 0.9;
     let data = json.parse(json.read(getProfile()));
-    
+
     items = items_f.prepareItems();
 
     //prepared vars
@@ -342,7 +343,7 @@ function getPurchasesData() {
                 let preparePrice = basePrice * multiplier * itemCount;
 
                 preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
-                purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' +  data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
+                purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' + data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
             }
         }
     }
@@ -411,11 +412,11 @@ function find() {
     constants.setActiveID(settings.debug.activeId);
 
     let backendUrl = "https://" + ip;
-    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';  
+    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 }
 
 function addItemToStash(tmpList, body, trad = "")// Buying item from trader
-{ 
+{
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
