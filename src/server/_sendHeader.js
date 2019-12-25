@@ -37,7 +37,6 @@ function sendHTML(resp, output) {
 }
 
 function sendFile(resp, file) {
-    console.log(file);
     let pathSlic = file.split("/");
     let type = mime[pathSlic[pathSlic.length -1].split(".")[1]] || mime['txt'];
     let fileStream = fs.createReadStream(file);
