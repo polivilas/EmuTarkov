@@ -4,7 +4,7 @@ require('./libs.js');
 
 function getPath(id) {
     let traderPath = filepaths.user.profiles.traders[id];
-    return traderPath.replace("__REPLACE__", constants.getActiveID());
+    return traderPath.replace("__REPLACEME__", constants.getActiveID());
 }
 
 function loadAllTraders() {
