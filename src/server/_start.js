@@ -122,8 +122,7 @@ function handleRequest(req, resp) {
 				let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
 				// get the IP address of the client
-				let displayBody = ((settings.debug.debugMode === true) ? jsonData : "");
-				console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + displayBody, "cyan");
+				console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> ", "cyan");
 
 				sendResponse(req, resp, jsonData);
 			});

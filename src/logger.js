@@ -28,7 +28,7 @@ const colorData = [
 
 var fileStream = undefined;
 
-console.log = function (data, colorFront, colorBack, isLog = false) {
+console.log = function (data, colorFront, colorBack) {
     let setColors = "";
     let colors = ["", ""];
 
@@ -54,11 +54,9 @@ console.log = function (data, colorFront, colorBack, isLog = false) {
         printf(data);
     }
 
-    // write the logged data to the file - if debugmode on write everything
-    if (isLog === false || settings.debug.debugMode === true) {
-        if (typeof fileStream !== "undefined") {
-            fileStream.write(util.format(data) + '\n');
-        }
+    // write the logged data to the file
+    if (typeof fileStream !== "undefined") {
+        fileStream.write(util.format(data) + '\n');
     }
 };
 

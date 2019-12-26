@@ -403,8 +403,8 @@ function getResponse(req, body) {
         let crctest = JSON.parse(output);
 
         if (typeof crctest.crc != "undefined") {
-            if (info.crc.toString() === crctest.crc.toString() && settings.debug.debugMode != true) {
-                console.log("[Loading From Cache Files]", "", "", true);
+            if (info.crc.toString() === crctest.crc.toString()) {
+                console.log("[Loading from game cache files]", "", "", true);
                 output = '{"err":0, "errmsg":null, "data":null}';
             } else {
                 output = JSON.stringify(crctest).replace(/\s\s+/g, '');
