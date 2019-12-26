@@ -154,7 +154,7 @@ function getWeather(url, info) {
     let time = utility.getTime().replace("-", ":").replace("-", ":");
     let date = utility.getDate();
     let datetime = date + " " + time;
-    let output = weathers[utility.getRandomInt(0, weather.length - 1)];
+    let output = weather.data[utility.getRandomInt(0, weather.length - 1)];
 
     // replace date and time
     output.data.weather.timestamp = Math.floor(new Date() / 1000);

@@ -29,11 +29,6 @@ function genericCacher(cachename, filepathNode, output = "") {
 
             case "items.json":
                 fileName = fileData._id;
-
-                if (settings.debug.examinedByDefault) {
-                    fileData._props.ExaminedByDefault = true;
-                }
-        
                 base.data[fileName] = fileData;
             break;
 
@@ -50,9 +45,9 @@ function genericCacher(cachename, filepathNode, output = "") {
     }
 
     if (output == "") {
-        json.write("user/cache/" + cachename, base, true);
+        json.write("user/cache/" + cachename, base);
     } else {
-        json.write(output + cachename, base, true);
+        json.write(output + cachename, base);
     }
 }
 

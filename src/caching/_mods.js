@@ -53,6 +53,7 @@ function traders(mod) {
         }
 
         filepaths.traders[inputNames[i++]] = mod.files.traders[item];
+        filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json";
     }
 }
 

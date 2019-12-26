@@ -279,6 +279,7 @@ function cache() {
     filepaths.user.cache.hideout_areas = "user/cache/hideout_areas.json";
     filepaths.user.cache.hideout_production = "user/cache/hideout_production.json";
     filepaths.user.cache.hideout_scavcase = "user/cache/hideout_scavcase.json";
+    filepaths.user.cache.weather = "user/cache/weather.json";
     filepaths.user.cache.templates = "user/cache/templates.json";
 
     for (let assort in assortList) {

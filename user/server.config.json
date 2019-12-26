@@ -4,13 +4,16 @@
 		"generateIp": false,
 		"lootSaving": true
 	},
-	"bots": {
-		"randomized": true
-	},
 	"mods": {
 		"rebuildCache": false,
 		"rebuildRoutes": false,
 		"list": [
+			{
+				"name": "ExaminedByDefault",
+				"author": "EmuTarkov",
+				"version": "1.0.0",
+				"enabled": false
+			},
 			{
 				"name": "PresetTrader",
 				"author": "EmuTarkov",
@@ -27,7 +30,6 @@
 	},
 	"debug": {
 		"debugMode": true,
-		"examinedByDefault": true,
 		"activeId": 1
 	}
 }
