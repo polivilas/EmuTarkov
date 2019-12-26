@@ -272,7 +272,6 @@ function cache() {
 
     filepaths.user.cache.items = "user/cache/items.json";
     filepaths.user.cache.quests = "user/cache/quests.json";
-    filepaths.user.cache.traders = "user/cache/traders.json";
     filepaths.user.cache.locations = "user/cache/locations.json";
     filepaths.user.cache.customization_outfits = "user/cache/customization_outfits.json";
     filepaths.user.cache.customization_offers = "user/cache/customization_offers.json";
@@ -330,9 +329,10 @@ function all() {
         routeDatabase();
         mods.load();
         dump();
+    } else {
+        filepaths = json.parse(json.read("user/cache/filepaths.json"));
     }
 
-    filepaths = json.parse(json.read("user/cache/filepaths.json"));
     settings.mods.rebuildRoutes = false;
 }
 

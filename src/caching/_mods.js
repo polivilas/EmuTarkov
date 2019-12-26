@@ -165,13 +165,13 @@ function isRebuildRequired() {
         return true;
     }
 
-    let cachedList = filepaths.user.cachce.mods;
+    let cachedList = json.parse(json.read("user/cache/mods.json"));
 
     if (modList.length !== cachedList.length) {
         return true;
     }
 
-    for (let mod of modList) {
+    for (let mod in modList) {
         if (modList[mod].name !== cachedList[mod].name || modList[mod].version !== cachedList[mod].version || modList[mod].enabled !== cachedList[mod].enabled) {
             return true;
         }
@@ -191,7 +191,7 @@ function load() {
         }
 
         // apply mod
-        let mod = json.parse(json.read("user/mods/" + modList[element].name + "/mod.config.json"))
+        let mod = json.parse(json.read("user/mods/" + modList[element].author + "-" + modList[element].name + "/mod.config.json"))
 
         console.log("Loading mod " + modList[element].name + " v" + modList[element].version);
         items(mod);
