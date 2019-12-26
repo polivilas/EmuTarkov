@@ -115,7 +115,7 @@ function templates() {
         }
     }
 
-    json.write("user/cache/templates.json", base, true);
+    json.write("user/cache/templates.json", base);
 }
 
 function assorts(trader) {
@@ -208,7 +208,12 @@ function locales(locale) {
         }
     }
 
-    json.write("user/cache/locale_" + locale + ".json", base, true);
+    json.write("user/cache/locale_" + locale + ".json", base);
+}
+
+function mods() {
+    console.log("Caching: mods.json");    
+    json.write("user/cache/mods.json", settings.mods.list);
 }
 
 function all() {
@@ -216,6 +221,12 @@ function all() {
     let assortList = utility.getDirList("db/assort/");
     let localesList = utility.getDirList("db/locales/");
 
+    // force if rebuild is required
+    if (mods.isRebuildRequired()) {
+        force = true;
+    }
+
+    // generate cache
     if (force || !fs.existsSync("user/cache/items.json")) {
         items();
     }
@@ -274,6 +285,10 @@ function all() {
         if (force || !fs.existsSync("user/cache/locale_" + localesList[locale] + ".json")) {
             locales(localesList[locale]);
         }
+    }
+
+    if (force || !fs.existsSync("user/cache/mods.json")) {
+        mods();
     }
 
     settings.mods.rebuildCache = false;

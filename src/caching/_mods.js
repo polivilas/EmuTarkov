@@ -158,6 +158,28 @@ function assort(mod) {
     }
 }
 
+function isRebuildRequired() {
+    let modList = settings.mods.list;
+
+    if (!fs.existsSync("user/cache/mods.json")) {
+        return true;
+    }
+
+    let cachedList = filepaths.user.cachce.mods;
+
+    if (modList.length !== cachedList.length) {
+        return true;
+    }
+
+    for (let mod of modList) {
+        if (modList[mod].name !== cachedList[mod].name || modList[mod].version !== cachedList[mod].version || modList[mod].enabled !== cachedList[mod].enabled) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function load() {
     let modList = settings.mods.list;
 
@@ -168,9 +190,9 @@ function load() {
             continue;
         }
 
+        // apply mod
         let mod = json.parse(json.read("user/mods/" + modList[element].name + "/mod.config.json"))
 
-        // apply mod
         console.log("Loading mod " + modList[element].name + " v" + modList[element].version);
         items(mod);
         quests(mod);
@@ -181,4 +203,5 @@ function load() {
     }
 }
 
+module.exports.isRebuildRequired = isRebuildRequired;
 module.exports.load = load;

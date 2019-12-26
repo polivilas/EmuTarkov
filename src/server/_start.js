@@ -112,17 +112,12 @@ function handleRequest(req, resp) {
 	if (req.method == "POST") {
 		// received data
         req.on('data', function (data) {
-            // prevent flood attack
-            if (data.length > 1000000 && req.url != "/OfflineRaidSave") {
-				request.connection.destroy();
-			}
-
 			// extract data
 			zlib.inflate(data, function(err, body) {
 				let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
 				// get the IP address of the client
-				console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> ", "cyan");
+				console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
 
 				sendResponse(req, resp, jsonData);
 			});
@@ -179,7 +174,7 @@ function start() {
 	let serverHTTPS = https.createServer(options, (req, res) => {
 		handleRequest(req, res);
 	}).listen(port, ip, function() {
-		console.log("» server url: " + "https://" + ip + "/", "green", "", true);
+		console.log("» server url: " + "https://" + ip + "/", "green", "");
 	});
 	
 	// server already running
