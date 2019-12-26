@@ -276,7 +276,7 @@ function getPurchasesData() {
     let multiplier = 0.9;
     let data = json.parse(json.read(getProfile()));
 
-    items = items_f.prepareItems();
+    items = json.parse(json.read(filepaths.user.cache.items));
 
     //prepared vars
     let equipment = data.Inventory.equipment;

@@ -131,7 +131,7 @@ function getQueueStatus(url, info) {
 }
 
 function getItems(url, info) {
-    return JSON.stringify(items_f.prepareItems());
+    return JSON.stringify(json.parse(json.read(filepaths.user.cache.items)));
 }
 
 function getGlobals(url, info) {

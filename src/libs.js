@@ -50,24 +50,23 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 		console.log("Files cached... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
 
-	// Items
-	global.items_f = require('./response/_items.js');				// response/_locations
-	global.items = items_f.prepareItems();							// prepare items only once
-	// Locations
-	global.locations_f = require('./response/_locations.js');		// response/_locations
-	global.locations = locations_f.prepareLocations();				// prepare locations only once
-	// Weather
-	global.weather_f = require('./response/_weather.js');			// repsonse/_weather
-	global.weathers = weather_f.prepareWeather();					// prepare weather only once
-	// Quests
-	global.quests_f = require('./response/_quests.js');				// response/_locations
-	global.quests = quests_f.prepareQuests();						// prepare quests only once
+	// global data
+	global.weather_f = require('./response/_weather.js');		// todo: cache
+	global.items = json.parse(json.read(filepaths.user.cache.items));
+	global.locations = json.parse(json.read(filepaths.user.cache.locations));
+	global.weathers = weather_f.prepareWeather();
+	global.quests = json.parse(json.read(filepaths.user.cache.quests));
+	global.names = json.parse(json.read(filepaths.bots.names));
+	global.botBase = json.parse(json.read(filepaths.bots.base));
+	global.globalSettings = json.parse(json.read(filepaths.globals));
+	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
+
 	// Other
 	global.printf = console.log;
 	global.logger = require('./logger.js');							// logger
 	global.locale = require('./locale.js');							// locale changer function
 	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
-	global.repair_f = require('./response/_repair.js');				// response/_repair
+	global.repair_f = require('./item/_repair.js');				// response/_repair
 	global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
 	global.server = require('./server/_start.js');					// server/_start
 	global.constants = require('./server/_constants.js');			// server/_constants
@@ -93,13 +92,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	if (isFirstLaunch == "first") {
 		printf("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
-
-	// yea this is tough but loads only once
-	global.names = json.parse(json.read(filepaths.bots.names));
-	global.botBase = json.parse(json.read(filepaths.bots.base));
-
-	global.globalSettings = json.parse(json.read(filepaths.globals));
-	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
 	
 	if (isFirstLaunch == "first") {
 		printf("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);
