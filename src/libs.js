@@ -74,7 +74,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.header_f = require('./server/_sendHeader.js');			// server/_sendHeader
 	global.profile = require('./profile.js');						// profile
 	//global.botRandomized_f = require('./bots/_randomized.js');		// bots/_randomized
-	global.botPresets_f = require('./bots/_preset.js');				// bots/_presets
+	//global.botPresets_f = require('./bots/_preset.js');				// bots/_presets
 	global.bots = require('./bots.js');								// bots
 	global.itm_hf = require('./item/helpFunctions.js');				// item/helpFunctions
 	global.quest_f = require('./item/_quest.js'); 					// item/_quest
