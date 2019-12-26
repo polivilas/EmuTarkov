@@ -316,7 +316,7 @@ function routeDatabase() {
 
 function all() {
     // force rebuilding routes
-    let force = settings.mods.rebuildRoutes;
+    let force = false;
 
     // force if rebuild is required
     if (mods.isRebuildRequired()) {

@@ -217,7 +217,7 @@ function mod() {
 }
 
 function all() {
-    let force = settings.mods.rebuildCache;
+    let force = false;
     let assortList = utility.getDirList("db/assort/");
     let localesList = utility.getDirList("db/locales/");
 
