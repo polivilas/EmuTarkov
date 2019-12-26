@@ -1,9 +1,6 @@
 {
 	"name": "M4HoneyBadger",
-	"author": [
-		"Duelo",
-		"NoHurry" 
-	],
+	"author": "Duelo",
 	"description": "Adds M4 Honey Badger conversion to presets trader",
 	"license": "MIT",
 	"releases": [
@@ -18,6 +15,13 @@
 			"changelog": [
 				"Initial release."
 			]
+		}
+	],
+	"dependencies": [
+		{
+			"name": "PresetTrader",
+			"author": "EmuTarkov",
+			"version": "1.0.0"
 		}
 	],
 	"files": {
