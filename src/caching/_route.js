@@ -281,7 +281,7 @@ function cache() {
     filepaths.user.cache.hideout_scavcase = "user/cache/hideout_scavcase.json";
     filepaths.user.cache.weather = "user/cache/weather.json";
     filepaths.user.cache.templates = "user/cache/templates.json";
-    filepaths.user.cachce.mods = "user/cache/mods.json";
+    filepaths.user.cache.mods = "user/cache/mods.json";
 
     for (let assort in assortList) {
         filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + assortList[assort] + ".json";
@@ -321,6 +321,7 @@ function all() {
 
     // force if rebuild is required
     if (mods.isRebuildRequired()) {
+        console.log("Modslist mismatch, force rebuilding cache");
         force = true;
     }
 

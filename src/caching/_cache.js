@@ -211,7 +211,7 @@ function locales(locale) {
     json.write("user/cache/locale_" + locale + ".json", base);
 }
 
-function mods() {
+function mod() {
     console.log("Caching: mods.json");    
     json.write("user/cache/mods.json", settings.mods.list);
 }
@@ -288,7 +288,7 @@ function all() {
     }
 
     if (force || !fs.existsSync("user/cache/mods.json")) {
-        mods();
+        mod();
     }
 
     settings.mods.rebuildCache = false;
