@@ -151,7 +151,19 @@ function getProfileStatus(url, info) {
 }
 
 function getWeather(url, info) {
-    return weather_f.main();
+    let time = utility.getTime().replace("-", ":").replace("-", ":");
+    let date = utility.getDate();
+    let datetime = date + " " + time;
+    let output = weathers[utility.getRandomInt(0, weather.length - 1)];
+
+    // replace date and time
+    output.data.weather.timestamp = Math.floor(new Date() / 1000);
+    output.data.weather.date = date;
+    output.data.weather.time = datetime;
+    output.data.date = date;
+    output.data.time = time;
+
+    return JSON.stringify(output);   
 }
 
 function getLocations(url, info) {

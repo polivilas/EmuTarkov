@@ -23,6 +23,7 @@ function genericCacher(cachename, filepathNode, output = "") {
             case "hideout_areas.json":
             case "hideout_production.json":
             case "hideout_scavcase.json":
+            case "weather.json":
                 base.data.push(fileData);
             break;
 
@@ -63,12 +64,6 @@ function quests() {
     genericCacher("quests.json", filepaths.quests);
 }
 
-/*
-function traders() {
-    genericCacher("traders.json", filepaths.traders);
-}
-*/
-
 function locations() {
     genericCacher("locations.json", filepaths.locations);
 }
@@ -95,6 +90,10 @@ function hideoutProduction() {
 
 function hideoutScavcase() {
     genericCacher("hideout_scavcase.json", filepaths.hideout.scavcase);
+}
+
+function weather() {
+    genericCacher("weather.json", filepaths.weather);
 }
 
 function templates() {
@@ -230,12 +229,6 @@ function all() {
         quests();
     }
 
-    /*
-    if (force || !fs.existsSync("user/cache/traders.json")) {
-        traders();
-    }
-    */
-
     if (force || !fs.existsSync("user/cache/locations.json")) {
         locations();
     }
@@ -262,6 +255,10 @@ function all() {
 
     if (force || !fs.existsSync("user/cache/hideout_scavcase.json")) {
         hideoutScavcase();
+    }
+
+    if (force || !fs.existsSync("user/cache/weather.json")) {
+        weather();
     }
 
     if (force || !fs.existsSync("user/cache/templates.json")) {

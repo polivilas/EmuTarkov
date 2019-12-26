@@ -4,11 +4,11 @@ require('../libs.js');
 
 function main(tmplist, body) {
     let output = item.getOutput();
-    let count = body.items.length;
+    let count = body.repairItems.length;
     let tmpTraderInfo = trader.get(body.tid);
     let repairCurrency = tmpTraderInfo.data.repair.currency;
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
-    let RequestData = body.items;
+    let RequestData = body.repairItems;
     let cnt = 0;
 
     console.log(body.items, "", "", true);

@@ -51,10 +51,9 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	}
 
 	// global data
-	global.weather_f = require('./response/_weather.js');		// todo: cache
 	global.items = json.parse(json.read(filepaths.user.cache.items));
 	global.locations = json.parse(json.read(filepaths.user.cache.locations));
-	global.weathers = weather_f.prepareWeather();
+	global.weather = json.parse(json.read(filepaths.user.cache.weather));
 	global.quests = json.parse(json.read(filepaths.user.cache.quests));
 	global.names = json.parse(json.read(filepaths.bots.names));
 	global.botBase = json.parse(json.read(filepaths.bots.base));
@@ -66,7 +65,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.logger = require('./logger.js');							// logger
 	global.locale = require('./locale.js');							// locale changer function
 	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
-	global.repair_f = require('./item/_repair.js');				// response/_repair
+	global.repair_f = require('./item/_repair.js');					// response/_repair
 	global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
 	global.server = require('./server/_start.js');					// server/_start
 	global.constants = require('./server/_constants.js');			// server/_constants
