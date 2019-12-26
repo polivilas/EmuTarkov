@@ -193,7 +193,8 @@ function load() {
         // apply mod
         let mod = json.parse(json.read("user/mods/" + modList[element].author + "-" + modList[element].name + "/mod.config.json"))
 
-        console.log("Loading mod " + modList[element].name + " v" + modList[element].version);
+        console.log("Loading mod " + modList[element].author + "-" + modList[element].name + " v" + modList[element].version);
+        
         items(mod);
         quests(mod);
         traders(mod);
