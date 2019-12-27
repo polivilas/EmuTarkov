@@ -3,14 +3,13 @@
 require('../libs.js');
 
 const templates = json.parse(json.read(filepaths.user.cache.templates));
-const AllQuests = quests;
 var output = "";
 
-function returnOutput(){
+function returnOutput() {
 	return output;
 }
 
-function setInternalOutput(data){
+function setInternalOutput(data) {
     output = data;
 }
 
@@ -178,6 +177,7 @@ function getMoney(tmpList, amount, body, output_temp) {
     let value = inRUB(amount, currency);
     let calcAmount = fromRUB(amount, currency);
     let skip = false;
+
     for (let item of tmpList.data[0].Inventory.items) {
         if (item._tpl === currency) {
             item.upd.StackObjectsCount += calcAmount;
@@ -185,9 +185,12 @@ function getMoney(tmpList, amount, body, output_temp) {
             console.log("Money received: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
             skip = true;
         }
-        if (skip)
+
+        if (skip) {
             break;
+        }
     }
+
     if (!skip) {
         let StashFS_2D = recheckInventoryFreeSpace(tmpList);
         //creating item tho
@@ -196,41 +199,37 @@ function getMoney(tmpList, amount, body, output_temp) {
         for (let My = 0; My <= stashSize[1]; My++) {
             for (let Mx = 0; Mx <= stashSize[0]; Mx++) {
                 let skip0 = false;
+
                 if (StashFS_2D[My][Mx] !== 0) {
                     skip0 = true;
                 }
+
                 if (!skip0) {
-                    let MoneyItem =
-                        {
-                            "_id": utility.generateNewItemId(),
-                            "_tpl": currency,
-                            "parentId": tmpList.data[0].Inventory.stash,
-                            "slotId": "hideout",
-                            "location": {x: Mx, y: My, r: "Horizontal"},
-                            "upd": {"StackObjectsCount": calcAmount}
-                        };
+                    let MoneyItem = {
+                        "_id": utility.generateNewItemId(),
+                        "_tpl": currency,
+                        "parentId": tmpList.data[0].Inventory.stash,
+                        "slotId": "hideout",
+                        "location": {x: Mx, y: My, r: "Horizontal"},
+                        "upd": {"StackObjectsCount": calcAmount}
+                    };
+
                     tmpList.data[0].Inventory.items.push(MoneyItem);
                     output_temp.data.items.new.push(MoneyItem);
                     console.log("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
                     break addedMoney;
                 }
-
             }
         }
     }
-	  /* TODO: This needs rework ¬TheMaoci¬
-    let traderLoyalty = tmpTraderInfo.data.loyalty;
-    traderLoyalty.currentSalesSum += value;
-    trader.get(body.tid).data.loyalty = traderLoyalty;
-    let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
-    for (let lvlUpTrader in newLvlTraders) {
-        if (tmpList.data[0].TraderStandings.hasOwnProperty(lvlUpTrader)) {
-            tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
-        }
-    }
-    if (body.tid !== "91_everythingTrader" && body.tid !== "92_SecretTrader")
-        tmpList.data[0].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
-	*/
+
+	// update sales sum
+    tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
+    trader.setTrader(tmpTraderInfo.data);
+
+    // update level
+    trader.lvlUp(body.tid);
+
     profile.setCharacterData(tmpList);
     return output_temp;
 }
