@@ -92,19 +92,19 @@ function showIndex(url, info) {
 function showInventoryChecker(url, info) {
     let output = "";
     let inv = itm_hf.recheckInventoryFreeSpace(profile.getCharacterData());
-    
+
     output += "<style>td{border:1px solid #aaa;}</style>Inventory Stash Usage:<br><table><tr><td>-</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9<br>";
-    
+
     for (let y = 0; y < inv.length; y++) {
         output += '<tr><td>' + y + "</td>";
-        
+
         for (let x = 0; x < inv[0].length; x++) {
-            output += '<td ' + ((inv[y][x] === 1)?'style="background:#aaa"':'') + '>' + inv[y][x] + "</td>";
+            output += '<td ' + ((inv[y][x] === 1) ? 'style="background:#aaa"' : '') + '>' + inv[y][x] + "</td>";
         }
-        
+
         output += "</tr>";
     }
-    
+
     output += "</table>";
     return output;
 }
@@ -139,7 +139,20 @@ function getGlobals(url, info) {
 }
 
 function getProfileData(url, info) {
-    return JSON.stringify(profile.getCharacterData());
+    const responseData = profile.getCharacterData();
+
+    // If we have experience gained after the raid, we save it
+    if (responseData.data.length > 0 && responseData.data[0].Stats.TotalSessionExperience > 0) {
+        const sessionExp = responseData.data[0].Stats.TotalSessionExperience;
+        responseData.data[0].Info.Experience += sessionExp;
+        responseData.data[0].Stats.TotalSessionExperience = 0;
+
+        profile.setCharacterData(responseData);
+
+        responseData.data[0].Info.Experience -= sessionExp;
+    }
+
+    return JSON.stringify(responseData);
 }
 
 function selectProfile(url, info) {
@@ -163,7 +176,7 @@ function getWeather(url, info) {
     output.data.date = date;
     output.data.time = time;
 
-    return JSON.stringify(output);   
+    return JSON.stringify(output);
 }
 
 function getLocations(url, info) {
@@ -200,7 +213,7 @@ function searchRagfair(url, info) {
 
 function getAvailableMatch(url, info) {
     return '{"err":404, "errmsg":"EmuTarkov-0.8.0 does not supports online raids. Please use offline match.\n", "data":false}';
-    
+
     // use this for online lan testing
     //return '{"err":0, "errmsg":null, "data":true}';
 }
@@ -218,7 +231,20 @@ function joinMatch(url, info) {
         profileId = "user" + constants.getActiveID() + "pmc";
     }
 
-    return JSON.stringify({"err": 0, "errmsg": null, "data": [{"profileid": profileId, "status": "busy", "ip": "", "port": 0, "location": info.location, "sid": "", "gamemode": "deathmatch", "shortid": shortid}]});
+    return JSON.stringify({
+        "err": 0,
+        "errmsg": null,
+        "data": [{
+            "profileid": profileId,
+            "status": "busy",
+            "ip": "",
+            "port": 0,
+            "location": info.location,
+            "sid": "",
+            "gamemode": "deathmatch",
+            "shortid": shortid
+        }]
+    });
 }
 
 function getChatServerList(url, info) {
@@ -256,7 +282,7 @@ function getCustomization(info) {
     return json.read(filepaths.user.cache.customization_outfits);
 }
 
-function getCustomizationOffers(url, info) {  
+function getCustomizationOffers(url, info) {
     let tempoffers = [];
     let allOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
     let splittedUrl = url.split('/');
@@ -373,17 +399,17 @@ function getResponse(req, body) {
     if (body !== "") {
         info = JSON.parse(body);
     }
-    
+
     // remove ?retry=X from URL
     if (url.indexOf("?retry=") != -1) {
         url = url.split("?retry=")[0];
     }
 
     // handle static requests
-	if (typeof staticRoutes[url] !== "undefined") {
+    if (typeof staticRoutes[url] !== "undefined") {
         return staticRoutes[url](url, info);
     }
-	
+
     // handle dynamic requests
     for (let key in dynamicRoutes) {
         if (url.indexOf(key) != -1) {
@@ -394,8 +420,8 @@ function getResponse(req, body) {
     // request couldn't be handled
     if (output === "") {
         console.log("[UNHANDLED][" + url + "] request data: " + JSON.stringify(info), "white", "red");
-        output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: '+ url + '", "data":null}';
-		return output;
+        output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
+        return output;
     }
 
     // load from cache when server is in release mode
@@ -409,8 +435,8 @@ function getResponse(req, body) {
             } else {
                 output = JSON.stringify(crctest).replace(/\s\s+/g, '');
             }
-            
-			return output;
+
+            return output;
         }
     }
 
