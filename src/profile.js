@@ -426,12 +426,13 @@ function find() {
     return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 }
 
-function addItemToStash(tmpList, body, trad = "")// Buying item from trader
-{
+// Buying item from trader
+function addItemToStash(tmpList, body, trad = "") {
+    item.resetOutput();
+
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
-    item.resetOutput();
     let output = item.getOutput();
     let tmpTrader = json.parse(json.read(filepaths.user.cache.assort_everything));
 
@@ -463,12 +464,14 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
             // stacks prepared
 
             for (let stacks = 0; stacks < MaxStacks; stacks++) {
-                tmpList = profile.getCharacterData();//update profile on each stack so stash recalculate will have new items
+                //update profile on each stack so stash recalculate will have new items
+                tmpList = profile.getCharacterData();
+                
                 let StashFS_2D = itm_hf.recheckInventoryFreeSpace(tmpList);
                 let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTrader.data.items);
                 let tmpSizeX = ItemSize[0];
                 let tmpSizeY = ItemSize[1];
-                //let badSlot = "no";
+
                 addedProperly:
                     for (let y = 0; y <= stashY - tmpSizeY; y++) {
                         for (let x = 0; x <= stashX - tmpSizeX; x++) {
@@ -507,7 +510,6 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
                                 "location": {"x": x, "y": y, "r": 0},
                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                             });
-                            //tmpUserTrader.data[newItem] = [[{"_tpl": item._tpl, "count": prices.data.barter_scheme[item._tpl][0][0].count}]];
 
                             while (true) {
                                 if (typeof toDo[0] === "undefined") {
@@ -559,7 +561,9 @@ function addItemToStash(tmpList, body, trad = "")// Buying item from trader
                             break addedProperly;
                         }
                     }
-                profile.setCharacterData(tmpList); // save after each added item
+
+                // save after each added item
+                profile.setCharacterData(tmpList);
             }
             return output;
         }

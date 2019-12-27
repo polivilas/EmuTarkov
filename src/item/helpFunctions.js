@@ -133,28 +133,14 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
                     return false;
         }
     }
-    // this script will not override data if something goes wrong aka return false;
-    // keep track of trader changing
-	/* TODO: This needs rework ¬TheMaoci¬
-    if (body.tid !== "91_everythingTrader" && body.tid !== "92_SecretTrader")
-        if (trad === "") {
-            let tmpTrader = trader.get(body.tid);
-            let traderCurrency = tmpTrader.data.currency;
-            let traderLoyalty = tmpTrader.data.loyalty;
-            value = inRUB(value, traderCurrency);
-            traderLoyalty.currentSalesSum += value;
-            trader.get(body.tid).data.loyalty = traderLoyalty;
-            let newLvlTraders = trader.lvlUp(tmpList.data[0].Info.Level);
-            for (let lvlUpTrader in newLvlTraders) {
-                if (tmpList.data[0].TraderStandings.hasOwnProperty(lvlUpTrader)) {
-                    tmpList.data[0].TraderStandings[lvlUpTrader].currentLevel = trader.get(lvlUpTrader).data.loyalty.currentLevel;
-                }
-            }
-            // if everything goes OK save profile
-            // update trader data also in profile
 
-            tmpList.data[0].TraderStandings[body.tid].currentSalesSum = traderLoyalty.currentSalesSum;
-        }*/
+    // update sales sum
+    let tmpTraderInfo = trader.get(body.tid);
+
+    tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
+    trader.setTrader(tmpTraderInfo.data);
+
+    // save changes
     profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);
 	item.setOutput(output);

@@ -85,7 +85,6 @@ function completeQuest(tmpList, body)
 
                         tmpTraderInfo.data.loyalty.currentStanding
                         tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + reward.value;
-                        console.log(tmpTraderInfo.data.loyalty.currentStanding);
 
                         // set trader level here
 
