@@ -18,7 +18,6 @@ function genericCacher(cachename, filepathNode, output = "") {
         switch (cachename) {
             case "quests.json":
             case "traders.json":
-            case "locale_languages.json":
             case "customization_offers.json":
             case "hideout_areas.json":
             case "hideout_production.json":
@@ -44,11 +43,7 @@ function genericCacher(cachename, filepathNode, output = "") {
         }
     }
 
-    if (output == "") {
-        json.write("user/cache/" + cachename, base);
-    } else {
-        json.write(output + cachename, base);
-    }
+    json.write("user/cache/" + cachename, base);
 }
 
 function items() {
@@ -64,7 +59,17 @@ function locations() {
 }
 
 function languages() {
-    genericCacher("locale_languages.json", filepaths.locales.languages);
+    let base = json.parse(json.read("db/cache/languages.json"));
+    let inputFiles = filepaths.locales;
+
+    for (let file in inputFiles) {
+        let filePath = filepaths.locales[file].name;
+        let fileData = json.parse(json.read(filePath));
+        
+        base.data.push(fileData);
+    }
+
+    json.write("user/cache/languages.json", base);
 }
 
 function customizationOutfits() {
@@ -278,10 +283,6 @@ function all() {
     }
 
     for (let locale in localesList) {
-        if (localesList[locale] == "languages") {
-            continue;
-        }
-
         if (force || !fs.existsSync("user/cache/locale_" + localesList[locale] + ".json")) {
             locales(localesList[locale]);
         }
@@ -294,5 +295,4 @@ function all() {
     settings.mods.rebuildCache = false;
 }
 
-module.exports.genericCacher = genericCacher;
 module.exports.all = all;

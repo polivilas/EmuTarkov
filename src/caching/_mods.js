@@ -75,24 +75,6 @@ function locations(mod) {
     }
 }
 
-function languages(mod) {
-    if (!mod.files.hasOwnProperty("locales") || !mod.files.locales.hasOwnProperty("languages")) {
-        return;
-    }
-
-    let inputNames = Object.keys(mod.files.locales.languages);
-    let i = 0;
-
-    for (let item in mod.files.locales.languages) {
-        if (mod.files.locales.languages[item] == "delete") {
-            delete filepaths.locales.languages[inputNames[i++]];
-            continue;
-        }
-
-        filepaths.locales.languages[inputNames[i++]] = mod.files.locales.languages[item];
-    }
-}
-
 function assort(mod) {
     if (!mod.files.hasOwnProperty("assort")) {
         return;
@@ -158,6 +140,104 @@ function assort(mod) {
     }
 }
 
+function locales(mod) {
+    if (!mod.files.hasOwnProperty("locales")) {
+        return;
+    }
+
+    let inputNames = Object.keys(mod.files.locales);
+    let i = 0;
+
+    for (let locale in mod.files.locales) {
+        // create locale
+        if (!filepaths.locales.hasOwnProperty(inputNames[i])) {
+            filepaths.locales[inputNames[i++]] = mod.files.locales[locale];
+            continue;
+        }
+        
+        // set active locale
+        let activeLocale = mod.files.locales[locale];
+
+        // set static locale data
+        filepaths.locales[locale].name = activeLocale.shortname;
+        filepaths.locales[locale].menu = activeLocale.menu;
+        filepaths.locales[locale].interface = activeLocale.interface;
+        filepaths.locales[locale].error = activeLocale.error;
+
+        // locale banners
+        inputNames = Object.keys(activeLocale.banners);
+        i = 0;
+
+        for (let text in activeLocale.banners) {
+            filepaths.locales[locale].banners[inputNames[i++]] = activeLocale.banners[text];
+        }
+
+        // locale handbook
+        inputNames = Object.keys(activeLocale.handbook);
+        i = 0;
+
+        for (let text in activeLocale.handbook) {
+            filepaths.locales[locale].handbook[inputNames[i++]] = activeLocale.handbook[text];
+        }
+
+        // locale locations
+        inputNames = Object.keys(activeLocale.locations);
+        i = 0;
+
+        for (let text in activeLocale.locations) {
+            filepaths.locales[locale].locations[inputNames[i++]] = activeLocale.locations[text];
+        }
+
+        // locale mail
+        inputNames = Object.keys(activeLocale.mail);
+        i = 0;
+
+        for (let text in activeLocale.mail) {
+            filepaths.locales[locale].mail[inputNames[i++]] = activeLocale.mail[text];
+        }
+
+        // locale preset
+        inputNames = Object.keys(activeLocale.preset);
+        i = 0;
+
+        for (let text in activeLocale.preset) {
+            filepaths.locales[locale].preset[inputNames[i++]] = activeLocale.preset[text];
+        }
+
+        // locale quest
+        inputNames = Object.keys(activeLocale.quest);
+        i = 0;
+
+        for (let text in activeLocale.quest) {
+            filepaths.locales[locale].quest[inputNames[i++]] = activeLocale.quest[text];
+        }
+
+        // locale season
+        inputNames = Object.keys(activeLocale.season);
+        i = 0;
+
+        for (let text in activeLocale.season) {
+            filepaths.locales[locale].season[inputNames[i++]] = activeLocale.season[text];
+        }
+
+        // locale templates
+        inputNames = Object.keys(activeLocale.templates);
+        i = 0;
+
+        for (let text in activeLocale.templates) {
+            filepaths.locales[locale].templates[inputNames[i++]] = activeLocale.templates[text];
+        }
+
+        // locale trading
+        inputNames = Object.keys(activeLocale.trading);
+        i = 0;
+
+        for (let text in activeLocale.trading) {
+            filepaths.locales[locale].trading[inputNames[i++]] = activeLocale.trading[text];
+        }
+    }
+}
+
 function isRebuildRequired() {
     let modList = settings.mods.list;
 
@@ -183,24 +263,24 @@ function isRebuildRequired() {
 function load() {
     let modList = settings.mods.list;
 
-    for (let element in modList) {
+    for (let element of modList) {
         // skip mod
         if (!modList[element].enabled) {
-            console.log("Skipping mod " + modList[element].name + " v" + modList[element].version);
+            console.log("Skipping mod " + element.name + " v" + element.version);
             continue;
         }
 
         // apply mod
-        let mod = json.parse(json.read("user/mods/" + modList[element].author + "-" + modList[element].name + "/mod.config.json"))
+        let mod = json.parse(json.read("user/mods/" + element.author + "-" + element.name + "/mod.config.json"))
 
-        console.log("Loading mod " + modList[element].author + "-" + modList[element].name + " v" + modList[element].version);
+        console.log("Loading mod " + element.author + "-" + element.name + " v" + element.version);
         
         items(mod);
         quests(mod);
         traders(mod);
         locations(mod);
-        languages(mod);
         assort(mod);
+        locales(mod);
     }
 }
 

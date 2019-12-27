@@ -25,7 +25,6 @@ function genericFilepathCacher(type, basepath) {
             case "quests": filepaths.quests[fileName] = filePath; break;
             case "traders": filepaths.traders[fileName] = filePath; break;
             case "locations": filepaths.locations[fileName] = filePath; break;
-            case "languages": filepaths.locales.languages[fileName] = filePath; break;
             case "customOutfits": filepaths.customization.outfits[fileName] = filePath; break;
             case "customOffers": filepaths.customization.offers[fileName] = filePath; break;
             case "hideoutAreas": filepaths.hideout.areas[fileName] = filePath; break;
@@ -55,10 +54,6 @@ function traders() {
 
 function locations() {
     genericFilepathCacher("locations", "db/locations");
-}
-
-function languages() {
-    genericFilepathCacher("languages", "db/locales/languages");
 }
 
 function customizationOutfits() {
@@ -145,10 +140,6 @@ function locales() {
     let dirList = utility.getDirList("db/locales/");
 
     for (let dir in dirList) {
-        if (dirList[dir] == "languages") {
-            continue;
-        }
-
         let locale = dirList[dir];
         let localeFilepath = {"menu": "", "interface": "", "error": "", "mail": {}, "quest": {}, "preset": {}, "handbook": {}, "season": {}, "templates": {}, "locations": {}, "banners": {}, "trading": {}}
         let inputDir = [
@@ -165,6 +156,7 @@ function locales() {
 
         console.log("Routing: db/locales/" + locale + "/");
         
+        localeFilepath.name = "db/locales/" + locale + "/" + locale + ".json";
         localeFilepath.menu = "db/locales/" + locale + "/menu.json";
         localeFilepath.interface = "db/locales/" + locale + "/interface.json";
         localeFilepath.error = "db/locales/" + locale + "/error.json";
@@ -297,7 +289,6 @@ function routeDatabase() {
     quests();
     traders();
     locations();
-    languages();
     customizationOutfits();
     customizationOffers();
     hideoutAreas();
