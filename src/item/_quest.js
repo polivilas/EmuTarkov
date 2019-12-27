@@ -81,14 +81,15 @@ function completeQuest(tmpList, body)
                         break;
 
                     case "TraderStanding":
+                        // improve trader standing
                         let tmpTraderInfo = trader.get(quest.traderId);
 
                         tmpTraderInfo.data.loyalty.currentStanding
                         tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + reward.value;
-
-                        // set trader level here
-
                         trader.setTrader(tmpTraderInfo.data);
+
+                        // level up trader
+                        trader.lvlUp(quest.traderId);
                         break;
                 }
             }

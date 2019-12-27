@@ -140,6 +140,9 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
     tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
     trader.setTrader(tmpTraderInfo.data);
 
+    // update level
+    trader.lvlUp(body.tid);
+
     // save changes
     profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);

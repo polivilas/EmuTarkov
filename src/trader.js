@@ -62,8 +62,31 @@ function setTrader(data) {
     return json.write(getPath(data._id), data);
 }
 
-function lvlUp(playerLvl) {
-    return [];
+function lvlUp(id) {
+    let currentProfile = profile.getCharacterData();
+    let currentTrader = get(id);
+    let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
+
+    for (let level in loyaltyLevels) {
+        if (currentTrader.data.loyalty.currentLevel <= level) {
+            continue;
+        }
+
+        if (loyaltyLevels[level].minLevel > currentProfile.data[0].Info.Level) {
+            return;
+        }
+
+        if (loyaltyLevels[level].minSalesSum > currentTrader.data.loyalty.currentSalesSum) {
+            return;
+        }
+
+        if (loyaltyLevels[level].minStanding > currentTrader.data.loyalty.currentStanding) {
+            return;
+        }
+
+        currentTrader.data.loyalty.currentLevel = 1 + level;
+        setTrader(currentTrader.data);
+    }
 }
 
 module.exports.getPath = getPath;
