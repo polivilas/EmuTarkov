@@ -84,7 +84,8 @@ function lvlUp(id) {
             return;
         }
 
-        currentTrader.data.loyalty.currentLevel = 1 + level;
+        // level starts at 0, currentLevel at 1
+        currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
         setTrader(currentTrader.data);
     }
 }

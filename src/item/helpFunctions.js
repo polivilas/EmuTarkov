@@ -108,12 +108,15 @@ function fromRUB(value, currency) {
 * output:
 * */
 function payMoney(tmpList, moneyObject, body, trad = "") {
-	output = item.getOutput();
+    output = item.getOutput();
+    
     let value = 0;
+
     for (let i = 0; i < moneyObject.length; i++) {
 		for (let index in tmpList.data[0].Inventory.items) {
-			let itm = tmpList.data[0].Inventory.items[index];
-            if (typeof itm.upd !== "undefined")
+            let itm = tmpList.data[0].Inventory.items[index];
+            
+            if (typeof itm.upd !== "undefined") {
                 if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
                     itm.upd.StackObjectsCount -= body.scheme_items[i].count;
@@ -129,8 +132,10 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
                     value += body.scheme_items[i].count;
                     tmpList.data[0].Inventory.items.splice(index, 1);// just slice item from )
                     output.data.items.del.push({"_id": itm._id});
-                } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count)
+                } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count) {
                     return false;
+                }
+            }
         }
     }
 
