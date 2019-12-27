@@ -205,6 +205,7 @@ function cache() {
     filepaths.user.cache.items = "user/cache/items.json";
     filepaths.user.cache.quests = "user/cache/quests.json";
     filepaths.user.cache.locations = "user/cache/locations.json";
+    filepaths.user.cache.languages = "user/cache/languages.json";
     filepaths.user.cache.customization_outfits = "user/cache/customization_outfits.json";
     filepaths.user.cache.customization_offers = "user/cache/customization_offers.json";
     filepaths.user.cache.hideout_areas = "user/cache/hideout_areas.json";

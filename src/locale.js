@@ -3,10 +3,10 @@
 require('./libs.js');
 
 function getLanguages() {
-    return json.read(filepaths.user.cache.locale_languages);
+    return json.read(filepaths.user.cache.languages);
 }
 
-function getMenu(lang) {
+function getMenu(lang = "en") {
     let base = filepaths.locales[lang.toLowerCase()];
 
     return json.read(base.menu);

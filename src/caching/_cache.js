@@ -66,8 +66,7 @@ function languages() {
 
     for (let file in inputFiles) {
         let locale = filepaths.locales[inputNames[i++]];
-        let filePath = locale.name;
-        let fileData = json.parse(json.read(filePath));
+        let fileData = json.parse(json.read(locale.name));
         
         base.data.push(fileData);
     }

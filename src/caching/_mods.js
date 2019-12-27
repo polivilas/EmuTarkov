@@ -2,6 +2,23 @@
 
 require('../libs.js');
 
+function cache(mod) {
+    if (!mod.files.hasOwnProperty("user")) {
+       return;
+    }
+
+    if (!mod.files.user.hasOwnProperty("cache")) {
+        return;
+    }
+
+    let inputNames = Object.keys(mod.files.user.cache);
+    let i = 0;
+
+    for (let item in mod.files.user.cache) {
+        filepaths.user.cache[inputNames[i++]] = mod.files.user.cache[item];
+    }
+}
+
 function items(mod) {
     if (!mod.files.hasOwnProperty("items")) {
         return;
@@ -11,11 +28,6 @@ function items(mod) {
     let i = 0;
 
     for (let item in mod.files.items) {
-        if (mod.files.items[item] == "delete") {
-            delete filepaths.items[inputNames[i++]];
-            continue;
-        }
-
         filepaths.items[inputNames[i++]] = mod.files.items[item];
     }
 }
@@ -29,11 +41,6 @@ function quests(mod) {
     let i = 0;
 
     for (let item in mod.files.quests) {
-        if (mod.files.quests[item] == "delete") {
-            delete filepaths.quests[inputNames[i++]];
-            continue;
-        }
-
         filepaths.quests[inputNames[i++]] = mod.files.quests[item];
     }
 }
@@ -47,11 +54,6 @@ function traders(mod) {
     let i = 0;
 
     for (let item in mod.files.traders) {
-        if (mod.files.traders[item] == "delete") {
-            delete filepaths.traders[inputNames[i++]];
-            continue;
-        }
-
         filepaths.traders[inputNames[i++]] = mod.files.traders[item];
         filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json";
     }
@@ -66,11 +68,6 @@ function locations(mod) {
     let i = 0;
 
     for (let item in mod.files.locations) {
-        if (mod.files.locations[item] == "delete") {
-            delete filepaths.locations[inputNames[i++]];
-            continue;
-        }
-
         filepaths.locations[inputNames[i++]] = mod.files.locations[item];
     }
 }
@@ -84,12 +81,6 @@ function assort(mod) {
     let i = 0;
 
     for (let assort in mod.files.assort) {
-        // delete assort
-        if (mod.files.assort[assort] == null) {
-            delete filepaths.assort[assort];
-            continue;
-        }
-
         // create assort
         if (!filepaths.assort.hasOwnProperty(inputNames[i])) {
             filepaths.assort[inputNames[i++]] = mod.files.assort[assort];
@@ -104,11 +95,6 @@ function assort(mod) {
         i = 0;
 
         for (let item in activeAssort.items) {
-            if (activeAssort.items[item] == "delete") {
-                delete filepaths.assort[assort].items[inputNames[i++]];
-                continue
-            }
-
             filepaths.assort[assort].items[inputNames[i++]] = activeAssort.items[item];
         }
 
@@ -117,11 +103,6 @@ function assort(mod) {
         i = 0;
 
         for (let item in activeAssort.barter_scheme) {
-            if (activeAssort.barter_scheme[item] == "delete") {
-                delete filepaths.assort[assort].barter_scheme[inputNames[i++]];
-                continue;
-            }
-
             filepaths.assort[assort].barter_scheme[inputNames[i++]] = activeAssort.barter_scheme[item];
         }
 
@@ -130,11 +111,6 @@ function assort(mod) {
         i = 0;
 
         for (let item in activeAssort.loyal_level_items) {
-            if (activeAssort.loyal_level_items[item] == "delete") {
-                delete filepaths.assort[assort].loyal_level_items[inputNames[i++]];
-                continue;
-            }
-
             filepaths.assort[assort].loyal_level_items[inputNames[i++]] = activeAssort.loyal_level_items[item];
         }
     }
@@ -252,7 +228,15 @@ function isRebuildRequired() {
     }
 
     for (let mod in modList) {
-        if (modList[mod].name !== cachedList[mod].name || modList[mod].version !== cachedList[mod].version || modList[mod].enabled !== cachedList[mod].enabled) {
+        if (modList[mod].name !== cachedList[mod].name) {
+            return true;
+        }
+            
+        if (modList[mod].version !== cachedList[mod].version) {
+            return true;
+        }
+        
+        if (modList[mod].enabled !== typeof undefined && cachedList[mod].enabled !== typeof undefined && modList[mod].enabled !== cachedList[mod].enabled) {
             return true;
         }
     }
@@ -265,7 +249,7 @@ function load() {
 
     for (let element of modList) {
         // skip mod
-        if (!element.enabled) {
+        if (element.enabled !== undefined && !element.enabled) {
             console.log("Skipping mod " + element.author + "-" + element.name + " v" + element.version);
             continue;
         }
@@ -275,6 +259,7 @@ function load() {
 
         console.log("Loading mod " + element.author + "-" + element.name + " v" + element.version);
         
+        cache(mod);
         items(mod);
         quests(mod);
         traders(mod);
