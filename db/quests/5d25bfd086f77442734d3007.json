@@ -1,0 +1,148 @@
+{
+	"_id": "5d25bfd086f77442734d3007",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d67b3ed86f7744a2e70f15c.jpg",
+	"type": "Experience",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e02be602a251a0952271104",
+				"value": "30000",
+				"id": "5d6654a886f77427135f3a13",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271104",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 30000
+						}
+					}
+				]
+			},
+			{
+				"value": "9000",
+				"id": "5d6654b986f77427d529a113",
+				"type": "Experience",
+				"index": 1
+			},
+			{
+				"target": "5e02be602a251a0952271105",
+				"value": "2",
+				"id": "5d6654db86f77472690db3c3",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271105",
+						"_tpl": "5c0fa877d174af02a012e1cf",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.03",
+				"id": "5d762a0286f774454c5360c0",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5d25b6be86f77444001e1b89",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5dadc99686f7744b0f1b1d2a"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Experience",
+					"counter": {
+						"id": "5d25c5a186f77443fe457660",
+						"conditions": [
+							{
+								"_parent": "HealthEffect",
+								"_props": {
+									"time": {
+										"compareMethod": ">=",
+										"value": 300
+									},
+									"bodyPartsWithEffects": [
+										{
+											"bodyParts": [
+												"Stomach"
+											],
+											"effects": [
+												"Dehydration"
+											]
+										}
+									],
+									"id": "5d25c5d086f77408251c4224"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d25c5a186f77443fe457661"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "5d9f035086f7741cac4a9712",
+						"conditions": [
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5d9f035a86f7741cab6b0182"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "",
+					"id": "5d9f035086f7741cac4a9713",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5d25c5a186f77443fe457661",
+								"id": "5d9f036886f7741cac4a9714"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

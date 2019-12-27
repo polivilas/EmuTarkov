@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5d34df2788a4504526796c9d",
+				"target": "5e02be602a251a09522710d1",
 				"value": "15000",
 				"id": "5acb7ded86f77417d079736e",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c9d",
+						"_id": "5e02be602a251a09522710d1",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 15000
@@ -41,14 +41,14 @@
 				"index": 2
 			},
 			{
-				"target": "5d34df2788a4504526796c9e",
+				"target": "5e02be602a251a09522710d2",
 				"value": "1",
 				"id": "5ad0ab7286f774547c14e283",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c9e",
+						"_id": "5e02be602a251a09522710d2",
 						"_tpl": "5abcbc27d8ce8700182eceeb",
 						"parentId": "hideout",
 						"slotId": "hideout",
@@ -57,51 +57,51 @@
 						}
 					},
 					{
-						"_id": "5d34df2788a4504526796c9f",
+						"_id": "5e02be602a251a09522710d3",
 						"_tpl": "59d64ec286f774171d1e0a42",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_gas_block"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca0",
+						"_id": "5e02be602a251a09522710d4",
 						"_tpl": "59e61eb386f77440d64f5daf",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_muzzle"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca1",
+						"_id": "5e02be602a251a09522710d5",
 						"_tpl": "5a0071d486f77404e23a12b2",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_pistol_grip_akms"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca2",
+						"_id": "5e02be602a251a09522710d6",
 						"_tpl": "59d6507c86f7741b846413a2",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_reciever"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca3",
+						"_id": "5e02be602a251a09522710d7",
 						"_tpl": "59d650cf86f7741b846413a4",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_sight_rear"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca4",
+						"_id": "5e02be602a251a09522710d8",
 						"_tpl": "5abcd472d8ce8700166032ae",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_stock_akms"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca5",
+						"_id": "5e02be602a251a09522710d9",
 						"_tpl": "5a0060fc86f7745793204432",
-						"parentId": "5d34df2788a4504526796c9e",
+						"parentId": "5e02be602a251a09522710d2",
 						"slotId": "mod_magazine"
 					},
 					{
-						"_id": "5d34df2788a4504526796ca6",
+						"_id": "5e02be602a251a09522710da",
 						"_tpl": "59d64f2f86f77417193ef8b3",
-						"parentId": "5d34df2788a4504526796c9f",
+						"parentId": "5e02be602a251a09522710d3",
 						"slotId": "mod_handguard"
 					}
 				]
@@ -129,12 +129,14 @@
 					"target": [
 						"59e36c6f86f774176c10a2a7"
 					],
-					"value": "5",
+					"value": "3",
 					"minDurability": 0,
 					"dogtagLevel": 0,
 					"index": 0,
 					"parentId": "",
-					"id": "5ac502a786f7740bde1b000c"
+					"id": "5ac502a786f7740bde1b000c",
+					"maxDurability": 0,
+					"onlyFoundInRaid": false
 				}
 			},
 			{
@@ -143,13 +145,15 @@
 					"target": [
 						"59e36c6f86f774176c10a2a7"
 					],
-					"value": "5",
+					"value": "3",
 					"minDurability": 0,
 					"dogtagLevel": 0,
 					"index": 1,
 					"parentId": "",
 					"id": "5ac5055a86f7745cae22b582",
-					"visibilityConditions": []
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": false
 				}
 			},
 			{
@@ -187,12 +191,14 @@
 					"target": [
 						"590a3b0486f7743954552bdb"
 					],
-					"value": "5",
+					"value": "3",
 					"minDurability": 0,
 					"dogtagLevel": 0,
 					"index": 4,
 					"parentId": "",
-					"id": "5ac5061386f77417e429ce7a"
+					"id": "5ac5061386f77417e429ce7a",
+					"maxDurability": 0,
+					"onlyFoundInRaid": false
 				}
 			},
 			{
@@ -201,13 +207,15 @@
 					"target": [
 						"590a3b0486f7743954552bdb"
 					],
-					"value": "5",
+					"value": "3",
 					"minDurability": 0,
 					"dogtagLevel": 0,
 					"index": 5,
 					"parentId": "",
 					"id": "5ac5062586f774587c327395",
-					"visibilityConditions": []
+					"visibilityConditions": [],
+					"maxDurability": 0,
+					"onlyFoundInRaid": false
 				}
 			}
 		],

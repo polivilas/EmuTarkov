@@ -57,6 +57,7 @@
 		"AllowSpawnOnLocations": [],
 		"SendToClient": true,
 		"AnimationVariantsNumber": 0,
+		"DiscardingBlock": false,
 		"medUseTime": 16,
 		"medEffectType": "duringUse",
 		"MaxHpResource": 5,
@@ -134,7 +135,7 @@
 				"healthPenaltyMax": 0
 			},
 			"fracture": {
-				"remove": true,
+				"remove": false,
 				"time": 0,
 				"duration": 0,
 				"fadeOut": 0,
@@ -178,8 +179,8 @@
 				"time": 0,
 				"duration": 0,
 				"fadeOut": 0,
-				"healthPenaltyMin": 55,
-				"healthPenaltyMax": 70
+				"healthPenaltyMin": 45,
+				"healthPenaltyMax": 60
 			}
 		}
 	},

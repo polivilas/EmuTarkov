@@ -33,14 +33,14 @@
 				"id": "5a4ba2ad88a4504dd35e8494"
 			},
 			{
-				"target": "5d34df2788a4504526796c18",
+				"target": "5e02be602a251a095227105a",
 				"value": "65000",
 				"type": "Item",
 				"index": 3,
 				"id": "5a2e5d0b86f77452ee40c4b2",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c18",
+						"_id": "5e02be602a251a095227105a",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 65000
@@ -55,14 +55,14 @@
 				"index": 4
 			},
 			{
-				"target": "5d34df2788a4504526796c19",
+				"target": "5e02be602a251a095227105b",
 				"value": "1",
 				"id": "5a2e5dc086f77452ee40c4b3",
 				"type": "Item",
 				"index": 5,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c19",
+						"_id": "5e02be602a251a095227105b",
 						"_tpl": "545cdae64bdc2d39198b4568",
 						"upd": {
 							"StackObjectsCount": 1
@@ -71,7 +71,7 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796c1a",
+				"target": "5e02be602a251a095227105c",
 				"id": "5ac6676e86f774056634a230",
 				"type": "AssortmentUnlock",
 				"index": 6,
@@ -79,57 +79,57 @@
 				"traderId": "58330581ace78e27b8b10cee",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c1a",
+						"_id": "5e02be602a251a095227105c",
 						"_tpl": "59e6687d86f77411d949b251",
 						"parentId": "hideout",
 						"slotId": "hideout"
 					},
 					{
-						"_id": "5d34df2788a4504526796c1b",
+						"_id": "5e02be602a251a095227105d",
 						"_tpl": "59e649f986f77411d949b246",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_gas_block"
 					},
 					{
-						"_id": "5d34df2788a4504526796c1c",
+						"_id": "5e02be602a251a095227105e",
 						"_tpl": "59e8a00d86f7742ad93b569c",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_muzzle"
 					},
 					{
-						"_id": "5d34df2788a4504526796c1d",
+						"_id": "5e02be602a251a095227105f",
 						"_tpl": "59e6318286f77444dd62c4cc",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_pistol_grip"
 					},
 					{
-						"_id": "5d34df2788a4504526796c1e",
+						"_id": "5e02be602a251a0952271060",
 						"_tpl": "59e6449086f7746c9f75e822",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_reciever"
 					},
 					{
-						"_id": "5d34df2788a4504526796c1f",
+						"_id": "5e02be602a251a0952271061",
 						"_tpl": "59e8977386f77415a553c453",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_sight_rear"
 					},
 					{
-						"_id": "5d34df2788a4504526796c20",
+						"_id": "5e02be602a251a0952271062",
 						"_tpl": "59e89d0986f77427600d226e",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_stock"
 					},
 					{
-						"_id": "5d34df2788a4504526796c21",
+						"_id": "5e02be602a251a0952271063",
 						"_tpl": "59d625f086f774661516605d",
-						"parentId": "5d34df2788a4504526796c1a",
+						"parentId": "5e02be602a251a095227105c",
 						"slotId": "mod_magazine"
 					},
 					{
-						"_id": "5d34df2788a4504526796c22",
+						"_id": "5e02be602a251a0952271064",
 						"_tpl": "59e898ee86f77427614bd225",
-						"parentId": "5d34df2788a4504526796c1b",
+						"parentId": "5e02be602a251a095227105d",
 						"slotId": "mod_handguard"
 					}
 				]
@@ -154,7 +154,7 @@
 			{
 				"_parent": "CounterCreator",
 				"_props": {
-					"value": "6",
+					"value": "4",
 					"type": "Elimination",
 					"counter": {
 						"id": "596b45e786f77457c7006f87",
@@ -166,18 +166,21 @@
 									"compareMethod": ">=",
 									"value": "1",
 									"weapon": [
-										"5a7ae0c351dfba0017554310",
+										"56d59856d2720bd8418b456a",
+										"5b1fa9b25acfc40018633c01",
 										"576a581d2459771e7b1bc4f1",
 										"5448bd6b4bdc2dfc2f8b4569",
 										"5a17f98cfcdbcb0980087290",
 										"579204f224597773d619e051",
-										"5b1fa9b25acfc40018633c01",
 										"5abccb7dd8ce87001773e277",
-										"56d59856d2720bd8418b456a",
 										"59f98b4986f7746f546d2cef",
 										"5b3b713c5acfc4330140bd8d",
 										"56e0598dd2720bb5668b45a6",
-										"571a12c42459771f627b58a0"
+										"571a12c42459771f627b58a0",
+										"5cadc190ae921500103bb3b6",
+										"5d3eb3b0a4b93615055e84d2",
+										"5d67abc1a4b93614ec50137f",
+										"5a7ae0c351dfba0017554310"
 									],
 									"id": "5979e7fe86f774311955e613"
 								}

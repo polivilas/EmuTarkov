@@ -25,14 +25,14 @@
 				"id": "5bcf103486f77423c25c50a4"
 			},
 			{
-				"target": "5d34df2788a4504526796b40",
+				"target": "5e02be602a251a0952271077",
 				"value": "17000",
 				"id": "5a2e867186f7741a95102607",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796b40",
+						"_id": "5e02be602a251a0952271077",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 17000
@@ -41,14 +41,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796b41",
+				"target": "5e02be602a251a0952271078",
 				"value": "4",
 				"id": "5a2e868686f7741a943575b9",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796b41",
+						"_id": "5e02be602a251a0952271078",
 						"_tpl": "5710c24ad2720bc3458b45a3",
 						"upd": {
 							"StackObjectsCount": 4
@@ -57,15 +57,7 @@
 				]
 			}
 		],
-		"Fail": [
-			{
-				"target": "54cb50c76803fa8b248b4571",
-				"value": "-0.06",
-				"type": "TraderStanding",
-				"index": 0,
-				"id": "597afde186f7741ce2755ed5"
-			}
-		]
+		"Fail": []
 	},
 	"conditions": {
 		"AvailableForStart": [],
@@ -73,7 +65,7 @@
 			{
 				"_parent": "CounterCreator",
 				"_props": {
-					"value": "20",
+					"value": "25",
 					"type": "Elimination",
 					"counter": {
 						"id": "598f0c6386f7746c837802cb",
@@ -84,10 +76,6 @@
 									"target": "Savage",
 									"compareMethod": ">=",
 									"value": "1",
-									"daytime": {
-										"from": 15,
-										"to": 22
-									},
 									"id": "598f0c6986f77468ba349ed5"
 								}
 							},

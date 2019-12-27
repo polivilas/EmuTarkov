@@ -1,0 +1,112 @@
+{
+	"_id": "5d2495a886f77425cd51e403",
+	"traderId": "5a7c2eca46aef81a7ca2145d",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/5d67b2a086f774131e206c05.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e02be602a251a09522710f5",
+				"value": "15000",
+				"id": "5d65671086f77476de799fde",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e02be602a251a09522710f5",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 15000
+						}
+					}
+				]
+			},
+			{
+				"value": "4500",
+				"id": "5d65672186f774766e559dc9",
+				"type": "Experience",
+				"index": 1
+			},
+			{
+				"target": "5a7c2eca46aef81a7ca2145d",
+				"value": "0.05",
+				"id": "5d7620bc86f774454d58840d",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"id": "5d78c49786f7745041358b58",
+				"type": "TraderUnlock",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5ac23c6186f7741247042bad",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5d7fc0fb86f77440351becb3"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "VisitPlace",
+				"_props": {
+					"target": "huntsman_001",
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "5d2496fb86f77425ce7f1254"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5d3ec50586f774183a607442"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": false,
+					"index": 1,
+					"parentId": "",
+					"id": "5d249a6e86f774791546e952"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5d3ec50586f774183a607442"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": false,
+					"index": 2,
+					"parentId": "",
+					"id": "5d249aa286f77475e8376399"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

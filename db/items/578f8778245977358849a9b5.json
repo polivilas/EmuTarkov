@@ -57,17 +57,27 @@
 		"AllowSpawnOnLocations": [],
 		"SendToClient": false,
 		"AnimationVariantsNumber": 0,
+		"DiscardingBlock": false,
 		"Grids": [
 			{
 				"_name": "main",
 				"_id": "578f887c2459773546601e30",
 				"_parent": "578f8778245977358849a9b5",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 2,
 					"cellsV": 2,
 					"minCount": 0,
-					"maxCount": 3,
+					"maxCount": 2,
 					"maxWeight": 0
 				},
 				"_proto": "55d329c24bdc2d892f8b4567"

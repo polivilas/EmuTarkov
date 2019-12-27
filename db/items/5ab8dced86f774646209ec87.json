@@ -57,13 +57,23 @@
 		"AllowSpawnOnLocations": [],
 		"SendToClient": false,
 		"AnimationVariantsNumber": 0,
+		"DiscardingBlock": false,
 		"Grids": [
 			{
 				"_name": "1",
 				"_id": "5ab8dced86f774646209ec89",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -77,7 +87,16 @@
 				"_id": "5ab8dced86f774646209ec8a",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -91,7 +110,16 @@
 				"_id": "5ab8dced86f774646209ec8b",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -105,7 +133,16 @@
 				"_id": "5ab8dced86f774646209ec8c",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -119,7 +156,16 @@
 				"_id": "5ab8dced86f774646209ec8d",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -133,7 +179,16 @@
 				"_id": "5ab8dced86f774646209ec8e",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -147,7 +202,16 @@
 				"_id": "5ab8dced86f774646209ec8f",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -161,7 +225,16 @@
 				"_id": "5ab8dced86f774646209ec90",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -175,7 +248,16 @@
 				"_id": "5abe4df086f77436271eace7",
 				"_parent": "5ab8dced86f774646209ec87",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 2,
 					"cellsV": 1,
 					"minCount": 0,
@@ -191,8 +273,8 @@
 		"SearchSound": "looting_body_extended",
 		"BlocksArmorVest": true,
 		"RigLayoutName": "ANA Tactical M2",
-		"Durability": 40,
-		"MaxDurability": 40,
+		"Durability": 60,
+		"MaxDurability": 60,
 		"armorZone": [
 			"Chest",
 			"Stomach"

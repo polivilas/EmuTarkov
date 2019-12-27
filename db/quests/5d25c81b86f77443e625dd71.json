@@ -1,0 +1,103 @@
+{
+	"_id": "5d25c81b86f77443e625dd71",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d67b41686f774368e1b78df.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e02be602a251a0952271106",
+				"value": "65000",
+				"id": "5daef03f86f77426fa0a54f8",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271106",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 65000
+						}
+					}
+				]
+			},
+			{
+				"value": "10000",
+				"id": "5d66562b86f774272e5d1492",
+				"type": "Experience",
+				"index": 1
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5d25bfd086f77442734d3007",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5d7630e286f774452173421a"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "5",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d25c8c986f77443e47ad479",
+						"conditions": [
+							{
+								"_parent": "HealthEffect",
+								"_props": {
+									"bodyPartsWithEffects": [
+										{
+											"bodyParts": [
+												"Head",
+												"Chest",
+												"Stomach",
+												"LeftArm",
+												"RightArm",
+												"LeftLeg",
+												"RightLeg"
+											],
+											"effects": [
+												"Pain"
+											]
+										}
+									],
+									"id": "5d25c8ed86f7740a21220d15"
+								}
+							},
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5d25c91186f77443e625dd72"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d25c8c986f77443e47ad47a"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

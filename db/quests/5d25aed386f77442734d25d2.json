@@ -1,0 +1,265 @@
+{
+	"_id": "5d25aed386f77442734d25d2",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/5979d3ea86f7746d0b3e3fdc.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e02be602a251a09522710f7",
+				"value": "22000",
+				"id": "5d65679c86f77479fe4dc982",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e02be602a251a09522710f7",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 22000
+						}
+					}
+				]
+			},
+			{
+				"value": "7000",
+				"id": "5d6567ae86f77474ef100f53",
+				"type": "Experience",
+				"index": 1
+			},
+			{
+				"target": "5e02be602a251a09522710f8",
+				"value": "200",
+				"id": "5d6567e786f77476d6220ed5",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e02be602a251a09522710f8",
+						"_tpl": "59e655cb86f77411dc52a77b",
+						"upd": {
+							"StackObjectsCount": 200
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.04",
+				"id": "5d76305d86f774452073df6e",
+				"type": "TraderStanding",
+				"index": 3
+			},
+			{
+				"target": "5e02be602a251a09522710f9",
+				"value": "2",
+				"id": "5d84e34686f77414e522c5ea",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e02be602a251a09522710f9",
+						"_tpl": "59e6687d86f77411d949b251",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					},
+					{
+						"_id": "5e02be602a251a09522710fa",
+						"_tpl": "59e649f986f77411d949b246",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_gas_block"
+					},
+					{
+						"_id": "5e02be602a251a09522710fb",
+						"_tpl": "59e8a00d86f7742ad93b569c",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_muzzle"
+					},
+					{
+						"_id": "5e02be602a251a09522710fc",
+						"_tpl": "59e6318286f77444dd62c4cc",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5e02be602a251a09522710fd",
+						"_tpl": "59e6449086f7746c9f75e822",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_reciever"
+					},
+					{
+						"_id": "5e02be602a251a09522710fe",
+						"_tpl": "59e8977386f77415a553c453",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_sight_rear"
+					},
+					{
+						"_id": "5e02be602a251a09522710ff",
+						"_tpl": "59e89d0986f77427600d226e",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_stock"
+					},
+					{
+						"_id": "5e02be602a251a0952271100",
+						"_tpl": "59d625f086f774661516605d",
+						"parentId": "5e02be602a251a09522710f9",
+						"slotId": "mod_magazine"
+					},
+					{
+						"_id": "5e02be602a251a0952271101",
+						"_tpl": "59e898ee86f77427614bd225",
+						"parentId": "5e02be602a251a09522710fa",
+						"slotId": "mod_handguard"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5d24b81486f77439c92d6ba8",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5d76302d86f774454d58840e"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "7",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d25af3c86f77443ff46b9e6",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5d25af5d86f77443e625d0b9"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentExclusive": [
+										[
+											"545cdb794bdc2d3a198b456a"
+										],
+										[
+											"5ab8e79e86f7742d8b372e78"
+										],
+										[
+											"5ab8e4ed86f7742d8e50c7fa"
+										],
+										[
+											"5c0e53c886f7747fa54205c7"
+										],
+										[
+											"5c0e51be86f774598e797894"
+										],
+										[
+											"5c0e541586f7747fa54205c9"
+										],
+										[
+											"5c0e5bab86f77461f55ed1f3"
+										],
+										[
+											"5c0e57ba86f7747fa141986d"
+										],
+										[
+											"5b44cd8b86f774503d30cba2"
+										],
+										[
+											"5b44cf1486f77431723e3d05"
+										],
+										[
+											"5b44d0de86f774503d30cba8"
+										],
+										[
+											"5b44d22286f774172b0c9de8"
+										],
+										[
+											"5ca2151486f774244a3b8d30"
+										],
+										[
+											"5ca21c6986f77479963115a7"
+										],
+										[
+											"5c0e655586f774045612eeb2"
+										],
+										[
+											"5c0e5edb86f77461f55ed1f7"
+										],
+										[
+											"5c0e625a86f7742d77340f62"
+										],
+										[
+											"59e7635f86f7742cbf2c1095"
+										],
+										[
+											"5648a7494bdc2d9d488b4583"
+										],
+										[
+											"5ab8dced86f774646209ec87"
+										],
+										[
+											"5c0e446786f7742013381639"
+										],
+										[
+											"5c0e3eb886f7742015526062"
+										],
+										[
+											"5b44cad286f77402a54ae7e5"
+										],
+										[
+											"5c0e746986f7741453628fe5"
+										],
+										[
+											"544a5caa4bdc2d1a388b4568"
+										],
+										[
+											"5d5d646386f7742797261fd9"
+										]
+									],
+									"id": "5d25af8586f77443fe4569c4"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"Woods"
+									],
+									"id": "5d2f064386f77459145a4d23"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d25af3c86f77443ff46b9e7"
+				}
+			}
+		],
+		"Fail": []
+	}
+}
