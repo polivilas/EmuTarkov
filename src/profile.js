@@ -11,12 +11,12 @@ function isProfileWiped() {
     return !profiles[constants.getActiveID()].wipe;
 }
 
-function getProfile() {
+function getProfilePath() {
     let profilePath = filepaths.user.profiles.character;
     return profilePath.replace("__REPLACEME__", constants.getActiveID());
 }
 
-function getProfileById(profileID) {
+function getProfilePathById(profileID) {
     let profilePath = filepaths.user.profiles.character;
     return json.parse(json.read(profilePath.replace("__REPLACEME__", profileID)));
 }
@@ -134,13 +134,10 @@ function saveProfileProgress(offRaidData) {
     let currentProfile = getCharacterData();
 
     // replace data
-    currentProfile.data[0].Info.Experience = offRaidProfile.Info.Experience;
     currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
     currentProfile.data[0].Health = offRaidProfile.Health;
     currentProfile.data[0].Skills = offRaidProfile.Skills;
-    currentProfile.data[0].Stats.SessionCounters = offRaidProfile.Stats.SessionCounters;
-    currentProfile.data[0].Stats.OverallCounters = offRaidProfile.Stats.OverallCounters;
-    currentProfile.data[0].Stats.LastSessionDate = offRaidProfile.Stats.LastSessionDate;
+    currentProfile.data[0].Stats = offRaidProfile.Stats;
     currentProfile.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
     currentProfile.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
     currentProfile.data[0].Quests = offRaidProfile.Quests;
@@ -224,7 +221,7 @@ function getCharacterData() {
     }
 
     // create full profile data from simplified character data
-    let playerData = json.parse(json.read(getProfile()));
+    let playerData = json.parse(json.read(getProfilePath()));
     let scavData = bots.generatePlayerScav();
 
     scavData._id = playerData.savage;
@@ -237,7 +234,7 @@ function getCharacterData() {
 }
 
 function getStashType() {
-    let temp = json.parse(json.read(getProfile()));
+    let temp = json.parse(json.read(getProfilePath()));
 
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
@@ -254,7 +251,7 @@ function setCharacterData(data) {
         data = data.data[0];
     }
 
-    json.write(getProfile(), data);
+    json.write(getProfilePath(), data);
 }
 
 function addChildPrice(data, parentID, childPrice) {
@@ -274,7 +271,7 @@ function addChildPrice(data, parentID, childPrice) {
 
 function getPurchasesData() {
     let multiplier = 0.9;
-    let data = json.parse(json.read(getProfile()));
+    let data = json.parse(json.read(getProfilePath()));
 
     items = json.parse(json.read(filepaths.user.cache.items));
 
@@ -386,7 +383,7 @@ function nicknameExist(info) {
     let profiles = getProfiles();
 
     for (let i = 0; i < profiles.length; i++) {
-        let profile = json.parse(json.read(getProfile()));
+        let profile = json.parse(json.read(getProfilePath()));
 
         if (profile.Info.Nickname === info.nickname) {
             return true;
@@ -573,7 +570,7 @@ function addItemToStash(tmpList, body, trad = "") {
 }
 
 module.exports.isProfileWiped = isProfileWiped;
-module.exports.getProfileById = getProfileById;
+module.exports.getProfileById = getProfilePathById;
 module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
