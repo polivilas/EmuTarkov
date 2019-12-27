@@ -11,14 +11,14 @@ function isProfileWiped() {
     return !profiles[constants.getActiveID()].wipe;
 }
 
-function getProfilePath() {
+function getProfilePath(profileId = -1) {
     let profilePath = filepaths.user.profiles.character;
-    return profilePath.replace("__REPLACEME__", constants.getActiveID());
-}
 
-function getProfilePathById(profileID) {
-    let profilePath = filepaths.user.profiles.character;
-    return json.parse(json.read(profilePath.replace("__REPLACEME__", profileID)));
+    if (profileId > -1) {
+        return json.parse(json.read(profilePath.replace("__REPLACEME__", profileId)));
+    } else {
+        return profilePath.replace("__REPLACEME__", constants.getActiveID());
+    }
 }
 
 function create(info) {
@@ -78,54 +78,6 @@ function create(info) {
     // don't wipe profile again
     profiles[constants.getActiveID()].wipe = false;
     json.write(filepaths.user.profiles.list, profiles);
-}
-
-function loadTraderStandings(playerData = "") {
-    // get profile Data
-    let profileData = playerData;
-
-    if (playerData == "") {
-        profileData = getCharacterData();
-    }
-
-    let profileCharData = profileData.data[1];
-
-    // get trader data and update by profile info
-    let dynTrader;
-
-    // Check if trader standing data exists
-    /*if (profileCharData.hasOwnProperty("TraderStandings")) {
-        for (dynTrader of trader.getDynamicTraders()) {
-            let profileStanding = profileCharData.TraderStandings[dynTrader];
-            let traderLoyality = trader.get(dynTrader).data.loyalty;
-
-            traderLoyality.currentLevel = profileStanding.currentLevel;
-            traderLoyality.currentStanding = profileStanding.currentStanding;
-            traderLoyality.currentSalesSum = profileStanding.currentSalesSum;
-
-            // set Loyalty in trader
-            trader.get(dynTrader).data.loyalty = traderLoyality;
-        }
-    } else {
-        profileCharData.TraderStandings = {};
-        // add with default data
-        for (dynTrader of trader.getDynamicTraders()) {
-            let traderLoyality = trader.get(dynTrader).data.loyalty;
-            profileCharData.TraderStandings[dynTrader] =
-                {
-                    "currentSalesSum": traderLoyality.currentSalesSum,
-                    "currentLevel": traderLoyality.currentLevel,
-                    "currentStanding": traderLoyality.currentStanding
-                };
-        }
-        // save profile
-        profileData.data[1] = profileCharData;
-        setCharacterData(profileData);
-    }*/
-
-    if (playerData != "") {
-        return profileData;
-    }
 }
 
 function saveProfileProgress(offRaidData) {
@@ -228,8 +180,6 @@ function getCharacterData() {
     scavData.aid = constants.getActiveID();
     ret.data.push(playerData);
     ret.data.push(scavData);
-    ret = loadTraderStandings(ret);
-
     return ret;
 }
 
@@ -570,7 +520,6 @@ function addItemToStash(tmpList, body, trad = "") {
 }
 
 module.exports.isProfileWiped = isProfileWiped;
-module.exports.getProfileById = getProfilePathById;
 module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
