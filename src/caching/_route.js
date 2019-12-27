@@ -135,65 +135,6 @@ function assort() {
     }
 }
 
-
-function locales() {
-    let dirList = utility.getDirList("db/locales/");
-
-    for (let dir in dirList) {
-        let locale = dirList[dir];
-        let localeFilepath = {"menu": "", "interface": "", "error": "", "mail": {}, "quest": {}, "preset": {}, "handbook": {}, "season": {}, "templates": {}, "locations": {}, "banners": {}, "trading": {}}
-        let inputDir = [
-            "db/locales/" + locale + "/mail/",
-            "db/locales/" + locale + "/quest/",
-            "db/locales/" + locale + "/preset/",
-            "db/locales/" + locale + "/handbook/",
-            "db/locales/" + locale + "/season/",
-            "db/locales/" + locale + "/templates/",
-            "db/locales/" + locale + "/locations/",
-            "db/locales/" + locale + "/banners/",
-            "db/locales/" + locale + "/trading/",
-        ];
-
-        console.log("Routing: db/locales/" + locale + "/");
-        
-        localeFilepath.name = "db/locales/" + locale + "/" + locale + ".json";
-        localeFilepath.menu = "db/locales/" + locale + "/menu.json";
-        localeFilepath.interface = "db/locales/" + locale + "/interface.json";
-        localeFilepath.error = "db/locales/" + locale + "/error.json";
-
-        for (let path in inputDir) {
-            let inputFiles = fs.readdirSync(inputDir[path]);
-            
-            for (let file in inputFiles) {
-                let filePath = inputDir[path] + inputFiles[file];
-                let fileName = inputFiles[file].replace(".json", "");
-
-                if (path == 0) {
-                    localeFilepath.mail[fileName] = filePath;
-                } else if (path == 1) {
-                    localeFilepath.quest[fileName] = filePath;
-                } else if (path == 2) {
-                    localeFilepath.preset[fileName] = filePath;
-                } else if (path == 3) {
-                    localeFilepath.handbook[fileName] = filePath;
-                } else if (path == 4) {
-                    localeFilepath.season[fileName] = filePath;
-                } else if (path == 5) {
-                    localeFilepath.templates[fileName] = filePath;
-                } else if (path == 6) {
-                    localeFilepath.locations[fileName] = filePath;
-                } else if (path == 7) {
-                    localeFilepath.banners[fileName] = filePath;
-                } else if (path == 8) {
-                    localeFilepath.trading[fileName] = filePath;
-                }
-            }
-        }
-
-        filepaths.locales[locale] = localeFilepath;
-    }
-}
-
 function weather() {
     genericFilepathCacher("weather", "db/weather");
 }
@@ -260,7 +201,6 @@ function others() {
 
 function cache() {
     let assortList = utility.getDirList("db/assort/");
-    let localesList = utility.getDirList("db/locales/");
 
     filepaths.user.cache.items = "user/cache/items.json";
     filepaths.user.cache.quests = "user/cache/quests.json";
@@ -277,10 +217,6 @@ function cache() {
     for (let assort in assortList) {
         filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + assortList[assort] + ".json";
     }
-
-    for (let locale in localesList) {
-        filepaths.user.cache["locale_" + localesList[locale]] = "user/cache/locale_" + localesList[locale] + ".json";
-    }
 }
 
 function routeDatabase() {
@@ -296,7 +232,6 @@ function routeDatabase() {
     hideoutScavcase();
     templates();
     assort();
-    locales();
     weather();
     maps();
     bots();

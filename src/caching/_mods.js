@@ -265,8 +265,8 @@ function load() {
 
     for (let element of modList) {
         // skip mod
-        if (!modList[element].enabled) {
-            console.log("Skipping mod " + element.name + " v" + element.version);
+        if (!element.enabled) {
+            console.log("Skipping mod " + element.author + "-" + element.name + " v" + element.version);
             continue;
         }
 

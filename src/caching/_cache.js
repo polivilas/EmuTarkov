@@ -61,9 +61,12 @@ function locations() {
 function languages() {
     let base = json.parse(json.read("db/cache/languages.json"));
     let inputFiles = filepaths.locales;
+    let inputNames = Object.keys(inputFiles);
+    let i = 0;
 
     for (let file in inputFiles) {
-        let filePath = filepaths.locales[file].name;
+        let locale = filepaths.locales[inputNames[i++]];
+        let filePath = locale.name;
         let fileData = json.parse(json.read(filePath));
         
         base.data.push(fileData);
@@ -127,7 +130,7 @@ function assorts(trader) {
     console.log("Caching: assort_" + trader + ".json");
 
     let base = json.parse(json.read("db/cache/assort.json"));
-    let inputNode = filepaths.assort[trader]
+    let inputNode = filepaths.assort[trader];
     let inputDir = [
         "items",
         "barter_scheme",
@@ -158,10 +161,6 @@ function assorts(trader) {
 }
 
 function locales(locale) {
-    if (locale == "languages") {
-        return;
-    }
-
     let base = json.parse(json.read("db/cache/locale.json"));
     let inputNode = filepaths.locales[locale];
     let inputDir = [
@@ -223,8 +222,8 @@ function mod() {
 
 function all() {
     let force = false;
-    let assortList = utility.getDirList("db/assort/");
-    let localesList = utility.getDirList("db/locales/");
+    let assortList = Object.keys(filepaths.assort);
+    let localesList = Object.keys(filepaths.locales);
 
     // force if rebuild is required
     if (mods.isRebuildRequired()) {
