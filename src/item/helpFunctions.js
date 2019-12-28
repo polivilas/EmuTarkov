@@ -179,22 +179,30 @@ function getMoney(tmpList, amount, body, output_temp) {
     let skip = false;
 
     for (let item of tmpList.data[0].Inventory.items) {
-        if (item._tpl === currency) {
-            item.upd.StackObjectsCount += calcAmount;
-            output_temp.data.items.change.push(item);
-            console.log("Money received: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
-            skip = true;
+        // item is not currency
+        if (item._tpl !== currency) {
+            continue;
         }
 
-        if (skip) {
-            break;
+        // prevent integer overflow
+        if (item.udp.StackObjectsCount + calcAmount > 500000) {
+            continue;
         }
+
+        // receive money
+        item.upd.StackObjectsCount += calcAmount;
+        output_temp.data.items.change.push(item);
+        console.log("Money received: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
+        skip = true;
+        break;
     }
 
     if (!skip) {
         let StashFS_2D = recheckInventoryFreeSpace(tmpList);
-        //creating item tho
+
+        // creating item
         let stashSize = getPlayerStash();
+
         addedMoney:
         for (let My = 0; My <= stashSize[1]; My++) {
             for (let Mx = 0; Mx <= stashSize[0]; Mx++) {
