@@ -94,6 +94,11 @@ function saveProfileProgress(offRaidData) {
     currentProfile.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
     currentProfile.data[0].Quests = offRaidProfile.Quests;
 
+    // level 69 cap to prevent visual bug occuring at level 70
+    if (currentProfile.data[0].Info.Experience > 13129881) {
+        currentProfile.data[0].Info.Experience = 13129881;
+    }
+
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
