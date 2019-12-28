@@ -11,7 +11,7 @@ function main(tmplist, body) {
 
     console.log(body.items, "", "", true);
 
-    for (let item in tmplist.data[0].Inventory.items) {
+    for (let item of tmplist.data[0].Inventory.items) {
         for (let repairItem of RequestData) {
             if (tmplist.data[0].Inventory.items[item]._id !== repairItem._id) {
                 continue;
@@ -22,49 +22,32 @@ function main(tmplist, body) {
             itemRepairCost = itemRepairCost * repairItem.count * repairRate;
 
             // need to check and compare it ingame
-            for (let curency in tmplist.data[0].Inventory.items) {
-                if (!tmplist.data[0].Inventory.items.hasOwnProperty(curency)) {
-                    continue;
-                }
-
-                if (tmplist.data[0].Inventory.items[curency]._tpl !== repairCurrency) {
-                    continue;
-                }
-
-                if (typeof tmplist.data[0].Inventory.items[curency].upd === undefined) {
-                    continue;
-                }
-
-                if (typeof tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount === undefined) {
+            for (let curency of tmplist.data[0].Inventory.items) {
+                if (curency._tpl !== repairCurrency) {
                     continue;
                 }
 
                 // checking if StackObjectsCount is OK
-                if (tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount < itemRepairCost) {
-                    continue;
-                }
-
-                // check if repairItem is repairable for sure
-                if (typeof item.upd.Repairable === undefined) {
+                if (curency.upd.StackObjectsCount < itemRepairCost) {
                     continue;
                 }
 
                 // ok we can now repair it
-                if (tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount < itemRepairCost) {
+                if (curency.upd.StackObjectsCount < itemRepairCost) {
                     continue;
                 }
 
-                tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount -= Math.floor(itemRepairCost);
-                if (tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount === itemRepairCost) {
-                    output.data.items.del.push({"_id": tmplist.data[0].Inventory.items[curency]._id});
+                curency.upd.StackObjectsCount -= Math.floor(itemRepairCost);
+
+                if (curency.upd.StackObjectsCount === itemRepairCost) {
+                    output.data.items.del.push({"_id": curency._id});
                 } else {
-                    output.data.items.change.push(tmplist.data[0].Inventory.items[curency]);
+                    output.data.items.change.push(curency);
                 }
 
-                // currency is handled now is time for repairItem
+                // change item durability
                 let calculateDurability = item.upd.Repairable.Durability + repairItem.count;
 
-                // make sure durability will not extends maximum possible durability
                 if (item.upd.Repairable.MaxDurability < calculateDurability) {
                     calculateDurability = item.upd.Repairable.MaxDurability;
                 }
