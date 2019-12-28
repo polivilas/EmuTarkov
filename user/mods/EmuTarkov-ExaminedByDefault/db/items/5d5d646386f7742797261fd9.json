@@ -57,13 +57,23 @@
 		"AllowSpawnOnLocations": [],
 		"SendToClient": false,
 		"AnimationVariantsNumber": 0,
+		"DiscardingBlock": false,
 		"Grids": [
 			{
 				"_name": "1",
 				"_id": "5d5d646386f7742797261fdb",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 1,
 					"minCount": 0,
@@ -77,7 +87,16 @@
 				"_id": "5d5d646386f7742797261fdc",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 1,
 					"minCount": 0,
@@ -91,7 +110,16 @@
 				"_id": "5d5d646386f7742797261fdd",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -105,7 +133,16 @@
 				"_id": "5d5d646386f7742797261fde",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -119,7 +156,16 @@
 				"_id": "5d5d646386f7742797261fdf",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -133,7 +179,16 @@
 				"_id": "5d5d646386f7742797261fe0",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 2,
 					"minCount": 0,
@@ -147,7 +202,16 @@
 				"_id": "5d5d65b486f77427997cfaec",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 1,
 					"minCount": 0,
@@ -161,7 +225,16 @@
 				"_id": "5d5d65c186f77439eb4c2c57",
 				"_parent": "5d5d646386f7742797261fd9",
 				"_props": {
-					"filters": [],
+					"filters": [
+						{
+							"Filter": [
+								"54009119af1c881c07000029"
+							],
+							"ExcludedFilter": [
+								"5448bf274bdc2dfc2f8b456a"
+							]
+						}
+					],
 					"cellsH": 1,
 					"cellsV": 1,
 					"minCount": 0,
@@ -177,8 +250,8 @@
 		"SearchSound": "looting_body_extended",
 		"BlocksArmorVest": true,
 		"RigLayoutName": "6h112",
-		"Durability": 30,
-		"MaxDurability": 30,
+		"Durability": 40,
+		"MaxDurability": 40,
 		"armorZone": [
 			"Chest",
 			"Stomach"

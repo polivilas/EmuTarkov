@@ -17,7 +17,7 @@
 		"CreditsPrice": 299,
 		"ItemSound": "ammo_singleround",
 		"Prefab": {
-			"path": "assets/content/items/ammo/patrons/patron_762x39.bundle",
+			"path": "assets/content/items/ammo/patrons/patron_762x39_bp.bundle",
 			"rcid": ""
 		},
 		"UsePrefab": {
@@ -57,11 +57,12 @@
 		"AllowSpawnOnLocations": [],
 		"SendToClient": false,
 		"AnimationVariantsNumber": 0,
+		"DiscardingBlock": false,
 		"StackMinRandom": 20,
 		"StackMaxRandom": 60,
 		"ammoType": "bullet",
-		"Damage": 52,
-		"ammoAccr": 0,
+		"Damage": 58,
+		"ammoAccr": -3,
 		"ammoRec": 5,
 		"ammoDist": 0,
 		"buckshotBullets": 0,
