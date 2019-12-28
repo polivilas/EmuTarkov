@@ -3,37 +3,23 @@
 require('../libs.js');
 
 function main(tmplist, body) {
-    let output = item.getOutput();
-    let count = body.repairItems.length;
+    let output = repairItem.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let repairCurrency = tmpTraderInfo.data.repair.currency;
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
     let RequestData = body.repairItems;
-    let cnt = 0;
 
     console.log(body.items, "", "", true);
 
-    for (let inventory in tmplist.data[0].Inventory.items) {
-        for (let item in RequestData) {
-            if (cnt === count) {
-                break;
-            }
-
-            if (tmplist.data[0].Inventory.items.hasOwnProperty(inventory)) {
+    for (let item in tmplist.data[0].Inventory.items) {
+        for (let repairItem of RequestData) {
+            if (tmplist.data[0].Inventory.items[item]._id !== repairItem._id) {
                 continue;
             }
 
-            if (!RequestData.hasOwnProperty(item)) {
-                continue;
-            }
+            let itemRepairCost = items.data[tmplist.data[0].Inventory.items[item]._tpl]._props.RepairCost;
 
-            if (tmplist.data[0].Inventory.items[inventory]._id !== RequestData[item]._id) {
-                continue;
-            }
-
-            let itemRepairCost = items.data[tmplist.data[0].Inventory.items[inventory]._tpl]._props.RepairCost;
-
-            itemRepairCost = itemRepairCost * RequestData[item].count * repairRate;
+            itemRepairCost = itemRepairCost * repairItem.count * repairRate;
 
             // need to check and compare it ingame
             for (let curency in tmplist.data[0].Inventory.items) {
@@ -45,11 +31,11 @@ function main(tmplist, body) {
                     continue;
                 }
 
-                if (typeof tmplist.data[0].Inventory.items[curency].upd === "undefined") {
+                if (typeof tmplist.data[0].Inventory.items[curency].upd === undefined) {
                     continue;
                 }
 
-                if (typeof tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount === "undefined") {
+                if (typeof tmplist.data[0].Inventory.items[curency].upd.StackObjectsCount === undefined) {
                     continue;
                 }
 
@@ -58,8 +44,8 @@ function main(tmplist, body) {
                     continue;
                 }
 
-                // check if item is repairable for sure
-                if (typeof tmplist.data[0].Inventory.items[inventory].upd.Repairable === "undefined") {
+                // check if repairItem is repairable for sure
+                if (typeof item.upd.Repairable === undefined) {
                     continue;
                 }
 
@@ -75,28 +61,23 @@ function main(tmplist, body) {
                     output.data.items.change.push(tmplist.data[0].Inventory.items[curency]);
                 }
 
-                // currency is handled now is time for item
-                let calculateDurability = tmplist.data[0].Inventory.items[inventory].upd.Repairable.Durability + RequestData[item].count;
+                // currency is handled now is time for repairItem
+                let calculateDurability = item.upd.Repairable.Durability + repairItem.count;
 
                 // make sure durability will not extends maximum possible durability
-                if (tmplist.data[0].Inventory.items[inventory].upd.Repairable.MaxDurability < calculateDurability) {
-                    calculateDurability = tmplist.data[0].Inventory.items[inventory].upd.Repairable.MaxDurability;
+                if (item.upd.Repairable.MaxDurability < calculateDurability) {
+                    calculateDurability = item.upd.Repairable.MaxDurability;
                 }
 
-                tmplist.data[0].Inventory.items[inventory].upd.Repairable.Durability = calculateDurability;
-                tmplist.data[0].Inventory.items[inventory].upd.Repairable.MaxDurability = calculateDurability;
-                output.data.items.change.push(tmplist.data[0].Inventory.items[inventory]);
+                item.upd.Repairable.Durability = calculateDurability;
+                item.upd.Repairable.MaxDurability = calculateDurability;
+                output.data.items.change.push(item);
 
                 // set trader standing
                 output.data.currentSalesSums[body.tid] = tmpTraderInfo.loyalty.currentSalesSum + Math.floor(itemRepairCost);
 
                 console.log(JSON.stringify(output.data.items.change[1].upd));
-                cnt++;
             }
-        }
-
-        if (cnt === count) {
-            break;
         }
     }
 
