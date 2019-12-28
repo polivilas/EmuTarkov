@@ -160,11 +160,16 @@ function payMoney(tmpList, moneyObject, body, trad = "") {
 * */
 function findMoney(tmpList, barter_itemID) { // find required items to take after buying (handles multiple items)
     let prepareReturn = [];
-    for (let item of tmpList.data[0].Inventory.items)
-        for (let i = 0; i < barter_itemID.length; i++)
-            if (item._id === barter_itemID[i])
+
+    for (let item of tmpList.data[0].Inventory.items) {
+        for (let i = 0; i < barter_itemID.length; i++) {
+            if (item._id === barter_itemID[i]) {
                 prepareReturn[i] = item;
-    return prepareReturn; // if none return []
+            }
+        }
+    }
+
+    return prepareReturn;
 }
 
 /* receive money back after selling
@@ -184,8 +189,16 @@ function getMoney(tmpList, amount, body, output_temp) {
             continue;
         }
 
-        // prevent integer overflow
-        if (item.udp.StackObjectsCount + calcAmount > 500000) {
+        // too much money for a stack
+        if (item.upd.StackObjectsCount + calcAmount > 500000) {
+            // calculate difference
+            let tmp = item.upd.StackObjectsCount;
+            let difference = 500000 - tmp;
+
+            // make stack max money, then look further
+            item.upd.StackObjectsCount = 500000;
+            calcAmount -= difference;
+            console.log("Money received: " + difference + " " + tmpTraderInfo.data.currency, "white", "green", true);
             continue;
         }
 
