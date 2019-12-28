@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function main(tmplist, body) {
+function main(tmpList, body) {
     let output = repairItem.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let repairCurrency = tmpTraderInfo.data.repair.currency;
@@ -11,13 +11,13 @@ function main(tmplist, body) {
 
     console.log(body.items, "", "", true);
 
-    for (let item of tmplist.data[0].Inventory.items) {
+    for (let item of tmpList.data[0].Inventory.items) {
         for (let repairItem of RequestData) {
-            if (tmplist.data[0].Inventory.items[item]._id !== repairItem._id) {
+            if (tmpList.data[0].Inventory.items[item]._id !== repairItem._id) {
                 continue;
             }
 
-            let itemRepairCost = items.data[tmplist.data[0].Inventory.items[item]._tpl]._props.RepairCost;
+            let itemRepairCost = items.data[tmpList.data[0].Inventory.items[item]._tpl]._props.RepairCost;
             itemRepairCost = itemRepairCost * repairItem.count * repairRate;
 
             // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
@@ -29,7 +29,7 @@ function main(tmplist, body) {
             }
 
             // pay the item	to profile
-            if (!itm_hf.payMoney(tmplist, moneyObject, body)) {
+            if (!itm_hf.payMoney(tmpList, moneyObject, body)) {
                 console.log("no money found");
                 return "";
             }
