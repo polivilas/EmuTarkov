@@ -21,7 +21,7 @@ function main(tmplist, body) {
             itemRepairCost = itemRepairCost * repairItem.count * repairRate;
 
             // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
-            let moneyObject = itm_hf.findMoney(tmpList, moneyID);
+            let moneyObject = itm_hf.findMoney(tmpList, repairCurrency);
 
             if (typeof moneyObject[0] === "undefined") {
                 console.log("Error something goes wrong (not found Money)");
