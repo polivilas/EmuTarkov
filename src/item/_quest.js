@@ -49,33 +49,21 @@ function completeQuest(tmpList, body)
 
                         for(let rewardItem of reward.items)
                         {
-                            /*
-                            if(rewardItem.parentId == "hideout" || rewardItem.parentId === undefined )
-                            {
-                                let newReq = {};
-                                newReq.item_id = rewardItem._tpl;
-                                newReq.count = reward.value;
-                    
-                                profile.addItemToStash(tmpList, newReq);
-                            }
-                            else
-                            {
-                                tmpList.Inventory.items.push(rewardItem);
-                            }
-                            */
-
                             let newReq = {};
                             newReq.item_id = rewardItem._tpl;
                             newReq.count = reward.value;
                     
                             profile.addItemToStash(tmpList, newReq);
                             tmpList = profile.getCharacterData(); //update it everytime otherwise every given items are deleted
-
                         }
                         break;
 
                     case "Experience":
+                        console.log("[DEBUG][QUEST ID] ", quest._id);
+                        console.log("[DEBUG][QUEST EXPERIENCE] ", reward.value);
+                        console.log("[DEBUG][CHARACTER EXPERIENCE] ", tmpList.data[0].Info.Experience);
                         tmpList.data[0].Info.Experience += reward.value;
+                        console.log("[DEBUG][QUEST EXPERIENCE APPLIES] ", tmpList.data[0].Info.Experience);
                         profile.setCharacterData(tmpList);
                         tmpList = profile.getCharacterData();// update it because it will be overrided otherwise
                         break;

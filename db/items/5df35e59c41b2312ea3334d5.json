@@ -1,0 +1,145 @@
+{
+	"_id": "5df35e59c41b2312ea3334d5",
+	"_name": "stock_t5000_orsis_t5000_se_chassis",
+	"_parent": "55818a594bdc2db9688b456a",
+	"_type": "Item",
+	"_props": {
+		"Name": "stock_870_remington_sps_12g",
+		"ShortName": "stock_870_remington_sps_12g",
+		"Description": "stock_870_remington_sps_12g\n",
+		"Weight": 0.64,
+		"BackgroundColor": "blue",
+		"Width": 2,
+		"Height": 1,
+		"StackMaxSize": 1,
+		"Rarity": "Not_exist",
+		"SpawnChance": 20,
+		"CreditsPrice": 13200,
+		"ItemSound": "mod",
+		"Prefab": {
+			"path": "assets/content/items/mods/stocks/stock_t5000_orsis_t5000_se_chassis.bundle",
+			"rcid": ""
+		},
+		"UsePrefab": {
+			"path": "",
+			"rcid": ""
+		},
+		"StackObjectsCount": 1,
+		"NotShownInSlot": false,
+		"ExaminedByDefault": false,
+		"ExamineTime": 1,
+		"IsUndiscardable": false,
+		"IsUnsaleable": false,
+		"IsUnbuyable": false,
+		"IsUngivable": false,
+		"IsLockedafterEquip": false,
+		"QuestItem": false,
+		"LootExperience": 10,
+		"ExamineExperience": 1,
+		"HideEntrails": false,
+		"RepairCost": 0,
+		"RepairSpeed": 0,
+		"ExtraSizeLeft": 0,
+		"ExtraSizeRight": 1,
+		"ExtraSizeUp": 0,
+		"ExtraSizeDown": 0,
+		"ExtraSizeForceAdd": false,
+		"MergesWithChildren": true,
+		"CanSellOnRagfair": true,
+		"CanRequireOnRagfair": true,
+		"BannedFromRagfair": false,
+		"ConflictingItems": [
+			"5d25af8f8abbc3055079fec5",
+			"5cf12a15d7f00c05464b293f",
+			"5bfeaa0f0db834001b734927",
+			"5bfea7ad0db834001c38f1ee"
+		],
+		"FixedPrice": false,
+		"Unlootable": false,
+		"UnlootableFromSlot": "FirstPrimaryWeapon",
+		"UnlootableFromSide": [],
+		"ChangePriceCoef": 1,
+		"AllowSpawnOnLocations": [],
+		"SendToClient": false,
+		"AnimationVariantsNumber": 0,
+		"DiscardingBlock": false,
+		"Grids": [],
+		"Slots": [
+			{
+				"_name": "mod_handguard",
+				"_id": "5df389abdfc58d14537c203a",
+				"_parent": "5df35e59c41b2312ea3334d5",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5df25d3bfd6b4e6e2276dc9a"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_pistol_grip",
+				"_id": "5df389bdfd6b4e6e2276dcb2",
+				"_parent": "5df35e59c41b2312ea3334d5",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5df38a5fb74cd90030650cb6"
+							]
+						}
+					]
+				},
+				"_required": true,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			},
+			{
+				"_name": "mod_stock_axis",
+				"_id": "5df389c823295c755a015895",
+				"_parent": "5df35e59c41b2312ea3334d5",
+				"_props": {
+					"filters": [
+						{
+							"Shift": 0,
+							"Filter": [
+								"5df35ddddfc58d14537c2036"
+							]
+						}
+					]
+				},
+				"_required": false,
+				"_mergeSlotWithChildren": false,
+				"_proto": "55d30c4c4bdc2db4468b457e"
+			}
+		],
+		"CanPutIntoDuringTheRaid": true,
+		"CantRemoveFromSlotsDuringRaid": [],
+		"Durability": 100,
+		"Accuracy": 0,
+		"Recoil": -2,
+		"Loudness": 0,
+		"EffectiveDistance": 0,
+		"Ergonomics": 10,
+		"Velocity": 0,
+		"RaidModdable": false,
+		"ToolModdable": true,
+		"BlocksFolding": false,
+		"BlocksCollapsible": false,
+		"IsAnimated": true,
+		"HasShoulderContact": true,
+		"SightingRange": 0,
+		"IsShoulderContact": false,
+		"Foldable": true,
+		"Retractable": false,
+		"SizeReduceRight": 0
+	},
+	"_proto": "56083be64bdc2d20478b456f"
+}

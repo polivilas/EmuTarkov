@@ -198,7 +198,6 @@ function getMoney(tmpList, amount, body, output_temp) {
             // make stack max money, then look further
             item.upd.StackObjectsCount = 500000;
             calcAmount -= difference;
-            console.log("Money received: " + difference + " " + tmpTraderInfo.data.currency, "white", "green", true);
             continue;
         }
 
