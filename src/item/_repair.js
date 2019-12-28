@@ -18,49 +18,37 @@ function main(tmplist, body) {
             }
 
             let itemRepairCost = items.data[tmplist.data[0].Inventory.items[item]._tpl]._props.RepairCost;
-
             itemRepairCost = itemRepairCost * repairItem.count * repairRate;
 
-            // need to check and compare it ingame
-            for (let curency of tmplist.data[0].Inventory.items) {
-                if (curency._tpl !== repairCurrency) {
-                    continue;
-                }
+            // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
+            let moneyObject = itm_hf.findMoney(tmpList, moneyID);
 
-                // checking if StackObjectsCount is OK
-                if (curency.upd.StackObjectsCount < itemRepairCost) {
-                    continue;
-                }
-
-                // ok we can now repair it
-                if (curency.upd.StackObjectsCount < itemRepairCost) {
-                    continue;
-                }
-
-                curency.upd.StackObjectsCount -= Math.floor(itemRepairCost);
-
-                if (curency.upd.StackObjectsCount === itemRepairCost) {
-                    output.data.items.del.push({"_id": curency._id});
-                } else {
-                    output.data.items.change.push(curency);
-                }
-
-                // change item durability
-                let calculateDurability = item.upd.Repairable.Durability + repairItem.count;
-
-                if (item.upd.Repairable.MaxDurability < calculateDurability) {
-                    calculateDurability = item.upd.Repairable.MaxDurability;
-                }
-
-                item.upd.Repairable.Durability = calculateDurability;
-                item.upd.Repairable.MaxDurability = calculateDurability;
-                output.data.items.change.push(item);
-
-                // set trader standing
-                output.data.currentSalesSums[body.tid] = tmpTraderInfo.loyalty.currentSalesSum + Math.floor(itemRepairCost);
-
-                console.log(JSON.stringify(output.data.items.change[1].upd));
+            if (typeof moneyObject[0] === "undefined") {
+                console.log("Error something goes wrong (not found Money)");
+                return "";
             }
+
+            // pay the item	to profile
+            if (!itm_hf.payMoney(tmplist, moneyObject, body)) {
+                console.log("no money found");
+                return "";
+            }
+
+            // change item durability
+            let calculateDurability = item.upd.Repairable.Durability + repairItem.count;
+
+            if (item.upd.Repairable.MaxDurability < calculateDurability) {
+                calculateDurability = item.upd.Repairable.MaxDurability;
+            }
+
+            item.upd.Repairable.Durability = calculateDurability;
+            item.upd.Repairable.MaxDurability = calculateDurability;
+            output.data.items.change.push(item);
+
+            // set trader standing
+            output.data.currentSalesSums[body.tid] = tmpTraderInfo.loyalty.currentSalesSum + Math.floor(itemRepairCost);
+
+            console.log(JSON.stringify(output.data.items.change[1].upd));
         }
     }
 

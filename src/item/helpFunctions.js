@@ -106,7 +106,7 @@ function fromRUB(value, currency) {
 * input:
 * output:
 * */
-function payMoney(tmpList, moneyObject, body, trad = "") {
+function payMoney(tmpList, moneyObject, body) {
     output = item.getOutput();
     
     let value = 0;
