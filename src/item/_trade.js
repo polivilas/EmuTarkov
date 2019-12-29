@@ -5,8 +5,8 @@ require('../libs.js');
 var output = "";
 
 function buyItem(tmpList, body, trad = "") {
-	let PlayerStash = itm_hf.getPlayerStash();
-	let stashY = PlayerStash[1];
+    let PlayerStash = itm_hf.getPlayerStash();
+    let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
     let tmpTrader = 0;
 
@@ -25,11 +25,11 @@ function buyItem(tmpList, body, trad = "") {
 
     // prepare barter items as money (roubles are counted there as well)
     for (let i = 0; i < body.scheme_items.length; i++) {
-        moneyID[i] = body.scheme_items[i].id;
+        moneyID.push(body.scheme_items[i].id);
     }
 
     // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
-    let moneyObject = itm_hf.findMoney(tmpList, moneyID);
+    let moneyObject = itm_hf.findMoney("id", tmpList, moneyID);
 
     if (typeof moneyObject[0] === "undefined") {
         console.log("Error something goes wrong (not found Money)");
@@ -104,7 +104,7 @@ function buyItem(tmpList, body, trad = "") {
                             }
 
                             console.log("Item placed at position [" + x + "," + y + "]", "", "", true);
-                            
+
                             let newItem = utility.generateNewItemId();
                             let toDo = [[item._id, newItem]];
 
@@ -136,7 +136,7 @@ function buyItem(tmpList, body, trad = "") {
                                         let SlotID = tmpTrader.data.items[tmpKey].slotId;
 
                                         newItem = utility.generateNewItemId();
-                                        
+
                                         if (SlotID === "hideout") {
                                             output.data.items.new.push({
                                                 "_id": newItem,
@@ -172,7 +172,7 @@ function buyItem(tmpList, body, trad = "") {
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
                                         }
-                                        
+
                                         toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
                                     }
                                 }
@@ -202,7 +202,7 @@ function sellItem(tmpList, body) {
 
     item.resetOutput();
     output = item.getOutput();
-    
+
     // find the items to sell
     for (let i in body.items) {
         // print item trying to sell
@@ -220,12 +220,12 @@ function sellItem(tmpList, body) {
             // item found
             if (item._id === checkID) {
                 console.log("Selling: " + checkID, "", "", true);
-                
+
                 // add money to return to the player
                 let price_money = prices.data[item._id][0][0].count;
 
                 output = move_f.removeItem(tmpList, {Action: 'Remove', item: checkID}, output);
-                
+
                 if (output !== "BAD") {
                     money += price_money;
                 } else {
@@ -265,7 +265,7 @@ function confirmRagfairTrading(tmpList, body) {
 
     let ragfairOffers = body.offers;
     let allOutput = item.getOutput()
-    
+
     for (let oneOffer of ragfairOffers) {
         tmpList = profile.getCharacterData();
         body = {};

@@ -106,7 +106,7 @@ function fromRUB(value, currency) {
 * */
 function payForRepair(playerData, repairCurrency, itemRepairCost, body) {
     output = item.getOutput();
-    let moneyItems = itm_hf.findMoney(playerData, repairCurrency);
+    let moneyItems = itm_hf.findMoney("tpl", playerData, repairCurrency);
 
     let amountMoney = moneyItems.reduce((total, item) => {
         return total + item.upd.StackObjectsCount;
@@ -203,12 +203,14 @@ function payMoney(playerData, moneyItems, body) {
 * input: object of player data, string BarteredItem ID
 * output: array of Item from inventory
 * */
-function findMoney(playerData, barter_itemID) { // find required items to take after buying (handles multiple items)
+function findMoney(by, playerData, barter_itemID) { // find required items to take after buying (handles multiple items)
     const barterIDs = typeof barter_itemID === "string" ? [barter_itemID] : barter_itemID;
     let itemsArray = [];
 
     for (const barterID of barterIDs) {
-        let mapResult = playerData.data[0].Inventory.items.filter(item => item._tpl === barterID);
+        let mapResult = playerData.data[0].Inventory.items.filter(item => {
+            return by === "tpl" ? (item._tpl === barterID) : (item._id === barterID);
+        });
         itemsArray = Object.assign(itemsArray, mapResult);
     }
 
