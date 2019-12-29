@@ -20,15 +20,12 @@ function acceptQuest(tmpList, body) {
 
 }
 
-function completeQuest(tmpList, body) 
-{ // -> Complete quest (need rework for giving back quests)
-    
+function completeQuest(tmpList, body) { 
+    // -> Complete quest (need rework for giving back quests)
     item.resetOutput();
 
-    for (let quest of tmpList.data[0].Quests) 
-    {
-        if (quest.qid === body.qid) 
-        {
+    for (let quest of tmpList.data[0].Quests) {
+        if (quest.qid === body.qid) {
             quest.status = 4;
             profile.setCharacterData(tmpList);
             tmpList = profile.getCharacterData();
@@ -37,21 +34,15 @@ function completeQuest(tmpList, body)
     }
 
     // find Quest data and update trader loyalty
-    for (let quest of quests.data)
-    {
-        if (quest._id === body.qid) 
-        {
-            for (let reward of quest.rewards.Success) 
-            {
-                switch(reward.type)
-                {
+    for (let quest of quests.data) {
+        if (quest._id === body.qid) {
+            for (let reward of quest.rewards.Success) {
+                switch(reward.type) {
                     case "Item":
-
-                        for(let rewardItem of reward.items)
-                        {
+                        for (let rewardItem of reward.items) {
                             let newReq = {};
                             newReq.item_id = rewardItem._tpl;
-                            newReq.count = reward.value;
+                            newReq.count = parseInt(reward.value);
                     
                             profile.addItemToStash(tmpList, newReq);
                             tmpList = profile.getCharacterData(); //update it everytime otherwise every given items are deleted
@@ -59,11 +50,7 @@ function completeQuest(tmpList, body)
                         break;
 
                     case "Experience":
-                        console.log("[DEBUG][QUEST ID] ", quest._id);
-                        console.log("[DEBUG][QUEST EXPERIENCE] ", reward.value);
-                        console.log("[DEBUG][CHARACTER EXPERIENCE] ", tmpList.data[0].Info.Experience);
-                        tmpList.data[0].Info.Experience += reward.value;
-                        console.log("[DEBUG][QUEST EXPERIENCE APPLIES] ", tmpList.data[0].Info.Experience);
+                        tmpList.data[0].Info.Experience += parseInt(reward.value);
                         profile.setCharacterData(tmpList);
                         tmpList = profile.getCharacterData();// update it because it will be overrided otherwise
                         break;
@@ -73,7 +60,7 @@ function completeQuest(tmpList, body)
                         let tmpTraderInfo = trader.get(quest.traderId);
 
                         tmpTraderInfo.data.loyalty.currentStanding
-                        tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + reward.value;
+                        tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + parseFloat(reward.value);
                         trader.setTrader(tmpTraderInfo.data);
 
                         // level up trader
