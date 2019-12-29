@@ -110,7 +110,7 @@ function assort() {
         let inputDir = [
             "db/assort/" + dirList[trader] + "/items/",
             "db/assort/" + dirList[trader] + "/barter/",
-            "db/assort/" + dirList[trader] + "/loyalty/"
+            "db/assort/" + dirList[trader] + "/level/"
         ];
 
         for (let path in inputDir) {

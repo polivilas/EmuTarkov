@@ -70,13 +70,11 @@ function examineItem(tmpList, body) {
 
     // trader inventory
     if (typeof tmpTrader !== "undefined") {
-        if (tmpTrader) {
-            for (let item of tmpTrader.data) {
-                if (item._id === body.item) {
-                    console.log("Found trader with examined item: " + item._id, "", "", true);
-                    returned = item._tpl;
-                    break;
-                }
+        for (let item of tmpTrader.data) {
+            if (item._id === body.item) {
+                console.log("Found trader with examined item: " + item._id, "", "", true);
+                returned = item._tpl;
+                break;
             }
         }
     }
