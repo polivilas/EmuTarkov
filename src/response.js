@@ -56,7 +56,9 @@ const staticRoutes = {
     "/client/match/exit": nullResponse,
     "/client/match/updatePing": nullResponse,
     "/client/game/profile/savage/regenerate": nullResponse,
-    "/client/mail/dialog/list": nullArrayResponse,
+    "/client/mail/dialog/list": getMailDialogList,
+    "/client/mail/dialog/view": getMailDialogView,
+    "/client/mail/dialog/info": getMailDialogInfo,
     "/client/friend/request/list/outbox": nullArrayResponse,
     "/client/friend/request/list/inbox": nullArrayResponse
 };
@@ -322,11 +324,6 @@ function getHandbookUserlist(url, info) {
 }
 
 function createNotifierChannel(url, info) {
-    if (constants.gameVersion() == "0.11.7.4711") {
-        return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"http://' + ip + '","channel_id":"testChannel","url":"http://' + ip + '/notifierBase"},"notifierServer":"http://' + ip + '/notifierServer"}}';
-    }
-
-    // assume client is 0.12.x.xxxx
     return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '","channel_id":"testChannel","url":"https://' + ip + '/notifierBase"},"notifierServer":"https://' + ip + '/notifierServer"}}';
 }
 
@@ -352,6 +349,42 @@ function offlineRaidSave(url, info) {
     constants.setActiveID(info.profile.aid.replace("user", ""));
     profile.saveProfileProgress(info);
     return "DONE";
+}
+
+// this shows a list of conversations available
+// request: {"limit":30,"offset":0}
+// response: {"err":0,"errmsg":null,"data":[{"type":1,"message":{"dt":1576780987,"type":1,"text":"Oh you're Dreamz init","uid":"5b09e7ac8ed239663f049ac3"},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},{"type":1,"message":{"dt":1576778783,"type":1,"text":"suck my ass","uid":"5a3a9f3f46b16870c921cfa0"},"new":0,"attachmentsNew":0,"_id":"5a3a9f3f46b16870c921cfa0","Users":[{"_id":"5a3a9f3f46b16870c921cfa0","Info":{"Nickname":"ZackFair","Side":"Bear","Level":9,"MemberCategory":"Default"}}],"pinned":false},{"type":1,"message":{"dt":1536917869,"type":1,"text":"trying*","uid":"5b09e7ac8ed239663f049ac3"},"new":0,"attachmentsNew":0,"pinned":false,"_id":"5b7a8952f0dd353a3d5bed8f","Users":[{"_id":"5b7a8952f0dd353a3d5bed8f","Info":{"Nickname":"laplaie974","Side":"Bear","Level":1,"MemberCategory":"Default"}}]}]}
+// limit: amount of messages to display
+// offset: no idea
+function getMailDialogList() {
+    // these are used to show user conversations
+    // a message looks like this: {"type":1,"message":{"dt":<datetime>,"type":1,"text":<message text>,"uid":<user id, like user0pmc>},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},
+
+    return '{"err":0, "errmsg":null, "data":[]}';
+}
+
+// this displays the full conversation
+// request: {"type":1,"dialogId":"5bd9aae93546826f3c560d6b","limit":30,"time":0.0}
+// response: {"err":0,"errmsg":null,"data":{"messages":[{"_id":"5dfbc4bb838e89696277a1ce","uid":"5b09e7ac8ed239663f049ac3","type":1,"dt":1576780987.6456,"text":"Oh you're Dreamz init","hasRewards":false},{"_id":"5dfbc49db496aa7ac411583a","uid":"5b09e7ac8ed239663f049ac3","type":1,"dt":1576780957.4885,"text":"And why are you saying fuck off lmfao","hasRewards":false},{"_id":"5dfbc4978ad8fa614d69ce73","uid":"5b09e7ac8ed239663f049ac3","type":1,"dt":1576780951.7064,"text":"Who even are you","hasRewards":false},{"_id":"5bdae6696588815f0c799eb8","uid":"5bd9aae93546826f3c560d6b","type":1,"dt":1541072489.5961,"text":"Fuck off","hasRewards":false}],"profiles":[{"_id":"5b09e7ac8ed239663f049ac3","Info":{"Nickname":"InAHurryToCode","Side":"Usec","Level":1,"MemberCategory":"Default"}},{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"hasMessagesWithRewards":false}}
+// dialogId: unique ID of the message list
+// limit: amount of messages visible
+// offset: no idea
+function getMailDialogView() {
+    // an overview of the object is like this: {"messages"[list of messages], "profiles":[list of profiles], "hasMessagesWithRewards":<does it contain message with items?>}
+    // a message looks like this: {"_id":<string, unique>, "uid": <user id that sent message, like ussr0pmc>, "dt": <datetime with milliseconds>, "text": <the message to display>. "hasRewards": <item attached to message?>}
+    // a profile looks like this: {"_id":<user id, like user0pmc>,"Info":{"Nickname":<nickname of profile>,"Side":<side of profile>,"Level":<profile level>,"MemberCategory":"Default"}}
+
+    return '{"err":0, "errmsg":null, "data":null}';
+}
+
+// these are trader conversations
+// request: {"dialogId":"54cb57776803fa99248b456e"}
+// response: {"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"54cb57776803fa99248b456e","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"54cb57776803fa99248b456e","pinned":false}}
+// dialogId: user id, like user0pmc
+function getMailDialogInfo() {
+    // an overview of the object is this:
+
+    return '{"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"user' + constants.getActiveID() + 'pmc","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"user' + constants.getActiveID() + 'pmc","pinned":false}}';
 }
 
 function getMapLocation(url, info) {
