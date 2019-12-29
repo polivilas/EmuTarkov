@@ -6,7 +6,7 @@ const templates = json.parse(json.read(filepaths.user.cache.templates));
 var output = "";
 
 function returnOutput() {
-	return output;
+    return output;
 }
 
 function setInternalOutput(data) {
@@ -18,7 +18,7 @@ function setInternalOutput(data) {
 * output: table[y][x]
 * */
 function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
-	let PlayerStash = getPlayerStash();
+    let PlayerStash = getPlayerStash();
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
     for (let item of tmpList.data[0].Inventory.items) {
         // hideout  // added proper stash ID older was "5c71b934354682353958ea35"
@@ -29,26 +29,24 @@ function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
             let iW = tmpSize[0];
             //			y
             let iH = tmpSize[1];
-			if(typeof item.upd != "undefined")
-				if(typeof item.upd.Foldable != "undefined")
-					if(item.upd.Foldable.Folded){
-						iW -= 1;
-					}
-			
+            if (typeof item.upd != "undefined")
+                if (typeof item.upd.Foldable != "undefined")
+                    if (item.upd.Foldable.Folded) {
+                        iW -= 1;
+                    }
+
             let fH = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iW : iH);
             let fW = ((item.location.r === "Vertical" || item.location.rotation === "Vertical") ? iH : iW);
-			
+
 
             for (let y = 0; y < fH; y++) {
-				if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) { // fixed filling out of bound
+                if (item.location.y + y <= PlayerStash[1] && item.location.x + fW <= PlayerStash[0]) { // fixed filling out of bound
                     let FillTo = ((item.location.x + fW >= PlayerStash[0]) ? PlayerStash[0] : item.location.x + fW);
-					try
-					{
-						Stash2D[item.location.y + y].fill(1, item.location.x, FillTo);
-					} catch(e)
-					{ 
-						console.log("[OOB] for item " + item._id + " [" + item._id + "] with error message: " + e);
-					}
+                    try {
+                        Stash2D[item.location.y + y].fill(1, item.location.x, FillTo);
+                    } catch (e) {
+                        console.log("[OOB] for item " + item._id + " [" + item._id + "] with error message: " + e);
+                    }
                 }
             }
         }
@@ -103,20 +101,67 @@ function fromRUB(value, currency) {
 }
 
 /* take money and insert items into return to server request
-* input:
-* output:
+* input: object of playerData, string of repairCurrency, int of itemRepairCost, object of body request
+* output: boolean
 * */
-function payMoney(tmpList, moneyObject, body) {
+function payForRepair(playerData, repairCurrency, itemRepairCost, body) {
     output = item.getOutput();
-    
+    let moneyItems = itm_hf.findMoney(playerData, repairCurrency);
+
+    let amountMoney = moneyItems.reduce((total, item) => {
+        return total + item.upd.StackObjectsCount;
+    }, 0);
+
+    // if no money in inventory or amount is not enough we return false
+    if (moneyItems.length <= 0 || amountMoney < itemRepairCost) return false;
+
+    let leftToPay = itemRepairCost;
+    for (let moneyItem of moneyItems) {
+        let itemAmount = moneyItem.upd.StackObjectsCount;
+
+        if (leftToPay >= itemAmount) {
+            leftToPay -= itemAmount;
+            output.data.items.del.push({"_id": moneyItem._id});
+        } else {
+            moneyItem.upd.StackObjectsCount -= leftToPay;
+            leftToPay = 0;
+            output.data.items.change.push(moneyItem);
+        }
+        if (leftToPay === 0) break;
+    }
+
+    // update sales sum
+    const tmpTraderInfo = trader.get(body.tid);
+
+    tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(itemRepairCost, tmpTraderInfo.data.currency);
+    trader.setTrader(tmpTraderInfo.data);
+
+    // update level
+    trader.lvlUp(body.tid);
+
+    // save changes
+    profile.setCharacterData(playerData);
+    console.log("Money items taken. Status OK.", "white", "green", true);
+    item.setOutput(output);
+
+    return true;
+}
+
+/* take money and insert items into return to server request
+* input:
+* output: boolean
+* */
+function payMoney(playerData, moneyItems, body) {
+    output = item.getOutput();
+
     let value = 0;
 
-    for (let i = 0; i < moneyObject.length; i++) {
-		for (let index in tmpList.data[0].Inventory.items) {
-            let itm = tmpList.data[0].Inventory.items[index];
-            
+    for (let i = 0; i < moneyItems.length; i++) {
+        for (let index in playerData.data[0].Inventory.items) {
+            let itm = playerData.data[0].Inventory.items[index];
+
             if (typeof itm.upd !== "undefined") {
-                if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
+                if (itm._id === moneyItems[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
                     itm.upd.StackObjectsCount -= body.scheme_items[i].count;
                     output.data.items.change.push({
@@ -127,11 +172,11 @@ function payMoney(tmpList, moneyObject, body) {
                         "location": itm.location,
                         "upd": {"StackObjectsCount": itm.upd.StackObjectsCount}
                     });
-                } else if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
+                } else if (itm._id === moneyItems[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
-                    tmpList.data[0].Inventory.items.splice(index, 1);// just slice item from )
+                    playerData.data[0].Inventory.items.splice(index, 1);// just slice item from )
                     output.data.items.del.push({"_id": itm._id});
-                } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count) {
+                } else if (itm._id === moneyItems[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count) {
                     return false;
                 }
             }
@@ -148,9 +193,9 @@ function payMoney(tmpList, moneyObject, body) {
     trader.lvlUp(body.tid);
 
     // save changes
-    profile.setCharacterData(tmpList);
+    profile.setCharacterData(playerData);
     console.log("Items taken. Status OK.", "white", "green", true);
-	item.setOutput(output);
+    item.setOutput(output);
     return true;
 }
 
@@ -214,34 +259,34 @@ function getMoney(tmpList, amount, body, output_temp) {
         let stashSize = getPlayerStash();
 
         addedMoney:
-        for (let My = 0; My <= stashSize[1]; My++) {
-            for (let Mx = 0; Mx <= stashSize[0]; Mx++) {
-                let skip0 = false;
+            for (let My = 0; My <= stashSize[1]; My++) {
+                for (let Mx = 0; Mx <= stashSize[0]; Mx++) {
+                    let skip0 = false;
 
-                if (StashFS_2D[My][Mx] !== 0) {
-                    skip0 = true;
-                }
+                    if (StashFS_2D[My][Mx] !== 0) {
+                        skip0 = true;
+                    }
 
-                if (!skip0) {
-                    let MoneyItem = {
-                        "_id": utility.generateNewItemId(),
-                        "_tpl": currency,
-                        "parentId": tmpList.data[0].Inventory.stash,
-                        "slotId": "hideout",
-                        "location": {x: Mx, y: My, r: "Horizontal"},
-                        "upd": {"StackObjectsCount": calcAmount}
-                    };
+                    if (!skip0) {
+                        let MoneyItem = {
+                            "_id": utility.generateNewItemId(),
+                            "_tpl": currency,
+                            "parentId": tmpList.data[0].Inventory.stash,
+                            "slotId": "hideout",
+                            "location": {x: Mx, y: My, r: "Horizontal"},
+                            "upd": {"StackObjectsCount": calcAmount}
+                        };
 
-                    tmpList.data[0].Inventory.items.push(MoneyItem);
-                    output_temp.data.items.new.push(MoneyItem);
-                    console.log("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
-                    break addedMoney;
+                        tmpList.data[0].Inventory.items.push(MoneyItem);
+                        output_temp.data.items.new.push(MoneyItem);
+                        console.log("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
+                        break addedMoney;
+                    }
                 }
             }
-        }
     }
 
-	// update sales sum
+    // update sales sum
     tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
     trader.setTrader(tmpTraderInfo.data);
 
@@ -260,7 +305,7 @@ function getPlayerStash() { //this sets automaticly a stash size from items.json
     let stashTPL = profile.getStashType();
     let stashX = (items.data[stashTPL]._props.Grids[0]._props.cellsH !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
     let stashY = (items.data[stashTPL]._props.Grids[0]._props.cellsV !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
-	return [stashX, stashY];
+    return [stashX, stashY];
 }
 
 /* Gets item data from items.json
@@ -285,101 +330,99 @@ function getItem(template) { // -> Gets item from <input: _tpl>
 * */
 function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and height returns [sizeX, sizeY]
     let toDo = [itemID],
-		rootItem = itemID,
-		tmpItem = getItem(itemtpl)[1],
-		isFolded = false,
-		isMagazine = false, 
-		isGrip = false,
-		isMainBaseHasis = false,
-		isBarrel = false,
-		BxH_diffrence_stock = 0,
-		BxH_diffrence_barrel = 0;
-			
-			
-			
-		   
+        rootItem = itemID,
+        tmpItem = getItem(itemtpl)[1],
+        isFolded = false,
+        isMagazine = false,
+        isGrip = false,
+        isMainBaseHasis = false,
+        isBarrel = false,
+        BxH_diffrence_stock = 0,
+        BxH_diffrence_barrel = 0;
+
+
     let outX = tmpItem._props.Width;
     let outY = tmpItem._props.Height;
-	let skipThisItems = ["5448e53e4bdc2d60728b4567", "566168634bdc2d144c8b456c", "5795f317245977243854e041"];
-	
-	if(skipThisItems.indexOf(tmpItem._parent) === -1){ // containers big no no
-		while (true) {
-			if (typeof toDo[0] === "undefined") {
-				break;
-			}
-			for (let tmpKey in InventoryItem) {
-				if (InventoryItem.hasOwnProperty(tmpKey)) {
-					if(InventoryItem[tmpKey]._id == toDo[0]){
-						if(typeof InventoryItem[tmpKey].upd != "undefined")
-							if(typeof InventoryItem[tmpKey].upd.Foldable != "undefined")
-								if(InventoryItem[tmpKey].upd.Foldable.Folded === true)
-									isFolded = true;
-					}
-					if (InventoryItem[tmpKey].parentId === toDo[0]) {
-						let itm = getItem(InventoryItem[tmpKey]._tpl)[1];
-						//if(rootItem === InventoryItem[tmpKey].parentId || itm._props.ExtraSizeForceAdd == true) {
-						if(InventoryItem[tmpKey].slotId != "mod_handguard"){
-							if(InventoryItem[tmpKey].slotId == "mod_magazine"){ 
-								if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-									isMagazine = true;
-								}
-							}
-							if(InventoryItem[tmpKey].slotId == "mod_pistol_grip" || InventoryItem[tmpKey].slotId == "mod_pistolgrip"){
-																							  
-								isGrip = true;
-							}
-							if(InventoryItem[tmpKey].slotId == "mod_stock"){
-								if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-									isGrip = true;
-								}
-							}
-							if(InventoryItem[tmpKey].slotId == "mod_stock"){
-								if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-									BxH_diffrence_stock = itm._props.ExtraSizeLeft;
-									isMainBaseHasis = true;
-								}
-							}
-							if(InventoryItem[tmpKey].slotId == "mod_barrel"){
-								if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-									BxH_diffrence_barrel = itm._props.ExtraSizeLeft;
-									isBarrel = true;
-								}
-							}
-							if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
-								if (InventoryItem[tmpKey].slotId == "mod_barrel" && itm._props.ExtraSizeLeft > 1 || InventoryItem[tmpKey].slotId != "mod_barrel")
-								outX += itm._props.ExtraSizeLeft;
-							}
+    let skipThisItems = ["5448e53e4bdc2d60728b4567", "566168634bdc2d144c8b456c", "5795f317245977243854e041"];
 
-							if (typeof itm._props.ExtraSizeRight !== "undefined" && itm._props.ExtraSizeRight > 0) {
-								outX += itm._props.ExtraSizeRight;
-							}
+    if (skipThisItems.indexOf(tmpItem._parent) === -1) { // containers big no no
+        while (true) {
+            if (typeof toDo[0] === "undefined") {
+                break;
+            }
+            for (let tmpKey in InventoryItem) {
+                if (InventoryItem.hasOwnProperty(tmpKey)) {
+                    if (InventoryItem[tmpKey]._id == toDo[0]) {
+                        if (typeof InventoryItem[tmpKey].upd != "undefined")
+                            if (typeof InventoryItem[tmpKey].upd.Foldable != "undefined")
+                                if (InventoryItem[tmpKey].upd.Foldable.Folded === true)
+                                    isFolded = true;
+                    }
+                    if (InventoryItem[tmpKey].parentId === toDo[0]) {
+                        let itm = getItem(InventoryItem[tmpKey]._tpl)[1];
+                        //if(rootItem === InventoryItem[tmpKey].parentId || itm._props.ExtraSizeForceAdd == true) {
+                        if (InventoryItem[tmpKey].slotId != "mod_handguard") {
+                            if (InventoryItem[tmpKey].slotId == "mod_magazine") {
+                                if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
+                                    isMagazine = true;
+                                }
+                            }
+                            if (InventoryItem[tmpKey].slotId == "mod_pistol_grip" || InventoryItem[tmpKey].slotId == "mod_pistolgrip") {
 
-							if (typeof itm._props.ExtraSizeUp !== "undefined" && itm._props.ExtraSizeUp > 0) {
-								outY += itm._props.ExtraSizeUp;
-							}
+                                isGrip = true;
+                            }
+                            if (InventoryItem[tmpKey].slotId == "mod_stock") {
+                                if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
+                                    isGrip = true;
+                                }
+                            }
+                            if (InventoryItem[tmpKey].slotId == "mod_stock") {
+                                if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
+                                    BxH_diffrence_stock = itm._props.ExtraSizeLeft;
+                                    isMainBaseHasis = true;
+                                }
+                            }
+                            if (InventoryItem[tmpKey].slotId == "mod_barrel") {
+                                if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
+                                    BxH_diffrence_barrel = itm._props.ExtraSizeLeft;
+                                    isBarrel = true;
+                                }
+                            }
+                            if (typeof itm._props.ExtraSizeLeft !== "undefined" && itm._props.ExtraSizeLeft > 0) {
+                                if (InventoryItem[tmpKey].slotId == "mod_barrel" && itm._props.ExtraSizeLeft > 1 || InventoryItem[tmpKey].slotId != "mod_barrel")
+                                    outX += itm._props.ExtraSizeLeft;
+                            }
 
-							if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
-								outY += itm._props.ExtraSizeDown;
-							}
-						}
-						//console.log(InventoryItem[tmpKey]._id + " - " + outX + " - " + outY );
-						toDo.push(InventoryItem[tmpKey]._id);
-					}
-				}
-			}
-			toDo.splice(0, 1);
-		}
-	}
-	if(isBarrel && isMainBaseHasis){
-		let calculate = Math.abs(BxH_diffrence_stock - BxH_diffrence_barrel);
-		calculate = ((BxH_diffrence_stock > BxH_diffrence_barrel)?BxH_diffrence_stock:BxH_diffrence_barrel) - calculate;
-		outX -= calculate;
-	}
-	if(isMagazine && isGrip)
-		outY -= 1;
-	if(isFolded)
-		outX -= 1;
-	//console.log("-EndSize= "+rootItem+" >" + outX + " - " + outY);
+                            if (typeof itm._props.ExtraSizeRight !== "undefined" && itm._props.ExtraSizeRight > 0) {
+                                outX += itm._props.ExtraSizeRight;
+                            }
+
+                            if (typeof itm._props.ExtraSizeUp !== "undefined" && itm._props.ExtraSizeUp > 0) {
+                                outY += itm._props.ExtraSizeUp;
+                            }
+
+                            if (typeof itm._props.ExtraSizeDown !== "undefined" && itm._props.ExtraSizeDown > 0) {
+                                outY += itm._props.ExtraSizeDown;
+                            }
+                        }
+                        //console.log(InventoryItem[tmpKey]._id + " - " + outX + " - " + outY );
+                        toDo.push(InventoryItem[tmpKey]._id);
+                    }
+                }
+            }
+            toDo.splice(0, 1);
+        }
+    }
+    if (isBarrel && isMainBaseHasis) {
+        let calculate = Math.abs(BxH_diffrence_stock - BxH_diffrence_barrel);
+        calculate = ((BxH_diffrence_stock > BxH_diffrence_barrel) ? BxH_diffrence_stock : BxH_diffrence_barrel) - calculate;
+        outX -= calculate;
+    }
+    if (isMagazine && isGrip)
+        outY -= 1;
+    if (isFolded)
+        outX -= 1;
+    //console.log("-EndSize= "+rootItem+" >" + outX + " - " + outY);
     return [outX, outY];
 }
 
@@ -413,3 +456,4 @@ module.exports.getSize = getSize;
 module.exports.findAndReturnChildren = findAndReturnChildren;
 module.exports.returnOutput = returnOutput;
 module.exports.setInternalOutput = setInternalOutput;
+module.exports.payForRepair = payForRepair;

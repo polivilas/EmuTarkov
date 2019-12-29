@@ -2,55 +2,40 @@
 
 require('../libs.js');
 
-function main(tmpList, body) {
+function main(profilesData, body) {
+    item.resetOutput();
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let repairCurrency = tmpTraderInfo.data.repair.currency;
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
     let RequestData = body.repairItems;
 
-    for (let item of tmpList.data[0].Inventory.items) {
-        for (let repairItem of RequestData) {
-            if (tmpList.data[0].Inventory.items[item]._id !== repairItem._id) {
-                continue;
-            }
+    for (let repairItem of RequestData) {
+        const itemToRepair = profilesData.data[0].Inventory.items.find(item => repairItem._id === item._id);
+        if (itemToRepair === undefined) continue;
 
-            let itemRepairCost = items.data[tmpList.data[0].Inventory.items[item]._tpl]._props.RepairCost;
-            itemRepairCost = itemRepairCost * repairItem.count * repairRate;
+        let itemRepairCost = items.data[itemToRepair._tpl]._props.RepairCost;
+        itemRepairCost = Math.floor(itemRepairCost * repairItem.count * repairRate);
 
-            // pay the repair cost
-            let moneyObject = itm_hf.findMoney(tmpList, repairCurrency);
-
-            if (typeof moneyObject[0] === "undefined") {
-                console.log("Error something goes wrong (not found Money)");
-                return "";
-            }
-
-            if (!itm_hf.payMoney(tmpList, moneyObject, body)) {
-                console.log("no money found");
-                return "";
-            }
-
-            // change item durability
-            let calculateDurability = item.upd.Repairable.Durability + repairItem.count;
-
-            if (item.upd.Repairable.MaxDurability < calculateDurability) {
-                calculateDurability = item.upd.Repairable.MaxDurability;
-            }
-
-            item.upd.Repairable.Durability = calculateDurability;
-            item.upd.Repairable.MaxDurability = calculateDurability;
-            output.data.items.change.push(item);
-
-            // set trader standing
-            output.data.currentSalesSums[body.tid] = tmpTraderInfo.loyalty.currentSalesSum + Math.floor(itemRepairCost);
-            trader.lvlUp(body.tid);
-
-            console.log(JSON.stringify(output.data.items.change[1].upd));
+        // pay the repair cost
+        if (!itm_hf.payForRepair(profilesData, repairCurrency, itemRepairCost, body)) {
+            console.log("no money found");
+            continue;
         }
+
+        // change item durability
+        let calculateDurability = itemToRepair.upd.Repairable.Durability + repairItem.count;
+
+        if (itemToRepair.upd.Repairable.MaxDurability <= calculateDurability) {
+            calculateDurability = itemToRepair.upd.Repairable.MaxDurability;
+        }
+
+        itemToRepair.upd.Repairable.Durability = calculateDurability;
+        itemToRepair.upd.Repairable.MaxDurability = calculateDurability;
+        output.data.items.change.push(itemToRepair);
     }
 
-    profile.setCharacterData(data);
+    profile.setCharacterData(profilesData);
     return output;
 }
 
