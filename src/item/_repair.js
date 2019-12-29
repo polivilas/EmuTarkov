@@ -2,57 +2,56 @@
 
 require('../libs.js');
 
-function main(tmpList, body) {
-    let output = repairItem.getOutput();
-    let tmpTraderInfo = trader.get(body.tid);
-    let repairCurrency = tmpTraderInfo.data.repair.currency;
-    let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
-    let RequestData = body.repairItems;
+function main(profilesData, body) {
+    item.resetOutput();
+    let output = item.getOutput();
+    let traderProfile = trader.get(body.tid).data;
+    let traderRepair = trader.get(body.tid).data.repair;
+    let repairItems = body.repairItems;
 
-    console.log(body.items, "", "", true);
+    if (repairItems.length > 0) {
+        for (const itemForRepair of repairItems) {
+            const repairItem = profilesData.data[0].Inventory.items.find(item => itemForRepair._id === item._id);
 
-    for (let item of tmpList.data[0].Inventory.items) {
-        for (let repairItem of RequestData) {
-            if (tmpList.data[0].Inventory.items[item]._id !== repairItem._id) {
-                continue;
+            if (repairItem !== undefined) {
+                const pointsToRepair = itemForRepair.count;
+                const repairItemTpl = items.data[repairItem._tpl];
+                const itemRepairCost = repairItemTpl._props.RepairCost;
+                const repairCost = Math.floor((itemRepairCost + itemRepairCost * traderRepair.price_rate / 100) * pointsToRepair * traderRepair.currency_coefficient);
+
+                const currencyItem = profilesData.data[0].Inventory.items.find(item => {
+                    if (traderRepair.currency === item._tpl) {
+                        return item.upd.StackObjectsCount >= repairCost;
+                    }
+                });
+
+                if (currencyItem !== undefined) {
+                    currencyItem.upd.StackObjectsCount -= repairCost;
+
+                    if (Math.floor(currencyItem.upd.StackObjectsCount) === 0) {
+                        output.data.items.del.push({"_id": currencyItem._id});
+                    } else {
+                        output.data.items.change.push(currencyItem);
+                    }
+
+                    // anti cheat :D
+                    if (repairItem.upd.Repairable.Durability < repairItemTpl._props.MaxDurability) {
+                        repairItem.upd.Repairable.Durability += pointsToRepair;
+                        repairItem.upd.Repairable.MaxDurability = repairItem.upd.Repairable.Durability;
+                    } else {
+                        repairItem.upd.Repairable.Durability = 0.5;
+                        repairItem.upd.Repairable.MaxDurability = 0.5;
+                    }
+                    output.data.items.change.push(repairItem);
+
+                    // set trader standing
+                    output.data.currentSalesSums[body.tid] = traderProfile.loyalty.currentSalesSum + Math.floor(repairCost);
+                }
             }
-
-            let itemRepairCost = items.data[tmpList.data[0].Inventory.items[item]._tpl]._props.RepairCost;
-            itemRepairCost = itemRepairCost * repairItem.count * repairRate;
-
-            // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
-            let moneyObject = itm_hf.findMoney(tmpList, repairCurrency);
-
-            if (typeof moneyObject[0] === "undefined") {
-                console.log("Error something goes wrong (not found Money)");
-                return "";
-            }
-
-            // pay the item	to profile
-            if (!itm_hf.payMoney(tmpList, moneyObject, body)) {
-                console.log("no money found");
-                return "";
-            }
-
-            // change item durability
-            let calculateDurability = item.upd.Repairable.Durability + repairItem.count;
-
-            if (item.upd.Repairable.MaxDurability < calculateDurability) {
-                calculateDurability = item.upd.Repairable.MaxDurability;
-            }
-
-            item.upd.Repairable.Durability = calculateDurability;
-            item.upd.Repairable.MaxDurability = calculateDurability;
-            output.data.items.change.push(item);
-
-            // set trader standing
-            output.data.currentSalesSums[body.tid] = tmpTraderInfo.loyalty.currentSalesSum + Math.floor(itemRepairCost);
-
-            console.log(JSON.stringify(output.data.items.change[1].upd));
         }
     }
 
-    profile.setCharacterData(data);
+    profile.setCharacterData(profilesData);
     return output;
 }
 
