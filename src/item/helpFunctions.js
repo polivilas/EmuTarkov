@@ -106,6 +106,7 @@ function fromRUB(value, currency) {
 * */
 function payForRepair(playerData, repairCurrency, itemRepairCost, body) {
     output = item.getOutput();
+    let playerItems = playerData.data[0].Inventory.items;
     let moneyItems = itm_hf.findMoney("tpl", playerData, repairCurrency);
 
     let amountMoney = moneyItems.reduce((total, item) => {
@@ -122,6 +123,7 @@ function payForRepair(playerData, repairCurrency, itemRepairCost, body) {
         if (leftToPay >= itemAmount) {
             leftToPay -= itemAmount;
             output.data.items.del.push({"_id": moneyItem._id});
+            playerItems = playerItems.filter(item => item._id !== moneyItem._id);
         } else {
             moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;
@@ -129,6 +131,8 @@ function payForRepair(playerData, repairCurrency, itemRepairCost, body) {
         }
         if (leftToPay === 0) break;
     }
+
+    playerData.data[0].Inventory.items = playerItems;
 
     // update sales sum
     const tmpTraderInfo = trader.get(body.tid);
