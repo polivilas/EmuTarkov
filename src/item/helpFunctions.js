@@ -154,22 +154,20 @@ function payMoney(tmpList, moneyObject, body) {
     return true;
 }
 
-/* Find Barter item in the inventory
-* input: player data, BarteredItem ID
-* output: data of Item from inventory
+/* Find Barter items in the inventory
+* input: object of player data, string BarteredItem ID
+* output: array of Item from inventory
 * */
-function findMoney(tmpList, barter_itemID) { // find required items to take after buying (handles multiple items)
-    let prepareReturn = [];
+function findMoney(playerData, barter_itemID) { // find required items to take after buying (handles multiple items)
+    const barterIDs = typeof barter_itemID === "string" ? [barter_itemID] : barter_itemID;
+    let itemsArray = [];
 
-    for (let item of tmpList.data[0].Inventory.items) {
-        for (let i = 0; i < barter_itemID.length; i++) {
-            if (item._id === barter_itemID[i]) {
-                prepareReturn[i] = item;
-            }
-        }
+    for (const barterID of barterIDs) {
+        let mapResult = playerData.data[0].Inventory.items.filter(item => item._tpl === barterID);
+        itemsArray = Object.assign(itemsArray, mapResult);
     }
 
-    return prepareReturn;
+    return itemsArray;
 }
 
 /* receive money back after selling
