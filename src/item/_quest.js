@@ -37,7 +37,7 @@ function completeQuest(tmpList, body) {
     for (let quest of quests.data) {
         if (quest._id === body.qid) {
             for (let reward of quest.rewards.Success) {
-                switch(reward.type) {
+                switch (reward.type) {
                     case "Item":
                         for (let rewardItem of reward.items) {
                             let newReq = {};
