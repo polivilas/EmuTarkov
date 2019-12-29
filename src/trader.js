@@ -21,7 +21,7 @@ function loadAllTraders() {
 }
 
 function checkTraders(file) {
-    return settings.debug.enableEverythingTrader === true || (settings.debug.enableEverythingTrader === false && file !== "everything");
+    return file !== "everything";
 }
 
 function get(id, flea = false) {
