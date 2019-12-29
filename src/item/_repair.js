@@ -3,7 +3,7 @@
 require('../libs.js');
 
 function main(tmpList, body) {
-    let output = repairItem.getOutput();
+    let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let repairCurrency = tmpTraderInfo.data.repair.currency;
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
