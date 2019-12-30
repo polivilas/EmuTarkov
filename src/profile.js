@@ -376,7 +376,7 @@ function find(data) {
     let info = json.parse(text);
     let profileId = exist(info);
 
-    console.log(profileId);
+    console.log("[DEBUG][PROFILE ID] ", profileId);
     constants.setActiveID(profileId);
 }
 
