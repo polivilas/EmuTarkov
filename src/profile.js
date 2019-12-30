@@ -372,12 +372,15 @@ function changeVoice(info) {
     setCharacterData(tmpList);
 }
 
-function find() {
-    settings = json.parse(json.read(filepaths.user.config));
-    constants.setActiveID(settings.debug.activeId);
+function find(data) {
+    let buff = new Buffer(data, 'base64');
+    let text = buff.toString('ascii');
+    let info = json.parse(text);
+    let profileId = exist(info);
 
-    let backendUrl = "https://" + ip;
-    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
+    if (profileId >= 0) {
+        constants.setActiveID(profileId);
+    }
 }
 
 // Buying item from trader

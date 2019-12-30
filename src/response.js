@@ -7,7 +7,6 @@ const staticRoutes = {
     "/client/friend/list": getFriendList,
     "/client/game/profile/items/moving": handleItems,
     "/client/languages": getLocale,
-    "/client/game/login": loginUser,
     "/client/queue/status": getQueueStatus,
     "/client/items": getItems,
     "/client/globals": getGlobals,
@@ -33,7 +32,7 @@ const staticRoutes = {
     "/client/repair/exec": handleRepair,
     "/client/game/keepalive": handleKeepAlive,
     "/client/game/version/validate": validateGameVersion,
-    "/client/game/config": loginUser,
+    "/client/game/config": getGameConfig,
     "/client/customization": getCustomization,
     "/client/trading/customization/5ac3b934156ae10c4430e83c/offers": getCustomizationOffers,
     "/client/trading/customization/579dc571d53a0658a154fbec/offers": getCustomizationOffers,
@@ -47,7 +46,6 @@ const staticRoutes = {
     "/client/game/profile/nickname/reserved": getReservedNickname,
     "/client/game/profile/nickname/validate": validateNickname,
     "/client/game/profile/create": createProfile,
-    "/OfflineRaidSave": offlineRaidSave,
     "/favicon.ico": nullResponse,
     "/client/game/logout": nullResponse,
     "/client/putMetrics": nullResponse,
@@ -60,7 +58,11 @@ const staticRoutes = {
     "/client/mail/dialog/view": getMailDialogView,
     "/client/mail/dialog/info": getMailDialogInfo,
     "/client/friend/request/list/outbox": nullArrayResponse,
-    "/client/friend/request/list/inbox": nullArrayResponse
+    "/client/friend/request/list/inbox": nullArrayResponse,
+
+    // EmuLib
+    "/OfflineRaidSave": offlineRaidSave,
+    "/launcher/game/login": loginUser
 };
 
 const dynamicRoutes = {
@@ -111,6 +113,11 @@ function showInventoryChecker(url, info) {
     return output;
 }
 
+function getGameConfig() {
+    let backendUrl = "https://" + ip;
+    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
+}
+
 function getFriendList(url, info) {
     return '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
 }
@@ -125,7 +132,8 @@ function getLocale(url, info) {
 }
 
 function loginUser(url, info) {
-    return profile.find();
+    profile.find(info);
+    return "DONE";
 }
 
 function getQueueStatus(url, info) {
