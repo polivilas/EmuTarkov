@@ -321,10 +321,8 @@ function exist(info) {
     let profiles = getProfiles();
 
     for (let profile of profiles) {
-        if (info.email === profile.email && info.pass === profile.password) {
+        if (info.email === profile.email && info.password === profile.password) {
             return profile.id;
-        } else {
-            return -3;
         }
     }
 
@@ -378,9 +376,8 @@ function find(data) {
     let info = json.parse(text);
     let profileId = exist(info);
 
-    if (profileId >= 0) {
-        constants.setActiveID(profileId);
-    }
+    console.log(profileId);
+    constants.setActiveID(profileId);
 }
 
 // Buying item from trader
