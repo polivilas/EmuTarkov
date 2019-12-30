@@ -132,8 +132,7 @@ function getLocale(url, info) {
 }
 
 function loginUser(url, info) {
-    profile.find(info);
-    return "DONE";
+    return profile.find(info);
 }
 
 function getQueueStatus(url, info) {
