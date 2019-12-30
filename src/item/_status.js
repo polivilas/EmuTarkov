@@ -99,12 +99,13 @@ function examineItem(tmpList, body) {
         return "BAD";
     }
 
-    // item found
-    console.log("EXAMINED: " + returned, "white", "green", true);
-    tmpList.data[0].Encyclopedia[returned] = true;
-    tmpList.data[0].Info.Experience += json.parse(json.read(filepaths.items[body.item]))._props.ExaminedExperience;
-    profile.setCharacterData(tmpList);
+    // item found    
+    let data = json.parse(json.read(filepaths.items[returned]));
 
+    tmpList.data[0].Info.Experience += data._props.ExamineExperience;
+    tmpList.data[0].Encyclopedia[returned] = true;
+    profile.setCharacterData(tmpList);
+    console.log("EXAMINED: " + returned, "white", "green", true);
     return "OK";
 }
 
