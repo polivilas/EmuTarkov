@@ -378,7 +378,7 @@ function find(data) {
 
     console.log("[DEBUG][PROFILE ID] " + profileId);
     constants.setActiveID(profileId);
-    return '{"err":0, "errmsg":null, "data":{"profileId": profile}}';
+    return '{"err":0, "errmsg":null, "data":{"profileId":' + profile + '}}';
 }
 
 // Buying item from trader
