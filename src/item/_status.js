@@ -69,10 +69,11 @@ function examineItem(tmpList, body) {
     let returned = "BAD";
 
     // trader inventory
-    //let tmpTraderAssort = trader.getAssort();
 
-    if (typeof tmpTraderAssort !== "undefined") {
-        for (let item of tmpTraderAssort.data) {
+    if (typeof body.fromOwner !== "undefined") {
+        let tmpTraderAssort = trader.getAssort(body.fromOwner.id);
+
+        for (let item of tmpTraderAssort.data.items) {
             if (item._id === body.item) {
                 console.log("Found trader with examined item: " + item._id, "", "", true);
                 returned = item._tpl;
