@@ -68,9 +68,13 @@ function bindItem(tmpList, body) {
 function examineItem(tmpList, body) {
     let returned = "BAD";
 
-    // trader inventory
+    // ragfair
+    if (typeof body.fromOwner !== "undefined" && body.fromOwner.type === "RagFair") {
+        returned = body.fromOwner.id;
+    }
 
-    if (typeof body.fromOwner !== "undefined") {
+    // trader
+    if (typeof body.fromOwner !== "undefined" && body.fromOwner.type === "Trader") {
         let tmpTraderAssort = trader.getAssort(body.fromOwner.id);
 
         for (let item of tmpTraderAssort.data.items) {
