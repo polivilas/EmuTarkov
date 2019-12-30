@@ -99,7 +99,7 @@ function examineItem(tmpList, body) {
         return "BAD";
     }
 
-    // item found    
+    // item found
     let data = json.parse(json.read(filepaths.items[returned]));
 
     tmpList.data[0].Info.Experience += data._props.ExamineExperience;
