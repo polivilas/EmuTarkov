@@ -44,7 +44,7 @@ function genericCacher(cachename, filepathNode, output = "") {
     }
 
     if (typeof base.crc != "undefined") {
-        base.crc = utility.generateCRC(json.stringify(base));
+        base.crc = utility.generateCRC(json.stringify(base.data));
     }
     
     json.write("user/cache/" + cachename, base);
