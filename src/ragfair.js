@@ -7,7 +7,7 @@ const handbook = json.parse(json.read(filepaths.user.cache.templates));
 function getOffers(request) {
     let response = json.parse(json.read(filepaths.ragfair.search));
 
-    if( Object.entries(request.buildItems).length != 0 ) {
+    if (Object.entries(request.buildItems).length != 0) {
         createOfferFromBuild(request.buildItems,response);
     } else if (request.handbookId !== "" && request.linkedSearchId !== "") {
         //list specific category from a linked search
