@@ -326,7 +326,7 @@ function exist(info) {
         }
     }
 
-    return -1;
+    return 0;
 }
 
 function getReservedNickname() {
