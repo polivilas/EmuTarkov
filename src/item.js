@@ -50,6 +50,7 @@ const staticRoutes = {
 };
 
 function getOutput() {
+    if (output === "") resetOutput();
     return output;
 }
 

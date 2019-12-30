@@ -4,23 +4,25 @@ let game = 'Not Started';
 let profileActiveId = 0;
 
 function serverVersion() {
-	return server;
+    return server;
 }
 
 function gameVersion() {
-	return game;
+    return game;
 }
 
 function setVersion(version) {
-	game = version;
+    game = version;
 }
 
 function getActiveID() {
-	return profileActiveId;
+    return profileActiveId;
 }
 
 function setActiveID(ID) {
-	profileActiveId = ID;
+    ID -= 0;
+    if (ID === profileActiveId) return;
+    profileActiveId = ID - 1;
 }
 
 module.exports.getActiveID = getActiveID;
