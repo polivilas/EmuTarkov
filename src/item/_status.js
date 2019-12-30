@@ -102,7 +102,7 @@ function examineItem(tmpList, body) {
     // item found
     console.log("EXAMINED: " + returned, "white", "green", true);
     tmpList.data[0].Encyclopedia[returned] = true;
-    tmpList.data[0].Info.Experience += json.parse(json.read(filepaths.items[returned]))._props.ExaminedExperience;
+    tmpList.data[0].Info.Experience += json.parse(json.read(filepaths.items[body.item]))._props.ExaminedExperience;
     profile.setCharacterData(tmpList);
 
     return "OK";
