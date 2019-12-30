@@ -20,7 +20,8 @@ function getActiveID() {
 }
 
 function setActiveID(ID) {
-    if (ID === (profileActiveId + "")) return;
+    ID -= 0;
+    if (ID === profileActiveId) return;
     profileActiveId = ID - 1;
 }
 
