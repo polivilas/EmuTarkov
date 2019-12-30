@@ -373,7 +373,7 @@ function changeVoice(info) {
 }
 
 function find(data) {
-    let buff = new Buffer(data.token, 'base64');
+    let buff = Buffer.from(data.token, 'base64');
     let text = buff.toString('ascii');
     let info = json.parse(text);
     let profileId = exist(info);
