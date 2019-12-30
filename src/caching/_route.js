@@ -259,8 +259,6 @@ function all() {
     } else {
         filepaths = json.parse(json.read("user/cache/filepaths.json"));
     }
-
-    settings.mods.rebuildRoutes = false;
 }
 
 module.exports.all = all;

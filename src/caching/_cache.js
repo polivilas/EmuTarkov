@@ -289,8 +289,6 @@ function all() {
     if (force || !fs.existsSync("user/cache/mods.json")) {
         mod();
     }
-
-    settings.mods.rebuildCache = false;
 }
 
 module.exports.all = all;
