@@ -10,8 +10,8 @@ function isProfileWiped() {
     let profiles = getProfiles();
 
     for (let profile of profiles) {
-        if (profiles[profile].id === constants.getActiveID()) {
-            return !profiles[profile].wipe;
+        if (profile.id === constants.getActiveID()) {
+            return !profile.wipe;
         }
     }
     
