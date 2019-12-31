@@ -3,7 +3,15 @@
 require("./libs.js");
 
 function getProfiles() {
-    return json.parse(json.read(filepaths.user.profiles.list));
+    let profiles = json.parse(json.read(filepaths.user.profiles.list));
+    let result = [];
+    result.push({});
+
+    profiles.forEach(profile => {
+        result.push(profile);
+    });
+
+    return result;
 }
 
 function isProfileWiped() {
@@ -337,8 +345,7 @@ function exist(info) {
 }
 
 function getReservedNickname() {
-    let profiles = getProfiles();
-    return profiles[constants.getActiveID()].nickname;
+    return getProfiles()[constants.getActiveID()].nickname;
 }
 
 function nicknameExist(info) {
