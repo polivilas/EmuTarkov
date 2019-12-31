@@ -3,15 +3,15 @@
 require("./libs.js");
 
 function getProfiles() {
-    let profiles = json.parse(json.read(filepaths.user.profiles.list));
-    let result = [];
-    result.push({});
+    let profileArray = json.parse(json.read(filepaths.user.profiles.list));
+    let profiles = [];
+    profiles.push({});
 
-    profiles.forEach(profile => {
-        result.push(profile);
+    profileArray.forEach(profile => {
+        profiles.push(profile);
     });
 
-    return result;
+    return profiles;
 }
 
 function isProfileWiped() {
