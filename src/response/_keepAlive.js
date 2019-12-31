@@ -3,10 +3,10 @@
 require('../libs.js');
 
 function main() {
-    if (!profile.isProfileWiped) {
+    //if (!profile.isProfileWiped) {
         updateTraders();
         updatePlayerHideout();
-    }
+    //}
 
     return;
 }
