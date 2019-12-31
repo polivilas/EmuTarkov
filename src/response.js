@@ -62,7 +62,7 @@ const staticRoutes = {
 
     // EmuLib
     "/OfflineRaidSave": offlineRaidSave,
-    "/launcher/game/login": loginUser
+    "/launcher/profile/login": loginUser
 };
 
 const dynamicRoutes = {
@@ -213,7 +213,7 @@ function getTraderList(url, info) {
 }
 
 function getServer(url, info) {
-    return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + port + '"}]}';
+    return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + https_port + '"}]}';
 }
 
 function searchRagfair(url, info) {

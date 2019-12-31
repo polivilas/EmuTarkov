@@ -20,9 +20,9 @@ function getActiveID() {
 }
 
 function setActiveID(ID) {
+    if (typeof ID !== "string") return;
     ID -= 0;
-    if (ID === profileActiveId) return;
-    profileActiveId = ID - 1;
+    profileActiveId = ID;
 }
 
 module.exports.getActiveID = getActiveID;

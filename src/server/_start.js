@@ -108,8 +108,7 @@ function handleRequest(req, resp) {
     let IP = req.connection.remoteAddress.replace("::ffff:", "");
 
     const sessionID = getCookies(req)['PHPSESSID'];
-    if (sessionID !== "NaN" && sessionID !== undefined)
-        constants.setActiveID(sessionID);
+    constants.setActiveID(sessionID);
 
     if (req.method == "POST") {
         // received data
@@ -175,14 +174,27 @@ function start() {
     // create HTTPS server (port 443)
     let serverHTTPS = https.createServer(options, (req, res) => {
         handleRequest(req, res);
-    }).listen(port, ip, function () {
+    }).listen(https_port, ip, function () {
         console.log("» server url: " + "https://" + ip + "/", "green", "");
     });
 
     // server already running
     serverHTTPS.on('error', function (e) {
         console.log(e);
-        console.log("» Port " + port + " is already in use. Check if console isnt already open or change port", "red", "");
+        console.log("» Port " + https_port + " is already in use. Check if console isnt already open or change port", "red", "");
+    });
+
+    // create HTTP server (port 80)
+    let serverHTTP = http.createServer((req, res) => {
+        handleRequest(req, res);
+    }).listen(http_port, ip, function () {
+        console.log("» server url: " + "http://" + ip + "/", "green", "");
+    });
+
+    // server already running
+    serverHTTP.on('error', function (e) {
+        console.log(e);
+        console.log("» Port " + http_port + " is already in use. Check if console isnt already open or change port", "red", "");
     });
 }
 
