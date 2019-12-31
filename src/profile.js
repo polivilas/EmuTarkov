@@ -8,7 +8,14 @@ function getProfiles() {
 
 function isProfileWiped() {
     let profiles = getProfiles();
-    return !profiles[constants.getActiveID()].wipe;
+
+    for (let profile of profiles) {
+        if (profiles[profile].id === constants.getActiveID()) {
+            return !profiles[profile].wipe;
+        }
+    }
+    
+    return true;
 }
 
 function getProfilePath(profileId = -1) {
