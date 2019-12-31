@@ -1,0 +1,78 @@
+{
+	"_id": "5dc53acb86f77469c740c893",
+	"traderId": "5ac3b934156ae10c4430e83c",
+	"location": "5714dbc024597771384a510d",
+	"image": "/files/quest/icon/5d69468a86f77452aa51d79d.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e0ac74b9d594972a112aa14",
+				"value": "100000",
+				"id": "5dc5413186f77433bb565ac4",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112aa14",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 100000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5ae4498786f7744bde357695",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5dc541c386f77469c87589a6"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "100",
+					"type": "Elimination",
+					"counter": {
+						"id": "5dc53fd386f77469c87589a2",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"savageRole": [
+										"bossKilla"
+									],
+									"id": "5dc53ff786f7743361195af2"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5dc53fd386f77469c87589a3"
+				}
+			}
+		],
+		"Fail": []
+	}
+}
