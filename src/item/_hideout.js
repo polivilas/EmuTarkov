@@ -221,6 +221,7 @@ function HideoutTakeProduction(tmplist, body) {
 			newReq.item_id = crafting_receipes.data[receipe].endProduct;
 			newReq.count = crafting_receipes.data[receipe].count;
 			profile.addItemToStash(tmplist, newReq);
+			item.resetOutput();
 			return item.getOutput();
 		}	
 	}
