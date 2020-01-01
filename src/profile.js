@@ -6,13 +6,23 @@ function getProfiles() {
     return json.parse(json.read(filepaths.user.profiles.list));
 }
 
-function isProfileWiped() {
+function findProfile(profileId) {
     let profiles = getProfiles();
 
     for (let profile of profiles) {
-        if (profile.id === constants.getActiveID()) {
-            return profile.wipe;
+        if (profile.id === profileId) {
+            return profile.id;
         }
+    }
+
+    return 0;
+}
+
+function isProfileWiped() {
+    let profile = findProfile(constants.getActiveID());
+
+    if (profile !== 0) {
+        return profile.wipe;
     }
 
     return true;
@@ -337,7 +347,13 @@ function exist(info) {
 }
 
 function getReservedNickname() {
-    return getProfiles()[constants.getActiveID()].nickname;
+    let profile = findProfile(constants.getActiveID());
+
+    if (profile !== 0) {
+        return profile.nickname;
+    }
+
+    return "";
 }
 
 function nicknameExist(info) {
@@ -382,7 +398,6 @@ function find(data) {
     let info = json.parse(text);
     let profileId = exist(info);
 
-    console.log("[DEBUG][PROFILE ID] " + profileId);
     constants.setActiveID(profileId);
     return JSON.stringify({profileId: profileId});
 }
