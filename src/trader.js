@@ -12,6 +12,10 @@ function loadAllTraders() {
 
     // load trader files
     for (let file in filepaths.traders) {
+        if (!fs.existsSync(getPath(file))) {
+            continue;
+        }
+
         if (filepaths.traders.hasOwnProperty(file) && checkTraders(file)) {
             traders.push(json.parse(json.read(getPath(file))));
         }

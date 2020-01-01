@@ -11,27 +11,39 @@ function findProfile(profileId) {
 
     for (let profile of profiles) {
         if (profile.id === profileId) {
-            return profile.id;
+            return profile;
         }
     }
 
-    return 0;
+    return undefined;
 }
 
 function isProfileWiped() {
     let profile = findProfile(constants.getActiveID());
 
-    if (profile !== 0) {
+    if (profile !== typeof "undefined") {
         return profile.wipe;
     }
 
     return true;
 }
 
-function getProfilePath(profileId = -1) {
+function setProfileWipe(profileId, state = false) {
+    let profiles = getProfiles();
+
+    for (let profile of profiles) {
+        if (profile.id === profileId) {
+            profile.wipe = state;
+        }
+    }
+
+    json.write(filepaths.user.profiles.list, profiles);
+}
+
+function getProfilePath(profileId = 0) {
     let profilePath = filepaths.user.profiles.character;
 
-    if (profileId > -1) {
+    if (profileId > 0) {
         return json.parse(json.read(profilePath.replace("__REPLACEME__", profileId)));
     } else {
         return profilePath.replace("__REPLACEME__", constants.getActiveID());
@@ -93,8 +105,7 @@ function create(info) {
     }
 
     // don't wipe profile again
-    profiles[constants.getActiveID()].wipe = false;
-    json.write(filepaths.user.profiles.list, profiles);
+    setProfileWipe(constants.getActiveID(), false);
 }
 
 function saveProfileProgress(offRaidData) {
@@ -349,7 +360,7 @@ function exist(info) {
 function getReservedNickname() {
     let profile = findProfile(constants.getActiveID());
 
-    if (profile !== 0) {
+    if (profile !== typeof "undefined") {
         return profile.nickname;
     }
 
