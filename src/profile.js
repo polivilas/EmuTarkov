@@ -182,7 +182,7 @@ function getCharacterData() {
     let ret = {err: 0, errmsg: null, data: []};
 
     // creating profile for first time
-    if (!isProfileWiped()) {
+    if (isProfileWiped()) {
         return ret;
     }
 
