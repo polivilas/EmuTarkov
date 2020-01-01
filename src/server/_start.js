@@ -110,7 +110,7 @@ function handleRequest(req, resp) {
     const sessionID = getCookies(req)['PHPSESSID'];
     constants.setActiveID(sessionID);
 
-    if (req.method == "POST") {
+    if (req.method === "POST") {
         // received data
         req.on('data', function (data) {
             // extract data
@@ -122,6 +122,29 @@ function handleRequest(req, resp) {
 
                 sendResponse(req, resp, jsonData);
             });
+
+        });
+    } else if (req.method === "PUT") {
+        req.on('data', function (data) {
+            if (req.headers.hasOwnProperty("expect")) {
+                const requestLength = req.headers["content-length"] - 0;
+                const sessionID = req.headers.sessionid - 0;
+                constants.setActiveID(sessionID);
+
+                if (!constants.putInBuffer(sessionID, data, requestLength)) {
+                    resp.writeContinue();
+                    return;
+                }
+                data = constants.getFromBuffer(sessionID);
+            }
+            zlib.inflate(data, function (err, body) {
+                let jsonData = JSON.parse((body !== undefined) ? body.toString() : "{}");
+
+                // get the IP address of the client
+                console.log("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
+
+                profile.saveProfileProgress(jsonData);
+            });
         });
     } else {
         console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");
@@ -129,6 +152,9 @@ function handleRequest(req, resp) {
     }
 }
 
+/*
+
+ */
 function start() {
     const options = {
         cert: fs.readFileSync(filepaths.cert.server.cert),
