@@ -145,10 +145,107 @@ function maps() {
 
 function bots() {
     console.log("Routing: bots");
+    
     filepaths.bots.base = "db/bots/base.json";
+    
+    let inputDir = [
+        "db/bots/custom/",
+        "db/bots/bear/",
+        "db/bots/usec/",
+        "db/bots/scav/assault/",
+        "db/bots/scav/bossbully/",
+        "db/bots/scav/bossgluhar/",
+        "db/bots/scav/bosskilla/",
+        "db/bots/scav/bosskojaniy/",
+        "db/bots/scav/followerbully/",
+        "db/bots/scav/followergluharassault/",
+        "db/bots/scav/followergluharscout/",
+        "db/bots/scav/followergluharsecutiry/",
+        "db/bots/scav/followerkojaniy/",
+        "db/bots/scav/marksman/",
+        "db/bots/scav/pmcbot/"
+    ];
+
+    let cacheDir = [
+        "appearance/body/",
+        "appearance/head/",
+        "appearance/hands/",
+        "appearance/feet",
+        "appearance/voice",
+        "health/",
+        "inventory",
+        "experience"
+    ];
+
+    for (let path in inputDir) {
+        for (let item in cacheDir) {
+            let inputFiles = fs.readdirSync(inputDir[path]);
+            let baseNode = json.parse(json.read("db/cache/bots.js"));
+
+            for (let file in inputFiles) {
+                let filePath = inputDir[path] + cacheDir[item] + inputFiles[file];
+                let fileName = inputFiles[file].replace(".json", "");
+
+                if (path == 0) {
+                    filepaths.bots.custom[fileName] = filePath;
+                } else {
+                    if (item == 0) {
+                        baseNode.appearance.body[fileName] = filepath;
+                    } else if (item == 1) {
+                        baseNode.appearance.head[fileName] = filepath;
+                    } else if (item == 2) {
+                        baseNode.appearance.hands[fileName] = filepath;
+                    } else if (item == 3) {
+                        baseNode.appearance.feet[fileName] = filepath;
+                    } else if (item == 4) {
+                        baseNode.appearance.voice[fileName] = filepath;
+                    } else if (item == 5) {
+                        baseNode.health[fileName] = filepath;
+                    } else if (item == 6) {
+                        baseNode.appearance.inventory[fileName] = filepath;
+                    } if (item == 7) {
+                        baseNode.appearance.experience[fileName] = filepath;
+                    }
+                }
+            }
+
+            if (path == 1) {
+                filepaths.bots.bear = baseNode;
+            } else if (path == 2) {
+                filepaths.bots.usec = baseNode;
+            } else if (path == 3) {
+                filepaths.bots.scav.assault = baseNode;
+            } else if (path == 3) {
+                filepaths.bots.scav.bossbully = baseNode;
+            } else if (path == 4) {
+                filepaths.bots.scav.bossgluhar = baseNode;
+            } else if (path == 5) {
+                filepaths.bots.scav.bosskilla = baseNode;
+            }  else if (path == 6) {
+                filepaths.bots.scav.bosskojaniy = baseNode;
+            } else if (path == 7) {
+                filepaths.bots.scav.followerbully = baseNode;
+            } else if (path == 8) {
+                filepaths.bots.scav.followergluharassault = baseNode;
+            } else if (path == 9) {
+                filepaths.bots.scav.followergluharscout = baseNode;
+            } else if (path == 10) {
+                filepaths.bots.scav.followergluharsecurity = baseNode;
+            } else if (path == 11) {
+                filepaths.bots.scav.followerkojaniy = baseNode;
+            } else if (path == 12) {
+                filepaths.bots.scav.marksman = baseNode;
+            } else if (path == 13) {
+                filepaths.bots.scav.pmcbot = baseNode;
+            }
+        }        
+    }
+
+    /*
     filepaths.bots.names = "db/bots/names.json";
     filepaths.bots.outfits = "db/bots/outfits.json";
     genericFilepathCacher("botsInv", "db/bots/inventory");
+    */
 }
 
 function images() {
@@ -186,11 +283,15 @@ function images() {
 
 function others() {
     console.log("Routing: others");
+
+    filepaths.profile.character = "user/profile/character.json";
+    filepaths.profile.storage = "user/profile/storage.json";
+    filepaths.profile.userbuilds = "user/profile/userbuilds.json";
     filepaths.user.config = "user/server.config.json";
     filepaths.user.profiles.list = "user/profiles/list.json";
     filepaths.user.profiles.character = "user/profiles/__REPLACEME__/character.json";
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
-    filepaths.user.profiles.userBuilds = "user/profiles/__REPLACEME__/userBuilds.json";
+    filepaths.user.profiles.userbuilds = "user/profiles/__REPLACEME__/userbuilds.json";
     filepaths.globals = "db/globals.json";
     filepaths.hideout.settings = "db/hideout/settings.json";
     filepaths.ragfair.offer = "db/ragfair/offer.json";

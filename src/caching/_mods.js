@@ -161,6 +161,24 @@ function globals(mod) {
     filepaths.globals = mod.files.globals;
 }
 
+function globals(mod) {
+    if (!mod.files.hasOwnProperty("profile")) {
+        return;
+    }
+
+    if (mod.files.profile.hasOwnProperty("character")) {
+        filepaths.profile.character = mod.files.profile.character;
+    }
+    
+    if (mod.files.profile.hasOwnProperty("storage")) {
+        filepaths.profile.storage = mod.files.profile.storage;
+    }
+
+    if (mod.files.profile.hasOwnProperty("userbuilds")) {
+        filepaths.profile.userbuilds = mod.files.prfile.userbuilds;
+    }
+}
+
 function assort(mod) {
     if (!mod.files.hasOwnProperty("assort")) {
         return;

@@ -53,9 +53,9 @@ function getProfilePath(profileId = 0) {
 function create(info) {
     let profiles = getProfiles();
     let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
-    let character = json.parse(json.read("db/profile/character.json"));
-    let storage = json.parse(json.read("db/profile/storage.json"));
-    let userBuilds = json.parse(json.read("db/profile/userBuilds.json"));
+    let character = json.parse(json.read(filepaths.profile.character));
+    let storage = json.parse(json.read(filepaths.profile.storage));
+    let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
     character._id = "user" + constants.getActiveID() + "pmc";
     character.aid = "user" + constants.getActiveID();
@@ -89,7 +89,7 @@ function create(info) {
     // create profile
     json.write(accountFolder + "character.json", character);
     json.write(accountFolder + "storage.json", storage);
-    json.write(accountFolder + "userBuilds.json", userBuilds);
+    json.write(accountFolder + "userBuilds.json", userbuilds);
 
     // create traders
     let inputFiles = filepaths.traders;
