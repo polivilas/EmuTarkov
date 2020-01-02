@@ -149,7 +149,6 @@ function bots() {
     filepaths.bots.base = "db/bots/base.json";
     
     let inputDir = [
-        "db/bots/custom/",
         "db/bots/bear/",
         "db/bots/usec/",
         "db/bots/scav/assault/",
@@ -173,39 +172,36 @@ function bots() {
         "appearance/feet",
         "appearance/voice",
         "health/",
-        "inventory",
-        "experience"
+        "inventory/",
+        "experience/"
     ];
 
     for (let path in inputDir) {
         for (let item in cacheDir) {
             let inputFiles = fs.readdirSync(inputDir[path]);
-            let baseNode = json.parse(json.read("db/cache/bots.js"));
+            let baseNode = json.parse(json.read("db/cache/bots.json"));
+            console.log(baseNode);
 
             for (let file in inputFiles) {
                 let filePath = inputDir[path] + cacheDir[item] + inputFiles[file];
                 let fileName = inputFiles[file].replace(".json", "");
 
-                if (path == 0) {
-                    filepaths.bots.custom[fileName] = filePath;
-                } else {
-                    if (item == 0) {
-                        baseNode.appearance.body[fileName] = filepath;
-                    } else if (item == 1) {
-                        baseNode.appearance.head[fileName] = filepath;
-                    } else if (item == 2) {
-                        baseNode.appearance.hands[fileName] = filepath;
-                    } else if (item == 3) {
-                        baseNode.appearance.feets[fileName] = filepath;
-                    } else if (item == 4) {
-                        baseNode.appearance.voice[fileName] = filepath;
-                    } else if (item == 5) {
-                        baseNode.health[fileName] = filepath;
-                    } else if (item == 6) {
-                        baseNode.appearance.inventory[fileName] = filepath;
-                    } if (item == 7) {
-                        baseNode.appearance.experience[fileName] = filepath;
-                    }
+                if (item == 0) {
+                    baseNode.appearance.body[fileName] = filePath;
+                } else if (item == 1) {
+                    baseNode.appearance.head[fileName] = filePath;
+                } else if (item == 2) {
+                    baseNode.appearance.hands[fileName] = filePath;
+                } else if (item == 3) {
+                    baseNode.appearance.feet[fileName] = filePath;
+                } else if (item == 4) {
+                    baseNode.appearance.voice[fileName] = filePath;
+                } else if (item == 5) {
+                    baseNode.health[fileName] = filePath;
+                } else if (item == 6) {
+                    baseNode.inventory[fileName] = filePath;
+                } if (item == 7) {
+                    baseNode.experience[fileName] = filePath;
                 }
             }
 
