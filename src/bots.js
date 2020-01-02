@@ -12,6 +12,7 @@ function getBotNode(role) {
 	} else if (role === "usec") {
 		return filepaths.bots.usec;
 	} else if (role === "assault") {
+		console.log(role);
 		return filepaths.bots.scav.assault;
 	} else if (role === "bossBully") {
 		return filepaths.bots.scav.bossbully;
@@ -63,6 +64,7 @@ function generateBot(botBase, role) {
 		}
 	}
 
+	console.log(getBotNode(type));
 	let botNode = getBotNode(type);
 
 	botBase.Info.Settings.Role = role;
