@@ -149,8 +149,8 @@ function bots() {
     filepaths.bots.base = "db/bots/base.json";
     
     let inputDir = [
-        "db/bots/bear/",
-        "db/bots/usec/",
+        "db/bots/pmc/bear/",
+        "db/bots/pmc/usec/",
         "db/bots/scav/assault/",
         "db/bots/scav/bossbully/",
         "db/bots/scav/bossgluhar/",
@@ -210,9 +210,9 @@ function bots() {
         }
         
         if (path == 0) {
-            filepaths.bots.bear = baseNode;
+            filepaths.bots.pmc.bear = baseNode;
         } else if (path == 1) {
-            filepaths.bots.usec = baseNode;
+            filepaths.bots.pmc.usec = baseNode;
         } else if (path == 2) {
             filepaths.bots.scav.assault = baseNode;
         } else if (path == 3) {
