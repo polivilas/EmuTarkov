@@ -2,7 +2,6 @@
 
 function getRandomValue(node) {
 	let keys = Object.keys(node);
-	console.log(node[keys[utility.getRandomInt(0, keys.length - 1)]]);
 	return node[keys[utility.getRandomInt(0, keys.length - 1)]];
 }
 
@@ -64,7 +63,6 @@ function generateBot(botBase, role) {
 		}
 	}
 
-	console.log(getBotNode(type));
 	let botNode = getBotNode(type);
 
 	botBase.Info.Settings.Role = role;
@@ -74,7 +72,7 @@ function generateBot(botBase, role) {
 	botBase.Health = json.parse(json.read(getRandomValue(botNode.health)));
 	botBase.Customization.Head = json.parse(json.read(getRandomValue(botNode.appearance.head)));
 	botBase.Customization.Body = json.parse(json.read(getRandomValue(botNode.appearance.body)));
-	botBase.Customization.Feets = json.parse(json.read(getRandomValue(botNode.appearance.feets)));
+	botBase.Customization.Feet = json.parse(json.read(getRandomValue(botNode.appearance.feet)));
 	botBase.Customization.Hands = json.parse(json.read(getRandomValue(botNode.appearance.hands)));
 	botBase.Inventory = json.parse(json.read(getRandomValue(botNode.inventory)));
 

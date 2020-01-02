@@ -3,7 +3,7 @@
 require('../libs.js');
 
 function getUserBuildsPath() {
-	let filepath = filepaths.user.profiles.userBuilds;
+	let filepath = filepaths.user.profiles.userbuilds;
 	return filepath.replace("__REPLACEME__", constants.getActiveID());
 }
 
