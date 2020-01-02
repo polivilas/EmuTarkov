@@ -215,37 +215,31 @@ function bots() {
                 filepaths.bots.usec = baseNode;
             } else if (path == 3) {
                 filepaths.bots.scav.assault = baseNode;
-            } else if (path == 3) {
-                filepaths.bots.scav.bossbully = baseNode;
             } else if (path == 4) {
-                filepaths.bots.scav.bossgluhar = baseNode;
+                filepaths.bots.scav.bossbully = baseNode;
             } else if (path == 5) {
+                filepaths.bots.scav.bossgluhar = baseNode;
+            } else if (path == 6) {
                 filepaths.bots.scav.bosskilla = baseNode;
-            }  else if (path == 6) {
+            }  else if (path == 7) {
                 filepaths.bots.scav.bosskojaniy = baseNode;
-            } else if (path == 7) {
-                filepaths.bots.scav.followerbully = baseNode;
             } else if (path == 8) {
-                filepaths.bots.scav.followergluharassault = baseNode;
+                filepaths.bots.scav.followerbully = baseNode;
             } else if (path == 9) {
-                filepaths.bots.scav.followergluharscout = baseNode;
+                filepaths.bots.scav.followergluharassault = baseNode;
             } else if (path == 10) {
-                filepaths.bots.scav.followergluharsecurity = baseNode;
+                filepaths.bots.scav.followergluharscout = baseNode;
             } else if (path == 11) {
-                filepaths.bots.scav.followerkojaniy = baseNode;
+                filepaths.bots.scav.followergluharsecurity = baseNode;
             } else if (path == 12) {
-                filepaths.bots.scav.marksman = baseNode;
+                filepaths.bots.scav.followerkojaniy = baseNode;
             } else if (path == 13) {
+                filepaths.bots.scav.marksman = baseNode;
+            } else if (path == 14) {
                 filepaths.bots.scav.pmcbot = baseNode;
             }
         }        
     }
-
-    /*
-    filepaths.bots.names = "db/bots/names.json";
-    filepaths.bots.outfits = "db/bots/outfits.json";
-    genericFilepathCacher("botsInv", "db/bots/inventory");
-    */
 }
 
 function images() {

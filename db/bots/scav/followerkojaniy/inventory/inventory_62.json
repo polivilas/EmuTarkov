@@ -1,0 +1,2298 @@
+{
+	"items": [
+		{
+			"_id": "5dcb1e5fea579744b6245a06",
+			"_tpl": "55d7217a4bdc2d86028b456d"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ab8",
+			"_tpl": "587e02ff24597743df3deaeb",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "FirstPrimaryWeapon",
+			"upd": {
+				"FireMode": {
+					"FireMode": "single"
+				}
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245abb",
+			"_tpl": "574db213245977459a2f3f5d",
+			"parentId": "5dcb1e5fea579744b6245ab8",
+			"slotId": "mod_sight_rear"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245abe",
+			"_tpl": "5d0236dad7ad1a0940739d29",
+			"parentId": "5dcb1e5fea579744b6245ab8",
+			"slotId": "mod_stock"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245abf",
+			"_tpl": "5d023784d7ad1a049d4aa7f2",
+			"parentId": "5dcb1e5fea579744b6245abe",
+			"slotId": "mod_pistol_grip"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac0",
+			"_tpl": "5b3a337e5acfc4704b4a19a0",
+			"parentId": "5dcb1e5fea579744b6245abe",
+			"slotId": "mod_tactical_000"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac1",
+			"_tpl": "587e08ee245977446b4410cf",
+			"parentId": "5dcb1e5fea579744b6245ab8",
+			"slotId": "mod_mount"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac2",
+			"_tpl": "5947db3f86f77447880cf76f",
+			"parentId": "5dcb1e5fea579744b6245ac1",
+			"slotId": "mod_scope"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac3",
+			"_tpl": "587df583245977373c4f1129",
+			"parentId": "5dcb1e5fea579744b6245ab8",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac4",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ac3",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 20
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac5",
+			"_tpl": "557ffd194bdc2d28148b457f",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "Pockets"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b67",
+			"_tpl": "590c678286f77426c9660122",
+			"parentId": "5dcb1e5fea579744b6245ac5",
+			"slotId": "pocket1",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"MedKit": {
+					"HpResource": 300
+				}
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac6",
+			"_tpl": "592c2d1a86f7746dbe2af32a",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "TacticalVest"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b65",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ac6",
+			"slotId": "1",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 21
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac7",
+			"_tpl": "5ab8f4ff86f77431c60d91ba",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "FaceCover"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac8",
+			"_tpl": "5a16bb52fcdbcb001a3b00dc",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "Headwear"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ac9",
+			"_tpl": "5a16b8a9fcdbcb00165aa6ca",
+			"parentId": "5dcb1e5fea579744b6245ac8",
+			"slotId": "mod_nvg"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aca",
+			"_tpl": "5c0695860db834001b735461",
+			"parentId": "5dcb1e5fea579744b6245ac9",
+			"slotId": "mod_nvg"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245acb",
+			"_tpl": "5c0696830db834001d23f5da",
+			"parentId": "5dcb1e5fea579744b6245aca",
+			"slotId": "mod_nvg"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245acc",
+			"_tpl": "5b44d22286f774172b0c9de8",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "ArmorVest",
+			"upd": {
+				"Repairable": {
+					"Durability": 70
+				}
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245acd",
+			"_tpl": "5ab8ee7786f7742d8f33f0b9",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "Backpack"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b68",
+			"_tpl": "5755356824597772cb798962",
+			"parentId": "5dcb1e5fea579744b6245acd",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"MedKit": {
+					"HpResource": 59
+				}
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ace",
+			"_tpl": "5c0a794586f77461c458f892",
+			"parentId": "5dcb1e5fea579744b6245a06",
+			"slotId": "SecuredContainer"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245acf",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad0",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad1",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad2",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad3",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad4",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad5",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 2,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad6",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 2,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad7",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 2,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad8",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 3,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ad9",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 3,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ada",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 3,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245adb",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 4,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245adc",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 4,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245add",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 4,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ade",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 5,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245adf",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 5,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae0",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 5,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae1",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 6,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae2",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 6,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae3",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 6,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae4",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 7,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae5",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 7,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae6",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 7,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae7",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 8,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae8",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 8,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245ae9",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 8,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aea",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 9,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aeb",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 9,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aec",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 9,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aed",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 10,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aee",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 10,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aef",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 10,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af0",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 11,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af1",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 11,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af2",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 11,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af3",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 12,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af4",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 12,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af5",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 12,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af6",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 13,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af7",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 13,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af8",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 13,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245af9",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 14,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245afa",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 14,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245afb",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 14,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245afc",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 15,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245afd",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 15,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245afe",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 15,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245aff",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 16,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b00",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 16,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b01",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 16,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b02",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 17,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b03",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 17,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b04",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 17,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b05",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 18,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b06",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 18,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b07",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 18,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b08",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 19,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b09",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 19,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b0a",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 19,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b0b",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 20,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b0c",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 20,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b0d",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 20,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b0e",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 21,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b0f",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 21,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b10",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 21,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b11",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 22,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b12",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 22,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b13",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 22,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b14",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 23,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b15",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 23,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b16",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 23,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b17",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 24,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b18",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 24,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b19",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 24,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b1a",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 25,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b1b",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 25,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b1c",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 25,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b1d",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 26,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b1e",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 26,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b1f",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 26,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b20",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 27,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b21",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 27,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b22",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 27,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b23",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 28,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b24",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 28,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b25",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 28,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b26",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 29,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b27",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 29,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b28",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 29,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b29",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 30,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b2a",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 30,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b2b",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 30,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b2c",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 31,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b2d",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 31,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b2e",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 31,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b2f",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 32,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b30",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 32,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b31",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 32,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b32",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 33,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b33",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 33,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b34",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 33,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b35",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 34,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b36",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 34,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b37",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 34,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b38",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 35,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b39",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 35,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b3a",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 35,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b3b",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 36,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b3c",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 36,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b3d",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 36,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b3e",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 37,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b3f",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 37,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b40",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 37,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b41",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 38,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b42",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 38,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b43",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 38,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b44",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 39,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b45",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 39,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b46",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 39,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b47",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 40,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b48",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 40,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b49",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 40,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b4a",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 41,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b4b",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 41,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b4c",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 41,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b4d",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 42,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b4e",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 42,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b4f",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 42,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b50",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 43,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b51",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 43,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b52",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 43,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b53",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 44,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b54",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 44,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b55",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 44,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b56",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 45,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b57",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 45,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b58",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 45,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b59",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 46,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b5a",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 46,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b5b",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 46,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b5c",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 47,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b5d",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 47,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b5e",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 47,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b5f",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 48,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b60",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 48,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b61",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 48,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b62",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 49,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b63",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 49,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245b64",
+			"_tpl": "59e0d99486f7744a32234762",
+			"parentId": "5dcb1e5fea579744b6245ace",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 49,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245a05",
+			"_tpl": "566abbc34bdc2d92178b4576"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245a08",
+			"_tpl": "5963866b86f7747bfa1c4462"
+		},
+		{
+			"_id": "5dcb1e5fea579744b6245a07",
+			"_tpl": "5963866286f7747bf429b572"
+		}
+	],
+	"equipment": "5dcb1e5fea579744b6245a06",
+	"stash": "5dcb1e5fea579744b6245a05",
+	"questRaidItems": "5dcb1e5fea579744b6245a07",
+	"questStashItems": "5dcb1e5fea579744b6245a08",
+	"fastPanel": {}
+}

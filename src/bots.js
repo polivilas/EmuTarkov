@@ -14,6 +14,40 @@ function getRandomValue(node) {
 }
 
 function getBotNode(role) {
+	if (role === "bear") {
+		return filepaths.bots.bear;
+	} else if (role === "usec") {
+		filepaths.bots.usec;
+	}
+
+	/*
+	else if (role === "assault") {
+		return filepaths.bots.scav.assault;
+	} else if (role === 3) {
+		return filepaths.bots.scav.bossbully;
+	} else if (role === 4) {
+		return filepaths.bots.scav.bossgluhar;
+	} else if (role === 5) {
+		return filepaths.bots.scav.bosskilla;
+	}  else if (role === 6) {
+		return filepaths.bots.scav.bosskojaniy;
+	} else if (role === 7) {
+		return filepaths.bots.scav.followerbully;
+	} else if (role === 8) {
+		return filepaths.bots.scav.followergluharassault;
+	} else if (role === 9) {
+		return filepaths.bots.scav.followergluharscout;
+	} else if (role === 10) {
+		return filepaths.bots.scav.followergluharsecurity;
+	} else if (role === 11) {
+		return filepaths.bots.scav.followerkojaniy;
+	} else if (role === "marksman") {
+		return filepaths.bots.scav.marksman;
+	} else if (role === "pmcBot") {
+		return filepaths.bots.scav.pmcbot;
+	}
+	*/
+
 	return {};
 }
 
@@ -29,7 +63,7 @@ function generateBot(botBase, role) {
 		let spawnChance = utility.getRandomInt(0, 99);
 		let sideChance = utility.getRandomInt(0, 99);
 
-		if (spawnChance < settings.bots.pmc.spawnChance) {
+		if (spawnChance < settings.bots.pmc.chance) {
 			if (sideChance < 50) {
 				botBase.Info.Side = "Bear";
 				side = "bear";
@@ -54,66 +88,6 @@ function generateBot(botBase, role) {
 	botBase.Inventory = json.parse(json.read(getRandomValue(botNode.inventory)));
 
 	return botBase;
-}
-
-function generateBotGeneric(botBase, role) {
-	botBase.Info.Nickname = botNames.scav[utility.getRandomInt(0, botNames.scav.length)];
-	botBase.Customization = setOutfit("scav");
-	botBase.Health = setHealth("default");
-
-	let allInventories = [];
-
-	if (role == "marksman") {
-		allInventories = json.parse(json.read(filepaths.bots.inventory.marksman));
-	} else {
-		allInventories = json.parse(json.read(filepaths.bots.inventory.assault));
-	}
-	
-	botBase.Inventory = allInventories[utility.getRandomInt(0, allInventories.length)];
-	return botBase;
-}
-
-function generateRaider(botBase, role) {
-	botBase.Info.Settings.Experience = 500;
-}
-
-function generateReshala(botBase, role) {
-	botBase.Info.Nickname = "Reshala";
-	botBase.Info.Settings.Experience = 800;
-}
-
-function generateFollowerReshala(botBase, role) {
-	botBase.Info.Settings.Experience = 500;
-}
-
-function generateKilla(botBase, role) {
-	botBase.Info.Nickname = "Killa";
-	botBase.Info.Settings.Experience = 1000;
-}
-
-function generateKojaniy(botBase, role) {
-	botBase.Info.Nickname = "Shturman";
-	botBase.Info.Settings.Experience = 1100;
-}
-
-function generateFollowerKojaniy(botBase, role) {
-	botBase.Info.Settings.Experience = 500;
-}
-
-function generateGluhkar(botBase, role) {
-	botBase.Info.Settings.Experience = 1000;
-}
-
-function generateFollowerGluharAssault(botBase, role) {
-	botBase.Info.Settings.Experience = 500;
-}
-
-function generateFollowerGluharSecurity(botBase, role) {
-	botBase.Info.Settings.Experience = 500;
-}
-
-function generateFollowerGluharScout(botBase, role) {
-	botBase.Info.Settings.Experience = 500;
 }
 
 function generate(databots) {

@@ -1,0 +1,308 @@
+{
+	"items": [
+		{
+			"_id": "5dcb1de5d7ed5e035c438c3b",
+			"_tpl": "55d7217a4bdc2d86028b456d"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c60",
+			"_tpl": "587e02ff24597743df3deaeb",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "FirstPrimaryWeapon"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c61",
+			"_tpl": "587e0531245977466077a0f7",
+			"parentId": "5dcb1de5d7ed5e035c438c60",
+			"slotId": "mod_stock"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c62",
+			"_tpl": "587e08ee245977446b4410cf",
+			"parentId": "5dcb1de5d7ed5e035c438c60",
+			"slotId": "mod_mount"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c63",
+			"_tpl": "587df3a12459772c28142567",
+			"parentId": "5dcb1de5d7ed5e035c438c60",
+			"slotId": "mod_magazine"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c64",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c63",
+			"slotId": "cartridges",
+			"upd": {
+				"StackObjectsCount": 10
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c65",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c60",
+			"slotId": "patron_in_weapon",
+			"upd": {
+				"StackObjectsCount": 1
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c66",
+			"_tpl": "557ffd194bdc2d28148b457f",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "Pockets"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c77",
+			"_tpl": "57347d692459774491567cf1",
+			"parentId": "5dcb1de5d7ed5e035c438c66",
+			"slotId": "pocket1",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"FoodDrink": {
+					"HpPercent": 1
+				}
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c67",
+			"_tpl": "59e7643b86f7742cbf2c109a",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "TacticalVest"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c75",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c67",
+			"slotId": "1",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 55
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c68",
+			"_tpl": "59e7715586f7742ee5789605",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "FaceCover"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c69",
+			"_tpl": "57e26fc7245977162a14b800",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "Scabbard"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c6a",
+			"_tpl": "544a5cde4bdc2d39388b456b",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "Backpack"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c78",
+			"_tpl": "575146b724597720a27126d5",
+			"parentId": "5dcb1de5d7ed5e035c438c6a",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"FoodDrink": {
+					"HpPercent": 1
+				}
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c79",
+			"_tpl": "5938144586f77473c2087145",
+			"parentId": "5dcb1de5d7ed5e035c438c6a",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c7a",
+			"_tpl": "5c0e531d86f7747fa23f4d42",
+			"parentId": "5dcb1de5d7ed5e035c438c6a",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c7b",
+			"_tpl": "5909e99886f7740c983b9984",
+			"parentId": "5dcb1de5d7ed5e035c438c6a",
+			"slotId": "main",
+			"location": {
+				"x": 3,
+				"y": 0,
+				"r": 0
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c6b",
+			"_tpl": "5857a8bc2459772bad15db29",
+			"parentId": "5dcb1de5d7ed5e035c438c3b",
+			"slotId": "SecuredContainer"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c6c",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c6d",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c6e",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 0,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c6f",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c70",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c71",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 1,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c72",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 0,
+				"y": 2,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c73",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 1,
+				"y": 2,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c74",
+			"_tpl": "5656d7c34bdc2d9d198b4587",
+			"parentId": "5dcb1de5d7ed5e035c438c6b",
+			"slotId": "main",
+			"location": {
+				"x": 2,
+				"y": 2,
+				"r": 0
+			},
+			"upd": {
+				"StackObjectsCount": 60
+			}
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c3a",
+			"_tpl": "566abbc34bdc2d92178b4576"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c3d",
+			"_tpl": "5963866b86f7747bfa1c4462"
+		},
+		{
+			"_id": "5dcb1de5d7ed5e035c438c3c",
+			"_tpl": "5963866286f7747bf429b572"
+		}
+	],
+	"equipment": "5dcb1de5d7ed5e035c438c3b",
+	"stash": "5dcb1de5d7ed5e035c438c3a",
+	"questRaidItems": "5dcb1de5d7ed5e035c438c3c",
+	"questStashItems": "5dcb1de5d7ed5e035c438c3d",
+	"fastPanel": {}
+}
