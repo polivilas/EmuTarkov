@@ -53,6 +53,16 @@ function locations(mod) {
     }
 }
 
+function weather(mod) {
+    if (!mod.files.hasOwnProperty("weather")) {
+        return;
+    }
+
+    for (let item in mod.files.weather) {
+        filepaths.weather[item] = mod.files.weather[item];
+    }
+}
+
 function assort(mod) {
     if (!mod.files.hasOwnProperty("assort")) {
         return;
@@ -203,6 +213,7 @@ function load() {
         quests(mod);
         traders(mod);
         locations(mod);
+        weather(mod);
         assort(mod);
         locales(mod);
     }
