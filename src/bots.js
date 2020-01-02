@@ -9,42 +9,38 @@ function getBotNode(role) {
 	if (role === "bear") {
 		return filepaths.bots.bear;
 	} else if (role === "usec") {
-		filepaths.bots.usec;
-	}
-
-	/*
-	else if (role === "assault") {
+		return filepaths.bots.usec;
+	} else if (role === "assault") {
 		return filepaths.bots.scav.assault;
-	} else if (role === 3) {
+	} else if (role === "bossBully") {
 		return filepaths.bots.scav.bossbully;
-	} else if (role === 4) {
+	} else if (role === "bossGluhar") {
 		return filepaths.bots.scav.bossgluhar;
-	} else if (role === 5) {
+	} else if (role === "bossKilla") {
 		return filepaths.bots.scav.bosskilla;
-	}  else if (role === 6) {
+	}  else if (role === "bossKojaniy") {
 		return filepaths.bots.scav.bosskojaniy;
-	} else if (role === 7) {
+	} else if (role === "followerBully") {
 		return filepaths.bots.scav.followerbully;
-	} else if (role === 8) {
+	} else if (role === "followerGluharAssault") {
 		return filepaths.bots.scav.followergluharassault;
-	} else if (role === 9) {
+	} else if (role === "followerGluharScout") {
 		return filepaths.bots.scav.followergluharscout;
-	} else if (role === 10) {
+	} else if (role === "followerGluharSecurity") {
 		return filepaths.bots.scav.followergluharsecurity;
-	} else if (role === 11) {
+	} else if (role === "followerKojaniy") {
 		return filepaths.bots.scav.followerkojaniy;
 	} else if (role === "marksman") {
 		return filepaths.bots.scav.marksman;
 	} else if (role === "pmcBot") {
 		return filepaths.bots.scav.pmcbot;
 	}
-	*/
 
 	return {};
 }
 
 function generateBot(botBase, role) {
-	let side = role.toLowerCase();
+	let type = role;
 
 	if (role === "cursedAssault") {
 		role = "assault"
@@ -58,15 +54,15 @@ function generateBot(botBase, role) {
 		if (spawnChance < settings.bots.pmc.chance) {
 			if (sideChance < 50) {
 				botBase.Info.Side = "Bear";
-				side = "bear";
+				type = "bear";
 			} else {
 				botBase.Info.Side = "Usec";
-				side = "usec";
+				type = "usec";
 			}
 		}
 	}
 
-	let botNode = getBotNode(side);
+	let botNode = getBotNode(type);
 
 	botBase.Info.Settings.Role = role;
 	botBase.Info.Nickname = json.parse(json.read(getRandomValue(botNode.names)));
