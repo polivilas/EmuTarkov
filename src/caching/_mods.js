@@ -63,6 +63,104 @@ function weather(mod) {
     }
 }
 
+function customizationOffers(mod) {
+    if (!mod.files.hasOwnProperty("customization") || !mod.files.customization.hasOwnProperty("offers")) {
+        return;
+    }
+
+    for (let item in mod.files.customization.offers) {
+        filepaths.customization.offers[item] = mod.files.customization.offers[item];
+    }
+}
+
+function customizationOutfits(mod) {
+    if (!mod.files.hasOwnProperty("customization") || !mod.files.customization.hasOwnProperty("outfits")) {
+        return;
+    }
+
+    for (let item in mod.files.customization.outfits) {
+        filepaths.customization.outfits[item] = mod.files.customization.outfits[item];
+    }
+}
+
+function hideoutAreas(mod) {
+    if (!mod.files.hasOwnProperty("hideout") || !mod.files.customization.hasOwnProperty("areas")) {
+        return;
+    }
+
+    for (let item in mod.files.hideout.areas) {
+        filepaths.hideout.areas[item] = mod.files.hideout.areas[item];
+    }
+}
+
+function hideoutProduction(mod) {
+    if (!mod.files.hasOwnProperty("hideout") || !mod.files.customization.hasOwnProperty("production")) {
+        return;
+    }
+
+    for (let item in mod.files.hideout.production) {
+        filepaths.hideout.production[item] = mod.files.hideout.production[item];
+    }
+}
+
+function hideoutScavcase(mod) {
+    if (!mod.files.hasOwnProperty("hideout") || !mod.files.customization.hasOwnProperty("scavcase")) {
+        return;
+    }
+
+    for (let item in mod.files.hideout.scavcase) {
+        filepaths.hideout.scavcase[item] = mod.files.hideout.scavcase[item];
+    }
+}
+
+function maps(mod) {
+    if (!mod.files.hasOwnProperty("maps")) {
+        return;
+    }
+
+    for (let item in mod.files.maps) {
+        filepaths.maps[item] = mod.files.maps[item];
+    }
+}
+
+function ragfair(mod) {
+    if (!mod.files.hasOwnProperty("ragfair")) {
+        return;
+    }
+
+    for (let item in mod.files.ragfair) {
+        filepaths.ragfair[item] = mod.files.ragfair[item];
+    }
+}
+
+function templatesCategories(mod) {
+    if (!mod.files.hasOwnProperty("templates") || !mod.files.hasOwnProperty("categories")) {
+        return;
+    }
+
+    for (let item in mod.files.templates.categories) {
+        filepaths.templates.categories[item] = mod.files.templates.categories[item];
+    }
+}
+
+function templatesItems(mod) {
+    if (!mod.files.hasOwnProperty("templates") || !mod.files.hasOwnProperty("items")) {
+        return;
+    }
+
+    for (let item in mod.files.templates.items) {
+        filepaths.templates.items[item] = mod.files.templates.items[item];
+    }
+}
+
+function globals(mod) {
+    if (!mod.files.hasOwnProperty("globals")) {
+        return;
+    }
+
+    filepaths.globals = mod.files.globals;
+}
+
 function assort(mod) {
     if (!mod.files.hasOwnProperty("assort")) {
         return;
@@ -214,6 +312,16 @@ function load() {
         traders(mod);
         locations(mod);
         weather(mod);
+        customizationOffers(mod);
+        customizationOutfits(mod);
+        hideoutAreas(mod);
+        hideoutProduction(mod);
+        hideoutScavcase(mod);
+        maps(mod);
+        ragfair(mod);
+        templatesCategories(mod);
+        templatesItems(mod);
+        globals(mod);
         assort(mod);
         locales(mod);
     }
