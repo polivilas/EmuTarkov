@@ -277,9 +277,9 @@ function images() {
 function others() {
     console.log("Routing: others");
 
-    filepaths.profile.character = "user/profile/character.json";
-    filepaths.profile.storage = "user/profile/storage.json";
-    filepaths.profile.userbuilds = "user/profile/userbuilds.json";
+    filepaths.profile.character = "db/profile/character.json";
+    filepaths.profile.storage = "db/profile/storage.json";
+    filepaths.profile.userbuilds = "db/profile/userbuilds.json";
     filepaths.user.profiles.list = "user/profiles/list.json";
     filepaths.user.profiles.character = "user/profiles/__REPLACEME__/character.json";
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
