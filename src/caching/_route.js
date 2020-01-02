@@ -178,11 +178,10 @@ function bots() {
     ];
 
     for (let path in inputDir) {
+        let baseNode = json.parse(json.read("db/cache/bots.json"));
+
         for (let item in cacheDir) {
             let inputFiles = fs.readdirSync(inputDir[path] + cacheDir[item]);
-            let baseNode = json.parse(json.read("db/cache/bots.json"));
-
-            console.log("path: " + path + ", item: " + item);
 
             for (let file in inputFiles) {
                 let filePath = inputFiles[file];

@@ -56,7 +56,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.locations = json.parse(json.read(filepaths.user.cache.locations));
 	global.weather = json.parse(json.read(filepaths.user.cache.weather));
 	global.quests = json.parse(json.read(filepaths.user.cache.quests));
-	global.names = json.parse(json.read(filepaths.bots.names));
 	global.botBase = json.parse(json.read(filepaths.bots.base));
 	global.globalSettings = json.parse(json.read(filepaths.globals));
 	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
