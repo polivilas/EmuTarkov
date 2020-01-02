@@ -28,12 +28,12 @@ function isProfileWiped() {
     return true;
 }
 
-function setProfileWipe(profileId, state = false) {
+function setProfileWipe(profileId, state) {
     let profiles = getProfiles();
 
-    for (let profile of profiles) {
-        if (profile.id === profileId) {
-            profile.wipe = state;
+    for (let profile in profiles) {
+        if (profiles[profile].id === profileId) {
+            profiles[profile].wipe = state;
         }
     }
 
@@ -51,7 +51,6 @@ function getProfilePath(profileId = 0) {
 }
 
 function create(info) {
-    let profiles = getProfiles();
     let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
     let character = json.parse(json.read(filepaths.profile.character));
     let storage = json.parse(json.read(filepaths.profile.storage));

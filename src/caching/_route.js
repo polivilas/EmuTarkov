@@ -196,7 +196,7 @@ function bots() {
                     } else if (item == 2) {
                         baseNode.appearance.hands[fileName] = filepath;
                     } else if (item == 3) {
-                        baseNode.appearance.feet[fileName] = filepath;
+                        baseNode.appearance.feets[fileName] = filepath;
                     } else if (item == 4) {
                         baseNode.appearance.voice[fileName] = filepath;
                     } else if (item == 5) {
