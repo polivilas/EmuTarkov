@@ -175,7 +175,7 @@ function globals(mod) {
     }
 
     if (mod.files.profile.hasOwnProperty("userbuilds")) {
-        filepaths.profile.userbuilds = mod.files.prfile.userbuilds;
+        filepaths.profile.userbuilds = mod.files.profile.userbuilds;
     }
 }
 

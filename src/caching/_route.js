@@ -287,11 +287,11 @@ function others() {
     filepaths.profile.character = "user/profile/character.json";
     filepaths.profile.storage = "user/profile/storage.json";
     filepaths.profile.userbuilds = "user/profile/userbuilds.json";
-    filepaths.user.config = "user/server.config.json";
     filepaths.user.profiles.list = "user/profiles/list.json";
     filepaths.user.profiles.character = "user/profiles/__REPLACEME__/character.json";
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
     filepaths.user.profiles.userbuilds = "user/profiles/__REPLACEME__/userbuilds.json";
+    filepaths.user.config = "user/server.config.json";
     filepaths.globals = "db/globals.json";
     filepaths.hideout.settings = "db/hideout/settings.json";
     filepaths.ragfair.offer = "db/ragfair/offer.json";
