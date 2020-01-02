@@ -7,11 +7,10 @@ function getRandomValue(node) {
 
 function getBotNode(role) {
 	if (role === "bear") {
-		return filepaths.bots.bear;
+		return filepaths.bots.pmc.bear;
 	} else if (role === "usec") {
-		return filepaths.bots.usec;
+		return filepaths.bots.pmc.usec;
 	} else if (role === "assault") {
-		console.log(role);
 		return filepaths.bots.scav.assault;
 	} else if (role === "bossBully") {
 		return filepaths.bots.scav.bossbully;
