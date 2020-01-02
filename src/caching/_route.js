@@ -159,7 +159,7 @@ function bots() {
         "db/bots/scav/followerbully/",
         "db/bots/scav/followergluharassault/",
         "db/bots/scav/followergluharscout/",
-        "db/bots/scav/followergluharsecutiry/",
+        "db/bots/scav/followergluharsecurity/",
         "db/bots/scav/followerkojaniy/",
         "db/bots/scav/marksman/",
         "db/bots/scav/pmcbot/"
@@ -173,17 +173,19 @@ function bots() {
         "appearance/voice",
         "health/",
         "inventory/",
-        "experience/"
+        "experience/",
+        "names/"
     ];
 
     for (let path in inputDir) {
         for (let item in cacheDir) {
-            let inputFiles = fs.readdirSync(inputDir[path]);
+            let inputFiles = fs.readdirSync(inputDir[path] + cacheDir[item]);
             let baseNode = json.parse(json.read("db/cache/bots.json"));
-            console.log(baseNode);
+
+            console.log("path: " + path + ", item: " + item);
 
             for (let file in inputFiles) {
-                let filePath = inputDir[path] + cacheDir[item] + inputFiles[file];
+                let filePath = inputFiles[file];
                 let fileName = inputFiles[file].replace(".json", "");
 
                 if (item == 0) {
@@ -200,41 +202,43 @@ function bots() {
                     baseNode.health[fileName] = filePath;
                 } else if (item == 6) {
                     baseNode.inventory[fileName] = filePath;
-                } if (item == 7) {
+                } else if (item == 7) {
                     baseNode.experience[fileName] = filePath;
+                } else if (item == 8) {
+                    baseNode.names[fileName] = filePath;
                 }
             }
-
-            if (path == 1) {
-                filepaths.bots.bear = baseNode;
-            } else if (path == 2) {
-                filepaths.bots.usec = baseNode;
-            } else if (path == 3) {
-                filepaths.bots.scav.assault = baseNode;
-            } else if (path == 4) {
-                filepaths.bots.scav.bossbully = baseNode;
-            } else if (path == 5) {
-                filepaths.bots.scav.bossgluhar = baseNode;
-            } else if (path == 6) {
-                filepaths.bots.scav.bosskilla = baseNode;
-            }  else if (path == 7) {
-                filepaths.bots.scav.bosskojaniy = baseNode;
-            } else if (path == 8) {
-                filepaths.bots.scav.followerbully = baseNode;
-            } else if (path == 9) {
-                filepaths.bots.scav.followergluharassault = baseNode;
-            } else if (path == 10) {
-                filepaths.bots.scav.followergluharscout = baseNode;
-            } else if (path == 11) {
-                filepaths.bots.scav.followergluharsecurity = baseNode;
-            } else if (path == 12) {
-                filepaths.bots.scav.followerkojaniy = baseNode;
-            } else if (path == 13) {
-                filepaths.bots.scav.marksman = baseNode;
-            } else if (path == 14) {
-                filepaths.bots.scav.pmcbot = baseNode;
-            }
-        }        
+        }
+        
+        if (path == 1) {
+            filepaths.bots.bear = baseNode;
+        } else if (path == 2) {
+            filepaths.bots.usec = baseNode;
+        } else if (path == 3) {
+            filepaths.bots.scav.assault = baseNode;
+        } else if (path == 4) {
+            filepaths.bots.scav.bossbully = baseNode;
+        } else if (path == 5) {
+            filepaths.bots.scav.bossgluhar = baseNode;
+        } else if (path == 6) {
+            filepaths.bots.scav.bosskilla = baseNode;
+        }  else if (path == 7) {
+            filepaths.bots.scav.bosskojaniy = baseNode;
+        } else if (path == 8) {
+            filepaths.bots.scav.followerbully = baseNode;
+        } else if (path == 9) {
+            filepaths.bots.scav.followergluharassault = baseNode;
+        } else if (path == 10) {
+            filepaths.bots.scav.followergluharscout = baseNode;
+        } else if (path == 11) {
+            filepaths.bots.scav.followergluharsecurity = baseNode;
+        } else if (path == 12) {
+            filepaths.bots.scav.followerkojaniy = baseNode;
+        } else if (path == 13) {
+            filepaths.bots.scav.marksman = baseNode;
+        } else if (path == 14) {
+            filepaths.bots.scav.pmcbot = baseNode;
+        }
     }
 }
 
