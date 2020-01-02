@@ -169,8 +169,8 @@ function bots() {
         "appearance/body/",
         "appearance/head/",
         "appearance/hands/",
-        "appearance/feet",
-        "appearance/voice",
+        "appearance/feet/",
+        "appearance/voice/",
         "health/",
         "inventory/",
         "experience/",
@@ -184,7 +184,7 @@ function bots() {
             let inputFiles = fs.readdirSync(inputDir[path] + cacheDir[item]);
 
             for (let file in inputFiles) {
-                let filePath = inputFiles[file];
+                let filePath = inputDir[path] + cacheDir[item] + inputFiles[file];
                 let fileName = inputFiles[file].replace(".json", "");
 
                 if (item == 0) {

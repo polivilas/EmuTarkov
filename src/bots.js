@@ -2,7 +2,8 @@
 
 function getRandomValue(node) {
 	let keys = Object.keys(node);
-	return node[keys[utility.getRandomInt(0, keys.length)]];
+	console.log(node[keys[utility.getRandomInt(0, keys.length - 1)]]);
+	return node[keys[utility.getRandomInt(0, keys.length - 1)]];
 }
 
 function getBotNode(role) {
