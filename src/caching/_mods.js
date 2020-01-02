@@ -7,15 +7,8 @@ function cache(mod) {
        return;
     }
 
-    if (!mod.files.user.hasOwnProperty("cache")) {
-        return;
-    }
-
-    let inputNames = Object.keys(mod.files.user.cache);
-    let i = 0;
-
     for (let item in mod.files.user.cache) {
-        filepaths.user.cache[inputNames[i++]] = mod.files.user.cache[item];
+        filepaths.user.cache[item] = mod.files.user.cache[item];
     }
 }
 
@@ -24,11 +17,8 @@ function items(mod) {
         return;
     }
 
-    let inputNames = Object.keys(mod.files.items);
-    let i = 0;
-
     for (let item in mod.files.items) {
-        filepaths.items[inputNames[i++]] = mod.files.items[item];
+        filepaths.items[item] = mod.files.items[item];
     }
 }
 
@@ -37,25 +27,19 @@ function quests(mod) {
         return;
     }
 
-    let inputNames = Object.keys(mod.files.quests);
-    let i = 0;
-
     for (let item in mod.files.quests) {
-        filepaths.quests[inputNames[i++]] = mod.files.quests[item];
+        filepaths.quests[item] = mod.files.quests[item];
     }
 }
 
 function traders(mod) {
-    if (!mod.files.hasOwnProperty("traderss")) {
+    if (!mod.files.hasOwnProperty("traders")) {
         return;
     }
 
-    let inputNames = Object.keys(mod.files.traders);
-    let i = 0;
-
     for (let item in mod.files.traders) {
-        filepaths.traders[inputNames[i++]] = mod.files.traders[item];
-        filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json";
+        filepaths.traders[item] = mod.files.traders[item];
+        filepaths.user.profiles.traders[item] = "user/profiles/__REPLACEME__/traders/" + item + ".json";
     }
 }
 
@@ -64,11 +48,8 @@ function locations(mod) {
         return;
     }
 
-    let inputNames = Object.keys(mod.files.locations);
-    let i = 0;
-
     for (let item in mod.files.locations) {
-        filepaths.locations[inputNames[i++]] = mod.files.locations[item];
+        filepaths.locations[item] = mod.files.locations[item];
     }
 }
 
@@ -77,13 +58,10 @@ function assort(mod) {
         return;
     }
 
-    let inputNames = Object.keys(mod.files.assort);
-    let i = 0;
-
     for (let assort in mod.files.assort) {
         // create assort
-        if (!filepaths.assort.hasOwnProperty(inputNames[i])) {
-            filepaths.assort[inputNames[i++]] = mod.files.assort[assort];
+        if (!filepaths.assort.hasOwnProperty(assort)) {
+            filepaths.assort[assort] = mod.files.assort[assort];
             continue;
         }
         
@@ -91,27 +69,18 @@ function assort(mod) {
         let activeAssort = mod.files.assort[assort];
 
         // assort items
-        inputNames = Object.keys(activeAssort.items);
-        i = 0;
-
         for (let item in activeAssort.items) {
-            filepaths.assort[assort].items[inputNames[i++]] = activeAssort.items[item];
+            filepaths.assort[assort].items[item] = activeAssort.items[item];
         }
 
         // assort barter_scheme
-        inputNames = Object.keys(activeAssort.barter_scheme);
-        i = 0;
-
         for (let item in activeAssort.barter_scheme) {
-            filepaths.assort[assort].barter_scheme[inputNames[i++]] = activeAssort.barter_scheme[item];
+            filepaths.assort[assort].barter_scheme[item] = activeAssort.barter_scheme[item];
         }
 
         // assort loyal_level_items
-        inputNames = Object.keys(activeAssort.loyal_level_items);
-        i = 0;
-
         for (let item in activeAssort.loyal_level_items) {
-            filepaths.assort[assort].loyal_level_items[inputNames[i++]] = activeAssort.loyal_level_items[item];
+            filepaths.assort[assort].loyal_level_items[item] = activeAssort.loyal_level_items[item];
         }
     }
 }
@@ -121,13 +90,10 @@ function locales(mod) {
         return;
     }
 
-    let inputNames = Object.keys(mod.files.locales);
-    let i = 0;
-
     for (let locale in mod.files.locales) {
         // create locale
-        if (!filepaths.locales.hasOwnProperty(inputNames[i])) {
-            filepaths.locales[inputNames[i++]] = mod.files.locales[locale];
+        if (!filepaths.locales.hasOwnProperty(locale)) {
+            filepaths.locales[locale] = mod.files.locales[locale];
             continue;
         }
         
@@ -141,75 +107,48 @@ function locales(mod) {
         filepaths.locales[locale].error = activeLocale.error;
 
         // locale banners
-        inputNames = Object.keys(activeLocale.banners);
-        i = 0;
-
-        for (let text in activeLocale.banners) {
-            filepaths.locales[locale].banners[inputNames[i++]] = activeLocale.banners[text];
+        for (let item in activeLocale.banners) {
+            filepaths.locales[locale].banners[item] = activeLocale.banners[item];
         }
 
         // locale handbook
-        inputNames = Object.keys(activeLocale.handbook);
-        i = 0;
-
-        for (let text in activeLocale.handbook) {
-            filepaths.locales[locale].handbook[inputNames[i++]] = activeLocale.handbook[text];
+        for (let item in activeLocale.handbook) {
+            filepaths.locales[locale].handbook[item] = activeLocale.handbook[item];
         }
 
         // locale locations
-        inputNames = Object.keys(activeLocale.locations);
-        i = 0;
-
-        for (let text in activeLocale.locations) {
-            filepaths.locales[locale].locations[inputNames[i++]] = activeLocale.locations[text];
+        for (let item in activeLocale.locations) {
+            filepaths.locales[locale].locations[item] = activeLocale.locations[item];
         }
 
         // locale mail
-        inputNames = Object.keys(activeLocale.mail);
-        i = 0;
-
-        for (let text in activeLocale.mail) {
-            filepaths.locales[locale].mail[inputNames[i++]] = activeLocale.mail[text];
+        for (let item in activeLocale.mail) {
+            filepaths.locales[locale].mail[item] = activeLocale.mail[item];
         }
 
         // locale preset
-        inputNames = Object.keys(activeLocale.preset);
-        i = 0;
-
-        for (let text in activeLocale.preset) {
-            filepaths.locales[locale].preset[inputNames[i++]] = activeLocale.preset[text];
+        for (let item in activeLocale.preset) {
+            filepaths.locales[locale].preset[item] = activeLocale.preset[item];
         }
 
         // locale quest
-        inputNames = Object.keys(activeLocale.quest);
-        i = 0;
-
-        for (let text in activeLocale.quest) {
-            filepaths.locales[locale].quest[inputNames[i++]] = activeLocale.quest[text];
+        for (let item in activeLocale.quest) {
+            filepaths.locales[locale].quest[item] = activeLocale.quest[item];
         }
 
         // locale season
-        inputNames = Object.keys(activeLocale.season);
-        i = 0;
-
-        for (let text in activeLocale.season) {
-            filepaths.locales[locale].season[inputNames[i++]] = activeLocale.season[text];
+        for (let item in activeLocale.season) {
+            filepaths.locales[locale].season[item] = activeLocale.season[item];
         }
 
         // locale templates
-        inputNames = Object.keys(activeLocale.templates);
-        i = 0;
-
-        for (let text in activeLocale.templates) {
-            filepaths.locales[locale].templates[inputNames[i++]] = activeLocale.templates[text];
+        for (let item in activeLocale.templates) {
+            filepaths.locales[locale].templates[item] = activeLocale.templates[item];
         }
 
         // locale trading
-        inputNames = Object.keys(activeLocale.trading);
-        i = 0;
-
-        for (let text in activeLocale.trading) {
-            filepaths.locales[locale].trading[inputNames[i++]] = activeLocale.trading[text];
+        for (let item in activeLocale.trading) {
+            filepaths.locales[locale].trading[item] = activeLocale.trading[item];
         }
     }
 }
