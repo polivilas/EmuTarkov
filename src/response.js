@@ -184,14 +184,14 @@ function getWeather(url, info) {
     let output = {};
 
     // set weather
-    if (settings.gameplay.locations.forceWeatherEnabled) {
-        output = weather.data[settings.gameplay.locations.forceWeatherId];
+    if (settings.gameplay.location.forceWeatherEnabled) {
+        output = weather.data[settings.gameplay.location.forceWeatherId];
     } else {
         output = weather.data[utility.getRandomInt(0, weather.length - 1)];
     }
 
     // replace date and time
-    if (settings.gameplay.locations.realTimeEnables) {
+    if (settings.gameplay.location.realTimeEnabled) {
         output.data.weather.timestamp = Math.floor(new Date() / 1000);
         output.data.weather.date = date;
         output.data.weather.time = datetime;
