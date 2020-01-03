@@ -181,14 +181,23 @@ function getWeather(url, info) {
     let time = utility.getTime().replace("-", ":").replace("-", ":");
     let date = utility.getDate();
     let datetime = date + " " + time;
-    let output = weather.data[utility.getRandomInt(0, weather.length - 1)];
+    let output = {};
+
+    // set weather
+    if (settings.gameplay.locations.forceWeatherEnabled) {
+        output = weather.data[settings.gameplay.locations.forceWeatherId];
+    } else {
+        output = weather.data[utility.getRandomInt(0, weather.length - 1)];
+    }
 
     // replace date and time
-    output.data.weather.timestamp = Math.floor(new Date() / 1000);
-    output.data.weather.date = date;
-    output.data.weather.time = datetime;
-    output.data.date = date;
-    output.data.time = time;
+    if (settings.gameplay.locations.realTimeEnables) {
+        output.data.weather.timestamp = Math.floor(new Date() / 1000);
+        output.data.weather.date = date;
+        output.data.weather.time = datetime;
+        output.data.date = date;
+        output.data.time = time;
+    }
 
     return JSON.stringify(output);
 }
