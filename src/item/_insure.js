@@ -3,7 +3,7 @@
 require('../libs.js');
 
 function cost(info) {
-    let output = {"err":0,"errmsg":null,"data":{}};
+    let output = {"err": 0, "errmsg": null, "data": {}};
     let tmpList = profile.getCharacterData();
 
     for (let trader of info.traders) {
@@ -37,14 +37,17 @@ function insure(tmpList, body) {
             if (item._id === key) {
                 let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
-                itemsToPay.push({"id": item._id, "count": Math.round(template.Price * settings.gameplay.insureMultiplier)});
+                itemsToPay.push({
+                    "id": item._id,
+                    "count": Math.round(template.Price * settings.gameplay.trading.insureMultiplier)
+                });
                 break;
             }
         }
     }
 
     // pay the item	to profile
-    if (!itm_hf.payMoney(tmpList, {"scheme_items": itemsToPay, "tid": body.tid})) {
+    if (!itm_hf.payMoney(tmpList, {scheme_items: itemsToPay, tid: body.tid})) {
         console.log("no money found");
         return "";
     }

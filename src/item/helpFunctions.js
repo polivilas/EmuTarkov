@@ -62,9 +62,9 @@ function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
 function getCurrency(currency) {
     switch (currency) {
         case "EUR":
-            return "5696686a4bdc2da3298b456a";
-        case "USD":
             return "569668774bdc2da2298b4568";
+        case "USD":
+            return "5696686a4bdc2da3298b456a";
         default:
             return "5449016a4bdc2d6f028b456f"; // RUB set by default
     }
@@ -104,71 +104,56 @@ function fromRUB(value, currency) {
 * input:
 * output: boolean
 * */
-function payMoney(tmpList, body) {
+function payMoney(profileData, body) {
     output = item.getOutput();
+    const tmpTraderInfo = trader.get(body.tid);
+    const currencyTpl = getCurrency(tmpTraderInfo.data.currency);
+    let profileItems = profileData.data[0].Inventory.items;
 
-    let tmpTraderInfo = trader.get(body.tid);
-    let value = 0;
-    let moneyID = [];
+    // find all items with currency _tpl id
+    const moneyItems = itm_hf.findMoney("tpl", profileData, currencyTpl);
 
-    // prepare barter items as money (roubles are counted there as well)
-    for (let i = 0; i < body.scheme_items.length; i++) {
-        moneyID.push(body.scheme_items[i].id);
-    }
+    // prepare a price for barter
+    let barterPrice = body.scheme_items.reduce((total, item) => {
+        return total + item.count;
+    }, 0);
 
-    // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
-    let moneyObject = itm_hf.findMoney("id", tmpList, moneyID);
+    // prepare the amount of money in the profile
+    let amountMoney = moneyItems.reduce((total, item) => {
+        return total + item.upd.StackObjectsCount;
+    }, 0);
 
-    if (typeof moneyObject[0] === "undefined") {
-        return false;
-    }
+    // if no money in inventory or amount is not enough we return false
+    if (moneyItems.length <= 0 || amountMoney < barterPrice) return false;
 
-    for (let i = 0; i < moneyObject.length; i++) {
-        for (let index in tmpList.data[0].Inventory.items) {
-            let itm = tmpList.data[0].Inventory.items[index];
+    let leftToPay = barterPrice;
+    for (let moneyItem of moneyItems) {
+        let itemAmount = moneyItem.upd.StackObjectsCount;
 
-            if (typeof itm.upd !== "undefined") {
-                if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
-                    value += body.scheme_items[i].count;
-                    itm.upd.StackObjectsCount -= body.scheme_items[i].count;
-                    output.data.items.change.push({
-                        "_id": itm._id,
-                        "_tpl": itm._tpl,
-                        "parentId": itm.parentId,
-                        "slotId": itm.slotId,
-                        "location": itm.location,
-                        "upd": {"StackObjectsCount": itm.upd.StackObjectsCount}
-                    });
-
-                    // set current sale sum
-                    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
-
-                    tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
-                    console.log(filepaths.user.profiles.traders[tmpTraderInfo._id]);
-                    trader.setTrader(tmpTraderInfo.data);
-                    trader.lvlUp(body.tid);
-                    output.data.currentSalesSums[body.tid] = saleSum;
-                } else if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
-                    value += body.scheme_items[i].count;
-                    tmpList.data[0].Inventory.items.splice(index, 1);// just slice item from )
-                    output.data.items.del.push({"_id": itm._id});
-
-                    // set current sale sum
-                    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
-
-                    tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
-                    trader.setTrader(tmpTraderInfo.data);
-                    trader.lvlUp(body.tid);
-                    output.data.currentSalesSums[body.tid] = saleSum;
-                } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count) {
-                    return false;
-                }
-            }
+        if (leftToPay >= itemAmount) {
+            leftToPay -= itemAmount;
+            output.data.items.del.push({"_id": moneyItem._id});
+            profileItems = profileItems.filter(item => item._id !== moneyItem._id);
+        } else {
+            moneyItem.upd.StackObjectsCount -= leftToPay;
+            leftToPay = 0;
+            output.data.items.change.push(moneyItem);
         }
+        if (leftToPay === 0) break;
     }
+
+    profileData.data[0].Inventory.items = profileItems;
+
+    // set current sale sum
+    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(barterPrice, tmpTraderInfo.data.currency);
+
+    tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
+    trader.setTrader(tmpTraderInfo.data);
+    trader.lvlUp(body.tid);
+    output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
-    profile.setCharacterData(tmpList);
+    profile.setCharacterData(profileData);
     console.log("Items taken. Status OK.", "white", "green", true);
     item.setOutput(output);
     return true;
@@ -412,7 +397,7 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * */
 function findAndReturnChildren(tmpList, itemid) {
     let list = [];
-    
+
     for (let childitem of tmpList.data[0].Inventory.items) {
         if (childitem.parentId === itemid) {
             list.push.apply(list, findAndReturnChildren(tmpList, childitem._id));

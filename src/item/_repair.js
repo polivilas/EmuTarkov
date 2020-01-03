@@ -4,7 +4,7 @@ require('../libs.js');
 
 function main(tmpList, body) {
     item.resetOutput();
-    
+
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
@@ -12,17 +12,25 @@ function main(tmpList, body) {
 
     for (let repairItem of RequestData) {
         const itemToRepair = tmpList.data[0].Inventory.items.find(item => repairItem._id === item._id);
-        
+
         if (itemToRepair === undefined) {
             continue;
         }
 
         let itemRepairCost = items.data[itemToRepair._tpl]._props.RepairCost;
-        
+
         itemRepairCost = Math.floor(itemRepairCost * repairItem.count * repairRate);
 
         // pay the item	to profile
-        if (!itm_hf.payMoney(tmpList, {"scheme_items": [{"id": repairItem._id, "count": Math.round(itemRepairCost * settings.gameplay.repairMultiplier)}], "tid": body.tid})) {
+        if (!itm_hf.payMoney(tmpList,
+            {
+                scheme_items: [{
+                    id: repairItem._id,
+                    count: Math.round(itemRepairCost * settings.gameplay.trading.repairMultiplier)
+                }],
+                tid: body.tid
+            }
+        )) {
             console.log("no money found");
             return "";
         }
