@@ -110,20 +110,20 @@ function create(info) {
 function saveProfileProgress(offRaidData) {
     let offRaidExit = offRaidData.exit;
     let offRaidProfile = offRaidData.profile;
-    let currentProfile = getCharacterData();
+    let tmpList = getCharacterData();
 
     // replace data
-    currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
-    currentProfile.data[0].Health = offRaidProfile.Health;
-    currentProfile.data[0].Skills = offRaidProfile.Skills;
-    currentProfile.data[0].Stats = offRaidProfile.Stats;
-    currentProfile.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
-    currentProfile.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
-    currentProfile.data[0].Quests = offRaidProfile.Quests;
+    tmpList.data[0].Info.Level = offRaidProfile.Info.Level;
+    tmpList.data[0].Health = offRaidProfile.Health;
+    tmpList.data[0].Skills = offRaidProfile.Skills;
+    tmpList.data[0].Stats = offRaidProfile.Stats;
+    tmpList.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
+    tmpList.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
+    tmpList.data[0].Quests = offRaidProfile.Quests;
 
     // level 69 cap to prevent visual bug occuring at level 70
-    if (currentProfile.data[0].Info.Experience > 13129881) {
-        currentProfile.data[0].Info.Experience = 13129881;
+    if (tmpList.data[0].Info.Experience > 13129881) {
+        tmpList.data[0].Info.Experience = 13129881;
     }
 
     // replace bsg shit long ID with proper one
@@ -133,8 +133,8 @@ function saveProfileProgress(offRaidData) {
         let insuredItem = false;
 
         // insured items shouldn't be renamed
-        for (let insurance in currentProfile.data[0].InsuredItems) {
-            if (currentProfile.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[recalID]) {
+        for (let insurance in tmpList.data[0].InsuredItems) {
+            if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[recalID]) {
                 console.log("editing id found insured item");
                 insuredItem = true;
             }
@@ -167,12 +167,12 @@ function saveProfileProgress(offRaidData) {
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
     // set profile equipment to the raid equipment
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.equipment}, false);
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
+    move_f.removeItem(tmpList, {Action: 'Remove', item: tmpList.data[0].Inventory.equipment});
+    move_f.removeItem(tmpList, {Action: 'Remove', item: tmpList.data[0].Inventory.questRaidItems});
+    move_f.removeItem(tmpList, {Action: 'Remove', item: tmpList.data[0].Inventory.questStashItems});
 
     for (let item in offRaidProfile.Inventory.items) {
-        currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[item]);
+        tmpList.data[0].Inventory.items.push(offRaidProfile.Inventory.items[item]);
     }
 
     // remove inventory if player died
@@ -180,8 +180,8 @@ function saveProfileProgress(offRaidData) {
         let pocketid = "";
         let items_to_delete = [];
 
-        for (let item of currentProfile.data[0].Inventory.items) {
-            if (item.parentId === currentProfile.data[0].Inventory.equipment
+        for (let item of tmpList.data[0].Inventory.items) {
+            if (item.parentId === tmpList.data[0].Inventory.equipment
                 && item.slotId !== "SecuredContainer"
                 && item.slotId !== "Scabbard"
                 && item.slotId !== "Pockets") {
@@ -197,7 +197,7 @@ function saveProfileProgress(offRaidData) {
         }
 
         // and then delete inside pockets
-        for (let item of currentProfile.data[0].Inventory.items) {
+        for (let item of tmpList.data[0].Inventory.items) {
             if (item.parentId === pocketid) {
                 // store it and delete later because i dont know its not working otherwiswe
                 items_to_delete.push(item._id);
@@ -206,12 +206,12 @@ function saveProfileProgress(offRaidData) {
 
         // check for insurance
         for (let item_to_delete in items_to_delete) {
-            for (let insurance in currentProfile.data[0].InsuredItems) {
-                if (items_to_delete[item_to_delete] === currentProfile.data[0].InsuredItems[insurance].itemId) {
+            for (let insurance in tmpList.data[0].InsuredItems) {
+                if (items_to_delete[item_to_delete] === tmpList.data[0].InsuredItems[insurance].itemId) {
                     console.log("found insured item");
 
                     items_to_delete.splice(item_to_delete, 1);
-                    move_f.removeInsurance(currentProfile, items_to_delete[item_to_delete])
+                    move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
                     break;
                 }
             }
@@ -219,11 +219,11 @@ function saveProfileProgress(offRaidData) {
 
         // finally delete them
         for (let item_to_delete in items_to_delete) {
-            move_f.removeItem(currentProfile, {Action: 'Remove', item: items_to_delete[item_to_delete]});
+            move_f.removeItem(tmpList, {Action: 'Remove', item: items_to_delete[item_to_delete]});
         }
     }
 
-    setCharacterData(currentProfile);
+    setCharacterData(tmpList);
 }
 
 function getCharacterData() {

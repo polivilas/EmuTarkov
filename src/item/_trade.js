@@ -207,6 +207,7 @@ function sellItem(tmpList, body) {
 
                 // remove item
                 output = move_f.removeItem(tmpList, {Action: 'Remove', item: checkID}, output);
+                move_f.removeInsurance(tmpList, checkID);
 
                 // add money to return to the player
                 let price_money = prices.data[item._id][0][0].count;

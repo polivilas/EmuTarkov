@@ -44,7 +44,7 @@ function moveItem(tmpList, body) {
 /* Remove Item
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * */
-function removeItem(tmpList, body, output = item.getOutput(), removeInsured = true) {
+function removeItem(tmpList, body, output = item.getOutput()) {
     // -> Deletes item and its all child completly - now works
 	if (output == ""){
 		item.resetOutput();
@@ -64,15 +64,6 @@ function removeItem(tmpList, body, output = item.getOutput(), removeInsured = tr
             for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
                 if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
                     tmpList.data[0].Inventory.items.splice(a, 1);  //remove item from tmplist
-
-                    // insurance
-                    if (removeInsured) {
-                        for (let insurance in tmpList.data[0].InsuredItems) {
-                            if (tmpList.data[0].InsuredItems[insurance].itemId == ids_toremove[i]) {
-                                tmpList.data[0].InsuredItems.splice(insurance, 1);
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -86,13 +77,7 @@ function removeItem(tmpList, body, output = item.getOutput(), removeInsured = tr
     }
 }
 
-function removeInsurance(tmpList, body, output = item.getOutput()) {
-    // -> Deletes item and its all child completly - now works
-	if (output == ""){
-		item.resetOutput();
-		output = item.getOutput()
-    }
-
+function removeInsurance(tmpList, body) {
     var toDo = [body];
     
     //Find the item and all of it's relates
@@ -112,10 +97,8 @@ function removeInsurance(tmpList, body, output = item.getOutput()) {
         }
 
         profile.setCharacterData(tmpList); //save tmplist to profile
-        return output;
     } else {
         console.log("item id is not vaild");
-        return "BAD"
         //maybe return something because body.item id wasn't valid.
     }
 }
