@@ -135,6 +135,7 @@ function saveProfileProgress(offRaidData) {
         // insured items shouldn't be renamed
         for (let insurance in currentProfile.data[0].InsuredItems) {
             if (currentProfile.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[recalID]) {
+                console.log("editing id found insured item");
                 insuredItem = true;
             }
         }
@@ -166,15 +167,13 @@ function saveProfileProgress(offRaidData) {
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
     // set profile equipment to the raid equipment
-    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.equipment});
+    move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.equipment}, false);
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
 
     for (let item in offRaidProfile.Inventory.items) {
         currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[item]);
     }
-
-    json.write("dump/offraidProfileItems.json", offRaidProfile.Inventory.items);
 
     // remove inventory if player died
     if (offRaidExit !== "survived" && offRaidExit !== "runner") {
@@ -208,16 +207,12 @@ function saveProfileProgress(offRaidData) {
         // check for insurance
         for (let item_to_delete in items_to_delete) {
             for (let insurance in currentProfile.data[0].InsuredItems) {
-                console.log("to delete: " + items_to_delete[item_to_delete] + ", insurance: " + currentProfile.data[0].InsuredItems);
-
                 if (items_to_delete[item_to_delete] === currentProfile.data[0].InsuredItems[insurance].itemId) {
-                    console.log("found item insured item");
+                    console.log("found insured item");
 
-                    items_to_delete[item_to_delete].splice(item_to_delete, 1);
-                    currentProfile.data[0].InsuredItems.splice(insurance, 1);
+                    items_to_delete.splice(item_to_delete, 1);
+                    move_f.removeInsurance(currentProfile, items_to_delete[item_to_delete])
                     break;
-                } else {
-                    console.log("item is not insured");
                 }
             }
         }

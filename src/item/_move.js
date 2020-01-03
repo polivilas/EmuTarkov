@@ -44,24 +44,64 @@ function moveItem(tmpList, body) {
 /* Remove Item
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * */
-function removeItem(tmpList, body, output = item.getOutput()) {
+function removeItem(tmpList, body, output = item.getOutput(), removeInsured = true) {
     // -> Deletes item and its all child completly - now works
-	if(output == ""){
+	if (output == ""){
 		item.resetOutput();
 		output = item.getOutput()
-	}
-    //output = item.resetOutput();
+    }
+    
+
     var toDo = [body.item];
+
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
         let ids_toremove = itm_hf.findAndReturnChildren(tmpList, toDo[0]); //get all ids related to this item, +including this item itself
+
         for (let i in ids_toremove) { //remove one by one all related items and itself
             output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
+
             for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
                 if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
                     tmpList.data[0].Inventory.items.splice(a, 1);  //remove item from tmplist
 
                     // insurance
+                    if (removeInsured) {
+                        for (let insurance in tmpList.data[0].InsuredItems) {
+                            if (tmpList.data[0].InsuredItems[insurance].itemId == ids_toremove[i]) {
+                                tmpList.data[0].InsuredItems.splice(insurance, 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        profile.setCharacterData(tmpList); //save tmplist to profile
+        return output;
+    } else {
+        console.log("item id is not vaild");
+        return "BAD"
+        //maybe return something because body.item id wasn't valid.
+    }
+}
+
+function removeInsurance(tmpList, body, output = item.getOutput()) {
+    // -> Deletes item and its all child completly - now works
+	if (output == ""){
+		item.resetOutput();
+		output = item.getOutput()
+    }
+
+    var toDo = [body];
+    
+    //Find the item and all of it's relates
+    if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
+        let ids_toremove = itm_hf.findAndReturnChildren(tmpList, toDo[0]); //get all ids related to this item, +including this item itself
+
+        for (let i in ids_toremove) { //remove one by one all related items and itself
+            for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
+                if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
                     for (let insurance in tmpList.data[0].InsuredItems) {
                         if (tmpList.data[0].InsuredItems[insurance].itemId == ids_toremove[i]) {
                             tmpList.data[0].InsuredItems.splice(insurance, 1);
@@ -70,6 +110,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
                 }
             }
         }
+
         profile.setCharacterData(tmpList); //save tmplist to profile
         return output;
     } else {
@@ -234,3 +275,4 @@ module.exports.splitItem = splitItem;
 module.exports.mergeItem = mergeItem;
 module.exports.transferItem = transferItem;
 module.exports.swapItem = swapItem;
+module.exports.removeInsurance = removeInsurance;

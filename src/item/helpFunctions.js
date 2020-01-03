@@ -412,11 +412,13 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * */
 function findAndReturnChildren(tmpList, itemid) {
     let list = [];
+    
     for (let childitem of tmpList.data[0].Inventory.items) {
         if (childitem.parentId === itemid) {
             list.push.apply(list, findAndReturnChildren(tmpList, childitem._id));
         }
     }
+
     list.push(itemid);// it's required
     return list;
 }
