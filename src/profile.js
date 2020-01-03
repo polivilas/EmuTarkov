@@ -113,9 +113,7 @@ function saveProfileProgress(offRaidData) {
     let currentProfile = getCharacterData();
 
     // replace data
-    //currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
-    console.log("[DEBUG][Experience Offraid] ", offRaidProfile.Info.Experience);
-    console.log("[DEBUG][Experience Profile] ", currentProfile.data[0].Info.Experience);
+    currentProfile.data[0].Info.Level = offRaidProfile.Info.Level;
     currentProfile.data[0].Health = offRaidProfile.Health;
     currentProfile.data[0].Skills = offRaidProfile.Skills;
     currentProfile.data[0].Stats = offRaidProfile.Stats;

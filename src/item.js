@@ -46,7 +46,8 @@ const staticRoutes = {
     "RagFairBuyOffer": trade_f.confirmRagfairTrading,
     "CustomizationWear": customization_f.wearClothing,
     "CustomizationBuy": customization_f.buyClothing,
-    "Repair": repair_f.main
+    "Repair": repair_f.main,
+    "Insure": insure_f.insure
 };
 
 function getOutput() {

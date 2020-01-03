@@ -46,6 +46,7 @@ const staticRoutes = {
     "/client/game/profile/nickname/reserved": getReservedNickname,
     "/client/game/profile/nickname/validate": validateNickname,
     "/client/game/profile/create": createProfile,
+    "/client/insurance/items/list/cost": getInsuranceCost,
     "/favicon.ico": nullResponse,
     "/client/game/logout": nullResponse,
     "/client/putMetrics": nullResponse,
@@ -133,6 +134,10 @@ function getLocale(url, info) {
 
 function loginUser(url, info) {
     return profile.find(info);
+}
+
+function getInsuranceCost(url, info) {
+    return insure_f.cost(info);
 }
 
 function getQueueStatus(url, info) {

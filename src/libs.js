@@ -66,6 +66,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.locale = require('./locale.js');							// locale changer function
 	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
 	global.repair_f = require('./item/_repair.js');					// response/_repair
+	global.insure_f = require('./item/_insure.js');					// response/_insure
 	global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
 	global.server = require('./server/_start.js');					// server/_start
 	global.constants = require('./server/_constants.js');			// server/_constants

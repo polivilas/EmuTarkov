@@ -4,6 +4,7 @@ require('../libs.js');
 
 function main(profilesData, body) {
     item.resetOutput();
+    
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let repairCurrency = tmpTraderInfo.data.repair.currency;
