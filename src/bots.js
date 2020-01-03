@@ -39,43 +39,7 @@ function getBotNode(role) {
 	return {};
 }
 
-function generateBot(botBase, role) {
-	let type = role;
-
-	if (role === "cursedAssault") {
-		role = "assault"
-	}
-
-	// chance to spawn simulated PMC players
-	if (((role === "assault" || role === "marksman" || role === "pmcBot") && settings.gameplay.bots.pmcEnabled)) {
-		let spawnChance = utility.getRandomInt(0, 99);
-		let sideChance = utility.getRandomInt(0, 99);
-		botBase.Info.Level = Math.floor(Math.random()*Math.floor(70));
-		
-		if (spawnChance < settings.gameplay.bots.pmcChance) {
-			if (sideChance < 50) {
-				botBase.Info.Side = "Bear";
-				type = "bear";
-			} else {
-				botBase.Info.Side = "Usec";
-				type = "usec";
-			}
-		}
-	}
-
-	let botNode = getBotNode(type);
-
-	botBase.Info.Settings.Role = role;
-	botBase.Info.Nickname = json.parse(json.read(getRandomValue(botNode.names)));
-	botBase.Info.Settings.Experience = json.parse(json.read(getRandomValue(botNode.experience)));
-	botBase.Info.Voice = json.parse(json.read(getRandomValue(botNode.appearance.voice)));
-	botBase.Health = json.parse(json.read(getRandomValue(botNode.health)));
-	botBase.Customization.Head = json.parse(json.read(getRandomValue(botNode.appearance.head)));
-	botBase.Customization.Body = json.parse(json.read(getRandomValue(botNode.appearance.body)));
-	botBase.Customization.Feet = json.parse(json.read(getRandomValue(botNode.appearance.feet)));
-	botBase.Customization.Hands = json.parse(json.read(getRandomValue(botNode.appearance.hands)));
-	botBase.Inventory = json.parse(json.read(getRandomValue(botNode.inventory)));
-
+function addDogtag(botBase) {
 	if (botBase.Info.Side !== 'Savage') {
 		if (botBase.Info.Side === 'Usec') {
 			botBase.Inventory.items.push({
@@ -116,6 +80,53 @@ function generateBot(botBase, role) {
 				}
 			})
 		}
+	}
+
+	return botBase;
+}
+
+function generateBot(botBase, role) {
+	let type = role;
+
+	if (role === "cursedAssault") {
+		role = "assault"
+	}
+
+	// chance to spawn simulated PMC players
+	if (((role === "assault" || role === "marksman" || role === "pmcBot") && settings.gameplay.bots.pmcEnabled)) {
+		let spawnChance = utility.getRandomInt(0, 99);
+		let sideChance = utility.getRandomInt(0, 99);
+		botBase.Info.Level = Math.floor(Math.random()*Math.floor(70));
+		
+		if (spawnChance < settings.gameplay.bots.pmcChance) {
+			if (sideChance < 50) {
+				botBase.Info.Side = "Bear";
+				type = "bear";
+			} else {
+				botBase.Info.Side = "Usec";
+				type = "usec";
+			}
+		}
+	}
+
+	let botNode = getBotNode(type);
+
+	botBase.Info.Settings.Role = role;
+	botBase.Info.Nickname = json.parse(json.read(getRandomValue(botNode.names)));
+	botBase.Info.Settings.Experience = json.parse(json.read(getRandomValue(botNode.experience)));
+	botBase.Info.Voice = json.parse(json.read(getRandomValue(botNode.appearance.voice)));
+	botBase.Health = json.parse(json.read(getRandomValue(botNode.health)));
+	botBase.Customization.Head = json.parse(json.read(getRandomValue(botNode.appearance.head)));
+	botBase.Customization.Body = json.parse(json.read(getRandomValue(botNode.appearance.body)));
+	botBase.Customization.Feet = json.parse(json.read(getRandomValue(botNode.appearance.feet)));
+	botBase.Customization.Hands = json.parse(json.read(getRandomValue(botNode.appearance.hands)));
+	botBase.Inventory = json.parse(json.read(getRandomValue(botNode.inventory)));
+
+	// 35% to add add dogtag to scavs, 100% for PMC's
+	let dogtagChance = utility.getRandomInt(0, 99);
+		
+	if (dogtagChance < 35 || type === "usec" || type === "bear" || type === "pmcBot") {
+		botBase = addDogtag(botBase);
 	}
 	
 	return botBase;
