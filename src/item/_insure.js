@@ -14,7 +14,7 @@ function cost(info) {
                 if (item._id === key) {
                     let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
-                    items[template.Id] = Math.round(template.Price * settings.gameplay.insureMultiplier);
+                    items[template.Id] = Math.round(template.Price * settings.gameplay.trading.insureMultiplier);
                     break;
                 }
             }
@@ -23,6 +23,7 @@ function cost(info) {
         output.data[trader] = items;
     }
 
+    console.log(output);
     return json.stringify(output);
 }
 
