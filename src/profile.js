@@ -149,11 +149,11 @@ function saveProfileProgress(offRaidData) {
             break;
         }
 
-        if (offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questRaidItems) {
+        if (offRaidProfile.Inventory.items[recalID]._id === offRaidProfile.Inventory.questRaidItems) {
             break;
         }
 
-        if (offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questStashItems) {
+        if (offRaidProfile.Inventory.items[recalID]._id === offRaidProfile.Inventory.questStashItems) {
             break;
         }
 
