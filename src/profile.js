@@ -210,8 +210,8 @@ function saveProfileProgress(offRaidData) {
                 if (items_to_delete[item_to_delete] === tmpList.data[0].InsuredItems[insurance].itemId) {
                     console.log("found insured item");
 
-                    items_to_delete.splice(item_to_delete, 1);
                     move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
+                    items_to_delete[item_to_delete] = undefined;
                     break;
                 }
             }
@@ -219,7 +219,9 @@ function saveProfileProgress(offRaidData) {
 
         // finally delete them
         for (let item_to_delete in items_to_delete) {
-            move_f.removeItem(tmpList, {Action: 'Remove', item: items_to_delete[item_to_delete]});
+            if (items_to_delete[item_to_delete] !== typeof "undefined") {
+                move_f.removeItem(tmpList, {Action: 'Remove', item: items_to_delete[item_to_delete]});
+            }
         }
     }
 
