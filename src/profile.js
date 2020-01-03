@@ -130,19 +130,37 @@ function saveProfileProgress(offRaidData) {
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
     for (let recalID in offRaidProfile.Inventory.items) {
-        if (offRaidProfile.Inventory.items.hasOwnProperty(recalID)) {
-            //do not replace important ID's
-            if (
-                offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.equipment &&
-                offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questRaidItems &&
-                offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questStashItems
-            ) {
-                let old_id = offRaidProfile.Inventory.items[recalID]._id;
-                let new_id = utility.generateNewItemId();
+        let insuredItem = false;
 
-                string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
+        // insured items shouldn't be renamed
+        for (let insurance in currentProfile.data[0].InsuredItems) {
+            if (currentProfile.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[recalID]) {
+                insuredItem = true;
             }
         }
+
+        // do not replace important ID's
+        if (insuredItem) {
+            break;
+        }
+
+        if (offRaidProfile.Inventory.items[recalID]._id === offRaidProfile.Inventory.equipment) {
+            break;
+        }
+
+        if (offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questRaidItems) {
+            break;
+        }
+
+        if (offRaidProfile.Inventory.items[recalID]._id !== offRaidProfile.Inventory.questStashItems) {
+            break;
+        }
+
+        // replace id
+        let old_id = offRaidProfile.Inventory.items[recalID]._id;
+        let new_id = utility.generateNewItemId();
+
+        string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
     }
 
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
@@ -152,38 +170,55 @@ function saveProfileProgress(offRaidData) {
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questRaidItems});
     move_f.removeItem(currentProfile, {Action: 'Remove', item: currentProfile.data[0].Inventory.questStashItems});
 
-    for (let inventoryitem in offRaidProfile.Inventory.items) {
-        if (offRaidProfile.Inventory.items.hasOwnProperty(inventoryitem)) {
-            currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[inventoryitem]);
-        }
+    for (let item in offRaidProfile.Inventory.items) {
+        currentProfile.data[0].Inventory.items.push(offRaidProfile.Inventory.items[item]);
     }
+
+    json.write("dump/offraidProfileItems.json", offRaidProfile.Inventory.items);
 
     // remove inventory if player died
     if (offRaidExit !== "survived" && offRaidExit !== "runner") {
         let pocketid = "";
         let items_to_delete = [];
 
-        for (let inventoryitem in currentProfile.data[0].Inventory.items) {
-            if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === currentProfile.data[0].Inventory.equipment
-                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
-                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Scabbard"
-                && currentProfile.data[0].Inventory.items[inventoryitem].slotId !== "Pockets") {
+        for (let item of currentProfile.data[0].Inventory.items) {
+            if (item.parentId === currentProfile.data[0].Inventory.equipment
+                && item.slotId !== "SecuredContainer"
+                && item.slotId !== "Scabbard"
+                && item.slotId !== "Pockets") {
 
                 //store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
+                items_to_delete.push(item._id);
             }
 
             // we need pocket id for later, its working differently
-            if (currentProfile.data[0].Inventory.items[inventoryitem].slotId === "Pockets") {
-                pocketid = currentProfile.data[0].Inventory.items[inventoryitem]._id;
+            if (item.slotId === "Pockets") {
+                pocketid = item._id;
             }
         }
 
         // and then delete inside pockets
-        for (let inventoryitem in currentProfile.data[0].Inventory.items) {
-            if (currentProfile.data[0].Inventory.items[inventoryitem].parentId === pocketid) {
+        for (let item of currentProfile.data[0].Inventory.items) {
+            if (item.parentId === pocketid) {
                 // store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(currentProfile.data[0].Inventory.items[inventoryitem]._id);
+                items_to_delete.push(item._id);
+            }
+        }
+
+        // check for insurance
+        for (let item_to_delete in items_to_delete) {
+            for (let insurance in currentProfile.data[0].InsuredItems) {
+                console.log("to delete: " + items_to_delete[item_to_delete] + ", insurance: " + currentProfile.data[0].InsuredItems);
+
+                if (items_to_delete[item_to_delete] === currentProfile.data[0].InsuredItems[insurance].itemId) {
+                    console.log("found item insured item");
+
+                    items_to_delete[item_to_delete].splice(item_to_delete, 1);
+                    currentProfile.data[0].InsuredItems.splice(insurance, 1);
+                    break;
+                } else {
+                    console.log("item is not insured");
+                }
             }
         }
 
