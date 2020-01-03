@@ -60,6 +60,13 @@ function removeItem(tmpList, body, output = item.getOutput()) {
             for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
                 if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
                     tmpList.data[0].Inventory.items.splice(a, 1);  //remove item from tmplist
+
+                    // insurance
+                    for (let insurance in tmpList.data[0].InsuredItems) {
+                        if (tmpList.data[0].InsuredItems[insurance].itemId == ids_toremove[i]) {
+                            tmpList.data[0].InsuredItems.splice(insurance, 1);
+                        }
+                    }
                 }
             }
         }

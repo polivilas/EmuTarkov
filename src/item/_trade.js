@@ -205,10 +205,11 @@ function sellItem(tmpList, body) {
             if (item._id === checkID) {
                 console.log("Selling: " + checkID, "", "", true);
 
+                // remove item
+                output = move_f.removeItem(tmpList, {Action: 'Remove', item: checkID}, output);
+
                 // add money to return to the player
                 let price_money = prices.data[item._id][0][0].count;
-
-                output = move_f.removeItem(tmpList, {Action: 'Remove', item: checkID}, output);
 
                 if (output !== "BAD") {
                     money += price_money;
