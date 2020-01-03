@@ -363,7 +363,7 @@ function createProfile(url, info) {
 }
 
 function offlineRaidSave(url, info) {
-    if (settings.server.lootSaving === false) {
+    if (settings.gameplay.features.lootSavingEnabled === false) {
         return "DONE";
     }
 

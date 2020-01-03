@@ -183,7 +183,7 @@ function saveProfileProgress(offRaidData) {
         for (let item of tmpList.data[0].Inventory.items) {
             if (item.parentId === tmpList.data[0].Inventory.equipment
                 && item.slotId !== "SecuredContainer"
-                && item.slotId !== "Scabbard"
+                //&& item.slotId !== "Scabbard"
                 && item.slotId !== "Pockets") {
 
                 //store it and delete later because i dont know its not working otherwiswe
@@ -208,18 +208,20 @@ function saveProfileProgress(offRaidData) {
         for (let item_to_delete in items_to_delete) {
             for (let insurance in tmpList.data[0].InsuredItems) {
                 if (items_to_delete[item_to_delete] === tmpList.data[0].InsuredItems[insurance].itemId) {
-                    console.log("found insured item");
-
-                    move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
-                    items_to_delete[item_to_delete] = undefined;
-                    break;
+                    let insureReturnChance = utility.getRandomInt(0, 99);
+		
+	                if (insureReturnChance < settings.gameplay.trading.insureReturnChance) {
+                        move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
+                        items_to_delete[item_to_delete] = "insured";
+                        break;
+                    }
                 }
             }
         }
 
         // finally delete them
         for (let item_to_delete in items_to_delete) {
-            if (items_to_delete[item_to_delete] !== typeof "undefined") {
+            if (items_to_delete[item_to_delete] !== "insured") {
                 move_f.removeItem(tmpList, {Action: 'Remove', item: items_to_delete[item_to_delete]});
             }
         }

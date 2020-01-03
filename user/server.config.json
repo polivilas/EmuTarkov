@@ -1,10 +1,12 @@
 {
 	"server": {
 		"ip": "127.0.0.1",
-		"generateIp": false,
-		"lootSaving": true
+		"generateIp": false
 	},
 	"gameplay": {
+		"features": {
+			"lootSavingEnabled": true
+		},
 		"bots": {
 			"customEnabled": true,
 			"customChance": 1,
@@ -13,7 +15,8 @@
 		},
 		"trading": {
 			"repairMultiplier": 1,
-			"insureMultiplier": 0.1
+			"insureMultiplier": 0.1,
+			"insureReturnChance": 75
 		},
 		"location": {
 			"realTimeEnabled": true,
