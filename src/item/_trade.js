@@ -20,24 +20,8 @@ function buyItem(tmpList, body, trad = "") {
         tmpTrader = json.parse(json.read(filepaths.user.cache.assort_everything));
     }
 
-    // no exceptions possible here
-    let moneyID = [];
-
-    // prepare barter items as money (roubles are counted there as well)
-    for (let i = 0; i < body.scheme_items.length; i++) {
-        moneyID.push(body.scheme_items[i].id);
-    }
-
-    // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
-    let moneyObject = itm_hf.findMoney("id", tmpList, moneyID);
-
-    if (typeof moneyObject[0] === "undefined") {
-        console.log("Error something goes wrong (not found Money)");
-        return "";
-    }
-
     // pay the item	to profile
-    if (!itm_hf.payMoney(tmpList, moneyObject, body, trad)) {
+    if (!itm_hf.payMoney(tmpList, body)) {
         console.log("no money found");
         return "";
     }

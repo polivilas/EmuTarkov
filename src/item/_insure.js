@@ -14,7 +14,7 @@ function cost(info) {
                 if (item._id === key) {
                     let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
-                    items[template.Id] = round(template.Price * 0.65);
+                    items[template.Id] = Math.round(template.Price * 0.65);
                     break;
                 }
             }
@@ -28,16 +28,39 @@ function cost(info) {
 
 function insure(tmpList, body) {
     item.resetOutput();
-    
-    let output = item.getOutput();
+
+    let itemsToPay = [];
 
     // get the price of all items
+    for (let key of body.items) {
+        for (let item of tmpList.data[0].Inventory.items) {
+            if (item._id === key) {
+                let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
-    // pay the money
+                itemsToPay.push({"id": item._id, "count": Math.round(template.Price * 0.65)});
+                break;
+            }
+        }
+    }
 
-    // add items to InsuredItems list
+    // pay the item	to profile
+    if (!itm_hf.payMoney(tmpList, {"scheme_items": itemsToPay, "tid": body.tid})) {
+        console.log("no money found");
+        return "";
+    }
 
-    return output;
+    // add items to InsuredItems list once money has been paid
+    for (let key of body.items) {
+        for (let item of tmpList.data[0].Inventory.items) {
+            if (item._id === key) {
+                tmpList.data[0].InsuredItems.push({"tid": body.tid, "itemId": item._id});
+                break;
+            }
+        }
+    }
+
+    profile.setCharacterData(tmpList);
+    return item.getOutput();
 }
 
 module.exports.cost = cost;

@@ -101,71 +101,34 @@ function fromRUB(value, currency) {
 }
 
 /* take money and insert items into return to server request
-* input: object of playerData, string of repairCurrency, int of itemRepairCost, object of body request
-* output: boolean
-* */
-function payForRepair(playerData, repairCurrency, itemRepairCost, body) {
-    output = item.getOutput();
-    let playerItems = playerData.data[0].Inventory.items;
-    let moneyItems = itm_hf.findMoney("tpl", playerData, repairCurrency);
-
-    let amountMoney = moneyItems.reduce((total, item) => {
-        return total + item.upd.StackObjectsCount;
-    }, 0);
-
-    // if no money in inventory or amount is not enough we return false
-    if (moneyItems.length <= 0 || amountMoney < itemRepairCost) return false;
-
-    let leftToPay = itemRepairCost;
-    for (let moneyItem of moneyItems) {
-        let itemAmount = moneyItem.upd.StackObjectsCount;
-
-        if (leftToPay >= itemAmount) {
-            leftToPay -= itemAmount;
-            output.data.items.del.push({"_id": moneyItem._id});
-            playerItems = playerItems.filter(item => item._id !== moneyItem._id);
-        } else {
-            moneyItem.upd.StackObjectsCount -= leftToPay;
-            leftToPay = 0;
-            output.data.items.change.push(moneyItem);
-        }
-        if (leftToPay === 0) break;
-    }
-
-    playerData.data[0].Inventory.items = playerItems;
-
-    // update sales sum
-    const tmpTraderInfo = trader.get(body.tid);
-
-    tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(itemRepairCost, tmpTraderInfo.data.currency);
-    trader.setTrader(tmpTraderInfo.data);
-
-    // update level
-    trader.lvlUp(body.tid);
-
-    // save changes
-    profile.setCharacterData(playerData);
-    console.log("Money items taken. Status OK.", "white", "green", true);
-    item.setOutput(output);
-
-    return true;
-}
-
-/* take money and insert items into return to server request
 * input:
 * output: boolean
 * */
-function payMoney(playerData, moneyItems, body) {
+function payMoney(tmpList, body) {
     output = item.getOutput();
 
+    let tmpTraderInfo = trader.get(body.tid);
     let value = 0;
+    let moneyID = [];
 
-    for (let i = 0; i < moneyItems.length; i++) {
-        for (let index in playerData.data[0].Inventory.items) {
-            let itm = playerData.data[0].Inventory.items[index];
+    // prepare barter items as money (roubles are counted there as well)
+    for (let i = 0; i < body.scheme_items.length; i++) {
+        moneyID.push(body.scheme_items[i].id);
+    }
+
+    // check if money exists if not throw an exception (this step must be fullfill no matter what - by client side - if not user cheats)
+    let moneyObject = itm_hf.findMoney("id", tmpList, moneyID);
+
+    if (typeof moneyObject[0] === "undefined") {
+        return false;
+    }
+
+    for (let i = 0; i < moneyObject.length; i++) {
+        for (let index in tmpList.data[0].Inventory.items) {
+            let itm = tmpList.data[0].Inventory.items[index];
 
             if (typeof itm.upd !== "undefined") {
-                if (itm._id === moneyItems[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
+                if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount > body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
                     itm.upd.StackObjectsCount -= body.scheme_items[i].count;
                     output.data.items.change.push({
@@ -176,28 +139,36 @@ function payMoney(playerData, moneyItems, body) {
                         "location": itm.location,
                         "upd": {"StackObjectsCount": itm.upd.StackObjectsCount}
                     });
-                } else if (itm._id === moneyItems[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
+
+                    // set current sale sum
+                    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
+
+                    tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
+                    console.log(filepaths.user.profiles.traders[tmpTraderInfo._id]);
+                    trader.setTrader(tmpTraderInfo.data);
+                    trader.lvlUp(body.tid);
+                    output.data.currentSalesSums[body.tid] = saleSum;
+                } else if (itm._id === moneyObject[i]._id && itm.upd.StackObjectsCount === body.scheme_items[i].count) {
                     value += body.scheme_items[i].count;
-                    playerData.data[0].Inventory.items.splice(index, 1);// just slice item from )
+                    tmpList.data[0].Inventory.items.splice(index, 1);// just slice item from )
                     output.data.items.del.push({"_id": itm._id});
-                } else if (itm._id === moneyItems[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count) {
+
+                    // set current sale sum
+                    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
+
+                    tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
+                    trader.setTrader(tmpTraderInfo.data);
+                    trader.lvlUp(body.tid);
+                    output.data.currentSalesSums[body.tid] = saleSum;
+                } else if (itm._id === moneyObject[i].id && itm.upd.StackObjectsCount < body.scheme_items[i].count) {
                     return false;
                 }
             }
         }
     }
 
-    // update sales sum
-    let tmpTraderInfo = trader.get(body.tid);
-
-    tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
-    trader.setTrader(tmpTraderInfo.data);
-
-    // update level
-    trader.lvlUp(body.tid);
-
     // save changes
-    profile.setCharacterData(playerData);
+    profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);
     item.setOutput(output);
     return true;
@@ -207,12 +178,12 @@ function payMoney(playerData, moneyItems, body) {
 * input: object of player data, string BarteredItem ID
 * output: array of Item from inventory
 * */
-function findMoney(by, playerData, barter_itemID) { // find required items to take after buying (handles multiple items)
+function findMoney(by, tmpList, barter_itemID) { // find required items to take after buying (handles multiple items)
     const barterIDs = typeof barter_itemID === "string" ? [barter_itemID] : barter_itemID;
     let itemsArray = [];
 
     for (const barterID of barterIDs) {
-        let mapResult = playerData.data[0].Inventory.items.filter(item => {
+        let mapResult = tmpList.data[0].Inventory.items.filter(item => {
             return by === "tpl" ? (item._tpl === barterID) : (item._id === barterID);
         });
         itemsArray = Object.assign(itemsArray, mapResult);
@@ -222,7 +193,7 @@ function findMoney(by, playerData, barter_itemID) { // find required items to ta
 }
 
 /* receive money back after selling
-* input: playerData, numberToReturn, request.body,
+* input: tmpList, numberToReturn, request.body,
 * output: none (output is sended to item.js, and profile is saved to file)
 * */
 function getMoney(tmpList, amount, body, output_temp) {
@@ -292,12 +263,13 @@ function getMoney(tmpList, amount, body, output_temp) {
             }
     }
 
-    // update sales sum
-    tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
-    trader.setTrader(tmpTraderInfo.data);
+    // set current sale sum
+    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
 
-    // update level
+    tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
+    trader.setTrader(tmpTraderInfo.data);
     trader.lvlUp(body.tid);
+    output.data.currentSalesSums[body.tid] = saleSum;
 
     profile.setCharacterData(tmpList);
     return output_temp;
@@ -462,4 +434,3 @@ module.exports.getSize = getSize;
 module.exports.findAndReturnChildren = findAndReturnChildren;
 module.exports.returnOutput = returnOutput;
 module.exports.setInternalOutput = setInternalOutput;
-module.exports.payForRepair = payForRepair;

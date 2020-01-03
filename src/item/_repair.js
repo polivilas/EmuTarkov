@@ -2,26 +2,29 @@
 
 require('../libs.js');
 
-function main(profilesData, body) {
+function main(tmpList, body) {
     item.resetOutput();
     
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
-    let repairCurrency = tmpTraderInfo.data.repair.currency;
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
     let RequestData = body.repairItems;
 
     for (let repairItem of RequestData) {
-        const itemToRepair = profilesData.data[0].Inventory.items.find(item => repairItem._id === item._id);
-        if (itemToRepair === undefined) continue;
+        const itemToRepair = tmpList.data[0].Inventory.items.find(item => repairItem._id === item._id);
+        
+        if (itemToRepair === undefined) {
+            continue;
+        }
 
         let itemRepairCost = items.data[itemToRepair._tpl]._props.RepairCost;
+        
         itemRepairCost = Math.floor(itemRepairCost * repairItem.count * repairRate);
 
-        // pay the repair cost
-        if (!itm_hf.payForRepair(profilesData, repairCurrency, itemRepairCost, body)) {
+        // pay the item	to profile
+        if (!itm_hf.payMoney(tmpList, {"scheme_items": [{"id": repairItem._id, "count": Math.round(itemRepairCost)}], "tid": body.tid})) {
             console.log("no money found");
-            continue;
+            return "";
         }
 
         // change item durability
@@ -36,7 +39,7 @@ function main(profilesData, body) {
         output.data.items.change.push(itemToRepair);
     }
 
-    profile.setCharacterData(profilesData);
+    profile.setCharacterData(tmpList);
     return output;
 }
 
