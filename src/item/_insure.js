@@ -23,7 +23,6 @@ function cost(info) {
         output.data[trader] = items;
     }
 
-    console.log(output);
     return json.stringify(output);
 }
 
