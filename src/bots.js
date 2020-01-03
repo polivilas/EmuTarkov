@@ -50,7 +50,8 @@ function generateBot(botBase, role) {
 	if (((role === "assault" || role === "marksman" || role === "pmcBot") && settings.gameplay.bots.pmcEnabled)) {
 		let spawnChance = utility.getRandomInt(0, 99);
 		let sideChance = utility.getRandomInt(0, 99);
-
+		botBase.Info.Level = Math.floor(Math.random()*Math.floor(70));
+		
 		if (spawnChance < settings.gameplay.bots.pmcChance) {
 			if (sideChance < 50) {
 				botBase.Info.Side = "Bear";
@@ -75,6 +76,48 @@ function generateBot(botBase, role) {
 	botBase.Customization.Hands = json.parse(json.read(getRandomValue(botNode.appearance.hands)));
 	botBase.Inventory = json.parse(json.read(getRandomValue(botNode.inventory)));
 
+	if (botBase.Info.Side !== 'Savage') {
+
+	if(botBase.Info.Side === 'Usec') {}
+		botBase.Inventory.items.push({
+			_id: "dogtag_" + 100000000 + utility.getRandomIntEx(899999999),
+			_tpl: "59f32c3b86f77472a31742f0",
+			parentId: botBase.Inventory.equipment,
+			slotId: "Dogtag",
+			upd: {
+				"Dogtag": {
+					"Nickname": botBase.Info.Nickname,
+					"Side": botBase.Info.Side,
+					"Level": botBase.Info.Level,
+					"Time": "2020-01-01T00:00:00",
+					"Status": "Killed by JET",
+					"KillerName": 'JustEmuTarkov',
+					"WeaponName": "JET Reverse Engineering"
+				},
+				"SpawnedInSession": "true"
+			}
+		})
+	} else{
+		botBase.Inventory.items.push({
+			_id: "dogtag_" + 100000000 + utility.getRandomIntEx(899999999),
+			_tpl: "59f32bb586f774757e1e8442",
+			parentId: botBase.Inventory.equipment,
+			slotId: "Dogtag",
+			upd: {
+				"Dogtag": {
+					"Nickname": botBase.Info.Nickname,
+					"Side": botBase.Info.Side,
+					"Level": botBase.Info.Level,
+					"Time": "2020-01-01T00:00:00",
+					"Status": "Killed by JET",
+					"KillerName": 'JustEmuTarkov',
+					"WeaponName": "JET Reverse Engineering"
+				},
+				"SpawnedInSession": "true"
+			}
+		})
+	}
+	
 	return botBase;
 }
 
