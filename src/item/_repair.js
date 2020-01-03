@@ -22,7 +22,7 @@ function main(tmpList, body) {
         itemRepairCost = Math.floor(itemRepairCost * repairItem.count * repairRate);
 
         // pay the item	to profile
-        if (!itm_hf.payMoney(tmpList, {"scheme_items": [{"id": repairItem._id, "count": Math.round(itemRepairCost)}], "tid": body.tid})) {
+        if (!itm_hf.payMoney(tmpList, {"scheme_items": [{"id": repairItem._id, "count": Math.round(itemRepairCost * settings.gameplay.repairMultiplier)}], "tid": body.tid})) {
             console.log("no money found");
             return "";
         }

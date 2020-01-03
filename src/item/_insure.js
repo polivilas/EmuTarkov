@@ -37,7 +37,7 @@ function insure(tmpList, body) {
             if (item._id === key) {
                 let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
-                itemsToPay.push({"id": item._id, "count": Math.round(template.Price * 0.65)});
+                itemsToPay.push({"id": item._id, "count": Math.round(template.Price * settings.gameplay.insureMultiplier)});
                 break;
             }
         }

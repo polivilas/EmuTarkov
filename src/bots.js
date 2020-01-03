@@ -47,11 +47,11 @@ function generateBot(botBase, role) {
 	}
 
 	// chance to spawn simulated PMC players
-	if (((role === "assault" || role === "marksman" || role === "pmcBot") && settings.bots.pmc.enabled)) {
+	if (((role === "assault" || role === "marksman" || role === "pmcBot") && settings.gameplay.bots.pmcEnabled)) {
 		let spawnChance = utility.getRandomInt(0, 99);
 		let sideChance = utility.getRandomInt(0, 99);
 
-		if (spawnChance < settings.bots.pmc.chance) {
+		if (spawnChance < settings.gameplay.bots.pmcChance) {
 			if (sideChance < 50) {
 				botBase.Info.Side = "Bear";
 				type = "bear";

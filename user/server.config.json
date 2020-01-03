@@ -4,14 +4,16 @@
 		"generateIp": false,
 		"lootSaving": true
 	},
-	"bots": {
-		"pmc": {
-			"enabled": true,
-			"chance": 10
+	"gameplay": {
+		"bots": {
+			"customEnabled": true,
+			"customChance": 1,
+			"pmcEnabled": true,
+			"pmcChance": 15
 		},
-		"custom": {
-			"enabled": true,
-			"chance": 1
+		"trading": {
+			"repairMultiplier": 1,
+			"insureMultiplier": 0.25
 		}
 	},
 	"mods": {
