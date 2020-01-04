@@ -126,6 +126,37 @@ function saveProfileProgress(offRaidData) {
         tmpList.data[0].Info.Experience = 13129881;
     }
 
+    // mark items found in raid
+    for (let offRaidItem in offRaidProfile.Inventory.items) {
+        let found = false;
+
+        // check if item exists already
+        for (let item of tmpList.data[0].Inventory.items) {
+            if ( offRaidProfile.Inventory.items[offRaidItem]._id === tmpList.data[0].Inventory.items[item]._id) {
+                found = true;
+            }            
+        }
+
+        if (found) {
+            continue;
+        }
+
+        // mark item found in raid when unfound
+        let currentItem = offRaidProfile.Inventory.items[offRaidItem];
+
+        if (currentItem.hasOwnProperty("upd")) {
+            if (currentItem.upd.hasOwnProperty("SpawnedInSession")) {
+                continue;
+            }
+
+            currentItem.upd["SpawnedInSession"] = true;
+        } else {
+            currentItem["udp"] = {"SpawnedInSession": true};
+        }
+
+        offRaidProfile.Inventory.items[offRaidItem] = currentItem;
+    }
+
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
@@ -181,17 +212,16 @@ function saveProfileProgress(offRaidData) {
         let items_to_delete = [];
 
         for (let item of tmpList.data[0].Inventory.items) {
-            if (item.parentId === tmpList.data[0].Inventory.equipment
-                && item.slotId !== "SecuredContainer"
-                && item.slotId !== "Pockets") {
+            if (item.parentId === tmpList.data[0].Inventory.equipment) {
+                // store it and delete later because i dont know its not working otherwiswe
+                if (item.slotId !== "Pockets" || item.slotId !== "SecuredContainer" || item.slotId !== "Scabbard") {
+                    items_to_delete.push(item._id);
+                }
 
-                //store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(item._id);
-            }
-
-            // we need pocket id for later, its working differently
-            if (item.slotId === "Pockets") {
-                pocketid = item._id;
+                // we need pocket id for later, its working differently
+                if (item.slotId === "Pockets") {
+                    pocketid = item._id;
+                }
             }
         }
 
