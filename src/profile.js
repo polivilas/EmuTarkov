@@ -160,12 +160,12 @@ function saveProfileProgress(offRaidData) {
     // replace bsg shit long ID with proper one
     let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
 
-    for (let recalID in offRaidProfile.Inventory.items) {
+    for (let item in offRaidProfile.Inventory.items) {
         let insuredItem = false;
 
         // insured items shouldn't be renamed
         for (let insurance in tmpList.data[0].InsuredItems) {
-            if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[recalID]) {
+            if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]) {
                 console.log("editing id found insured item");
                 insuredItem = true;
             }
@@ -176,20 +176,20 @@ function saveProfileProgress(offRaidData) {
             break;
         }
 
-        if (offRaidProfile.Inventory.items[recalID]._id === offRaidProfile.Inventory.equipment) {
-            break;
+        if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.equipment) {
+            continue;
         }
 
-        if (offRaidProfile.Inventory.items[recalID]._id === offRaidProfile.Inventory.questRaidItems) {
-            break;
+        if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.questRaidItems) {
+            continue;
         }
 
-        if (offRaidProfile.Inventory.items[recalID]._id === offRaidProfile.Inventory.questStashItems) {
-            break;
+        if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.questStashItems) {
+            continue;
         }
 
         // replace id
-        let old_id = offRaidProfile.Inventory.items[recalID]._id;
+        let old_id = offRaidProfile.Inventory.items[item]._id;
         let new_id = utility.generateNewItemId();
 
         string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
