@@ -132,7 +132,7 @@ function saveProfileProgress(offRaidData) {
 
         // check if item exists already
         for (let item of tmpList.data[0].Inventory.items) {
-            if ( offRaidProfile.Inventory.items[offRaidItem]._id === tmpList.data[0].Inventory.items[item]._id) {
+            if (offRaidProfile.Inventory.items[offRaidItem]._id === item._id) {
                 found = true;
             }            
         }
@@ -145,6 +145,7 @@ function saveProfileProgress(offRaidData) {
         let currentItem = offRaidProfile.Inventory.items[offRaidItem];
 
         if (currentItem.hasOwnProperty("upd")) {
+            // property already exists, so we can skip it
             if (currentItem.upd.hasOwnProperty("SpawnedInSession")) {
                 continue;
             }
