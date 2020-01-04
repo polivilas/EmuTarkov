@@ -254,7 +254,7 @@ function getMoney(tmpList, amount, body, output_temp) {
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
     trader.setTrader(tmpTraderInfo.data);
     trader.lvlUp(body.tid);
-    output.data.currentSalesSums[body.tid] = saleSum;
+    output_temp.data.currentSalesSums[body.tid] = saleSum;
 
     profile.setCharacterData(tmpList);
     return output_temp;
