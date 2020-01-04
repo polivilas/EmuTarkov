@@ -183,7 +183,6 @@ function saveProfileProgress(offRaidData) {
         for (let item of tmpList.data[0].Inventory.items) {
             if (item.parentId === tmpList.data[0].Inventory.equipment
                 && item.slotId !== "SecuredContainer"
-                //&& item.slotId !== "Scabbard"
                 && item.slotId !== "Pockets") {
 
                 //store it and delete later because i dont know its not working otherwiswe

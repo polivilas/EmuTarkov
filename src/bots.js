@@ -98,13 +98,13 @@ function generateBot(botBase, role) {
 		let sideChance = utility.getRandomInt(0, 99);
 		botBase.Info.Level = Math.floor(Math.random()*Math.floor(70));
 		
-		if (spawnChance < settings.gameplay.bots.pmcChance) {
-			if (sideChance < 50) {
-				botBase.Info.Side = "Bear";
-				type = "bear";
-			} else {
+		if (spawnChance < settings.gameplay.bots.pmcSpawnChance) {
+			if (sideChance < settings.gameplay.bots.pmcUsecChance) {
 				botBase.Info.Side = "Usec";
 				type = "usec";
+			} else {
+				botBase.Info.Side = "Bear";
+				type = "bear";
 			}
 		}
 	}
