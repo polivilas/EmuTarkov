@@ -308,7 +308,7 @@ function cache() {
     filepaths.user.cache.weather = "user/cache/weather.json";
     filepaths.user.cache.templates = "user/cache/templates.json";
     filepaths.user.cache.mods = "user/cache/mods.json";
-    filepaths.user.cache.globals = "user/cache/mods.json";
+    filepaths.user.cache.globals = filepaths.globals;
 
     for (let assort in assortList) {
         filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + assortList[assort] + ".json";
@@ -332,8 +332,8 @@ function routeDatabase() {
     maps();
     bots();
     images();
-    cache();
     others();
+    cache();
 }
 
 function all() {

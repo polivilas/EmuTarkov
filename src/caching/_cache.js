@@ -240,7 +240,9 @@ function mod() {
 }
 
 function globals() {
-    let base = filepaths.globals;
+    console.log("Caching: globals.json");    
+
+    let base = json.parse(json.read(filepaths.user.cache.globals));
 
     if (typeof base.crc != "undefined") {
         base.crc = utility.adlerGen(json.stringify(base.data));
