@@ -44,6 +44,11 @@ function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
     return Stash2D;
 }
 
+function isMoneyTpl(tpl) {
+    const moneyTplArray = ['569668774bdc2da2298b4568', '5696686a4bdc2da3298b456a', '5449016a4bdc2d6f028b456f'];
+    return moneyTplArray.findIndex(moneyTlp => moneyTlp === tpl) > -1;
+}
+
 /* Gets currency TPL from TAG
 * input: currency(tag)
 * output: template ID
@@ -93,11 +98,24 @@ function fromRUB(value, currency) {
 * input:
 * output: boolean
 * */
-function payMoney(tmpList, body) {
+function payMoney(tmpList, body) {    
     let output = item.getOutput();
     let profileItems = tmpList.data[0].Inventory.items;
     const tmpTraderInfo = trader.get(body.tid);
     const currencyTpl = getCurrency(tmpTraderInfo.data.currency);
+
+    // delete barter things(not a money) from inventory
+    if (body.Action === 'TradingConfirm') {
+        body.scheme_items.forEach((schemeItem, index) => {
+            let item = profileItems.find(inventoryItem => schemeItem.id === inventoryItem._id);
+
+            if (item !== undefined && !isMoneyTpl(item._tpl)) {
+                profileItems = profileItems.filter(inventoryItem => item._id !== inventoryItem._id);
+                output.data.items.del.push({"_id": item._id});
+                body.scheme_items[index].count = 0;
+            }
+        });
+    }
 
     // find all items with currency _tpl id
     const moneyItems = itm_hf.findMoney("tpl", tmpList, currencyTpl);
@@ -121,15 +139,15 @@ function payMoney(tmpList, body) {
         let itemAmount = moneyItem.upd.StackObjectsCount;
 
         if (leftToPay >= itemAmount) {
-            leftToPay -= itemAmount;
             output.data.items.del.push({"_id": moneyItem._id});
             profileItems = profileItems.filter(item => item._id !== moneyItem._id);
+            leftToPay -= itemAmount;
         } else {
-            leftToPay = 0;
-            output.data.items.change.push(moneyItem);
             moneyItem.upd.StackObjectsCount -= leftToPay;
+            output.data.items.change.push(moneyItem);
+            leftToPay = 0;
         }
-        
+
         if (leftToPay === 0) {
             break;
         }
@@ -151,6 +169,7 @@ function payMoney(tmpList, body) {
     item.setOutput(output);
     return true;
 }
+
 
 /* Find Barter items in the inventory
 * input: object of player data, string BarteredItem ID
