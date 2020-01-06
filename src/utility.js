@@ -108,7 +108,6 @@ function getLocalIpAddress() {
 
 module.exports.clearString = clearString;
 module.exports.adlerGen = adlerGen;
-module.exports.generateCRC = generateCRC;
 module.exports.getRandomInt = getRandomInt;
 module.exports.getRandomIntEx = getRandomIntEx;
 module.exports.getDirList = getDirList;
