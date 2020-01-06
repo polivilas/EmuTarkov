@@ -474,16 +474,23 @@ function find(data) {
 }
 
 // Buying item from trader
-function addItemToStash(tmpList, body, trad = "") {
+function addItemToStash(tmpList, body, traderName = "") {
     item.resetOutput();
 
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
     let output = item.getOutput();
-    let tmpTrader = json.parse(json.read(filepaths.user.cache.assort_everything));
+    let tmpTraderAssort = {};
 
-    for (let item of tmpTrader.data.items) {
+    if (traderName === "") {
+        tmpTraderAssort = trader.getAssort(body.tid);
+    } else {
+        // its for fleamarket only
+        tmpTraderAssort = json.parse(json.read(filepaths.user.cache.assort_everything));
+    }
+
+    for (let item of tmpTraderAssort.data.items) {
         if (item._id === body.item_id) {
             let MaxStacks = 1;
             let StacksValue = [];
@@ -492,9 +499,10 @@ function addItemToStash(tmpList, body, trad = "") {
             // split stacks if the size is higher than allowed by StackMaxSize
             if (body.count > tmpItem._props.StackMaxSize) {
                 let count = body.count;
-                //maxstacks if not divided by then +1
                 let calc = body.count - (Math.floor(body.count / tmpItem._props.StackMaxSize) * tmpItem._props.StackMaxSize);
+                
                 MaxStacks = (calc > 0) ? MaxStacks + Math.floor(count / tmpItem._props.StackMaxSize) : Math.floor(count / tmpItem._props.StackMaxSize);
+
                 for (let sv = 0; sv < MaxStacks; sv++) {
                     if (count > 0) {
                         if (count > tmpItem._props.StackMaxSize) {
@@ -515,7 +523,7 @@ function addItemToStash(tmpList, body, trad = "") {
                 tmpList = profile.getCharacterData();
 
                 let StashFS_2D = itm_hf.recheckInventoryFreeSpace(tmpList);
-                let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTrader.data.items);
+                let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTraderAssort.data.items);
                 let tmpSizeX = ItemSize[0];
                 let tmpSizeY = ItemSize[1];
 
@@ -563,48 +571,53 @@ function addItemToStash(tmpList, body, trad = "") {
                                     break;
                                 }
 
-                                for (let tmpKey in tmpTrader.data.items) {
-                                    if (tmpTrader.data.items[tmpKey].parentId && tmpTrader.data.items[tmpKey].parentId === toDo[0][0]) {
+                                for (let tmpKey in tmpTraderAssort.data.items) {
+                                    if (tmpTraderAssort.data.items[tmpKey].parentId && tmpTraderAssort.data.items[tmpKey].parentId === toDo[0][0]) {
                                         newItem = utility.generateNewItemId();
-                                        let SlotID = tmpTrader.data.items[tmpKey].slotId;
+                                        let SlotID = tmpTraderAssort.data.items[tmpKey].slotId;
                                         if (SlotID === "hideout") {
                                             output.data.items.new.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTrader.data.items[tmpKey]._tpl,
+                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
                                                 "slotId": SlotID,
                                                 "location": {"x": x, "y": y, "r": "Horizontal"},
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
+
                                             tmpList.data[0].Inventory.items.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTrader.data.items[tmpKey]._tpl,
+                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
-                                                "slotId": tmpTrader.data.items[tmpKey].slotId,
+                                                "slotId": tmpTraderAssort.data.items[tmpKey].slotId,
                                                 "location": {"x": x, "y": y, "r": "Horizontal"},
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
                                         } else {
                                             output.data.items.new.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTrader.data.items[tmpKey]._tpl,
+                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
                                                 "slotId": SlotID,
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
+
                                             tmpList.data[0].Inventory.items.push({
                                                 "_id": newItem,
-                                                "_tpl": tmpTrader.data.items[tmpKey]._tpl,
+                                                "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
-                                                "slotId": tmpTrader.data.items[tmpKey].slotId,
+                                                "slotId": tmpTraderAssort.data.items[tmpKey].slotId,
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
                                         }
-                                        toDo.push([tmpTrader.data.items[tmpKey]._id, newItem]);
+
+                                        toDo.push([tmpTraderAssort.data.items[tmpKey]._id, newItem]);
                                     }
                                 }
+
                                 toDo.splice(0, 1);
                             }
+
                             break addedProperly;
                         }
                     }
@@ -612,6 +625,7 @@ function addItemToStash(tmpList, body, trad = "") {
                 // save after each added item
                 profile.setCharacterData(tmpList);
             }
+
             return output;
         }
     }

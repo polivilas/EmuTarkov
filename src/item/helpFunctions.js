@@ -2,16 +2,6 @@
 
 require('../libs.js');
 
-var output = "";
-
-function returnOutput() {
-    return output;
-}
-
-function setInternalOutput(data) {
-    output = data;
-}
-
 /* Made a 2d array table with 0 - free slot and 1 - used slot
 * input: PlayerData
 * output: table[y][x]
@@ -103,14 +93,14 @@ function fromRUB(value, currency) {
 * input:
 * output: boolean
 * */
-function payMoney(profileData, body) {
-    output = item.getOutput();
+function payMoney(tmpList, body) {
+    let output = item.getOutput();
+    let profileItems = tmpList.data[0].Inventory.items;
     const tmpTraderInfo = trader.get(body.tid);
     const currencyTpl = getCurrency(tmpTraderInfo.data.currency);
-    let profileItems = profileData.data[0].Inventory.items;
 
     // find all items with currency _tpl id
-    const moneyItems = itm_hf.findMoney("tpl", profileData, currencyTpl);
+    const moneyItems = itm_hf.findMoney("tpl", tmpList, currencyTpl);
 
     // prepare a price for barter
     let barterPrice = body.scheme_items.reduce((total, item) => {
@@ -126,6 +116,7 @@ function payMoney(profileData, body) {
     if (moneyItems.length <= 0 || amountMoney < barterPrice) return false;
 
     let leftToPay = barterPrice;
+
     for (let moneyItem of moneyItems) {
         let itemAmount = moneyItem.upd.StackObjectsCount;
 
@@ -134,14 +125,17 @@ function payMoney(profileData, body) {
             output.data.items.del.push({"_id": moneyItem._id});
             profileItems = profileItems.filter(item => item._id !== moneyItem._id);
         } else {
-            moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;
             output.data.items.change.push(moneyItem);
+            moneyItem.upd.StackObjectsCount -= leftToPay;
         }
-        if (leftToPay === 0) break;
+        
+        if (leftToPay === 0) {
+            break;
+        }
     }
 
-    profileData.data[0].Inventory.items = profileItems;
+    tmpList.data[0].Inventory.items = profileItems;
 
     // set current sale sum
     let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(barterPrice, tmpTraderInfo.data.currency);
@@ -152,7 +146,7 @@ function payMoney(profileData, body) {
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
-    profile.setCharacterData(profileData);
+    profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);
     item.setOutput(output);
     return true;
@@ -208,7 +202,7 @@ function getMoney(tmpList, amount, body, output_temp) {
         // receive money
         item.upd.StackObjectsCount += calcAmount;
         output_temp.data.items.change.push(item);
-        console.log("Money received: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
+        console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green", true);
         skip = true;
         break;
     }
@@ -418,5 +412,3 @@ module.exports.getPlayerStash = getPlayerStash;
 module.exports.getItem = getItem;
 module.exports.getSize = getSize;
 module.exports.findAndReturnChildren = findAndReturnChildren;
-module.exports.returnOutput = returnOutput;
-module.exports.setInternalOutput = setInternalOutput;
