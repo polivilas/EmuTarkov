@@ -1,0 +1,143 @@
+{
+	"_id": "5d25e29d86f7740a22516326",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d67b5ca86f7744dcc5e2f88.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "13000",
+				"id": "5d6672cc86f774266f07fc9c",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e12b4878441bd0e2c0fa86a",
+				"value": "40000",
+				"id": "5d6672e086f774131e206b3a",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e12b4878441bd0e2c0fa86a",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 40000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e12b4878441bd0e2c0fa86b",
+				"value": "3",
+				"id": "5d6672f486f774368e1b7866",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e12b4878441bd0e2c0fa86b",
+						"_tpl": "5b3b6e495acfc4330140bd88",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.03",
+				"id": "5d77cf1e86f7742fa857dd74",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5d25dae186f77443e55d2f78",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5d77cda786f774319c488837"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "10",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d25fd8386f77443fe457cad",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"daytime": {
+										"from": 21,
+										"to": 3
+									},
+									"id": "5d25feb086f77444001e2e4e"
+								}
+							},
+							{
+								"_parent": "Equipment",
+								"_props": {
+									"equipmentExclusive": [
+										[
+											"5c0696830db834001d23f5da"
+										],
+										[
+											"5c066e3a0db834001b7353f0"
+										],
+										[
+											"5c0558060db834001b735271"
+										],
+										[
+											"57235b6f24597759bf5a30f1"
+										],
+										[
+											"5c110624d174af029e69734c"
+										],
+										[
+											"5a7c74b3e899ef0014332c29"
+										],
+										[
+											"5a1eaa87fcdbcb001865f75e"
+										],
+										[
+											"5b3b6e495acfc4330140bd88"
+										],
+										[
+											"5d1b5e94d7ad1a2b865a96b0"
+										]
+									],
+									"id": "5d2f573986f7745e043a808d"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d25fd8386f77443fe457cae"
+				}
+			}
+		],
+		"Fail": []
+	}
+}
