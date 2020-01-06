@@ -239,6 +239,16 @@ function mod() {
     json.write("user/cache/mods.json", settings.mods.list);
 }
 
+function globals() {
+    let base = filepaths.globals;
+
+    if (typeof base.crc != "undefined") {
+        base.crc = utility.adlerGen(json.stringify(base.data));
+    }
+
+    json.write("user/cache/globals.json", base);
+}
+
 function all() {
     let force = false;
     let assortList = Object.keys(filepaths.assort);
@@ -292,6 +302,10 @@ function all() {
 
     if (force || !fs.existsSync("user/cache/templates.json")) {
         templates();
+    }
+
+    if (force || !fs.existsSync("user/cache/globals.json")) {
+        globals();
     }
 
     for (let assort in assortList) {

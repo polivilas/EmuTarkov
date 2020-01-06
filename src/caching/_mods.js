@@ -158,10 +158,10 @@ function globals(mod) {
         return;
     }
 
-    filepaths.globals = mod.files.globals;
+    filepaths.user.cache.globals = mod.files.globals;
 }
 
-function globals(mod) {
+function profile(mod) {
     if (!mod.files.hasOwnProperty("profile")) {
         return;
     }
@@ -340,6 +340,7 @@ function load() {
         templatesCategories(mod);
         templatesItems(mod);
         globals(mod);
+        profile(mod);
         assort(mod);
         locales(mod);
     }
