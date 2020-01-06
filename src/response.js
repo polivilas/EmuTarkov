@@ -377,7 +377,7 @@ function offlineRaidSave(url, info) {
 // response: {"err":0,"errmsg":null,"data":[{"type":1,"message":{"dt":1576780987,"type":1,"text":"Oh you're Dreamz init","uid":"5b09e7ac8ed239663f049ac3"},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},{"type":1,"message":{"dt":1576778783,"type":1,"text":"suck my ass","uid":"5a3a9f3f46b16870c921cfa0"},"new":0,"attachmentsNew":0,"_id":"5a3a9f3f46b16870c921cfa0","Users":[{"_id":"5a3a9f3f46b16870c921cfa0","Info":{"Nickname":"ZackFair","Side":"Bear","Level":9,"MemberCategory":"Default"}}],"pinned":false},{"type":1,"message":{"dt":1536917869,"type":1,"text":"trying*","uid":"5b09e7ac8ed239663f049ac3"},"new":0,"attachmentsNew":0,"pinned":false,"_id":"5b7a8952f0dd353a3d5bed8f","Users":[{"_id":"5b7a8952f0dd353a3d5bed8f","Info":{"Nickname":"laplaie974","Side":"Bear","Level":1,"MemberCategory":"Default"}}]}]}
 // limit: amount of messages to display
 // offset: no idea
-function getMailDialogList() {
+function getMailDialogList(url, info) {
     // these are used to show user conversations
     // a message looks like this: {"type":1,"message":{"dt":<datetime>,"type":1,"text":<message text>,"uid":<user id, like user0pmc>},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},
 
@@ -390,7 +390,7 @@ function getMailDialogList() {
 // dialogId: unique ID of the message list
 // limit: amount of messages visible
 // offset: no idea
-function getMailDialogView() {
+function getMailDialogView(url, info) {
     // an overview of the object is like this: {"messages"[list of messages], "profiles":[list of profiles], "hasMessagesWithRewards":<does it contain message with items?>}
     // a message looks like this: {"_id":<string, unique>, "uid": <user id that sent message, like ussr0pmc>, "dt": <datetime with milliseconds>, "text": <the message to display>. "hasRewards": <item attached to message?>}
     // a profile looks like this: {"_id":<user id, like user0pmc>,"Info":{"Nickname":<nickname of profile>,"Side":<side of profile>,"Level":<profile level>,"MemberCategory":"Default"}}
@@ -402,7 +402,7 @@ function getMailDialogView() {
 // request: {"dialogId":"54cb57776803fa99248b456e"}
 // response: {"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"54cb57776803fa99248b456e","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"54cb57776803fa99248b456e","pinned":false}}
 // dialogId: user id, like user0pmc
-function getMailDialogInfo() {
+function getMailDialogInfo(url, info) {
     // an overview of the object is this:
 
     return '{"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"user' + constants.getActiveID() + 'pmc","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"user' + constants.getActiveID() + 'pmc","pinned":false}}';
