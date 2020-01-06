@@ -71,24 +71,28 @@ function lvlUp(id) {
     let currentTrader = get(id);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 
+    // level up player
+    let checkedExp = 0;
+
+    for (let level in globalSettings.data.config.exp.level.exp_table) {
+        if (currentProfile.data[0].Info.Experience < checkedExp) {
+            break;
+        }
+
+        currentProfile.data[0].Info.Level = 1 + globalSettings.data.config.exp.level.exp_table[level];
+        checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
+    }
+
+    // level up traders
     for (let level in loyaltyLevels) {
-        if (currentTrader.data.loyalty.currentLevel <= level) {
-            continue;
+        // max level reached
+        if (loyaltyLevels[level].minLevel > currentProfile.data[0].Info.Level
+            || loyaltyLevels[level].minSalesSum > currentTrader.data.loyalty.currentSalesSum
+            || loyaltyLevels[level].minStanding > currentTrader.data.loyalty.currentStanding) {
+            break;
         }
 
-        if (loyaltyLevels[level].minLevel > currentProfile.data[0].Info.Level) {
-            return;
-        }
-
-        if (loyaltyLevels[level].minSalesSum > currentTrader.data.loyalty.currentSalesSum) {
-            return;
-        }
-
-        if (loyaltyLevels[level].minStanding > currentTrader.data.loyalty.currentStanding) {
-            return;
-        }
-
-        // level starts at 0, currentLevel at 1
+        // set current level found
         currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
         setTrader(currentTrader.data);
     }

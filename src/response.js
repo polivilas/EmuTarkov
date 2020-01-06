@@ -116,7 +116,7 @@ function showInventoryChecker(url, info) {
 
 function getGameConfig() {
     let backendUrl = "https://" + ip;
-    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid": "user' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
+    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid":' + constants.getActiveID() + '", "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 }
 
 function getFriendList(url, info) {
@@ -280,7 +280,7 @@ function changeNickname(url, info) {
 
 function changeVoice(url, info) {
     profile.changeVoice(info);
-    return '{"err":0, "errmsg":null, "data":null}';
+    return nullResponse(url, info);
 }
 
 function getGroupStatus(url, info) {
@@ -367,7 +367,7 @@ function offlineRaidSave(url, info) {
         return "DONE";
     }
 
-    constants.setActiveID(info.profile.aid.replace("user", ""));
+    constants.setActiveID(info.profile.aid);
     profile.saveProfileProgress(info);
     return "DONE";
 }
@@ -381,7 +381,7 @@ function getMailDialogList() {
     // these are used to show user conversations
     // a message looks like this: {"type":1,"message":{"dt":<datetime>,"type":1,"text":<message text>,"uid":<user id, like user0pmc>},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},
 
-    return '{"err":0, "errmsg":null, "data":[]}';
+    return nullArrayResponse(url, info);
 }
 
 // this displays the full conversation
@@ -395,7 +395,7 @@ function getMailDialogView() {
     // a message looks like this: {"_id":<string, unique>, "uid": <user id that sent message, like ussr0pmc>, "dt": <datetime with milliseconds>, "text": <the message to display>. "hasRewards": <item attached to message?>}
     // a profile looks like this: {"_id":<user id, like user0pmc>,"Info":{"Nickname":<nickname of profile>,"Side":<side of profile>,"Level":<profile level>,"MemberCategory":"Default"}}
 
-    return '{"err":0, "errmsg":null, "data":null}';
+    return nullResponse(url, info);
 }
 
 // these are trader conversations
@@ -485,7 +485,7 @@ function getResponse(req, body) {
         if (typeof crctest.crc != "undefined") {
             if (info.crc.toString() === crctest.crc.toString()) {
                 console.log("[Loading from game cache files]", "", "", true);
-                output = '{"err":0, "errmsg":null, "data":null}';
+                output = nullResponse(url, info);
             } else {
                 output = JSON.stringify(crctest).replace(/\s\s+/g, '');
             }

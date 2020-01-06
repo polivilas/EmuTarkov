@@ -44,7 +44,7 @@ function genericCacher(cachename, filepathNode, output = "") {
     }
 
     if (typeof base.crc != "undefined") {
-        base.crc = utility.generateCRC(json.stringify(base.data));
+        base.crc = utility.adlerGen(json.stringify(base.data));
     }
     
     json.write("user/cache/" + cachename, base);
@@ -73,6 +73,10 @@ function languages() {
         let fileData = json.parse(json.read(locale.name));
         
         base.data.push(fileData);
+    }
+
+    if (typeof base.crc != "undefined") {
+        base.crc = utility.adlerGen(json.stringify(base.data));
     }
 
     json.write("user/cache/languages.json", base);
@@ -126,6 +130,10 @@ function templates() {
         }
     }
 
+    if (typeof base.crc != "undefined") {
+        base.crc = utility.adlerGen(json.stringify(base.data));
+    }
+
     json.write("user/cache/templates.json", base);
 }
 
@@ -158,6 +166,10 @@ function assorts(trader) {
                 base.data.loyal_level_items[fileName] = fileData;
             }
         }
+    }
+
+    if (typeof base.crc != "undefined") {
+        base.crc = utility.adlerGen(json.stringify(base.data));
     }
 
     json.write("user/cache/assort_" + trader + ".json", base);
@@ -213,6 +225,10 @@ function locales(locale) {
                 base.data.trading[fileName] = fileData;
             }
         }
+    }
+
+    if (typeof base.crc != "undefined") {
+        base.crc = utility.adlerGen(json.stringify(base.data));
     }
 
     json.write("user/cache/locale_" + locale + ".json", base);

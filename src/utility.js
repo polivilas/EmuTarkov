@@ -10,13 +10,6 @@ function adlerGen(string){
 	return adler32.sum(string);
 }
 
-function generateCRC(string) {
-    return string.split("").reduce(function(a, b) {
-        a = ((a << 5) - a) + b.charCodeAt(0);
-        return a & a;
-    }, 0);
-}
-
 function getRandomInt(min = 0, max = 100) {
     min = Math.ceil(min);
     max = Math.floor(max);

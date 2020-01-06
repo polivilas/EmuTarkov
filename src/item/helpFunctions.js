@@ -2,7 +2,6 @@
 
 require('../libs.js');
 
-const templates = json.parse(json.read(filepaths.user.cache.templates));
 var output = "";
 
 function returnOutput() {

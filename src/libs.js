@@ -59,6 +59,7 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.botBase = json.parse(json.read(filepaths.bots.base));
 	global.globalSettings = json.parse(json.read(filepaths.globals));
 	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
+	global.templates = json.parse(json.read(filepaths.user.cache.templates));
 
 	// Other
 	global.printf = console.log;

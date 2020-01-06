@@ -57,7 +57,7 @@ function create(info) {
     let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
     character._id = "user" + constants.getActiveID() + "pmc";
-    character.aid = "user" + constants.getActiveID();
+    character.aid = constants.getActiveID();
     character.savage = "user" + constants.getActiveID() + "scav";
     character.Info.Nickname = info.nickname;
     character.Info.LowerNickname = info.nickname.toLowerCase();
@@ -114,7 +114,6 @@ function saveProfileProgress(offRaidData) {
 
     // replace data
     tmpList.data[0].Info.Level = offRaidProfile.Info.Level;
-    tmpList.data[0].Health = offRaidProfile.Health;
     tmpList.data[0].Skills = offRaidProfile.Skills;
     tmpList.data[0].Stats = offRaidProfile.Stats;
     tmpList.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
@@ -152,7 +151,7 @@ function saveProfileProgress(offRaidData) {
 
             currentItem.upd["SpawnedInSession"] = true;
         } else {
-            currentItem["udp"] = {"SpawnedInSession": true};
+            currentItem["upd"] = {"SpawnedInSession": true};
         }
 
         offRaidProfile.Inventory.items[offRaidItem] = currentItem;
@@ -166,7 +165,7 @@ function saveProfileProgress(offRaidData) {
 
         // insured items shouldn't be renamed
         for (let insurance in tmpList.data[0].InsuredItems) {
-            if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]) {
+            if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
                 console.log("editing id found insured item");
                 insuredItem = true;
             }
@@ -174,7 +173,7 @@ function saveProfileProgress(offRaidData) {
 
         // do not replace important ID's
         if (insuredItem) {
-            break;
+            continue;
         }
 
         if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.equipment) {
