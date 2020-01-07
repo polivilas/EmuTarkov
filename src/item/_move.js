@@ -242,13 +242,15 @@ function swapItem(tmpList, body) {
 /* Give Item
 * its used for "add" item like gifts etc.
 * */
-function addItem(tmpList, body) {
-    item.resetOutput();
+function addItem(tmpList, body, output = {}) {
+    if (output === {}) {
+        item.resetOutput();
+        output = item.getOutput();
+    }
 
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
-    let output = item.getOutput();
     let tmpTraderAssort = trader.getAssort(body.tid);
 
     for (let item of tmpTraderAssort.data.items) {

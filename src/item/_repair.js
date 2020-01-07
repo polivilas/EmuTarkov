@@ -19,18 +19,10 @@ function main(tmpList, body) {
 
         let itemRepairCost = items.data[itemToRepair._tpl]._props.RepairCost;
 
-        itemRepairCost = Math.round(itemRepairCost * repairItem.count * repairRate);
+        itemRepairCost = Math.round((itemRepairCost * repairItem.count * repairRate) * settings.gameplay.trading.repairMultiplier);
 
         // pay the item	to profile
-        if (!itm_hf.payMoney(tmpList,
-            {
-                scheme_items: [{
-                    id: repairItem._id,
-                    count: Math.round(itemRepairCost * settings.gameplay.trading.repairMultiplier)
-                }],
-                tid: body.tid
-            }
-        )) {
+        if (!itm_hf.payMoney(tmpList, {scheme_items: [{id: repairItem._id, count: Math.round(itemRepairCost)}], tid: body.tid})) {
             console.log("no money found");
             return "";
         }
