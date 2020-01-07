@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function buyItem(tmpList, body, traderName = "") {
+function buyItem(tmpList, body) {
     // pay the item	to profile
     if (!itm_hf.payMoney(tmpList, body)) {
         console.log("no money found");
@@ -62,10 +62,10 @@ function sellItem(tmpList, body) {
 }
 
 // separate is that selling or buying
-function confirmTrading(tmpList, body, traderName = "") {
+function confirmTrading(tmpList, body) {
     // buying
     if (body.type === "buy_from_trader") {
-        return buyItem(tmpList, body, traderName);
+        return buyItem(tmpList, body);
     }
 
     // selling
@@ -88,13 +88,13 @@ function confirmRagfairTrading(tmpList, body) {
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";
-        body.tid = "everything";
+        body.tid = "ragfair";
         body.item_id = offer.id;
         body.count = offer.count;
         body.scheme_id = 0;
         body.scheme_items = offer.items;
 
-        let tmpOutput = confirmTrading(tmpList, body, "ragfair");
+        let tmpOutput = confirmTrading(tmpList, body);
 
         for (let item of tmpOutput.data.items.new) {
             output.data.items.new.push(item);

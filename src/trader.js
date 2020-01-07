@@ -16,7 +16,7 @@ function loadAllTraders() {
             continue;
         }
 
-        if (filepaths.traders.hasOwnProperty(file) && checkTraders(file)) {
+        if (filepaths.traders.hasOwnProperty(file) && file !== "ragfair") {
             traders.push(json.parse(json.read(getPath(file))));
         }
     }
@@ -24,20 +24,10 @@ function loadAllTraders() {
 	return {err: 0, errmsg: null, data: traders};
 }
 
-function checkTraders(file) {
-    return file !== "everything";
-}
-
-function get(id, flea = false) {
-    let selectedTrader = id;
-
+function get(id) {
     // find the trader
-	if (selectedTrader == "everything" && flea) {
-		return {err: 0, errmsg: "", data: json.parse(json.read(filepaths.traders.everything))};
-	} else {
-		if (filepaths.traders.hasOwnProperty(selectedTrader)) {
-            return {err: 0, errmsg: "", data: json.parse(json.read(getPath(selectedTrader)))};
-        }
+	if (filepaths.traders.hasOwnProperty(id)) {
+        return {err: 0, errmsg: "", data: json.parse(json.read(getPath(id)))};
     }
     
     // trader not found
@@ -45,16 +35,10 @@ function get(id, flea = false) {
     return {err: 999, errmsg: "Couldn't find trader of ID " + id, data: null};
 }
 
-function getAssort(id, flea = false) {
-    let selectedTrader = id;
-
-    // always return everything trader
-	if (selectedTrader == "everything" && flea) {
-		return json.parse(json.read(filepaths.user.cache.assort_everything));
-	} else {
-        if (filepaths.user.cache.hasOwnProperty("assort_" + selectedTrader)) {
-            return json.parse(json.read(filepaths.user.cache["assort_" + selectedTrader]));
-        }
+function getAssort(id) {
+    // find the assort
+	if (filepaths.user.cache.hasOwnProperty("assort_" + id)) {
+        return json.parse(json.read(filepaths.user.cache["assort_" + id]));
     }
     
     // assort not found

@@ -474,7 +474,7 @@ function find(data) {
 }
 
 // Buying item from trader
-function addItemToStash(tmpList, body, traderName = "") {
+function addItemToStash(tmpList, body) {
     item.resetOutput();
 
     let PlayerStash = itm_hf.getPlayerStash();
@@ -482,13 +482,6 @@ function addItemToStash(tmpList, body, traderName = "") {
     let stashX = PlayerStash[0];
     let output = item.getOutput();
     let tmpTraderAssort = {};
-
-    if (traderName === "") {
-        tmpTraderAssort = trader.getAssort(body.tid);
-    } else {
-        // its for fleamarket only
-        tmpTraderAssort = json.parse(json.read(filepaths.user.cache.assort_everything));
-    }
 
     for (let item of tmpTraderAssort.data.items) {
         if (item._id === body.item_id) {
