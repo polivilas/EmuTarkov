@@ -44,7 +44,7 @@ function completeQuest(tmpList, body) {
                             newReq.item_id = rewardItem._tpl;
                             newReq.count = parseInt(reward.value);
                     
-                            profile.addItemToStash(tmpList, newReq);
+                            move_f.addItem(tmpList, newReq);
                             tmpList = profile.getCharacterData(); //update it everytime otherwise every given items are deleted
                         }
                         break;

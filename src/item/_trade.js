@@ -11,7 +11,7 @@ function buyItem(tmpList, body) {
 
     // print debug information
     console.log("Bought item: " + body.item_id, "", "", true);
-    return profile.addItemToStash(tmpList, body);
+    return move_f.addItem(tmpList, body);
 }
 
 // Selling item to trader

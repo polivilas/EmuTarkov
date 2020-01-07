@@ -105,7 +105,7 @@ function HideoutTakeItemsFromAreaSlots(tmpList, body) {
 
     		newReq.item_id = tmpList.data[0].Hideout.Areas[area].slots[0].item[0]._tpl;
     		newReq.count = 1;
-			profile.addItemToStash(tmpList, newReq);
+			move_f.addItem(tmpList, newReq);
 			tmpList = profile.getCharacterData();
 			tmpList.data[0].Hideout.Areas[area].slots.splice(0,1);
 			profile.setCharacterData(tmpList);
@@ -220,7 +220,7 @@ function HideoutTakeProduction(tmpList, body) {
 
 			newReq.item_id = crafting_receipes.data[receipe].endProduct;
 			newReq.count = crafting_receipes.data[receipe].count;
-			profile.addItemToStash(tmpList, newReq);
+			move_f.addItem(tmpList, newReq);
 			item.resetOutput();
 			return item.getOutput();
 		}	
@@ -246,7 +246,7 @@ function HideoutTakeProduction(tmpList, body) {
 							newReq.item_id = itemProd._tpl;
 							newReq.count = 1;
 		
-							let tempOutput = profile.addItemToStash(tmpList, newReq);
+							let tempOutput = move_f.addItem(tmpList, newReq);
 
 							for (let newItem of tempOutput.data.items.new) {
 								allOutput.data.items.new.push(newItem);
