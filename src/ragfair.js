@@ -159,7 +159,7 @@ function createOffer(template, price) {
 
     offerBase._id = template;
     offerBase.items[0]._tpl = template;
-    offerBase.requirements[0].count = Math.round(price * settings.gameplay.trading.insureMultiplier);
+    offerBase.requirements[0].count = Math.round(price * settings.gameplay.trading.ragfairMultiplier);;
 	//offerBase.startTime = utility.getTimestamp() - 1000;
     //offerBase.endTime = utility.getTimestamp() + 43200;
     
