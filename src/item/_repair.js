@@ -19,7 +19,7 @@ function main(tmpList, body) {
 
         let itemRepairCost = items.data[itemToRepair._tpl]._props.RepairCost;
 
-        itemRepairCost = Math.floor(itemRepairCost * repairItem.count * repairRate);
+        itemRepairCost = Math.round(itemRepairCost * repairItem.count * repairRate);
 
         // pay the item	to profile
         if (!itm_hf.payMoney(tmpList,

@@ -9,13 +9,13 @@ function getOffers(request) {
         createOfferFromBuild(request.buildItems,response);
     } else if (request.handbookId !== "" && request.linkedSearchId !== "") {
         //list specific category from a linked search
-        let linkedSearch = getLinkedSearchList(request.linkedSearchId,response );
+        let linkedSearch = getLinkedSearchList(request.linkedSearchId,response);
         let categorySearch = getCategoryList(request.handbookId);
 
         for (let p1 in categorySearch) {
             for (let search in linkedSearch) {
                 if (p1 == search) {
-                    response.data.offers.push( createOffer(search, linkedSearch[search]));
+                    response.data.offers.push(createOffer(search, linkedSearch[search]));
                 }
             }   
         }
@@ -25,14 +25,12 @@ function getOffers(request) {
         for (let price in offers) {
             response.data.offers.push(createOffer(price, offers[price]));
         }
-        
     } else if (request.handbookId !== "") {
         let offers = getCategoryList(request.handbookId);
 
         for (let price in offers) {
             response.data.offers.push(createOffer(price , offers[price]));
         }
-        
     }
 
     return json.stringify(response);
@@ -48,9 +46,9 @@ function getLinkedSearchList(linkedSearchId, response) {
         for (let itemSlot of itemLink._props.Slots) {
             for (let itemSlotFilter of itemSlot._props.filters) {
                 for (let mod of itemSlotFilter.Filter) {
-                    for (let someitem of templates.data.Items) {
-                        if (someitem.Id === mod) {
-                            tableOfItems[mod] = someitem.Price;
+                    for (let item of templates.data.Items) {
+                        if (item.Id === mod) {
+                            tableOfItems[mod] = item.Price;
                             response.data.categories[mod] = 1;
                         }
                     }
@@ -61,9 +59,9 @@ function getLinkedSearchList(linkedSearchId, response) {
 
     if (typeof itemLink._props.Chambers !== "undefined") {
         for (let patron of itemLink._props.Chambers[0]._props.filters[0].Filter) {
-            for (let someitem of templates.data.Items) {
-                if (someitem.Id === patron) {
-                    tableOfItems[patron] = someitem.Price;
+            for (let item of templates.data.Items) {
+                if (item.Id === patron) {
+                    tableOfItems[patron] = item.Price;
                     response.data.categories[patron] = 1;
                 }   
             }
@@ -122,9 +120,9 @@ function getCategoryList(handbookId) {
         if (isCateg === false) {
             for (let curItem in items.data) {
                 if (curItem === handbookId) {
-                    for (let someitem of templates.data.Items) {
-                        if (someitem.Id === handbookId) {
-                            tableOfItems[curItem] = someitem.Price;
+                    for (let item of templates.data.Items) {
+                        if (item.Id === handbookId) {
+                            tableOfItems[curItem] = item.Price;
                         }
                     }
 
@@ -141,9 +139,9 @@ function createOfferFromBuild(buildItems,response) {
     for (var itemFromBuild in buildItems) {
         for (let curItem in items.data) {
             if (curItem === itemFromBuild) {
-                for (let someitem of templates.data.Items) {
-                    if (someitem.Id === itemFromBuild) {
-                        response.data.offers.push(createOffer(curItem, (someitem.Price)));
+                for (let item of templates.data.Items) {
+                    if (item.Id === itemFromBuild) {
+                        response.data.offers.push(createOffer(curItem, (item.Price)));
                         break;
                     }
                 }
@@ -161,7 +159,7 @@ function createOffer(template, price) {
 
     offerBase._id = template;
     offerBase.items[0]._tpl = template;
-    offerBase.requirements[0].count = price;
+    offerBase.requirements[0].count = Math.round(price * settings.gameplay.trading.insureMultiplier);
 	//offerBase.startTime = utility.getTimestamp() - 1000;
     //offerBase.endTime = utility.getTimestamp() + 43200;
     
