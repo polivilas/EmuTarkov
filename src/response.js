@@ -473,21 +473,21 @@ function getResponse(req, body) {
 
     // request couldn't be handled
     if (output === "") {
-        console.log("[UNHANDLED][" + url + "] request data: " + JSON.stringify(info), "white", "red");
+        console.log("[UNHANDLED][" + url + "] request data: " + json.stringify(info), "white", "red");
         output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
         return output;
     }
 
     // load from cache when server is in release mode
     if (typeof info.crc != "undefined") {
-        let crctest = JSON.parse(output);
+        let crctest = json.parse(output);
 
         if (typeof crctest.crc != "undefined") {
             if (info.crc.toString() === crctest.crc.toString()) {
                 console.log("[Loading from game cache files]", "", "", true);
                 output = nullResponse(url, info);
             } else {
-                output = JSON.stringify(crctest).replace(/\s\s+/g, '');
+                output = json.stringify(crctest).replace(/\s\s+/g, '');
             }
 
             return output;

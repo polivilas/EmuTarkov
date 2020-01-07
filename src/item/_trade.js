@@ -2,8 +2,6 @@
 
 require('../libs.js');
 
-var output = "";
-
 function buyItem(tmpList, body, traderName = "") {
     // pay the item	to profile
     if (!itm_hf.payMoney(tmpList, body)) {
@@ -18,16 +16,16 @@ function buyItem(tmpList, body, traderName = "") {
 
 // Selling item to trader
 function sellItem(tmpList, body) {
-    let money = 0;
-    let prices = JSON.parse(profile.getPurchasesData());
-
     item.resetOutput();
-    output = item.getOutput();
+
+    let money = 0;
+    let prices = json.parse(profile.getPurchasesData());
+    let output = item.getOutput();
 
     // find the items to sell
     for (let i in body.items) {
         // print item trying to sell
-        console.log("selling item" + JSON.stringify(body.items[i]), "", "", true);
+        console.log("selling item" + json.stringify(body.items[i]), "", "", true);
 
         // profile inventory, look into it if item exist
         for (let item of tmpList.data[0].Inventory.items) {
@@ -80,38 +78,30 @@ function confirmTrading(tmpList, body, traderName = "") {
 
 // Ragfair trading
 function confirmRagfairTrading(tmpList, body) {
-    /*
-    { Action: 'RagFairBuyOffer',  offerId: '56d59d3ad2720bdb418b4577',  count: 1,  items: [ { id: '1566757577968610909', count: 42 } ] }
-    */
-
     item.resetOutput();
 
-    let ragfairOffers = body.offers;
-    let allOutput = item.getOutput()
+    let offers = body.offers;
+    let output = item.getOutput()
 
-    for (let oneOffer of ragfairOffers) {
+    for (let offer of offers) {
         tmpList = profile.getCharacterData();
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";
         body.tid = "everything";
-        body.item_id = oneOffer.id;
-        body.count = oneOffer.count;
+        body.item_id = offer.id;
+        body.count = offer.count;
         body.scheme_id = 0;
-        body.scheme_items = oneOffer.items;
+        body.scheme_items = offer.items;
 
-        let tempOutput = confirmTrading(tmpList, body, "ragfair");
+        let tmpOutput = confirmTrading(tmpList, body, "ragfair");
 
-        if (tempOutput === "") {
-            break;
-        }
-
-        for (let newItem of tempOutput.data.items.new) {
-            allOutput.data.items.new.push(newItem);
+        for (let item of tmpOutput.data.items.new) {
+            output.data.items.new.push(item);
         }
     }
 
-    return allOutput;
+    return output;
 }
 
 module.exports.buyItem = buyItem;

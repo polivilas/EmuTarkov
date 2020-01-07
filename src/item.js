@@ -84,11 +84,11 @@ function moving(info) {
 
     // return items
     if (output === "OK") {
-        return JSON.stringify(getOutput());
+        return json.stringify(getOutput());
     }
 
     if (output !== "") {
-        return JSON.stringify(output);
+        return json.stringify(output);
     }
 
     return output;

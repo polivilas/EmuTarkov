@@ -158,7 +158,7 @@ function saveProfileProgress(offRaidData) {
     }
 
     // replace bsg shit long ID with proper one
-    let string_inventory = JSON.stringify(offRaidProfile.Inventory.items);
+    let string_inventory = json.stringify(offRaidProfile.Inventory.items);
 
     for (let item in offRaidProfile.Inventory.items) {
         let insuredItem = false;
@@ -470,7 +470,7 @@ function find(data) {
     let profileId = exist(info);
 
     constants.setActiveID(profileId);
-    return JSON.stringify({profileId: profileId});
+    return json.stringify({profileId: profileId});
 }
 
 // Buying item from trader

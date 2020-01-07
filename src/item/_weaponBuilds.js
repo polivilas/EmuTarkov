@@ -14,7 +14,7 @@ function SaveBuild(tmpList, body) {
 	let savedBuilds = json.parse(json.read(getUserBuildsPath()));
 
 	//verif duplicated ids
-	let buildAsString = JSON.stringify(body);
+	let buildAsString = json.stringify(body);
 
 	let ids = [];
 	for(let itemBuild of body.items){ ids.push(itemBuild._id); }

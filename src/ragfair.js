@@ -35,7 +35,7 @@ function getOffers(request) {
         
     }
 
-    return JSON.stringify(response);
+    return json.stringify(response);
 }
 
 function getLinkedSearchList(linkedSearchId, response) {

@@ -138,7 +138,7 @@ function handleRequest(req, resp) {
                 data = constants.getFromBuffer(sessionID);
             }
             zlib.inflate(data, function (err, body) {
-                let jsonData = JSON.parse((body !== undefined) ? body.toString() : "{}");
+                let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
 
                 // get the IP address of the client
                 console.log("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
