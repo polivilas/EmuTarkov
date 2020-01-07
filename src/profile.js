@@ -208,28 +208,23 @@ function saveProfileProgress(offRaidData) {
 
     // remove inventory if player died
     if (offRaidExit !== "survived" && offRaidExit !== "runner") {
-        let pocketid = "";
         let items_to_delete = [];
 
         for (let item of tmpList.data[0].Inventory.items) {
-            if (item.parentId === tmpList.data[0].Inventory.equipment) {
-                // store it and delete later because i dont know its not working otherwiswe
-                if (item.slotId !== "Pockets" || item.slotId !== "SecuredContainer" || item.slotId !== "Scabbard") {
-                    items_to_delete.push(item._id);
-                }
-
-                // we need pocket id for later, its working differently
-                if (item.slotId === "Pockets") {
-                    pocketid = item._id;
-                }
+            if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === currentProfile.data[1].Inventory.equipment
+                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
+                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Scabbard"
+                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Pockets") {
+                items_to_delete.push(currentProfile.data[1].Inventory.items[inventoryitem]._id);
             }
-        }
 
-        // and then delete inside pockets
-        for (let item of tmpList.data[0].Inventory.items) {
-            if (item.parentId === pocketid) {
-                // store it and delete later because i dont know its not working otherwiswe
-                items_to_delete.push(item._id);
+            // pockets works differently
+            if (item.slotId === "Pockets") {
+                for (let pocket of tmpList.data[0].Inventory.items) {
+                    if (pocket.parentId === item._id) {
+                        items_to_delete.push(pocket._id);
+                    }
+                }
             }
         }
 
