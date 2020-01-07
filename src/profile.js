@@ -481,7 +481,7 @@ function addItemToStash(tmpList, body) {
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
     let output = item.getOutput();
-    let tmpTraderAssort = {};
+    let tmpTraderAssort = trader.getAssort(body.tid);
 
     for (let item of tmpTraderAssort.data.items) {
         if (item._id === body.item_id) {
