@@ -61,8 +61,7 @@ const staticRoutes = {
     "/client/friend/request/list/outbox": nullArrayResponse,
     "/client/friend/request/list/inbox": nullArrayResponse,
 
-    // EmuLib
-    "/OfflineRaidSave": offlineRaidSave,
+    // EmuTarkov-Launcher
     "/launcher/profile/login": loginUser
 };
 
@@ -359,16 +358,6 @@ function validateNickname(url, info) {
 function createProfile(url, info) {
     profile.create(info);
     return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
-}
-
-function offlineRaidSave(url, info) {
-    if (settings.gameplay.features.lootSavingEnabled === false) {
-        return "DONE";
-    }
-
-    constants.setActiveID(info.profile.aid);
-    profile.saveProfileProgress(info);
-    return "DONE";
 }
 
 // this shows a list of conversations available

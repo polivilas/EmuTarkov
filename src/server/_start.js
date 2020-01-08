@@ -112,6 +112,7 @@ function handleRequest(req, resp) {
 
         });
     } else if (req.method === "PUT") {
+        // --- offline profile saving
         req.on('data', function (data) {
             if (req.headers.hasOwnProperty("expect")) {
                 const requestLength = req.headers["content-length"] - 0;
@@ -128,11 +129,16 @@ function handleRequest(req, resp) {
 
             zlib.inflate(data, function (err, body) {
                 let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
-
+                
+                if (settings.gameplay.features.lootSavingEnabled === false) {
+                    return;
+                }
+            
                 logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
-                sendResponse(req, resp, jsonData);
+                profile.saveProfileProgress(jsonData);
             });
         });
+        // ---
     } else {
         logger.logRequest("[" + constants.getActiveID() + "][" + IP + "] " + req.url);
         sendResponse(req, resp, null);
@@ -182,27 +188,27 @@ function start() {
     logger.logRequest("╚═" + box_width + "═╝");
 
     // create HTTPS server (port 443)
-    let serverHTTPS = https.createServer(options, (req, res) => {
+    let gameServer = https.createServer(options, (req, res) => {
         handleRequest(req, res);
     }).listen(443, ip, function() {
         logger.logIp("» server url: " + "https://" + ip + "/");
     });
 
     // server already running
-    serverHTTPS.on('error', function(e) {
-        logger.logError("» Port " + 443 + " is already in use. Check if the server isn't already running");
+    gameServer.on('error', function(e) {
+        logger.logError("» Port " + 443 + " is already in use, check if the server isn't already running");
     });
 
     // create HTTP server (port 80)
-    let serverHTTP = http.createServer((req, res) => {
+    let launcherServer = http.createServer((req, res) => {
         handleRequest(req, res);
     }).listen(80, ip, function() {
         logger.logIp("» launcher url: " + "http://" + ip + "/");
     });
 
     // server already running
-    serverHTTP.on('error', function(e) {
-        logger.logError("» Port " + 80 + " is already in use. Check if the server isn't already running");
+    launcherServer.on('error', function(e) {
+        logger.logError("» Port " + 80 + " is already in use, check if the server isn't already running");
     });
 }
 
