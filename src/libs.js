@@ -60,8 +60,11 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
 	global.templates = json.parse(json.read(filepaths.user.cache.templates));
 
+	if (isFirstLaunch == "first") {
+		console.log("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);
+	}
+
 	// Other
-	global.printf = console.log;
 	global.logger = require('./logger.js');							// logger
 	global.locale = require('./locale.js');							// locale changer function
 	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
@@ -90,12 +93,6 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.response = require('./response.js');						// response
 	
 	if (isFirstLaunch == "first") {
-		printf("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);
-	}
-	
-	if (isFirstLaunch == "first") {
-		printf("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);
+		console.log("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);
 	}
 }
-
-/* Made by TheMaoci - Load only once */

@@ -2,6 +2,26 @@
 
 require('./libs.js');
 
+let fileStream = undefined;
+
+function start() {
+    let file = utility.getTime() + "_" + utility.getDate() + ".log";
+    let folder = "user/logs/";
+    let filepath = path.join(folder, file);
+
+    // create log folder
+    if (!fs.existsSync(folder)) {
+        fs.mkdirSync(folder);
+    }
+
+    // create log file
+    if (!fs.existsSync(filepath)) {
+        fs.writeFileSync(filepath);
+    }
+
+    fileStream = fs.createWriteStream(filepath, {flags: 'w'});
+}
+
 // colorData[0] -> front, colorData[1] -> back
 const colorData = [
     {
@@ -26,9 +46,7 @@ const colorData = [
     }
 ];
 
-var fileStream = undefined;
-
-console.log = function (data, colorFront, colorBack) {
+function log(data, colorFront, colorBack) {
     let setColors = "";
     let colors = ["", ""];
 
@@ -49,9 +67,9 @@ console.log = function (data, colorFront, colorBack) {
 
     // print data
     if (colors[0] !== "" || colors[1] !== "") {
-        printf(setColors + data + "\x1b[0m");
+        console.log(setColors + data + "\x1b[0m");
     } else {
-        printf(data);
+        console.log(data);
     }
 
     // write the logged data to the file
@@ -60,45 +78,34 @@ console.log = function (data, colorFront, colorBack) {
     }
 };
 
-function separator() {
-    let s = '';
-
-    for (let i = 0; i < process.stdout.columns - 1; i++) {
-        s = s + '-';
-    }
-
-    console.log(s);
+function logError(text) {
+    log(text, white, red);
 }
 
-function center(text) {
-    let count = (process.stdout.columns - text.length) / 2;
-    let space = '';
-
-    for (let i = 0; i < count; i++) {
-        space += ' ';
-    }
-
-    return space + text + space;
+function logWarning(text) {
+    log(text, white, yellow);
 }
 
-function start() {
-    let file = utility.getTime() + "_" + utility.getDate() + ".log";
-    let folder = "user/logs/";
-    let filepath = path.join(folder, file);
-
-    // create log folder
-    if (!fs.existsSync(folder)) {
-        fs.mkdirSync(folder);
-    }
-
-    // create log file
-    if (!fs.existsSync(filepath)) {
-        fs.writeFileSync(filepath);
-    }
-
-    fileStream = fs.createWriteStream(filepath, {flags: 'w'});
+function logSuccess(text) {
+    log(text, white, green);
 }
 
-module.exports.separator = separator;
-module.exports.center = center;
+function logDebug(text) {
+    log(text, white, blue);
+}
+
+function logRequest(text) {
+    log(text, blue);
+}
+
+function logData(data) {
+    log(data);
+}
+
 module.exports.start = start;
+module.exports.logError = logError;
+module.exports.logWarning = logWarning;
+module.exports.logSuccess = logSuccess;
+module.exports.logDebug = logDebug;
+module.exports.logRequest = logRequest;
+module.exports.logData = logData;
