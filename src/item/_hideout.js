@@ -66,6 +66,10 @@ function HideoutUpgradeComplete(tmpList, body) {
 
 // move items from hideout
 function HideoutPutItemsInAreaSlots(tmpList, body) {
+	item.resetOutput();
+
+	let output = item.getOutput();
+
 	for (let itemToMove in body.items) {
 		for (let inventoryItem of tmpList.data[0].Inventory.items) {
 			if (body.items[itemToMove].id !== inventoryItem._id) {
@@ -80,13 +84,13 @@ function HideoutPutItemsInAreaSlots(tmpList, body) {
 				let slot_to_add = {"item": [{"_id": inventoryItem._id, "_tpl": inventoryItem._tpl, "upd": inventoryItem.upd}]}
 
 				tmpList.data[0].Hideout.Areas[area].slots.push(slot_to_add);
-				move_f.removeItem(tmpList, {"item": inventoryItem._id});
+				output = move_f.removeItem(tmpList, {"item": inventoryItem._id}, output);
 			}
 		}
 	}
 
-	profile.setCharacterData(tmpList);	
-	return item.getOutput();
+	profile.setCharacterData(tmpList);
+	return output;
 }
 
 function HideoutTakeItemsFromAreaSlots(tmpList, body) {
@@ -103,6 +107,8 @@ function HideoutTakeItemsFromAreaSlots(tmpList, body) {
 
 		newReq.item_id = tmpList.data[0].Hideout.Areas[area].slots[0].item[0]._tpl;
 		newReq.count = 1;
+		newReq.tid = "ragfair";
+		
 		output = move_f.addItem(tmpList, newReq, output);
 		
 		tmpList = profile.getCharacterData();
@@ -126,14 +132,16 @@ function HideoutToggleArea(tmpList, body) {
 }
 
 function HideoutSingleProductionStart(tmpList, body) {
+	item.resetOutput();
 	registerProduction(tmpList, body);
 
+	let output = item.getOutput();
+
 	for (let itemToDelete of body.items) {
-		move_f.removeItem(tmpList, {"item": itemToDelete.id});
+		output = move_f.removeItem(tmpList, {"item": itemToDelete.id}, output);
 	}
 
-	item.resetOutput();
-	return item.getOutput();
+	return output;
 }
 
 function HideoutScavCaseProductionStart(tmpList, body) {
@@ -221,6 +229,7 @@ function HideoutTakeProduction(tmpList, body) {
 
 		newReq.item_id = crafting_receipes.data[receipe].endProduct;
 		newReq.count = crafting_receipes.data[receipe].count;
+		newReq.tid = "ragfair";
 		return move_f.addItem(tmpList, newReq, output);	
 	}
 
@@ -244,6 +253,7 @@ function HideoutTakeProduction(tmpList, body) {
 				tmpList = profile.getCharacterData();
 				newReq.item_id = itemProd._tpl;
 				newReq.count = 1;
+				newReq.tid = "ragfair";
 
 				let tmpOutput = move_f.addItem(tmpList, newReq, output);
 
