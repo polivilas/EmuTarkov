@@ -226,7 +226,7 @@ function getTraderList(url, info) {
 }
 
 function getServer(url, info) {
-    return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + https_port + '"}]}';
+    return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + 443 + '"}]}';
 }
 
 function searchRagfair(url, info) {
