@@ -138,7 +138,7 @@ function generate(databots) {
 
 	for (let condition of databots.conditions) {
 		for (i = 0; i < condition.Limit; i++)  {
-			var bot = json.parse(json.read(filepaths.bots.base));
+			let bot = json.parse(json.read(filepaths.bots.base));
 
 			bot._id = "bot" + utility.getRandomIntEx(99999999);
 			bot.Info.Settings.BotDifficulty = condition.Difficulty;

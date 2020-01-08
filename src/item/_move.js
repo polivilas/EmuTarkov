@@ -242,12 +242,7 @@ function swapItem(tmpList, body) {
 /* Give Item
 * its used for "add" item like gifts etc.
 * */
-function addItem(tmpList, body, output = {}) {
-    if (output === {}) {
-        item.resetOutput();
-        output = item.getOutput();
-    }
-
+function addItem(tmpList, body, output = item.getOutput()) {
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
