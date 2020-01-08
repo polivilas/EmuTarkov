@@ -20,7 +20,7 @@ function sendResponse(req, resp, body) {
     let output = "";
 
     // get response
-    if (req.method === "POST") {
+    if (req.method === "POST" || req.method === "PUT") {
         output = response.getResponse(req, body);
     } else {
         output = response.getResponse(req, "{}");
@@ -41,19 +41,19 @@ function sendResponse(req, resp, body) {
 
         // get images to look through
         if (req.url.indexOf("/quest") != -1) {
-            console.log("[IMG.quests]:" + req.url);
+            logger.logInfo("[IMG.quests]:" + req.url);
             baseNode = filepaths.images.quest;
         } else if (req.url.indexOf("/handbook") != -1) {
-            console.log("[IMG.handbook]:" + req.url);
+            logger.logInfo("[IMG.handbook]:" + req.url);
             baseNode = filepaths.images.handbook;
         } else if (req.url.indexOf("/avatar") != -1) {
-            console.log("[IMG.trader]:" + req.url);
+            logger.logInfo("[IMG.trader]:" + req.url);
             baseNode = filepaths.images.trader;
         } else if (req.url.indexOf("/banners") != -1) {
-            console.log("[IMG.banners]:" + req.url);
+            logger.logInfo("[IMG.banners]:" + req.url);
             baseNode = filepaths.images.banners;
         } else {
-            console.log("[IMG.hideout]:" + req.url);
+            logger.logInfo("[IMG.hideout]:" + req.url);
             baseNode = filepaths.images.hideout;
         }
 
@@ -83,17 +83,8 @@ function sendResponse(req, resp, body) {
         let RandomPreset = utility.getRandomInt(1, 6);
         let map = json.read(filepaths.maps[mapname.toLowerCase() + RandomPreset]);
 
-        console.log("[MAP.config]: " + mapname);
+        logger.logInfo("[MAP.config]: " + mapname);
         header_f.sendTextJson(resp, map);
-        return;
-    }
-
-    if (output === "GETPROFILEBYID") {
-        let profileIdRequested = req.url.replace("/server/profile/get/", '');
-        let profileData = profile.getProfileByID(profileIdRequested);
-
-        console.log("Profile Requested By the game : " + profileIdRequested);
-        header_f.sendTextJson(resp, profileData);
         return;
     }
 
@@ -106,20 +97,16 @@ function sendResponse(req, resp, body) {
 
 function handleRequest(req, resp) {
     let IP = req.connection.remoteAddress.replace("::ffff:", "");
-
     const sessionID = getCookies(req)['PHPSESSID'];
+
     constants.setActiveID(sessionID);
 
     if (req.method === "POST") {
-        // received data
         req.on('data', function (data) {
-            // extract data
             zlib.inflate(data, function (err, body) {
                 let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
-                // get the IP address of the client
-                console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
-
+                logger.logRequest("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                 sendResponse(req, resp, jsonData);
             });
 
@@ -135,19 +122,19 @@ function handleRequest(req, resp) {
                     resp.writeContinue();
                     return;
                 }
+
                 data = constants.getFromBuffer(sessionID);
             }
+
             zlib.inflate(data, function (err, body) {
                 let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
 
-                // get the IP address of the client
-                console.log("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
-
-                profile.saveProfileProgress(jsonData);
+                logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
+                sendResponse(req, resp, jsonData);
             });
         });
     } else {
-        console.log("[" + constants.getActiveID() + "][" + IP + "] " + req.url, "cyan");
+        logger.logRequest("[" + constants.getActiveID() + "][" + IP + "] " + req.url);
         sendResponse(req, resp, null);
     }
 }
@@ -189,10 +176,10 @@ function start() {
         box_width += "═";
     }
 
-    logger.logWatermark("╔═" + box_width + "═╗");
-    logger.logWatermark("║ " + text_1 + box_spacing_between_1 + " ║");
-    logger.logWatermark("║ " + text_2 + box_spacing_between_2 + " ║");
-    logger.logWatermark("╚═" + box_width + "═╝");
+    logger.logRequest("╔═" + box_width + "═╗");
+    logger.logRequest("║ " + text_1 + box_spacing_between_1 + " ║");
+    logger.logRequest("║ " + text_2 + box_spacing_between_2 + " ║");
+    logger.logRequest("╚═" + box_width + "═╝");
 
     // create HTTPS server (port 443)
     let serverHTTPS = https.createServer(options, (req, res) => {

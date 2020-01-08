@@ -76,7 +76,6 @@ const dynamicRoutes = {
     "/client/trading/api/getTraderAssort/": getAssort,
     "/client/menu/locale/": getMenuLocale,
     "/client/locale/": getGlobalLocale,
-    "/server/profile/get/": getProfileById,
     "/notifierBase": nullArrayResponse,
     "/notifierServer": nullArrayResponse,
     "/push/notifier/get/": nullArrayResponse
@@ -438,10 +437,6 @@ function getMenuLocale(url, info) {
 
 function getGlobalLocale(url, info) {
     return locale.getGlobal(url.replace("/client/locale/", ''));
-}
-
-function getProfileById(url, body) {
-    return "GETPROFILEBYID";
 }
 
 function getResponse(req, body) {

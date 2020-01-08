@@ -40,14 +40,9 @@ function setProfileWipe(profileId, state) {
     json.write(filepaths.user.profiles.list, profiles);
 }
 
-function getProfilePath(profileId = 0) {
+function getProfilePath() {
     let profilePath = filepaths.user.profiles.character;
-
-    if (profileId > 0) {
-        return json.parse(json.read(profilePath.replace("__REPLACEME__", profileId)));
-    } else {
-        return profilePath.replace("__REPLACEME__", constants.getActiveID());
-    }
+    return profilePath.replace("__REPLACEME__", constants.getActiveID());
 }
 
 function create(info) {

@@ -95,15 +95,11 @@ function logInfo(text) {
 }
 
 function logRequest(text) {
-    log(text, "blue", "black");
+    log(text, "cyan", "black");
 }
 
 function logData(data) {
     log(data);
-}
-
-function logWatermark(text) {
-    log(text, "cyan", "black");
 }
 
 function logIp(text) {
@@ -117,5 +113,4 @@ module.exports.logSuccess = logSuccess;
 module.exports.logInfo = logInfo;
 module.exports.logRequest = logRequest;
 module.exports.logData = logData;
-module.exports.logWatermark = logWatermark;
 module.exports.logIp = logIp;
