@@ -102,7 +102,6 @@ function payMoney(tmpList, body) {
     item.resetOutput();
 
     let output = item.getOutput();
-    let profileItems = ;
     const tmpTraderInfo = trader.get(body.tid);
     const currencyTpl = getCurrency(tmpTraderInfo.data.currency);
 
