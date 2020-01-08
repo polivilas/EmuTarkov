@@ -103,6 +103,10 @@ function create(info) {
 }
 
 function saveProfileProgress(offRaidData) {
+    if (!settings.gameplay.features.lootSavingEnabled) {
+        return;
+    }
+
     let offRaidExit = offRaidData.exit;
     let offRaidProfile = offRaidData.profile;
     let tmpList = getCharacterData();
@@ -205,14 +209,14 @@ function saveProfileProgress(offRaidData) {
         let items_to_delete = [];
 
         for (let item of tmpList.data[0].Inventory.items) {
-            if (inventoryitem.parentId === currentProfile.data[0].Inventory.equipment
-                && inventoryitem.slotId !== "SecuredContainer"
-                && inventoryitem.slotId !== "Scabbard"
-                && inventoryitem.slotId !== "Pockets") {
-                items_to_delete.push(inventoryitem._id);
+            if (item.parentId === tmpList.data[0].Inventory.equipment
+                && item.slotId !== "SecuredContainer"
+                && item.slotId !== "Scabbard"
+                && item.slotId !== "Pockets") {
+                items_to_delete.push(item._id);
             }
 
-            // pockets works differently
+            // remove pocket insides
             if (item.slotId === "Pockets") {
                 for (let pocket of tmpList.data[0].Inventory.items) {
                     if (pocket.parentId === item._id) {
