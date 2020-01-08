@@ -31,7 +31,7 @@ function get(id) {
     }
     
     // trader not found
-    console.log("Couldn't find trader of ID " + id, "white", "red");
+    logger.logError("Couldn't find trader of ID " + id);
     return {err: 999, errmsg: "Couldn't find trader of ID " + id, data: null};
 }
 
@@ -42,7 +42,7 @@ function getAssort(id) {
     }
     
     // assort not found
-    console.log("Couldn't find assort of ID " + trader, "white", "red");
+    logger.logError("Couldn't find assort of ID " + trader);
     return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
 }
 

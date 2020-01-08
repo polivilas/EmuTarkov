@@ -8,58 +8,49 @@ function getUserBuildsPath() {
 }
 
 function SaveBuild(tmpList, body) {
+	item.resetOutput();
 	delete body.Action;
 	body.id = utility.generateNewItemId();	
 
+	let output = item.getOutput();
 	let savedBuilds = json.parse(json.read(getUserBuildsPath()));
-
-	//verif duplicated ids
-	let buildAsString = json.stringify(body);
-
 	let ids = [];
-	for(let itemBuild of body.items){ ids.push(itemBuild._id); }
-
 	let dupes = {};
-	ids.forEach(function(x){ dupes[x] = (dupes[x] || 0)+1; });
-
 	let newParents = {}
-	for(let itemBuilds in body.items)
-	{
-		if(dupes[body.items[itemBuilds]._id] > 1 )
-		{
-			console.log("id is duplicated ! " + body.items[itemBuilds]._id);
+
+	for (let itemBuild of body.items) {
+		ids.push(itemBuild._id);
+	}
+	
+	for (let x in ids) {
+		dupes[x] = (dupes[x] || 0) + 1;
+	}
+
+	for (let itemBuilds in body.items) {
+		if (dupes[body.items[itemBuilds]._id] > 1 ) {
 			let newId = utility.generateNewItemId();
-			newParents[newId] =
-			{
-				"oldId" : body.items[itemBuilds]._id,
-				"slot" : body.items[itemBuilds].slotId
-			};
-
+			
+			logger.logWarning("id is duplicated ! " + body.items[itemBuilds]._id);
+			newParents[newId] = {"oldId" : body.items[itemBuilds]._id, "slot" : body.items[itemBuilds].slotId};
 			body.items[itemBuilds]._id = newId;
-
 		}
-		if(dupes[body.items[itemBuilds].parentId] > 1)
-		{
-			console.log("an item has a duplicated parent ! : " + body.items[itemBuilds].parentId);
-			for(let newId in newParents)
-			{
-				if(body.items[itemBuilds].parentId == newParents[newId].oldId)
-				{
+
+		if (dupes[body.items[itemBuilds].parentId] > 1) {
+			loggr.logWarning("an item has a duplicated parent ! : " + body.items[itemBuilds].parentId);
+
+			for (let newId in newParents) {
+				if (body.items[itemBuilds].parentId == newParents[newId].oldId) {
 					body.items[itemBuilds].parentId = newId;
 				}
+
 				delete newParents[newId];
 			}
 		}
-
 	}
 
 	savedBuilds.data.push(body);
 	json.write(getUserBuildsPath(), savedBuilds);
-	item.resetOutput();
-
-	let output = item.getOutput();
-	
-	output.data.builds.push(body)
+	output.data.builds.push(body);
     return output;
 }
 

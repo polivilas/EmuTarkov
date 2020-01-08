@@ -279,7 +279,7 @@ function getStashType() {
         }
     }
 
-    console.log("Not found Stash: error check character.json", "red");
+    logger.logError("Not found Stash: error check character.json", "red");
     return "NotFound Error";
 }
 

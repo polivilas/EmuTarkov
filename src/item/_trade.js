@@ -5,12 +5,12 @@ require('../libs.js');
 function buyItem(tmpList, body) {
     // pay the item	to profile
     if (!itm_hf.payMoney(tmpList, body)) {
-        console.log("no money found");
+        logger.logError("no money found");
         return "";
     }
 
     // print debug information
-    console.log("Bought item: " + body.item_id, "", "", true);
+    logger.logSuccess("Bought item: " + body.item_id);
     return move_f.addItem(tmpList, body, item.getOutput());
 }
 
@@ -25,7 +25,7 @@ function sellItem(tmpList, body) {
     // find the items to sell
     for (let i in body.items) {
         // print item trying to sell
-        console.log("selling item" + json.stringify(body.items[i]), "", "", true);
+        logger.logInfo("selling item" + json.stringify(body.items[i]));
 
         // profile inventory, look into it if item exist
         for (let item of tmpList.data[0].Inventory.items) {
@@ -38,7 +38,7 @@ function sellItem(tmpList, body) {
 
             // item found
             if (item._id === checkID) {
-                console.log("Selling: " + checkID, "", "", true);
+                logger.logInfo("Selling: " + checkID);
 
                 // remove item
                 output = move_f.removeItem(tmpList, checkID, output);

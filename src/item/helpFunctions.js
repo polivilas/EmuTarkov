@@ -34,7 +34,7 @@ function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
                     try {
                         Stash2D[item.location.y + y].fill(1, item.location.x, FillTo);
                     } catch (e) {
-                        console.log("[OOB] for item " + item._id + " [" + item._id + "] with error message: " + e);
+                        logger.logError("[OOB] for item " + item._id + " [" + item._id + "] with error message: " + e);
                     }
                 }
             }
@@ -179,7 +179,7 @@ function payMoney(tmpList, body) {
 
     // save changes
     profile.setCharacterData(tmpList);
-    console.log("Items taken. Status OK.", "white", "green", true);
+    logger.logSuccess("Items taken. Status OK.");
     item.setOutput(output);
     return true;
 }
@@ -234,7 +234,7 @@ function getMoney(tmpList, amount, body, output_temp) {
         // receive money
         item.upd.StackObjectsCount += calcAmount;
         output_temp.data.items.change.push(item);
-        console.log("Money received: " + amount + " " + tmpTraderInfo.data.currency, "white", "green", true);
+        logger.logSuccess("Money received: " + amount + " " + tmpTraderInfo.data.currency);
         skip = true;
         break;
     }
@@ -266,7 +266,7 @@ function getMoney(tmpList, amount, body, output_temp) {
 
                         tmpList.data[0].Inventory.items.push(MoneyItem);
                         output_temp.data.items.new.push(MoneyItem);
-                        console.log("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency, "white", "green", true);
+                        logger.logSuccess("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency);
                         break addedMoney;
                     }
                 }

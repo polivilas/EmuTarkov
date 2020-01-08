@@ -468,7 +468,7 @@ function getResponse(req, body) {
 
     // request couldn't be handled
     if (output === "") {
-        console.log("[UNHANDLED][" + url + "] request data: " + json.stringify(info), "white", "red");
+        logger.logError("[UNHANDLED][" + url + "] request data: " + json.stringify(info));
         output = '{"err":404, "errmsg":"UNHANDLED RESPONSE: ' + url + '", "data":null}';
         return output;
     }
@@ -479,7 +479,7 @@ function getResponse(req, body) {
 
         if (typeof crctest.crc != "undefined") {
             if (info.crc.toString() === crctest.crc.toString()) {
-                console.log("[Loading from game cache files]", "", "", true);
+                logger.logInfo("[Loading from game cache files]");
                 output = nullResponse(url, info);
             } else {
                 output = json.stringify(crctest).replace(/\s\s+/g, '');

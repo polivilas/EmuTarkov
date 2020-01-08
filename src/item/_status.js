@@ -79,7 +79,7 @@ function examineItem(tmpList, body) {
 
         for (let item of tmpTraderAssort.data.items) {
             if (item._id === body.item) {
-                console.log("Found trader with examined item: " + item._id, "", "", true);
+                logger.logInfo("Found trader with examined item: " + item._id, "", "", true);
                 returned = item._tpl;
                 break;
             }
@@ -90,7 +90,7 @@ function examineItem(tmpList, body) {
     if (returned === "BAD") {
         for (let item of tmpList.data[0].Inventory.items) {
             if (item._id === body.item) {
-                console.log("Found equipment examing item: " + item._id, "", "", true);
+                logger.logInfo("Found equipment examing item: " + item._id, "", "", true);
                 returned = item._tpl;
                 break;
             }
@@ -99,7 +99,7 @@ function examineItem(tmpList, body) {
 
     // item not found
     if (returned === "BAD") {
-        console.log("Cannot find proper item. Stopped.", "white", "red");
+        logger.logError("Cannot find proper item. Stopped.");
         return "BAD";
     }
 
@@ -109,7 +109,7 @@ function examineItem(tmpList, body) {
     tmpList.data[0].Info.Experience += data._props.ExamineExperience;
     tmpList.data[0].Encyclopedia[returned] = true;
     profile.setCharacterData(tmpList);
-    console.log("EXAMINED: " + returned, "white", "green", true);
+    logger.logSuccess("EXAMINED: " + returned);
     return "OK";
 }
 
