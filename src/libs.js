@@ -93,6 +93,6 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	}
 
 	if (isFirstLaunch) {
-		logger.logSuccess("[Library Loaded] " + String(new Date() - time));
+		logger.logSuccess("[Library Loaded]");
 	}
 }
