@@ -55,9 +55,9 @@ function getBotNode(type) {
 	}
 }
 
-function addDogtag(botBase) {
+function addDogtag(tmpList, botBase) {
 	let dogtagItem = {
-		_id: "dogtag_" + 100000000 + utility.getRandomIntEx(899999999),
+		_id: utility.generateNewItemId(),
 		_tpl: "__REPLACEME__",
 		parentId: botBase.Inventory.equipment,
 		slotId: "Dogtag",
@@ -66,9 +66,9 @@ function addDogtag(botBase) {
 				"Nickname": botBase.Info.Nickname,
 				"Side": botBase.Info.Side,
 				"Level": botBase.Info.Level,
-				"Time": "2020-01-01T00:00:00",
-				"Status": "Killed by JET",
-				"KillerName": 'JustEmuTarkov',
+				"Time": new Date().setMilliseconds(0).toISOString().replace(".000Z", ""),
+				"Status": "Killed by " + tmpList.data[0].Info.Nickname,
+				"KillerName": tmpList.data[0].Info.Nickname,
 				"WeaponName": "JET Reverse Engineering"
 			},
 			"SpawnedInSession": "true"
@@ -85,7 +85,7 @@ function addDogtag(botBase) {
 	return botBase;
 }
 
-function generateBot(botBase, role) {
+function generateBot(tmpList, botBase, role) {
 	let type = role;
 
 	if (role === "cursedAssault") {
@@ -125,13 +125,14 @@ function generateBot(botBase, role) {
 
 	// add dogtag to PMC's		
 	if (type === "usec" || type === "bear") {
-		botBase = addDogtag(botBase);
+		botBase = addDogtag(tmpList, botBase);
 	}
 	
 	return botBase;
 }
 
 function generate(databots) {
+	let tmpList = profile.getCharacterData();
 	let generatedBots = []; 
 	let i = 0;
 
@@ -141,7 +142,7 @@ function generate(databots) {
 
 			bot._id = "bot" + utility.getRandomIntEx(99999999);
 			bot.Info.Settings.BotDifficulty = condition.Difficulty;
-			bot = generateBot(bot, condition.Role);
+			bot = generateBot(tmpList, bot, condition.Role);
 			generatedBots.unshift(bot);
 		}
 	}
