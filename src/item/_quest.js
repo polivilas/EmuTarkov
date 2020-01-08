@@ -24,6 +24,8 @@ function completeQuest(tmpList, body) {
     // -> Complete quest (need rework for giving back quests)
     item.resetOutput();
 
+    let output = item.getOutput();
+
     for (let quest of tmpList.data[0].Quests) {
         if (quest.qid === body.qid) {
             quest.status = 4;
@@ -49,7 +51,7 @@ function completeQuest(tmpList, body) {
                         newReq.tid = "ragfair";
                 
                         tmpList = profile.getCharacterData();
-                        move_f.addItem(tmpList, newReq);
+                        output = move_f.addItem(tmpList, newReq, output);
                     }
                     break;
 
@@ -74,7 +76,7 @@ function completeQuest(tmpList, body) {
         }
     }
 
-    return item.getOutput();
+    return output;
 }
 
 function handoverQuest(tmpList, body) {
