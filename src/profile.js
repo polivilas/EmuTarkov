@@ -166,7 +166,6 @@ function saveProfileProgress(offRaidData) {
         // insured items shouldn't be renamed
         for (let insurance in tmpList.data[0].InsuredItems) {
             if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
-                console.log("editing id found insured item");
                 insuredItem = true;
             }
         }
@@ -198,9 +197,9 @@ function saveProfileProgress(offRaidData) {
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
     // set profile equipment to the raid equipment
-    move_f.removeItem(tmpList, {Action: 'Remove', item: tmpList.data[0].Inventory.equipment});
-    move_f.removeItem(tmpList, {Action: 'Remove', item: tmpList.data[0].Inventory.questRaidItems});
-    move_f.removeItem(tmpList, {Action: 'Remove', item: tmpList.data[0].Inventory.questStashItems});
+    move_f.removeItem(tmpList, tmpList.data[0].Inventory.equipment);
+    move_f.removeItem(tmpList, tmpList.data[0].Inventory.questRaidItems);
+    move_f.removeItem(tmpList, tmpList.data[0].Inventory.questStashItems);
 
     for (let item in offRaidProfile.Inventory.items) {
         tmpList.data[0].Inventory.items.push(offRaidProfile.Inventory.items[item]);
@@ -211,11 +210,11 @@ function saveProfileProgress(offRaidData) {
         let items_to_delete = [];
 
         for (let item of tmpList.data[0].Inventory.items) {
-            if (currentProfile.data[1].Inventory.items[inventoryitem].parentId === currentProfile.data[1].Inventory.equipment
-                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "SecuredContainer"
-                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Scabbard"
-                && currentProfile.data[1].Inventory.items[inventoryitem].slotId !== "Pockets") {
-                items_to_delete.push(currentProfile.data[1].Inventory.items[inventoryitem]._id);
+            if (inventoryitem.parentId === currentProfile.data[0].Inventory.equipment
+                && inventoryitem.slotId !== "SecuredContainer"
+                && inventoryitem.slotId !== "Scabbard"
+                && inventoryitem.slotId !== "Pockets") {
+                items_to_delete.push(inventoryitem._id);
             }
 
             // pockets works differently
@@ -231,14 +230,16 @@ function saveProfileProgress(offRaidData) {
         // check for insurance
         for (let item_to_delete in items_to_delete) {
             for (let insurance in tmpList.data[0].InsuredItems) {
-                if (items_to_delete[item_to_delete] === tmpList.data[0].InsuredItems[insurance].itemId) {
-                    let insureReturnChance = utility.getRandomInt(0, 99);
+                if (items_to_delete[item_to_delete] !== tmpList.data[0].InsuredItems[insurance].itemId) {
+                    continue;
+                }
+
+                let insureReturnChance = utility.getRandomInt(0, 99);
 		
-	                if (insureReturnChance < settings.gameplay.trading.insureReturnChance) {
-                        move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
-                        items_to_delete[item_to_delete] = "insured";
-                        break;
-                    }
+                if (insureReturnChance < settings.gameplay.trading.insureReturnChance) {
+                    move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
+                    items_to_delete[item_to_delete] = "insured";
+                    break;
                 }
             }
         }
@@ -246,7 +247,7 @@ function saveProfileProgress(offRaidData) {
         // finally delete them
         for (let item_to_delete in items_to_delete) {
             if (items_to_delete[item_to_delete] !== "insured") {
-                move_f.removeItem(tmpList, {Action: 'Remove', item: items_to_delete[item_to_delete]});
+                move_f.removeItem(tmpList, items_to_delete[item_to_delete]);
             }
         }
     }
@@ -268,6 +269,7 @@ function getCharacterData() {
 
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
+
     ret.data.push(playerData);
     ret.data.push(scavData);
     return ret;

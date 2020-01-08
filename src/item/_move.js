@@ -52,7 +52,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
     }
     
 
-    var toDo = [body.item];
+    var toDo = [body];
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {

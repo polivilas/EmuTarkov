@@ -122,7 +122,7 @@ function payMoney(tmpList, body) {
             }
 
             if (item !== undefined && !isMoneyTpl(item._tpl)) {
-                output = move_f.removeItem(tmpList, {"item": item._id}, output);
+                output = move_f.removeItem(tmpList, item._id, output);
                 body.scheme_items[index].count = 0;
             }
         }
@@ -157,7 +157,7 @@ function payMoney(tmpList, body) {
 
         if (leftToPay >= itemAmount) {
             leftToPay -= itemAmount;
-            output = move_f.removeItem(tmpList, {"item": moneyItem._id}, output);
+            output = move_f.removeItem(tmpList, moneyItem._id, output);
         } else {
             moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;

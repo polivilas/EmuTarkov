@@ -45,7 +45,7 @@ function eatItem(tmpList, body) {
 
     if(maxResource == 1 || todelete == true)
     {
-        move_f.removeItem(tmpList, {Action: 'Remove', item: body.item});
+        move_f.removeItem(tmpList, body.item);
     }
     else
     {
@@ -75,7 +75,7 @@ function healPlayer(tmpList, body) {
 
             // remove medkit if its empty
             if (item.upd.MedKit.HpResource === 0) {
-                move_f.removeItem(tmpList, {Action: 'Remove', item: body.item});
+                move_f.removeItem(tmpList, body.item);
             }
 
             profile.setCharacterData(tmpList);

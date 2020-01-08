@@ -16,7 +16,7 @@ function HideoutUpgrade(tmpList, body) {
 			if (tmpList.data[0].Inventory.items[inventoryItem]._tpl === "5449016a4bdc2d6f028b456f") {
 				tmpList.data[0].Inventory.items[inventoryItem].upd.StackObjectsCount -= itemToPay.count;
 			} else {	
-				move_f.removeItem(tmpList, {"item" : tmpList.data[0].Inventory.items[inventoryItem]._id});
+				move_f.removeItem(tmpList, tmpList.data[0].Inventory.items[inventoryItem]._id);
 			}	
 		}
 	}
@@ -84,7 +84,7 @@ function HideoutPutItemsInAreaSlots(tmpList, body) {
 				let slot_to_add = {"item": [{"_id": inventoryItem._id, "_tpl": inventoryItem._tpl, "upd": inventoryItem.upd}]}
 
 				tmpList.data[0].Hideout.Areas[area].slots.push(slot_to_add);
-				output = move_f.removeItem(tmpList, {"item": inventoryItem._id}, output);
+				output = move_f.removeItem(tmpList, inventoryItem._id, output);
 			}
 		}
 	}
@@ -138,7 +138,7 @@ function HideoutSingleProductionStart(tmpList, body) {
 	let output = item.getOutput();
 
 	for (let itemToDelete of body.items) {
-		output = move_f.removeItem(tmpList, {"item": itemToDelete.id}, output);
+		output = move_f.removeItem(tmpList, itemToDelete.id, output);
 	}
 
 	return output;
@@ -177,7 +177,7 @@ function HideoutScavCaseProductionStart(tmpList, body) {
 					if (tempItem._props.Rarity === rarityType) {
 						products.push({ 
 							"_id" : utility.generateNewItemId(),
-							"_tpl":tempItem._id
+							"_tpl": tempItem._id
 						});
 
 						rarityItemCounter[rarityType] -= 1;

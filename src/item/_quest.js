@@ -79,39 +79,32 @@ function completeQuest(tmpList, body) {
     return output;
 }
 
+// TODO: handle money
 function handoverQuest(tmpList, body) {
-    let counter = 0;
-    let found = false;
     item.resetOutput();
     
-    for (let itemHandover of body.items) 
-    {
+    let output = item.getOutput();
+    let counter = 0;
+    let found = false;
+    
+    for (let itemHandover of body.items) {
         counter += itemHandover.count;
-        move_f.removeItem(tmpList, {
-			Action: 'Remove', 
-			item: itemHandover.id
-		});
+        output = move_f.removeItem(tmpList, itemHandover.id, output);
     }
 
-    for (let backendCounter in tmpList.data[0].BackendCounters) 
-    {
-        if (backendCounter === body.conditionId) 
-        {
+    for (let backendCounter in tmpList.data[0].BackendCounters) {
+        if (backendCounter === body.conditionId) {
             tmpList.data[0].BackendCounters[body.conditionId].value += counter;
             found = true;
         }
     }
 
     if (!found) {
-        tmpList.data[0].BackendCounters[body.conditionId] = {
-			"id": body.conditionId, 
-			"qid": body.qid, 
-			"value": counter
-		};
+        tmpList.data[0].BackendCounters[body.conditionId] = {"id": body.conditionId, "qid": body.qid, "value": counter};
     }
 
     profile.setCharacterData(tmpList);
-    return item.getOutput();
+    return output;
 }
 
 module.exports.acceptQuest = acceptQuest;

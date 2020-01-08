@@ -41,7 +41,7 @@ function sellItem(tmpList, body) {
                 console.log("Selling: " + checkID, "", "", true);
 
                 // remove item
-                output = move_f.removeItem(tmpList, {Action: 'Remove', item: checkID}, output);
+                output = move_f.removeItem(tmpList, checkID, output);
                 move_f.removeInsurance(tmpList, checkID);
 
                 // add money to return to the player
