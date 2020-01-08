@@ -98,44 +98,53 @@ function fromRUB(value, currency) {
 * input:
 * output: boolean
 * */
-function payMoney(profileData, body) {
+function payMoney(tmpList, body) {
     item.resetOutput();
 
     let output = item.getOutput();
-    let profileItems = profileData.data[0].Inventory.items;
+    let profileItems = ;
     const tmpTraderInfo = trader.get(body.tid);
     const currencyTpl = getCurrency(tmpTraderInfo.data.currency);
 
     // delete barter things(not a money) from inventory
     if (body.Action === 'TradingConfirm') {
         for (let index in body.scheme_items) {
-            let item = profileItems.find(inventoryItem => body.scheme_items[index].id === inventoryItem._id);
+            let item = undefined;
 
-            if (isMoneyTpl(itm._tpl)) {
+            for (let element of tmpList.data[0].Inventory.items) {
+                if (body.scheme_items[element].id === element._id) {
+                    item = element;
+                }
+            }
+
+            if (item !== undefined && isMoneyTpl(item._tpl)) {
                 currencyTpl = item._tpl;
                 break;
             }
 
             if (item !== undefined && !isMoneyTpl(item._tpl)) {
-                profileItems = profileItems.filter(inventoryItem => item._id !== inventoryItem._id);
-                output = move_f.removeItem(profileData, {"item": item._id}, output);
+                output = move_f.removeItem(tmpList, {"item": item._id}, output);
                 body.scheme_items[index].count = 0;
             }
         }
     }
 
     // find all items with currency _tpl id
-    const moneyItems = itm_hf.findMoney("tpl", profileData, currencyTpl);
+    const moneyItems = itm_hf.findMoney("tpl", tmpList, currencyTpl);
 
     // prepare a price for barter
-    let barterPrice = body.scheme_items.reduce((total, item) => {
-        return total + item.count;
-    }, 0);
+    let barterPrice = 0;
+    
+    for (let item in body.scheme_items) {
+        barterPrice += item.count;
+    }
 
     // prepare the amount of money in the profile
-    let amountMoney = moneyItems.reduce((total, item) => {
-        return total + item.upd.StackObjectsCount;
-    }, 0);
+    let amountMoney = 0;
+    
+    for (let item in moneyItems) {
+        amountMoney += item.upd.StackObjectsCount;
+    }
 
     // if no money in inventory or amount is not enough we return false
     if (moneyItems.length <= 0 || amountMoney < barterPrice) {
@@ -149,8 +158,7 @@ function payMoney(profileData, body) {
 
         if (leftToPay >= itemAmount) {
             leftToPay -= itemAmount;
-            output.data.items.del.push({"_id": moneyItem._id});
-            profileItems = profileItems.filter(item => item._id !== moneyItem._id);
+            output = move_f.removeItem(tmpList, {"item": moneyItem._id}, output);
         } else {
             moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;
@@ -162,19 +170,17 @@ function payMoney(profileData, body) {
         }
     }
 
-    profileData.data[0].Inventory.items = profileItems;
-
     // set current sale sum
     let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum + inRUB(barterPrice, tmpTraderInfo.data.currency);
+
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
     trader.setTrader(tmpTraderInfo.data);
     trader.lvlUp(body.tid);
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
-    profile.setCharacterData(profileData);
+    profile.setCharacterData(tmpList);
     console.log("Items taken. Status OK.", "white", "green", true);
-    console.debug(`Items taken. Output: ${JSON.stringify(output)}`);
     item.setOutput(output);
     return true;
 }
