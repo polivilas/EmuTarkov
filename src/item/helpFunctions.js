@@ -102,8 +102,8 @@ function payMoney(tmpList, body) {
     item.resetOutput();
 
     let output = item.getOutput();
-    const tmpTraderInfo = trader.get(body.tid);
-    const currencyTpl = getCurrency(tmpTraderInfo.data.currency);
+    let tmpTraderInfo = trader.get(body.tid);
+    let currencyTpl = getCurrency(tmpTraderInfo.data.currency);
 
     // delete barter things(not a money) from inventory
     if (body.Action === 'TradingConfirm') {
@@ -111,7 +111,7 @@ function payMoney(tmpList, body) {
             let item = undefined;
 
             for (let element of tmpList.data[0].Inventory.items) {
-                if (body.scheme_items[element].id === element._id) {
+                if (body.scheme_items[index].id === element._id) {
                     item = element;
                 }
             }
@@ -134,14 +134,14 @@ function payMoney(tmpList, body) {
     // prepare a price for barter
     let barterPrice = 0;
     
-    for (let item in body.scheme_items) {
+    for (let item of body.scheme_items) {
         barterPrice += item.count;
     }
 
     // prepare the amount of money in the profile
     let amountMoney = 0;
     
-    for (let item in moneyItems) {
+    for (let item of moneyItems) {
         amountMoney += item.upd.StackObjectsCount;
     }
 
