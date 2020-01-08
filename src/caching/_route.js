@@ -11,7 +11,7 @@ function dump() {
 }
 
 function genericFilepathCacher(type, basepath) {
-    console.log("Routing: " + basepath + "/");
+    logger.logInfo("Routing: " + basepath + "/");
 
     let inputDir = basepath + "/";
     let inputFiles = fs.readdirSync(inputDir);
@@ -77,7 +77,7 @@ function hideoutScavcase() {
 }
 
 function templates() {
-    console.log("Routing: db/templates/");
+    logger.logInfo("Routing: db/templates/");
 
     let inputDir = [
         "db/templates/categories/",
@@ -104,7 +104,7 @@ function assort() {
     let dirList = utility.getDirList("db/assort/");
 
     for (let trader in dirList) {
-        console.log("Routing: db/assort/" + dirList[trader] + "/");
+        logger.logInfo("Routing: db/assort/" + dirList[trader] + "/");
 
         let assortFilePath = {"items":{}, "barter_scheme":{}, "loyal_level_items":{}};
         let inputDir = [
@@ -144,7 +144,7 @@ function maps() {
 }
 
 function bots() {
-    console.log("Routing: bots");
+    logger.logInfo("Routing: bots");
     
     filepaths.bots.base = "db/bots/base.json";
     
@@ -242,7 +242,7 @@ function bots() {
 }
 
 function images() {
-    console.log("Routing: images");
+    logger.logInfo("Routing: images");
 
     let inputDir = [
         "res/banners/",
@@ -275,7 +275,7 @@ function images() {
 }
 
 function others() {
-    console.log("Routing: others");
+    logger.logInfo("Routing: others");
 
     filepaths.profile.character = "db/profile/character.json";
     filepaths.profile.storage = "db/profile/storage.json";
@@ -342,7 +342,7 @@ function all() {
 
     // force if rebuild is required
     if (mods.isRebuildRequired()) {
-        console.log("Modslist mismatch, force rebuilding cache");
+        logger.logWarning("Modslist mismatch, force rebuilding cache");
         force = true;
     }
 

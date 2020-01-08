@@ -3,7 +3,7 @@
 require('../libs.js');
 
 function genericCacher(cachename, filepathNode, output = "") {
-    console.log("Caching: " + cachename);
+    logger.logInfo("Caching: " + cachename);
 
     let base = json.parse(json.read("db/cache/" + cachename));
     let inputFiles = filepathNode;
@@ -107,7 +107,7 @@ function weather() {
 }
 
 function templates() {
-    console.log("Caching: templates.json");
+    logger.logInfo("Caching: templates.json");
 
     let base = json.parse(json.read("db/cache/templates.json"));
     let inputDir = [
@@ -138,7 +138,7 @@ function templates() {
 }
 
 function assorts(trader) {
-    console.log("Caching: assort_" + trader + ".json");
+    logger.logInfo("Caching: assort_" + trader + ".json");
 
     let base = json.parse(json.read("db/cache/assort.json"));
     let inputNode = filepaths.assort[trader];
@@ -190,7 +190,7 @@ function locales(locale) {
         "trading",
     ];
 
-    console.log("Caching: locale_" + locale + ".json");
+    logger.logInfo("Caching: locale_" + locale + ".json");
 
     base.data.interface = json.parse(json.read(inputNode.interface));
     base.data.error = json.parse(json.read(inputNode.error));
@@ -235,12 +235,12 @@ function locales(locale) {
 }
 
 function mod() {
-    console.log("Caching: mods.json");    
+    logger.logInfo("Caching: mods.json");    
     json.write("user/cache/mods.json", settings.mods.list);
 }
 
 function globals() {
-    console.log("Caching: globals.json");    
+    logger.logInfo("Caching: globals.json");    
 
     let base = json.parse(json.read(filepaths.user.cache.globals));
 

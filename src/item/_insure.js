@@ -48,7 +48,7 @@ function insure(tmpList, body) {
 
     // pay the item	to profile
     if (!itm_hf.payMoney(tmpList, {scheme_items: itemsToPay, tid: body.tid})) {
-        console.log("no money found");
+        logger.LogError("no money found");
         return "";
     }
 

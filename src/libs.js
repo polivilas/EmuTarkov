@@ -1,6 +1,4 @@
-module.exports = function(isFirstLaunch = "no", time = 0) {
-	let StartingTimeTemporalVariable = time;
-	
+module.exports = function(isFirstLaunch = false, time = 0) {	
 	global.fs = require('fs');
 	global.path = require('path');
 	global.util = require('util');
@@ -9,28 +7,27 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.zlib = require('zlib');
 	global.adler32 = require('adler32');
 	global.os = require('os');
-	
-	if (isFirstLaunch == "first") {
-		console.log("Main require() files loaded... [%dms]", new Date() - StartingTimeTemporalVariable);
-	}
-	
-	// no other files required for it
+
 	global.json = require('./json.js');
 	global.utility = require('./utility.js');
+	global.logger = require('./logger.js');
+
+	if (isFirstLaunch) {
+		logger.start();
+		logger.logSuccess("Main require() files loaded... [" + String(new Date() - time) + "]");
+	}	
 
 	// setup server
 	global.settings = json.parse(json.read("user/server.config.json"));
 	global.ended_at = 0;
 	global.ip = settings.server.ip;
-	global.https_port = 443;
-	global.http_port = 80;
 	global.items = "";
 	global.quests = "";
 	global.locations = "";
 	global.weathers = '{}';
 
-	if (isFirstLaunch == "first") {
-		console.log("Main variables setted properly... [%dms]", new Date() - StartingTimeTemporalVariable);
+	if (isFirstLaunch) {
+		logger.logSuccess("Main variables setted properly... [" + String(new Date() - time) + "]");
 	}
 
 	// setup routes
@@ -39,16 +36,16 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.route = require('./caching/_route.js');
 	route.all();
 
-	if (isFirstLaunch == "first") {
-		console.log("Files routed... [%dms]", new Date() - StartingTimeTemporalVariable);
+	if (isFirstLaunch) {
+		logger.logSuccess("Files routed... [" + String(new Date() - time) + "]");
 	}
 
 	// setup cache
 	global.cache = require('./caching/_cache.js');
 	cache.all();
 
-	if (isFirstLaunch == "first") {
-		console.log("Files cached... [%dms]", new Date() - StartingTimeTemporalVariable);
+	if (isFirstLaunch) {
+		logger.logSuccess("Files cached... [" + String(new Date() - time) + "]");
 	}
 
 	// global data
@@ -60,12 +57,11 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
 	global.templates = json.parse(json.read(filepaths.user.cache.templates));
 
-	if (isFirstLaunch == "first") {
-		console.log("Finished loading json files into library... [%dms]", new Date() - StartingTimeTemporalVariable);
+	if (isFirstLaunch) {
+		logger.logSuccess("Finished loading json files into library... [" + String(new Date() - time) + "]");
 	}
 
 	// Other
-	global.logger = require('./logger.js');							// logger
 	global.locale = require('./locale.js');							// locale changer function
 	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
 	global.repair_f = require('./item/_repair.js');					// response/_repair
@@ -92,7 +88,11 @@ module.exports = function(isFirstLaunch = "no", time = 0) {
 	global.ragfair = require('./ragfair.js');						// ragfair
 	global.response = require('./response.js');						// response
 	
-	if (isFirstLaunch == "first") {
-		console.log("Finished loading game server functions... [%dms]", new Date() - StartingTimeTemporalVariable);
+	if (isFirstLaunch) {
+		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");
+	}
+
+	if (isFirstLaunch) {
+		logger.logSuccess("[Library Loaded] " + String(new Date() - time));
 	}
 }

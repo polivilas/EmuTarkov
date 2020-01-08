@@ -393,7 +393,6 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
                                 outY += itm._props.ExtraSizeDown;
                             }
                         }
-                        //console.log(InventoryItem[tmpKey]._id + " - " + outX + " - " + outY );
                         toDo.push(InventoryItem[tmpKey]._id);
                     }
                 }
@@ -410,7 +409,6 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
         outY -= 1;
     if (isFolded)
         outX -= 1;
-    //console.log("-EndSize= "+rootItem+" >" + outX + " - " + outY);
     return [outX, outY];
 }
 

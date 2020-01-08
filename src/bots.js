@@ -50,7 +50,7 @@ function getBotNode(type) {
 			return filepaths.bots.scav.pmcbot;
 
 		default:
-			console.log("BOTS ERROR: SHITS FUCKED, PLZ SEND HELP");
+			logger.writeError("bots type " + type + " is not handled");
 			return {};
 	}
 }

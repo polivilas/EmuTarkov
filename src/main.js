@@ -1,29 +1,23 @@
 "use strict";
 
+// set stdout encoding
 process.stdout.setEncoding('utf8');
 
-let isFirstLaunch = "first";
-let start0 = new Date();
+// load application
+require("./libs.js")(true, new Date());
 
-console.log('[Starting Application]','','');
-
-require("./libs.js")(isFirstLaunch, start0);
-
-ended_at = new Date() - start0;
-console.info('[Library Loaded]  %dms', ended_at);
-console.info("[Mods loaded] ", settings.mods.list);
-process.stdout.write('\x1Bc');
-
+// show server name in window
 process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " + constants.serverVersion() + String.fromCharCode(7));
+process.stdout.write('\u001B[2J\u001B[0;0f');
 
-logger.start();
+// start application
 server.start();
 
+// oops all errors
 process.on('uncaughtException', (error, promise) => {
-    console.log("[ERROR] Server: " + constants.serverVersion(), "red");
-    console.log("[ERROR] Game: " + ((constants.gameVersion() !== "")?constants.gameVersion():"Not Launched"), "red");
-    console.log("[ERROR] Trace:", "red");
-    console.log(error, "cyan");
-    console.log(error);
-    console.log("[LOGGING] Finished Dumping Error", "cyan");
+    logger.logError("Server: " + constants.serverVersion());
+    logger.logError("Game: " + ((constants.gameVersion() !== "") ? constants.gameVersion() : "Not Launched"));
+    logger.logError("Trace:");
+    logger.logData(error);
+    logger.logInfo("Finished Dumping Error", "cyan");
 });

@@ -315,14 +315,14 @@ function load() {
     for (let element of modList) {
         // skip mod
         if (element.enabled !== undefined && !element.enabled) {
-            console.log("Skipping mod " + element.author + "-" + element.name + " v" + element.version);
+            logger.logInfo("Skipping mod " + element.author + "-" + element.name + " v" + element.version);
             continue;
         }
 
         // apply mod
         let mod = json.parse(json.read("user/mods/" + element.author + "-" + element.name + "/mod.config.json"))
 
-        console.log("Loading mod " + element.author + "-" + element.name + " v" + element.version);
+        logger.logInfo("Loading mod " + element.author + "-" + element.name + " v" + element.version);
         
         cache(mod);
         items(mod);

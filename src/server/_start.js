@@ -152,9 +152,6 @@ function handleRequest(req, resp) {
     }
 }
 
-/*
-
- */
 function start() {
     const options = {
         cert: fs.readFileSync(filepaths.cert.server.cert),
@@ -192,35 +189,33 @@ function start() {
         box_width += "═";
     }
 
-    console.log("╔═" + box_width + "═╗", "cyan", "");
-    console.log("║ " + text_1 + box_spacing_between_1 + " ║", "cyan", "");
-    console.log("║ " + text_2 + box_spacing_between_2 + " ║", "cyan", "");
-    console.log("╚═" + box_width + "═╝", "cyan", "");
+    logger.logWatermark("╔═" + box_width + "═╗");
+    logger.logWatermark("║ " + text_1 + box_spacing_between_1 + " ║");
+    logger.logWatermark("║ " + text_2 + box_spacing_between_2 + " ║");
+    logger.logWatermark("╚═" + box_width + "═╝");
 
     // create HTTPS server (port 443)
     let serverHTTPS = https.createServer(options, (req, res) => {
         handleRequest(req, res);
-    }).listen(https_port, ip, function () {
-        console.log("» server url: " + "https://" + ip + "/", "green", "");
+    }).listen(443, ip, function() {
+        logger.logIp("» server url: " + "https://" + ip + "/");
     });
 
     // server already running
-    serverHTTPS.on('error', function (e) {
-        console.log(e);
-        console.log("» Port " + https_port + " is already in use. Check if console isnt already open or change port", "red", "");
+    serverHTTPS.on('error', function(e) {
+        logger.logError("» Port " + 443 + " is already in use. Check if the server isn't already running");
     });
 
     // create HTTP server (port 80)
     let serverHTTP = http.createServer((req, res) => {
         handleRequest(req, res);
-    }).listen(http_port, ip, function () {
-        console.log("» server url: " + "http://" + ip + "/", "green", "");
+    }).listen(80, ip, function() {
+        logger.logIp("» launcher url: " + "http://" + ip + "/");
     });
 
     // server already running
-    serverHTTP.on('error', function (e) {
-        console.log(e);
-        console.log("» Port " + http_port + " is already in use. Check if console isnt already open or change port", "red", "");
+    serverHTTP.on('error', function(e) {
+        logger.logError("» Port " + 80 + " is already in use. Check if the server isn't already running");
     });
 }
 

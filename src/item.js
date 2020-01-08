@@ -70,7 +70,7 @@ function handleMoving(body) {
     if (typeof staticRoutes[body.Action] !== "undefined") {
         return staticRoutes[body.Action](tmpList, body);
     } else {
-        console.log("[UNHANDLED ACTION] " + body.Action, "white", "red");
+        logger.logError("[UNHANDLED ACTION] " + body.Action);
     }
 }
 

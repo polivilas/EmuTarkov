@@ -46,15 +46,15 @@ const colorData = [
     }
 ];
 
-function log(data, colorFront, colorBack) {
+function log(data, colorFront = "", colorBack = "") {
     let setColors = "";
     let colors = ["", ""];
 
-    if (typeof colorFront !== "undefined") {
+    if (typeof colorFront !== "") {
         colors[0] = colorFront;
     }
 
-    if (typeof colorBack !== "undefined") {
+    if (typeof colorBack !== "") {
         colors[1] = colorBack;
     }
 
@@ -79,33 +79,43 @@ function log(data, colorFront, colorBack) {
 };
 
 function logError(text) {
-    log(text, white, red);
+    log("[ERROR] " + text, "white", "red");
 }
 
 function logWarning(text) {
-    log(text, white, yellow);
+    log("[WARNING] " + text, "white", "yellow");
 }
 
 function logSuccess(text) {
-    log(text, white, green);
+    log("[SUCCESS] " + text, "white", "green");
 }
 
-function logDebug(text) {
-    log(text, white, blue);
+function logInfo(text) {
+    log("[INFO] " + text, "cyan", "black");
 }
 
 function logRequest(text) {
-    log(text, blue);
+    log(text, "blue", "black");
 }
 
 function logData(data) {
     log(data);
 }
 
+function logWatermark(text) {
+    log(text, "cyan", "black");
+}
+
+function logIp(text) {
+    log(text, "green", "black");
+}
+
 module.exports.start = start;
 module.exports.logError = logError;
 module.exports.logWarning = logWarning;
 module.exports.logSuccess = logSuccess;
-module.exports.logDebug = logDebug;
+module.exports.logInfo = logInfo;
 module.exports.logRequest = logRequest;
 module.exports.logData = logData;
+module.exports.logWatermark = logWatermark;
+module.exports.logIp = logIp;

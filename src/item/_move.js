@@ -71,7 +71,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
         profile.setCharacterData(tmpList); //save tmplist to profile
         return output;
     } else {
-        console.log("item id is not vaild");
+        logger.logError("item id is not vaild");
         return "BAD"
         //maybe return something because body.item id wasn't valid.
     }
@@ -96,10 +96,9 @@ function removeInsurance(tmpList, body) {
             }
         }
 
-        profile.setCharacterData(tmpList); //save tmplist to profile
+        profile.setCharacterData(tmpList);
     } else {
-        console.log("item id is not vaild");
-        //maybe return something because body.item id wasn't valid.
+        logger.logError("item id is not vaild");
     }
 }
 
@@ -302,7 +301,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
                                 continue;
                             }
 
-                            console.log("Item placed at position [" + x + "," + y + "]", "", "", true);
+                            logger.logInfo("Item placed at position [" + x + "," + y + "]", "", "", true);
                             let newItem = utility.generateNewItemId();
                             let toDo = [[item._id, newItem]];
 
