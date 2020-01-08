@@ -28,45 +28,48 @@ function completeQuest(tmpList, body) {
         if (quest.qid === body.qid) {
             quest.status = 4;
             profile.setCharacterData(tmpList);
-            tmpList = profile.getCharacterData();
             break;
         }
     }
 
     // find Quest data and update trader loyalty
     for (let quest of quests.data) {
-        if (quest._id === body.qid) {
-            for (let reward of quest.rewards.Success) {
-                switch (reward.type) {
-                    case "Item":
-                        for (let rewardItem of reward.items) {
-                            let newReq = {};
-                            newReq.item_id = rewardItem._tpl;
-                            newReq.count = parseInt(reward.value);
-                    
-                            move_f.addItem(tmpList, newReq);
-                            tmpList = profile.getCharacterData(); //update it everytime otherwise every given items are deleted
-                        }
-                        break;
+        if (quest._id !== body.qid) {
+            continue;
+        }
 
-                    case "Experience":
-                        tmpList.data[0].Info.Experience += parseInt(reward.value);
-                        profile.setCharacterData(tmpList);
-                        tmpList = profile.getCharacterData();// update it because it will be overrided otherwise
-                        break;
+        for (let reward of quest.rewards.Success) {
+            switch (reward.type) {
+                case "Item":
+                    for (let rewardItem of reward.items) {
+                        let newReq = {};
 
-                    case "TraderStanding":
-                        // improve trader standing
-                        let tmpTraderInfo = trader.get(quest.traderId);
+                        newReq.item_id = rewardItem._tpl;
+                        newReq.count = parseInt(reward.value);
+                        newReq.tid = "ragfair";
+                
+                        tmpList = profile.getCharacterData();
+                        move_f.addItem(tmpList, newReq);
+                    }
+                    break;
 
-                        tmpTraderInfo.data.loyalty.currentStanding
-                        tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + parseFloat(reward.value);
-                        trader.setTrader(tmpTraderInfo.data);
+                case "Experience":
+                    tmpList = profile.getCharacterData();
+                    tmpList.data[0].Info.Experience += parseInt(reward.value);
+                    profile.setCharacterData(tmpList);
+                    break;
 
-                        // level up trader
-                        trader.lvlUp(quest.traderId);
-                        break;
-                }
+                case "TraderStanding":
+                    // improve trader standing
+                    let tmpTraderInfo = trader.get(quest.traderId);
+
+                    tmpTraderInfo.data.loyalty.currentStanding
+                    tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + parseFloat(reward.value);
+                    trader.setTrader(tmpTraderInfo.data);
+
+                    // level up trader
+                    trader.lvlUp(quest.traderId);
+                    break;
             }
         }
     }
