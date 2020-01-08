@@ -111,6 +111,11 @@ function payMoney(profileData, body) {
         for (let index in body.scheme_items) {
             let item = profileItems.find(inventoryItem => body.scheme_items[index].id === inventoryItem._id);
 
+            if (isMoneyTpl(itm._tpl)) {
+                currencyTpl = item._tpl;
+                break;
+            }
+
             if (item !== undefined && !isMoneyTpl(item._tpl)) {
                 profileItems = profileItems.filter(inventoryItem => item._id !== inventoryItem._id);
                 output = move_f.removeItem(profileData, {"item": item._id}, output);
