@@ -47,10 +47,10 @@ function HideoutUpgrade(tmpList, body) {
 }
 
 // validating the upgrade
-// TODO: apply bonusses or its auto ? 
+// TODO: apply bonusses or is it automatically applied? 
 function HideoutUpgradeComplete(tmpList, body) {
 	for (let hideoutArea in tmpList.data[0].Hideout.Areas) {
-		if (tmpList.data[0].Hideout.Areas[hideoutArea].type === body.areaType) {
+		if (tmpList.data[0].Hideout.Areas[hideoutArea].type !== body.areaType) {
 			continue;
 		}
 
