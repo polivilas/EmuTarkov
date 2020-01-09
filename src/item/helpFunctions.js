@@ -207,7 +207,7 @@ function findMoney(by, tmpList, barter_itemID) { // find required items to take 
 function getMoney(tmpList, amount, body, output_temp) {
     let tmpTraderInfo = trader.get(body.tid);
     let currency = getCurrency(tmpTraderInfo.data.currency);
-    let calcAmount = fromRUB(amount, currency);
+    let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
 
     for (let item of tmpList.data[0].Inventory.items) {
