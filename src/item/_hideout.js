@@ -28,7 +28,7 @@ function HideoutUpgrade(tmpList, body) {
 		}
 
 		for (let hideout_stage in hideout_areas_config.data) {	
-			if (hideout_areas_config.data[hideout_stage].type !== body.areaType) {
+			if (hideout_areas_config.data[hideout_stage].type === body.areaType) {
 				let ctime = hideout_areas_config.data[hideout_stage].stages[tmpList.data[0].Hideout.Areas[hideoutArea].level + 1].constructionTime;
 			
 				if (ctime > 0) {	
