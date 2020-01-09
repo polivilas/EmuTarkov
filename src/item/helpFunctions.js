@@ -69,11 +69,12 @@ function getCurrency(currency) {
 * output: value after conversion
 */
 function inRUB(value, currency) {
-    for(let temp of templates.data.Items) {
-        if(temp.Id === currency) {
-            return Math.round(value * temp.Price);
+    for (let template of templates.data.Items) {
+        if (template.Id === currency) {
+            return Math.round(value * template.Price);
         }
     }
+    
     return value;
 }
 
@@ -82,11 +83,12 @@ function inRUB(value, currency) {
 * output: value after conversion
 * */
 function fromRUB(value, currency) {
-    for(let temp of templates.data.Items) {
-        if(temp.Id === currency) {
-            return Math.round(value / temp.Price);
+    for (let template of templates.data.Items) {
+        if (template.Id === currency) {
+            return Math.round(value / template.Price);
         }
     }
+    
     return value;
 }
 
