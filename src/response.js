@@ -410,7 +410,7 @@ function handleNotifierCustomLink(url, info) {
 
 function getProfilePurchases(url, info) {
     // let's grab the traderId from the url
-    return profile.getPurchasesData(url.substr(url.lastIndexOf('/')));
+    return profile.getPurchasesData(url.substr(url.lastIndexOf('/') + 1));
 }
 
 function getTrader(url, info) {
