@@ -2,11 +2,7 @@
 
 require('./libs.js');
 
-var AllQuests = quests;
-var stashX = 10; // fix for your stash size
-var stashY = 66; // ^ if you edited it ofc
-var output = "";
-
+let output = "";
 const staticRoutes = {
     "SaveBuild": weaponBuilds_f.saveBuild,
     "RemoveBuild": weaponBuilds_f.removeBuild,
@@ -50,7 +46,10 @@ const staticRoutes = {
 };
 
 function getOutput() {
-    if (output === "") resetOutput();
+    if (output === "") {
+        resetOutput();
+    }
+
     return output;
 }
 

@@ -51,8 +51,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
 		output = item.getOutput()
     }
     
-
-    var toDo = [body];
+    let toDo = [body];
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
@@ -78,7 +77,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
 }
 
 function removeInsurance(tmpList, body) {
-    var toDo = [body];
+    let toDo = [body];
     
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
