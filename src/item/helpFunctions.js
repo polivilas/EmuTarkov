@@ -69,13 +69,12 @@ function getCurrency(currency) {
 * output: value after conversion
 */
 function inRUB(value, currency) {
-    for (let temp in templates.data) {
-        if (templates.data.hasOwnProperty(temp)) {
-            if (templates.data[temp].Id === currency) {
-                return value * templates.data[temp].Price;
-            }
+    for (let template of templates.data.Items) {
+        if (template.Id === currency) {
+            return Math.round(value * template.Price);
         }
     }
+    
     return value;
 }
 
@@ -84,13 +83,12 @@ function inRUB(value, currency) {
 * output: value after conversion
 * */
 function fromRUB(value, currency) {
-    for (let temp in templates.data) {
-        if (templates.data.hasOwnProperty(temp)) {
-            if (templates.data[temp].Id === currency) {
-                return value / templates.data[temp].Price;
-            }
+    for (let template of templates.data.Items) {
+        if (template.Id === currency) {
+            return Math.round(value / template.Price);
         }
     }
+    
     return value;
 }
 
@@ -100,7 +98,6 @@ function fromRUB(value, currency) {
 * */
 function payMoney(tmpList, body) {
     item.resetOutput();
-
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
     let currencyTpl = getCurrency(tmpTraderInfo.data.currency);
@@ -170,7 +167,8 @@ function payMoney(tmpList, body) {
     }
 
     // set current sale sum
-    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum + inRUB(barterPrice, tmpTraderInfo.data.currency);
+    // convert barterPrice itemTpl into RUB then convert RUB into trader currency
+    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum + fromRUB(inRUB(barterPrice, currencyTpl), getCurrency(tmpTraderInfo.data.currency));
 
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
     trader.setTrader(tmpTraderInfo.data);
@@ -208,8 +206,7 @@ function findMoney(by, tmpList, barter_itemID) { // find required items to take 
 * */
 function getMoney(tmpList, amount, body, output_temp) {
     let tmpTraderInfo = trader.get(body.tid);
-    let currency = getCurrency();
-    let value = inRUB(amount, currency);
+    let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(amount, currency);
     let skip = false;
 
@@ -274,7 +271,7 @@ function getMoney(tmpList, amount, body, output_temp) {
     }
 
     // set current sale sum
-    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += inRUB(value, tmpTraderInfo.data.currency);
+    let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += amount;
 
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
     trader.setTrader(tmpTraderInfo.data);

@@ -19,7 +19,7 @@ function sellItem(tmpList, body) {
     item.resetOutput();
 
     let money = 0;
-    let prices = json.parse(profile.getPurchasesData());
+    let prices = json.parse(profile.getPurchasesData(body.tid));
     let output = item.getOutput();
 
     // find the items to sell
