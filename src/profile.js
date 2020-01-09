@@ -311,7 +311,7 @@ function addChildPrice(data, parentID, childPrice) {
 }
 
 // added lastTrader so that we can list prices using the correct currency based on the trader
-function getPurchasesData(lastTrader) {
+function getPurchasesData(tmpTraderInfo) {
     let multiplier = 0.9;
     let data = json.parse(json.read(getProfilePath()));
 
@@ -393,7 +393,7 @@ function getPurchasesData(lastTrader) {
                 let preparePrice = basePrice * multiplier * itemCount;
 
                 // convert the price using the lastTrader's currency
-                let currency = trader.get(lastTrader).data.currency;
+                let currency = trader.get(tmpTraderInfo).data.currency;
                 preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(currency));
 
                 preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
