@@ -37,6 +37,10 @@ function get(id) {
 
 function getAssort(id) {
     // find the assort
+    if (id === "579dc571d53a0658a154fbec") {
+        generateFenceAssort();
+    }
+
 	if (filepaths.user.cache.hasOwnProperty("assort_" + id)) {
         return json.parse(json.read(filepaths.user.cache["assort_" + id]));
     }
@@ -44,6 +48,28 @@ function getAssort(id) {
     // assort not found
     logger.logError("Couldn't find assort of ID " + trader);
     return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
+}
+
+function generateFenceAssort() {
+    let base = json.parse(json.read("db/cache/assort.json"));
+    let names = Object.keys(filepaths.assort.ragfair.level);
+    let added = [];
+
+    for (let i = 0; i < settings.ganeplay.trading.fenceAssortSize; i++) {
+        let id = names[utility.getRandomInt(0, names.length - 1)];
+
+        if (added.includes(id)) {
+            i--;
+            continue;
+        }
+
+        added.push(id);
+        base.data.items.push(json.parse(json.read(filepaths.assort.ragfair.items[id])));
+        base.data.barter[id] = json.parse(json.read(filepaths.assort.ragfair.barter[id]));
+        base.data.level[id] = json.parse(json.read(filepaths.assort.ragfair.level[id]));
+    }
+
+    return json.write(filepaths.user.cache["assort_579dc571d53a0658a154fbec"], base);
 }
 
 function setTrader(data) {
