@@ -113,14 +113,14 @@ function payMoney(tmpList, body) {
                 }
             }
 
-            if (item !== undefined && isMoneyTpl(item._tpl)) {
-                currencyTpl = item._tpl;
-                break;
-            }
-
-            if (item !== undefined && !isMoneyTpl(item._tpl)) {
-                output = move_f.removeItem(tmpList, item._id, output);
-                body.scheme_items[index].count = 0;
+            if (item !== undefined) {
+                if (!isMoneyTpl(item._tpl)) {
+                    output = move_f.removeItem(tmpList, item._id, output);
+                    body.scheme_items[index].count = 0;
+                } else {
+                    currencyTpl = item._tpl;
+                    break;
+                }
             }
         }
     }
