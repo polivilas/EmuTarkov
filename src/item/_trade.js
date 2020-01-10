@@ -3,14 +3,17 @@
 require('../libs.js');
 
 function buyItem(tmpList, body) {
-    // pay the item	to profile
     if (!itm_hf.payMoney(tmpList, body)) {
         logger.logError("no money found");
         return "";
     }
 
-    // print debug information
     logger.logSuccess("Bought item: " + body.item_id);
+
+    if (body.tid === "579dc571d53a0658a154fbec") {
+        body.tid = "ragfair";
+    }
+    
     return move_f.addItem(tmpList, body, item.getOutput());
 }
 
@@ -19,7 +22,7 @@ function sellItem(tmpList, body) {
     item.resetOutput();
 
     let money = 0;
-    let prices = json.parse(profile.getPurchasesData());
+    let prices = json.parse(profile.getPurchasesData(body.tid));
     let output = item.getOutput();
 
     // find the items to sell
