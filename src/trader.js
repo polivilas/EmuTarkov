@@ -52,10 +52,10 @@ function getAssort(id) {
 
 function generateFenceAssort() {
     let base = json.parse(json.read("db/cache/assort.json"));
-    let names = Object.keys(filepaths.assort.ragfair.level);
+    let names = Object.keys(filepaths.assort.ragfair.loyal_level_items);
     let added = [];
 
-    for (let i = 0; i < settings.ganeplay.trading.fenceAssortSize; i++) {
+    for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
         let id = names[utility.getRandomInt(0, names.length - 1)];
 
         if (added.includes(id)) {
@@ -65,11 +65,11 @@ function generateFenceAssort() {
 
         added.push(id);
         base.data.items.push(json.parse(json.read(filepaths.assort.ragfair.items[id])));
-        base.data.barter[id] = json.parse(json.read(filepaths.assort.ragfair.barter[id]));
-        base.data.level[id] = json.parse(json.read(filepaths.assort.ragfair.level[id]));
+        base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort.ragfair.barter_scheme[id]));
+        base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
     }
 
-    return json.write(filepaths.user.cache["assort_579dc571d53a0658a154fbec"], base);
+    return json.write(filepaths.user.cache.assort_579dc571d53a0658a154fbec, base);
 }
 
 function setTrader(data) {
