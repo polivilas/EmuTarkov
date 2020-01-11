@@ -120,7 +120,6 @@ function saveProfileProgress(offRaidData) {
     // replace data
     // if isPlayerScav is true, then offRaidProfile points to a scav profile
     const isPlayerScav = offRaidData.isPlayerScav;
-    console.log('is this scav? ' + isPlayerScav);
     if (!isPlayerScav) {
         tmpList.data[0].Info.Level = offRaidProfile.Info.Level;
         tmpList.data[0].Skills = offRaidProfile.Skills;
