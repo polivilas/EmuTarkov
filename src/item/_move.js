@@ -44,15 +44,13 @@ function moveItem(tmpList, body) {
 /* Remove Item
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * */
-function removeItem(tmpList, body, output = item.getOutput()) {
-    // -> Deletes item and its all child completly - now works
-	if (output == ""){
+function removeItem(tmpList, body, output = "") {
+	if (output === "") {
 		item.resetOutput();
 		output = item.getOutput()
     }
     
-
-    var toDo = [body];
+    let toDo = [body];
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
@@ -78,7 +76,7 @@ function removeItem(tmpList, body, output = item.getOutput()) {
 }
 
 function removeInsurance(tmpList, body) {
-    var toDo = [body];
+    let toDo = [body];
     
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {

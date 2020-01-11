@@ -113,14 +113,14 @@ function payMoney(tmpList, body) {
                 }
             }
 
-            if (item !== undefined && isMoneyTpl(item._tpl)) {
-                currencyTpl = item._tpl;
-                break;
-            }
-
-            if (item !== undefined && !isMoneyTpl(item._tpl)) {
-                output = move_f.removeItem(tmpList, item._id, output);
-                body.scheme_items[index].count = 0;
+            if (item !== undefined) {
+                if (!isMoneyTpl(item._tpl)) {
+                    output = move_f.removeItem(tmpList, item._id, output);
+                    body.scheme_items[index].count = 0;
+                } else {
+                    currencyTpl = item._tpl;
+                    break;
+                }
             }
         }
     }
@@ -204,7 +204,7 @@ function findMoney(by, tmpList, barter_itemID) { // find required items to take 
 * input: tmpList, numberToReturn, request.body,
 * output: none (output is sended to item.js, and profile is saved to file)
 * */
-function getMoney(tmpList, amount, body, output_temp) {
+function getMoney(tmpList, amount, body, output) {
     let tmpTraderInfo = trader.get(body.tid);
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
@@ -224,13 +224,14 @@ function getMoney(tmpList, amount, body, output_temp) {
 
             // make stack max money, then look further
             item.upd.StackObjectsCount = 500000;
+            output.data.items.change.push(item);
             calcAmount -= difference;
             continue;
         }
 
         // receive money
         item.upd.StackObjectsCount += calcAmount;
-        output_temp.data.items.change.push(item);
+        output.data.items.change.push(item);
         logger.logSuccess("Money received: " + amount + " " + tmpTraderInfo.data.currency);
         skip = true;
         break;
@@ -262,7 +263,7 @@ function getMoney(tmpList, amount, body, output_temp) {
                         };
 
                         tmpList.data[0].Inventory.items.push(MoneyItem);
-                        output_temp.data.items.new.push(MoneyItem);
+                        output.data.items.new.push(MoneyItem);
                         logger.logSuccess("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency);
                         break addedMoney;
                     }
@@ -276,10 +277,10 @@ function getMoney(tmpList, amount, body, output_temp) {
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
     trader.setTrader(tmpTraderInfo.data);
     trader.lvlUp(body.tid);
-    output_temp.data.currentSalesSums[body.tid] = saleSum;
+    output.data.currentSalesSums[body.tid] = saleSum;
 
     profile.setCharacterData(tmpList);
-    return output_temp;
+    return output;
 }
 
 /* Get Player Stash Proper Size

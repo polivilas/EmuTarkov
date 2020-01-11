@@ -75,6 +75,10 @@ function examineItem(tmpList, body) {
 
     // trader
     if (typeof body.fromOwner !== "undefined" && body.fromOwner.type === "Trader") {
+        if (body.fromOwner.id === "579dc571d53a0658a154fbec") {
+            body.fromOwner.id = "ragfair";
+        }
+
         let tmpTraderAssort = trader.getAssort(body.fromOwner.id);
 
         for (let item of tmpTraderAssort.data.items) {

@@ -1,0 +1,120 @@
+{
+	"_id": "5d25e2d886f77442734d335e",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d67c1e486f774131e206c3a.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 0,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e17b808ca08cb0fac2c9655",
+				"value": "50000",
+				"id": "5d77662f86f774319c488823",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e17b808ca08cb0fac2c9655",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"value": "21000",
+				"id": "5d77663886f7742fa732bf03",
+				"type": "Experience",
+				"index": 1
+			},
+			{
+				"target": "5e17b808ca08cb0fac2c9656",
+				"value": "1",
+				"id": "5d77665486f7742fa901bc74",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e17b808ca08cb0fac2c9656",
+						"_tpl": "5b3b99475acfc432ff4dcbee",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.04",
+				"id": "5d77666986f7742fa5005cb4",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5d25e2cc86f77443e47ae019",
+					"status": 4,
+					"availableAfter": 0,
+					"index": 0,
+					"parentId": "",
+					"id": "5d77695b86f7742fa901bc75"
+				}
+			}
+		],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "3",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d307fc886f77447f15f5b22",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"enemyHealthEffects": [
+										{
+											"bodyParts": [
+												"Head",
+												"Chest",
+												"Stomach",
+												"LeftArm",
+												"RightArm",
+												"LeftLeg",
+												"RightLeg"
+											],
+											"effects": [
+												"Stun"
+											]
+										}
+									],
+									"id": "5d307ff586f77447f340bce1"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d307fc886f77447f15f5b23"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

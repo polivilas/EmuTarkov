@@ -8,8 +8,6 @@
 			"lootSavingEnabled": true
 		},
 		"bots": {
-			"customEnabled": true,
-			"customChance": 1,
 			"pmcEnabled": true,
 			"pmcSpawnChance": 15,
 			"pmcUsecChance": 50
@@ -18,7 +16,8 @@
 			"ragfairMultiplier": 1,
 			"repairMultiplier": 1,
 			"insureMultiplier": 0.1,
-			"insureReturnChance": 75
+			"insureReturnChance": 75,
+			"fenceAssortSize": 300
 		},
 		"location": {
 			"realTimeEnabled": true,
@@ -70,18 +69,6 @@
 				"name": "ExaminedByDefault",
 				"author": "EmuTarkov",
 				"version": "1.0.0",
-				"enabled": false
-			},
-			{
-				"name": "PresetTrader",
-				"author": "EmuTarkov",
-				"version": "1.0.0",
-				"enabled": false
-			},
-			{
-				"name": "M4HoneyBadger",
-				"author": "Duelo",
-				"version": "1.1.0",
 				"enabled": false
 			}
 		]
