@@ -157,6 +157,20 @@ function generatePlayerScav() {
 	let playerscav = generate({"conditions":[{"Role":"playerScav","Limit":1,"Difficulty":"normal"}]}).data;
 
 	playerscav[0].Info.Settings = {};
+	// delete secured containers because the bot loadouts may have them.
+	for (let item of playerscav[0].Inventory.items) {
+        if (item.slotId === "SecuredContainer") {
+            let idsToRemove = itm_hf.findAndReturnChildren(playerscav[0], item._id);
+            for (let itemId of idsToRemove) {
+            	for (let index in playerscav[0].Inventory.items) { //find correct item by id and delete it
+	                if (playerscav[0].Inventory.items[index]._id === itemId) {
+	                    playerscav[0].Inventory.items.splice(index, 1);  //remove item from tmplist
+	                }
+	            }
+            }
+        }
+    }
+
 	return playerscav[0];
 }
 
