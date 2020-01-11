@@ -71,9 +71,9 @@ function moveItem(tmpList, body) {
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * Profile index: 0 = main profile, 1 = scav profile
 * */
-function removeItem(tmpList, body, output = item.getOutput(), profileIndex = 0) {
+function removeItem(tmpList, body, output = "", profileIndex = 0) {
     // -> Deletes item and its all child completly - now works
-	if (output == ""){
+	if (output === ""){
 		item.resetOutput();
 		output = item.getOutput()
     }
