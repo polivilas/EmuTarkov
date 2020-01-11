@@ -109,6 +109,10 @@ function generateBot(botBase, role) {
 		}
 	}
 
+	if (role === "playerScav") {
+		type = "assault";
+	}
+
 	let botNode = getBotNode(type);
 
 	// generate bot
@@ -150,10 +154,9 @@ function generate(databots) {
 }
 
 function generatePlayerScav() {
-	let playerscav = generate({"conditions":[{"Role":"assault","Limit":1,"Difficulty":"normal"}]}).data;
+	let playerscav = generate({"conditions":[{"Role":"playerScav","Limit":1,"Difficulty":"normal"}]}).data;
 
 	playerscav[0].Info.Settings = {};
-	playerscav[0]._id = "5c71b934354682353958e983";
 	return playerscav[0];
 }
 

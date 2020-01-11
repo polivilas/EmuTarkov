@@ -45,6 +45,11 @@ function getProfilePath() {
     return profilePath.replace("__REPLACEME__", constants.getActiveID());
 }
 
+function getScavProfilePath() {
+    let profilePath = filepaths.user.profiles.scav;
+    return profilePath.replace("__REPLACEME__", constants.getActiveID());
+}
+
 function create(info) {
     let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
     let character = json.parse(json.read(filepaths.profile.character));
@@ -109,19 +114,25 @@ function saveProfileProgress(offRaidData) {
 
     let offRaidExit = offRaidData.exit;
     let offRaidProfile = offRaidData.profile;
+
     let tmpList = getCharacterData();
 
     // replace data
-    tmpList.data[0].Info.Level = offRaidProfile.Info.Level;
-    tmpList.data[0].Skills = offRaidProfile.Skills;
-    tmpList.data[0].Stats = offRaidProfile.Stats;
-    tmpList.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
-    tmpList.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
-    tmpList.data[0].Quests = offRaidProfile.Quests;
+    // if isPlayerScav is true, then offRaidProfile points to a scav profile
+    const isPlayerScav = offRaidData.isPlayerScav;
+    console.log('is this scav? ' + isPlayerScav);
+    if (!isPlayerScav) {
+        tmpList.data[0].Info.Level = offRaidProfile.Info.Level;
+        tmpList.data[0].Skills = offRaidProfile.Skills;
+        tmpList.data[0].Stats = offRaidProfile.Stats;
+        tmpList.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
+        tmpList.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
+        tmpList.data[0].Quests = offRaidProfile.Quests;
 
-    // level 69 cap to prevent visual bug occuring at level 70
-    if (tmpList.data[0].Info.Experience > 13129881) {
-        tmpList.data[0].Info.Experience = 13129881;
+        // level 69 cap to prevent visual bug occuring at level 70
+        if (tmpList.data[0].Info.Experience > 13129881) {
+            tmpList.data[0].Info.Experience = 13129881;
+        }
     }
 
     // mark items found in raid
@@ -195,13 +206,21 @@ function saveProfileProgress(offRaidData) {
 
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
+    let profileIndex = isPlayerScav ? 1 : 0;
+
     // set profile equipment to the raid equipment
-    move_f.removeItem(tmpList, tmpList.data[0].Inventory.equipment);
-    move_f.removeItem(tmpList, tmpList.data[0].Inventory.questRaidItems);
-    move_f.removeItem(tmpList, tmpList.data[0].Inventory.questStashItems);
+    move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.equipment, item.getOutput(), profileIndex);
+    move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.questRaidItems, item.getOutput(), profileIndex);
+    move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.questStashItems, item.getOutput(), profileIndex);
 
     for (let item in offRaidProfile.Inventory.items) {
-        tmpList.data[0].Inventory.items.push(offRaidProfile.Inventory.items[item]);
+        tmpList.data[profileIndex].Inventory.items.push(offRaidProfile.Inventory.items[item]);
+    }
+
+    // terminate early for player scavs because we don't care about whether they died.
+    if (isPlayerScav) {
+        setScavData(tmpList.data[1]);
+        return;
     }
 
     // remove inventory if player died
@@ -264,14 +283,29 @@ function getCharacterData() {
 
     // create full profile data from simplified character data
     let playerData = json.parse(json.read(getProfilePath()));
+
+    // if scav profile doesn't exist, generate one. otherwise, we should rely on
+    // regenerate function to get us new ones.
+    if (!fs.existsSync(getScavProfilePath())) {
+        generateScavProfile();
+    }
+    let scavData = json.parse(json.read(getScavProfilePath()));
+
+    ret.data.push(playerData);
+    ret.data.push(scavData);
+    return ret;
+}
+
+function generateScavProfile() {
+    let playerData = json.parse(json.read(getProfilePath()));
     let scavData = bots.generatePlayerScav();
 
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
 
-    ret.data.push(playerData);
-    ret.data.push(scavData);
-    return ret;
+    setScavData(scavData);
+
+    return scavData;
 }
 
 function getStashType() {
@@ -293,6 +327,14 @@ function setCharacterData(data) {
     }
 
     json.write(getProfilePath(), data);
+}
+
+function setScavData(data) {
+    if (typeof data.data !== "undefined") {
+        data = data.data[1];
+    }
+
+    json.write(getScavProfilePath(), data);   
 }
 
 function addChildPrice(data, parentID, childPrice) {
@@ -479,6 +521,8 @@ module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
 module.exports.getPurchasesData = getPurchasesData;
+module.exports.generateScavProfile = generateScavProfile;
+module.exports.setScavData = setScavData;
 module.exports.getStashType = getStashType;
 module.exports.getReservedNickname = getReservedNickname;
 module.exports.changeNickname = changeNickname;

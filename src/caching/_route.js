@@ -282,6 +282,7 @@ function others() {
     filepaths.profile.userbuilds = "db/profile/userbuilds.json";
     filepaths.user.profiles.list = "user/profiles/list.json";
     filepaths.user.profiles.character = "user/profiles/__REPLACEME__/character.json";
+    filepaths.user.profiles.scav = "user/profiles/__REPLACEME__/scav.json";
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
     filepaths.user.profiles.userbuilds = "user/profiles/__REPLACEME__/userbuilds.json";
     filepaths.user.config = "user/server.config.json";
