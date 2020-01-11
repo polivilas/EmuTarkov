@@ -21,20 +21,46 @@ function moveItem(tmpList, body) {
     }
     //cartriges handler end
 
-    for (let item of tmpList.data[0].Inventory.items) {
-        if (item._id && item._id === body.item) {
-            item.parentId = body.to.id;
-            item.slotId = body.to.container;
-            if (typeof body.to.location !== "undefined") {
-                item.location = body.to.location;
-            } else {
-                if (item.location) {
-                    delete item.location;
+    if (typeof body.fromOwner !== 'undefined' && body.fromOwner.id === tmpList.data[1]._id) {
+        let mainItems = tmpList.data[0].Inventory.items;
+        let scavItems = tmpList.data[1].Inventory.items;
+        let idsToMove = itm_hf.findAndReturnChildren(tmpList.data[1], body.item);
+        for (let itemId of idsToMove) {
+            for (let item of scavItems) {
+                if (item._id && item._id === itemId) {
+                    if (itemId === body.item) {
+                        item.parentId = body.to.id;
+                        item.slotId = body.to.container;
+                        if (typeof body.to.location !== "undefined") {
+                            item.location = body.to.location;
+                        } else {
+                            if (item.location) {
+                                delete item.location;
+                            }
+                        }
+                    }
+                    mainItems.push(item);
                 }
             }
+        }
+        profile.setCharacterData(tmpList);
+        return output;
+    } else {
+        for (let item of tmpList.data[0].Inventory.items) {
+            if (item._id && item._id === body.item) {
+                item.parentId = body.to.id;
+                item.slotId = body.to.container;
+                if (typeof body.to.location !== "undefined") {
+                    item.location = body.to.location;
+                } else {
+                    if (item.location) {
+                        delete item.location;
+                    }
+                }
 
-            profile.setCharacterData(tmpList);
-            return output;
+                profile.setCharacterData(tmpList);
+                return output;
+            }
         }
     }
 
@@ -43,9 +69,11 @@ function moveItem(tmpList, body) {
 
 /* Remove Item
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
+* Profile index: 0 = main profile, 1 = scav profile
 * */
-function removeItem(tmpList, body, output = "") {
-	if (output === "") {
+function removeItem(tmpList, body, output = "", profileIndex = 0) {
+    // -> Deletes item and its all child completly - now works
+	if (output === ""){
 		item.resetOutput();
 		output = item.getOutput()
     }
@@ -54,19 +82,23 @@ function removeItem(tmpList, body, output = "") {
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-        let ids_toremove = itm_hf.findAndReturnChildren(tmpList, toDo[0]); //get all ids related to this item, +including this item itself
+        let ids_toremove = itm_hf.findAndReturnChildren(tmpList.data[profileIndex], toDo[0]); //get all ids related to this item, +including this item itself
 
         for (let i in ids_toremove) { //remove one by one all related items and itself
             output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
 
-            for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
-                if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
-                    tmpList.data[0].Inventory.items.splice(a, 1);  //remove item from tmplist
+            for (let a in tmpList.data[profileIndex].Inventory.items) {	//find correct item by id and delete it
+                if (tmpList.data[profileIndex].Inventory.items[a]._id === ids_toremove[i]) {
+                    tmpList.data[profileIndex].Inventory.items.splice(a, 1);  //remove item from tmplist
                 }
             }
         }
 
-        profile.setCharacterData(tmpList); //save tmplist to profile
+        if (profileIndex === 1) {
+            profile.setScavData(tmpList); // save scav profile
+        } else {
+            profile.setCharacterData(tmpList); //save tmplist to profile
+        }
         return output;
     } else {
         logger.logError("item id is not vaild");
@@ -80,7 +112,7 @@ function removeInsurance(tmpList, body) {
     
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-        let ids_toremove = itm_hf.findAndReturnChildren(tmpList, toDo[0]); //get all ids related to this item, +including this item itself
+        let ids_toremove = itm_hf.findAndReturnChildren(tmpList.data[0], toDo[0]); //get all ids related to this item, +including this item itself
 
         for (let i in ids_toremove) { //remove one by one all related items and itself
             for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it

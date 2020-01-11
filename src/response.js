@@ -54,7 +54,7 @@ const staticRoutes = {
     "/client/match/group/exit_from_menu": nullResponse,
     "/client/match/exit": nullResponse,
     "/client/match/updatePing": nullResponse,
-    "/client/game/profile/savage/regenerate": nullResponse,
+    "/client/game/profile/savage/regenerate": regenerateScav,
     "/client/mail/dialog/list": getMailDialogList,
     "/client/mail/dialog/view": getMailDialogView,
     "/client/mail/dialog/info": getMailDialogInfo,
@@ -165,6 +165,13 @@ function getProfileData(url, info) {
     }
 
     return JSON.stringify(responseData);
+}
+
+function regenerateScav(url, info) {
+    let response = {err: 0, errmsg: null, data: []};
+    response.data.push(profile.generateScavProfile());
+
+    return JSON.stringify(response);
 }
 
 function selectProfile(url, info) {
