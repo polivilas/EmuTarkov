@@ -44,9 +44,8 @@ function moveItem(tmpList, body) {
 /* Remove Item
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * */
-function removeItem(tmpList, body, output = item.getOutput()) {
-    // -> Deletes item and its all child completly - now works
-	if (output == ""){
+function removeItem(tmpList, body, output = "") {
+	if (output === "") {
 		item.resetOutput();
 		output = item.getOutput()
     }
