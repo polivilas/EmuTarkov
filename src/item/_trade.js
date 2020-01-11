@@ -97,13 +97,8 @@ function confirmRagfairTrading(tmpList, body) {
         body.scheme_id = 0;
         body.scheme_items = offer.items;
 
-        let tmpOutput = confirmTrading(tmpList, body);
-
-        for (let item of tmpOutput.data.items.new) {
-            output.data.items.new.push(item);
-        }
+        output = confirmTrading(tmpList, body);
     }
-
     return output;
 }
 
