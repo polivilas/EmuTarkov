@@ -20,12 +20,7 @@ function acceptQuest(tmpList, body) {
 
 }
 
-function completeQuest(tmpList, body) { 
-    // -> Complete quest (need rework for giving back quests)
-    item.resetOutput();
-
-    let output = item.getOutput();
-
+function completeQuest(tmpList, body) {
     for (let quest of tmpList.data[0].Quests) {
         if (quest.qid === body.qid) {
             quest.status = 4;
@@ -76,8 +71,12 @@ function completeQuest(tmpList, body) {
         }
     }
 
+    item.resetOutput();
+
+    let output = item.getOutput();
+
     output.data.quests = quests.data;
-    logger.logWarning(output);
+    logger.logData(output);
     return output;
 }
 
