@@ -59,19 +59,21 @@ function lvlUp(id) {
     // level up traders
     for (let level in loyaltyLevels) {
         // level reached
-        if (loyaltyLevels[level].minLevel < currentProfile.data[0].Info.Level
-            || loyaltyLevels[level].minSalesSum < currentTrader.data.loyalty.currentSalesSum
-            || loyaltyLevels[level].minStanding < currentTrader.data.loyalty.currentStanding) {
+        if ((loyaltyLevels[level].minLevel < currentProfile.data[0].Info.Level
+            && loyaltyLevels[level].minSalesSum < currentTrader.data.loyalty.currentSalesSum
+            && loyaltyLevels[level].minStanding < currentTrader.data.loyalty.currentStanding)
+            && level !== "3") {
             continue;
         }
 
         // set current level found
         currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
         setTrader(currentTrader.data);
-        assort_f.generate(id);
-        logger.logWarning(currentTrader.data.loyalty.currentLevel);
         break;
     }
+
+    // set assort
+    assort_f.generate(id);
 }
 
 module.exports.getPath = getPath;

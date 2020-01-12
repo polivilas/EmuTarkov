@@ -72,11 +72,8 @@ function completeQuest(tmpList, body) {
     }
 
     item.resetOutput();
-
     let output = item.getOutput();
-
     output.data.quests = quests.data;
-    logger.logData(output);
     return output;
 }
 
