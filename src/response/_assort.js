@@ -3,8 +3,8 @@
 require('../libs.js');
 
 function getPath(id) {
-    let traderPath = filepaths.user.profiles.assort[id];
-    return traderPath.replace("__REPLACEME__", constants.getActiveID());
+    let assortPath = filepaths.user.profiles.assort[id];
+    return assortPath.replace("__REPLACEME__", constants.getActiveID());
 }
 
 function findAndReturnChildren(assort, itemid) {
@@ -60,7 +60,7 @@ function generateAssort(id) {
         }
     }
 
-    json.write(filepaths.user.profiles.assort["assort_" + id], base);
+    json.write(getPath(id), base);
 }
 
 function generateFenceAssort() {

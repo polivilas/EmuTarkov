@@ -35,7 +35,6 @@ function genericFilepathCacher(type, basepath) {
             case "botsInv": filepaths.bots.inventory[fileName] = filePath; break;
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
             case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
-            case "profileAssort": filepaths.user.profiles.assort[fileName] = "user/profiles/__REPLACEME__/assort/" + fileName + ".json"; break;
         }
     }
 }
@@ -103,15 +102,16 @@ function templates() {
 
 function assort() {
     let dirList = utility.getDirList("db/assort/");
+    let assortName = dirList[trader];
 
     for (let trader in dirList) {
-        logger.logInfo("Routing: db/assort/" + dirList[trader] + "/");
+        logger.logInfo("Routing: db/assort/" +  + "/");
 
         let assortFilePath = {"items":{}, "barter_scheme":{}, "loyal_level_items":{}};
         let inputDir = [
-            "db/assort/" + dirList[trader] + "/items/",
-            "db/assort/" + dirList[trader] + "/barter/",
-            "db/assort/" + dirList[trader] + "/level/"
+            "db/assort/" + assortName + "/items/",
+            "db/assort/" + assortName + "/barter/",
+            "db/assort/" + assortName + "/level/"
         ];
 
         for (let path in inputDir) {
@@ -132,7 +132,8 @@ function assort() {
             }
         }
 
-        filepaths.assort[dirList[trader]] = assortFilePath;
+        filepaths.assort[assortName] = assortFilePath;
+        filepaths.user.profiles.assort[assortName] = "user/profiles/__REPLACEME__/assort/" + assortName + ".json"
     }
 }
 
