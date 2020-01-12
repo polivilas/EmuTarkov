@@ -77,11 +77,14 @@ function removeItem(tmpList, body, output = "", profileIndex = 0) {
 		output = item.getOutput();
     }
     
-    let toDo = [body];
+    let toDo = []
 
-    //Accounts for inventory discarding
     if (body.hasOwnProperty("item")) {
+		// item discarding
         toDo = [body.item];
+    } else {
+		// all other cases
+    	toDo = [body];
     }
 
     //Find the item and all of it's relates
