@@ -396,6 +396,14 @@ function getPurchasesData(tmpTraderInfo) {
                 let currency = trader.get(tmpTraderInfo).data.currency;
                 preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(currency));
 
+                // uses profile information to get the level of the dogtag and multiplies
+                // the prepare price after conversion with this factor
+                if (itm_hf.isDogtag(data[invItems]._tpl)) {
+                    if ("Dogtag" in data[invItems].upd) {
+                        preparePrice = preparePrice * data[invItems].upd.Dogtag.Level;
+                    }
+                }
+
                 preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
                 purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' + data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
             }
