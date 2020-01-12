@@ -2,17 +2,19 @@
 
 require('../libs.js');
 
+// statuses seem as follow
+// 1 - not accepted
+// 2 - accepted
+// 3 - failed 
+// 4 - completed
+
 function acceptQuest(tmpList, body) {
     tmpList.data[0].Quests.push({
 		"qid": body.qid.toString(), 
 		"startTime": utility.getTimestamp(), 
 		"status": 2
 	}); 
-	// statuses seem as follow - 
-	// 1 - not accepted | 
-	// 2 - accepted | 
-	// 3 - failed | 
-	// 4 - completed
+	
     profile.setCharacterData(tmpList);
 
     item.resetOutput();
@@ -21,9 +23,22 @@ function acceptQuest(tmpList, body) {
 }
 
 function completeQuest(tmpList, body) {
-    for (let quest of tmpList.data[0].Quests) {
-        if (quest.qid === body.qid) {
-            quest.status = 4;
+    for (let quest in tmpList.data[0].Quests) {
+        if (tmpList.data[0].Quests[quest].qid === body.qid) {
+            if (tmpList.data[0].Quests[quest].restartable === false) {
+                // quest completed
+                tmpList.data[0].Quests[quest].status = 4;
+            } else {
+                // remove quest to allow it to be restartable again
+                for (let counter in tmpList.data[0].BackendCounters) {
+                    if (tmpList.data[0].BackendCounters[counter].qid === tmpList.data[0].Quests[quest].qid) {
+                        delete tmpList.data[0].BackendCounters[counter];
+                    }
+                }
+
+                tmpList.data[0].Quests.splice(quest, 1);
+            }
+
             profile.setCharacterData(tmpList);
             break;
         }
