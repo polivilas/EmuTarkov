@@ -80,6 +80,11 @@ function generateFence() {
     for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
         let id = names[utility.getRandomInt(0, names.length - 1)];
 
+        if (!added.includes(id)) {
+            i--;
+            continue;
+        }
+
         added.push(id);
         base.data.items.push(json.parse(json.read(filepaths.assort.ragfair.items[id])));
         base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort.ragfair.barter_scheme[id]));
