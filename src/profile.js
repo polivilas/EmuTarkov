@@ -128,18 +128,18 @@ function saveProfileProgress(offRaidData) {
     // replace data
     // if isPlayerScav is true, then offRaidProfile points to a scav profile
     const isPlayerScav = offRaidData.isPlayerScav;
-    if (!isPlayerScav) {
-        tmpList.data[0].Info.Level = offRaidProfile.Info.Level;
-        tmpList.data[0].Skills = offRaidProfile.Skills;
-        tmpList.data[0].Stats = offRaidProfile.Stats;
-        tmpList.data[0].Encyclopedia = offRaidProfile.Encyclopedia;
-        tmpList.data[0].ConditionCounters = offRaidProfile.ConditionCounters;
-        tmpList.data[0].Quests = offRaidProfile.Quests;
+    let profileIndex = isPlayerScav ? 1 : 0;
+    
+    tmpList.data[profileIndex].Info.Level = offRaidProfile.Info.Level;
+    tmpList.data[profileIndex].Skills = offRaidProfile.Skills;
+    tmpList.data[profileIndex].Stats = offRaidProfile.Stats;
+    tmpList.data[profileIndex].Encyclopedia = offRaidProfile.Encyclopedia;
+    tmpList.data[profileIndex].ConditionCounters = offRaidProfile.ConditionCounters;
+    tmpList.data[profileIndex].Quests = offRaidProfile.Quests;
 
-        // level 69 cap to prevent visual bug occuring at level 70
-        if (tmpList.data[0].Info.Experience > 13129881) {
-            tmpList.data[0].Info.Experience = 13129881;
-        }
+    // level 69 cap to prevent visual bug occuring at level 70
+    if (tmpList.data[profileIndex].Info.Experience > 13129881) {
+        tmpList.data[profileIndex].Info.Experience = 13129881;
     }
 
     // mark items found in raid
@@ -147,10 +147,13 @@ function saveProfileProgress(offRaidData) {
         let found = false;
 
         // check if item exists already
-        for (let item of tmpList.data[0].Inventory.items) {
-            if (offRaidProfile.Inventory.items[offRaidItem]._id === item._id) {
-                found = true;
-            }            
+        // only applies to pmcs, as all items found in scavs are considered found in raid.
+        if (!isPlayerScav) {
+            for (let item of tmpList.data[0].Inventory.items) {
+                if (offRaidProfile.Inventory.items[offRaidItem]._id === item._id) {
+                    found = true;
+                }            
+            }
         }
 
         if (found) {
@@ -181,9 +184,12 @@ function saveProfileProgress(offRaidData) {
         let insuredItem = false;
 
         // insured items shouldn't be renamed
-        for (let insurance in tmpList.data[0].InsuredItems) {
-            if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
-                insuredItem = true;
+        // only works for pmcs.
+        if (!isPlayerScav) {
+            for (let insurance in tmpList.data[0].InsuredItems) {
+                if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
+                    insuredItem = true;
+                }
             }
         }
 
@@ -212,8 +218,6 @@ function saveProfileProgress(offRaidData) {
     }
 
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
-
-    let profileIndex = isPlayerScav ? 1 : 0;
 
     // set profile equipment to the raid equipment
     move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.equipment, item.getOutput(), profileIndex);
