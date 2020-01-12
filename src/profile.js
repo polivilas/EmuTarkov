@@ -448,7 +448,7 @@ function getPurchasesData(tmpTraderInfo) {
                 // uses profile information to get the level of the dogtag and multiplies
                 // the prepare price after conversion with this factor
                 if (itm_hf.isDogtag(data[invItems]._tpl)) {
-                    if ("Dogtag" in data[invItems].upd) {
+                    if (data[invItems].upd.hasOwnProperty("Dogtag")) {
                         preparePrice = preparePrice * data[invItems].upd.Dogtag.Level;
                     }
                 }

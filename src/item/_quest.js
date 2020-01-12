@@ -51,7 +51,7 @@ function completeQuest(tmpList, body) {
                         newReq.tid = "ragfair";
                 
                         tmpList = profile.getCharacterData();
-                        output = move_f.addItem(tmpList, newReq, output);
+                        move_f.addItem(tmpList, newReq);
                     }
                     break;
 
@@ -76,6 +76,8 @@ function completeQuest(tmpList, body) {
         }
     }
 
+    output.data.quests = quests.data;
+    logger.logWarning(output);
     return output;
 }
 

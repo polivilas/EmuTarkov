@@ -59,10 +59,10 @@ function lvlUp(id) {
     // level up traders
     for (let level in loyaltyLevels) {
         // level reached
-        if (loyaltyLevels[level].minLevel < currentProfile.data[0].Info.Level
-            && loyaltyLevels[level].minSalesSum < currentTrader.data.loyalty.currentSalesSum
-            && loyaltyLevels[level].minStanding < currentTrader.data.loyalty.currentStanding) {
-            continue;
+        if (loyaltyLevels[level].minLevel > currentProfile.data[0].Info.Level
+            || loyaltyLevels[level].minSalesSum > currentTrader.data.loyalty.currentSalesSum
+            || loyaltyLevels[level].minStanding > currentTrader.data.loyalty.currentStanding) {
+            break;
         }
 
         // set current level found
