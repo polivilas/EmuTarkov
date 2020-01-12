@@ -103,6 +103,11 @@ function create(info) {
         json.write(accountFolder + "traders/" + fileName + ".json", fileData);
     }
 
+    // generate assort
+    for (let fileName of inputNames) {
+        assort_f.generateAssort(fileName);
+    }
+
     // don't wipe profile again
     setProfileWipe(constants.getActiveID(), false);
 }

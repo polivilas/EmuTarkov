@@ -84,6 +84,7 @@ function lvlUp(id) {
         currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
         setTrader(currentTrader.data);
         assort_f.generateAssort(id);
+        logger.logWarning(currentTrader.data.loyalty.currentLevel);
         break;
     }
 }
