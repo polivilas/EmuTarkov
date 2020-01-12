@@ -46,7 +46,7 @@ function removeItem(assort, id) {
     }
 }
 
-function generateAssort(id) {
+function generate(id) {
     let base = json.parse(json.read(filepaths.user.cache["assort_" + id]));
     let keyNames = Object.keys(base.data.loyal_level_items);
     let level = trader.get(id).data.loyalty.currentLevel;
@@ -63,7 +63,7 @@ function generateAssort(id) {
     json.write(getPath(id), base);
 }
 
-function generateFenceAssort() {
+function generateFence() {
     let base = json.parse(json.read("db/cache/assort.json"));
     let names = Object.keys(filepaths.assort.ragfair.loyal_level_items);
     let added = [];
@@ -85,5 +85,20 @@ function generateFenceAssort() {
     return json.write(filepaths.user.cache.assort_579dc571d53a0658a154fbec, base);
 }
 
-module.exports.generateAssort = generateAssort;
-module.exports.generateFenceAssort = generateFenceAssort;
+function get(id) {
+    // find the assort
+    if (id === "579dc571d53a0658a154fbec") {
+        generateFence();
+    }
+
+	if (filepaths.user.cache.hasOwnProperty("assort_" + id)) {
+        return json.parse(json.read(getPath(id)));
+    }
+    
+    // assort not found
+    logger.logError("Couldn't find assort of ID " + trader);
+    return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
+}
+
+module.exports.get = get;
+module.exports.generate = generate;

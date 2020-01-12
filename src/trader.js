@@ -35,21 +35,6 @@ function get(id) {
     return {err: 999, errmsg: "Couldn't find trader of ID " + id, data: null};
 }
 
-function getAssort(id) {
-    // find the assort
-    if (id === "579dc571d53a0658a154fbec") {
-        assort_f.generateFenceAssort();
-    }
-
-	if (filepaths.user.cache.hasOwnProperty("assort_" + id)) {
-        return json.parse(json.read(filepaths.user.profiles.assort["assort_" + id]));
-    }
-    
-    // assort not found
-    logger.logError("Couldn't find assort of ID " + trader);
-    return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
-}
-
 function setTrader(data) {
     return json.write(getPath(data._id), data);
 }
@@ -83,7 +68,7 @@ function lvlUp(id) {
         // set current level found
         currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
         setTrader(currentTrader.data);
-        assort_f.generateAssort(id);
+        assort_f.generate(id);
         logger.logWarning(currentTrader.data.loyalty.currentLevel);
         break;
     }
@@ -92,6 +77,5 @@ function lvlUp(id) {
 module.exports.getPath = getPath;
 module.exports.loadAllTraders = loadAllTraders;
 module.exports.get = get;
-module.exports.getAssort = getAssort;
 module.exports.setTrader = setTrader;
 module.exports.lvlUp = lvlUp;

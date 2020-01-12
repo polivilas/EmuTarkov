@@ -274,7 +274,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
-    let tmpTraderAssort = trader.getAssort(body.tid);
+    let tmpTraderAssort = assort_f.get(body.tid);
 
     for (let item of tmpTraderAssort.data.items) {
         if (item._id === body.item_id) {

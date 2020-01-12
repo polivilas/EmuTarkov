@@ -79,7 +79,7 @@ function examineItem(tmpList, body) {
             body.fromOwner.id = "ragfair";
         }
 
-        let tmpTraderAssort = trader.getAssort(body.fromOwner.id);
+        let tmpTraderAssort = assort_f.get(body.fromOwner.id);
 
         for (let item of tmpTraderAssort.data.items) {
             if (item._id === body.item) {

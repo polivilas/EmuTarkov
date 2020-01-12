@@ -425,7 +425,7 @@ function getTrader(url, info) {
 }
 
 function getAssort(url, info) {
-    return JSON.stringify(trader.getAssort(url.replace("/client/trading/api/getTraderAssort/", '')));
+    return JSON.stringify(assort_f.get(url.replace("/client/trading/api/getTraderAssort/", '')));
 }
 
 function getMenuLocale(url, info) {
