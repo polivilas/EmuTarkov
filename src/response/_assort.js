@@ -47,14 +47,23 @@ function removeItem(assort, id) {
 }
 
 function generate(id) {
+    if (id === "579dc571d53a0658a154fbec") {
+        return;
+    }
+
     let base = json.parse(json.read(filepaths.user.cache["assort_" + id]));
     let keyNames = Object.keys(base.data.loyal_level_items);
     let level = trader.get(id).data.loyalty.currentLevel;
 
+    logger.logWarning("level " + level);
+
     // 1 is min level, 4 is max level
     for (let i = 4; i > 0; i--) {
         for (let key in keyNames) {
-            if (base.data.loyal_level_items[key] < level) {
+            logger.logWarning("key level " + base.data.loyal_level_items[keyNames[key]]);
+
+            if (base.data.loyal_level_items[keyNames[key]] > level) {
+                logger.logError("removing item " + keyNames[key]);
                 base = removeItem(base, keyNames[key]);
             }
         }
