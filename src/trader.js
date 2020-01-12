@@ -56,21 +56,26 @@ function lvlUp(id) {
         checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
     }
 
+    // if I do it like this the first requirement will always start at 1 once we check for
+    // the first level so set initial value 0
+    let targetLevel = 0;
+    
     // level up traders
     for (let level in loyaltyLevels) {
         // level reached
-        if ((loyaltyLevels[level].minLevel < currentProfile.data[0].Info.Level
-            && loyaltyLevels[level].minSalesSum < currentTrader.data.loyalty.currentSalesSum
-            && loyaltyLevels[level].minStanding < currentTrader.data.loyalty.currentStanding)
-            && level !== "3") {
-            continue;
+        if ((loyaltyLevels[level].minLevel <= currentProfile.data[0].Info.Level
+            && loyaltyLevels[level].minSalesSum <= currentTrader.data.loyalty.currentSalesSum
+            && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
+            && targetLevel < 4) {
+                targetLevel++;
+        } else {
+            break;
         }
-
-        // set current level found
-        currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
-        setTrader(currentTrader.data);
-        break;
     }
+
+    // set currentLevel using the target level
+    currentTrader.data.loyalty.currentLevel = targetLevel;
+    setTrader(currentTrader.data);
 
     // set assort
     assort_f.generate(id);
