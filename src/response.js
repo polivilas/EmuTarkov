@@ -216,7 +216,7 @@ function getTemplates(url, info) {
 }
 
 function getQuests(url, info) {
-    let tmpList = prfole.getCharacterData();
+    let tmpList = profile.getCharacterData();
     let base = quests;
     let triggerLoyatyBuyout = false;
     let triggerHippocraticVow = false; 
