@@ -1,0 +1,159 @@
+{
+	"_id": "5d25e2b486f77409de05bba0",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d763d4886f774454e50d06d.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "14000",
+				"id": "5d66737586f774368d281a9c",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e02be602a251a095227110f",
+				"value": "37000",
+				"id": "5d66738886f774131e206b3c",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e02be602a251a095227110f",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 37000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e02be602a251a0952271110",
+				"value": "2",
+				"id": "5d66739c86f774368e1b786a",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271110",
+						"_tpl": "5af04b6486f774195a3ebb49",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5e02be602a251a0952271111",
+				"value": "1",
+				"id": "5d6673ad86f774368d281a9e",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271111",
+						"_tpl": "590c2e1186f77425357b6124",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5e02be602a251a0952271112",
+				"value": "2",
+				"id": "5d6673bf86f7744dcc5e2990",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271112",
+						"_tpl": "5d40425986f7743185265461",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5e02be602a251a0952271113",
+				"value": "2",
+				"id": "5d6673d386f7744a2e70f037",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271113",
+						"_tpl": "59e35cbb86f7741778269d83",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.03",
+				"id": "5d763bc886f774454c5360cd",
+				"type": "TraderStanding",
+				"index": 6
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "10",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d26143c86f77469ef0f894b",
+						"conditions": [
+							{
+								"_parent": "InZone",
+								"_props": {
+									"zoneIds": [
+										"huntsman_013"
+									],
+									"id": "5d26149b86f77469f1599fdc"
+								}
+							},
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5d2c954586f77434292a5662"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"factory4_day",
+										"factory4_night"
+									],
+									"id": "5d2c955186f774342b030482"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d26143c86f77469ef0f894c"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

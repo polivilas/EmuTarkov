@@ -1,0 +1,121 @@
+{
+	"_id": "5d25e48186f77443e625e386",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "5704e554d2720bac5b8b456e",
+	"image": "/files/quest/icon/5d6faf8f86f7743598553dd4.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "10000",
+				"id": "5d667ecf86f774368f43a1fd",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e02be602a251a0952271128",
+				"value": "35000",
+				"id": "5d667ee286f7744a2e70f04a",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e02be602a251a0952271128",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 35000
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.03",
+				"id": "5d77856186f774319c48882a",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5d357b6c86f774588d4d7e24",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "huntsman_024_1",
+									"value": "1",
+									"id": "5d357b7b86f7745b3f307c52"
+								}
+							}
+						]
+					},
+					"index": 3,
+					"parentId": "",
+					"id": "5d357b6c86f774588d4d7e25"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5d357b9586f7745b422d653e",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "huntsman_024_2",
+									"value": "1",
+									"id": "5d357ba686f7745b7023c376"
+								}
+							}
+						]
+					},
+					"index": 4,
+					"parentId": "",
+					"id": "5d357b9586f7745b422d653f"
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5d357bb786f774588d4d7e26",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "huntsman_024_3",
+									"value": "1",
+									"id": "5d357bcf86f7745b3f307c53"
+								}
+							}
+						]
+					},
+					"index": 5,
+					"parentId": "",
+					"id": "5d357bb786f774588d4d7e27"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

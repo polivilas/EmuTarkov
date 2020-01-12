@@ -1,0 +1,126 @@
+{
+	"_id": "5d25e44386f77409453bce7b",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d69474486f77414077d1cc8.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20000",
+				"id": "5d667c5886f774368d281aae",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e17b808ca08cb0fac2c9657",
+				"value": "75000",
+				"id": "5d667c4c86f774368f43a1f6",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e17b808ca08cb0fac2c9657",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 75000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e17b808ca08cb0fac2c9658",
+				"value": "2",
+				"id": "5d667c8286f774369120c2b9",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e17b808ca08cb0fac2c9658",
+						"_tpl": "5c12613b86f7743bbe2c3f76",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5e17b808ca08cb0fac2c9659",
+				"value": "2",
+				"id": "5d667ca186f774368e1b7879",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e17b808ca08cb0fac2c9659",
+						"_tpl": "590c621186f774138d11ea29",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.04",
+				"id": "5d777df386f7742fa5005cb6",
+				"type": "TraderStanding",
+				"index": 4
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "10",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d2733c586f7741dea4f3071",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "AnyPmc",
+									"compareMethod": ">=",
+									"value": "1",
+									"id": "5d27351e86f774457411b262"
+								}
+							},
+							{
+								"_parent": "InZone",
+								"_props": {
+									"zoneIds": [
+										"huntsman_020"
+									],
+									"id": "5d27354086f77445722f1f9d"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5d2c94f786f774342d57a662"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d2733c586f7741dea4f3072"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

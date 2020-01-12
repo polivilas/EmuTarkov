@@ -1,0 +1,85 @@
+{
+	"_id": "5d25e48d86f77408251c4bfb",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5979ed4c86f7742f55674442.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "5e0ac74b9d594972a112aa09",
+				"value": "50000",
+				"id": "5d667f7886f774369120c2c3",
+				"type": "Item",
+				"index": 0,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112aa09",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 50000
+						}
+					}
+				]
+			},
+			{
+				"value": "11000",
+				"id": "5d667f8986f774131e206b51",
+				"type": "Experience",
+				"index": 1
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.04",
+				"id": "5d7785f786f7742fa732bf08",
+				"type": "TraderStanding",
+				"index": 2
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"590c621186f774138d11ea29"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 0,
+					"parentId": "",
+					"id": "5d6949e786f774238a38d9e0"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"590c621186f774138d11ea29"
+					],
+					"value": "3",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 1,
+					"parentId": "",
+					"id": "5d27491686f77475aa5cf5b9",
+					"visibilityConditions": []
+				}
+			}
+		],
+		"Fail": []
+	}
+}

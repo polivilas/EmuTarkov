@@ -1,0 +1,223 @@
+{
+	"_id": "5967530a86f77462ba22226b",
+	"traderId": "54cb50c76803fa8b248b4571",
+	"location": "56f40101d2720b2a4d8b45d6",
+	"image": "/files/quest/icon/596a108786f7741ddc2d31b1.jpg",
+	"type": "PickUp",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "4200",
+				"id": "5c94f0b286f77455185027e6",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "54cb50c76803fa8b248b4571",
+				"value": "0.10",
+				"type": "TraderStanding",
+				"index": 1,
+				"id": "5bcf0f3186f77423c13fb055"
+			},
+			{
+				"target": "5e0ac74b9d594972a112a832",
+				"value": "16000",
+				"type": "Item",
+				"index": 2,
+				"id": "5a2e846486f7741a9865a988",
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a832",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 16000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e0ac74b9d594972a112a833",
+				"value": "1",
+				"id": "5a3fa3a786f774455b0f2879",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a833",
+						"_tpl": "57f4c844245977379d5c14d1",
+						"parentId": "hideout",
+						"slotId": "hideout",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					},
+					{
+						"_id": "5e0ac74b9d594972a112a834",
+						"_tpl": "57d152ec245977144076ccdf",
+						"parentId": "5e0ac74b9d594972a112a833",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5e0ac74b9d594972a112a835",
+						"_tpl": "57d1519e24597714373db79d",
+						"parentId": "5e0ac74b9d594972a112a833",
+						"slotId": "mod_magazine"
+					}
+				]
+			},
+			{
+				"target": "5e0ac74b9d594972a112a836",
+				"value": "3",
+				"id": "5a2e860886f77406357faa77",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a836",
+						"_tpl": "57d1519e24597714373db79d",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5e0ac74b9d594972a112a837",
+				"id": "5ac6517b86f7740575506e66",
+				"type": "AssortmentUnlock",
+				"index": 5,
+				"loyaltyLevel": 2,
+				"traderId": "54cb50c76803fa8b248b4571",
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a837",
+						"_tpl": "576fd4ec2459777f0b518431"
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5a3fbdb086f7745a554f0c30",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "locked_office",
+									"value": "1",
+									"id": "5a3fbdd386f7740fad0d7e26"
+								}
+							}
+						]
+					},
+					"index": 1,
+					"parentId": "5968943f86f7740d137ebfc2",
+					"id": "5a3fbdb086f7745a554f0c31"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5938144586f77473c2087145"
+					],
+					"value": "1",
+					"index": 2,
+					"parentId": "5968943f86f7740d137ebfc2",
+					"id": "5968941f86f7740d1570bbd2"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5938188786f77474f723e87f"
+					],
+					"value": "1",
+					"index": 0,
+					"parentId": "",
+					"id": "5968943f86f7740d137ebfc2"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5938188786f77474f723e87f"
+					],
+					"value": "1",
+					"index": 1,
+					"parentId": "",
+					"id": "5968948986f7740d121082d4",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5968943f86f7740d137ebfc2",
+								"id": "5a60650d86f7740d86320f14"
+							}
+						}
+					]
+				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Completion",
+					"counter": {
+						"id": "596762ec86f77426d3687a86",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"bigmap"
+									],
+									"id": "5981f9f886f774536f56ce42"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived",
+										"Runner"
+									],
+									"id": "5a60653f86f7740d887d2d38"
+								}
+							}
+						]
+					},
+					"index": 2,
+					"parentId": "",
+					"id": "596762ec86f77426d3687a87",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5968943f86f7740d137ebfc2",
+								"id": "5a60671186f774402e264147"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

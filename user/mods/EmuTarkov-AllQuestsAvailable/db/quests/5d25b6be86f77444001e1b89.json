@@ -1,0 +1,136 @@
+{
+	"_id": "5d25b6be86f77444001e1b89",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "5704e3c2d2720bac5b8b4567",
+	"image": "/files/quest/icon/59675e7b86f77414b25fb049.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "6500",
+				"id": "5d65688286f77474ef100f55",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e0ac74b9d594972a112aa04",
+				"value": "22000",
+				"id": "5d656dba86f774766e559dcc",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112aa04",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 22000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e0ac74b9d594972a112aa05",
+				"value": "2",
+				"id": "5d656ddc86f77476d6220ed8",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112aa05",
+						"_tpl": "5d1b313086f77425227d1678",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.04",
+				"id": "5d7629cd86f774454c5360bf",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"590c5d4b86f774784e1b9c45"
+					],
+					"zoneId": "huntsman_005_1",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 0,
+					"parentId": "",
+					"id": "5d25beca86f77409dd5cdbb3"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5448fee04bdc2dbc018b4567"
+					],
+					"zoneId": "huntsman_005_1",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 1,
+					"parentId": "",
+					"id": "5d25beeb86f77443fe45765f"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"590c5d4b86f774784e1b9c45"
+					],
+					"zoneId": "huntsman_005_2",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 2,
+					"parentId": "",
+					"id": "5d2deedc86f77459121c3118"
+				}
+			},
+			{
+				"_parent": "LeaveItemAtLocation",
+				"_props": {
+					"target": [
+						"5448fee04bdc2dbc018b4567"
+					],
+					"zoneId": "huntsman_005_2",
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"plantTime": 20,
+					"index": 3,
+					"parentId": "",
+					"id": "5d2defc586f774591510e6b9"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

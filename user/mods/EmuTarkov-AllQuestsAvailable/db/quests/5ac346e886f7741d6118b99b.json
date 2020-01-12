@@ -1,0 +1,79 @@
+{
+	"_id": "5ac346e886f7741d6118b99b",
+	"traderId": "5a7c2eca46aef81a7ca2145d",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4d8f186f774422237860d.jpg",
+	"type": "Skill",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "11100",
+				"id": "5c950d4486f774592a470256",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e0ac74b9d594972a112a944",
+				"value": "20000",
+				"id": "5acb7d0786f7742fa2019cc3",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a944",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 20000
+						}
+					}
+				]
+			},
+			{
+				"target": "5a7c2eca46aef81a7ca2145d",
+				"value": "0.04",
+				"id": "5acb8d4a86f77475bb19d90b",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5e0ac74b9d594972a112a945",
+				"value": "1",
+				"id": "5acb7d3986f7740ee6641447",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a945",
+						"_tpl": "5aa66be6e5b5b0214e506e97",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "Skill",
+				"_props": {
+					"target": "Memory",
+					"compareMethod": ">=",
+					"value": "4",
+					"index": 0,
+					"parentId": "",
+					"id": "5ac5eb3286f7746e7a509a09"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

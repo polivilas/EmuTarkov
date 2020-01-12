@@ -1,0 +1,79 @@
+{
+	"_id": "5ac3479086f7742880308199",
+	"traderId": "5a7c2eca46aef81a7ca2145d",
+	"location": "any",
+	"image": "/files/quest/icon/5ac4dbb086f7743e7c61ca09.jpg",
+	"type": "Standing",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9300",
+				"id": "5c950d6b86f77455192fa446",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e0ac74b9d594972a112a94e",
+				"value": "800",
+				"id": "5acb7a2986f77440a60503c1",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a94e",
+						"_tpl": "569668774bdc2da2298b4568",
+						"upd": {
+							"StackObjectsCount": 800
+						}
+					}
+				]
+			},
+			{
+				"target": "5a7c2eca46aef81a7ca2145d",
+				"value": "0.04",
+				"id": "5bcf299d86f77472316aa2b2",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5e0ac74b9d594972a112a94f",
+				"value": "2",
+				"id": "5acb7a6e86f77432b76dbca9",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e0ac74b9d594972a112a94f",
+						"_tpl": "5a32a064c4a28200741e22de",
+						"upd": {
+							"StackObjectsCount": 2
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "TraderLoyalty",
+				"_props": {
+					"target": "54cb50c76803fa8b248b4571",
+					"compareMethod": ">=",
+					"value": "3",
+					"index": 0,
+					"parentId": "",
+					"id": "5dbadfd186f77449467d1482"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

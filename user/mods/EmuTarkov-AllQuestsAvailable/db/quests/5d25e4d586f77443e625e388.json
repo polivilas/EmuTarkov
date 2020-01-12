@@ -1,0 +1,123 @@
+{
+	"_id": "5d25e4d586f77443e625e388",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "5704e5fad2720bc05b8b4567",
+	"image": "/files/quest/icon/5d77a10586f7745041358b41.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": true,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "9000",
+				"id": "5d66942586f77436900206a2",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e12b4878441bd0e2c0fa87f",
+				"value": "16000",
+				"id": "5d66943d86f774131e206b66",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e12b4878441bd0e2c0fa87f",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 16000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e12b4878441bd0e2c0fa880",
+				"value": "3",
+				"id": "5d66944e86f7744dcc5e2f75",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e12b4878441bd0e2c0fa880",
+						"_tpl": "590c31c586f774245e3141b2",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5e12b4878441bd0e2c0fa881",
+				"value": "3",
+				"id": "5d66946686f774368d281b03",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e12b4878441bd0e2c0fa881",
+						"_tpl": "59e35ef086f7741777737012",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5e12b4878441bd0e2c0fa882",
+				"value": "1",
+				"id": "5d66947c86f774131e206b68",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e12b4878441bd0e2c0fa882",
+						"_tpl": "5d1b39a386f774252339976f",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.03",
+				"id": "5d78b81e86f77461b27a2387",
+				"type": "TraderStanding",
+				"index": 5
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5d8a05d086f77410b4225d0f",
+						"conditions": [
+							{
+								"_parent": "VisitPlace",
+								"_props": {
+									"target": "huntsman_029",
+									"value": "1",
+									"id": "5d8a05e786f77410b11a7b9a"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d8a05d086f77410b4225d10"
+				}
+			}
+		],
+		"Fail": []
+	}
+}
