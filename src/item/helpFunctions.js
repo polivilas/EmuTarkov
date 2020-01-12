@@ -429,6 +429,16 @@ function findAndReturnChildren(tmpList, itemid) {
     return list;
 }
 
+/* Is Dogtag
+* input: itemId
+* output: bool
+* Checks if an item is a dogtag. Used under profile.js to modify preparePrice based
+* on the level of the dogtag
+*/
+function isDogtag(itemId) {
+    return itemId === "59f32bb586f774757e1e8442" || itemId === "59f32c3b86f77472a31742f0" ? true : false;
+}
+
 module.exports.recheckInventoryFreeSpace = recheckInventoryFreeSpace;
 module.exports.getCurrency = getCurrency;
 module.exports.inRUB = inRUB;
@@ -440,3 +450,4 @@ module.exports.getPlayerStash = getPlayerStash;
 module.exports.getItem = getItem;
 module.exports.getSize = getSize;
 module.exports.findAndReturnChildren = findAndReturnChildren;
+module.exports.isDogtag = isDogtag;
