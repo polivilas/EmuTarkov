@@ -99,14 +99,16 @@ function confirmRagfairTrading(tmpList, body) {
 
         let tmpOutput = confirmTrading(tmpList, body);
 
-        // this compiles all the offers that will eventually be sent back into one
-        // response to handle the ragfair purchase (multiple offer purchase ie. preset purchases)
         for (let item of tmpOutput.data.items.new) {
             output.data.items.new.push(item);
         }
 
         for (let item of tmpOutput.data.items.change) {
             output.data.items.change.push(item);
+        }
+
+        for (let item of tmpOutput.data.items.del) {
+            output.data.items.del.push(item);
         }
     }
     return output;
