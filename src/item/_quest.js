@@ -19,7 +19,6 @@ function acceptQuest(tmpList, body) {
 
     item.resetOutput();
     return item.getOutput();
-
 }
 
 function completeQuest(tmpList, body) {

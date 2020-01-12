@@ -216,7 +216,35 @@ function getTemplates(url, info) {
 }
 
 function getQuests(url, info) {
-    return JSON.stringify(quests, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
+    let tmpList = prfole.getCharacterData();
+    let base = quests;
+    let triggerLoyatyBuyout = false;
+    let triggerHippocraticVow = false; 
+
+    // check quest availability
+    for (let quest in tmpList.data[0].Quests) {
+        // loyalty buyout
+        if (tmpList.data[0].Quests[quest].qid === "597a171586f77405ba6887d3" && tmpList.data[0].Quests[quest].status === 4
+        || tmpList.data[0].Quests[quest].qid === "597a160786f77477531d39d2" && tmpList.data[0].Quests[quest].status === 4) {
+            triggerLoyatyBuyout = true;
+        }
+
+        // Hippocratic vow
+        if (tmpList.data[0].Quests[quest].qid === "596a218586f77420d232807c" && tmpList.data[0].Quests[quest].status === 4
+        || tmpList.data[0].Quests[quest].qid === "596b455186f77457cb50eccb" && tmpList.data[0].Quests[quest].status === 4) {
+            triggerHippocraticVow = true;
+        }
+    }
+
+    // quest not found
+    for (let quest in quests.data) {
+        if ((triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
+        || (triggerHippocraticVow === false && quests.data[quest].qid === " 5a5642ce86f77445c63c3419")) {
+            base.data.splice(quest, 1);
+        }
+    }
+
+    return JSON.stringify(base, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
 }
 
 function getMetrics(url, info) {
