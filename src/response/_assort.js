@@ -48,8 +48,6 @@ function removeItem(assort, id) {
 
 function generateAssort(id) {
     let base = json.parse(json.read(filepaths.user.cache["assort_" + id]));
-    console.log(filepaths.user.cache["assort_" + id]);
-    console.log(base);
     let keyNames = Object.keys(base.data.loyal_level_items);
     let level = trader.get(id).data.loyalty.currentLevel;
 

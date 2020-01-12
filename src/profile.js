@@ -105,6 +105,10 @@ function create(info) {
 
     // generate assort
     for (let fileName of inputNames) {
+        if (fileName === "579dc571d53a0658a154fbec") {
+            continue;
+        }
+
         assort_f.generateAssort(fileName);
     }
 
