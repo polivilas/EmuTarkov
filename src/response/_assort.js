@@ -55,15 +55,10 @@ function generate(id) {
     let keyNames = Object.keys(base.data.loyal_level_items);
     let level = trader.get(id).data.loyalty.currentLevel;
 
-    logger.logWarning("level " + level);
-
     // 1 is min level, 4 is max level
     for (let i = 4; i > 0; i--) {
         for (let key in keyNames) {
-            logger.logWarning("key level " + base.data.loyal_level_items[keyNames[key]]);
-
             if (base.data.loyal_level_items[keyNames[key]] > level) {
-                logger.logError("removing item " + keyNames[key]);
                 base = removeItem(base, keyNames[key]);
             }
         }
@@ -97,10 +92,11 @@ function generateFence() {
 function get(id) {
     // find the assort
     if (id === "579dc571d53a0658a154fbec") {
+        logger.logWarning("generating fence");
         generateFence();
     }
 
-	if (filepaths.user.cache.hasOwnProperty("assort_" + id)) {
+	if (filepaths.user.profiles.assort.hasOwnProperty(id)) {
         return json.parse(json.read(getPath(id)));
     }
     
