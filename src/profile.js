@@ -100,16 +100,15 @@ function create(info) {
         let fileData = json.parse(json.read(filePath));
         let fileName = inputNames[i++];
 
+        // generate trader
         json.write(accountFolder + "traders/" + fileName + ".json", fileData);
-    }
 
-    // generate assort
-    for (let fileName of inputNames) {
+        // generate assort
         if (fileName === "579dc571d53a0658a154fbec") {
             continue;
         }
 
-        assort_f.generateAssort(fileName);
+        assort_f.generate(fileName);
     }
 
     // don't wipe profile again
