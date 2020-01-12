@@ -2,6 +2,11 @@
 
 require('../libs.js');
 
+function getPath(id) {
+    let traderPath = filepaths.user.profiles.assort[id];
+    return traderPath.replace("__REPLACEME__", constants.getActiveID());
+}
+
 function findAndReturnChildren(assort, itemid) {
     let list = [];
 
@@ -42,7 +47,7 @@ function removeItem(assort, id) {
 }
 
 function generateAssort(id) {
-    let base = json.parse(json.read(filepaths.user.cache["assort_" + id]));
+    let base = json.parse(json.read(getPath(id)));
     let keyNames = Object.keys(base.loyal_level_scheme);
     let level = trader.get(id).data.loyalty.currentLevel;
 
