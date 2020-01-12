@@ -104,7 +104,6 @@ function assort() {
     let dirList = utility.getDirList("db/assort/");
 
     for (let trader in dirList) {
-        logger.logInfo("Routing: db/assort/" +  + "/");
 
         let assortName = dirList[trader];
         let assortFilePath = {"items":{}, "barter_scheme":{}, "loyal_level_items":{}};
@@ -113,6 +112,8 @@ function assort() {
             "db/assort/" + assortName + "/barter/",
             "db/assort/" + assortName + "/level/"
         ];
+
+        logger.logInfo("Routing: db/assort/" + assortName + "/");
 
         for (let path in inputDir) {
             let inputFiles = fs.readdirSync(inputDir[path]);
