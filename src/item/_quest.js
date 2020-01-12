@@ -25,20 +25,7 @@ function acceptQuest(tmpList, body) {
 function completeQuest(tmpList, body) {
     for (let quest in tmpList.data[0].Quests) {
         if (tmpList.data[0].Quests[quest].qid === body.qid) {
-            if (tmpList.data[0].Quests[quest].restartable === false) {
-                // quest completed
-                tmpList.data[0].Quests[quest].status = 4;
-            } else {
-                // remove quest to allow it to be restartable again
-                for (let counter in tmpList.data[0].BackendCounters) {
-                    if (tmpList.data[0].BackendCounters[counter].qid === tmpList.data[0].Quests[quest].qid) {
-                        delete tmpList.data[0].BackendCounters[counter];
-                    }
-                }
-
-                tmpList.data[0].Quests.splice(quest, 1);
-            }
-
+            tmpList.data[0].Quests[quest].status = 4;
             profile.setCharacterData(tmpList);
             break;
         }
