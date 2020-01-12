@@ -288,6 +288,7 @@ function others() {
     filepaths.user.profiles.scav = "user/profiles/__REPLACEME__/scav.json";
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
     filepaths.user.profiles.userbuilds = "user/profiles/__REPLACEME__/userbuilds.json";
+    filepaths.user.profiles.assort["579dc571d53a0658a154fbec"] = "user/profiles/__REPLACEME__/assort/579dc571d53a0658a154fbec.json";
     filepaths.user.config = "user/server.config.json";
     filepaths.globals = "db/globals.json";
     filepaths.hideout.settings = "db/hideout/settings.json";
@@ -313,7 +314,6 @@ function cache() {
     filepaths.user.cache.templates = "user/cache/templates.json";
     filepaths.user.cache.mods = "user/cache/mods.json";
     filepaths.user.cache.globals = filepaths.globals;
-    filepaths.user.cache.assort_579dc571d53a0658a154fbec = "user/cache/assort_579dc571d53a0658a154fbec.json";
 
     for (let assort in assortList) {
         filepaths.user.cache["assort_" + assortList[assort]] = "user/cache/assort_" + assortList[assort] + ".json";

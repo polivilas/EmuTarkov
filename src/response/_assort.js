@@ -91,7 +91,7 @@ function generateFence() {
         base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
     }
 
-    return json.write(filepaths.user.cache.assort_579dc571d53a0658a154fbec, base);
+    return json.write(filepaths.user.profiles.assort["579dc571d53a0658a154fbec"], base);
 }
 
 function get(id) {
