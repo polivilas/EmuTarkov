@@ -102,11 +102,11 @@ function templates() {
 
 function assort() {
     let dirList = utility.getDirList("db/assort/");
-    let assortName = dirList[trader];
 
     for (let trader in dirList) {
         logger.logInfo("Routing: db/assort/" +  + "/");
 
+        let assortName = dirList[trader];
         let assortFilePath = {"items":{}, "barter_scheme":{}, "loyal_level_items":{}};
         let inputDir = [
             "db/assort/" + assortName + "/items/",
