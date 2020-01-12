@@ -52,7 +52,7 @@ function lvlUp(id) {
             break;
         }
 
-        currentProfile.data[0].Info.Level = 1 + globalSettings.data.config.exp.level.exp_table[level];
+        currentProfile.data[0].Info.Level = level;
         checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
     }
 
