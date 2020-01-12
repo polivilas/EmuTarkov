@@ -47,7 +47,7 @@ function removeItem(assort, id) {
 }
 
 function generateAssort(id) {
-    let base = json.parse(json.read(getPath(id)));
+    let base = json.parse(json.read(filepaths.user.cache["assort_" + id]));
     let keyNames = Object.keys(base.loyal_level_scheme);
     let level = trader.get(id).data.loyalty.currentLevel;
 
