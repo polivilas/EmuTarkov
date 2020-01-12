@@ -75,7 +75,7 @@ function generateFence() {
     for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
         let id = names[utility.getRandomInt(0, names.length - 1)];
 
-        if (!added.includes(id)) {
+        if (added.includes(id)) {
             i--;
             continue;
         }
@@ -86,7 +86,7 @@ function generateFence() {
         base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
     }
 
-    return json.write(filepaths.user.profiles.assort["579dc571d53a0658a154fbec"], base);
+    return json.write(getPath("579dc571d53a0658a154fbec"), base);
 }
 
 function get(id) {
@@ -96,13 +96,7 @@ function get(id) {
         generateFence();
     }
 
-	if (filepaths.user.profiles.assort.hasOwnProperty(id)) {
-        return json.parse(json.read(getPath(id)));
-    }
-    
-    // assort not found
-    logger.logError("Couldn't find assort of ID " + trader);
-    return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
+	return json.parse(json.read(getPath(id)));
 }
 
 module.exports.get = get;
