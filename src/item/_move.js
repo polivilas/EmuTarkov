@@ -72,8 +72,7 @@ function moveItem(tmpList, body) {
 * Profile index: 0 = main profile, 1 = scav profile
 * */
 function removeItem(tmpList, body, output = "", profileIndex = 0) {
-    // -> Deletes item and its all child completly - now works
-	if (output === ""){
+	if (output === "") {
 		item.resetOutput();
 		output = item.getOutput()
     }

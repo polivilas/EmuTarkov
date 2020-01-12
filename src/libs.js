@@ -64,8 +64,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	// Other
 	global.locale = require('./locale.js');							// locale changer function
 	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
-	global.repair_f = require('./item/_repair.js');					// response/_repair
-	global.insure_f = require('./item/_insure.js');					// response/_insure
+	global.assort_f = require('./response/_assort.js');				// response/_assort
 	global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
 	global.server = require('./server/_start.js');					// server/_start
 	global.constants = require('./server/_constants.js');			// server/_constants
@@ -83,6 +82,8 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.customization_f = require('./item/_customization.js');	// item/_customization
 	global.hideout_f = require('./item/_hideout.js'); 				// item/_hideout
 	global.weaponBuilds_f = require('./item/_weaponBuilds.js'); 	// item/_weaponBuilds
+	global.repair_f = require('./item/_repair.js');					// item/_repair
+	global.insure_f = require('./item/_insure.js');					// item/_insure
 	global.item = require('./item.js');								// items
 	global.trader = require('./trader.js');							// trader
 	global.ragfair = require('./ragfair.js');						// ragfair

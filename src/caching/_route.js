@@ -35,6 +35,7 @@ function genericFilepathCacher(type, basepath) {
             case "botsInv": filepaths.bots.inventory[fileName] = filePath; break;
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
             case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
+            case "profileAssort": filepaths.user.profiles.assort[fileName] = "user/profiles/__REPLACEME__/assort/" + fileName + ".json"; break;
         }
     }
 }

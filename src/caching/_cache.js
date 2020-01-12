@@ -43,10 +43,7 @@ function genericCacher(cachename, filepathNode, output = "") {
         }
     }
 
-    if (typeof base.crc != "undefined") {
-        base.crc = utility.adlerGen(json.stringify(base.data));
-    }
-    
+    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/" + cachename, base);
 }
 
@@ -130,10 +127,7 @@ function templates() {
         }
     }
 
-    if (typeof base.crc != "undefined") {
-        base.crc = utility.adlerGen(json.stringify(base.data));
-    }
-
+    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/templates.json", base);
 }
 
@@ -168,10 +162,7 @@ function assorts(trader) {
         }
     }
 
-    if (typeof base.crc != "undefined") {
-        base.crc = utility.adlerGen(json.stringify(base.data));
-    }
-
+    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/assort_" + trader + ".json", base);
 }
 
@@ -227,10 +218,7 @@ function locales(locale) {
         }
     }
 
-    if (typeof base.crc != "undefined") {
-        base.crc = utility.adlerGen(json.stringify(base.data));
-    }
-
+    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/locale_" + locale + ".json", base);
 }
 
@@ -243,11 +231,8 @@ function globals() {
     logger.logInfo("Caching: globals.json");    
 
     let base = json.parse(json.read(filepaths.user.cache.globals));
-
-    if (typeof base.crc != "undefined") {
-        base.crc = utility.adlerGen(json.stringify(base.data));
-    }
-
+    
+    base.crc = utility.adlerGen(json.stringify(base.data));
     json.write("user/cache/globals.json", base);
 }
 

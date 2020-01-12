@@ -38,38 +38,16 @@ function get(id) {
 function getAssort(id) {
     // find the assort
     if (id === "579dc571d53a0658a154fbec") {
-        generateFenceAssort();
+        assort_f.generateFenceAssort();
     }
 
 	if (filepaths.user.cache.hasOwnProperty("assort_" + id)) {
-        return json.parse(json.read(filepaths.user.cache["assort_" + id]));
+        return json.parse(json.read(filepaths.user.profiles.assort["assort_" + id]));
     }
     
     // assort not found
     logger.logError("Couldn't find assort of ID " + trader);
     return {err: 999, errmsg: "Couldn't find assort of ID " + trader, data: null};
-}
-
-function generateFenceAssort() {
-    let base = json.parse(json.read("db/cache/assort.json"));
-    let names = Object.keys(filepaths.assort.ragfair.loyal_level_items);
-    let added = [];
-
-    for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
-        let id = names[utility.getRandomInt(0, names.length - 1)];
-
-        if (added.includes(id)) {
-            i--;
-            continue;
-        }
-
-        added.push(id);
-        base.data.items.push(json.parse(json.read(filepaths.assort.ragfair.items[id])));
-        base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort.ragfair.barter_scheme[id]));
-        base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
-    }
-
-    return json.write(filepaths.user.cache.assort_579dc571d53a0658a154fbec, base);
 }
 
 function setTrader(data) {
@@ -105,6 +83,7 @@ function lvlUp(id) {
         // set current level found
         currentTrader.data.loyalty.currentLevel = 1 + parseInt(level);
         setTrader(currentTrader.data);
+        assort_f.generateAssort(id);
         break;
     }
 }
