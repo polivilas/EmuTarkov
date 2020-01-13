@@ -60,7 +60,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5ae448a386f7744d3730fff0",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5af4155d86f7745b5e2aba63"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

@@ -1,8 +1,8 @@
 {
 	"_id": "5bc4893c86f774626f5ebf3e",
-	"traderId": "5a7c2eca46aef81a7ca2145d",
+	"traderId": "5c0647fdd443bc2504c2d371",
 	"location": "5704e3c2d2720bac5b8b4567",
-	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
 	"type": "Elimination",
 	"isKey": false,
 	"restartable": false,
@@ -18,7 +18,7 @@
 				"index": 0
 			},
 			{
-				"target": "5a7c2eca46aef81a7ca2145d",
+				"target": "5c0647fdd443bc2504c2d371",
 				"value": "0.06",
 				"id": "5bcf263c86f7746a45695b08",
 				"type": "TraderStanding",
@@ -78,7 +78,7 @@
 				"type": "AssortmentUnlock",
 				"index": 5,
 				"loyaltyLevel": 4,
-				"traderId": "5a7c2eca46aef81a7ca2145d",
+				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
 						"_id": "5d34df2788a4504526796dbf",
@@ -92,7 +92,7 @@
 				"type": "AssortmentUnlock",
 				"index": 6,
 				"loyaltyLevel": 4,
-				"traderId": "5a7c2eca46aef81a7ca2145d",
+				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
 						"_id": "5d34df2788a4504526796dc0",
@@ -104,7 +104,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5bc4856986f77454c317bea7",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5bdabf7186f7743e152e867d"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

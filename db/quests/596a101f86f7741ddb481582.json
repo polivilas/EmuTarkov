@@ -52,7 +52,18 @@
 		]
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5969f9e986f7741dde183a50",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "596a0eaf86f774576d4c957f"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "HandoverItem",

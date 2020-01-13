@@ -58,7 +58,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "59675ea386f77414b32bded2",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5968962686f7740e7266d973"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "HandoverItem",

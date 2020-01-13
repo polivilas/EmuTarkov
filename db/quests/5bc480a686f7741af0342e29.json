@@ -1,8 +1,8 @@
 {
 	"_id": "5bc480a686f7741af0342e29",
-	"traderId": "5a7c2eca46aef81a7ca2145d",
+	"traderId": "5c0647fdd443bc2504c2d371",
 	"location": "any",
-	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
+	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
 	"type": "Elimination",
 	"isKey": false,
 	"restartable": false,
@@ -34,7 +34,7 @@
 				]
 			},
 			{
-				"target": "5a7c2eca46aef81a7ca2145d",
+				"target": "5c0647fdd443bc2504c2d371",
 				"value": "0.04",
 				"id": "5bcf230e86f7746a464c5676",
 				"type": "TraderStanding",
@@ -46,7 +46,7 @@
 				"type": "AssortmentUnlock",
 				"index": 3,
 				"loyaltyLevel": 2,
-				"traderId": "5a7c2eca46aef81a7ca2145d",
+				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
 						"_id": "5d34df2788a4504526796cc9",
@@ -60,7 +60,7 @@
 				"type": "AssortmentUnlock",
 				"index": 4,
 				"loyaltyLevel": 2,
-				"traderId": "5a7c2eca46aef81a7ca2145d",
+				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
 						"_id": "5d34df2788a4504526796cca",
@@ -104,7 +104,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5bc47dbf86f7741ee74e93b9",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5bdabf3386f7743e171249ae"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "Skill",

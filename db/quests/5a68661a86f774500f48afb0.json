@@ -74,7 +74,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5969f9e986f7741dde183a50",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5a6874a186f77474f43809fd"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "PlaceBeacon",

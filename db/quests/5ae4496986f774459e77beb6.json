@@ -44,7 +44,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5ae4495c86f7744e87761355",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5ae9be7f86f7746c6337153d"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "FindItem",

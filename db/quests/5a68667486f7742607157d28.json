@@ -60,7 +60,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5a68665c86f774255929b4c7",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "5a68778c86f77423391f38f0"
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "Skill",
