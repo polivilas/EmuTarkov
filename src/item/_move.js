@@ -4,67 +4,108 @@ require('../libs.js');
 
 /* Move Item
 * change location of item with parentId and slotId
+* transfers items from one profile to another if fromOwner/toOwner is set in the body.
+* otherwise, move is contained within the same profile.
 * */
 function moveItem(tmpList, body) {
     item.resetOutput();
     let output = item.getOutput();
+
+    if (typeof body.fromOwner !== 'undefined' && body.fromOwner.id === tmpList.data[1]._id) {
+        // Handle changes to items from scav inventory should update the item
+        if (typeof body.to.container === "undefined" || (body.to.container !== "main" && body.to.container !== "hideout")) {
+            moveItemInternal(tmpList.data[1], body);
+            profile.setScavData(tmpList);
+            return output;
+        }
+
+        moveItemToProfile(tmpList.data[1], tmpList.data[0], body);
+        profile.setCharacterData(tmpList);
+        profile.setScavData(tmpList);
+        return output;
+    } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === tmpList.data[1]._id) {
+        // Handle transfers from stash to scav.
+        moveItemToProfile(tmpList.data[0], tmpList.data[1], body);
+        profile.setCharacterData(tmpList);
+        profile.setScavData(tmpList);
+        return output;
+    } else {
+        moveItemInternal(tmpList.data[0], body);
+        profile.setCharacterData(tmpList);
+        return output;
+    }
+
+    return "";
+}
+
+/* Internal helper function to transfer an item from one profile to another.
+* fromProfileData: Profile of the source.
+* toProfileData: Profile of the destination.
+* body: Move request
+*/
+function moveItemToProfile(fromProfileData, toProfileData, body) {
+    handleCartridges(fromProfileData, body);
+    let fromItems = fromProfileData.Inventory.items;
+    let toItems = toProfileData.Inventory.items;
+    let idsToMove = itm_hf.findAndReturnChildren(fromProfileData, body.item);
+    for (let itemId of idsToMove) {
+        for (let itemIndex in fromItems) {
+            if (fromItems[itemIndex]._id && fromItems[itemIndex]._id === itemId) {
+                if (itemId === body.item) {
+                    fromItems[itemIndex].parentId = body.to.id;
+                    fromItems[itemIndex].slotId = body.to.container;
+                    if (typeof body.to.location !== "undefined") {
+                        fromItems[itemIndex].location = body.to.location;
+                    } else {
+                        if (fromItems[itemIndex].location) {
+                            delete fromItems[itemIndex].location;
+                        }
+                    }
+                }
+                toItems.push(fromItems[itemIndex]);
+                fromItems.splice(itemIndex, 1);
+            }
+        }
+    }
+}
+
+/* Internal helper function to move item within the same profile.
+* profileData: Profile
+* body: Move request
+*/
+function moveItemInternal(profileData, body) {
+    handleCartridges(profileData, body);
+    for (let item of profileData.Inventory.items) {
+        if (item._id && item._id === body.item) {
+            item.parentId = body.to.id;
+            item.slotId = body.to.container;
+            if (typeof body.to.location !== "undefined") {
+                item.location = body.to.location;
+            } else {
+                if (item.location) {
+                    delete item.location;
+                }
+            }
+            return;
+        }
+    }
+}
+
+/* Internal helper function to handle cartridges in inventory if any of them exist.
+* profileData: Profile
+* body: Move request
+*/
+function handleCartridges(profileData, body) {
     // -> Move item to diffrent place - counts with equiping filling magazine etc
-    //cartriges handler start
     if (body.to.container === 'cartridges') {
         let tmp_counter = 0;
-        for (let item_ammo in tmpList.data[0].Inventory.items) {
-            if (body.to.id === tmpList.data[0].Inventory.items[item_ammo].parentId) {
+        for (let item_ammo in profileData.Inventory.items) {
+            if (body.to.id === profileData.Inventory.items[item_ammo].parentId) {
                 tmp_counter++;
             }
         }
         body.to.location = tmp_counter;//wrong location for first cartrige
     }
-    //cartriges handler end
-
-    if (typeof body.fromOwner !== 'undefined' && body.fromOwner.id === tmpList.data[1]._id) {
-        let mainItems = tmpList.data[0].Inventory.items;
-        let scavItems = tmpList.data[1].Inventory.items;
-        let idsToMove = itm_hf.findAndReturnChildren(tmpList.data[1], body.item);
-        for (let itemId of idsToMove) {
-            for (let item of scavItems) {
-                if (item._id && item._id === itemId) {
-                    if (itemId === body.item) {
-                        item.parentId = body.to.id;
-                        item.slotId = body.to.container;
-                        if (typeof body.to.location !== "undefined") {
-                            item.location = body.to.location;
-                        } else {
-                            if (item.location) {
-                                delete item.location;
-                            }
-                        }
-                    }
-                    mainItems.push(item);
-                }
-            }
-        }
-        profile.setCharacterData(tmpList);
-        return output;
-    } else {
-        for (let item of tmpList.data[0].Inventory.items) {
-            if (item._id && item._id === body.item) {
-                item.parentId = body.to.id;
-                item.slotId = body.to.container;
-                if (typeof body.to.location !== "undefined") {
-                    item.location = body.to.location;
-                } else {
-                    if (item.location) {
-                        delete item.location;
-                    }
-                }
-
-                profile.setCharacterData(tmpList);
-                return output;
-            }
-        }
-    }
-
-    return "";
 }
 
 /* Remove Item
