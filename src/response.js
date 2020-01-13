@@ -218,11 +218,25 @@ function getTemplates(url, info) {
 function getQuests(url, info) {
     let tmpList = profile.getCharacterData();
     let base = quests;
+    let triggerTrustRegain = false;
+    let triggerNoOffence = false;
     let triggerLoyatyBuyout = false;
-    let triggerHippocraticVow = false; 
+    let triggerHippocraticVow = false;
 
     // check quest availability
     for (let quest in tmpList.data[0].Quests) {
+        // loyalty buyout
+        if (tmpList.data[0].Quests[quest].qid === "597a0f5686f774273b74f676" && tmpList.data[0].Quests[quest].status === 4
+        || tmpList.data[0].Quests[quest].qid === "597a171586f77405ba6887d3" && tmpList.data[0].Quests[quest].status === 4) {
+            triggerTrustRegain = true;
+        }
+
+        // loyalty buyout
+        if (tmpList.data[0].Quests[quest].qid === "597a0f5686f774273b74f676" && tmpList.data[0].Quests[quest].status === 4
+        || tmpList.data[0].Quests[quest].qid === "597a160786f77477531d39d2" && tmpList.data[0].Quests[quest].status === 4) {
+            triggerNoOffence = true;
+        }
+
         // loyalty buyout
         if (tmpList.data[0].Quests[quest].qid === "597a171586f77405ba6887d3" && tmpList.data[0].Quests[quest].status === 4
         || tmpList.data[0].Quests[quest].qid === "597a160786f77477531d39d2" && tmpList.data[0].Quests[quest].status === 4) {
@@ -238,7 +252,9 @@ function getQuests(url, info) {
 
     // quest not found
     for (let quest in quests.data) {
-        if ((triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
+        if ((triggerTrustRegain === false && quests.data[quest].qid === "59c9392986f7742f6923add2")
+        || ((triggerNoOffence === false && quests.data[quest].qid === "59ca1a6286f774509a270942")
+        || ((triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
         || (triggerHippocraticVow === false && quests.data[quest].qid === " 5a5642ce86f77445c63c3419")) {
             base.data.splice(quest, 1);
         }
