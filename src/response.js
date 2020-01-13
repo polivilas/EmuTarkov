@@ -253,8 +253,8 @@ function getQuests(url, info) {
     // quest not found
     for (let quest in quests.data) {
         if ((triggerTrustRegain === false && quests.data[quest].qid === "59c9392986f7742f6923add2")
-        || ((triggerNoOffence === false && quests.data[quest].qid === "59ca1a6286f774509a270942")
-        || ((triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
+        || (triggerNoOffence === false && quests.data[quest].qid === "59ca1a6286f774509a270942")
+        || (triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
         || (triggerHippocraticVow === false && quests.data[quest].qid === " 5a5642ce86f77445c63c3419")) {
             base.data.splice(quest, 1);
         }
