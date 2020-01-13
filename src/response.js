@@ -218,6 +218,7 @@ function getTemplates(url, info) {
 function getQuests(url, info) {
     let tmpList = profile.getCharacterData();
     let base = quests;
+    let triggerDeconterminationService = false;
     let triggerTrustRegain = false;
     let triggerNoOffence = false;
     let triggerLoyatyBuyout = false;
@@ -225,13 +226,19 @@ function getQuests(url, info) {
 
     // check quest availability
     for (let quest in tmpList.data[0].Quests) {
-        // loyalty buyout
+        // Decontermination service
+        if (tmpList.data[0].Quests[quest].qid === "5a68669a86f774255929b4d4" && tmpList.data[0].Quests[quest].status === 4
+        || tmpList.data[0].Quests[quest].qid === "5c0be5fc86f774467a116593" && tmpList.data[0].Quests[quest].status === 4) {
+            triggerDeconterminationService = true;
+        }
+
+        // Trust regain
         if (tmpList.data[0].Quests[quest].qid === "597a0f5686f774273b74f676" && tmpList.data[0].Quests[quest].status === 4
         || tmpList.data[0].Quests[quest].qid === "597a171586f77405ba6887d3" && tmpList.data[0].Quests[quest].status === 4) {
             triggerTrustRegain = true;
         }
 
-        // loyalty buyout
+        // No offence
         if (tmpList.data[0].Quests[quest].qid === "597a0f5686f774273b74f676" && tmpList.data[0].Quests[quest].status === 4
         || tmpList.data[0].Quests[quest].qid === "597a160786f77477531d39d2" && tmpList.data[0].Quests[quest].status === 4) {
             triggerNoOffence = true;
@@ -252,7 +259,8 @@ function getQuests(url, info) {
 
     // quest not found
     for (let quest in quests.data) {
-        if ((triggerTrustRegain === false && quests.data[quest].qid === "59c9392986f7742f6923add2")
+        if ((triggerDeconterminationService === false && quests.data[quest].qid === "5c0d1c4cd0928202a02a6f5c")
+        || (triggerTrustRegain === false && quests.data[quest].qid === "59c9392986f7742f6923add2")
         || (triggerNoOffence === false && quests.data[quest].qid === "59ca1a6286f774509a270942")
         || (triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
         || (triggerHippocraticVow === false && quests.data[quest].qid === " 5a5642ce86f77445c63c3419")) {
