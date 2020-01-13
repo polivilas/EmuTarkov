@@ -14,7 +14,7 @@ function moveItem(tmpList, body) {
     if (typeof body.fromOwner !== 'undefined' && body.fromOwner.id === tmpList.data[1]._id) {
         // Handle changes to items from scav inventory should update the item
         if (typeof body.to.container === "undefined" || (body.to.container !== "main" && body.to.container !== "hideout")) {
-            moveItemInternal(tmpList.data[1]);
+            moveItemInternal(tmpList.data[1], body);
             profile.setScavData(tmpList);
             return output;
         }
@@ -23,7 +23,7 @@ function moveItem(tmpList, body) {
         profile.setCharacterData(tmpList);
         profile.setScavData(tmpList);
         return output;
-    } else if (to.fromOwner !== 'undefined' && body.toOwner.id === tmpList.data[1]._id) {
+    } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === tmpList.data[1]._id) {
         // Handle transfers from stash to scav.
         moveItemToProfile(tmpList.data[0], tmpList.data[1], body);
         profile.setCharacterData(tmpList);
