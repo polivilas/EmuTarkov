@@ -53,7 +53,7 @@ function getScavProfilePath() {
 function create(info) {
     let profile = findProfile(constants.getActiveID());
     let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
-    let character = json.parse(json.read(filepaths.profile.character[profile.edition]));
+    let character = json.parse(json.read(filepaths.profile.character[profile.edition + "_" + info.side.toLowerCase()]));
     let storage = json.parse(json.read(filepaths.profile.storage));
     let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
