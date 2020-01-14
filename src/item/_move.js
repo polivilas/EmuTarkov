@@ -118,15 +118,7 @@ function removeItem(tmpList, body, output = "", profileIndex = 0) {
 		output = item.getOutput();
     }
     
-    let toDo = []
-
-    if (body.hasOwnProperty("item")) {
-		// item discarding
-        toDo = [body.item];
-    } else {
-		// all other cases
-    	toDo = [body];
-    }
+    let toDo = [body];
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
@@ -178,6 +170,11 @@ function removeInsurance(tmpList, body) {
     } else {
         logger.logError("item id is not vaild");
     }
+}
+
+function discardItem(tmpList, body) {
+    removeInsurance(tmpList, body.item);
+    return removeItem(tmpList, body.item);
 }
 
 /* Split Item
@@ -470,6 +467,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
 
 module.exports.moveItem = moveItem;
 module.exports.removeItem = removeItem;
+module.exports.discardItem = discardItem;
 module.exports.splitItem = splitItem;
 module.exports.mergeItem = mergeItem;
 module.exports.transferItem = transferItem;

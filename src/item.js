@@ -22,7 +22,7 @@ const staticRoutes = {
     "EditNote": note_f.editNode,
     "DeleteNote": note_f.deleteNote,
     "Move": move_f.moveItem,
-    "Remove": move_f.removeItem,
+    "Remove": move_f.discardItem,
     "Split": move_f.splitItem,
     "Merge": move_f.mergeItem,
     "Fold": status_f.foldItem,
