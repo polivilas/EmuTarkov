@@ -32,9 +32,9 @@ function genericFilepathCacher(type, basepath) {
             case "hideoutScav": filepaths.hideout.scavcase[fileName] = filePath; break;
             case "weather": filepaths.weather[fileName] = filePath; break;
             case "maps": filepaths.maps[fileName] = filePath; break;
-            case "botsInv": filepaths.bots.inventory[fileName] = filePath; break;
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
             case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
+            case "profileEditions": filepaths.profile.character[fileName] = filePath; break;
         }
     }
 }
@@ -277,12 +277,16 @@ function images() {
     }
 }
 
+function profile() {
+    logger.logInfo("Routing: profile");
+    filepaths.profile.storage = "db/profile/storage.json";
+    filepaths.profile.userbuilds = "db/profile/userbuilds.json";
+    genericFilepathCacher("profileEditions", "db/profile/character");
+}
+
 function others() {
     logger.logInfo("Routing: others");
 
-    filepaths.profile.character = "db/profile/character.json";
-    filepaths.profile.storage = "db/profile/storage.json";
-    filepaths.profile.userbuilds = "db/profile/userbuilds.json";
     filepaths.user.profiles.list = "user/profiles/list.json";
     filepaths.user.profiles.character = "user/profiles/__REPLACEME__/character.json";
     filepaths.user.profiles.scav = "user/profiles/__REPLACEME__/scav.json";
@@ -337,6 +341,7 @@ function routeDatabase() {
     maps();
     bots();
     images();
+    profile();
     others();
     cache();
 }

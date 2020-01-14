@@ -167,7 +167,9 @@ function profile(mod) {
     }
 
     if (mod.files.profile.hasOwnProperty("character")) {
-        filepaths.profile.character = mod.files.profile.character;
+        for (let item in activeAssort.items) {
+            filepaths.profile.character[item] = mod.files.profile.character[item];
+        }
     }
     
     if (mod.files.profile.hasOwnProperty("storage")) {
