@@ -147,7 +147,7 @@ function getItems(url, info) {
 }
 
 function getGlobals(url, info) {
-    return json.read(filepaths.globals);
+    return json.read(filepaths.user.cache.globals);
 }
 
 function getProfileData(url, info) {
