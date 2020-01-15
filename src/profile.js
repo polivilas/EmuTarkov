@@ -52,17 +52,17 @@ function getScavProfilePath() {
 
 function create(info) {
     let profile = findProfile(constants.getActiveID());
-    let accountFolder = "user/profiles/" + constants.getActiveID() + "/";
+    let accountFolder = "user/profiles/" + profile.id + "/";
     let character = json.parse(json.read(filepaths.profile.character[profile.edition + "_" + info.side.toLowerCase()]));
     let storage = json.parse(json.read(filepaths.profile.storage));
     let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
-    character._id = "user" + profile.id + "pmc";
-    character.aid = constants.getActiveID();
-    character.savage = "user" + profile.id + "scav";
+    character._id = "pmc" + profile.id;
+    character.aid = profile.id;
+    character.savage = "scav" + profile.id;
     character.Info.Nickname = info.nickname;
     character.Info.LowerNickname = info.nickname.toLowerCase();
-    storage.data._id = "user" + profile.id + "pmc";
+    storage.data._id = "pmc" + profile.id;
 
     switch (info.side) {
         case "Bear":
@@ -89,7 +89,7 @@ function create(info) {
     // create profile
     json.write(accountFolder + "character.json", character);
     json.write(accountFolder + "storage.json", storage);
-    json.write(accountFolder + "userBuilds.json", userbuilds);
+    json.write(accountFolder + "userbuilds.json", userbuilds);
 
     // create traders
     let inputFiles = filepaths.traders;
