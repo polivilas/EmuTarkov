@@ -16,30 +16,30 @@ function save() {
     json.write(filepaths.user.profiles.list, accounts);
 }
 
-function findAccount(sessionID) {
-    for (let profile of account) {
-        if (profile.id === sessionID) {
-            return profile;
+function find(sessionID) {
+    for (let account of account) {
+        if (account.id === sessionID) {
+            return account;
         }
     }
 
     return undefined;
 }
 
-function isWiped() {
-    let profile = findAccount(constants.getActiveID());
+function isWiped(sessionID) {
+    let account = find(sessionID);
 
-    if (profile !== typeof "undefined") {
-        return profile.wipe;
+    if (account !== typeof "undefined") {
+        return account.wipe;
     }
 
     return true;
 }
 
 function setWipe(sessionID, state) {
-    for (let profile in accounts) {
-        if (accounts[profile].id === sessionID) {
-            accounts[profile].wipe = state;
+    for (let account in accounts) {
+        if (accounts[account].id === sessionID) {
+            accounts[account].wipe = state;
         }
     }
 
@@ -47,9 +47,9 @@ function setWipe(sessionID, state) {
 }
 
 function exists(info) {
-    for (let profile of accounts) {
-        if (info.email === profile.email && info.password === profile.password) {
-            return profile.id;
+    for (let account of accounts) {
+        if (info.email === account.email && info.password === account.password) {
+            return account.id;
         }
     }
 
@@ -57,19 +57,19 @@ function exists(info) {
 }
 
 function getReservedNickname(sessionID) {
-    let profile = findAccount(sessionID);
+    let account = find(sessionID);
 
-    if (profile !== typeof "undefined") {
-        return profile.nickname;
+    if (account !== typeof "undefined") {
+        return account.nickname;
     }
 
     return "";
 }
 
-function isNicknameTaken(info) {
+function isNicknameTaken(info, sessionID) {
     for (let i = 0; i < accounts.length; i++) {
         let account = accounts[i];
-        let profile = json.parse(json.read(profile.getPath()));
+        let profile = json.parse(json.read(profile.getPath(sessionID)));
 
         if (account.nickname === info.nickname || profile.Info.Nickname === info.nickname) {
             return true;
