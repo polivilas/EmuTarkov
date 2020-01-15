@@ -2,12 +2,12 @@
 
 require("./libs.js");
 
-function getProfiles() {
+function getAccounts() {
     return json.parse(json.read(filepaths.user.profiles.list));
 }
 
-function findProfile(profileId) {
-    let profiles = getProfiles();
+function findAccount(profileId) {
+    let profiles = getAccounts();
 
     for (let profile of profiles) {
         if (profile.id === profileId) {
@@ -18,8 +18,8 @@ function findProfile(profileId) {
     return undefined;
 }
 
-function isProfileWiped() {
-    let profile = findProfile(constants.getActiveID());
+function isAccountWiped() {
+    let profile = findAccount(constants.getActiveID());
 
     if (profile !== typeof "undefined") {
         return profile.wipe;
@@ -28,8 +28,8 @@ function isProfileWiped() {
     return true;
 }
 
-function setProfileWipe(profileId, state) {
-    let profiles = getProfiles();
+function setAccountWipe(profileId, state) {
+    let profiles = getAccounts();
 
     for (let profile in profiles) {
         if (profiles[profile].id === profileId) {
@@ -51,7 +51,7 @@ function getScavProfilePath() {
 }
 
 function create(info) {
-    let profile = findProfile(constants.getActiveID());
+    let profile = findAccount(constants.getActiveID());
     let accountFolder = "user/profiles/" + profile.id + "/";
     let character = json.parse(json.read(filepaths.profile.character[profile.edition + "_" + info.side.toLowerCase()]));
     let storage = json.parse(json.read(filepaths.profile.storage));
@@ -113,7 +113,7 @@ function create(info) {
     }
 
     // don't wipe profile again
-    setProfileWipe(constants.getActiveID(), false);
+    setAccountWipe(constants.getActiveID(), false);
 }
 
 function saveProfileProgress(offRaidData) {
@@ -289,7 +289,7 @@ function getCharacterData() {
     let ret = {err: 0, errmsg: null, data: []};
 
     // creating profile for first time
-    if (isProfileWiped()) {
+    if (isAccountWiped()) {
         return ret;
     }
 
@@ -314,7 +314,6 @@ function generateScavProfile() {
 
     scavData._id = playerData.savage;
     scavData.aid = constants.getActiveID();
-
     setScavData(scavData);
 
     return scavData;
@@ -468,8 +467,8 @@ function getPurchasesData(tmpTraderInfo) {
     return purchaseOutput;
 }
 
-function exist(info) {
-    let profiles = getProfiles();
+function accountExist(info) {
+    let profiles = getAccounts();
 
     for (let profile of profiles) {
         if (info.email === profile.email && info.password === profile.password) {
@@ -481,7 +480,7 @@ function exist(info) {
 }
 
 function getReservedNickname() {
-    let profile = findProfile(constants.getActiveID());
+    let profile = findAccount(constants.getActiveID());
 
     if (profile !== typeof "undefined") {
         return profile.nickname;
@@ -491,7 +490,7 @@ function getReservedNickname() {
 }
 
 function nicknameExist(info) {
-    let profiles = getProfiles();
+    let profiles = getAccounts();
 
     for (let i = 0; i < profiles.length; i++) {
         let profile = json.parse(json.read(getProfilePath()));
@@ -530,13 +529,13 @@ function find(data) {
     let buff = Buffer.from(data.token, 'base64');
     let text = buff.toString('ascii');
     let info = json.parse(text);
-    let profileId = exist(info);
+    let profileId = accountExist(info);
 
     constants.setActiveID(profileId);
     return json.stringify({profileId: profileId});
 }
 
-module.exports.isProfileWiped = isProfileWiped;
+module.exports.isAccountWiped = isAccountWiped;
 module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
