@@ -2,67 +2,29 @@
 
 require("./libs.js");
 
-function getAccounts() {
-    return json.parse(json.read(filepaths.user.profiles.list));
+function getPMC(sessionID) {
+    let path = filepaths.user.profiles.character;
+    return path.replace("__REPLACEME__", sessionID);
 }
 
-function findAccount(profileId) {
-    let profiles = getAccounts();
-
-    for (let profile of profiles) {
-        if (profile.id === profileId) {
-            return profile;
-        }
-    }
-
-    return undefined;
-}
-
-function isAccountWiped() {
-    let profile = findAccount(constants.getActiveID());
-
-    if (profile !== typeof "undefined") {
-        return profile.wipe;
-    }
-
-    return true;
-}
-
-function setAccountWipe(profileId, state) {
-    let profiles = getAccounts();
-
-    for (let profile in profiles) {
-        if (profiles[profile].id === profileId) {
-            profiles[profile].wipe = state;
-        }
-    }
-
-    json.write(filepaths.user.profiles.list, profiles);
-}
-
-function getProfilePath() {
-    let profilePath = filepaths.user.profiles.character;
-    return profilePath.replace("__REPLACEME__", constants.getActiveID());
-}
-
-function getScavProfilePath() {
-    let profilePath = filepaths.user.profiles.scav;
-    return profilePath.replace("__REPLACEME__", constants.getActiveID());
+function getScav(sessionID) {
+    let path = filepaths.user.profiles.scav;
+    return path.replace("__REPLACEME__", sessionID);
 }
 
 function create(info) {
-    let profile = findAccount(constants.getActiveID());
-    let accountFolder = "user/profiles/" + profile.id + "/";
+    let account = accounts.find(constants.getActiveID());
+    let folder = accounts.getPath(account.id);
     let character = json.parse(json.read(filepaths.profile.character[profile.edition + "_" + info.side.toLowerCase()]));
     let storage = json.parse(json.read(filepaths.profile.storage));
     let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
-    character._id = "pmc" + profile.id;
-    character.aid = profile.id;
-    character.savage = "scav" + profile.id;
+    character._id = "pmc" + account.id;
+    character.aid = account.id;
+    character.savage = "scav" + account.id;
     character.Info.Nickname = info.nickname;
     character.Info.LowerNickname = info.nickname.toLowerCase();
-    storage.data._id = "pmc" + profile.id;
+    storage.data._id = "pmc" + account.id;
 
     switch (info.side) {
         case "Bear":
@@ -87,9 +49,9 @@ function create(info) {
     }
 
     // create profile
-    json.write(accountFolder + "character.json", character);
-    json.write(accountFolder + "storage.json", storage);
-    json.write(accountFolder + "userbuilds.json", userbuilds);
+    json.write(folder + "character.json", character);
+    json.write(folder + "storage.json", storage);
+    json.write(folder + "userbuilds.json", userbuilds);
 
     // create traders
     let inputFiles = filepaths.traders;
@@ -102,7 +64,7 @@ function create(info) {
         let fileName = inputNames[i++];
 
         // generate trader
-        json.write(accountFolder + "traders/" + fileName + ".json", fileData);
+        json.write(folder + "traders/" + fileName + ".json", fileData);
 
         // generate assort
         if (fileName === "579dc571d53a0658a154fbec") {
@@ -286,30 +248,23 @@ function saveProfileProgress(offRaidData) {
 }
 
 function getCharacterData() {
-    let ret = {err: 0, errmsg: null, data: []};
+    let output = {err: 0, errmsg: null, data: []};
 
-    // creating profile for first time
-    if (isAccountWiped()) {
-        return ret;
+    if (accounts.isWiped(sessionID)) {
+        return output
     }
 
-    // create full profile data from simplified character data
-    let playerData = json.parse(json.read(getProfilePath()));
-
-    // if scav profile doesn't exist, generate one. otherwise, we should rely on
-    // regenerate function to get us new ones.
-    if (!fs.existsSync(getScavProfilePath())) {
+    if (!fs.existsSync(getScav())) {
         generateScavProfile();
     }
-    let scavData = json.parse(json.read(getScavProfilePath()));
 
-    ret.data.push(playerData);
-    ret.data.push(scavData);
-    return ret;
+    output.data.push(json.parse(json.read(getPMC())));
+    output.data.push(json.parse(json.read(getScav())));
+    return output;
 }
 
 function generateScavProfile() {
-    let playerData = json.parse(json.read(getProfilePath()));
+    let playerData = json.parse(json.read(getPMC()));
     let scavData = bots.generatePlayerScav();
 
     scavData._id = playerData.savage;
@@ -320,7 +275,7 @@ function generateScavProfile() {
 }
 
 function getStashType() {
-    let temp = json.parse(json.read(getProfilePath()));
+    let temp = json.parse(json.read(getPMC()));
 
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
@@ -337,7 +292,7 @@ function setCharacterData(data) {
         data = data.data[0];
     }
 
-    json.write(getProfilePath(), data);
+    json.write(getPMC(), data);
 }
 
 function setScavData(data) {
@@ -345,7 +300,7 @@ function setScavData(data) {
         data = data.data[1];
     }
 
-    json.write(getScavProfilePath(), data);   
+    json.write(getScav(), data);   
 }
 
 function addChildPrice(data, parentID, childPrice) {
@@ -366,11 +321,7 @@ function addChildPrice(data, parentID, childPrice) {
 // added lastTrader so that we can list prices using the correct currency based on the trader
 function getPurchasesData(tmpTraderInfo) {
     let multiplier = 0.9;
-    let data = json.parse(json.read(getProfilePath()));
-
-    items = json.parse(json.read(filepaths.user.cache.items));
-
-    //prepared vars
+    let data = json.parse(json.read(getPMC()));
     let equipment = data.Inventory.equipment;
     let stash = data.Inventory.stash;
     let questRaidItems = data.Inventory.questRaidItems;
@@ -387,32 +338,17 @@ function getPurchasesData(tmpTraderInfo) {
     ];
 
     for (let invItems in data) {
-        if (data.hasOwnProperty(invItems)) {
-            if (
-                data[invItems]._id !== equipment &&
-                data[invItems]._id !== stash &&
-                data[invItems]._id !== questRaidItems &&
-                data[invItems]._id !== questStashItems &&
-                notSoldableItems.indexOf(data[invItems]._tpl) === -1
-            ) {
-                if (data[invItems].hasOwnProperty("parentId")) {
-                    if (
-                        data[invItems].parentId !== equipment &&
-                        data[invItems].parentId !== stash &&
-                        data[invItems].parentId !== questRaidItems &&
-                        data[invItems].parentId !== questStashItems
-                    ) {
-                        let templateId = data[invItems]._tpl;
-                        let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
-                        let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
-                        data = addChildPrice(
-                            data,
-                            data[invItems].parentId,
-                            itemCount * basePrice
-                        ); // multiplyer is used at parent item
-                    }
-                }
-            }
+        if (data[invItems]._id !== equipment
+        && data[invItems]._id !== stash
+        && data[invItems]._id !== questRaidItems
+        && data[invItems]._id !== questStashItems
+        && notSoldableItems.indexOf(data[invItems]._tpl) === -1) {
+            let templateId = data[invItems]._tpl;
+            let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
+            let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
+            
+            // multiplyer is used at parent item
+            data = addChildPrice(data, data[invItems].parentId, itemCount * basePrice);
         }
     }
 
@@ -421,45 +357,41 @@ function getPurchasesData(tmpTraderInfo) {
     let i = 0;
 
     for (let invItems in data) {
-        if (data.hasOwnProperty(invItems)) {
-            if (
-                data[invItems]._id !== equipment &&
-                data[invItems]._id !== stash &&
-                data[invItems]._id !== questRaidItems &&
-                data[invItems]._id !== questStashItems &&
-                notSoldableItems.indexOf(data[invItems]._tpl) === -1
-            ) {
-                if (i !== 0) {
-                    purchaseOutput += ",";
-                } else {
-                    i++;
-                }
-
-                let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
-                let templateId = data[invItems]._tpl;
-                let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
-
-                if (data[invItems].hasOwnProperty("childPrice")) {
-                    basePrice += data[invItems].childPrice;
-                }
-
-                let preparePrice = basePrice * multiplier * itemCount;
-
-                // convert the price using the lastTrader's currency
-                let currency = trader.get(tmpTraderInfo).data.currency;
-                preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(currency));
-
-                // uses profile information to get the level of the dogtag and multiplies
-                // the prepare price after conversion with this factor
-                if (itm_hf.isDogtag(data[invItems]._tpl)) {
-                    if (data[invItems].upd.hasOwnProperty("Dogtag")) {
-                        preparePrice = preparePrice * data[invItems].upd.Dogtag.Level;
-                    }
-                }
-
-                preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
-                purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' + data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
+        if (data[invItems]._id !== equipment
+        && data[invItems]._id !== stash
+        && data[invItems]._id !== questRaidItems
+        && data[invItems]._id !== questStashItems
+        && notSoldableItems.indexOf(data[invItems]._tpl) === -1) {
+            if (i !== 0) {
+                purchaseOutput += ",";
+            } else {
+                i++;
             }
+
+            let itemCount = (typeof data[invItems].upd !== "undefined" ? (typeof data[invItems].upd.StackObjectsCount !== "undefined" ? data[invItems].upd.StackObjectsCount : 1) : 1);
+            let templateId = data[invItems]._tpl;
+            let basePrice = (items.data[templateId]._props.CreditsPrice >= 1 ? items.data[templateId]._props.CreditsPrice : 1);
+
+            if (data[invItems].hasOwnProperty("childPrice")) {
+                basePrice += data[invItems].childPrice;
+            }
+
+            let preparePrice = basePrice * multiplier * itemCount;
+
+            // convert the price using the lastTrader's currency
+            let currency = trader.get(tmpTraderInfo).data.currency;
+            preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(currency));
+
+            // uses profile information to get the level of the dogtag and multiplies
+            // the prepare price after conversion with this factor
+            if (itm_hf.isDogtag(data[invItems]._tpl)) {
+                if (data[invItems].upd.hasOwnProperty("Dogtag")) {
+                    preparePrice = preparePrice * data[invItems].upd.Dogtag.Level;
+                }
+            }
+
+            preparePrice = (preparePrice > 0 && preparePrice !== "NaN" ? preparePrice : 1);
+            purchaseOutput += '"' + data[invItems]._id + '":[[{"_tpl": "' + data[invItems]._tpl + '","count": ' + preparePrice.toFixed(0) + "}]]";
         }
     }
 
@@ -467,47 +399,11 @@ function getPurchasesData(tmpTraderInfo) {
     return purchaseOutput;
 }
 
-function accountExist(info) {
-    let profiles = getAccounts();
-
-    for (let profile of profiles) {
-        if (info.email === profile.email && info.password === profile.password) {
-            return profile.id;
-        }
-    }
-
-    return 0;
-}
-
-function getReservedNickname() {
-    let profile = findAccount(constants.getActiveID());
-
-    if (profile !== typeof "undefined") {
-        return profile.nickname;
-    }
-
-    return "";
-}
-
-function nicknameExist(info) {
-    let profiles = getAccounts();
-
-    for (let i = 0; i < profiles.length; i++) {
-        let profile = json.parse(json.read(getProfilePath()));
-
-        if (profile.Info.Nickname === info.nickname) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 function changeNickname(info) {
     let tmpList = getCharacterData();
 
     // check if the nickname exists
-    if (nicknameExist(info)) {
+    if (accounts.nicknameTaken(info)) {
         return '{"err":225, "errmsg":"this nickname is already in use", "data":null}';
     }
 
@@ -525,17 +421,6 @@ function changeVoice(info) {
     setCharacterData(tmpList);
 }
 
-function find(data) {
-    let buff = Buffer.from(data.token, 'base64');
-    let text = buff.toString('ascii');
-    let info = json.parse(text);
-    let profileId = accountExist(info);
-
-    constants.setActiveID(profileId);
-    return json.stringify({profileId: profileId});
-}
-
-module.exports.isAccountWiped = isAccountWiped;
 module.exports.create = create;
 module.exports.getCharacterData = getCharacterData;
 module.exports.setCharacterData = setCharacterData;
@@ -543,8 +428,6 @@ module.exports.getPurchasesData = getPurchasesData;
 module.exports.generateScavProfile = generateScavProfile;
 module.exports.setScavData = setScavData;
 module.exports.getStashType = getStashType;
-module.exports.getReservedNickname = getReservedNickname;
 module.exports.changeNickname = changeNickname;
 module.exports.changeVoice = changeVoice;
-module.exports.find = find;
 module.exports.saveProfileProgress = saveProfileProgress;
