@@ -103,6 +103,8 @@ function removeSecureContainer(botBase) {
 			}
 		}
 	}
+
+	return botBase;
 }
 
 function generateBot(botBase, role) {
@@ -148,7 +150,7 @@ function generateBot(botBase, role) {
 	botBase.Inventory = getRandomValue(botNode.inventory);
 
 	// remove secure container
-	removeSecureContainer(botBase);
+	botBase = removeSecureContainer(botBase);
 
 	// add dogtag to PMC's		
 	if (type === "usec" || type === "bear") {
@@ -162,7 +164,7 @@ function generate(databots) {
 	let generatedBots = []; 
 
 	for (let condition of databots.conditions) {
-		for (let index in condition.Limit)  {
+		for (let i = 0; i < condition.Limit; i++)  {
 			let bot = json.parse(json.read(filepaths.bots.base));
 
 			bot._id = "bot" + utility.getRandomIntEx(99999999);
@@ -172,7 +174,7 @@ function generate(databots) {
 		}
 	}
 
-	return { "err": 0,"errmsg": null, "data": generatedBots };
+	return {"err": 0,"errmsg": null, "data": generatedBots};
 }
 
 function generatePlayerScav() {
