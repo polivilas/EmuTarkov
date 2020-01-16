@@ -43,7 +43,7 @@ function eatItem(tmpList, body, sessionID) {
     profile_f.setPmc(tmpList, sessionID);
 
     if (maxResource === 1 || todelete === true) {
-        move_f.removeItem(tmpList, body, sessionID.item);
+        move_f.removeItem(tmpList, body.item, sessionID);
     } else {
         item.resetOutput();
     }
@@ -71,7 +71,7 @@ function healPlayer(tmpList, body, sessionID) {
             }
 
             if (item.upd.MedKit.HpResource === 0) {
-                move_f.removeItem(tmpList, body, sessionID.item);
+                move_f.removeItem(tmpList, body.item, sessionID);
             }
 
             profile_f.setPmc(tmpList, sessionID);
