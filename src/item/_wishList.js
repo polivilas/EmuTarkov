@@ -15,7 +15,7 @@ function addToWishList(tmpList, body) {
     }
     // add the item to the wishlist
     tmpList.data[0].WishList.push(body['templateId']);
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return "OK";
 }
 
@@ -29,7 +29,7 @@ function removeFromWishList(tmpList, body) {
             tmpList.data[0].WishList.splice(item, 1);
         }
     }
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return "OK";
 }
 
@@ -39,7 +39,7 @@ function removeFromWishList(tmpList, body) {
 * */
 function resetWishList(tmpList){
     tmpList.data[0].WishList = [];
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
 }
 
 module.exports.addToWishList = addToWishList;

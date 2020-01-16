@@ -39,7 +39,7 @@ function main(tmpList, body) {
         output.data.items.change.push(itemToRepair);
     }
 
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return output;
 }
 

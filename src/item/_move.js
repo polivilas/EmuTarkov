@@ -20,18 +20,18 @@ function moveItem(tmpList, body) {
         }
 
         moveItemToProfile(tmpList.data[1], tmpList.data[0], body);
-        profile_f.setCharacter(tmpList);
+        profile_f.setPmc(tmpList, sessionID);
         profile_f.setScavData(tmpList);
         return output;
     } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === tmpList.data[1]._id) {
         // Handle transfers from stash to scav.
         moveItemToProfile(tmpList.data[0], tmpList.data[1], body);
-        profile_f.setCharacter(tmpList);
+        profile_f.setPmc(tmpList, sessionID);
         profile_f.setScavData(tmpList);
         return output;
     } else {
         moveItemInternal(tmpList.data[0], body);
-        profile_f.setCharacter(tmpList);
+        profile_f.setPmc(tmpList, sessionID);
         return output;
     }
 
@@ -137,7 +137,7 @@ function removeItem(tmpList, body, output = "", profileIndex = 0) {
         if (profileIndex === 1) {
             profile_f.setScavData(tmpList); // save scav profile
         } else {
-            profile_f.setCharacter(tmpList); //save tmplist to profile
+            profile_f.setPmc(tmpList, sessionID); //save tmplist to profile
         }
         return output;
     } else {
@@ -166,7 +166,7 @@ function removeInsurance(tmpList, body) {
             }
         }
 
-        profile_f.setCharacter(tmpList);
+        profile_f.setPmc(tmpList, sessionID);
     } else {
         logger.logError("item id is not vaild");
     }
@@ -212,7 +212,7 @@ function splitItem(tmpList, body) { // -> Spliting item / Create new item with s
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
-            profile_f.setCharacter(tmpList);
+            profile_f.setPmc(tmpList, sessionID);
             return output;
         }
     }
@@ -246,7 +246,7 @@ function mergeItem(tmpList, body) {
                         output.data.items.del.push({"_id": tmpList.data[0].Inventory.items[key2]._id});
                         tmpList.data[0].Inventory.items.splice(key2, 1);
 
-                        profile_f.setCharacter(tmpList);
+                        profile_f.setPmc(tmpList, sessionID);
                         return output;
                     }
                 }
@@ -287,7 +287,7 @@ function transferItem(tmpList, body) {
             item.upd.StackObjectsCount = stackItemWith + body.count;
         }
     }
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return output;
 }
 
@@ -309,7 +309,7 @@ function swapItem(tmpList, body) {
             delete item.location;
         }
     }
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return output;
 }
 
@@ -352,7 +352,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
 
             for (let stacks = 0; stacks < MaxStacks; stacks++) {
                 //update profile on each stack so stash recalculate will have new items
-                tmpList = profile_f.getCharacter();
+                tmpList = profile_f.get(sessionID);
 
                 let StashFS_2D = itm_hf.recheckInventoryFreeSpace(tmpList);
                 let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTraderAssort.data.items);
@@ -455,7 +455,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
                     }
 
                 // save after each added item
-                profile_f.setCharacter(tmpList);
+                profile_f.setPmc(tmpList, sessionID);
             }
 
             return output;

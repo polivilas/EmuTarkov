@@ -7,7 +7,7 @@ function addNote(tmpList, body) {
 		"Time": body.note.Time, 
 		"Text": body.note.Text
 	});
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return "OK";
 }
 
@@ -16,13 +16,13 @@ function editNode(tmpList, body) {
 		"Time": body.note.Time, 
 		"Text": body.note.Text
 	};
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return "OK";
 }
 
 function deleteNote(tmpList, body) {
     tmpList.data[0].Notes.Notes.splice(body.index, 1);
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return "OK";
 }
 

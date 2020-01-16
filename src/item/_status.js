@@ -6,7 +6,7 @@ function foldItem(tmpList, body) {
     for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Foldable = {"Folded": body.value};
-            profile_f.setCharacter(tmpList);
+            profile_f.setPmc(tmpList, sessionID);
             return "OK";
         }
     }
@@ -18,7 +18,7 @@ function toggleItem(tmpList, body) {
     for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Togglable = {"On": body.value};
-            profile_f.setCharacter(tmpList);
+            profile_f.setPmc(tmpList, sessionID);
             return "OK";
         }
     }
@@ -45,7 +45,7 @@ function tagItem(tmpList, body) {
                 Object.assign(item, myobject); // merge myobject into item -- overwrite same properties and add missings
             }
 
-            profile_f.setCharacter(tmpList);
+            profile_f.setPmc(tmpList, sessionID);
             return "OK";
         }
     }
@@ -61,7 +61,7 @@ function bindItem(tmpList, body) {
     }
 
     tmpList.data[0].Inventory.fastPanel[body.index] = body.item;
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return "OK";
 }
 
@@ -112,7 +112,7 @@ function examineItem(tmpList, body) {
 
     tmpList.data[0].Info.Experience += data._props.ExamineExperience;
     tmpList.data[0].Encyclopedia[returned] = true;
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     logger.logSuccess("EXAMINED: " + returned);
     return "OK";
 }

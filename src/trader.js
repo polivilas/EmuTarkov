@@ -40,7 +40,7 @@ function setTrader(data) {
 }
 
 function lvlUp(id) {
-    let currentProfile = profile_f.getCharacter();
+    let currentProfile = profile_f.get(sessionID);
     let currentTrader = get(id);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 

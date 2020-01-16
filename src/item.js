@@ -64,7 +64,7 @@ function resetOutput() {
 }
 
 function handleMoving(body) {
-    let tmpList = profile_f.getCharacter();
+    let tmpList = profile_f.get(sessionID);
 
     if (typeof staticRoutes[body.Action] !== "undefined") {
         return staticRoutes[body.Action](tmpList, body);

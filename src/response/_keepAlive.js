@@ -40,14 +40,14 @@ function updateTraders() {
 }
 
 function updatePlayerHideout() {
-    let ply = profile_f.getCharacter();
+    let tmpList = profile_f.get(sessionID);
 
     // update production time
-    for (let prod in ply.data[0].Hideout.Production) { 
+    for (let prod in tmpList.data[0].Hideout.Production) { 
         /* bitcoin farm : manage multiples bitcoins but fuck this shit
-        for (let keyObj of Object.keys(ply.data[0].Hideout.Production)) {
+        for (let keyObj of Object.keys(tmpList.data[0].Hideout.Production)) {
             if (keyObj == '20') {
-                let time_elapsed = Math.floor( Date.now()/1000) - ply.data[0].Hideout.Production[prod].StartTime;
+                let time_elapsed = Math.floor( Date.now()/1000) - tmpList.data[0].Hideout.Production[prod].StartTime;
                                     
                 //then check what level of upgrade the player btc farm is
                 //if lvl = 1 : do nothing
@@ -66,18 +66,18 @@ function updatePlayerHideout() {
             if production needs gennerator activated true, then check if generator activated == true
 
         */
-        let time_elapsed = Math.floor( Date.now()/1000) - ply.data[0].Hideout.Production[prod].StartTime;
-        ply.data[0].Hideout.Production[prod].Progress = time_elapsed; 
+        let time_elapsed = Math.floor( Date.now()/1000) - tmpList.data[0].Hideout.Production[prod].StartTime;
+        tmpList.data[0].Hideout.Production[prod].Progress = time_elapsed; 
     }
 
-    for (let area in ply.data[0].Hideout.Areas) {            
+    for (let area in tmpList.data[0].Hideout.Areas) {            
         // update resource of first slot
-        if (ply.data[0].Hideout.Areas[area].slots.length > 0) {
+        if (tmpList.data[0].Hideout.Areas[area].slots.length > 0) {
             // hmmm ...? 
         }
     }
 
-    profile_f.setCharacter(ply); 
+    profile_f.setPmc(tmpList, sessionID); 
 }
 
 module.exports.main = main;

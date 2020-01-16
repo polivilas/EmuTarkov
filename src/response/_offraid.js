@@ -10,7 +10,7 @@ function saveProgress(offRaidData) {
     let offRaidExit = offRaidData.exit;
     let offRaidProfile = offRaidData.profile;
 
-    let tmpList = profile_f.getCharacter();
+    let tmpList = profile_f.get(sessionID);
 
     // replace data
     // if isPlayerScav is true, then offRaidProfile points to a scav profile
@@ -168,7 +168,7 @@ function saveProgress(offRaidData) {
         }
     }
 
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
 }
 
 modules.exports.saveProgress = saveProgress;

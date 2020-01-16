@@ -176,7 +176,7 @@ function payMoney(tmpList, body) {
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     logger.logSuccess("Items taken. Status OK.");
     item.setOutput(output);
     return true;
@@ -279,7 +279,7 @@ function getMoney(tmpList, amount, body, output) {
     trader.lvlUp(body.tid);
     output.data.currentSalesSums[body.tid] = saleSum;
 
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return output;
 }
 

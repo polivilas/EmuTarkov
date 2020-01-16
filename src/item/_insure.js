@@ -4,7 +4,7 @@ require('../libs.js');
 
 function cost(info) {
     let output = {"err": 0, "errmsg": null, "data": {}};
-    let tmpList = profile_f.getCharacter();
+    let tmpList = profile_f.get(sessionID);
 
     for (let trader of info.traders) {
         let items = {};
@@ -62,7 +62,7 @@ function insure(tmpList, body) {
         }
     }
 
-    profile_f.setCharacter(tmpList);
+    profile_f.setPmc(tmpList, sessionID);
     return item.getOutput();
 }
 

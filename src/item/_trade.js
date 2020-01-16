@@ -87,7 +87,7 @@ function confirmRagfairTrading(tmpList, body) {
     let output = item.getOutput()
 
     for (let offer of offers) {
-        tmpList = profile_f.getCharacter();
+        tmpList = profile_f.get(sessionID);
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";

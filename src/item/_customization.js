@@ -26,7 +26,7 @@ function wearClothing(tmpList, body) {
 		}
 	}
 
-	profile_f.setCharacter(tmpList);
+	profile_f.setPmc(tmpList, sessionID);
     item.resetOutput();
 	return item.getOutput();
 }
@@ -70,7 +70,7 @@ function buyClothing(tmpList, body) {
 	}
 
 	json.write(getCustomizationStoragePath(), customization_storage);
-	profile_f.setCharacter(tmpList);
+	profile_f.setPmc(tmpList, sessionID);
 	return output;
 }
 

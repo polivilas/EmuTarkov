@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-require("./libs.js");
+require("../libs.js");
 
 function getPmcPath(sessionID) {
     let path = filepaths.user.profiles.character;
@@ -78,34 +78,15 @@ function create(info, sessionID) {
     account_f.setWipe(account.id, false);
 }
 
-function generateScav(sessionID) {
-    let playerData = json.parse(json.read(getPmcPath()));
-    let scavData = bots.generatePlayerScav();
-
-    scavData._id = playerData.savage;
-    scavData.aid = sessionID;
-    setScavData(scavData);
-
-    return scavData;
+function getPmc(sessionID) {
+    return json.parse(json.read(getPmcPath(sessionID)));
 }
 
-function getCharacter(sessionID) {
-    let output = {err: 0, errmsg: null, data: []};
-
-    if (account_f.isWiped(sessionID)) {
-        return output
-    }
-
-    if (!fs.existsSync(getScavPath())) {
-        generateScav();
-    }
-
-    output.data.push(json.parse(json.read(getPmcPath(sessionID))));
-    output.data.push(json.parse(json.read(getScavPath(sessionID))));
-    return output;
+function getScav(sessionID) {
+    return json.parse(json.read(getScavPath(sessionID)));
 }
 
-function setCharacter(data) {
+function setPmc(data, sessionID) {
     if (typeof data.data !== "undefined") {
         data = data.data[0];
     }
@@ -113,12 +94,39 @@ function setCharacter(data) {
     json.write(getPmcPath(sessionID), data);
 }
 
-function setScavData(data) {
+function setScav(data, sessionID) {
     if (typeof data.data !== "undefined") {
         data = data.data[1];
     }
 
     json.write(getScavPath(sessionID), data);   
+}
+
+function generateScav(sessionID) {
+    let playerData = json.parse(json.read(getPmcPath(sessionID)));
+    let scavData = bots.generatePlayerScav();
+
+    scavData._id = playerData.savage;
+    scavData.aid = sessionID;
+    setScav(scavData, sessionID);
+
+    return scavData;
+}
+
+function get(sessionID) {
+    let output = {err: 0, errmsg: null, data: []};
+
+    if (account_f.isWiped(sessionID)) {
+        return output
+    }
+
+    if (!fs.existsSync(getScavPath(sessionID))) {
+        generateScav(sessionID);
+    }
+
+    output.data.push(getPmc(sessionID));
+    output.data.push(getScav(sessionID));
+    return output;
 }
 
 function addChildPrice(data, parentID, childPrice) {
@@ -136,8 +144,8 @@ function addChildPrice(data, parentID, childPrice) {
     return data;
 }
 
-function getStashType() {
-    let temp = json.parse(json.read(getPmcPath()));
+function getStashType(sessionID) {
+    let temp = json.parse(json.read(getPmcPath(sessionID)));
 
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
@@ -150,9 +158,9 @@ function getStashType() {
 }
 
 // added lastTrader so that we can list prices using the correct currency based on the trader
-function getPurchasesData(tmpTraderInfo) {
+function getPurchasesData(tmpTraderInfo, sessionID) {
     let multiplier = 0.9;
-    let data = json.parse(json.read(getPmcPath()));
+    let data = json.parse(json.read(getPmcPath(sessionID)));
     let equipment = data.Inventory.equipment;
     let stash = data.Inventory.stash;
     let questRaidItems = data.Inventory.questRaidItems;
@@ -230,8 +238,8 @@ function getPurchasesData(tmpTraderInfo) {
     return purchaseOutput;
 }
 
-function changeNickname(info) {
-    let tmpList = getCharacter();
+function changeNickname(info, sessionID) {
+    let tmpList = get();
 
     // check if the nickname exists
     if (account_f.nicknameTaken(info)) {
@@ -241,24 +249,25 @@ function changeNickname(info) {
     // change nickname
     tmpList.data[0].Info.Nickname = info.nickname;
     tmpList.data[0].Info.LowerNickname = info.nickname.toLowerCase();
-    setCharacter(tmpList);
+    setPmc(tmpList, sessionID);
     return ('{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + "}}");
 }
 
-function changeVoice(info) {
-    let tmpList = getCharacter();
+function changeVoice(info, sessionID) {
+    let tmpList = get();
 
     tmpList.data[0].Info.Voice = info.voice;
-    setCharacter(tmpList);
+    setPmc(tmpList, sessionID);
 }
 
 module.exports.create = create;
-module.exports.getCharacter = getCharacter;
-module.exports.setCharacter = setCharacter;
-module.exports.getPurchasesData = getPurchasesData;
+module.exports.get = get;
+module.exports.setPmc = setPmc;
+module.exports.setScav = setScav;
+module.exports.getPmc = getPmc;
+module.exports.getScav = getScav;
 module.exports.generateScavProfile = generateScavProfile;
-module.exports.setScavData = setScavData;
 module.exports.getStashType = getStashType;
+module.exports.getPurchasesData = getPurchasesData;
 module.exports.changeNickname = changeNickname;
 module.exports.changeVoice = changeVoice;
-module.exports.saveProfileProgress = saveProfileProgress;

@@ -94,7 +94,7 @@ function showIndex(url, info) {
 
 function showInventoryChecker(url, info) {
     let output = "";
-    let inv = itm_hf.recheckInventoryFreeSpace(profile_f.getCharacter());
+    let inv = itm_hf.recheckInventoryFreeSpace(profile_f.get(sessionID));
 
     output += "<style>td{border:1px solid #aaa;}</style>Inventory Stash Usage:<br><table><tr><td>-</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9<br>";
 
@@ -151,20 +151,19 @@ function getGlobals(url, info) {
 }
 
 function getProfileData(url, info) {
-    const responseData = profile_f.getCharacter();
+    const tmpList = profile_f.get(sessionID);
 
     // If we have experience gained after the raid, we save it
-    if (responseData.data.length > 0 && responseData.data[0].Stats.TotalSessionExperience > 0) {
-        const sessionExp = responseData.data[0].Stats.TotalSessionExperience;
-        responseData.data[0].Info.Experience += sessionExp;
-        responseData.data[0].Stats.TotalSessionExperience = 0;
+    if (tmpList.data.length > 0 && tmpList.data[0].Stats.TotalSessionExperience > 0) {
+        const sessionExp = tmpList.data[0].Stats.TotalSessionExperience;
 
-        profile_f.setCharacter(responseData);
-
-        responseData.data[0].Info.Experience -= sessionExp;
+        tmpList.data[0].Info.Experience += sessionExp;
+        tmpList.data[0].Stats.TotalSessionExperience = 0;
+        profile_f.setPmc(tmpList, sessionID);
+        tmpList.data[0].Info.Experience -= sessionExp;
     }
 
-    return JSON.stringify(responseData);
+    return JSON.stringify(tmpList);
 }
 
 function regenerateScav(url, info) {
@@ -216,7 +215,7 @@ function getTemplates(url, info) {
 }
 
 function getQuests(url, info) {
-    let tmpList = profile_f.getCharacter();
+    let tmpList = profile_f.get(sessionID);
     let base = quests;
     let triggerDeconterminationService = false;
     let triggerTrustRegain = false;

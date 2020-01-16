@@ -114,7 +114,7 @@ async function testServer() {
 	/* 20	*/	'{}',
 	/* 21	*/	'{}',
 	/* 22	*/	'{}',
-	/* 23	*/	readJson(__dirname + "/../db/offlineRaidprofile_f.json")
+	/* 23	*/	readJson(__dirname + "/../db/offlineRaidprofile.json")
 	];
 
 	for (let i = 0; i < path.length; i++) {
