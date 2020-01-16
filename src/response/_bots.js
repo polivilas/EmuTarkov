@@ -7,16 +7,6 @@ function getRandomValue(node) {
 	return json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));
 }
 
-function getBotNode(type) {
-	type = type.toLowerCase();
-
-	if (type === "bear" || type === "usec") {
-		return filepaths.bots.pmc[type];
-	}
-
-	return filepaths.bots.scav[type];
-}
-
 function addDogtag(bot) {
 	let dogtagItem = {
 		_id: "dogtag_" + 100000000 + utility.getRandomIntEx(899999999),
@@ -71,6 +61,7 @@ function removeSecureContainer(bot) {
 
 function generateBot(bot, role) {
 	let type = role;
+	let node = {};
 
 	if (role === "cursedAssault") {
 		type = "assault";
@@ -100,18 +91,22 @@ function generateBot(bot, role) {
 	}
 
 	// generate bot
-	let botNode = getBotNode(type);
+	if (type === "bear" || type === "usec") {
+		node = filepaths.bots.pmc[type];
+	} else {
+		node = filepaths.bots.scav[type.toLowerCase()];
+	}
 
 	bot.Info.Settings.Role = role;
-	bot.Info.Nickname = getRandomValue(botNode.names);
-	bot.Info.Settings.Experience = getRandomValue(botNode.experience);
-	bot.Info.Voice = getRandomValue(botNode.appearance.voice);
-	bot.Health = getRandomValue(botNode.health);
-	bot.Customization.Head = getRandomValue(botNode.appearance.head);
-	bot.Customization.Body = getRandomValue(botNode.appearance.body);
-	bot.Customization.Feet = getRandomValue(botNode.appearance.feet);
-	bot.Customization.Hands = getRandomValue(botNode.appearance.hands);
-	bot.Inventory = getRandomValue(botNode.inventory);
+	bot.Info.Nickname = getRandomValue(node.names);
+	bot.Info.Settings.Experience = getRandomValue(node.experience);
+	bot.Info.Voice = getRandomValue(node.appearance.voice);
+	bot.Health = getRandomValue(node.health);
+	bot.Customization.Head = getRandomValue(node.appearance.head);
+	bot.Customization.Body = getRandomValue(node.appearance.body);
+	bot.Customization.Feet = getRandomValue(node.appearance.feet);
+	bot.Customization.Hands = getRandomValue(node.appearance.hands);
+	bot.Inventory = getRandomValue(node.inventory);
 
 	// remove secure container
 	bot = removeSecureContainer(bot);
