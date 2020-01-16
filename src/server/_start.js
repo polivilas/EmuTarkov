@@ -154,8 +154,6 @@ function start() {
         settings.server.ip = ip;
     }
 
-    json.write(filepaths.user.config, settings);
-
     // show our watermark
     let text_1 = "JustEmuTarkov " + constants.serverVersion();
     let text_2 = "https://justemutarkov.github.io/";
