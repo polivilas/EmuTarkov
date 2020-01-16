@@ -40,7 +40,7 @@ function eatItem(tmpList, body) {
         energy.Current = energy.Maximum;
     }
 
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
 
     if (maxResource === 1 || todelete === true) {
         move_f.removeItem(tmpList, body.item);
@@ -74,7 +74,7 @@ function healPlayer(tmpList, body) {
                 move_f.removeItem(tmpList, body.item);
             }
 
-            profile.setCharacterData(tmpList);
+            profile_f.setCharacter(tmpList);
         }
     }
 

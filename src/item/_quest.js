@@ -15,7 +15,7 @@ function acceptQuest(tmpList, body) {
 		"status": 2
 	}); 
 	
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
 
     item.resetOutput();
     return item.getOutput();
@@ -25,7 +25,7 @@ function completeQuest(tmpList, body) {
     for (let quest in tmpList.data[0].Quests) {
         if (tmpList.data[0].Quests[quest].qid === body.qid) {
             tmpList.data[0].Quests[quest].status = 4;
-            profile.setCharacterData(tmpList);
+            profile_f.setCharacter(tmpList);
             break;
         }
     }
@@ -46,15 +46,15 @@ function completeQuest(tmpList, body) {
                         newReq.count = parseInt(reward.value);
                         newReq.tid = "ragfair";
                 
-                        tmpList = profile.getCharacterData();
+                        tmpList = profile_f.getCharacter();
                         move_f.addItem(tmpList, newReq);
                     }
                     break;
 
                 case "Experience":
-                    tmpList = profile.getCharacterData();
+                    tmpList = profile_f.getCharacter();
                     tmpList.data[0].Info.Experience += parseInt(reward.value);
-                    profile.setCharacterData(tmpList);
+                    profile_f.setCharacter(tmpList);
                     break;
 
                 case "TraderStanding":
@@ -102,7 +102,7 @@ function handoverQuest(tmpList, body) {
         tmpList.data[0].BackendCounters[body.conditionId] = {"id": body.conditionId, "qid": body.qid, "value": counter};
     }
 
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
     return output;
 }
 

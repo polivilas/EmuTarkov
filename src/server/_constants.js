@@ -1,5 +1,5 @@
 "use strict";
-let server = '0.8.0-dev-r22';
+let server = '0.8.0-dev-r23';
 let game = 'Not Started';
 let profileActiveId = 0;
 const saveLootBuffers = {};
@@ -20,14 +20,15 @@ function getActiveID() {
     return profileActiveId;
 }
 
-function setActiveID(ID) {
-    if (typeof ID !== "string") return;
-    ID -= 0;
-    profileActiveId = ID;
+function setActiveID(sessionID) {
+    if (typeof sessionID !== "string") return;
+    sessionID -= 0;
+    profileActiveId = sessionID;
 }
 
 function putInBuffer(sessionID, data, bufLength) {
     sessionID -= 0; //cast to integer
+
     if (saveLootBuffers[sessionID] === undefined || saveLootBuffers[sessionID].allocated !== bufLength) {
         saveLootBuffers[sessionID] = {
             written: 0,
@@ -37,9 +38,9 @@ function putInBuffer(sessionID, data, bufLength) {
     }
 
     let buf = saveLootBuffers[sessionID];
+    
     data.copy(buf.buffer, buf.written, 0);
     buf.written += data.length;
-
     return buf.written === buf.allocated;
 }
 
@@ -53,6 +54,5 @@ module.exports.setActiveID = setActiveID;
 module.exports.serverVersion = serverVersion;
 module.exports.gameVersion = gameVersion;
 module.exports.setVersion = setVersion;
-
 module.exports.putInBuffer = putInBuffer;
 module.exports.getFromBuffer = getFromBuffer;

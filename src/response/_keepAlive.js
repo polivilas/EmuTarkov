@@ -3,7 +3,7 @@
 require('../libs.js');
 
 function main() {
-    if (!profile.isAccountWiped()) {
+    if (!profile_f.isAccountWiped()) {
         updateTraders();
         updatePlayerHideout();
     }
@@ -40,7 +40,7 @@ function updateTraders() {
 }
 
 function updatePlayerHideout() {
-    let ply = profile.getCharacterData();
+    let ply = profile_f.getCharacter();
 
     // update production time
     for (let prod in ply.data[0].Hideout.Production) { 
@@ -77,7 +77,7 @@ function updatePlayerHideout() {
         }
     }
 
-    profile.setCharacterData(ply); 
+    profile_f.setCharacter(ply); 
 }
 
 module.exports.main = main;

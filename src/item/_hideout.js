@@ -41,7 +41,7 @@ function HideoutUpgrade(tmpList, body) {
 		}
 	}
 
-	profile.setCharacterData(tmpList);	
+	profile_f.setCharacter(tmpList);	
 	item.resetOutput();
 	return item.getOutput();
 }
@@ -59,7 +59,7 @@ function HideoutUpgradeComplete(tmpList, body) {
 		tmpList.data[0].Hideout.Areas[hideoutArea].constructing = false;
 	}
 
-	profile.setCharacterData(tmpList);
+	profile_f.setCharacter(tmpList);
 	item.resetOutput();		
 	return item.getOutput();
 }
@@ -89,7 +89,7 @@ function HideoutPutItemsInAreaSlots(tmpList, body) {
 		}
 	}
 
-	profile.setCharacterData(tmpList);
+	profile_f.setCharacter(tmpList);
 	return output;
 }
 
@@ -111,9 +111,9 @@ function HideoutTakeItemsFromAreaSlots(tmpList, body) {
 		
 		output = move_f.addItem(tmpList, newReq, output);
 		
-		tmpList = profile.getCharacterData();
+		tmpList = profile_f.getCharacter();
 		tmpList.data[0].Hideout.Areas[area].slots.splice(0, 1);
-		profile.setCharacterData(tmpList);
+		profile_f.setCharacter(tmpList);
 	}
 
 	return output;
@@ -126,7 +126,7 @@ function HideoutToggleArea(tmpList, body) {
 		}
 	}
 
-	profile.setCharacterData(tmpList);
+	profile_f.setCharacter(tmpList);
 	item.resetOutput();		
 	return item.getOutput();
 }
@@ -195,7 +195,7 @@ function HideoutScavCaseProductionStart(tmpList, body) {
 		}
 	}
 
-	profile.setCharacterData(tmpList);
+	profile_f.setCharacter(tmpList);
 	item.resetOutput();
 	return item.getOutput();
 }
@@ -220,7 +220,7 @@ function HideoutTakeProduction(tmpList, body) {
 		for (let prod in tmpList.data[0].Hideout.Production) {
 			if (tmpList.data[0].Hideout.Production[prod].RecipeId === body.recipeId) {
 				delete tmpList.data[0].Hideout.Production[prod];
-				profile.setCharacterData(tmpList);
+				profile_f.setCharacter(tmpList);
 			}
 		}
 
@@ -250,7 +250,7 @@ function HideoutTakeProduction(tmpList, body) {
 			for (let itemProd of tmpList.data[0].Hideout.Production[prod].Products) {
 				let newReq = {};
 
-				tmpList = profile.getCharacterData();
+				tmpList = profile_f.getCharacter();
 				newReq.item_id = itemProd._tpl;
 				newReq.count = 1;
 				newReq.tid = "ragfair";
@@ -263,7 +263,7 @@ function HideoutTakeProduction(tmpList, body) {
 			}
 
 			delete tmpList.data[0].Hideout.Production[prod];
-			profile.setCharacterData(tmpList);
+			profile_f.setCharacter(tmpList);
 			return output;
 		}
 	}
@@ -284,7 +284,7 @@ function registerProduction(tmpList, body) {
 		}
 	}
 
-	profile.setCharacterData(tmpList);
+	profile_f.setCharacter(tmpList);
 }
 
 module.exports.hideoutUpgrade = HideoutUpgrade;

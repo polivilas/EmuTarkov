@@ -58,42 +58,40 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.templates = json.parse(json.read(filepaths.user.cache.templates));
 
 	if (isFirstLaunch) {
-		logger.logSuccess("Finished loading json files into library... [" + String(new Date() - time) + "]");
+		logger.logSuccess("Finished loading json files... [" + String(new Date() - time) + "]");
 	}
 
 	// Other
-	global.locale = require('./locale.js');							// locale changer function
-	global.index_f = require('./response/_homeCredits.js');			// response/_homeCredits
-	global.assort_f = require('./response/_assort.js');				// response/_assort
-	global.keepAlive_f = require('./response/_keepAlive.js');		// response/_keepAlive
-	global.server = require('./server/_start.js');					// server/_start
-	global.constants = require('./server/_constants.js');			// server/_constants
-	global.header_f = require('./server/_sendHeader.js');			// server/_sendHeader
-	global.profile = require('./profile.js');						// profile
-	global.bots = require('./bots.js');								// bots
-	global.itm_hf = require('./item/helpFunctions.js');				// item/helpFunctions
-	global.quest_f = require('./item/_quest.js'); 					// item/_quest
-	global.note_f = require('./item/_notes.js'); 					// item/_notes
-	global.move_f = require('./item/_move.js'); 					// item/_move
-	global.status_f = require('./item/_status.js'); 				// item/_status
-	global.wishList_f = require('./item/_wishList.js'); 			// item/_wishList
-	global.character_f = require('./item/_character.js');			// item/_character
-	global.trade_f = require('./item/_trade.js'); 					// item/_trade
-	global.customization_f = require('./item/_customization.js');	// item/_customization
-	global.hideout_f = require('./item/_hideout.js'); 				// item/_hideout
-	global.weaponBuilds_f = require('./item/_weaponBuilds.js'); 	// item/_weaponBuilds
-	global.repair_f = require('./item/_repair.js');					// item/_repair
-	global.insure_f = require('./item/_insure.js');					// item/_insure
-	global.item = require('./item.js');								// items
-	global.trader = require('./trader.js');							// trader
-	global.ragfair = require('./ragfair.js');						// ragfair
-	global.response = require('./response.js');						// response
+	global.locale = require('./locale.js');
+	global.index_f = require('./response/_homeCredits.js');
+	global.assort_f = require('./response/_assort.js');
+	global.keepAlive_f = require('./response/_keepAlive.js');
+	global.server = require('./server/_start.js');
+	global.constants = require('./server/_constants.js');
+	global.header_f = require('./server/_sendHeader.js');
+	global.account_f = require('./response/_account.js');
+	global.profile_f = require('./response/_profile.js');
+	global.bots = require('./bots.js');
+	global.itm_hf = require('./item/helpFunctions.js');
+	global.quest_f = require('./item/_quest.js');
+	global.note_f = require('./item/_notes.js');
+	global.move_f = require('./item/_move.js');
+	global.status_f = require('./item/_status.js');
+	global.wishList_f = require('./item/_wishList.js');
+	global.character_f = require('./item/_character.js');
+	global.trade_f = require('./item/_trade.js');
+	global.customization_f = require('./item/_customization.js');
+	global.hideout_f = require('./item/_hideout.js');
+	global.weaponBuilds_f = require('./item/_weaponBuilds.js');
+	global.repair_f = require('./item/_repair.js');
+	global.insure_f = require('./item/_insure.js');
+	global.item = require('./item.js');
+	global.trader = require('./trader.js');
+	global.ragfair = require('./ragfair.js');
+	global.response = require('./response.js');
 	
 	if (isFirstLaunch) {
 		logger.logSuccess("Finished loading game server functions... [" + String(new Date() - time) + "]");
-	}
-
-	if (isFirstLaunch) {
 		logger.logSuccess("[Library Loaded]");
 	}
 }

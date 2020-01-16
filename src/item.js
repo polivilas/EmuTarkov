@@ -64,7 +64,7 @@ function resetOutput() {
 }
 
 function handleMoving(body) {
-    let tmpList = profile.getCharacterData();
+    let tmpList = profile_f.getCharacter();
 
     if (typeof staticRoutes[body.Action] !== "undefined") {
         return staticRoutes[body.Action](tmpList, body);

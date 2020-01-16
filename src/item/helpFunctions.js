@@ -176,7 +176,7 @@ function payMoney(tmpList, body) {
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
     logger.logSuccess("Items taken. Status OK.");
     item.setOutput(output);
     return true;
@@ -279,7 +279,7 @@ function getMoney(tmpList, amount, body, output) {
     trader.lvlUp(body.tid);
     output.data.currentSalesSums[body.tid] = saleSum;
 
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
     return output;
 }
 
@@ -288,7 +288,7 @@ function getMoney(tmpList, amount, body, output) {
 * output: [stashSizeWidth, stashSizeHeight]
 * */
 function getPlayerStash() { //this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
-    let stashTPL = profile.getStashType();
+    let stashTPL = profile_f.getStashType();
     let stashX = (items.data[stashTPL]._props.Grids[0]._props.cellsH !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
     let stashY = (items.data[stashTPL]._props.Grids[0]._props.cellsV !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
     return [stashX, stashY];
@@ -432,7 +432,7 @@ function findAndReturnChildren(tmpList, itemid) {
 /* Is Dogtag
 * input: itemId
 * output: bool
-* Checks if an item is a dogtag. Used under profile.js to modify preparePrice based
+* Checks if an item is a dogtag. Used under profile_f.js to modify preparePrice based
 * on the level of the dogtag
 */
 function isDogtag(itemId) {

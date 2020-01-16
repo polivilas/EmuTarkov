@@ -14,11 +14,11 @@ const mime = {
 	json: 'application/json'
 };
 
-function sendZlibJson(resp, output) {
+function sendZlibJson(resp, output, sessionID) {
     resp.writeHead(200, "OK", {
 		'Content-Type': mime['json'], 
 		'content-encoding' : 'deflate', 
-		'Set-Cookie' : 'PHPSESSID=' + constants.getActiveID()
+		'Set-Cookie' : 'PHPSESSID=' + sessionID
 	});
 
     zlib.deflate(output, function (err, buf) {

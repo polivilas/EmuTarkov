@@ -94,7 +94,7 @@ function showIndex(url, info) {
 
 function showInventoryChecker(url, info) {
     let output = "";
-    let inv = itm_hf.recheckInventoryFreeSpace(profile.getCharacterData());
+    let inv = itm_hf.recheckInventoryFreeSpace(profile_f.getCharacter());
 
     output += "<style>td{border:1px solid #aaa;}</style>Inventory Stash Usage:<br><table><tr><td>-</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9<br>";
 
@@ -131,7 +131,7 @@ function getLocale(url, info) {
 }
 
 function loginUser(url, info) {
-    return profile.find(info);
+    return profile_f.find(info);
 }
 
 function getInsuranceCost(url, info) {
@@ -151,7 +151,7 @@ function getGlobals(url, info) {
 }
 
 function getProfileData(url, info) {
-    const responseData = profile.getCharacterData();
+    const responseData = profile_f.getCharacter();
 
     // If we have experience gained after the raid, we save it
     if (responseData.data.length > 0 && responseData.data[0].Stats.TotalSessionExperience > 0) {
@@ -159,7 +159,7 @@ function getProfileData(url, info) {
         responseData.data[0].Info.Experience += sessionExp;
         responseData.data[0].Stats.TotalSessionExperience = 0;
 
-        profile.setCharacterData(responseData);
+        profile_f.setCharacter(responseData);
 
         responseData.data[0].Info.Experience -= sessionExp;
     }
@@ -169,7 +169,7 @@ function getProfileData(url, info) {
 
 function regenerateScav(url, info) {
     let response = {err: 0, errmsg: null, data: []};
-    response.data.push(profile.generateScavProfile());
+    response.data.push(profile_f.generateScavProfile());
 
     return JSON.stringify(response);
 }
@@ -216,7 +216,7 @@ function getTemplates(url, info) {
 }
 
 function getQuests(url, info) {
-    let tmpList = profile.getCharacterData();
+    let tmpList = profile_f.getCharacter();
     let base = quests;
     let triggerDeconterminationService = false;
     let triggerTrustRegain = false;
@@ -332,11 +332,11 @@ function getChatServerList(url, info) {
 }
 
 function changeNickname(url, info) {
-    return profile.changeNickname(info);
+    return profile_f.changeNickname(info);
 }
 
 function changeVoice(url, info) {
-    profile.changeVoice(info);
+    profile_f.changeVoice(info);
     return nullResponse(url, info);
 }
 
@@ -406,7 +406,7 @@ function createNotifierChannel(url, info) {
 }
 
 function getReservedNickname(url, info) {
-    return '{"err":0,"errmsg":null,"data":"' + profile.getReservedNickname() + '"}';
+    return '{"err":0,"errmsg":null,"data":"' + profile_f.getReservedNickname() + '"}';
 }
 
 function validateNickname(url, info) {
@@ -415,7 +415,7 @@ function validateNickname(url, info) {
 }
 
 function createProfile(url, info) {
-    profile.create(info);
+    profile_f.create(info);
     return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + constants.getActiveID() + '"}}';
 }
 
@@ -469,7 +469,7 @@ function handleNotifierCustomLink(url, info) {
 
 function getProfilePurchases(url, info) {
     // let's grab the traderId from the url
-    return profile.getPurchasesData(url.substr(url.lastIndexOf('/') + 1));
+    return profile_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1));
 }
 
 function getTrader(url, info) {

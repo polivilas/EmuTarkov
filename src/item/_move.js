@@ -5,7 +5,7 @@ require('../libs.js');
 /* Move Item
 * change location of item with parentId and slotId
 * transfers items from one profile to another if fromOwner/toOwner is set in the body.
-* otherwise, move is contained within the same profile.
+* otherwise, move is contained within the same profile_f.
 * */
 function moveItem(tmpList, body) {
     item.resetOutput();
@@ -15,23 +15,23 @@ function moveItem(tmpList, body) {
         // Handle changes to items from scav inventory should update the item
         if (typeof body.to.container === "undefined" || (body.to.container !== "main" && body.to.container !== "hideout")) {
             moveItemInternal(tmpList.data[1], body);
-            profile.setScavData(tmpList);
+            profile_f.setScavData(tmpList);
             return output;
         }
 
         moveItemToProfile(tmpList.data[1], tmpList.data[0], body);
-        profile.setCharacterData(tmpList);
-        profile.setScavData(tmpList);
+        profile_f.setCharacter(tmpList);
+        profile_f.setScavData(tmpList);
         return output;
     } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === tmpList.data[1]._id) {
         // Handle transfers from stash to scav.
         moveItemToProfile(tmpList.data[0], tmpList.data[1], body);
-        profile.setCharacterData(tmpList);
-        profile.setScavData(tmpList);
+        profile_f.setCharacter(tmpList);
+        profile_f.setScavData(tmpList);
         return output;
     } else {
         moveItemInternal(tmpList.data[0], body);
-        profile.setCharacterData(tmpList);
+        profile_f.setCharacter(tmpList);
         return output;
     }
 
@@ -69,7 +69,7 @@ function moveItemToProfile(fromProfileData, toProfileData, body) {
     }
 }
 
-/* Internal helper function to move item within the same profile.
+/* Internal helper function to move item within the same profile_f.
 * profileData: Profile
 * body: Move request
 */
@@ -135,9 +135,9 @@ function removeItem(tmpList, body, output = "", profileIndex = 0) {
         }
 
         if (profileIndex === 1) {
-            profile.setScavData(tmpList); // save scav profile
+            profile_f.setScavData(tmpList); // save scav profile
         } else {
-            profile.setCharacterData(tmpList); //save tmplist to profile
+            profile_f.setCharacter(tmpList); //save tmplist to profile
         }
         return output;
     } else {
@@ -166,7 +166,7 @@ function removeInsurance(tmpList, body) {
             }
         }
 
-        profile.setCharacterData(tmpList);
+        profile_f.setCharacter(tmpList);
     } else {
         logger.logError("item id is not vaild");
     }
@@ -212,7 +212,7 @@ function splitItem(tmpList, body) { // -> Spliting item / Create new item with s
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
-            profile.setCharacterData(tmpList);
+            profile_f.setCharacter(tmpList);
             return output;
         }
     }
@@ -246,7 +246,7 @@ function mergeItem(tmpList, body) {
                         output.data.items.del.push({"_id": tmpList.data[0].Inventory.items[key2]._id});
                         tmpList.data[0].Inventory.items.splice(key2, 1);
 
-                        profile.setCharacterData(tmpList);
+                        profile_f.setCharacter(tmpList);
                         return output;
                     }
                 }
@@ -287,7 +287,7 @@ function transferItem(tmpList, body) {
             item.upd.StackObjectsCount = stackItemWith + body.count;
         }
     }
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
     return output;
 }
 
@@ -309,7 +309,7 @@ function swapItem(tmpList, body) {
             delete item.location;
         }
     }
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
     return output;
 }
 
@@ -352,7 +352,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
 
             for (let stacks = 0; stacks < MaxStacks; stacks++) {
                 //update profile on each stack so stash recalculate will have new items
-                tmpList = profile.getCharacterData();
+                tmpList = profile_f.getCharacter();
 
                 let StashFS_2D = itm_hf.recheckInventoryFreeSpace(tmpList);
                 let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTraderAssort.data.items);
@@ -455,7 +455,7 @@ function addItem(tmpList, body, output = item.getOutput()) {
                     }
 
                 // save after each added item
-                profile.setCharacterData(tmpList);
+                profile_f.setCharacter(tmpList);
             }
 
             return output;

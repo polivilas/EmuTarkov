@@ -39,7 +39,7 @@ function main(tmpList, body) {
         output.data.items.change.push(itemToRepair);
     }
 
-    profile.setCharacterData(tmpList);
+    profile_f.setCharacter(tmpList);
     return output;
 }
 

@@ -69,9 +69,9 @@ function getReservedNickname(sessionID) {
 function isNicknameTaken(info, sessionID) {
     for (let i = 0; i < accounts.length; i++) {
         let account = accounts[i];
-        let profile = json.parse(json.read(profile.getPath(sessionID)));
+        let profile = json.parse(json.read(profile_f.getPath(sessionID)));
 
-        if (account.nickname === info.nickname || profile.Info.Nickname === info.nickname) {
+        if (account.nickname === info.nickname || profile_f.Info.Nickname === info.nickname) {
             return true;
         }
     }

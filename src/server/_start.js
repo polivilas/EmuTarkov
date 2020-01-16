@@ -16,14 +16,14 @@ function getCookies(req) {
     return found;
 }
 
-function sendResponse(req, resp, body) {
+function sendResponse(req, resp, body, sessionID) {
     let output = "";
 
     // get response
-    if (req.method === "POST" || req.method === "PUT") {
-        output = response.getResponse(req, body);
+    if (req.method === "POST") {
+        output = response.getResponse(req, body, sessionID);
     } else {
-        output = response.getResponse(req, "{}");
+        output = response.getResponse(req, "{}", sessionID);
     }
 
     // prepare message to send
@@ -90,9 +90,10 @@ function sendResponse(req, resp, body) {
 
     if (req.url === "/" || req.url === "/inv") {
         header_f.sendHTML(resp, output);
-    } else {
-        header_f.sendZlibJson(resp, output);
+        return;
     }
+
+    header_f.sendZlibJson(resp, output, sessionID);
 }
 
 function handleRequest(req, resp) {
@@ -106,8 +107,8 @@ function handleRequest(req, resp) {
             zlib.inflate(data, function (err, body) {
                 let jsonData = ((body !== null && body != "" && body != "{}") ? body.toString() : "{}");
 
-                logger.logRequest("[" + constants.getActiveID() + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
-                sendResponse(req, resp, jsonData);
+                logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
+                sendResponse(req, resp, jsonData, sessionID);
             });
 
         });
@@ -131,13 +132,13 @@ function handleRequest(req, resp) {
                 let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
             
                 logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
-                profile.saveProfileProgress(jsonData);
+                offraid_f.saveProfileProgress(jsonData, sessionID);
             });
         });
         // ---
     } else {
-        logger.logRequest("[" + constants.getActiveID() + "][" + IP + "] " + req.url);
-        sendResponse(req, resp, null);
+        logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
+        sendResponse(req, resp, null, sessionID);
     }
 }
 

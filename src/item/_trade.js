@@ -22,7 +22,7 @@ function sellItem(tmpList, body) {
     item.resetOutput();
 
     let money = 0;
-    let prices = json.parse(profile.getPurchasesData(body.tid));
+    let prices = json.parse(profile_f.getPurchasesData(body.tid));
     let output = item.getOutput();
 
     // find the items to sell
@@ -87,7 +87,7 @@ function confirmRagfairTrading(tmpList, body) {
     let output = item.getOutput()
 
     for (let offer of offers) {
-        tmpList = profile.getCharacterData();
+        tmpList = profile_f.getCharacter();
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";

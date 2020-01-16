@@ -40,7 +40,7 @@ function setTrader(data) {
 }
 
 function lvlUp(id) {
-    let currentProfile = profile.getCharacterData();
+    let currentProfile = profile_f.getCharacter();
     let currentTrader = get(id);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 
@@ -48,11 +48,11 @@ function lvlUp(id) {
     let checkedExp = 0;
 
     for (let level in globalSettings.data.config.exp.level.exp_table) {
-        if (currentProfile.data[0].Info.Experience < checkedExp) {
+        if (currentprofile_f.data[0].Info.Experience < checkedExp) {
             break;
         }
 
-        currentProfile.data[0].Info.Level = level;
+        currentprofile_f.data[0].Info.Level = level;
         checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
     }
 
@@ -63,7 +63,7 @@ function lvlUp(id) {
     // level up traders
     for (let level in loyaltyLevels) {
         // level reached
-        if ((loyaltyLevels[level].minLevel <= currentProfile.data[0].Info.Level
+        if ((loyaltyLevels[level].minLevel <= currentprofile_f.data[0].Info.Level
             && loyaltyLevels[level].minSalesSum <= currentTrader.data.loyalty.currentSalesSum
             && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
             && targetLevel < 4) {
