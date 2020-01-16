@@ -358,12 +358,12 @@ function validateGameVersion(url, info, sessionID) {
 }
 
 function getCustomization(info) {
-    return json.read(filepaths.user.cache.customization_outfits);
+    return json.stringify(customizationOutfits);
 }
 
 function getCustomizationOffers(url, info, sessionID) {
     let tempoffers = [];
-    let allOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
+    let allOffers = customizationOffers;
     let splittedUrl = url.split('/');
 
     for (let oneOffer of allOffers.data) {

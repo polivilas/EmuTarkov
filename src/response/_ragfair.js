@@ -1,6 +1,6 @@
 "use strict";
 
-require('./libs.js');
+require('../libs.js');
 
 function getOffers(request) {
     let response = json.parse(json.read(filepaths.ragfair.search));
@@ -141,7 +141,7 @@ function createOfferFromBuild(buildItems,response) {
             if (curItem === itemFromBuild) {
                 for (let item of templates.data.Items) {
                     if (item.Id === itemFromBuild) {
-                        response.data.offers.push(createOffer(curItem, (item.Price)));
+                        response.data.offers.push(createOffer(curItem, item.Price));
                         break;
                     }
                 }

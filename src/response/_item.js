@@ -1,6 +1,6 @@
 "use strict";
 
-require('./libs.js');
+require('../libs.js');
 
 let output = "";
 const staticRoutes = {
@@ -74,23 +74,23 @@ function handleMoving(body, sessionID) {
 }
 
 function moving(info) {
-    let output = "";
+    let internalOutput = "";
 
     // handle all items
     for (let i = 0; i < info.data.length; i++) {
-        output = handleMoving(info.data[i]);
+        internalOutput = handleMoving(info.data[i]);
     }
 
     // return items
-    if (output === "OK") {
+    if (internalOutput === "OK") {
         return json.stringify(getOutput());
     }
 
-    if (output !== "") {
-        return json.stringify(output);
+    if (internalOutput !== "") {
+        return json.stringify(internalOutput);
     }
 
-    return output;
+    return internalOutput;
 }
 
 module.exports.getOutput = getOutput;

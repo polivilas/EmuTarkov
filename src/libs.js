@@ -54,7 +54,8 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.weather = json.parse(json.read(filepaths.user.cache.weather));
 	global.quests = json.parse(json.read(filepaths.user.cache.quests));
 	global.globalSettings = json.parse(json.read(filepaths.user.cache.globals));
-	global.customization_m = json.parse(json.read(filepaths.user.cache.customization_outfits));
+	global.customizationOutfits = json.parse(json.read(filepaths.user.cache.customization_outfits));
+	global.customizationOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
 	global.templates = json.parse(json.read(filepaths.user.cache.templates));
 
 	if (isFirstLaunch) {
@@ -62,7 +63,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	}
 
 	// Other
-	global.locale = require('./locale.js');
+	global.locale = require('./response/_locale.js');
 	global.index_f = require('./response/_homeCredits.js');
 	global.assort_f = require('./response/_assort.js');
 	global.keepAlive_f = require('./response/_keepAlive.js');
@@ -72,7 +73,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.header_f = require('./server/_sendHeader.js');
 	global.account_f = require('./response/_account.js');
 	global.profile_f = require('./response/_profile.js');
-	global.bots = require('./bots.js');
+	global.bots = require('./response/_bots.js');
 	global.itm_hf = require('./item/helpFunctions.js');
 	global.quest_f = require('./item/_quest.js');
 	global.note_f = require('./item/_notes.js');
@@ -86,9 +87,9 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.weaponBuilds_f = require('./item/_weaponBuilds.js');
 	global.repair_f = require('./item/_repair.js');
 	global.insure_f = require('./item/_insure.js');
-	global.item = require('./item.js');
-	global.trader = require('./trader.js');
-	global.ragfair = require('./ragfair.js');
+	global.item = require('./response/_item.js');
+	global.trader = require('./response/_trader.js');
+	global.ragfair = require('./response/_ragfair.js');
 	global.response = require('./response.js');
 	
 	if (isFirstLaunch) {

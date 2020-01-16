@@ -2,15 +2,15 @@
 
 require('../libs.js');
 
-function getCustomizationStoragePath() {
-	let filepath = filepaths.user.profiles.storage;
-	return filepath.replace("__REPLACEME__", sessionID);
+function getPath(sessionID) {
+	let path = filepaths.user.profiles.storage;
+	return path.replace("__REPLACEME__", sessionID);
 }
 
 function wearClothing(tmpList, body, sessionID) {
 	// in case there is more suites to be wear
 	for (let i = 0; i < body.suites.length; i++) {
-		let costume_data = customization_m.data[body.suites[i]];
+		let costume_data = customizationOutfits.data[body.suites[i]];
 
 		// this parent reffers to Lower Node
 		if (costume_data._parent == "5cd944d01388ce000a659df9") {
@@ -36,7 +36,7 @@ function buyClothing(tmpList, body, sessionID) {
 
 	let output = item.getOutput();
 	let item_toPay = body.items;
-	let customization_storage = json.parse(json.read(getCustomizationStoragePath()));
+	let customization_storage = json.parse(json.read(getPath(sessionID)));
 
 	for (let i = 0; i < item_toPay.length; i++) {
 		for (let item in tmpList.data[0].Inventory.items) {
@@ -61,19 +61,17 @@ function buyClothing(tmpList, body, sessionID) {
 		}
 	}
 
-	let customizationOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
-
 	for (let offer of customizationOffers.data) {
 		if (body.offer == offer._id) {
 			customization_storage.data.suites.push(offer.suiteId);
 		}
 	}
 
-	json.write(getCustomizationStoragePath(), customization_storage);
+	json.write(getPath(sessionID), customization_storage);
 	profile_f.setPmc(tmpList, sessionID);
 	return output;
 }
 
-module.exports.getCustomizationStoragePath = getCustomizationStoragePath;
+module.exports.getPath = getCustomizationStoragePath;
 module.exports.wearClothing = wearClothing;
 module.exports.buyClothing = buyClothing;

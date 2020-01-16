@@ -1,23 +1,23 @@
 "use strict";
 
-require('./libs.js');
+require('../libs.js');
 
-function getPath(id) {
-    let traderPath = filepaths.user.profiles.traders[id];
-    return traderPath.replace("__REPLACEME__", sessionID);
+function getPath(id, sessionID) {
+    let path = filepaths.user.profiles.traders[id];
+    return path.replace("__REPLACEME__", sessionID);
 }
 
-function loadAllTraders() {
+function loadAllTraders(sessionID) {
     let traders = [];
 
     // load trader files
     for (let file in filepaths.traders) {
-        if (!fs.existsSync(getPath(file))) {
+        if (!fs.existsSync(getPath(file, sessionID))) {
             continue;
         }
 
         if (filepaths.traders.hasOwnProperty(file) && file !== "ragfair") {
-            traders.push(json.parse(json.read(getPath(file))));
+            traders.push(json.parse(json.read(getPath(file, sessionID))));
         }
     }
 
@@ -27,7 +27,7 @@ function loadAllTraders() {
 function get(id) {
     // find the trader
 	if (filepaths.traders.hasOwnProperty(id)) {
-        return {err: 0, errmsg: "", data: json.parse(json.read(getPath(id)))};
+        return {err: 0, errmsg: "", data: json.parse(json.read(getPath(id, sessionID)))};
     }
     
     // trader not found
@@ -35,12 +35,12 @@ function get(id) {
     return {err: 999, errmsg: "Couldn't find trader of ID " + id, data: null};
 }
 
-function setTrader(data) {
-    return json.write(getPath(data._id), data);
+function setTrader(data, sessionID) {
+    return json.write(getPath(data._id, sessionID), data);
 }
 
-function lvlUp(id) {
-    let currentProfile = profile_f.get(sessionID);
+function lvlUp(id, sessionID) {
+    let tmpList = profile_f.get(sessionID);
     let currentTrader = get(id);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 
@@ -48,22 +48,20 @@ function lvlUp(id) {
     let checkedExp = 0;
 
     for (let level in globalSettings.data.config.exp.level.exp_table) {
-        if (currentprofile_f.data[0].Info.Experience < checkedExp) {
+        if (tmpList.data[0].Info.Experience < checkedExp) {
             break;
         }
 
-        currentprofile_f.data[0].Info.Level = level;
+        tmpList.data[0].Info.Level = level;
         checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
     }
 
-    // if I do it like this the first requirement will always start at 1 once we check for
-    // the first level so set initial value 0
+    // level up traders
     let targetLevel = 0;
     
-    // level up traders
     for (let level in loyaltyLevels) {
         // level reached
-        if ((loyaltyLevels[level].minLevel <= currentprofile_f.data[0].Info.Level
+        if ((loyaltyLevels[level].minLevel <= tmpList.data[0].Info.Level
             && loyaltyLevels[level].minSalesSum <= currentTrader.data.loyalty.currentSalesSum
             && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
             && targetLevel < 4) {
@@ -73,7 +71,6 @@ function lvlUp(id) {
         }
     }
 
-    // set currentLevel using the target level
     currentTrader.data.loyalty.currentLevel = targetLevel;
     setTrader(currentTrader.data);
 
