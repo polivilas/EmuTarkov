@@ -34,7 +34,7 @@ function genericFilepathCacher(type, basepath) {
             case "maps": filepaths.maps[fileName] = filePath; break;
             case "userCache": filepaths.user.cache[fileName] = filePath; break;
             case "profileTraders": filepaths.user.profiles.traders[fileName] = "user/profiles/__REPLACEME__/traders/" + fileName + ".json"; break;
-            case "profileEditions": filepaths.profile_f.character[fileName] = filePath; break;
+            case "profileEditions": filepaths.profile.character[fileName] = filePath; break;
         }
     }
 }
@@ -279,8 +279,8 @@ function images() {
 
 function profile() {
     logger.logInfo("Routing: profile");
-    filepaths.profile_f.storage = "db/profile/storage.json";
-    filepaths.profile_f.userbuilds = "db/profile/userbuilds.json";
+    filepaths.profile.storage = "db/profile/storage.json";
+    filepaths.profile.userbuilds = "db/profile/userbuilds.json";
     genericFilepathCacher("profileEditions", "db/profile/character");
 }
 
