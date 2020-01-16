@@ -166,18 +166,18 @@ function profile(mod) {
         return;
     }
 
-    if (mod.files.profile_f.hasOwnProperty("character")) {
-        for (let item in mod.files.profile_f.character) {
-            filepaths.profile.character[item] = mod.files.profile_f.character[item];
+    if (mod.files.profile.hasOwnProperty("character")) {
+        for (let item in mod.files.profile.character) {
+            filepaths.profile.character[item] = mod.files.profile.character[item];
         }
     }
     
-    if (mod.files.profile_f.hasOwnProperty("storage")) {
-        filepaths.profile.storage = mod.files.profile_f.storage;
+    if (mod.files.profile.hasOwnProperty("storage")) {
+        filepaths.profile.storage = mod.files.profile.storage;
     }
 
-    if (mod.files.profile_f.hasOwnProperty("userbuilds")) {
-        filepaths.profile.userbuilds = mod.files.profile_f.userbuilds;
+    if (mod.files.profile.hasOwnProperty("userbuilds")) {
+        filepaths.profile.userbuilds = mod.files.profile.userbuilds;
     }
 }
 

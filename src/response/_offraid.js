@@ -1,6 +1,6 @@
 "use strict";
 
-require("./libs.js");
+require("../libs.js");
 
 function saveProgress(offRaidData) {
     if (!settings.gameplay.features.lootSavingEnabled) {
@@ -171,4 +171,4 @@ function saveProgress(offRaidData) {
     profile_f.setPmc(tmpList, sessionID);
 }
 
-modules.exports.saveProgress = saveProgress;
+module.exports.saveProgress = saveProgress;

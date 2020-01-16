@@ -1,5 +1,7 @@
 "use strict";
 
+require('../libs.js');
+
 function getRandomValue(node) {
 	let keys = Object.keys(node);
 	return json.parse(json.read(node[keys[utility.getRandomInt(0, keys.length - 1)]]));

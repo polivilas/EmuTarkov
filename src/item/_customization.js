@@ -72,6 +72,6 @@ function buyClothing(tmpList, body, sessionID) {
 	return output;
 }
 
-module.exports.getPath = getCustomizationStoragePath;
+module.exports.getPath = getPath;
 module.exports.wearClothing = wearClothing;
 module.exports.buyClothing = buyClothing;

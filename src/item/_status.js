@@ -1,6 +1,6 @@
 "use strict";
 
-const profile = require('../profile_f.js');
+require('../libs.js');
 
 function foldItem(tmpList, body, sessionID) {
     for (let item of tmpList.data[0].Inventory.items) {

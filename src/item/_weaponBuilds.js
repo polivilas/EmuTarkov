@@ -2,9 +2,9 @@
 
 require('../libs.js');
 
-function getUserBuildsPath() {
-	let filepath = filepaths.user.profiles.userbuilds;
-	return filepath.replace("__REPLACEME__", sessionID);
+function getPath(sessionID) {
+	let path = filepaths.user.profiles.userbuilds;
+	return path.replace("__REPLACEME__", sessionID);
 }
 
 function SaveBuild(tmpList, body, sessionID) {
@@ -13,7 +13,7 @@ function SaveBuild(tmpList, body, sessionID) {
 	body.id = utility.generateNewItemId();	
 
 	let output = item.getOutput();
-	let savedBuilds = json.parse(json.read(getUserBuildsPath()));
+	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 	let ids = [];
 	let dupes = {};
 	let newParents = {}
@@ -49,13 +49,13 @@ function SaveBuild(tmpList, body, sessionID) {
 	}
 
 	savedBuilds.data.push(body);
-	json.write(getUserBuildsPath(), savedBuilds);
+	json.write(getPath(sessionID), savedBuilds);
 	output.data.builds.push(body);
     return output;
 }
 
 function RemoveBuild(tmpList, body, sessionID) {
-	let savedBuilds = json.parse(json.read(getUserBuildsPath()));
+	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 	
 	for (let wBuild of savedBuilds.data) {
 		if (wBuild.id == body.id) {
@@ -67,11 +67,11 @@ function RemoveBuild(tmpList, body, sessionID) {
 		}
 	}
 
-	json.write(getUserBuildsPath(), savedBuilds);
+	json.write(getPath(sessionID), savedBuilds);
 	item.resetOutput();
     return item.getOutput();
 }
 
-module.exports.getUserBuildsPath = getUserBuildsPath;
+module.exports.getPath = getPath;
 module.exports.saveBuild = SaveBuild;
 module.exports.removeBuild = RemoveBuild;
