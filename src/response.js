@@ -179,7 +179,7 @@ function selectProfile(url, info) {
 }
 
 function getProfileStatus(url, info) {
-    return '{"err":0, "errmsg":null, "data":[{"profileid":"user' + constants.getActiveID() + 'scav", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"user' + constants.getActiveID() + 'pmc", "status":"Free", "sid":"", "ip":"", "port":0}]}';
+    return '{"err":0, "errmsg":null, "data":[{"profileid":"scav' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"pmc' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 }
 
 function getWeather(url, info) {
@@ -305,10 +305,10 @@ function joinMatch(url, info) {
     // check if the player is a scav
     if (info.savage === true) {
         shortid = "3XR5";
-        profileId = "user" + constants.getActiveID() + "scav";
+        profileId = "scav" + constants.getActiveID();
     } else {
         shortid = "3SRC";
-        profileId = "user" + constants.getActiveID() + "pmc";
+        profileId = "pmc" + constants.getActiveID();
     }
 
     return JSON.stringify({
@@ -416,7 +416,7 @@ function validateNickname(url, info) {
 
 function createProfile(url, info) {
     profile.create(info);
-    return '{"err":0,"errmsg":null,"data":{"uid":"user' + constants.getActiveID() + 'pmc"}}';
+    return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + constants.getActiveID() + '"}}';
 }
 
 // this shows a list of conversations available
@@ -452,7 +452,7 @@ function getMailDialogView(url, info) {
 function getMailDialogInfo(url, info) {
     // an overview of the object is this:
 
-    return '{"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"user' + constants.getActiveID() + 'pmc","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"user' + constants.getActiveID() + 'pmc","pinned":false}}';
+    return '{"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"pmc' + constants.getActiveID() + '","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"pmc' + constants.getActiveID() + '","pinned":false}}';
 }
 
 function getMapLocation(url, info) {
