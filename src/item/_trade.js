@@ -2,8 +2,8 @@
 
 require('../libs.js');
 
-function buyItem(tmpList, body, sessionID) {
-    if (!itm_hf.payMoney(tmpList, body, sessionID)) {
+function buyItem(pmcData, body, sessionID) {
+    if (!itm_hf.payMoney(pmcData, body, sessionID)) {
         logger.logError("no money found");
         return "";
     }
@@ -14,11 +14,11 @@ function buyItem(tmpList, body, sessionID) {
         body.tid = "ragfair";
     }
     
-    return move_f.addItem(tmpList, body, sessionID, item.getOutput());
+    return move_f.addItem(pmcData, body, sessionID, item.getOutput());
 }
 
 // Selling item to trader
-function sellItem(tmpList, body, sessionID) {
+function sellItem(pmcData, body, sessionID) {
     item.resetOutput();
 
     let money = 0;
@@ -31,7 +31,7 @@ function sellItem(tmpList, body, sessionID) {
         logger.logInfo("selling item" + json.stringify(body.items[i]));
 
         // profile inventory, look into it if item exist
-        for (let item of tmpList.data[0].Inventory.items) {
+        for (let item of pmcData.Inventory.items) {
             let isThereSpace = body.items[i].id.search(" ");
             let checkID = body.items[i].id;
 
@@ -44,8 +44,8 @@ function sellItem(tmpList, body, sessionID) {
                 logger.logInfo("Selling: " + checkID);
 
                 // remove item
-                output = move_f.removeItem(tmpList, checkID, output);
-                move_f.removeInsurance(tmpList, checkID);
+                output = move_f.removeItem(pmcData, checkID, output);
+                move_f.removeInsurance(pmcData, checkID);
 
                 // add money to return to the player
                 let price_money = prices.data[item._id][0][0].count;
@@ -60,34 +60,34 @@ function sellItem(tmpList, body, sessionID) {
     }
 
     // get money the item
-    output = itm_hf.getMoney(tmpList, money, body, output);
+    output = itm_hf.getMoney(pmcData, money, body, output);
     return output;
 }
 
 // separate is that selling or buying
-function confirmTrading(tmpList, body, sessionID) {
+function confirmTrading(pmcData, body, sessionID) {
     // buying
     if (body.type === "buy_from_trader") {
-        return buyItem(tmpList, body, sessionID);
+        return buyItem(pmcData, body, sessionID);
     }
 
     // selling
     if (body.type === "sell_to_trader") {
-        return sellItem(tmpList, body, sessionID);
+        return sellItem(pmcData, body, sessionID);
     }
 
     return "";
 }
 
 // Ragfair trading
-function confirmRagfairTrading(tmpList, body, sessionID) {
+function confirmRagfairTrading(pmcData, body, sessionID) {
     item.resetOutput();
 
     let offers = body.offers;
     let output = item.getOutput()
 
     for (let offer of offers) {
-        tmpList = profile_f.get(sessionID);
+        pmcData = profile_f.get(sessionID);
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";
@@ -97,7 +97,7 @@ function confirmRagfairTrading(tmpList, body, sessionID) {
         body.scheme_id = 0;
         body.scheme_items = offer.items;
 
-        let tmpOutput = confirmTrading(tmpList, body, sessionID);
+        let tmpOutput = confirmTrading(pmcData, body, sessionID);
 
         for (let item of tmpOutput.data.items.new) {
             output.data.items.new.push(item);

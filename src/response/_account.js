@@ -66,12 +66,12 @@ function getReservedNickname(sessionID) {
     return "";
 }
 
-function isNicknameTaken(info, sessionID) {
+function isNicknameTaken(info) {
     for (let i = 0; i < accounts.length; i++) {
         let account = accounts[i];
-        let profile = json.parse(json.read(profile_f.getPath(sessionID)));
+        let profile = profile_f.getPmcData(account.id);
 
-        if (account.nickname === info.nickname || profile_f.Info.Nickname === info.nickname) {
+        if (account.nickname === info.nickname || profile.Info.Nickname === info.nickname) {
             return true;
         }
     }

@@ -7,31 +7,31 @@ require('../libs.js');
 * transfers items from one profile to another if fromOwner/toOwner is set in the body.
 * otherwise, move is contained within the same profile_f.
 * */
-function moveItem(tmpList, body, sessionID) {
+function moveItem(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
 
-    if (typeof body.fromOwner !== 'undefined' && body.fromOwner.id === tmpList.data[1]._id) {
+    if (typeof body.fromOwner !== 'undefined' && body.fromOwner.id === pmcData.data[1]._id) {
         // Handle changes to items from scav inventory should update the item
         if (typeof body.to.container === "undefined" || (body.to.container !== "main" && body.to.container !== "hideout")) {
-            moveItemInternal(tmpList.data[1], body);
-            profile_f.setScavData(tmpList);
+            moveItemInternal(pmcData.data[1], body);
+            profile_f.setScavData(pmcData);
             return output;
         }
 
-        moveItemToProfile(tmpList.data[1], tmpList.data[0], body);
-        profile_f.setPmc(tmpList, sessionID);
-        profile_f.setScavData(tmpList);
+        moveItemToProfile(pmcData.data[1], pmcData, body);
+        profile_f.setPmcData(pmcData, sessionID);
+        profile_f.setScavData(pmcData);
         return output;
-    } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === tmpList.data[1]._id) {
+    } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === pmcData.data[1]._id) {
         // Handle transfers from stash to scav.
-        moveItemToProfile(tmpList.data[0], tmpList.data[1], body);
-        profile_f.setPmc(tmpList, sessionID);
-        profile_f.setScavData(tmpList);
+        moveItemToProfile(pmcData, pmcData.data[1], body);
+        profile_f.setPmcData(pmcData, sessionID);
+        profile_f.setScavData(pmcData);
         return output;
     } else {
-        moveItemInternal(tmpList.data[0], body);
-        profile_f.setPmc(tmpList, sessionID);
+        moveItemInternal(pmcData, body);
+        profile_f.setPmcData(pmcData, sessionID);
         return output;
     }
 
@@ -112,7 +112,7 @@ function handleCartridges(profileData, body) {
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * Profile index: 0 = main profile, 1 = scav profile
 * */
-function removeItem(tmpList, body, sessionID, output = "", profileIndex = 0) {    
+function removeItem(pmcData, body, sessionID, output = "", profileIndex = 0) {    
     if (output === "") {
 		item.resetOutput();
 		output = item.getOutput();
@@ -122,22 +122,22 @@ function removeItem(tmpList, body, sessionID, output = "", profileIndex = 0) {
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-        let ids_toremove = itm_hf.findAndReturnChildren(tmpList.data[profileIndex], toDo[0]); //get all ids related to this item, +including this item itself
+        let ids_toremove = itm_hf.findAndReturnChildren(pmcData.data[profileIndex], toDo[0]); //get all ids related to this item, +including this item itself
 
         for (let i in ids_toremove) { //remove one by one all related items and itself
             output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
 
-            for (let a in tmpList.data[profileIndex].Inventory.items) {	//find correct item by id and delete it
-                if (tmpList.data[profileIndex].Inventory.items[a]._id === ids_toremove[i]) {
-                    tmpList.data[profileIndex].Inventory.items.splice(a, 1);  //remove item from tmplist
+            for (let a in pmcData.data[profileIndex].Inventory.items) {	//find correct item by id and delete it
+                if (pmcData.data[profileIndex].Inventory.items[a]._id === ids_toremove[i]) {
+                    pmcData.data[profileIndex].Inventory.items.splice(a, 1);  //remove item from pmcData
                 }
             }
         }
 
         if (profileIndex === 1) {
-            profile_f.setScavData(tmpList); // save scav profile
+            profile_f.setScavData(pmcData); // save scav profile
         } else {
-            profile_f.setPmc(tmpList, sessionID); //save tmplist to profile
+            profile_f.setPmcData(pmcData, sessionID); //save pmcData to profile
         }
         return output;
     } else {
@@ -147,52 +147,52 @@ function removeItem(tmpList, body, sessionID, output = "", profileIndex = 0) {
     }
 }
 
-function removeInsurance(tmpList, body, sessionID) {
+function removeInsurance(pmcData, body, sessionID) {
     let toDo = [body];
     
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-        let ids_toremove = itm_hf.findAndReturnChildren(tmpList.data[0], toDo[0]); //get all ids related to this item, +including this item itself
+        let ids_toremove = itm_hf.findAndReturnChildren(pmcData, toDo[0]); //get all ids related to this item, +including this item itself
 
         for (let i in ids_toremove) { //remove one by one all related items and itself
-            for (let a in tmpList.data[0].Inventory.items) {	//find correct item by id and delete it
-                if (tmpList.data[0].Inventory.items[a]._id === ids_toremove[i]) {
-                    for (let insurance in tmpList.data[0].InsuredItems) {
-                        if (tmpList.data[0].InsuredItems[insurance].itemId == ids_toremove[i]) {
-                            tmpList.data[0].InsuredItems.splice(insurance, 1);
+            for (let a in pmcData.Inventory.items) {	//find correct item by id and delete it
+                if (pmcData.Inventory.items[a]._id === ids_toremove[i]) {
+                    for (let insurance in pmcData.InsuredItems) {
+                        if (pmcData.InsuredItems[insurance].itemId == ids_toremove[i]) {
+                            pmcData.InsuredItems.splice(insurance, 1);
                         }
                     }
                 }
             }
         }
 
-        profile_f.setPmc(tmpList, sessionID);
+        profile_f.setPmcData(pmcData, sessionID);
     } else {
         logger.logError("item id is not vaild");
     }
 }
 
-function discardItem(tmpList, body, sessionID) {
-    removeInsurance(tmpList, body, sessionID.item);
-    return removeItem(tmpList, body, sessionID.item);
+function discardItem(pmcData, body, sessionID) {
+    removeInsurance(pmcData, body, sessionID.item);
+    return removeItem(pmcData, body, sessionID.item);
 }
 
 /* Split Item
 * spliting 1 item into 2 separate items ...
 * */
-function splitItem(tmpList, body, sessionID) { // -> Spliting item / Create new item with splited amount and removing that amount from older one
+function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new item with splited amount and removing that amount from older one
     item.resetOutput();
     let output = item.getOutput();
     let location = body.container.location;
     if (typeof body.container.location === "undefined" && body.container.container === "cartridges") {
         let tmp_counter = 0;
-        for (let item_ammo in tmpList.data[0].Inventory.items) {
-            if (tmpList.data[0].Inventory.items[item_ammo].parentId === body.container.id)
+        for (let item_ammo in pmcData.Inventory.items) {
+            if (pmcData.Inventory.items[item_ammo].parentId === body.container.id)
                 tmp_counter++;
         }
         location = tmp_counter;//wrong location for first cartrige
     }
-    for (let item of tmpList.data[0].Inventory.items) {
+    for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.StackObjectsCount -= body.count;
             let newItem = utility.generateNewItemId();
@@ -204,7 +204,7 @@ function splitItem(tmpList, body, sessionID) { // -> Spliting item / Create new 
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
-            tmpList.data[0].Inventory.items.push({
+            pmcData.Inventory.items.push({
                 "_id": newItem,
                 "_tpl": item._tpl,
                 "parentId": body.container.id,
@@ -212,7 +212,7 @@ function splitItem(tmpList, body, sessionID) { // -> Spliting item / Create new 
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
-            profile_f.setPmc(tmpList, sessionID);
+            profile_f.setPmcData(pmcData, sessionID);
             return output;
         }
     }
@@ -223,30 +223,30 @@ function splitItem(tmpList, body, sessionID) { // -> Spliting item / Create new 
 /* Merge Item
 * merges 2 items into one, deletes item from body.item and adding number of stacks into body.with
 * */
-function mergeItem(tmpList, body, sessionID) {
+function mergeItem(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
-    for (let key in tmpList.data[0].Inventory.items) {
-        if (tmpList.data[0].Inventory.items.hasOwnProperty(key)) {
-            if (tmpList.data[0].Inventory.items[key]._id && tmpList.data[0].Inventory.items[key]._id === body.with) {
-                for (let key2 in tmpList.data[0].Inventory.items) {
-                    if (tmpList.data[0].Inventory.items[key2]._id && tmpList.data[0].Inventory.items[key2]._id === body.item) {
+    for (let key in pmcData.Inventory.items) {
+        if (pmcData.Inventory.items.hasOwnProperty(key)) {
+            if (pmcData.Inventory.items[key]._id && pmcData.Inventory.items[key]._id === body.with) {
+                for (let key2 in pmcData.Inventory.items) {
+                    if (pmcData.Inventory.items[key2]._id && pmcData.Inventory.items[key2]._id === body.item) {
                         let stackItem0 = 1;
                         let stackItem1 = 1;
-                        if (typeof tmpList.data[0].Inventory.items[key].upd !== "undefined")
-                            stackItem0 = tmpList.data[0].Inventory.items[key].upd.StackObjectsCount;
-                        if (typeof tmpList.data[0].Inventory.items[key2].upd !== "undefined")
-                            stackItem1 = tmpList.data[0].Inventory.items[key2].upd.StackObjectsCount;
+                        if (typeof pmcData.Inventory.items[key].upd !== "undefined")
+                            stackItem0 = pmcData.Inventory.items[key].upd.StackObjectsCount;
+                        if (typeof pmcData.Inventory.items[key2].upd !== "undefined")
+                            stackItem1 = pmcData.Inventory.items[key2].upd.StackObjectsCount;
 
                         if (stackItem0 === 1)
-                            Object.assign(tmpList.data[0].Inventory.items[key], {"upd": {"StackObjectsCount": 1}});
+                            Object.assign(pmcData.Inventory.items[key], {"upd": {"StackObjectsCount": 1}});
 
-                        tmpList.data[0].Inventory.items[key].upd.StackObjectsCount = stackItem0 + stackItem1;
+                        pmcData.Inventory.items[key].upd.StackObjectsCount = stackItem0 + stackItem1;
 
-                        output.data.items.del.push({"_id": tmpList.data[0].Inventory.items[key2]._id});
-                        tmpList.data[0].Inventory.items.splice(key2, 1);
+                        output.data.items.del.push({"_id": pmcData.Inventory.items[key2]._id});
+                        pmcData.Inventory.items.splice(key2, 1);
 
-                        profile_f.setPmc(tmpList, sessionID);
+                        profile_f.setPmcData(pmcData, sessionID);
                         return output;
                     }
                 }
@@ -260,10 +260,10 @@ function mergeItem(tmpList, body, sessionID) {
 /* Transfer item
 * Used to take items from scav inventory into stash or to insert ammo into mags (shotgun ones) and reloading weapon by clicking "Reload"
 * */
-function transferItem(tmpList, body, sessionID) {
+function transferItem(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
-    for (let item of tmpList.data[0].Inventory.items) {
+    for (let item of pmcData.Inventory.items) {
         // From item
         if (item._id === body.item) {
             let stackItem = 1;
@@ -287,17 +287,17 @@ function transferItem(tmpList, body, sessionID) {
             item.upd.StackObjectsCount = stackItemWith + body.count;
         }
     }
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return output;
 }
 
 /* Swap Item
 * its used for "reload" if you have weapon in hands and magazine is somewhere else in rig or backpack in equipment
 * */
-function swapItem(tmpList, body, sessionID) {
+function swapItem(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
-    for (let item of tmpList.data[0].Inventory.items) {
+    for (let item of pmcData.Inventory.items) {
         if (item._id === body.item) {
             item.parentId = body.to.id;         // parentId
             item.slotId = body.to.container;    // slotId
@@ -309,14 +309,14 @@ function swapItem(tmpList, body, sessionID) {
             delete item.location;
         }
     }
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return output;
 }
 
 /* Give Item
 * its used for "add" item like gifts etc.
 * */
-function addItem(tmpList, body, sessionID, output = item.getOutput()) {
+function addItem(pmcData, body, sessionID, output = item.getOutput()) {
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
@@ -352,9 +352,9 @@ function addItem(tmpList, body, sessionID, output = item.getOutput()) {
 
             for (let stacks = 0; stacks < MaxStacks; stacks++) {
                 //update profile on each stack so stash recalculate will have new items
-                tmpList = profile_f.get(sessionID);
+                pmcData = profile_f.get(sessionID);
 
-                let StashFS_2D = itm_hf.recheckInventoryFreeSpace(tmpList);
+                let StashFS_2D = itm_hf.recheckInventoryFreeSpace(pmcData);
                 let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTraderAssort.data.items);
                 let tmpSizeX = ItemSize[0];
                 let tmpSizeY = ItemSize[1];
@@ -383,16 +383,16 @@ function addItem(tmpList, body, sessionID, output = item.getOutput()) {
                             output.data.items.new.push({
                                 "_id": newItem,
                                 "_tpl": item._tpl,
-                                "parentId": tmpList.data[0].Inventory.stash,
+                                "parentId": pmcData.Inventory.stash,
                                 "slotId": "hideout",
                                 "location": {"x": x, "y": y, "r": 0},
                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                             });
 
-                            tmpList.data[0].Inventory.items.push({
+                            pmcData.Inventory.items.push({
                                 "_id": newItem,
                                 "_tpl": item._tpl,
-                                "parentId": tmpList.data[0].Inventory.stash,
+                                "parentId": pmcData.Inventory.stash,
                                 "slotId": "hideout",
                                 "location": {"x": x, "y": y, "r": 0},
                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
@@ -417,7 +417,7 @@ function addItem(tmpList, body, sessionID, output = item.getOutput()) {
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
 
-                                            tmpList.data[0].Inventory.items.push({
+                                            pmcData.Inventory.items.push({
                                                 "_id": newItem,
                                                 "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
@@ -434,7 +434,7 @@ function addItem(tmpList, body, sessionID, output = item.getOutput()) {
                                                 "upd": {"StackObjectsCount": StacksValue[stacks]}
                                             });
 
-                                            tmpList.data[0].Inventory.items.push({
+                                            pmcData.Inventory.items.push({
                                                 "_id": newItem,
                                                 "_tpl": tmpTraderAssort.data.items[tmpKey]._tpl,
                                                 "parentId": toDo[0][1],
@@ -455,7 +455,7 @@ function addItem(tmpList, body, sessionID, output = item.getOutput()) {
                     }
 
                 // save after each added item
-                profile_f.setPmc(tmpList, sessionID);
+                profile_f.setPmcData(pmcData, sessionID);
             }
 
             return output;

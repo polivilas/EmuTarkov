@@ -8,24 +8,24 @@ require('../libs.js');
 // 3 - failed 
 // 4 - completed
 
-function acceptQuest(tmpList, body, sessionID) {
-    tmpList.data[0].Quests.push({
+function acceptQuest(pmcData, body, sessionID) {
+    pmcData.Quests.push({
 		"qid": body.qid.toString(), 
 		"startTime": utility.getTimestamp(), 
 		"status": 2
 	}); 
 	
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
 
     item.resetOutput();
     return item.getOutput();
 }
 
-function completeQuest(tmpList, body, sessionID) {
-    for (let quest in tmpList.data[0].Quests) {
-        if (tmpList.data[0].Quests[quest].qid === body.qid) {
-            tmpList.data[0].Quests[quest].status = 4;
-            profile_f.setPmc(tmpList, sessionID);
+function completeQuest(pmcData, body, sessionID) {
+    for (let quest in pmcData.Quests) {
+        if (pmcData.Quests[quest].qid === body.qid) {
+            pmcData.Quests[quest].status = 4;
+            profile_f.setPmcData(pmcData, sessionID);
             break;
         }
     }
@@ -46,15 +46,15 @@ function completeQuest(tmpList, body, sessionID) {
                         newReq.count = parseInt(reward.value);
                         newReq.tid = "ragfair";
                 
-                        tmpList = profile_f.get(sessionID);
-                        move_f.addItem(tmpList, newReq);
+                        pmcData = profile_f.get(sessionID);
+                        move_f.addItem(pmcData, newReq);
                     }
                     break;
 
                 case "Experience":
-                    tmpList = profile_f.get(sessionID);
-                    tmpList.data[0].Info.Experience += parseInt(reward.value);
-                    profile_f.setPmc(tmpList, sessionID);
+                    pmcData = profile_f.get(sessionID);
+                    pmcData.Info.Experience += parseInt(reward.value);
+                    profile_f.setPmcData(pmcData, sessionID);
                     break;
 
                 case "TraderStanding":
@@ -79,7 +79,7 @@ function completeQuest(tmpList, body, sessionID) {
 }
 
 // TODO: handle money
-function handoverQuest(tmpList, body, sessionID) {
+function handoverQuest(pmcData, body, sessionID) {
     item.resetOutput();
     
     let output = item.getOutput();
@@ -88,21 +88,21 @@ function handoverQuest(tmpList, body, sessionID) {
     
     for (let itemHandover of body.items) {
         counter += itemHandover.count;
-        output = move_f.removeItem(tmpList, itemHandover.id, output);
+        output = move_f.removeItem(pmcData, itemHandover.id, output);
     }
 
-    for (let backendCounter in tmpList.data[0].BackendCounters) {
+    for (let backendCounter in pmcData.BackendCounters) {
         if (backendCounter === body.conditionId) {
-            tmpList.data[0].BackendCounters[body.conditionId].value += counter;
+            pmcData.BackendCounters[body.conditionId].value += counter;
             found = true;
         }
     }
 
     if (!found) {
-        tmpList.data[0].BackendCounters[body.conditionId] = {"id": body.conditionId, "qid": body.qid, "value": counter};
+        pmcData.BackendCounters[body.conditionId] = {"id": body.conditionId, "qid": body.qid, "value": counter};
     }
 
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return output;
 }
 

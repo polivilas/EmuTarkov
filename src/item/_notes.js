@@ -2,27 +2,27 @@
 
 require('../libs.js');
 
-function addNote(tmpList, body, sessionID) {
-    tmpList.data[0].Notes.Notes.push({
+function addNote(pmcData, body, sessionID) {
+    pmcData.Notes.Notes.push({
 		"Time": body.note.Time, 
 		"Text": body.note.Text
 	});
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return "OK";
 }
 
-function editNode(tmpList, body, sessionID) {
-    tmpList.data[0].Notes.Notes[body.index] = {
+function editNode(pmcData, body, sessionID) {
+    pmcData.Notes.Notes[body.index] = {
 		"Time": body.note.Time, 
 		"Text": body.note.Text
 	};
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return "OK";
 }
 
-function deleteNote(tmpList, body, sessionID) {
-    tmpList.data[0].Notes.Notes.splice(body.index, 1);
-    profile_f.setPmc(tmpList, sessionID);
+function deleteNote(pmcData, body, sessionID) {
+    pmcData.Notes.Notes.splice(body.index, 1);
+    profile_f.setPmcData(pmcData, sessionID);
     return "OK";
 }
 

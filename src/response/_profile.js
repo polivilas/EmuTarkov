@@ -15,41 +15,41 @@ function getScavPath(sessionID) {
 function create(info, sessionID) {
     let account = account_f.find(sessionID);
     let folder = account_f.getPath(account.id);
-    let character = json.parse(json.read(filepaths.profile.character[account.edition + "_" + info.side.toLowerCase()]));
+    let pmcData = json.parse(json.read(filepaths.profile.character[account.edition + "_" + info.side.toLowerCase()]));
     let storage = json.parse(json.read(filepaths.profile.storage));
     let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
-    character._id = "pmc" + account.id;
-    character.aid = account.id;
-    character.savage = "scav" + account.id;
-    character.Info.Nickname = info.nickname;
-    character.Info.LowerNickname = info.nickname.toLowerCase();
+    pmcData._id = "pmc" + account.id;
+    pmcData.aid = account.id;
+    pmcData.savage = "scav" + account.id;
+    pmcData.Info.Nickname = info.nickname;
+    pmcData.Info.LowerNickname = info.nickname.toLowerCase();
     storage.data._id = "pmc" + account.id;
 
     switch (info.side) {
         case "Bear":
-            character.Info.Side = "Bear";
-            character.Info.Voice = "Bear_1";
-            character.Customization.Head = "5cc084dd14c02e000b0550a3";
-            character.Customization.Body = "5cc0858d14c02e000c6bea66";
-            character.Customization.Feet = "5cc085bb14c02e000e67a5c5";
-            character.Customization.Hands = "5cc0876314c02e000c6bea6b";
+            pmcData.Info.Side = "Bear";
+            pmcData.Info.Voice = "Bear_1";
+            pmcData.Customization.Head = "5cc084dd14c02e000b0550a3";
+            pmcData.Customization.Body = "5cc0858d14c02e000c6bea66";
+            pmcData.Customization.Feet = "5cc085bb14c02e000e67a5c5";
+            pmcData.Customization.Hands = "5cc0876314c02e000c6bea6b";
             storage.data.suites = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
             break;
 
         case "Usec":
-            character.Info.Side = "Usec";
-            character.Info.Voice = "Usec_1";
-            character.Customization.Head = "5cde96047d6c8b20b577f016";
-            character.Customization.Body = "5cde95d97d6c8b647a3769b0";
-            character.Customization.Feet = "5cde95ef7d6c8b04713c4f2d";
-            character.Customization.Hands = "5cde95fa7d6c8b04737c2d13";
+            pmcData.Info.Side = "Usec";
+            pmcData.Info.Voice = "Usec_1";
+            pmcData.Customization.Head = "5cde96047d6c8b20b577f016";
+            pmcData.Customization.Body = "5cde95d97d6c8b647a3769b0";
+            pmcData.Customization.Feet = "5cde95ef7d6c8b04713c4f2d";
+            pmcData.Customization.Hands = "5cde95fa7d6c8b04737c2d13";
             storage.data.suites = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
             break;
     }
 
     // create profile
-    json.write(folder + "character.json", character);
+    json.write(folder + "character.json", pmcData);
     json.write(folder + "storage.json", storage);
     json.write(folder + "userbuilds.json", userbuilds);
 
@@ -78,37 +78,29 @@ function create(info, sessionID) {
     account_f.setWipe(account.id, false);
 }
 
-function getPmc(sessionID) {
+function getPmcData(sessionID) {
     return json.parse(json.read(getPmcPath(sessionID)));
 }
 
-function getScav(sessionID) {
+function getScavData(sessionID) {
     return json.parse(json.read(getScavPath(sessionID)));
 }
 
-function setPmc(data, sessionID) {
-    if (typeof data.data !== "undefined") {
-        data = data.data[0];
-    }
-
+function setPmcData(data, sessionID) {
     json.write(getPmcPath(sessionID), data);
 }
 
-function setScav(data, sessionID) {
-    if (typeof data.data !== "undefined") {
-        data = data.data[1];
-    }
-
+function setScavData(data, sessionID) {
     json.write(getScavPath(sessionID), data);   
 }
 
 function generateScav(sessionID) {
-    let playerData = json.parse(json.read(getPmcPath(sessionID)));
+    let pmcData = getPmcData(sessionID);
     let scavData = bots.generatePlayerScav();
 
-    scavData._id = playerData.savage;
+    scavData._id = pmcData.savage;
     scavData.aid = sessionID;
-    setScav(scavData, sessionID);
+    setScavData(scavData, sessionID);
 
     return scavData;
 }
@@ -117,15 +109,15 @@ function get(sessionID) {
     let output = {err: 0, errmsg: null, data: []};
 
     if (account_f.isWiped(sessionID)) {
-        return output
+        return output;
     }
 
     if (!fs.existsSync(getScavPath(sessionID))) {
         generateScav(sessionID);
     }
 
-    output.data.push(getPmc(sessionID));
-    output.data.push(getScav(sessionID));
+    output.data.push(getPmcData(sessionID));
+    output.data.push(getScavData(sessionID));
     return output;
 }
 
@@ -145,7 +137,7 @@ function addChildPrice(data, parentID, childPrice) {
 }
 
 function getStashType(sessionID) {
-    let temp = json.parse(json.read(getPmcPath(sessionID)));
+    let temp = getPmcData(sessionID);
 
     for (let key in temp.Inventory.items) {
         if (temp.Inventory.items.hasOwnProperty(key) && temp.Inventory.items[key]._id === temp.Inventory.stash) {
@@ -160,7 +152,7 @@ function getStashType(sessionID) {
 // added lastTrader so that we can list prices using the correct currency based on the trader
 function getPurchasesData(tmpTraderInfo, sessionID) {
     let multiplier = 0.9;
-    let data = json.parse(json.read(getPmcPath(sessionID)));
+    let data = getPmcData(sessionID);
     let equipment = data.Inventory.equipment;
     let stash = data.Inventory.stash;
     let questRaidItems = data.Inventory.questRaidItems;
@@ -239,7 +231,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
 }
 
 function changeNickname(info, sessionID) {
-    let tmpList = get();
+    let pmcData = getPmcData(sessionID);
 
     // check if the nickname exists
     if (account_f.nicknameTaken(info)) {
@@ -247,25 +239,25 @@ function changeNickname(info, sessionID) {
     }
 
     // change nickname
-    tmpList.data[0].Info.Nickname = info.nickname;
-    tmpList.data[0].Info.LowerNickname = info.nickname.toLowerCase();
-    setPmc(tmpList, sessionID);
+    pmcData.Info.Nickname = info.nickname;
+    pmcData.Info.LowerNickname = info.nickname.toLowerCase();
+    setPmcData(pmcData, sessionID);
     return ('{"err":0, "errmsg":null, "data":{"status":0, "nicknamechangedate":' + Math.floor(new Date() / 1000) + "}}");
 }
 
 function changeVoice(info, sessionID) {
-    let tmpList = get();
+    let pmcData = getPmcData(sessionID);
 
-    tmpList.data[0].Info.Voice = info.voice;
-    setPmc(tmpList, sessionID);
+    pmcData.Info.Voice = info.voice;
+    setPmcData(pmcData, sessionID);
 }
 
 module.exports.create = create;
 module.exports.get = get;
-module.exports.setPmc = setPmc;
-module.exports.setScav = setScav;
-module.exports.getPmc = getPmc;
-module.exports.getScav = getScav;
+module.exports.setPmcData = setPmcData;
+module.exports.setScavData = setScavData;
+module.exports.getPmcData = getPmcData;
+module.exports.getScavData = getScavData;
 module.exports.generateScav = generateScav;
 module.exports.getStashType = getStashType;
 module.exports.getPurchasesData = getPurchasesData;

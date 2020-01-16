@@ -10,23 +10,23 @@ function saveProgress(offRaidData) {
     let offRaidExit = offRaidData.exit;
     let offRaidProfile = offRaidData.profile;
 
-    let tmpList = profile_f.get(sessionID);
+    let pmcData = profile_f.get(sessionID);
 
     // replace data
     // if isPlayerScav is true, then offRaidProfile points to a scav profile
     const isPlayerScav = offRaidData.isPlayerScav;
     let profileIndex = isPlayerScav ? 1 : 0;
     
-    tmpList.data[profileIndex].Info.Level = offRaidProfile.Info.Level;
-    tmpList.data[profileIndex].Skills = offRaidProfile.Skills;
-    tmpList.data[profileIndex].Stats = offRaidProfile.Stats;
-    tmpList.data[profileIndex].Encyclopedia = offRaidProfile.Encyclopedia;
-    tmpList.data[profileIndex].ConditionCounters = offRaidProfile.ConditionCounters;
-    tmpList.data[profileIndex].Quests = offRaidProfile.Quests;
+    pmcData.data[profileIndex].Info.Level = offRaidProfile.Info.Level;
+    pmcData.data[profileIndex].Skills = offRaidProfile.Skills;
+    pmcData.data[profileIndex].Stats = offRaidProfile.Stats;
+    pmcData.data[profileIndex].Encyclopedia = offRaidProfile.Encyclopedia;
+    pmcData.data[profileIndex].ConditionCounters = offRaidProfile.ConditionCounters;
+    pmcData.data[profileIndex].Quests = offRaidProfile.Quests;
 
     // level 69 cap to prevent visual bug occuring at level 70
-    if (tmpList.data[profileIndex].Info.Experience > 13129881) {
-        tmpList.data[profileIndex].Info.Experience = 13129881;
+    if (pmcData.data[profileIndex].Info.Experience > 13129881) {
+        pmcData.data[profileIndex].Info.Experience = 13129881;
     }
 
     // mark items found in raid
@@ -36,7 +36,7 @@ function saveProgress(offRaidData) {
         // check if item exists already
         // only applies to pmcs, as all items found in scavs are considered found in raid.
         if (!isPlayerScav) {
-            for (let item of tmpList.data[0].Inventory.items) {
+            for (let item of pmcData.Inventory.items) {
                 if (offRaidProfile.Inventory.items[offRaidItem]._id === item._id) {
                     found = true;
                 }            
@@ -73,8 +73,8 @@ function saveProgress(offRaidData) {
         // insured items shouldn't be renamed
         // only works for pmcs.
         if (!isPlayerScav) {
-            for (let insurance in tmpList.data[0].InsuredItems) {
-                if (tmpList.data[0].InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
+            for (let insurance in pmcData.InsuredItems) {
+                if (pmcData.InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
                     insuredItem = true;
                 }
             }
@@ -107,17 +107,17 @@ function saveProgress(offRaidData) {
     offRaidProfile.Inventory.items = JSON.parse(string_inventory);
 
     // set profile equipment to the raid equipment
-    move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.equipment, item.getOutput(), profileIndex);
-    move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.questRaidItems, item.getOutput(), profileIndex);
-    move_f.removeItem(tmpList, tmpList.data[profileIndex].Inventory.questStashItems, item.getOutput(), profileIndex);
+    move_f.removeItem(pmcData, pmcData.data[profileIndex].Inventory.equipment, item.getOutput(), profileIndex);
+    move_f.removeItem(pmcData, pmcData.data[profileIndex].Inventory.questRaidItems, item.getOutput(), profileIndex);
+    move_f.removeItem(pmcData, pmcData.data[profileIndex].Inventory.questStashItems, item.getOutput(), profileIndex);
 
     for (let item in offRaidProfile.Inventory.items) {
-        tmpList.data[profileIndex].Inventory.items.push(offRaidProfile.Inventory.items[item]);
+        pmcData.data[profileIndex].Inventory.items.push(offRaidProfile.Inventory.items[item]);
     }
 
     // terminate early for player scavs because we don't care about whether they died.
     if (isPlayerScav) {
-        profile_f.setScavData(tmpList.data[1]);
+        profile_f.setScavData(pmcData.data[1]);
         return;
     }
 
@@ -125,8 +125,8 @@ function saveProgress(offRaidData) {
     if (offRaidExit !== "survived" && offRaidExit !== "runner") {
         let items_to_delete = [];
 
-        for (let item of tmpList.data[0].Inventory.items) {
-            if (item.parentId === tmpList.data[0].Inventory.equipment
+        for (let item of pmcData.Inventory.items) {
+            if (item.parentId === pmcData.Inventory.equipment
                 && item.slotId !== "SecuredContainer"
                 && item.slotId !== "Scabbard"
                 && item.slotId !== "Pockets") {
@@ -135,7 +135,7 @@ function saveProgress(offRaidData) {
 
             // remove pocket insides
             if (item.slotId === "Pockets") {
-                for (let pocket of tmpList.data[0].Inventory.items) {
+                for (let pocket of pmcData.Inventory.items) {
                     if (pocket.parentId === item._id) {
                         items_to_delete.push(pocket._id);
                     }
@@ -145,15 +145,15 @@ function saveProgress(offRaidData) {
 
         // check for insurance
         for (let item_to_delete in items_to_delete) {
-            for (let insurance in tmpList.data[0].InsuredItems) {
-                if (items_to_delete[item_to_delete] !== tmpList.data[0].InsuredItems[insurance].itemId) {
+            for (let insurance in pmcData.InsuredItems) {
+                if (items_to_delete[item_to_delete] !== pmcData.InsuredItems[insurance].itemId) {
                     continue;
                 }
 
                 let insureReturnChance = utility.getRandomInt(0, 99);
 		
                 if (insureReturnChance < settings.gameplay.trading.insureReturnChance) {
-                    move_f.removeInsurance(tmpList, items_to_delete[item_to_delete]);
+                    move_f.removeInsurance(pmcData, items_to_delete[item_to_delete]);
                     items_to_delete[item_to_delete] = "insured";
                     break;
                 }
@@ -163,12 +163,12 @@ function saveProgress(offRaidData) {
         // finally delete them
         for (let item_to_delete in items_to_delete) {
             if (items_to_delete[item_to_delete] !== "insured") {
-                move_f.removeItem(tmpList, items_to_delete[item_to_delete]);
+                move_f.removeItem(pmcData, items_to_delete[item_to_delete]);
             }
         }
     }
 
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
 }
 
 module.exports.saveProgress = saveProgress;

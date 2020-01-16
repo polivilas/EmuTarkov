@@ -7,7 +7,7 @@ function getPath(sessionID) {
 	return path.replace("__REPLACEME__", sessionID);
 }
 
-function SaveBuild(tmpList, body, sessionID) {
+function SaveBuild(pmcData, body, sessionID) {
 	item.resetOutput();
 	delete body.Action;
 	body.id = utility.generateNewItemId();	
@@ -54,7 +54,7 @@ function SaveBuild(tmpList, body, sessionID) {
     return output;
 }
 
-function RemoveBuild(tmpList, body, sessionID) {
+function RemoveBuild(pmcData, body, sessionID) {
 	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 	
 	for (let wBuild of savedBuilds.data) {

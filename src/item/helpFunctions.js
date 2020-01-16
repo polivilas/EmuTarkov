@@ -6,14 +6,14 @@ require('../libs.js');
 * input: PlayerData
 * output: table[y][x]
 * */
-function recheckInventoryFreeSpace(tmpList) { // recalculate stach taken place
+function recheckInventoryFreeSpace(pmcData) { // recalculate stach taken place
     let PlayerStash = getPlayerStash();
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
-    for (let item of tmpList.data[0].Inventory.items) {
+    for (let item of pmcData.Inventory.items) {
         // hideout  // added proper stash ID older was "5c71b934354682353958ea35"
-        if (item.parentId === tmpList.data[0].Inventory.stash && typeof item.location != "undefined") {
+        if (item.parentId === pmcData.Inventory.stash && typeof item.location != "undefined") {
             // let tmpItem = getItem(item._tpl)[1];
-            let tmpSize = getSize(item._tpl, item._id, tmpList.data[0].Inventory.items);
+            let tmpSize = getSize(item._tpl, item._id, pmcData.Inventory.items);
             //			x
             let iW = tmpSize[0];
             //			y
@@ -96,7 +96,7 @@ function fromRUB(value, currency) {
 * input:
 * output: boolean
 * */
-function payMoney(tmpList, body, sessionID) {
+function payMoney(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);
@@ -107,7 +107,7 @@ function payMoney(tmpList, body, sessionID) {
         for (let index in body.scheme_items) {
             let item = undefined;
 
-            for (let element of tmpList.data[0].Inventory.items) {
+            for (let element of pmcData.Inventory.items) {
                 if (body.scheme_items[index].id === element._id) {
                     item = element;
                 }
@@ -115,7 +115,7 @@ function payMoney(tmpList, body, sessionID) {
 
             if (item !== undefined) {
                 if (!isMoneyTpl(item._tpl)) {
-                    output = move_f.removeItem(tmpList, item._id, output);
+                    output = move_f.removeItem(pmcData, item._id, output);
                     body.scheme_items[index].count = 0;
                 } else {
                     currencyTpl = item._tpl;
@@ -126,7 +126,7 @@ function payMoney(tmpList, body, sessionID) {
     }
 
     // find all items with currency _tpl id
-    const moneyItems = itm_hf.findMoney("tpl", tmpList, currencyTpl);
+    const moneyItems = itm_hf.findMoney("tpl", pmcData, currencyTpl);
 
     // prepare a price for barter
     let barterPrice = 0;
@@ -154,7 +154,7 @@ function payMoney(tmpList, body, sessionID) {
 
         if (leftToPay >= itemAmount) {
             leftToPay -= itemAmount;
-            output = move_f.removeItem(tmpList, moneyItem._id, output);
+            output = move_f.removeItem(pmcData, moneyItem._id, output);
         } else {
             moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;
@@ -176,7 +176,7 @@ function payMoney(tmpList, body, sessionID) {
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     logger.logSuccess("Items taken. Status OK.");
     item.setOutput(output);
     return true;
@@ -186,12 +186,12 @@ function payMoney(tmpList, body, sessionID) {
 * input: object of player data, string BarteredItem ID
 * output: array of Item from inventory
 * */
-function findMoney(by, tmpList, barter_itemID) { // find required items to take after buying (handles multiple items)
+function findMoney(by, pmcData, barter_itemID) { // find required items to take after buying (handles multiple items)
     const barterIDs = typeof barter_itemID === "string" ? [barter_itemID] : barter_itemID;
     let itemsArray = [];
 
     for (const barterID of barterIDs) {
-        let mapResult = tmpList.data[0].Inventory.items.filter(item => {
+        let mapResult = pmcData.Inventory.items.filter(item => {
             return by === "tpl" ? (item._tpl === barterID) : (item._id === barterID);
         });
         itemsArray = Object.assign(itemsArray, mapResult);
@@ -201,16 +201,16 @@ function findMoney(by, tmpList, barter_itemID) { // find required items to take 
 }
 
 /* receive money back after selling
-* input: tmpList, numberToReturn, request.body,
+* input: pmcData, numberToReturn, request.body,
 * output: none (output is sended to item.js, and profile is saved to file)
 * */
-function getMoney(tmpList, amount, body, output) {
+function getMoney(pmcData, amount, body, output) {
     let tmpTraderInfo = trader.get(body.tid);
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
 
-    for (let item of tmpList.data[0].Inventory.items) {
+    for (let item of pmcData.Inventory.items) {
         // item is not currency
         if (item._tpl !== currency) {
             continue;
@@ -238,7 +238,7 @@ function getMoney(tmpList, amount, body, output) {
     }
 
     if (!skip) {
-        let StashFS_2D = recheckInventoryFreeSpace(tmpList);
+        let StashFS_2D = recheckInventoryFreeSpace(pmcData);
 
         // creating item
         let stashSize = getPlayerStash();
@@ -256,13 +256,13 @@ function getMoney(tmpList, amount, body, output) {
                         let MoneyItem = {
                             "_id": utility.generateNewItemId(),
                             "_tpl": currency,
-                            "parentId": tmpList.data[0].Inventory.stash,
+                            "parentId": pmcData.Inventory.stash,
                             "slotId": "hideout",
                             "location": {x: Mx, y: My, r: "Horizontal"},
                             "upd": {"StackObjectsCount": calcAmount}
                         };
 
-                        tmpList.data[0].Inventory.items.push(MoneyItem);
+                        pmcData.Inventory.items.push(MoneyItem);
                         output.data.items.new.push(MoneyItem);
                         logger.logSuccess("Money created: " + calcAmount + " " + tmpTraderInfo.data.currency);
                         break addedMoney;
@@ -279,7 +279,7 @@ function getMoney(tmpList, amount, body, output) {
     trader.lvlUp(body.tid);
     output.data.currentSalesSums[body.tid] = saleSum;
 
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return output;
 }
 
@@ -416,12 +416,12 @@ function getSize(itemtpl, itemID, InventoryItem) { // -> Prepares item Width and
 * List is backward first item is the furthest child and last item is main item
 * returns all child items ids in array, includes itself and children
 * */
-function findAndReturnChildren(tmpList, itemid) {
+function findAndReturnChildren(pmcData, itemid) {
     let list = [];
 
-    for (let childitem of tmpList.Inventory.items) {
+    for (let childitem of pmcData.Inventory.items) {
         if (childitem.parentId === itemid) {
-            list.push.apply(list, findAndReturnChildren(tmpList, childitem._id));
+            list.push.apply(list, findAndReturnChildren(pmcData, childitem._id));
         }
     }
 

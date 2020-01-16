@@ -6,16 +6,16 @@ require('../libs.js');
 *  input: playerProfileData, Request body
 *  output: OK (saved profile)
 * */
-function addToWishList(tmpList, body, sessionID) {
-    for (let item in tmpList.data[0]['Wishlist']) {
+function addToWishList(pmcData, body, sessionID) {
+    for (let item in pmcData['Wishlist']) {
         // don't add the item
-        if (tmpList.data[0].WishList[item] === body['templateId']) {
+        if (pmcData.WishList[item] === body['templateId']) {
             return "OK";
         }
     }
     // add the item to the wishlist
-    tmpList.data[0].WishList.push(body['templateId']);
-    profile_f.setPmc(tmpList, sessionID);
+    pmcData.WishList.push(body['templateId']);
+    profile_f.setPmcData(pmcData, sessionID);
     return "OK";
 }
 
@@ -23,13 +23,13 @@ function addToWishList(tmpList, body, sessionID) {
 *  input: playerProfileData, Request body
 *  output: OK (saved profile)
 * */
-function removeFromWishList(tmpList, body, sessionID) {
-    for (let item in tmpList.data[0]['Wishlist']) {
-        if (tmpList.data[0].WishList[item] === body['templateId']) {
-            tmpList.data[0].WishList.splice(item, 1);
+function removeFromWishList(pmcData, body, sessionID) {
+    for (let item in pmcData['Wishlist']) {
+        if (pmcData.WishList[item] === body['templateId']) {
+            pmcData.WishList.splice(item, 1);
         }
     }
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return "OK";
 }
 
@@ -37,9 +37,9 @@ function removeFromWishList(tmpList, body, sessionID) {
 *  input: playerProfileData
 *  output: none
 * */
-function resetWishList(tmpList){
-    tmpList.data[0].WishList = [];
-    profile_f.setPmc(tmpList, sessionID);
+function resetWishList(pmcData){
+    pmcData.WishList = [];
+    profile_f.setPmcData(pmcData, sessionID);
 }
 
 module.exports.addToWishList = addToWishList;

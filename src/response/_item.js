@@ -64,10 +64,10 @@ function resetOutput() {
 }
 
 function handleMoving(body, sessionID) {
-    let tmpList = profile_f.get(sessionID);
+    let pmcData = profile_f.get(sessionID);
 
     if (typeof staticRoutes[body.Action] !== "undefined") {
-        return staticRoutes[body.Action](tmpList, body, sessionID);
+        return staticRoutes[body.Action](pmcData, body, sessionID);
     } else {
         logger.logError("[UNHANDLED ACTION] " + body.Action);
     }

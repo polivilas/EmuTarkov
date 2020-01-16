@@ -2,23 +2,23 @@
 
 require('../libs.js');
 
-function eatItem(tmpList, body, sessionID) {
+function eatItem(pmcData, body, sessionID) {
     let todelete = false;
     let maxResource = undefined;
     let effects = undefined;
 
-    for (let item in tmpList.data[0].Inventory.items) {
-        if (tmpList.data[0].Inventory.items[item]._id === body.item) {
-            maxResource = itm_hf.getItem(tmpList.data[0].Inventory.items[item]._tpl)[1]._props.MaxResource;
-            effects = itm_hf.getItem(tmpList.data[0].Inventory.items[item]._tpl)[1]._props.effects_health; 
+    for (let item in pmcData.Inventory.items) {
+        if (pmcData.Inventory.items[item]._id === body.item) {
+            maxResource = itm_hf.getItem(pmcData.Inventory.items[item]._tpl)[1]._props.MaxResource;
+            effects = itm_hf.getItem(pmcData.Inventory.items[item]._tpl)[1]._props.effects_health; 
 
             if (maxResource > 1) {   
-                if (typeof tmpList.data[0].Inventory.items[item].upd.FoodDrink === 'undefined') {
-                    tmpList.data[0].Inventory.items[item].upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
+                if (typeof pmcData.Inventory.items[item].upd.FoodDrink === 'undefined') {
+                    pmcData.Inventory.items[item].upd.FoodDrink = {"HpPercent" : maxResource - body.count}; 
                 } else {
-                    tmpList.data[0].Inventory.items[item].upd.FoodDrink.HpPercent -= body.count; 
+                    pmcData.Inventory.items[item].upd.FoodDrink.HpPercent -= body.count; 
                     
-                    if (tmpList.data[0].Inventory.items[item].upd.FoodDrink.HpPercent < 1) {
+                    if (pmcData.Inventory.items[item].upd.FoodDrink.HpPercent < 1) {
                         todelete = true;
                     }
                 }  
@@ -26,8 +26,8 @@ function eatItem(tmpList, body, sessionID) {
         }
     }
 
-    let hydration = tmpList.data[0].Health.Hydration;
-    let energy = tmpList.data[0].Health.Energy;
+    let hydration = pmcData.Health.Hydration;
+    let energy = pmcData.Health.Energy;
 
     hydration.Current += effects.hydration.value;
     energy.Current += effects.energy.value;
@@ -40,10 +40,10 @@ function eatItem(tmpList, body, sessionID) {
         energy.Current = energy.Maximum;
     }
 
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
 
     if (maxResource === 1 || todelete === true) {
-        move_f.removeItem(tmpList, body.item, sessionID);
+        move_f.removeItem(pmcData, body.item, sessionID);
     } else {
         item.resetOutput();
     }
@@ -51,16 +51,16 @@ function eatItem(tmpList, body, sessionID) {
     return item.getOutput();
 }
 
-function healPlayer(tmpList, body, sessionID) {
+function healPlayer(pmcData, body, sessionID) {
     // healing body part
-    for (let bdpart in tmpList.data[0].Health.BodyParts) {
+    for (let bdpart in pmcData.Health.BodyParts) {
         if (bdpart === body.part) {
-            tmpList.data[0].Health.BodyParts[bdpart].Health.Current += body.count;
+            pmcData.Health.BodyParts[bdpart].Health.Current += body.count;
         }
     }
 
     // update medkit used (hpresource)
-    for (let item of tmpList.data[0].Inventory.items) {
+    for (let item of pmcData.Inventory.items) {
         if (item._id === body.item) {
             if (typeof item.upd.MedKit === "undefined") {
                 let maxhp = itm_hf.getItem(item._tpl)[0]._props.MaxHpResource;
@@ -71,10 +71,10 @@ function healPlayer(tmpList, body, sessionID) {
             }
 
             if (item.upd.MedKit.HpResource === 0) {
-                move_f.removeItem(tmpList, body.item, sessionID);
+                move_f.removeItem(pmcData, body.item, sessionID);
             }
 
-            profile_f.setPmc(tmpList, sessionID);
+            profile_f.setPmcData(pmcData, sessionID);
         }
     }
 

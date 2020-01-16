@@ -7,7 +7,7 @@ function getPath(sessionID) {
 	return path.replace("__REPLACEME__", sessionID);
 }
 
-function wearClothing(tmpList, body, sessionID) {
+function wearClothing(pmcData, body, sessionID) {
 	// in case there is more suites to be wear
 	for (let i = 0; i < body.suites.length; i++) {
 		let costume_data = customizationOutfits.data[body.suites[i]];
@@ -15,23 +15,23 @@ function wearClothing(tmpList, body, sessionID) {
 		// this parent reffers to Lower Node
 		if (costume_data._parent == "5cd944d01388ce000a659df9") {
 			// do only feet
-			tmpList.data[0].Customization.Feet = costume_data._props.Feet;
+			pmcData.Customization.Feet = costume_data._props.Feet;
 		}
 
 		// this parent reffers to Upper Node
 		if (costume_data._parent == "5cd944ca1388ce03a44dc2a4") {
 			// do only body and hands
-			tmpList.data[0].Customization.Body = costume_data._props.Body;
-			tmpList.data[0].Customization.Hands = costume_data._props.Hands;
+			pmcData.Customization.Body = costume_data._props.Body;
+			pmcData.Customization.Hands = costume_data._props.Hands;
 		}
 	}
 
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
     item.resetOutput();
 	return item.getOutput();
 }
 
-function buyClothing(tmpList, body, sessionID) {
+function buyClothing(pmcData, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
@@ -39,23 +39,23 @@ function buyClothing(tmpList, body, sessionID) {
 	let customization_storage = json.parse(json.read(getPath(sessionID)));
 
 	for (let i = 0; i < item_toPay.length; i++) {
-		for (let item in tmpList.data[0].Inventory.items) {
-			if (tmpList.data[0].Inventory.items[item]._id == item_toPay[i].id) {
-				if (tmpList.data[0].Inventory.items[item].upd.StackObjectsCount > item_toPay[i].count) {
+		for (let item in pmcData.Inventory.items) {
+			if (pmcData.Inventory.items[item]._id == item_toPay[i].id) {
+				if (pmcData.Inventory.items[item].upd.StackObjectsCount > item_toPay[i].count) {
 					// now change cash
-					tmpList.data[0].Inventory.items[item].upd.StackObjectsCount = tmpList.data[0].Inventory.items[item].upd.StackObjectsCount - item_toPay[i].count;
+					pmcData.Inventory.items[item].upd.StackObjectsCount = pmcData.Inventory.items[item].upd.StackObjectsCount - item_toPay[i].count;
 					output.data.items.change.push({
-                        "_id": tmpList.data[0].Inventory.items[item]._id,
-                        "_tpl": tmpList.data[0].Inventory.items[item]._tpl,
-                        "parentId": tmpList.data[0].Inventory.items[item].parentId,
-                        "slotId": tmpList.data[0].Inventory.items[item].slotId,
-                        "location": tmpList.data[0].Inventory.items[item].location,
-                        "upd": {"StackObjectsCount": tmpList.data[0].Inventory.items[item].upd.StackObjectsCount}
+                        "_id": pmcData.Inventory.items[item]._id,
+                        "_tpl": pmcData.Inventory.items[item]._tpl,
+                        "parentId": pmcData.Inventory.items[item].parentId,
+                        "slotId": pmcData.Inventory.items[item].slotId,
+                        "location": pmcData.Inventory.items[item].location,
+                        "upd": {"StackObjectsCount": pmcData.Inventory.items[item].upd.StackObjectsCount}
                     });
 					break;
-				} else if (tmpList.data[0].Inventory.items[item].upd.StackObjectsCount == item_toPay[i].count && item_toPay[i].del == true) {
+				} else if (pmcData.Inventory.items[item].upd.StackObjectsCount == item_toPay[i].count && item_toPay[i].del == true) {
 					output.data.items.del.push({"_id": item_toPay[i].id});
-                    tmpList.data[0].Inventory.items.splice(item, 1);					
+                    pmcData.Inventory.items.splice(item, 1);					
 				}
 			}
 		}
@@ -68,7 +68,7 @@ function buyClothing(tmpList, body, sessionID) {
 	}
 
 	json.write(getPath(sessionID), customization_storage);
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
 	return output;
 }
 

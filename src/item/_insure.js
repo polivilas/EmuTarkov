@@ -4,13 +4,13 @@ require('../libs.js');
 
 function cost(info) {
     let output = {"err": 0, "errmsg": null, "data": {}};
-    let tmpList = profile_f.get(sessionID);
+    let pmcData = profile_f.get(sessionID);
 
     for (let trader of info.traders) {
         let items = {};
 
         for (let key of info.items) {
-            for (let item of tmpList.data[0].Inventory.items) {
+            for (let item of pmcData.Inventory.items) {
                 if (item._id === key) {
                     let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
@@ -26,14 +26,14 @@ function cost(info) {
     return json.stringify(output);
 }
 
-function insure(tmpList, body, sessionID) {
+function insure(pmcData, body, sessionID) {
     item.resetOutput();
 
     let itemsToPay = [];
 
     // get the price of all items
     for (let key of body.items) {
-        for (let item of tmpList.data[0].Inventory.items) {
+        for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
                 let template = json.parse(json.read(filepaths.templates.items[item._tpl]));
 
@@ -47,22 +47,22 @@ function insure(tmpList, body, sessionID) {
     }
 
     // pay the item	to profile
-    if (!itm_hf.payMoney(tmpList, {scheme_items: itemsToPay, tid: body.tid})) {
+    if (!itm_hf.payMoney(pmcData, {scheme_items: itemsToPay, tid: body.tid})) {
         logger.LogError("no money found");
         return "";
     }
 
     // add items to InsuredItems list once money has been paid
     for (let key of body.items) {
-        for (let item of tmpList.data[0].Inventory.items) {
+        for (let item of pmcData.Inventory.items) {
             if (item._id === key) {
-                tmpList.data[0].InsuredItems.push({"tid": body.tid, "itemId": item._id});
+                pmcData.InsuredItems.push({"tid": body.tid, "itemId": item._id});
                 break;
             }
         }
     }
 
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return item.getOutput();
 }
 

@@ -40,7 +40,7 @@ function setTrader(data, sessionID) {
 }
 
 function lvlUp(id, sessionID) {
-    let tmpList = profile_f.get(sessionID);
+    let pmcData = profile_f.get(sessionID);
     let currentTrader = get(id);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 
@@ -48,11 +48,11 @@ function lvlUp(id, sessionID) {
     let checkedExp = 0;
 
     for (let level in globalSettings.data.config.exp.level.exp_table) {
-        if (tmpList.data[0].Info.Experience < checkedExp) {
+        if (pmcData.Info.Experience < checkedExp) {
             break;
         }
 
-        tmpList.data[0].Info.Level = level;
+        pmcData.Info.Level = level;
         checkedExp += globalSettings.data.config.exp.level.exp_table[level].exp;
     }
 
@@ -61,7 +61,7 @@ function lvlUp(id, sessionID) {
     
     for (let level in loyaltyLevels) {
         // level reached
-        if ((loyaltyLevels[level].minLevel <= tmpList.data[0].Info.Level
+        if ((loyaltyLevels[level].minLevel <= pmcData.Info.Level
             && loyaltyLevels[level].minSalesSum <= currentTrader.data.loyalty.currentSalesSum
             && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
             && targetLevel < 4) {

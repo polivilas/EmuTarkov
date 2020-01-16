@@ -2,11 +2,11 @@
 
 require('../libs.js');
 
-function foldItem(tmpList, body, sessionID) {
-    for (let item of tmpList.data[0].Inventory.items) {
+function foldItem(pmcData, body, sessionID) {
+    for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Foldable = {"Folded": body.value};
-            profile_f.setPmc(tmpList, sessionID);
+            profile_f.setPmcData(pmcData, sessionID);
             return "OK";
         }
     }
@@ -14,11 +14,11 @@ function foldItem(tmpList, body, sessionID) {
     return "";
 }
 
-function toggleItem(tmpList, body, sessionID) {
-    for (let item of tmpList.data[0].Inventory.items) {
+function toggleItem(pmcData, body, sessionID) {
+    for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Togglable = {"On": body.value};
-            profile_f.setPmc(tmpList, sessionID);
+            profile_f.setPmcData(pmcData, sessionID);
             return "OK";
         }
     }
@@ -26,8 +26,8 @@ function toggleItem(tmpList, body, sessionID) {
     return "";
 }
 
-function tagItem(tmpList, body, sessionID) {
-    for (let item of tmpList.data[0].Inventory.items) {
+function tagItem(pmcData, body, sessionID) {
+    for (let item of pmcData.Inventory.items) {
         if (item._id === body.item) {
             if (item.upd !== null &&
                 item.upd !== undefined &&
@@ -45,7 +45,7 @@ function tagItem(tmpList, body, sessionID) {
                 Object.assign(item, myobject); // merge myobject into item -- overwrite same properties and add missings
             }
 
-            profile_f.setPmc(tmpList, sessionID);
+            profile_f.setPmcData(pmcData, sessionID);
             return "OK";
         }
     }
@@ -53,19 +53,19 @@ function tagItem(tmpList, body, sessionID) {
     return "";
 }
 
-function bindItem(tmpList, body, sessionID) {
-    for (let index in tmpList.data[0].Inventory.fastPanel) {
-        if (tmpList.data[0].Inventory.fastPanel[index] === body.item) {
-            tmpList.data[0].Inventory.fastPanel[index] = "";
+function bindItem(pmcData, body, sessionID) {
+    for (let index in pmcData.Inventory.fastPanel) {
+        if (pmcData.Inventory.fastPanel[index] === body.item) {
+            pmcData.Inventory.fastPanel[index] = "";
         }
     }
 
-    tmpList.data[0].Inventory.fastPanel[body.index] = body.item;
-    profile_f.setPmc(tmpList, sessionID);
+    pmcData.Inventory.fastPanel[body.index] = body.item;
+    profile_f.setPmcData(pmcData, sessionID);
     return "OK";
 }
 
-function examineItem(tmpList, body, sessionID) {
+function examineItem(pmcData, body, sessionID) {
     let returned = "BAD";
 
     // ragfair
@@ -92,7 +92,7 @@ function examineItem(tmpList, body, sessionID) {
 
     // player inventory
     if (returned === "BAD") {
-        for (let item of tmpList.data[0].Inventory.items) {
+        for (let item of pmcData.Inventory.items) {
             if (item._id === body.item) {
                 logger.logInfo("Found equipment examing item: " + item._id, "", "", true);
                 returned = item._tpl;
@@ -110,14 +110,14 @@ function examineItem(tmpList, body, sessionID) {
     // item found
     let data = json.parse(json.read(filepaths.items[returned]));
 
-    tmpList.data[0].Info.Experience += data._props.ExamineExperience;
-    tmpList.data[0].Encyclopedia[returned] = true;
-    profile_f.setPmc(tmpList, sessionID);
+    pmcData.Info.Experience += data._props.ExamineExperience;
+    pmcData.Encyclopedia[returned] = true;
+    profile_f.setPmcData(pmcData, sessionID);
     logger.logSuccess("EXAMINED: " + returned);
     return "OK";
 }
 
-function readEncyclopedia(tmpList, body, sessionID) {
+function readEncyclopedia(pmcData, body, sessionID) {
     return "OK";
 }
 

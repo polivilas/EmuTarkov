@@ -40,7 +40,7 @@ const staticRoutes = {
     "/client/hideout/production/recipes": getHideoutRecipes,
     "/client/hideout/settings": getHideoutSettings,
     "/client/hideout/areas": getHideoutAreas,
-    "/client/hideout/production/scavcase/recipes": getScavcaseRecipes,
+    "/client/hideout/production/scavcase/recipes": getScavDatacaseRecipes,
     "/client/handbook/builds/my/list": getHandbookUserlist,
     "/client/notifier/channel/create": createNotifierChannel,
     "/client/game/profile/nickname/reserved": getReservedNickname,
@@ -151,19 +151,19 @@ function getGlobals(url, info, sessionID) {
 }
 
 function getProfileData(url, info, sessionID) {
-    const tmpList = profile_f.get(sessionID);
+    const pmcData = profile_f.get(sessionID);
 
     // If we have experience gained after the raid, we save it
-    if (tmpList.data.length > 0 && tmpList.data[0].Stats.TotalSessionExperience > 0) {
-        const sessionExp = tmpList.data[0].Stats.TotalSessionExperience;
+    if (pmcData.data.length > 0 && pmcData.Stats.TotalSessionExperience > 0) {
+        const sessionExp = pmcData.Stats.TotalSessionExperience;
 
-        tmpList.data[0].Info.Experience += sessionExp;
-        tmpList.data[0].Stats.TotalSessionExperience = 0;
-        profile_f.setPmc(tmpList, sessionID);
-        tmpList.data[0].Info.Experience -= sessionExp;
+        pmcData.Info.Experience += sessionExp;
+        pmcData.Stats.TotalSessionExperience = 0;
+        profile_f.setPmcData(pmcData, sessionID);
+        pmcData.Info.Experience -= sessionExp;
     }
 
-    return JSON.stringify(tmpList);
+    return JSON.stringify(pmcData);
 }
 
 function regenerateScav(url, info, sessionID) {
@@ -215,7 +215,7 @@ function getTemplates(url, info, sessionID) {
 }
 
 function getQuests(url, info, sessionID) {
-    let tmpList = profile_f.get(sessionID);
+    let pmcData = profile_f.get(sessionID);
     let base = quests;
     let triggerDeconterminationService = false;
     let triggerTrustRegain = false;
@@ -224,34 +224,34 @@ function getQuests(url, info, sessionID) {
     let triggerHippocraticVow = false;
 
     // check quest availability
-    for (let quest in tmpList.data[0].Quests) {
+    for (let quest in pmcData.Quests) {
         // Decontermination service
-        if (tmpList.data[0].Quests[quest].qid === "5a68669a86f774255929b4d4" && tmpList.data[0].Quests[quest].status === 4
-        || tmpList.data[0].Quests[quest].qid === "5c0be5fc86f774467a116593" && tmpList.data[0].Quests[quest].status === 4) {
+        if (pmcData.Quests[quest].qid === "5a68669a86f774255929b4d4" && pmcData.Quests[quest].status === 4
+        || pmcData.Quests[quest].qid === "5c0be5fc86f774467a116593" && pmcData.Quests[quest].status === 4) {
             triggerDeconterminationService = true;
         }
 
         // Trust regain
-        if (tmpList.data[0].Quests[quest].qid === "597a0f5686f774273b74f676" && tmpList.data[0].Quests[quest].status === 4
-        || tmpList.data[0].Quests[quest].qid === "597a171586f77405ba6887d3" && tmpList.data[0].Quests[quest].status === 4) {
+        if (pmcData.Quests[quest].qid === "597a0f5686f774273b74f676" && pmcData.Quests[quest].status === 4
+        || pmcData.Quests[quest].qid === "597a171586f77405ba6887d3" && pmcData.Quests[quest].status === 4) {
             triggerTrustRegain = true;
         }
 
         // No offence
-        if (tmpList.data[0].Quests[quest].qid === "597a0f5686f774273b74f676" && tmpList.data[0].Quests[quest].status === 4
-        || tmpList.data[0].Quests[quest].qid === "597a160786f77477531d39d2" && tmpList.data[0].Quests[quest].status === 4) {
+        if (pmcData.Quests[quest].qid === "597a0f5686f774273b74f676" && pmcData.Quests[quest].status === 4
+        || pmcData.Quests[quest].qid === "597a160786f77477531d39d2" && pmcData.Quests[quest].status === 4) {
             triggerNoOffence = true;
         }
 
         // loyalty buyout
-        if (tmpList.data[0].Quests[quest].qid === "597a171586f77405ba6887d3" && tmpList.data[0].Quests[quest].status === 4
-        || tmpList.data[0].Quests[quest].qid === "597a160786f77477531d39d2" && tmpList.data[0].Quests[quest].status === 4) {
+        if (pmcData.Quests[quest].qid === "597a171586f77405ba6887d3" && pmcData.Quests[quest].status === 4
+        || pmcData.Quests[quest].qid === "597a160786f77477531d39d2" && pmcData.Quests[quest].status === 4) {
             triggerLoyatyBuyout = true;
         }
 
         // Hippocratic vow
-        if (tmpList.data[0].Quests[quest].qid === "596a218586f77420d232807c" && tmpList.data[0].Quests[quest].status === 4
-        || tmpList.data[0].Quests[quest].qid === "596b455186f77457cb50eccb" && tmpList.data[0].Quests[quest].status === 4) {
+        if (pmcData.Quests[quest].qid === "596a218586f77420d232807c" && pmcData.Quests[quest].status === 4
+        || pmcData.Quests[quest].qid === "596b455186f77457cb50eccb" && pmcData.Quests[quest].status === 4) {
             triggerHippocraticVow = true;
         }
     }
@@ -392,7 +392,7 @@ function getHideoutAreas(url, info, sessionID) {
     return json.read(filepaths.user.cache.hideout_areas);
 }
 
-function getScavcaseRecipes(url, info, sessionID) {
+function getScavDatacaseRecipes(url, info, sessionID) {
     return json.read(filepaths.user.cache.hideout_scavcase);
 }
 

@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function main(tmpList, body, sessionID) {
+function main(pmcData, body, sessionID) {
     item.resetOutput();
 
     let output = item.getOutput();
@@ -11,7 +11,7 @@ function main(tmpList, body, sessionID) {
     let RequestData = body.repairItems;
 
     for (let repairItem of RequestData) {
-        const itemToRepair = tmpList.data[0].Inventory.items.find(item => repairItem._id === item._id);
+        const itemToRepair = pmcData.Inventory.items.find(item => repairItem._id === item._id);
 
         if (itemToRepair === undefined) {
             continue;
@@ -22,7 +22,7 @@ function main(tmpList, body, sessionID) {
         itemRepairCost = Math.round((itemRepairCost * repairItem.count * repairRate) * settings.gameplay.trading.repairMultiplier);
 
         // pay the item	to profile
-        if (!itm_hf.payMoney(tmpList, {scheme_items: [{id: repairItem._id, count: Math.round(itemRepairCost)}], tid: body.tid})) {
+        if (!itm_hf.payMoney(pmcData, {scheme_items: [{id: repairItem._id, count: Math.round(itemRepairCost)}], tid: body.tid})) {
             logger.logError("no money found");
             return "";
         }
@@ -39,7 +39,7 @@ function main(tmpList, body, sessionID) {
         output.data.items.change.push(itemToRepair);
     }
 
-    profile_f.setPmc(tmpList, sessionID);
+    profile_f.setPmcData(pmcData, sessionID);
     return output;
 }
 

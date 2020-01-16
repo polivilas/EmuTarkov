@@ -2,166 +2,167 @@
 
 require('../libs.js');
 
-const hideout_areas_config = json.parse(json.read(filepaths.user.cache.hideout_areas));
-const crafting_receipes = json.parse(json.read(filepaths.user.cache.hideout_production));
+const hideoutAreas = json.parse(json.read(filepaths.user.cache.hideout_areas));
+const hideoutProduction = json.parse(json.read(filepaths.user.cache.hideout_production));
+const hideoutScavcase = json.parse(json.read(filepaths.user.cache.hideout_scavcase));
 
-function HideoutUpgrade(tmpList, body, sessionID) {
+function HideoutUpgrade(pmcData, body, sessionID) {
 	for (let itemToPay of body.items) {
-		for (let inventoryItem in tmpList.data[0].Inventory.items) {
-			if (tmpList.data[0].Inventory.items[inventoryItem]._id !== itemToPay.id) {
+		for (let inventoryItem in pmcData.Inventory.items) {
+			if (pmcData.Inventory.items[inventoryItem]._id !== itemToPay.id) {
 				continue;
 			}
 
 			// if it's not money, its construction / barter items
-			if (tmpList.data[0].Inventory.items[inventoryItem]._tpl === "5449016a4bdc2d6f028b456f") {
-				tmpList.data[0].Inventory.items[inventoryItem].upd.StackObjectsCount -= itemToPay.count;
+			if (pmcData.Inventory.items[inventoryItem]._tpl === "5449016a4bdc2d6f028b456f") {
+				pmcData.Inventory.items[inventoryItem].upd.StackObjectsCount -= itemToPay.count;
 			} else {	
-				move_f.removeItem(tmpList, tmpList.data[0].Inventory.items[inventoryItem]._id);
+				move_f.removeItem(pmcData, pmcData.Inventory.items[inventoryItem]._id);
 			}	
 		}
 	}
 
 	// time construction management
-	for (let hideoutArea in tmpList.data[0].Hideout.Areas) {
-		if (tmpList.data[0].Hideout.Areas[hideoutArea].type !== body.areaType) {
+	for (let hideoutArea in pmcData.Hideout.Areas) {
+		if (pmcData.Hideout.Areas[hideoutArea].type !== body.areaType) {
 			continue;
 		}
 
-		for (let hideout_stage in hideout_areas_config.data) {	
-			if (hideout_areas_config.data[hideout_stage].type === body.areaType) {
-				let ctime = hideout_areas_config.data[hideout_stage].stages[tmpList.data[0].Hideout.Areas[hideoutArea].level + 1].constructionTime;
+		for (let hideout_stage in hideoutAreas.data) {	
+			if (hideoutAreas.data[hideout_stage].type === body.areaType) {
+				let ctime = hideoutAreas.data[hideout_stage].stages[pmcData.Hideout.Areas[hideoutArea].level + 1].constructionTime;
 			
 				if (ctime > 0) {	
 					let timestamp = Math.floor(Date.now() / 1000);
 
-					tmpList.data[0].Hideout.Areas[hideoutArea].completeTime = timestamp + ctime;
-					tmpList.data[0].Hideout.Areas[hideoutArea].constructing = true;
+					pmcData.Hideout.Areas[hideoutArea].completeTime = timestamp + ctime;
+					pmcData.Hideout.Areas[hideoutArea].constructing = true;
 				}
 			}
 		}
 	}
 
-	profile_f.setPmc(tmpList, sessionID);	
+	profile_f.setPmcData(pmcData, sessionID);	
 	item.resetOutput();
 	return item.getOutput();
 }
 
 // validating the upgrade
 // TODO: apply bonusses or is it automatically applied? 
-function HideoutUpgradeComplete(tmpList, body, sessionID) {
-	for (let hideoutArea in tmpList.data[0].Hideout.Areas) {
-		if (tmpList.data[0].Hideout.Areas[hideoutArea].type !== body.areaType) {
+function HideoutUpgradeComplete(pmcData, body, sessionID) {
+	for (let hideoutArea in pmcData.Hideout.Areas) {
+		if (pmcData.Hideout.Areas[hideoutArea].type !== body.areaType) {
 			continue;
 		}
 
-		tmpList.data[0].Hideout.Areas[hideoutArea].level++;	
-		tmpList.data[0].Hideout.Areas[hideoutArea].completeTime = 0;
-		tmpList.data[0].Hideout.Areas[hideoutArea].constructing = false;
+		pmcData.Hideout.Areas[hideoutArea].level++;	
+		pmcData.Hideout.Areas[hideoutArea].completeTime = 0;
+		pmcData.Hideout.Areas[hideoutArea].constructing = false;
 	}
 
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
 	item.resetOutput();		
 	return item.getOutput();
 }
 
 // move items from hideout
-function HideoutPutItemsInAreaSlots(tmpList, body, sessionID) {
+function HideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
 
 	for (let itemToMove in body.items) {
-		for (let inventoryItem of tmpList.data[0].Inventory.items) {
+		for (let inventoryItem of pmcData.Inventory.items) {
 			if (body.items[itemToMove].id !== inventoryItem._id) {
 				continue
 			}
 
-			for (let area in tmpList.data[0].Hideout.Areas) {
-				if (tmpList.data[0].Hideout.Areas[area].type !== body.areaType) {
+			for (let area in pmcData.Hideout.Areas) {
+				if (pmcData.Hideout.Areas[area].type !== body.areaType) {
 					continue;
 				}
 
 				let slot_to_add = {"item": [{"_id": inventoryItem._id, "_tpl": inventoryItem._tpl, "upd": inventoryItem.upd}]}
 
-				tmpList.data[0].Hideout.Areas[area].slots.push(slot_to_add);
-				output = move_f.removeItem(tmpList, inventoryItem._id, output);
+				pmcData.Hideout.Areas[area].slots.push(slot_to_add);
+				output = move_f.removeItem(pmcData, inventoryItem._id, output);
 			}
 		}
 	}
 
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
 	return output;
 }
 
-function HideoutTakeItemsFromAreaSlots(tmpList, body, sessionID) {
+function HideoutTakeItemsFromAreaSlots(pmcData, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
 
-	for (let area in tmpList.data[0].Hideout.Areas) {
-		if (tmpList.data[0].Hideout.Areas[area].type !== body.areaType) {
+	for (let area in pmcData.Hideout.Areas) {
+		if (pmcData.Hideout.Areas[area].type !== body.areaType) {
 			continue;
 		}
 
 		let newReq = {};
 
-		newReq.item_id = tmpList.data[0].Hideout.Areas[area].slots[0].item[0]._tpl;
+		newReq.item_id = pmcData.Hideout.Areas[area].slots[0].item[0]._tpl;
 		newReq.count = 1;
 		newReq.tid = "ragfair";
 		
-		output = move_f.addItem(tmpList, newReq, output);
+		output = move_f.addItem(pmcData, newReq, output);
 		
-		tmpList = profile_f.get(sessionID);
-		tmpList.data[0].Hideout.Areas[area].slots.splice(0, 1);
-		profile_f.setPmc(tmpList, sessionID);
+		pmcData = profile_f.get(sessionID);
+		pmcData.Hideout.Areas[area].slots.splice(0, 1);
+		profile_f.setPmcData(pmcData, sessionID);
 	}
 
 	return output;
 }
 
-function HideoutToggleArea(tmpList, body, sessionID) {
-	for (let area in tmpList.data[0].Hideout.Areas) {
-		if (tmpList.data[0].Hideout.Areas[area].type == body.areaType) {	
-			tmpList.data[0].Hideout.Areas[area].active = body.enabled;
+function HideoutToggleArea(pmcData, body, sessionID) {
+	for (let area in pmcData.Hideout.Areas) {
+		if (pmcData.Hideout.Areas[area].type == body.areaType) {	
+			pmcData.Hideout.Areas[area].active = body.enabled;
 		}
 	}
 
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
 	item.resetOutput();		
 	return item.getOutput();
 }
 
-function HideoutSingleProductionStart(tmpList, body, sessionID) {
+function HideoutSingleProductionStart(pmcData, body, sessionID) {
 	item.resetOutput();
-	registerProduction(tmpList, body, sessionID);
+	registerProduction(pmcData, body, sessionID);
 
 	let output = item.getOutput();
 
 	for (let itemToDelete of body.items) {
-		output = move_f.removeItem(tmpList, itemToDelete.id, output);
+		output = move_f.removeItem(pmcData, itemToDelete.id, output);
 	}
 
 	return output;
 }
 
-function HideoutScavCaseProductionStart(tmpList, body, sessionID) {
+function HideoutScavCaseProductionStart(pmcData, body, sessionID) {
 	for (let moneyToEdit of body.items) {
-		for (let inventoryItem in tmpList.data[0].Inventory.items) {
-			if (tmpList.data[0].Inventory.items[inventoryItem]._id === moneyToEdit.id) {
-				tmpList.data[0].Inventory.items[inventoryItem].upd.StackObjectsCount -= moneyToEdit.count;
+		for (let inventoryItem in pmcData.Inventory.items) {
+			if (pmcData.Inventory.items[inventoryItem]._id === moneyToEdit.id) {
+				pmcData.Inventory.items[inventoryItem].upd.StackObjectsCount -= moneyToEdit.count;
 			}
 		}
 	}
 
-	let scavcase_receipes = json.parse(json.read(filepaths.user.cache.hideout_scavcase));
+	let hideoutScavcase = json.parse(json.read(filepaths.user.cache.hideout_scavcase));
 
-	for (let receipe in scavcase_receipes.data) {	
-		if (body.recipeId == scavcase_receipes.data[receipe]._id) {
+	for (let receipe in hideoutScavcase.data) {	
+		if (body.recipeId == hideoutScavcase.data[receipe]._id) {
 			let rarityItemCounter = {};
 
-			for (let rarity in scavcase_receipes.data[receipe].EndProducts) {
-				if (scavcase_receipes.data[receipe].EndProducts[rarity].max > 0) {
-					rarityItemCounter[rarity] = scavcase_receipes.data[receipe].EndProducts[rarity].max;
+			for (let rarity in hideoutScavcase.data[receipe].EndProducts) {
+				if (hideoutScavcase.data[receipe].EndProducts[rarity].max > 0) {
+					rarityItemCounter[rarity] = hideoutScavcase.data[receipe].EndProducts[rarity].max;
 				}
 			}
 
@@ -185,7 +186,7 @@ function HideoutScavCaseProductionStart(tmpList, body, sessionID) {
 				}
 			}
 
-			tmpList.data[0].Hideout.Production["14"] = { 
+			pmcData.Hideout.Production["14"] = { 
 				"Progress": 0,
 				"inProgress": true,
            		"RecipeId": body.recipeId,
@@ -195,75 +196,72 @@ function HideoutScavCaseProductionStart(tmpList, body, sessionID) {
 		}
 	}
 
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
 	item.resetOutput();
 	return item.getOutput();
 }
 
-function HideoutContinuousProductionStart(tmpList, body, sessionID) {
-	registerProduction(tmpList, body, sessionID);
+function HideoutContinuousProductionStart(pmcData, body, sessionID) {
+	registerProduction(pmcData, body, sessionID);
 	item.resetOutput();
 	return item.getOutput();
 }
 
-function HideoutTakeProduction(tmpList, body, sessionID) {
+function HideoutTakeProduction(pmcData, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
 
-	for (let receipe in crafting_receipes.data) {	
-		if (body.recipeId !== crafting_receipes.data[receipe]._id) {
+	for (let receipe in hideoutProduction.data) {	
+		if (body.recipeId !== hideoutProduction.data[receipe]._id) {
 			continue;
 		}
 
 		// delete the production in profile Hideout.Production
-		for (let prod in tmpList.data[0].Hideout.Production) {
-			if (tmpList.data[0].Hideout.Production[prod].RecipeId === body.recipeId) {
-				delete tmpList.data[0].Hideout.Production[prod];
-				profile_f.setPmc(tmpList, sessionID);
+		for (let prod in pmcData.Hideout.Production) {
+			if (pmcData.Hideout.Production[prod].RecipeId === body.recipeId) {
+				delete pmcData.Hideout.Production[prod];
+				profile_f.setPmcData(pmcData, sessionID);
 			}
 		}
 
 		// create item and throw it into profile
 		let newReq = {};
 
-		newReq.item_id = crafting_receipes.data[receipe].endProduct;
-		newReq.count = crafting_receipes.data[receipe].count;
+		newReq.item_id = hideoutProduction.data[receipe].endProduct;
+		newReq.count = hideoutProduction.data[receipe].count;
 		newReq.tid = "ragfair";
-		return move_f.addItem(tmpList, newReq, output);	
+		return move_f.addItem(pmcData, newReq, output);	
 	}
 
-	// its a scavcase production then manage it differently
-	let scavcase_receipes = json.parse(json.read(filepaths.user.cache.hideout_scavcase));
-
-	for (let receipe in scavcase_receipes.data) {
-		if (body.recipeId !== scavcase_receipes.data[receipe]._id) {
+	for (let receipe in hideoutScavcase.data) {
+		if (body.recipeId !== hideoutScavcase.data[receipe]._id) {
 			continue;
 		}
 
-		for (let prod in tmpList.data[0].Hideout.Production) {
-			if (tmpList.data[0].Hideout.Production[prod].RecipeId !== body.recipeId) {
+		for (let prod in pmcData.Hideout.Production) {
+			if (pmcData.Hideout.Production[prod].RecipeId !== body.recipeId) {
 				continue;
 			}
 
 			// give items BEFORE deleting the production
-			for (let itemProd of tmpList.data[0].Hideout.Production[prod].Products) {
+			for (let itemProd of pmcData.Hideout.Production[prod].Products) {
 				let newReq = {};
 
-				tmpList = profile_f.get(sessionID);
+				pmcData = profile_f.get(sessionID);
 				newReq.item_id = itemProd._tpl;
 				newReq.count = 1;
 				newReq.tid = "ragfair";
 
-				let tmpOutput = move_f.addItem(tmpList, newReq, output);
+				let tmpOutput = move_f.addItem(pmcData, newReq, output);
 
 				for (let newItem of tmpOutput.data.items.new) {
 					output.data.items.new.push(newItem);
 				}
 			}
 
-			delete tmpList.data[0].Hideout.Production[prod];
-			profile_f.setPmc(tmpList, sessionID);
+			delete pmcData.Hideout.Production[prod];
+			profile_f.setPmcData(pmcData, sessionID);
 			return output;
 		}
 	}
@@ -271,10 +269,10 @@ function HideoutTakeProduction(tmpList, body, sessionID) {
 	return "";
 }
 
-function registerProduction(tmpList, body, sessionID) {
-	for (let receipe in crafting_receipes.data) {
-		if (body.recipeId === crafting_receipes.data[receipe]._id) {
-			tmpList.data[0].Hideout.Production[crafting_receipes.data[receipe].areaType] = { 
+function registerProduction(pmcData, body, sessionID) {
+	for (let receipe in hideoutProduction.data) {
+		if (body.recipeId === hideoutProduction.data[receipe]._id) {
+			pmcData.Hideout.Production[hideoutProduction.data[receipe].areaType] = { 
 				"Progress": 0,
 				"inProgress": true,
 				"RecipeId": body.recipeId,
@@ -284,7 +282,7 @@ function registerProduction(tmpList, body, sessionID) {
 		}
 	}
 
-	profile_f.setPmc(tmpList, sessionID);
+	profile_f.setPmcData(pmcData, sessionID);
 }
 
 module.exports.hideoutUpgrade = HideoutUpgrade;
