@@ -4,10 +4,10 @@ require('../libs.js');
 
 function getUserBuildsPath() {
 	let filepath = filepaths.user.profiles.userbuilds;
-	return filepath.replace("__REPLACEME__", constants.getActiveID());
+	return filepath.replace("__REPLACEME__", sessionID);
 }
 
-function SaveBuild(tmpList, body) {
+function SaveBuild(tmpList, body, sessionID) {
 	item.resetOutput();
 	delete body.Action;
 	body.id = utility.generateNewItemId();	
@@ -54,7 +54,7 @@ function SaveBuild(tmpList, body) {
     return output;
 }
 
-function RemoveBuild(tmpList, body) {
+function RemoveBuild(tmpList, body, sessionID) {
 	let savedBuilds = json.parse(json.read(getUserBuildsPath()));
 	
 	for (let wBuild of savedBuilds.data) {

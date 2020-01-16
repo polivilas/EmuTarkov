@@ -96,7 +96,7 @@ function fromRUB(value, currency) {
 * input:
 * output: boolean
 * */
-function payMoney(tmpList, body) {
+function payMoney(tmpList, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
     let tmpTraderInfo = trader.get(body.tid);

@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function eatItem(tmpList, body) {
+function eatItem(tmpList, body, sessionID) {
     let todelete = false;
     let maxResource = undefined;
     let effects = undefined;
@@ -43,7 +43,7 @@ function eatItem(tmpList, body) {
     profile_f.setPmc(tmpList, sessionID);
 
     if (maxResource === 1 || todelete === true) {
-        move_f.removeItem(tmpList, body.item);
+        move_f.removeItem(tmpList, body, sessionID.item);
     } else {
         item.resetOutput();
     }
@@ -51,7 +51,7 @@ function eatItem(tmpList, body) {
     return item.getOutput();
 }
 
-function healPlayer(tmpList, body) {
+function healPlayer(tmpList, body, sessionID) {
     // healing body part
     for (let bdpart in tmpList.data[0].Health.BodyParts) {
         if (bdpart === body.part) {
@@ -71,7 +71,7 @@ function healPlayer(tmpList, body) {
             }
 
             if (item.upd.MedKit.HpResource === 0) {
-                move_f.removeItem(tmpList, body.item);
+                move_f.removeItem(tmpList, body, sessionID.item);
             }
 
             profile_f.setPmc(tmpList, sessionID);

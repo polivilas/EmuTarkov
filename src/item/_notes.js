@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function addNote(tmpList, body) {
+function addNote(tmpList, body, sessionID) {
     tmpList.data[0].Notes.Notes.push({
 		"Time": body.note.Time, 
 		"Text": body.note.Text
@@ -11,7 +11,7 @@ function addNote(tmpList, body) {
     return "OK";
 }
 
-function editNode(tmpList, body) {
+function editNode(tmpList, body, sessionID) {
     tmpList.data[0].Notes.Notes[body.index] = {
 		"Time": body.note.Time, 
 		"Text": body.note.Text
@@ -20,7 +20,7 @@ function editNode(tmpList, body) {
     return "OK";
 }
 
-function deleteNote(tmpList, body) {
+function deleteNote(tmpList, body, sessionID) {
     tmpList.data[0].Notes.Notes.splice(body.index, 1);
     profile_f.setPmc(tmpList, sessionID);
     return "OK";

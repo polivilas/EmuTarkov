@@ -2,8 +2,8 @@
 
 require('../libs.js');
 
-function buyItem(tmpList, body) {
-    if (!itm_hf.payMoney(tmpList, body)) {
+function buyItem(tmpList, body, sessionID) {
+    if (!itm_hf.payMoney(tmpList, body, sessionID)) {
         logger.logError("no money found");
         return "";
     }
@@ -14,11 +14,11 @@ function buyItem(tmpList, body) {
         body.tid = "ragfair";
     }
     
-    return move_f.addItem(tmpList, body, item.getOutput());
+    return move_f.addItem(tmpList, body, sessionID, item.getOutput());
 }
 
 // Selling item to trader
-function sellItem(tmpList, body) {
+function sellItem(tmpList, body, sessionID) {
     item.resetOutput();
 
     let money = 0;
@@ -65,22 +65,22 @@ function sellItem(tmpList, body) {
 }
 
 // separate is that selling or buying
-function confirmTrading(tmpList, body) {
+function confirmTrading(tmpList, body, sessionID) {
     // buying
     if (body.type === "buy_from_trader") {
-        return buyItem(tmpList, body);
+        return buyItem(tmpList, body, sessionID);
     }
 
     // selling
     if (body.type === "sell_to_trader") {
-        return sellItem(tmpList, body);
+        return sellItem(tmpList, body, sessionID);
     }
 
     return "";
 }
 
 // Ragfair trading
-function confirmRagfairTrading(tmpList, body) {
+function confirmRagfairTrading(tmpList, body, sessionID) {
     item.resetOutput();
 
     let offers = body.offers;
@@ -97,7 +97,7 @@ function confirmRagfairTrading(tmpList, body) {
         body.scheme_id = 0;
         body.scheme_items = offer.items;
 
-        let tmpOutput = confirmTrading(tmpList, body);
+        let tmpOutput = confirmTrading(tmpList, body, sessionID);
 
         for (let item of tmpOutput.data.items.new) {
             output.data.items.new.push(item);

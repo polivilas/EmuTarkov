@@ -4,7 +4,7 @@ require('../libs.js');
 
 function getPath(id) {
     let assortPath = filepaths.user.profiles.assort[id];
-    return assortPath.replace("__REPLACEME__", constants.getActiveID());
+    return assortPath.replace("__REPLACEME__", sessionID);
 }
 
 function findAndReturnChildren(assort, itemid) {

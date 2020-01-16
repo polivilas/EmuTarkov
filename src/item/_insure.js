@@ -26,7 +26,7 @@ function cost(info) {
     return json.stringify(output);
 }
 
-function insure(tmpList, body) {
+function insure(tmpList, body, sessionID) {
     item.resetOutput();
 
     let itemsToPay = [];

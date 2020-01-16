@@ -5,7 +5,7 @@ require('../libs.js');
 const hideout_areas_config = json.parse(json.read(filepaths.user.cache.hideout_areas));
 const crafting_receipes = json.parse(json.read(filepaths.user.cache.hideout_production));
 
-function HideoutUpgrade(tmpList, body) {
+function HideoutUpgrade(tmpList, body, sessionID) {
 	for (let itemToPay of body.items) {
 		for (let inventoryItem in tmpList.data[0].Inventory.items) {
 			if (tmpList.data[0].Inventory.items[inventoryItem]._id !== itemToPay.id) {
@@ -48,7 +48,7 @@ function HideoutUpgrade(tmpList, body) {
 
 // validating the upgrade
 // TODO: apply bonusses or is it automatically applied? 
-function HideoutUpgradeComplete(tmpList, body) {
+function HideoutUpgradeComplete(tmpList, body, sessionID) {
 	for (let hideoutArea in tmpList.data[0].Hideout.Areas) {
 		if (tmpList.data[0].Hideout.Areas[hideoutArea].type !== body.areaType) {
 			continue;
@@ -65,7 +65,7 @@ function HideoutUpgradeComplete(tmpList, body) {
 }
 
 // move items from hideout
-function HideoutPutItemsInAreaSlots(tmpList, body) {
+function HideoutPutItemsInAreaSlots(tmpList, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
@@ -93,7 +93,7 @@ function HideoutPutItemsInAreaSlots(tmpList, body) {
 	return output;
 }
 
-function HideoutTakeItemsFromAreaSlots(tmpList, body) {
+function HideoutTakeItemsFromAreaSlots(tmpList, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
@@ -119,7 +119,7 @@ function HideoutTakeItemsFromAreaSlots(tmpList, body) {
 	return output;
 }
 
-function HideoutToggleArea(tmpList, body) {
+function HideoutToggleArea(tmpList, body, sessionID) {
 	for (let area in tmpList.data[0].Hideout.Areas) {
 		if (tmpList.data[0].Hideout.Areas[area].type == body.areaType) {	
 			tmpList.data[0].Hideout.Areas[area].active = body.enabled;
@@ -131,9 +131,9 @@ function HideoutToggleArea(tmpList, body) {
 	return item.getOutput();
 }
 
-function HideoutSingleProductionStart(tmpList, body) {
+function HideoutSingleProductionStart(tmpList, body, sessionID) {
 	item.resetOutput();
-	registerProduction(tmpList, body);
+	registerProduction(tmpList, body, sessionID);
 
 	let output = item.getOutput();
 
@@ -144,7 +144,7 @@ function HideoutSingleProductionStart(tmpList, body) {
 	return output;
 }
 
-function HideoutScavCaseProductionStart(tmpList, body) {
+function HideoutScavCaseProductionStart(tmpList, body, sessionID) {
 	for (let moneyToEdit of body.items) {
 		for (let inventoryItem in tmpList.data[0].Inventory.items) {
 			if (tmpList.data[0].Inventory.items[inventoryItem]._id === moneyToEdit.id) {
@@ -200,13 +200,13 @@ function HideoutScavCaseProductionStart(tmpList, body) {
 	return item.getOutput();
 }
 
-function HideoutContinuousProductionStart(tmpList, body) {
-	registerProduction(tmpList, body);
+function HideoutContinuousProductionStart(tmpList, body, sessionID) {
+	registerProduction(tmpList, body, sessionID);
 	item.resetOutput();
 	return item.getOutput();
 }
 
-function HideoutTakeProduction(tmpList, body) {
+function HideoutTakeProduction(tmpList, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();
@@ -271,7 +271,7 @@ function HideoutTakeProduction(tmpList, body) {
 	return "";
 }
 
-function registerProduction(tmpList, body) {
+function registerProduction(tmpList, body, sessionID) {
 	for (let receipe in crafting_receipes.data) {
 		if (body.recipeId === crafting_receipes.data[receipe]._id) {
 			tmpList.data[0].Hideout.Production[crafting_receipes.data[receipe].areaType] = { 

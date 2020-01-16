@@ -6,7 +6,7 @@ require('../libs.js');
 *  input: playerProfileData, Request body
 *  output: OK (saved profile)
 * */
-function addToWishList(tmpList, body) {
+function addToWishList(tmpList, body, sessionID) {
     for (let item in tmpList.data[0]['Wishlist']) {
         // don't add the item
         if (tmpList.data[0].WishList[item] === body['templateId']) {
@@ -23,7 +23,7 @@ function addToWishList(tmpList, body) {
 *  input: playerProfileData, Request body
 *  output: OK (saved profile)
 * */
-function removeFromWishList(tmpList, body) {
+function removeFromWishList(tmpList, body, sessionID) {
     for (let item in tmpList.data[0]['Wishlist']) {
         if (tmpList.data[0].WishList[item] === body['templateId']) {
             tmpList.data[0].WishList.splice(item, 1);

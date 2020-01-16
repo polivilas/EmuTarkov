@@ -63,11 +63,11 @@ function resetOutput() {
     );
 }
 
-function handleMoving(body) {
+function handleMoving(body, sessionID) {
     let tmpList = profile_f.get(sessionID);
 
     if (typeof staticRoutes[body.Action] !== "undefined") {
-        return staticRoutes[body.Action](tmpList, body);
+        return staticRoutes[body.Action](tmpList, body, sessionID);
     } else {
         logger.logError("[UNHANDLED ACTION] " + body.Action);
     }

@@ -8,7 +8,7 @@ require('../libs.js');
 // 3 - failed 
 // 4 - completed
 
-function acceptQuest(tmpList, body) {
+function acceptQuest(tmpList, body, sessionID) {
     tmpList.data[0].Quests.push({
 		"qid": body.qid.toString(), 
 		"startTime": utility.getTimestamp(), 
@@ -21,7 +21,7 @@ function acceptQuest(tmpList, body) {
     return item.getOutput();
 }
 
-function completeQuest(tmpList, body) {
+function completeQuest(tmpList, body, sessionID) {
     for (let quest in tmpList.data[0].Quests) {
         if (tmpList.data[0].Quests[quest].qid === body.qid) {
             tmpList.data[0].Quests[quest].status = 4;
@@ -79,7 +79,7 @@ function completeQuest(tmpList, body) {
 }
 
 // TODO: handle money
-function handoverQuest(tmpList, body) {
+function handoverQuest(tmpList, body, sessionID) {
     item.resetOutput();
     
     let output = item.getOutput();

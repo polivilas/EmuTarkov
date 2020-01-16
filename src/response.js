@@ -80,19 +80,19 @@ const dynamicRoutes = {
     "/push/notifier/get/": nullArrayResponse
 };
 
-function nullResponse(url, info) {
+function nullResponse(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":null}';
 }
 
-function nullArrayResponse(url, info) {
+function nullArrayResponse(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":[]}';
 }
 
-function showIndex(url, info) {
+function showIndex(url, info, sessionID) {
     return index_f.index();
 }
 
-function showInventoryChecker(url, info) {
+function showInventoryChecker(url, info, sessionID) {
     let output = "";
     let inv = itm_hf.recheckInventoryFreeSpace(profile_f.get(sessionID));
 
@@ -112,45 +112,45 @@ function showInventoryChecker(url, info) {
     return output;
 }
 
-function getGameConfig() {
+function getGameConfig(url, info, sessionID) {
     let backendUrl = "https://" + ip;
-    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid":' + constants.getActiveID() + ', "token": "token_' + constants.getActiveID() + '", "taxonomy": "341", "activeProfileId": "user' + constants.getActiveID() + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
+    return '{"err":0,"errmsg":null,"data":{"queued": false, "banTime": 0, "hash": "BAN0", "lang": "en", "aid":' + sessionID + ', "token": "token_' + sessionID + '", "taxonomy": "341", "activeProfileId": "user' + sessionID + 'pmc", "nickname": "user", "backend": {"Trading":"' + backendUrl + '", "Messaging":"' + backendUrl + '", "Main":"' + backendUrl + '", "RagFair":"' + backendUrl + '"}, "totalInGame": 0}}';
 }
 
-function getFriendList(url, info) {
+function getFriendList(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":{"Friends":[], "Ignore":[], "InIgnoreList":[]}}';
 }
 
-function handleItems(url, info) {
+function handleItems(url, info, sessionID) {
     let output = item.moving(info);
     return output;
 }
 
-function getLocale(url, info) {
+function getLocale(url, info, sessionID) {
     return locale.getLanguages();
 }
 
-function loginUser(url, info) {
+function loginUser(url, info, sessionID) {
     return profile_f.find(info);
 }
 
-function getInsuranceCost(url, info) {
+function getInsuranceCost(url, info, sessionID) {
     return insure_f.cost(info);
 }
 
-function getQueueStatus(url, info) {
+function getQueueStatus(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":{"status": 0, "position": 0}}';
 }
 
-function getItems(url, info) {
+function getItems(url, info, sessionID) {
     return JSON.stringify(json.parse(json.read(filepaths.user.cache.items)));
 }
 
-function getGlobals(url, info) {
+function getGlobals(url, info, sessionID) {
     return json.read(filepaths.user.cache.globals);
 }
 
-function getProfileData(url, info) {
+function getProfileData(url, info, sessionID) {
     const tmpList = profile_f.get(sessionID);
 
     // If we have experience gained after the raid, we save it
@@ -166,22 +166,22 @@ function getProfileData(url, info) {
     return JSON.stringify(tmpList);
 }
 
-function regenerateScav(url, info) {
+function regenerateScav(url, info, sessionID) {
     let response = {err: 0, errmsg: null, data: []};
-    response.data.push(profile_f.generateScavProfile());
 
+    response.data.push(profile_f.generateScavProfile());
     return JSON.stringify(response);
 }
 
-function selectProfile(url, info) {
+function selectProfile(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
 }
 
-function getProfileStatus(url, info) {
-    return '{"err":0, "errmsg":null, "data":[{"profileid":"scav' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"pmc' + constants.getActiveID() + '", "status":"Free", "sid":"", "ip":"", "port":0}]}';
+function getProfileStatus(url, info, sessionID) {
+    return '{"err":0, "errmsg":null, "data":[{"profileid":"scav' + sessionID + '", "status":"Free", "sid":"", "ip":"", "port":0}, {"profileid":"pmc' + sessionID + '", "status":"Free", "sid":"", "ip":"", "port":0}]}';
 }
 
-function getWeather(url, info) {
+function getWeather(url, info, sessionID) {
     let time = utility.getTime().replace("-", ":").replace("-", ":");
     let date = utility.getDate();
     let datetime = date + " " + time;
@@ -206,15 +206,15 @@ function getWeather(url, info) {
     return JSON.stringify(output);
 }
 
-function getLocations(url, info) {
+function getLocations(url, info, sessionID) {
     return JSON.stringify(locations, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
 }
 
-function getTemplates(url, info) {
+function getTemplates(url, info, sessionID) {
     return json.read(filepaths.user.cache.templates);
 }
 
-function getQuests(url, info) {
+function getQuests(url, info, sessionID) {
     let tmpList = profile_f.get(sessionID);
     let base = quests;
     let triggerDeconterminationService = false;
@@ -270,44 +270,44 @@ function getQuests(url, info) {
     return JSON.stringify(base, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
 }
 
-function getMetrics(url, info) {
+function getMetrics(url, info, sessionID) {
     return json.read(`{"err":0,"errmsg":null,"data":{"Keys":[0,8,10,13,16,20,26,30,33,45,53,66,100,500,750,1000],"NetProcessingBins":[0,1,2,3,4,5,6,7,8,10,13,16,20,26,30,33,45,53,66,100,500,750,1000],"RenderBins":[0,4,8,10,13,16,20,26,30,33,45,53,66,100,500,750,1000],"GameUpdateBins":[0,4,8,10,13,16,20,26,30,33,45,53,66,100,500,750,1000],"MemoryMeasureInterval":180}}`);
 }
 
-function getBots(url, info) {
+function getBots(url, info, sessionID) {
     return JSON.stringify(bots.generate(info));
 }
 
-function getTraderList(url, info) {
+function getTraderList(url, info, sessionID) {
     return JSON.stringify(trader.loadAllTraders());
 }
 
-function getServer(url, info) {
+function getServer(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":[{"ip":"' + ip + '", "port":"' + 443 + '"}]}';
 }
 
-function searchRagfair(url, info) {
+function searchRagfair(url, info, sessionID) {
     return ragfair.getOffers(info);
 }
 
-function getAvailableMatch(url, info) {
+function getAvailableMatch(url, info, sessionID) {
     return '{"err":404, "errmsg":"EmuTarkov-0.8.0 does not supports online raids. Please use offline match.\n", "data":false}';
 
     // use this for online lan testing
     //return '{"err":0, "errmsg":null, "data":true}';
 }
 
-function joinMatch(url, info) {
+function joinMatch(url, info, sessionID) {
     let shortid = "";
     let profileId = "";
 
     // check if the player is a scav
     if (info.savage === true) {
         shortid = "3XR5";
-        profileId = "scav" + constants.getActiveID();
+        profileId = "scav" + sessionID;
     } else {
         shortid = "3SRC";
-        profileId = "pmc" + constants.getActiveID();
+        profileId = "pmc" + sessionID;
     }
 
     return JSON.stringify({
@@ -326,42 +326,42 @@ function joinMatch(url, info) {
     });
 }
 
-function getChatServerList(url, info) {
+function getChatServerList(url, info, sessionID) {
     return '{"err":0, "errmsg":null, "data":[{"_id":"5ae20a0dcb1c13123084756f", "RegistrationId":20, "DateTime":' + Math.floor(new Date() / 1000) + ', "IsDeveloper":true, "Regions":["EUR"], "VersionId":"bgkidft87ddd", "Ip":"", "Port":0, "Chats":[{"_id":"0", "Members":0}]}]}';
 }
 
-function changeNickname(url, info) {
+function changeNickname(url, info, sessionID) {
     return profile_f.changeNickname(info);
 }
 
-function changeVoice(url, info) {
+function changeVoice(url, info, sessionID) {
     profile_f.changeVoice(info);
-    return nullResponse(url, info);
+    return nullResponse(url, info, sessionID);
 }
 
-function getGroupStatus(url, info) {
+function getGroupStatus(url, info, sessionID) {
     return '{ "err": 0, "errmsg": null, "data": { "players": [], "invite": [], "group": [] } }';
 }
 
-function handleRepair(url, info) {
+function handleRepair(url, info, sessionID) {
     return repair_f.main(info);
 }
 
-function handleKeepAlive(url, info) {
+function handleKeepAlive(url, info, sessionID) {
     keepAlive_f.main();
     return '{"err":0,"errmsg":null,"data":{"msg":"OK"}}';
 }
 
-function validateGameVersion(url, info) {
+function validateGameVersion(url, info, sessionID) {
     constants.setVersion(info.version.major);
-    return '{"err":0,"errmsg":null,"data":null}';
+    return nullResponse(url, info, sessionID);
 }
 
 function getCustomization(info) {
     return json.read(filepaths.user.cache.customization_outfits);
 }
 
-function getCustomizationOffers(url, info) {
+function getCustomizationOffers(url, info, sessionID) {
     let tempoffers = [];
     let allOffers = json.parse(json.read(filepaths.user.cache.customization_offers));
     let splittedUrl = url.split('/');
@@ -376,46 +376,46 @@ function getCustomizationOffers(url, info) {
     return JSON.stringify(allOffers);
 }
 
-function getCustomizationStorage(url, info) {
-    return json.read(customization_f.getCustomizationStoragePath());
+function getCustomizationStorage(url, info, sessionID) {
+    return json.read(customization_f.getPath(sessionID));
 }
 
-function getHideoutRecipes(url, info) {
+function getHideoutRecipes(url, info, sessionID) {
     return json.read(filepaths.user.cache.hideout_production);
 }
 
-function getHideoutSettings(url, info) {
+function getHideoutSettings(url, info, sessionID) {
     return json.read(filepaths.hideout.settings);
 }
 
-function getHideoutAreas(url, info) {
+function getHideoutAreas(url, info, sessionID) {
     return json.read(filepaths.user.cache.hideout_areas);
 }
 
-function getScavcaseRecipes(url, info) {
+function getScavcaseRecipes(url, info, sessionID) {
     return json.read(filepaths.user.cache.hideout_scavcase);
 }
 
-function getHandbookUserlist(url, info) {
-    return json.read(weaponBuilds_f.getUserBuildsPath());
+function getHandbookUserlist(url, info, sessionID) {
+    return json.read(weaponBuilds_f.getPath(sessionID));
 }
 
-function createNotifierChannel(url, info) {
+function createNotifierChannel(url, info, sessionID) {
     return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '","channel_id":"testChannel","url":"https://' + ip + '/notifierBase"},"notifierServer":"https://' + ip + '/notifierServer"}}';
 }
 
-function getReservedNickname(url, info) {
-    return '{"err":0,"errmsg":null,"data":"' + profile_f.getReservedNickname() + '"}';
+function getReservedNickname(url, info, sessionID) {
+    return '{"err":0,"errmsg":null,"data":"' + profile_f.getReservedNickname(sessionID) + '"}';
 }
 
-function validateNickname(url, info) {
+function validateNickname(url, info, sessionID) {
     // todo: validate nickname properly
     return '{"err":0,"errmsg":null,"data":{"status":"ok"}}';
 }
 
-function createProfile(url, info) {
+function createProfile(url, info, sessionID) {
     profile_f.create(info);
-    return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + constants.getActiveID() + '"}}';
+    return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + sessionID + '"}}';
 }
 
 // this shows a list of conversations available
@@ -423,11 +423,11 @@ function createProfile(url, info) {
 // response: {"err":0,"errmsg":null,"data":[{"type":1,"message":{"dt":1576780987,"type":1,"text":"Oh you're Dreamz init","uid":"5b09e7ac8ed239663f049ac3"},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},{"type":1,"message":{"dt":1576778783,"type":1,"text":"suck my ass","uid":"5a3a9f3f46b16870c921cfa0"},"new":0,"attachmentsNew":0,"_id":"5a3a9f3f46b16870c921cfa0","Users":[{"_id":"5a3a9f3f46b16870c921cfa0","Info":{"Nickname":"ZackFair","Side":"Bear","Level":9,"MemberCategory":"Default"}}],"pinned":false},{"type":1,"message":{"dt":1536917869,"type":1,"text":"trying*","uid":"5b09e7ac8ed239663f049ac3"},"new":0,"attachmentsNew":0,"pinned":false,"_id":"5b7a8952f0dd353a3d5bed8f","Users":[{"_id":"5b7a8952f0dd353a3d5bed8f","Info":{"Nickname":"laplaie974","Side":"Bear","Level":1,"MemberCategory":"Default"}}]}]}
 // limit: amount of messages to display
 // offset: no idea
-function getMailDialogList(url, info) {
+function getMailDialogList(url, info, sessionID) {
     // these are used to show user conversations
     // a message looks like this: {"type":1,"message":{"dt":<datetime>,"type":1,"text":<message text>,"uid":<user id, like user0pmc>},"new":0,"attachmentsNew":0,"_id":"5bd9aae93546826f3c560d6b","Users":[{"_id":"5bd9aae93546826f3c560d6b","Info":{"Nickname":"StraightOnSight","Side":"Usec","Level":1,"MemberCategory":"Default"}}],"pinned":false},
 
-    return nullArrayResponse(url, info);
+    return nullArrayResponse(url, info, sessionID);
 }
 
 // this displays the full conversation
@@ -436,58 +436,58 @@ function getMailDialogList(url, info) {
 // dialogId: unique ID of the message list
 // limit: amount of messages visible
 // offset: no idea
-function getMailDialogView(url, info) {
+function getMailDialogView(url, info, sessionID) {
     // an overview of the object is like this: {"messages"[list of messages], "profiles":[list of profiles], "hasMessagesWithRewards":<does it contain message with items?>}
     // a message looks like this: {"_id":<string, unique>, "uid": <user id that sent message, like ussr0pmc>, "dt": <datetime with milliseconds>, "text": <the message to display>. "hasRewards": <item attached to message?>}
     // a profile looks like this: {"_id":<user id, like user0pmc>,"Info":{"Nickname":<nickname of profile>,"Side":<side of profile>,"Level":<profile level>,"MemberCategory":"Default"}}
 
-    return nullResponse(url, info);
+    return nullResponse(url, info, sessionID);
 }
 
 // these are trader conversations
 // request: {"dialogId":"54cb57776803fa99248b456e"}
 // response: {"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"54cb57776803fa99248b456e","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"54cb57776803fa99248b456e","pinned":false}}
 // dialogId: user id, like user0pmc
-function getMailDialogInfo(url, info) {
+function getMailDialogInfo(url, info, sessionID) {
     // an overview of the object is this:
 
-    return '{"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"pmc' + constants.getActiveID() + '","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"pmc' + constants.getActiveID() + '","pinned":false}}';
+    return '{"err":0,"errmsg":null,"data":{"type":2,"message":{"dt":1577648943,"type":10,"text":"quest started","uid":"pmc' + sessionID + '","templateId":"5abe61a786f7746ad512da4e"},"new":1,"_id":"pmc' + sessionID + '","pinned":false}}';
 }
 
-function getMapLocation(url, info) {
+function getMapLocation(url, info, sessionID) {
     return "MAPCONFIG";
 }
 
-function getImage(url, info) {
+function getImage(url, info, sessionID) {
     return "IMAGE";
 }
 
-function handleNotifierCustomLink(url, info) {
+function handleNotifierCustomLink(url, info, sessionID) {
     return 'DONE';
 }
 
-function getProfilePurchases(url, info) {
+function getProfilePurchases(url, info, sessionID) {
     // let's grab the traderId from the url
     return profile_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1));
 }
 
-function getTrader(url, info) {
+function getTrader(url, info, sessionID) {
     return JSON.stringify(trader.get(url.replace("/client/trading/api/getTrader/", '')));
 }
 
-function getAssort(url, info) {
+function getAssort(url, info, sessionID) {
     return JSON.stringify(assort_f.get(url.replace("/client/trading/api/getTraderAssort/", '')));
 }
 
-function getMenuLocale(url, info) {
+function getMenuLocale(url, info, sessionID) {
     return locale.getMenu(url.replace("/client/menu/locale/", ''));
 }
 
-function getGlobalLocale(url, info) {
+function getGlobalLocale(url, info, sessionID) {
     return locale.getGlobal(url.replace("/client/locale/", ''));
 }
 
-function getResponse(req, body) {
+function getResponse(req, body, sessionID) {
     let output = "";
     let url = req.url;
     let info = JSON.parse("{}");
@@ -504,13 +504,13 @@ function getResponse(req, body) {
 
     // handle static requests
     if (typeof staticRoutes[url] !== "undefined") {
-        return staticRoutes[url](url, info);
+        return staticRoutes[url](url, info, sessionID);
     }
 
     // handle dynamic requests
     for (let key in dynamicRoutes) {
         if (url.indexOf(key) != -1) {
-            return dynamicRoutes[key](url, info);
+            return dynamicRoutes[key](url, info, sessionID);
         }
     }
 
@@ -528,7 +528,7 @@ function getResponse(req, body) {
         if (typeof crctest.crc != "undefined") {
             if (info.crc.toString() === crctest.crc.toString()) {
                 logger.logInfo("[Loading from game cache files]");
-                output = nullResponse(url, info);
+                output = nullResponse(url, info, sessionID);
             } else {
                 output = json.stringify(crctest).replace(/\s\s+/g, '');
             }

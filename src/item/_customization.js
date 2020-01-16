@@ -4,10 +4,10 @@ require('../libs.js');
 
 function getCustomizationStoragePath() {
 	let filepath = filepaths.user.profiles.storage;
-	return filepath.replace("__REPLACEME__", constants.getActiveID());
+	return filepath.replace("__REPLACEME__", sessionID);
 }
 
-function wearClothing(tmpList, body) {
+function wearClothing(tmpList, body, sessionID) {
 	// in case there is more suites to be wear
 	for (let i = 0; i < body.suites.length; i++) {
 		let costume_data = customization_m.data[body.suites[i]];
@@ -31,7 +31,7 @@ function wearClothing(tmpList, body) {
 	return item.getOutput();
 }
 
-function buyClothing(tmpList, body) {
+function buyClothing(tmpList, body, sessionID) {
 	item.resetOutput();
 
 	let output = item.getOutput();

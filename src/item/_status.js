@@ -2,7 +2,7 @@
 
 const profile = require('../profile_f.js');
 
-function foldItem(tmpList, body) {
+function foldItem(tmpList, body, sessionID) {
     for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Foldable = {"Folded": body.value};
@@ -14,7 +14,7 @@ function foldItem(tmpList, body) {
     return "";
 }
 
-function toggleItem(tmpList, body) {
+function toggleItem(tmpList, body, sessionID) {
     for (let item of tmpList.data[0].Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.Togglable = {"On": body.value};
@@ -26,7 +26,7 @@ function toggleItem(tmpList, body) {
     return "";
 }
 
-function tagItem(tmpList, body) {
+function tagItem(tmpList, body, sessionID) {
     for (let item of tmpList.data[0].Inventory.items) {
         if (item._id === body.item) {
             if (item.upd !== null &&
@@ -53,7 +53,7 @@ function tagItem(tmpList, body) {
     return "";
 }
 
-function bindItem(tmpList, body) {
+function bindItem(tmpList, body, sessionID) {
     for (let index in tmpList.data[0].Inventory.fastPanel) {
         if (tmpList.data[0].Inventory.fastPanel[index] === body.item) {
             tmpList.data[0].Inventory.fastPanel[index] = "";
@@ -65,7 +65,7 @@ function bindItem(tmpList, body) {
     return "OK";
 }
 
-function examineItem(tmpList, body) {
+function examineItem(tmpList, body, sessionID) {
     let returned = "BAD";
 
     // ragfair
@@ -117,7 +117,7 @@ function examineItem(tmpList, body) {
     return "OK";
 }
 
-function readEncyclopedia(tmpList, body) {
+function readEncyclopedia(tmpList, body, sessionID) {
     return "OK";
 }
 

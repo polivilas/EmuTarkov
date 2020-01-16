@@ -7,7 +7,7 @@ require('../libs.js');
 * transfers items from one profile to another if fromOwner/toOwner is set in the body.
 * otherwise, move is contained within the same profile_f.
 * */
-function moveItem(tmpList, body) {
+function moveItem(tmpList, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
 
@@ -112,7 +112,7 @@ function handleCartridges(profileData, body) {
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * Profile index: 0 = main profile, 1 = scav profile
 * */
-function removeItem(tmpList, body, output = "", profileIndex = 0) {    
+function removeItem(tmpList, body, sessionID, output = "", profileIndex = 0) {    
     if (output === "") {
 		item.resetOutput();
 		output = item.getOutput();
@@ -147,7 +147,7 @@ function removeItem(tmpList, body, output = "", profileIndex = 0) {
     }
 }
 
-function removeInsurance(tmpList, body) {
+function removeInsurance(tmpList, body, sessionID) {
     let toDo = [body];
     
     //Find the item and all of it's relates
@@ -172,15 +172,15 @@ function removeInsurance(tmpList, body) {
     }
 }
 
-function discardItem(tmpList, body) {
-    removeInsurance(tmpList, body.item);
-    return removeItem(tmpList, body.item);
+function discardItem(tmpList, body, sessionID) {
+    removeInsurance(tmpList, body, sessionID.item);
+    return removeItem(tmpList, body, sessionID.item);
 }
 
 /* Split Item
 * spliting 1 item into 2 separate items ...
 * */
-function splitItem(tmpList, body) { // -> Spliting item / Create new item with splited amount and removing that amount from older one
+function splitItem(tmpList, body, sessionID) { // -> Spliting item / Create new item with splited amount and removing that amount from older one
     item.resetOutput();
     let output = item.getOutput();
     let location = body.container.location;
@@ -223,7 +223,7 @@ function splitItem(tmpList, body) { // -> Spliting item / Create new item with s
 /* Merge Item
 * merges 2 items into one, deletes item from body.item and adding number of stacks into body.with
 * */
-function mergeItem(tmpList, body) {
+function mergeItem(tmpList, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
     for (let key in tmpList.data[0].Inventory.items) {
@@ -260,7 +260,7 @@ function mergeItem(tmpList, body) {
 /* Transfer item
 * Used to take items from scav inventory into stash or to insert ammo into mags (shotgun ones) and reloading weapon by clicking "Reload"
 * */
-function transferItem(tmpList, body) {
+function transferItem(tmpList, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
     for (let item of tmpList.data[0].Inventory.items) {
@@ -294,7 +294,7 @@ function transferItem(tmpList, body) {
 /* Swap Item
 * its used for "reload" if you have weapon in hands and magazine is somewhere else in rig or backpack in equipment
 * */
-function swapItem(tmpList, body) {
+function swapItem(tmpList, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
     for (let item of tmpList.data[0].Inventory.items) {
@@ -316,7 +316,7 @@ function swapItem(tmpList, body) {
 /* Give Item
 * its used for "add" item like gifts etc.
 * */
-function addItem(tmpList, body, output = item.getOutput()) {
+function addItem(tmpList, body, sessionID, output = item.getOutput()) {
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
