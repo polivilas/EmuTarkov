@@ -84,7 +84,7 @@ function customizationOutfits(mod) {
 }
 
 function hideoutAreas(mod) {
-    if (!mod.files.hasOwnProperty("hideout") || !mod.files.customization.hasOwnProperty("areas")) {
+    if (!mod.files.hasOwnProperty("hideout") || !mod.files.hideout.hasOwnProperty("areas")) {
         return;
     }
 
@@ -94,7 +94,7 @@ function hideoutAreas(mod) {
 }
 
 function hideoutProduction(mod) {
-    if (!mod.files.hasOwnProperty("hideout") || !mod.files.customization.hasOwnProperty("production")) {
+    if (!mod.files.hasOwnProperty("hideout") || !mod.files.hideout.hasOwnProperty("production")) {
         return;
     }
 
@@ -104,7 +104,7 @@ function hideoutProduction(mod) {
 }
 
 function hideoutScavcase(mod) {
-    if (!mod.files.hasOwnProperty("hideout") || !mod.files.customization.hasOwnProperty("scavcase")) {
+    if (!mod.files.hasOwnProperty("hideout") || !mod.files.hideout.hasOwnProperty("scavcase")) {
         return;
     }
 
