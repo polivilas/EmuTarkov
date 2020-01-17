@@ -4,7 +4,7 @@ require('../libs.js');
 
 function cost(info) {
     let output = {"err": 0, "errmsg": null, "data": {}};
-    let pmcData = profile_f.get(sessionID);
+    let pmcData = profile_f.getPmcData(sessionID);
 
     for (let trader of info.traders) {
         let items = {};
@@ -47,7 +47,7 @@ function insure(pmcData, body, sessionID) {
     }
 
     // pay the item	to profile
-    if (!itm_hf.payMoney(pmcData, {scheme_items: itemsToPay, tid: body.tid})) {
+    if (!itm_hf.payMoney(pmcData, {scheme_items: itemsToPay, tid: body.tid}, sessionID)) {
         logger.LogError("no money found");
         return "";
     }

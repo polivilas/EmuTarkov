@@ -2,18 +2,18 @@
 
 require('../libs.js');
 
-function main() {
-    if (!profile_f.isAccountWiped()) {
-        updateTraders();
-        updatePlayerHideout();
+function main(sessionID) {
+    if (!account_f.isWiped(sessionID)) {
+        updateTraders(sessionID);
+        updatePlayerHideout(sessionID);
     }
 }
 
-function updateTraders() {
+function updateTraders(sessionID) {
     // update each hour
     let update_per = 3600;
     let timeNow = Math.floor(Date.now() / 1000);
-    let tradersToUpdateList = trader.loadAllTraders();
+    let tradersToUpdateList = trader.loadAllTraders(sessionID);
 
     tradersToUpdateList = tradersToUpdateList.data;
     
@@ -35,38 +35,33 @@ function updateTraders() {
         compensateUpdate_per = compensateUpdate_per * update_per;
         newTraderTime = newTraderTime + compensateUpdate_per + update_per;
         tradersToUpdateList[i].supply_next_time = newTraderTime;
-        trader.setTrader(tradersToUpdateList[i]);
+        trader.setTrader(tradersToUpdateList[i], sessionID);
     }
 }
 
-function updatePlayerHideout() {
-    let pmcData = profile_f.get(sessionID);
+function updatePlayerHideout(sessionID) {
+    let pmcData = profile_f.getPmcData(sessionID);
 
     // update production time
     for (let prod in pmcData.Hideout.Production) { 
         /* bitcoin farm : manage multiples bitcoins but fuck this shit
-        for (let keyObj of Object.keys(pmcData.Hideout.Production)) {
-            if (keyObj == '20') {
-                let time_elapsed = Math.floor( Date.now()/1000) - pmcData.Hideout.Production[prod].StartTime;
-                                    
-                //then check what level of upgrade the player btc farm is
-                //if lvl = 1 : do nothing
-                //if level = 2 or 3 then see how many bitcoins are already farmed, 
-                //then check time elapsed, and count how many bitcoins were farmed
-                //if farm is full, cut the production "inProgreess" = false
-            }
-        }
+        // loop to find btc farm (hideout area 20)
+        //then check what level of upgrade the player btc farm is
+        //if lvl = 1 : do nothing
+        //if level = 2 or 3 then see how many bitcoins are already farmed, 
+        //then check time elapsed, and count how many bitcoins were farmed
+        //if farm is full, cut the production "inProgress" = false
         */
 
         /*
             this need more checks too
-            if production need fuel, or generator turned on, check  both of these
+            if production need fuel, or generator turned on, check both of these
 
             if fuel = 0 then generator = disabled 
             if production needs gennerator activated true, then check if generator activated == true
 
         */
-        let time_elapsed = Math.floor( Date.now()/1000) - pmcData.Hideout.Production[prod].StartTime;
+        let time_elapsed = Math.floor(Date.now() / 1000) - pmcData.Hideout.Production[prod].StartTime;
         pmcData.Hideout.Production[prod].Progress = time_elapsed; 
     }
 

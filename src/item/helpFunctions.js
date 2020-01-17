@@ -99,7 +99,7 @@ function fromRUB(value, currency) {
 function payMoney(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
-    let tmpTraderInfo = trader.get(body.tid);
+    let tmpTraderInfo = trader.get(body.tid, sessionID);
     let currencyTpl = getCurrency(tmpTraderInfo.data.currency);
 
     // delete barter things(not a money) from inventory
@@ -204,8 +204,8 @@ function findMoney(by, pmcData, barter_itemID) { // find required items to take 
 * input: pmcData, numberToReturn, request.body,
 * output: none (output is sended to item.js, and profile is saved to file)
 * */
-function getMoney(pmcData, amount, body, output) {
-    let tmpTraderInfo = trader.get(body.tid);
+function getMoney(pmcData, amount, body, output, sessionID) {
+    let tmpTraderInfo = trader.get(body.tid, sessionID);
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;

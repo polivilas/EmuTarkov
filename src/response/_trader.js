@@ -24,7 +24,7 @@ function loadAllTraders(sessionID) {
 	return {err: 0, errmsg: null, data: traders};
 }
 
-function get(id) {
+function get(id, sessionID) {
     // find the trader
 	if (filepaths.traders.hasOwnProperty(id)) {
         return {err: 0, errmsg: "", data: json.parse(json.read(getPath(id, sessionID)))};
@@ -41,7 +41,7 @@ function setTrader(data, sessionID) {
 
 function lvlUp(id, sessionID) {
     let pmcData = profile_f.get(sessionID);
-    let currentTrader = get(id);
+    let currentTrader = get(id, sessionID);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 
     // level up player
@@ -72,7 +72,7 @@ function lvlUp(id, sessionID) {
     }
 
     currentTrader.data.loyalty.currentLevel = targetLevel;
-    setTrader(currentTrader.data);
+    setTrader(currentTrader.data, sessionID);
 
     // set assort
     assort_f.generate(id);

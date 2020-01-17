@@ -59,7 +59,7 @@ function completeQuest(pmcData, body, sessionID) {
 
                 case "TraderStanding":
                     // improve trader standing
-                    let tmpTraderInfo = trader.get(quest.traderId);
+                    let tmpTraderInfo = trader.get(quest.traderId, sessionID);
 
                     tmpTraderInfo.data.loyalty.currentStanding
                     tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + parseFloat(reward.value);

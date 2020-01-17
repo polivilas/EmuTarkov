@@ -53,7 +53,7 @@ function generate(id) {
 
     let base = json.parse(json.read(filepaths.user.cache["assort_" + id]));
     let keyNames = Object.keys(base.data.loyal_level_items);
-    let level = trader.get(id).data.loyalty.currentLevel;
+    let level = trader.get(id, sessionID).data.loyalty.currentLevel;
 
     // 1 is min level, 4 is max level
     for (let i = 4; i > 0; i--) {

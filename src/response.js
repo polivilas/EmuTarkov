@@ -348,7 +348,7 @@ function handleRepair(url, info, sessionID) {
 }
 
 function handleKeepAlive(url, info, sessionID) {
-    keepAlive_f.main();
+    keepAlive_f.main(sessionID);
     return '{"err":0,"errmsg":null,"data":{"msg":"OK"}}';
 }
 
@@ -472,7 +472,7 @@ function getProfilePurchases(url, info, sessionID) {
 }
 
 function getTrader(url, info, sessionID) {
-    return JSON.stringify(trader.get(url.replace("/client/trading/api/getTrader/", '')));
+    return JSON.stringify(trader.get(url.replace("/client/trading/api/getTrader/", ''), sessionID));
 }
 
 function getAssort(url, info, sessionID) {
