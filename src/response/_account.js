@@ -17,7 +17,7 @@ function save() {
 }
 
 function find(sessionID) {
-    for (let account of account) {
+    for (let account of accounts) {
         if (account.id === sessionID) {
             return account;
         }
@@ -37,9 +37,9 @@ function isWiped(sessionID) {
 }
 
 function setWipe(sessionID, state) {
-    for (let account in accounts) {
-        if (accounts[account].id === sessionID) {
-            accounts[account].wipe = state;
+    for (let account of accounts) {
+        if (account.id === sessionID) {
+            account.wipe = state;
         }
     }
 
