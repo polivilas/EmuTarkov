@@ -3,7 +3,6 @@
 require('../libs.js');
 
 function main(sessionID) {
-    console.log("woop");
     if (!account_f.isWiped(sessionID)) {
         updateTraders(sessionID);
         updatePlayerHideout(sessionID);
@@ -14,18 +13,16 @@ function updateTraders(sessionID) {
     // update each hour
     let update_per = 3600;
     let timeNow = Math.floor(Date.now() / 1000);
-    console.log("woop woop");
     let tradersToUpdateList = trader.loadAllTraders(sessionID);
-    console.log("woop woop woop");
 
     tradersToUpdateList = tradersToUpdateList.data;
     
     for (let i = 0; i < tradersToUpdateList.length; i++) {
-        // update restock timer
         if ((tradersToUpdateList[i].supply_next_time + update_per) > timeNow) {
             continue;
         }
 
+        // update restock timer
         let substracted_time = timeNow - tradersToUpdateList[i].supply_next_time;
         let days_passed = Math.floor((substracted_time) / 86400);
         let time_co_compensate = days_passed * 86400;
