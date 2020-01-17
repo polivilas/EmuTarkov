@@ -28,6 +28,7 @@ function find(sessionID) {
 
 function isWiped(sessionID) {
     let account = find(sessionID);
+    console.log(account);
 
     if (account !== typeof "undefined") {
         return account.wipe;
