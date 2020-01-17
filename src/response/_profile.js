@@ -24,26 +24,15 @@ function create(info, sessionID) {
     pmcData.savage = "scav" + account.id;
     pmcData.Info.Nickname = info.nickname;
     pmcData.Info.LowerNickname = info.nickname.toLowerCase();
+    pmcData.Info.RegistrationDate = Math.floor(new Date() / 1000);
     storage.data._id = "pmc" + account.id;
 
     switch (info.side) {
         case "Bear":
-            pmcData.Info.Side = "Bear";
-            pmcData.Info.Voice = "Bear_1";
-            pmcData.Customization.Head = "5cc084dd14c02e000b0550a3";
-            pmcData.Customization.Body = "5cc0858d14c02e000c6bea66";
-            pmcData.Customization.Feet = "5cc085bb14c02e000e67a5c5";
-            pmcData.Customization.Hands = "5cc0876314c02e000c6bea6b";
             storage.data.suites = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
             break;
 
         case "Usec":
-            pmcData.Info.Side = "Usec";
-            pmcData.Info.Voice = "Usec_1";
-            pmcData.Customization.Head = "5cde96047d6c8b20b577f016";
-            pmcData.Customization.Body = "5cde95d97d6c8b647a3769b0";
-            pmcData.Customization.Feet = "5cde95ef7d6c8b04713c4f2d";
-            pmcData.Customization.Hands = "5cde95fa7d6c8b04737c2d13";
             storage.data.suites = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
             break;
     }
