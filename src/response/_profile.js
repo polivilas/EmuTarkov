@@ -60,11 +60,30 @@ function create(info, sessionID) {
             continue;
         }
 
-        assort_f.generate(fileName);
+        assort_f.generate(fileName, account.id);
     }
 
     // don't wipe profile again
     account_f.setWipe(account.id, false);
+}
+
+function setPmcData(data, sessionID) {
+    json.write(getPmcPath(sessionID), data);
+}
+
+function setScavData(data, sessionID) {
+    json.write(getScavPath(sessionID), data);   
+}
+
+function generateScav(sessionID) {
+    let pmcData = getPmcData(sessionID);
+    let scavData = bots.generatePlayerScav();
+
+    scavData._id = pmcData.savage;
+    scavData.aid = sessionID;
+    setScavData(scavData, sessionID);
+
+    return scavData;
 }
 
 function getPmcData(sessionID) {
@@ -88,25 +107,6 @@ function getScavData(sessionID) {
     }
 
     return json.parse(json.read(getScavPath(sessionID)));
-}
-
-function setPmcData(data, sessionID) {
-    json.write(getPmcPath(sessionID), data);
-}
-
-function setScavData(data, sessionID) {
-    json.write(getScavPath(sessionID), data);   
-}
-
-function generateScav(sessionID) {
-    let pmcData = getPmcData(sessionID);
-    let scavData = bots.generatePlayerScav();
-
-    scavData._id = pmcData.savage;
-    scavData.aid = sessionID;
-    setScavData(scavData, sessionID);
-
-    return scavData;
 }
 
 function get(sessionID) {

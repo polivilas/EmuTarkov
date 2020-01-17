@@ -14,8 +14,7 @@ function save() {
 
 function find(sessionID) {
     for (let account of accounts) {
-        if (account.id == sessionID) {
-            console.log(account.id == sessionID);
+        if (account.id === sessionID) {
             return account;
         }
     }

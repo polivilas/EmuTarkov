@@ -122,8 +122,7 @@ function getFriendList(url, info, sessionID) {
 }
 
 function handleItems(url, info, sessionID) {
-    let output = item.moving(info);
-    return output;
+    return item.moving(info, sessionID);
 }
 
 function getLocale(url, info, sessionID) {

@@ -98,7 +98,7 @@ function sendResponse(req, resp, body, sessionID) {
 
 function handleRequest(req, resp) {
     let IP = req.connection.remoteAddress.replace("::ffff:", "");
-    const sessionID = getCookies(req)['PHPSESSID'];
+    const sessionID = parseInt(getCookies(req)['PHPSESSID']);
 
     if (req.method === "POST") {
         req.on('data', function (data) {
