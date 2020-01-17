@@ -45,15 +45,18 @@ function moveItem(pmcData, body, sessionID) {
 */
 function moveItemToProfile(fromProfileData, toProfileData, body) {
     handleCartridges(fromProfileData, body);
+
     let fromItems = fromProfileData.Inventory.items;
     let toItems = toProfileData.Inventory.items;
     let idsToMove = itm_hf.findAndReturnChildren(fromProfileData, body.item);
+
     for (let itemId of idsToMove) {
         for (let itemIndex in fromItems) {
             if (fromItems[itemIndex]._id && fromItems[itemIndex]._id === itemId) {
                 if (itemId === body.item) {
                     fromItems[itemIndex].parentId = body.to.id;
                     fromItems[itemIndex].slotId = body.to.container;
+
                     if (typeof body.to.location !== "undefined") {
                         fromItems[itemIndex].location = body.to.location;
                     } else {
@@ -62,6 +65,7 @@ function moveItemToProfile(fromProfileData, toProfileData, body) {
                         }
                     }
                 }
+
                 toItems.push(fromItems[itemIndex]);
                 fromItems.splice(itemIndex, 1);
             }
@@ -75,10 +79,12 @@ function moveItemToProfile(fromProfileData, toProfileData, body) {
 */
 function moveItemInternal(profileData, body) {
     handleCartridges(profileData, body);
+
     for (let item of profileData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.parentId = body.to.id;
             item.slotId = body.to.container;
+
             if (typeof body.to.location !== "undefined") {
                 item.location = body.to.location;
             } else {
@@ -86,6 +92,7 @@ function moveItemInternal(profileData, body) {
                     delete item.location;
                 }
             }
+
             return;
         }
     }
@@ -99,11 +106,13 @@ function handleCartridges(profileData, body) {
     // -> Move item to diffrent place - counts with equiping filling magazine etc
     if (body.to.container === 'cartridges') {
         let tmp_counter = 0;
+
         for (let item_ammo in profileData.Inventory.items) {
             if (body.to.id === profileData.Inventory.items[item_ammo].parentId) {
                 tmp_counter++;
             }
         }
+
         body.to.location = tmp_counter;//wrong location for first cartrige
     }
 }
@@ -112,7 +121,7 @@ function handleCartridges(profileData, body) {
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * Profile index: 0 = main profile, 1 = scav profile
 * */
-function removeItem(pmcData, body, sessionID, output = "", profileIndex = 0) {    
+function removeItem(pmcData, body, output = "", profileIndex = 0, sessionID) {    
     if (output === "") {
 		item.resetOutput();
 		output = item.getOutput();

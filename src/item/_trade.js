@@ -14,7 +14,7 @@ function buyItem(pmcData, body, sessionID) {
         body.tid = "ragfair";
     }
     
-    return move_f.addItem(pmcData, body, sessionID, item.getOutput());
+    return move_f.addItem(pmcData, body, item.getOutput(), sessionID);
 }
 
 // Selling item to trader
@@ -44,7 +44,7 @@ function sellItem(pmcData, body, sessionID) {
                 logger.logInfo("Selling: " + checkID);
 
                 // remove item
-                output = move_f.removeItem(pmcData, checkID, output);
+                output = move_f.removeItem(pmcData, checkID, output, sessionID);
                 move_f.removeInsurance(pmcData, checkID);
 
                 // add money to return to the player
@@ -60,7 +60,7 @@ function sellItem(pmcData, body, sessionID) {
     }
 
     // get money the item
-    output = itm_hf.getMoney(pmcData, money, body, output);
+    output = itm_hf.getMoney(pmcData, money, body, output, sessionID);
     return output;
 }
 

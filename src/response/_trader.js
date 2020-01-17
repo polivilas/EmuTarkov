@@ -75,7 +75,7 @@ function lvlUp(id, sessionID) {
     setTrader(currentTrader.data, sessionID);
 
     // set assort
-    assort_f.generate(id);
+    assort_f.generate(id, sessionID);
 }
 
 module.exports.getPath = getPath;

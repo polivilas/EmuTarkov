@@ -266,7 +266,7 @@ function getBots(url, info, sessionID) {
 }
 
 function getTraderList(url, info, sessionID) {
-    return JSON.stringify(trader.loadAllTraders());
+    return JSON.stringify(trader.loadAllTraders(sessionID));
 }
 
 function getServer(url, info, sessionID) {
@@ -455,7 +455,7 @@ function handleNotifierCustomLink(url, info, sessionID) {
 
 function getProfilePurchases(url, info, sessionID) {
     // let's grab the traderId from the url
-    return profile_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1));
+    return profile_f.getPurchasesData(url.substr(url.lastIndexOf('/') + 1), sessionID);
 }
 
 function getTrader(url, info, sessionID) {
