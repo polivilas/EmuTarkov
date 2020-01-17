@@ -5,11 +5,9 @@ require('../libs.js');
 let accounts = [];
 
 function init() {
-    accounts = load();
-}
-
-function load() {
-    return json.parse(json.read(filepaths.user.profiles.list));
+    logger.logWarning("loading profiles");
+    accounts = json.parse(json.read(filepaths.user.profiles.list));
+    logger.logData(accounts);
 }
 
 function save() {
@@ -27,8 +25,9 @@ function find(sessionID) {
 }
 
 function isWiped(sessionID) {
+    logger.logData(sessionID);
     let account = find(sessionID);
-    console.log(account);
+    logger.logData(account);
 
     if (account !== typeof "undefined") {
         return account.wipe;
