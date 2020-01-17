@@ -131,7 +131,7 @@ function getLocale(url, info, sessionID) {
 }
 
 function loginUser(url, info, sessionID) {
-    return profile_f.find(info);
+    return account_f.find(info);
 }
 
 function getInsuranceCost(url, info, sessionID) {
