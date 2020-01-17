@@ -5,9 +5,7 @@ require('../libs.js');
 let accounts = [];
 
 function init() {
-    logger.logWarning("loading profiles");
     accounts = json.parse(json.read(filepaths.user.profiles.list));
-    logger.logData(accounts);
 }
 
 function save() {
@@ -16,7 +14,7 @@ function save() {
 
 function find(sessionID) {
     for (let account of accounts) {
-        if (account.id === sessionID) {
+        if (account.id == sessionID) {
             return account;
         }
     }
@@ -25,15 +23,8 @@ function find(sessionID) {
 }
 
 function isWiped(sessionID) {
-    logger.logData(sessionID);
     let account = find(sessionID);
-    logger.logData(account);
-
-    if (account !== typeof "undefined") {
-        return account.wipe;
-    }
-
-    return true;
+    return account.wipe;
 }
 
 function setWipe(sessionID, state) {
@@ -58,12 +49,7 @@ function exists(info) {
 
 function getReservedNickname(sessionID) {
     let account = find(sessionID);
-
-    if (account !== typeof "undefined") {
-        return account.nickname;
-    }
-
-    return "";
+    return account.nickname;
 }
 
 function isNicknameTaken(info) {
