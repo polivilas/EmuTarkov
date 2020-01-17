@@ -73,12 +73,12 @@ function handleMoving(body, sessionID) {
     }
 }
 
-function moving(info) {
+function moving(info, sessionID) {
     let internalOutput = "";
 
     // handle all items
     for (let i = 0; i < info.data.length; i++) {
-        internalOutput = handleMoving(info.data[i]);
+        internalOutput = handleMoving(info.data[i], sessionID);
     }
 
     // return items
