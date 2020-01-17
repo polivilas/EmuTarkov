@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function getPath(id) {
+function getPath(id, sessionID) {
     let assortPath = filepaths.user.profiles.assort[id];
     return assortPath.replace("__REPLACEME__", sessionID);
 }
@@ -46,7 +46,7 @@ function removeItem(assort, id) {
     }
 }
 
-function generate(id) {
+function generate(id, sessionID) {
     if (id === "579dc571d53a0658a154fbec") {
         return;
     }
@@ -64,10 +64,10 @@ function generate(id) {
         }
     }
 
-    json.write(getPath(id), base);
+    json.write(getPath(id, sessionID), base);
 }
 
-function generateFence() {
+function generateFence(sessionID) {
     let base = json.parse(json.read("db/cache/assort.json"));
     let names = Object.keys(filepaths.assort.ragfair.loyal_level_items);
     let added = [];
@@ -86,17 +86,17 @@ function generateFence() {
         base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
     }
 
-    return json.write(getPath("579dc571d53a0658a154fbec"), base);
+    return json.write(getPath("579dc571d53a0658a154fbec", sessionID), base);
 }
 
-function get(id) {
+function get(id, sessionID) {
     // find the assort
     if (id === "579dc571d53a0658a154fbec") {
         logger.logWarning("generating fence");
-        generateFence();
+        generateFence(sessionID);
     }
 
-	return json.parse(json.read(getPath(id)));
+	return json.parse(json.read(getPath(id, sessionID)));
 }
 
 module.exports.get = get;

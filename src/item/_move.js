@@ -320,7 +320,7 @@ function addItem(pmcData, body, sessionID, output = item.getOutput()) {
     let PlayerStash = itm_hf.getPlayerStash();
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
-    let tmpTraderAssort = assort_f.get(body.tid);
+    let tmpTraderAssort = assort_f.get(body.tid, sessionID);
 
     for (let item of tmpTraderAssort.data.items) {
         if (item._id === body.item_id) {

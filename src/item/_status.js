@@ -79,7 +79,7 @@ function examineItem(pmcData, body, sessionID) {
             body.fromOwner.id = "ragfair";
         }
 
-        let tmpTraderAssort = assort_f.get(body.fromOwner.id);
+        let tmpTraderAssort = assort_f.get(body.fromOwner.id, sessionID);
 
         for (let item of tmpTraderAssort.data.items) {
             if (item._id === body.item) {

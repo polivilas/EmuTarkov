@@ -15,7 +15,7 @@ function save() {
 function find(sessionID) {
     for (let account of accounts) {
         if (account.id == sessionID) {
-            console.log("yep");
+            console.log(account.id == sessionID);
             return account;
         }
     }
@@ -80,6 +80,7 @@ function getPath(sessionID) {
 }
 
 module.exports.init = init;
+module.exports.find = find;
 module.exports.exists = exists;
 module.exports.isWiped = isWiped;
 module.exports.setWipe = setWipe;

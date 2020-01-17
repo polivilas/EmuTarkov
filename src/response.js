@@ -393,7 +393,7 @@ function createNotifierChannel(url, info, sessionID) {
 }
 
 function getReservedNickname(url, info, sessionID) {
-    return '{"err":0,"errmsg":null,"data":"' + profile_f.getReservedNickname(sessionID) + '"}';
+    return '{"err":0,"errmsg":null,"data":"' + account_f.getReservedNickname(sessionID) + '"}';
 }
 
 function validateNickname(url, info, sessionID) {
@@ -402,7 +402,7 @@ function validateNickname(url, info, sessionID) {
 }
 
 function createProfile(url, info, sessionID) {
-    profile_f.create(info);
+    profile_f.create(info, sessionID);
     return '{"err":0,"errmsg":null,"data":{"uid":"pmc' + sessionID + '"}}';
 }
 
@@ -464,7 +464,7 @@ function getTrader(url, info, sessionID) {
 }
 
 function getAssort(url, info, sessionID) {
-    return JSON.stringify(assort_f.get(url.replace("/client/trading/api/getTraderAssort/", '')));
+    return JSON.stringify(assort_f.get(url.replace("/client/trading/api/getTraderAssort/", ''), sessionID));
 }
 
 function getMenuLocale(url, info, sessionID) {
