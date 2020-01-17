@@ -68,14 +68,25 @@ function create(info, sessionID) {
 }
 
 function getPmcData(sessionID) {
-    return json.parse(json.read(getPmcPath(sessionID)));
+    let pmcData = json.parse(json.read(getPmcPath(sessionID)));
+
+    if (pmcData.Stats.TotalSessionExperience > 0) {
+        const sessionExp = pmcData.Stats.TotalSessionExperience;
+
+        pmcData.Info.Experience += sessionExp;
+        pmcData.Stats.TotalSessionExperience = 0;
+        setPmcData(pmcData, sessionID);
+        pmcData.Info.Experience -= sessionExp;
+    }
+    
+    return pmcData;
 }
 
 function getScavData(sessionID) {
     if (!fs.existsSync(getScavPath(sessionID))) {
         generateScav(sessionID);
     }
-    
+
     return json.parse(json.read(getScavPath(sessionID)));
 }
 

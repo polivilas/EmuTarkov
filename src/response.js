@@ -151,19 +151,7 @@ function getGlobals(url, info, sessionID) {
 }
 
 function getProfileData(url, info, sessionID) {
-    const pmcData = profile_f.getPmcData(sessionID);
-
-    // If we have experience gained after the raid, we save it
-    if (pmcData.Stats.TotalSessionExperience > 0) {
-        const sessionExp = pmcData.Stats.TotalSessionExperience;
-
-        pmcData.Info.Experience += sessionExp;
-        pmcData.Stats.TotalSessionExperience = 0;
-        profile_f.setPmcData(pmcData, sessionID);
-        pmcData.Info.Experience -= sessionExp;
-    }
-
-    return JSON.stringify(pmcData);
+    return JSON.stringify(profile_f.get(sessionID));
 }
 
 function regenerateScav(url, info, sessionID) {
