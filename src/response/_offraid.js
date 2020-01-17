@@ -10,7 +10,7 @@ function saveProgress(offRaidData) {
     let offRaidExit = offRaidData.exit;
     let offRaidProfile = offRaidData.profile;
 
-    let pmcData = profile_f.get(sessionID);
+    let pmcData = profile_f.getPmcData(sessionID);
 
     // replace data
     // if isPlayerScav is true, then offRaidProfile points to a scav profile

@@ -72,6 +72,10 @@ function getPmcData(sessionID) {
 }
 
 function getScavData(sessionID) {
+    if (!fs.existsSync(getScavPath(sessionID))) {
+        generateScav(sessionID);
+    }
+    
     return json.parse(json.read(getScavPath(sessionID)));
 }
 
@@ -99,10 +103,6 @@ function get(sessionID) {
 
     if (account_f.isWiped(sessionID)) {
         return output;
-    }
-
-    if (!fs.existsSync(getScavPath(sessionID))) {
-        generateScav(sessionID);
     }
 
     output.data.push(getPmcData(sessionID));

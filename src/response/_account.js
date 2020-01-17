@@ -14,7 +14,11 @@ function save() {
 
 function find(sessionID) {
     for (let account of accounts) {
+        console.log("" + account.id + ", " + sessionID);
+        console.log(parseInt(account.id) === parseInt(sessionID));
+
         if (account.id == sessionID) {
+            console.log("yep");
             return account;
         }
     }
@@ -71,7 +75,6 @@ function findID(data) {
     let info = json.parse(text);
     let sessionID = exists(info);
 
-    constants.setActiveID(sessionID);
     return json.stringify({profileId: sessionID});
 }
 

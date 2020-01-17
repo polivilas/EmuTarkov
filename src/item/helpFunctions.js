@@ -171,8 +171,8 @@ function payMoney(pmcData, body, sessionID) {
     let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum + fromRUB(inRUB(barterPrice, currencyTpl), getCurrency(tmpTraderInfo.data.currency));
 
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
-    trader.setTrader(tmpTraderInfo.data);
-    trader.lvlUp(body.tid);
+    trader.setTrader(tmpTraderInfo.data, sessionID);
+    trader.lvlUp(body.tid, sessionID);
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
@@ -275,8 +275,8 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += amount;
 
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
-    trader.setTrader(tmpTraderInfo.data);
-    trader.lvlUp(body.tid);
+    trader.setTrader(tmpTraderInfo.data, sessionID);
+    trader.lvlUp(body.tid, sessionID);
     output.data.currentSalesSums[body.tid] = saleSum;
 
     profile_f.setPmcData(pmcData, sessionID);

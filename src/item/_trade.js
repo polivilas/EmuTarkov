@@ -87,7 +87,7 @@ function confirmRagfairTrading(pmcData, body, sessionID) {
     let output = item.getOutput()
 
     for (let offer of offers) {
-        pmcData = profile_f.get(sessionID);
+        pmcData = profile_f.getPmcData(sessionID);
         body = {};
         body.Action = "TradingConfirm";
         body.type = "buy_from_trader";

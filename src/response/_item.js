@@ -64,7 +64,7 @@ function resetOutput() {
 }
 
 function handleMoving(body, sessionID) {
-    let pmcData = profile_f.get(sessionID);
+    let pmcData = profile_f.getPmcData(sessionID);
 
     if (typeof staticRoutes[body.Action] !== "undefined") {
         return staticRoutes[body.Action](pmcData, body, sessionID);

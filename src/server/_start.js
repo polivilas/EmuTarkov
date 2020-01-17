@@ -100,8 +100,6 @@ function handleRequest(req, resp) {
     let IP = req.connection.remoteAddress.replace("::ffff:", "");
     const sessionID = getCookies(req)['PHPSESSID'];
 
-    constants.setActiveID(sessionID);
-
     if (req.method === "POST") {
         req.on('data', function (data) {
             zlib.inflate(data, function (err, body) {

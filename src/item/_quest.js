@@ -46,13 +46,13 @@ function completeQuest(pmcData, body, sessionID) {
                         newReq.count = parseInt(reward.value);
                         newReq.tid = "ragfair";
                 
-                        pmcData = profile_f.get(sessionID);
+                        pmcData = profile_f.getPmcData(sessionID);
                         move_f.addItem(pmcData, newReq);
                     }
                     break;
 
                 case "Experience":
-                    pmcData = profile_f.get(sessionID);
+                    pmcData = profile_f.getPmcData(sessionID);
                     pmcData.Info.Experience += parseInt(reward.value);
                     profile_f.setPmcData(pmcData, sessionID);
                     break;
@@ -63,10 +63,10 @@ function completeQuest(pmcData, body, sessionID) {
 
                     tmpTraderInfo.data.loyalty.currentStanding
                     tmpTraderInfo.data.loyalty.currentStanding = tmpTraderInfo.data.loyalty.currentStanding + parseFloat(reward.value);
-                    trader.setTrader(tmpTraderInfo.data);
+                    trader.setTrader(tmpTraderInfo.data, sessionID);
 
                     // level up trader
-                    trader.lvlUp(quest.traderId);
+                    trader.lvlUp(quest.traderId, sessionID);
                     break;
             }
         }

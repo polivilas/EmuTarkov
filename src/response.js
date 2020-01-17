@@ -151,10 +151,10 @@ function getGlobals(url, info, sessionID) {
 }
 
 function getProfileData(url, info, sessionID) {
-    const pmcData = profile_f.get(sessionID);
+    const pmcData = profile_f.getPmcData(sessionID);
 
     // If we have experience gained after the raid, we save it
-    if (pmcData.data.length > 0 && pmcData.Stats.TotalSessionExperience > 0) {
+    if (pmcData.Stats.TotalSessionExperience > 0) {
         const sessionExp = pmcData.Stats.TotalSessionExperience;
 
         pmcData.Info.Experience += sessionExp;
@@ -215,7 +215,7 @@ function getTemplates(url, info, sessionID) {
 }
 
 function getQuests(url, info, sessionID) {
-    let pmcData = profile_f.get(sessionID);
+    let pmcData = profile_f.getPmcData(sessionID);
     let base = quests;
     let triggerDeconterminationService = false;
     let triggerTrustRegain = false;

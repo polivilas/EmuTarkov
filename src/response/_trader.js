@@ -40,7 +40,7 @@ function setTrader(data, sessionID) {
 }
 
 function lvlUp(id, sessionID) {
-    let pmcData = profile_f.get(sessionID);
+    let pmcData = profile_f.getPmcData(sessionID);
     let currentTrader = get(id, sessionID);
     let loyaltyLevels = currentTrader.data.loyalty.loyaltyLevels;
 
