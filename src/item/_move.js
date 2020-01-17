@@ -325,8 +325,8 @@ function swapItem(pmcData, body, sessionID) {
 /* Give Item
 * its used for "add" item like gifts etc.
 * */
-function addItem(pmcData, body, sessionID, output = item.getOutput()) {
-    let PlayerStash = itm_hf.getPlayerStash();
+function addItem(pmcData, body, output = item.getOutput(), sessionID) {
+    let PlayerStash = itm_hf.getPlayerStash(sessionID);
     let stashY = PlayerStash[1];
     let stashX = PlayerStash[0];
     let tmpTraderAssort = assort_f.get(body.tid, sessionID);

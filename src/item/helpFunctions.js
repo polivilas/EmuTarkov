@@ -287,8 +287,8 @@ function getMoney(pmcData, amount, body, output, sessionID) {
 * input: null
 * output: [stashSizeWidth, stashSizeHeight]
 * */
-function getPlayerStash() { //this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
-    let stashTPL = profile_f.getStashType();
+function getPlayerStash(sessionID) { //this sets automaticly a stash size from items.json (its not added anywhere yet cause we still use base stash)
+    let stashTPL = profile_f.getStashType(sessionID);
     let stashX = (items.data[stashTPL]._props.Grids[0]._props.cellsH !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsH : 10;
     let stashY = (items.data[stashTPL]._props.Grids[0]._props.cellsV !== 0) ? items.data[stashTPL]._props.Grids[0]._props.cellsV : 66;
     return [stashX, stashY];
