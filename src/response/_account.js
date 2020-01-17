@@ -79,7 +79,7 @@ function isNicknameTaken(info) {
     return false;
 }
 
-function findId(data) {
+function findID(data) {
     let buff = Buffer.from(data.token, 'base64');
     let text = buff.toString('ascii');
     let info = json.parse(text);
@@ -99,5 +99,5 @@ module.exports.isWiped = isWiped;
 module.exports.setWipe = setWipe;
 module.exports.getReservedNickname = getReservedNickname;
 module.exports.isNicknameTaken = isNicknameTaken;
-module.exports.findId = findId;
+module.exports.findID = findID;
 module.exports.getPath = getPath;
