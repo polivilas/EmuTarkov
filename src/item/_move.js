@@ -363,7 +363,7 @@ function addItem(pmcData, body, output = item.getOutput(), sessionID) {
                 //update profile on each stack so stash recalculate will have new items
                 pmcData = profile_f.getPmcData(sessionID);
 
-                let StashFS_2D = itm_hf.recheckInventoryFreeSpace(pmcData);
+                let StashFS_2D = itm_hf.recheckInventoryFreeSpace(pmcData, sessionID);
                 let ItemSize = itm_hf.getSize(item._tpl, item._id, tmpTraderAssort.data.items);
                 let tmpSizeX = ItemSize[0];
                 let tmpSizeY = ItemSize[1];

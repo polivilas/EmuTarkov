@@ -6,8 +6,8 @@ require('../libs.js');
 * input: PlayerData
 * output: table[y][x]
 * */
-function recheckInventoryFreeSpace(pmcData) { // recalculate stach taken place
-    let PlayerStash = getPlayerStash();
+function recheckInventoryFreeSpace(pmcData, sessionID) { // recalculate stach taken place
+    let PlayerStash = getPlayerStash(sessionID);
     let Stash2D = Array(PlayerStash[1]).fill(0).map(x => Array(PlayerStash[0]).fill(0));
     for (let item of pmcData.Inventory.items) {
         // hideout  // added proper stash ID older was "5c71b934354682353958ea35"
