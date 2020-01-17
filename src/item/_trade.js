@@ -22,7 +22,7 @@ function sellItem(pmcData, body, sessionID) {
     item.resetOutput();
 
     let money = 0;
-    let prices = json.parse(profile_f.getPurchasesData(body.tid));
+    let prices = json.parse(profile_f.getPurchasesData(body.tid, sessionID));
     let output = item.getOutput();
 
     // find the items to sell
