@@ -110,7 +110,7 @@ function HideoutTakeItemsFromAreaSlots(pmcData, body, sessionID) {
 		newReq.count = 1;
 		newReq.tid = "ragfair";
 		
-		output = move_f.addItem(pmcData, newReq, output);
+		output = move_f.addItem(pmcData, newReq, output, sessionID);
 		
 		pmcData = profile_f.getPmcData(sessionID);
 		pmcData.Hideout.Areas[area].slots.splice(0, 1);
@@ -231,7 +231,7 @@ function HideoutTakeProduction(pmcData, body, sessionID) {
 		newReq.item_id = hideoutProduction.data[receipe].endProduct;
 		newReq.count = hideoutProduction.data[receipe].count;
 		newReq.tid = "ragfair";
-		return move_f.addItem(pmcData, newReq, output);	
+		return move_f.addItem(pmcData, newReq, output, sessionID);	
 	}
 
 	for (let receipe in hideoutScavcase.data) {
@@ -253,7 +253,7 @@ function HideoutTakeProduction(pmcData, body, sessionID) {
 				newReq.count = 1;
 				newReq.tid = "ragfair";
 
-				let tmpOutput = move_f.addItem(pmcData, newReq, output);
+				let tmpOutput = move_f.addItem(pmcData, newReq, output, sessionID);
 
 				for (let newItem of tmpOutput.data.items.new) {
 					output.data.items.new.push(newItem);

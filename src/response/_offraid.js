@@ -2,7 +2,7 @@
 
 require("../libs.js");
 
-function saveProgress(offRaidData) {
+function saveProgress(offRaidData, sessionID) {
     if (!settings.gameplay.features.lootSavingEnabled) {
         return;
     }
@@ -163,7 +163,7 @@ function saveProgress(offRaidData) {
         // finally delete them
         for (let item_to_delete in items_to_delete) {
             if (items_to_delete[item_to_delete] !== "insured") {
-                move_f.removeItem(pmcData, items_to_delete[item_to_delete]);
+                move_f.removeItem(pmcData, items_to_delete[item_to_delete], sessionID);
             }
         }
     }

@@ -47,7 +47,7 @@ function completeQuest(pmcData, body, sessionID) {
                         newReq.tid = "ragfair";
                 
                         pmcData = profile_f.getPmcData(sessionID);
-                        move_f.addItem(pmcData, newReq);
+                        move_f.addItem(pmcData, newReq, item.getOutput(), sessionID);
                     }
                     break;
 
