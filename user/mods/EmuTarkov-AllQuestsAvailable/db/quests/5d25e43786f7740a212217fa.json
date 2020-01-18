@@ -1,0 +1,95 @@
+{
+	"_id": "5d25e43786f7740a212217fa",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d6946c486f77452a8292cb2.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "20000",
+				"id": "5d667b6086f774266f07fcaa",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a487",
+				"value": "80000",
+				"id": "5d667b7686f774368d281aab",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a487",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 80000
+						}
+					}
+				]
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a488",
+				"value": "5",
+				"id": "5d667b8986f7744a2e70f043",
+				"type": "Item",
+				"index": 2,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a488",
+						"_tpl": "5d1b371186f774253763a656",
+						"upd": {
+							"StackObjectsCount": 5
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.05",
+				"id": "5d776f0a86f7742fa857dd35",
+				"type": "TraderStanding",
+				"index": 3
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "3",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d272bd386f77446085fa4f8",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"savageRole": [
+										"followerBully"
+									],
+									"id": "5d272c1e86f77407053eb9b9"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d272bd386f77446085fa4f9"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

@@ -1,0 +1,111 @@
+{
+	"_id": "5d25e44f86f77443e625e385",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d6947c686f77452ac614b4b.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "30000",
+				"id": "5d667d6a86f774368f43a1f9",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a48c",
+				"value": "200000",
+				"id": "5d667d7d86f774131e206b4d",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a48c",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 200000
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.05",
+				"id": "5d777e9286f774319c488826",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a48d",
+				"value": "1",
+				"id": "5da9f5b886f7741e324ead3c",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a48d",
+						"_tpl": "59fb023c86f7746d0d4b423c",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a48e",
+				"value": "5000",
+				"id": "5da9f5e386f77443dd3e5a8a",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a48e",
+						"_tpl": "5696686a4bdc2da3298b456a",
+						"upd": {
+							"StackObjectsCount": 5000
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d27369586f774457411b263",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"savageRole": [
+										"bossGluhar"
+									],
+									"id": "5d667d2486f7744a2e70f046"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d27369586f774457411b264"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

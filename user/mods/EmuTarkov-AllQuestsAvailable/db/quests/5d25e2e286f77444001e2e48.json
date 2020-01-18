@@ -1,0 +1,168 @@
+{
+	"_id": "5d25e2e286f77444001e2e48",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d69468a86f77452aa51d79d.jpg",
+	"type": "Elimination",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "23000",
+				"id": "5d667a3786f7744dcc5e2997",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a47f",
+				"value": "150000",
+				"id": "5d667a5686f774369120c2b4",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a47f",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 150000
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.05",
+				"id": "5d776b3086f7742fa901bc76",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a480",
+				"value": "3",
+				"id": "5da9ed9a86f77406c9595c8e",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a480",
+						"_tpl": "5c12613b86f7743bbe2c3f76",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a481",
+				"value": "1",
+				"id": "5da9edaf86f77476bb048041",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a481",
+						"_tpl": "5ad7242b86f7740a6a3abd43",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a482",
+				"value": "1",
+				"id": "5da9edc386f774088158e638",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a482",
+						"_tpl": "5ad7217186f7746744498875",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d2719b186f7740701348572",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"savageRole": [
+										"bossKilla"
+									],
+									"id": "5d2719d486f7740703552142"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d2719b186f7740701348573"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5c0e874186f7745dc7616606"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 1,
+					"parentId": "",
+					"id": "5d667a8e86f774131e206b46"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5c0e874186f7745dc7616606"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 2,
+					"parentId": "",
+					"id": "5d271a3486f774483c7bdb12",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5d667a8e86f774131e206b46",
+								"id": "5d667a9d86f7743690020674"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}

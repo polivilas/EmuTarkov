@@ -1,0 +1,46 @@
+{
+	"_id": "5d6fbc2886f77449d825f9d3",
+	"traderId": "5935c25fb3acc3127c3d8cd9",
+	"location": "any",
+	"image": "/files/quest/icon/5a27cafa86f77424e20615d6.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"target": "Sniper",
+				"value": "300",
+				"id": "5d78ce4986f77437f7656bf2",
+				"type": "Skill",
+				"index": 0
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"569668774bdc2da2298b4568"
+					],
+					"value": "50000",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": false,
+					"index": 0,
+					"parentId": "",
+					"id": "5d6fbf0f86f77449d97f738e"
+				}
+			}
+		],
+		"Fail": []
+	}
+}

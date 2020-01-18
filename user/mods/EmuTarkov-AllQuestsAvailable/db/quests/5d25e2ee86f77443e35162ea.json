@@ -1,0 +1,168 @@
+{
+	"_id": "5d25e2ee86f77443e35162ea",
+	"traderId": "5c0647fdd443bc2504c2d371",
+	"location": "any",
+	"image": "/files/quest/icon/5d69470786f774238a38d844.jpg",
+	"type": "Completion",
+	"isKey": false,
+	"restartable": false,
+	"min_level": 1,
+	"canShowNotificationsInGame": true,
+	"rewards": {
+		"Started": [],
+		"Success": [
+			{
+				"value": "25000",
+				"id": "5d667ad886f7744a2e70f040",
+				"type": "Experience",
+				"index": 0
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a483",
+				"value": "17000",
+				"id": "5d667ae886f774368d281aaa",
+				"type": "Item",
+				"index": 1,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a483",
+						"_tpl": "5449016a4bdc2d6f028b456f",
+						"upd": {
+							"StackObjectsCount": 17000
+						}
+					}
+				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "0.05",
+				"id": "5d77c67e86f7745041358b51",
+				"type": "TraderStanding",
+				"index": 2
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a484",
+				"value": "4",
+				"id": "5da9f68086f77441e90527b3",
+				"type": "Item",
+				"index": 3,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a484",
+						"_tpl": "5d6fc87386f77449db3db94e",
+						"upd": {
+							"StackObjectsCount": 4
+						}
+					}
+				]
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a485",
+				"value": "1",
+				"id": "5da9f69986f774421a5d6fe4",
+				"type": "Item",
+				"index": 4,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a485",
+						"_tpl": "5c05300686f7746dce784e5d",
+						"upd": {
+							"StackObjectsCount": 1
+						}
+					}
+				]
+			},
+			{
+				"target": "5e230f11fabc1e7f3745a486",
+				"value": "3",
+				"id": "5da9f6ad86f7746c62550d6a",
+				"type": "Item",
+				"index": 5,
+				"items": [
+					{
+						"_id": "5e230f11fabc1e7f3745a486",
+						"_tpl": "5c94bbff86f7747ee735c08f",
+						"upd": {
+							"StackObjectsCount": 3
+						}
+					}
+				]
+			}
+		],
+		"Fail": []
+	},
+	"conditions": {
+		"AvailableForStart": [],
+		"AvailableForFinish": [
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Elimination",
+					"counter": {
+						"id": "5d27276886f7740701348577",
+						"conditions": [
+							{
+								"_parent": "Kills",
+								"_props": {
+									"target": "Savage",
+									"compareMethod": ">=",
+									"value": "1",
+									"savageRole": [
+										"bossKojaniy"
+									],
+									"id": "5d27293d86f774483c7bdb18"
+								}
+							}
+						]
+					},
+					"index": 0,
+					"parentId": "",
+					"id": "5d27276886f7740701348578"
+				}
+			},
+			{
+				"_parent": "FindItem",
+				"_props": {
+					"target": [
+						"5d08d21286f774736e7c94c3"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 1,
+					"parentId": "",
+					"id": "5d2f464e498f71c8886f7656"
+				}
+			},
+			{
+				"_parent": "HandoverItem",
+				"_props": {
+					"target": [
+						"5d08d21286f774736e7c94c3"
+					],
+					"value": "1",
+					"minDurability": 0,
+					"maxDurability": 0,
+					"dogtagLevel": 0,
+					"onlyFoundInRaid": true,
+					"index": 2,
+					"parentId": "",
+					"id": "5d272a0b86f7745ba2701532",
+					"visibilityConditions": [
+						{
+							"_parent": "CompleteCondition",
+							"_props": {
+								"target": "5d2f464e498f71c8886f7656",
+								"id": "5d2f4664498f71bcb806043c"
+							}
+						}
+					]
+				}
+			}
+		],
+		"Fail": []
+	}
+}
