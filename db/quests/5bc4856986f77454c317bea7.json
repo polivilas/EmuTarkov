@@ -2,7 +2,7 @@
 	"_id": "5bc4856986f77454c317bea7",
 	"traderId": "5c0647fdd443bc2504c2d371",
 	"location": "any",
-	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
 	"type": "Elimination",
 	"isKey": false,
 	"restartable": false,
@@ -19,20 +19,20 @@
 			},
 			{
 				"target": "5c0647fdd443bc2504c2d371",
-				"value": "0.05",
-				"id": "5bcf25cc86f7746a45695b06",
+				"value": "0.04",
+				"id": "5db9a818dac30559b3230cf6",
 				"type": "TraderStanding",
 				"index": 1
 			},
 			{
-				"target": "5d34df2788a4504526796db9",
+				"target": "5e230f10fabc1e7f3745a3c1",
 				"value": "1",
 				"id": "5bcf25e886f774378e266a35",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796db9",
+						"_id": "5e230f10fabc1e7f3745a3c1",
 						"_tpl": "5bc5a35cd4351e450201232f",
 						"upd": {
 							"StackObjectsCount": 1
@@ -41,28 +41,28 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dba",
+				"target": "5e230f10fabc1e7f3745a3c2",
 				"id": "5bcf25f486f7746a472ad9f5",
 				"type": "AssortmentUnlock",
 				"index": 3,
-				"loyaltyLevel": 4,
+				"loyaltyLevel": 3,
 				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dba",
+						"_id": "5e230f10fabc1e7f3745a3c2",
 						"_tpl": "5bc5a35cd4351e450201232f"
 					}
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dbb",
+				"target": "5e230f10fabc1e7f3745a3c3",
 				"value": "85000",
 				"id": "5bcf261286f7746a464c5684",
 				"type": "Item",
 				"index": 4,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dbb",
+						"_id": "5e230f10fabc1e7f3745a3c3",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 85000
@@ -74,23 +74,12 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [
-			{
-				"_parent": "Quest",
-				"_props": {
-					"target": "5bc4836986f7740c0152911c",
-					"status": 4,
-					"index": 0,
-					"parentId": "",
-					"id": "5bdabf6286f7743e171249af"
-				}
-			}
-		],
+		"AvailableForStart": [],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",
 				"_props": {
-					"value": "10",
+					"value": "7",
 					"type": "Elimination",
 					"counter": {
 						"id": "5bc485b586f774726473a857",
@@ -115,6 +104,30 @@
 										],
 										[
 											"59bffbb386f77435b379b9c2"
+										],
+										[
+											"593d489686f7745c6255d58a"
+										],
+										[
+											"5a0d63621526d8dba31fe3bf"
+										],
+										[
+											"59fb257e86f7742981561852"
+										],
+										[
+											"5a9fbacda2750c00141e080f"
+										],
+										[
+											"5a34fe59c4a282000b1521a2"
+										],
+										[
+											"5c7955c22e221644f31bfd5e"
+										],
+										[
+											"5cff9e84d7ad1a049e54ed55"
+										],
+										[
+											"5d44064fa4b9361e4f6eb8b5"
 										]
 									],
 									"id": "5bc488ca86f77460ec12a0d0"

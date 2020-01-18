@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5d34df2788a4504526796d5d",
+				"target": "5e230f11fabc1e7f3745a439",
 				"value": "25000",
 				"id": "5c1cfe7e86f7743db8758cfd",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d5d",
+						"_id": "5e230f11fabc1e7f3745a439",
 						"_tpl": "5696686a4bdc2da3298b456a",
 						"upd": {
 							"StackObjectsCount": 25000
@@ -41,7 +41,7 @@
 				"index": 2
 			},
 			{
-				"target": "5d34df2788a4504526796d5e",
+				"target": "5e230f11fabc1e7f3745a43a",
 				"id": "5c19314586f774315e7716c4",
 				"type": "AssortmentUnlock",
 				"index": 3,
@@ -49,13 +49,13 @@
 				"traderId": "5935c25fb3acc3127c3d8cd9",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d5e",
+						"_id": "5e230f11fabc1e7f3745a43a",
 						"_tpl": "5c0a2cec0db834001b7ce47d"
 					}
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796d5f",
+				"target": "5e230f11fabc1e7f3745a43b",
 				"id": "5c19318086f7745fa96afd4a",
 				"type": "AssortmentUnlock",
 				"index": 4,
@@ -63,13 +63,13 @@
 				"traderId": "5935c25fb3acc3127c3d8cd9",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d5f",
+						"_id": "5e230f11fabc1e7f3745a43b",
 						"_tpl": "5c0e66e2d174af02a96252f4"
 					}
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796d60",
+				"target": "5e230f11fabc1e7f3745a43c",
 				"id": "5c19319686f7747ce71bcbe7",
 				"type": "AssortmentUnlock",
 				"index": 5,
@@ -77,20 +77,20 @@
 				"traderId": "5935c25fb3acc3127c3d8cd9",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d60",
+						"_id": "5e230f11fabc1e7f3745a43c",
 						"_tpl": "5c0548ae0db834001966a3c2"
 					}
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796d61",
+				"target": "5e230f11fabc1e7f3745a43d",
 				"value": "1",
 				"id": "5c1ce80a86f774716e34081d",
 				"type": "Item",
 				"index": 6,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d61",
+						"_id": "5e230f11fabc1e7f3745a43d",
 						"_tpl": "5c0a2cec0db834001b7ce47d",
 						"upd": {
 							"StackObjectsCount": 1
@@ -99,14 +99,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796d62",
+				"target": "5e230f11fabc1e7f3745a43e",
 				"value": "1",
 				"id": "5c1ce81a86f774716e34081f",
 				"type": "Item",
 				"index": 7,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d62",
+						"_id": "5e230f11fabc1e7f3745a43e",
 						"_tpl": "5c0e66e2d174af02a96252f4",
 						"upd": {
 							"StackObjectsCount": 1
@@ -115,14 +115,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796d63",
+				"target": "5e230f11fabc1e7f3745a43f",
 				"value": "3",
 				"id": "5c1ce82d86f77470b220d1d9",
 				"type": "Item",
 				"index": 8,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d63",
+						"_id": "5e230f11fabc1e7f3745a43f",
 						"_tpl": "5c0548ae0db834001966a3c2",
 						"upd": {
 							"StackObjectsCount": 3
@@ -136,13 +136,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Quest",
+				"_parent": "Level",
 				"_props": {
-					"target": "5a27bc8586f7741b543d8ea4",
-					"status": 4,
+					"compareMethod": ">=",
+					"value": "40",
 					"index": 0,
 					"parentId": "",
-					"id": "5d0a111586f7743a1b0d87b1"
+					"id": "5d0a0e2286f7743a1a74d63b"
 				}
 			}
 		],
@@ -345,6 +345,39 @@
 					"parentId": "",
 					"id": "5c1931e686f7747ce71bcbea"
 				}
+			},
+			{
+				"_parent": "CounterCreator",
+				"_props": {
+					"value": "1",
+					"type": "Exploration",
+					"counter": {
+						"id": "5dc984ae4b68b15f4825cea4",
+						"conditions": [
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"RezervBase"
+									],
+									"id": "5dc984b8e520fb08ed2fee73"
+								}
+							},
+							{
+								"_parent": "ExitStatus",
+								"_props": {
+									"status": [
+										"Survived"
+									],
+									"id": "5dc984c3f5797f2494325086"
+								}
+							}
+						]
+					},
+					"index": 6,
+					"parentId": "",
+					"id": "5dc984ae4b68b15f4825cea5"
+				}
 			}
 		],
 		"Fail": [
@@ -371,13 +404,14 @@
 								"_parent": "Location",
 								"_props": {
 									"target": [
+										"Interchange",
 										"Shoreline",
-										"Woods",
-										"bigmap",
 										"factory4_day",
 										"factory4_night",
-										"laboratory",
-										"Interchange"
+										"RezervBase",
+										"Woods",
+										"bigmap",
+										"laboratory"
 									],
 									"id": "5c13992486f774365a69cc4e"
 								}

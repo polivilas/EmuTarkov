@@ -25,20 +25,27 @@
 				"index": 1
 			},
 			{
-				"target": "5d34df2788a4504526796bd3",
+				"target": "5e230f10fabc1e7f3745a294",
 				"value": "1200",
 				"id": "5a28243486f7741da250b43f",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796bd3",
+						"_id": "5e230f10fabc1e7f3745a294",
 						"_tpl": "5696686a4bdc2da3298b456a",
 						"upd": {
 							"StackObjectsCount": 1200
 						}
 					}
 				]
+			},
+			{
+				"target": "5c0647fdd443bc2504c2d371",
+				"value": "-0.01",
+				"id": "5d7260c186f77417140d77b2",
+				"type": "TraderStanding",
+				"index": 3
 			}
 		],
 		"Fail": []
@@ -53,16 +60,6 @@
 					"index": 0,
 					"parentId": "",
 					"id": "5a3a72c786f7745a7e19f661"
-				}
-			},
-			{
-				"_parent": "Quest",
-				"_props": {
-					"target": "5a27bafb86f7741c73584017",
-					"status": 4,
-					"index": 1,
-					"parentId": "",
-					"id": "5c9de99286f7741ced54c902"
 				}
 			}
 		],
@@ -128,37 +125,6 @@
 					"index": 0,
 					"parentId": "",
 					"id": "5c9de99286f7741ced54c902"
-				}
-			},
-			{
-				"_parent": "FindItem",
-				"_props": {
-					"target": [
-						"59f32c3b86f77472a31742f0",
-						"59f32bb586f774757e1e8442"
-					],
-					"value": "10",
-					"minDurability": 0,
-					"index": 1,
-					"parentId": "",
-					"id": "5a281dda86f7743f21349fd2",
-					"dogtagLevel": 0
-				}
-			},
-			{
-				"_parent": "HandoverItem",
-				"_props": {
-					"target": [
-						"59f32c3b86f77472a31742f0",
-						"59f32bb586f774757e1e8442"
-					],
-					"value": "10",
-					"minDurability": 0,
-					"index": 2,
-					"parentId": "",
-					"id": "5a281df286f77444dc7a2855",
-					"dogtagLevel": 0,
-					"visibilityConditions": []
 				}
 			}
 		],

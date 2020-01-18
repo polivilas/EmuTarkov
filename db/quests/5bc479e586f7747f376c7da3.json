@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e0ac74b9d594972a112a9d9",
+				"target": "5e230f10fabc1e7f3745a3ae",
 				"value": "65000",
 				"id": "5bcf21cc86f7746a45695a71",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e0ac74b9d594972a112a9d9",
+						"_id": "5e230f10fabc1e7f3745a3ae",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 65000
@@ -41,7 +41,7 @@
 				"index": 2
 			},
 			{
-				"target": "5e0ac74b9d594972a112a9da",
+				"target": "5e230f10fabc1e7f3745a3af",
 				"id": "5bcf222b86f774378e26691b",
 				"type": "AssortmentUnlock",
 				"index": 3,
@@ -49,20 +49,20 @@
 				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
-						"_id": "5e0ac74b9d594972a112a9da",
+						"_id": "5e230f10fabc1e7f3745a3af",
 						"_tpl": "5bc5a372d4351e44f824d17f"
 					}
 				]
 			},
 			{
-				"target": "5e0ac74b9d594972a112a9db",
+				"target": "5e230f10fabc1e7f3745a3b0",
 				"value": "1",
 				"id": "5bcf2c4686f774722e666716",
 				"type": "Item",
 				"index": 4,
 				"items": [
 					{
-						"_id": "5e0ac74b9d594972a112a9db",
+						"_id": "5e230f10fabc1e7f3745a3b0",
 						"_tpl": "5bc5a372d4351e44f824d17f",
 						"upd": {
 							"StackObjectsCount": 1
@@ -74,18 +74,7 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [
-			{
-				"_parent": "Quest",
-				"_props": {
-					"target": "5bc4776586f774512d07cf05",
-					"status": 4,
-					"index": 0,
-					"parentId": "",
-					"id": "5bdabf0586f7743e1809c555"
-				}
-			}
-		],
+		"AvailableForStart": [],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

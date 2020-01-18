@@ -2,7 +2,7 @@
 	"_id": "5bc4893c86f774626f5ebf3e",
 	"traderId": "5c0647fdd443bc2504c2d371",
 	"location": "5704e3c2d2720bac5b8b4567",
-	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
 	"type": "Elimination",
 	"isKey": false,
 	"restartable": false,
@@ -19,20 +19,20 @@
 			},
 			{
 				"target": "5c0647fdd443bc2504c2d371",
-				"value": "0.06",
-				"id": "5bcf263c86f7746a45695b08",
+				"value": "0.05",
+				"id": "5db9a8232f7b5700283d0806",
 				"type": "TraderStanding",
 				"index": 1
 			},
 			{
-				"target": "5d34df2788a4504526796dbc",
+				"target": "5e230f10fabc1e7f3745a3c4",
 				"value": "200000",
 				"id": "5bcf265486f774378e266a36",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dbc",
+						"_id": "5e230f10fabc1e7f3745a3c4",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 200000
@@ -41,14 +41,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dbd",
+				"target": "5e230f10fabc1e7f3745a3c5",
 				"value": "1",
 				"id": "5bcf266986f7746a45695b09",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dbd",
+						"_id": "5e230f10fabc1e7f3745a3c5",
 						"_tpl": "5bae13bad4351e00320204af",
 						"upd": {
 							"StackObjectsCount": 1
@@ -57,14 +57,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dbe",
+				"target": "5e230f10fabc1e7f3745a3c6",
 				"value": "1",
 				"id": "5bcf267786f7746a486b85e7",
 				"type": "Item",
 				"index": 4,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dbe",
+						"_id": "5e230f10fabc1e7f3745a3c6",
 						"_tpl": "5bae13ded4351e44f824bf38",
 						"upd": {
 							"StackObjectsCount": 1
@@ -73,7 +73,7 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dbf",
+				"target": "5e230f10fabc1e7f3745a3c7",
 				"id": "5bcf268686f7746a45695b0a",
 				"type": "AssortmentUnlock",
 				"index": 5,
@@ -81,13 +81,13 @@
 				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dbf",
+						"_id": "5e230f10fabc1e7f3745a3c7",
 						"_tpl": "5bae13ded4351e44f824bf38"
 					}
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dc0",
+				"target": "5e230f10fabc1e7f3745a3c8",
 				"id": "5bcf269286f7746a472ad9f7",
 				"type": "AssortmentUnlock",
 				"index": 6,
@@ -95,7 +95,7 @@
 				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dc0",
+						"_id": "5e230f10fabc1e7f3745a3c8",
 						"_tpl": "5bae13bad4351e00320204af"
 					}
 				]
@@ -104,23 +104,12 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [
-			{
-				"_parent": "Quest",
-				"_props": {
-					"target": "5bc4856986f77454c317bea7",
-					"status": 4,
-					"index": 0,
-					"parentId": "",
-					"id": "5bdabf7186f7743e152e867d"
-				}
-			}
-		],
+		"AvailableForStart": [],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",
 				"_props": {
-					"value": "4",
+					"value": "3",
 					"type": "Elimination",
 					"counter": {
 						"id": "5bc48aed86f77452c947ce66",

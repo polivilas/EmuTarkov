@@ -2,7 +2,7 @@
 	"_id": "5bc4826c86f774106d22d88b",
 	"traderId": "5c0647fdd443bc2504c2d371",
 	"location": "56f40101d2720b2a4d8b45d6",
-	"image": "/files/quest/icon/5bc9fab686f7742a90020769.jpg",
+	"image": "/files/quest/icon/5bc481ec86f7740c8649a4f1.jpg",
 	"type": "Elimination",
 	"isKey": false,
 	"restartable": false,
@@ -19,13 +19,13 @@
 			},
 			{
 				"target": "5c0647fdd443bc2504c2d371",
-				"value": "0.05",
-				"id": "5bcf23c086f7746a49593449",
+				"value": "0.04",
+				"id": "5db9a6696194ab4e69304de6",
 				"type": "TraderStanding",
 				"index": 1
 			},
 			{
-				"target": "5d34df2788a4504526796dc4",
+				"target": "5e230f10fabc1e7f3745a3bb",
 				"id": "5bcf23ff86f7746a464c5678",
 				"type": "AssortmentUnlock",
 				"index": 2,
@@ -33,20 +33,20 @@
 				"traderId": "5c0647fdd443bc2504c2d371",
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dc4",
+						"_id": "5e230f10fabc1e7f3745a3bb",
 						"_tpl": "5bc5a351d4351e003477a414"
 					}
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dc5",
+				"target": "5e230f10fabc1e7f3745a3bc",
 				"value": "1",
 				"id": "5bcf241086f7746a45695afd",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dc5",
+						"_id": "5e230f10fabc1e7f3745a3bc",
 						"_tpl": "5bc5a351d4351e003477a414",
 						"upd": {
 							"StackObjectsCount": 1
@@ -55,14 +55,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796dc6",
+				"target": "5e230f10fabc1e7f3745a3bd",
 				"value": "75000",
 				"id": "5bcf242686f7746a45695afe",
 				"type": "Item",
 				"index": 4,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796dc6",
+						"_id": "5e230f10fabc1e7f3745a3bd",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 75000
@@ -74,23 +74,12 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [
-			{
-				"_parent": "Quest",
-				"_props": {
-					"target": "5bc480a686f7741af0342e29",
-					"status": 4,
-					"index": 0,
-					"parentId": "",
-					"id": "5bdabf4486f7743e1665df6d"
-				}
-			}
-		],
+		"AvailableForStart": [],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",
 				"_props": {
-					"value": 12,
+					"value": "10",
 					"type": "Elimination",
 					"counter": {
 						"id": "5bc482c186f774710a789f25",

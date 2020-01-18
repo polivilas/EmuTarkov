@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5d34df2788a4504526796d80",
+				"target": "5e230f10fabc1e7f3745a3cb",
 				"value": "100000",
 				"id": "5c1fd82b86f7742b391bf154",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d80",
+						"_id": "5e230f10fabc1e7f3745a3cb",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 100000
@@ -41,14 +41,14 @@
 				"index": 2
 			},
 			{
-				"target": "5d34df2788a4504526796d81",
+				"target": "5e230f10fabc1e7f3745a3cc",
 				"value": "1",
 				"id": "5c17cf0086f77430a323d853",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796d81",
+						"_id": "5e230f10fabc1e7f3745a3cc",
 						"_tpl": "588892092459774ac91d4b11",
 						"parentId": "hideout",
 						"slotId": "hideout",
@@ -57,40 +57,40 @@
 						}
 					},
 					{
-						"_id": "5d34df2788a4504526796d82",
+						"_id": "5e230f10fabc1e7f3745a3cd",
 						"_tpl": "5888988e24597752fe43a6fa",
-						"parentId": "5d34df2788a4504526796d81",
+						"parentId": "5e230f10fabc1e7f3745a3cc",
 						"slotId": "mod_magazine"
 					},
 					{
-						"_id": "5d34df2788a4504526796d83",
+						"_id": "5e230f10fabc1e7f3745a3ce",
 						"_tpl": "5888945a2459774bf43ba385",
-						"parentId": "5d34df2788a4504526796d81",
+						"parentId": "5e230f10fabc1e7f3745a3cc",
 						"slotId": "mod_barrel"
 					},
 					{
-						"_id": "5d34df2788a4504526796d84",
-						"_tpl": "57c55f172459772d27602381",
-						"parentId": "5d34df2788a4504526796d81",
-						"slotId": "mod_pistol_grip"
-					},
-					{
-						"_id": "5d34df2788a4504526796d85",
-						"_tpl": "58889d0c2459775bc215d981",
-						"parentId": "5d34df2788a4504526796d81",
-						"slotId": "mod_stock"
-					},
-					{
-						"_id": "5d34df2788a4504526796d86",
+						"_id": "5e230f10fabc1e7f3745a3cf",
 						"_tpl": "58889c7324597754281f9439",
-						"parentId": "5d34df2788a4504526796d83",
+						"parentId": "5e230f10fabc1e7f3745a3ce",
 						"slotId": "mod_muzzle"
 					},
 					{
-						"_id": "5d34df2788a4504526796d87",
+						"_id": "5e230f10fabc1e7f3745a3d0",
 						"_tpl": "5888961624597754281f93f3",
-						"parentId": "5d34df2788a4504526796d83",
+						"parentId": "5e230f10fabc1e7f3745a3ce",
 						"slotId": "mod_bipod"
+					},
+					{
+						"_id": "5e230f10fabc1e7f3745a3d1",
+						"_tpl": "57c55f172459772d27602381",
+						"parentId": "5e230f10fabc1e7f3745a3cc",
+						"slotId": "mod_pistol_grip"
+					},
+					{
+						"_id": "5e230f10fabc1e7f3745a3d2",
+						"_tpl": "58889d0c2459775bc215d981",
+						"parentId": "5e230f10fabc1e7f3745a3cc",
+						"slotId": "mod_stock"
 					}
 				]
 			}
@@ -100,13 +100,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Quest",
+				"_parent": "Level",
 				"_props": {
-					"target": "5b4795fb86f7745876267770",
-					"status": 4,
+					"compareMethod": ">=",
+					"value": "30",
 					"index": 0,
 					"parentId": "",
-					"id": "5c1fa99086f77407e903a5fa"
+					"id": "5c1ea18b86f77461d75caa21"
 				}
 			}
 		],

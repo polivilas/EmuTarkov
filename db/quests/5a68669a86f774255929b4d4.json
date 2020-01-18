@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5d34df2788a4504526796c92",
+				"target": "5e230f10fabc1e7f3745a2c5",
 				"value": "1",
 				"id": "5ac665d286f77405d472939f",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c92",
+						"_id": "5e230f10fabc1e7f3745a2c5",
 						"_tpl": "5aafbcd986f7745e590fff23",
 						"upd": {
 							"StackObjectsCount": 1
@@ -34,14 +34,14 @@
 				]
 			},
 			{
-				"target": "5d34df2788a4504526796c93",
+				"target": "5e230f10fabc1e7f3745a2c6",
 				"value": "35000",
 				"id": "5a6887c686f77472c17ca5ed",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5d34df2788a4504526796c93",
+						"_id": "5e230f10fabc1e7f3745a2c6",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 35000
@@ -60,18 +60,7 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [
-			{
-				"_parent": "Quest",
-				"_props": {
-					"target": "5a68667486f7742607157d28",
-					"status": 4,
-					"index": 0,
-					"parentId": "",
-					"id": "5a6879be86f774284429b1bb"
-				}
-			}
-		],
+		"AvailableForStart": [],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",
@@ -87,6 +76,15 @@
 									"target": "ter_017_area_1",
 									"value": "1",
 									"id": "5a6879cf86f7745f5c382c3e"
+								}
+							},
+							{
+								"_parent": "Location",
+								"_props": {
+									"target": [
+										"factory4_night"
+									],
+									"id": "5dbabe4f5c1333728b71deb4"
 								}
 							}
 						]
