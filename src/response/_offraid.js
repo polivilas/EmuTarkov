@@ -64,47 +64,8 @@ function saveProgress(offRaidData, sessionID) {
         offRaidProfile.Inventory.items[offRaidItem] = currentItem;
     }
 
-    // replace bsg shit long ID with proper one
-    let string_inventory = json.stringify(offRaidProfile.Inventory.items);
-
-    for (let item in offRaidProfile.Inventory.items) {
-        let insuredItem = false;
-
-        // insured items shouldn't be renamed
-        // only works for pmcs.
-        if (!isPlayerScav) {
-            for (let insurance in pmcData.InsuredItems) {
-                if (pmcData.InsuredItems[insurance].itemId === offRaidProfile.Inventory.items[item]._id) {
-                    insuredItem = true;
-                }
-            }
-        }
-
-        // do not replace important ID's
-        if (insuredItem) {
-            continue;
-        }
-
-        if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.equipment) {
-            continue;
-        }
-
-        if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.questRaidItems) {
-            continue;
-        }
-
-        if (offRaidProfile.Inventory.items[item]._id === offRaidProfile.Inventory.questStashItems) {
-            continue;
-        }
-
-        // replace id
-        let old_id = offRaidProfile.Inventory.items[item]._id;
-        let new_id = utility.generateNewItemId();
-
-        string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
-    }
-
-    offRaidProfile.Inventory.items = JSON.parse(string_inventory);
+    // replace item ID's
+    offRaidProfile.Inventory.items = itm_hf.replaceIDs(offRaidProfile, offRaidProfile.Inventory.items);
 
     // set profile equipment to the raid equipment
     move_f.removeItem(pmcData, pmcData.data[profileIndex].Inventory.equipment, item.getOutput(), profileIndex);

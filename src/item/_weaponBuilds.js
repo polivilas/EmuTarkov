@@ -14,39 +14,9 @@ function SaveBuild(pmcData, body, sessionID) {
 
 	let output = item.getOutput();
 	let savedBuilds = json.parse(json.read(getPath(sessionID)));
-	let ids = [];
-	let dupes = {};
-	let newParents = {}
 
-	for (let itemBuild of body.items) {
-		ids.push(itemBuild._id);
-	}
-	
-	for (let x in ids) {
-		dupes[x] = (dupes[x] || 0) + 1;
-	}
-
-	for (let itemBuilds in body.items) {
-		if (dupes[body.items[itemBuilds]._id] > 1 ) {
-			let newId = utility.generateNewItemId();
-			
-			logger.logWarning("id is duplicated ! " + body.items[itemBuilds]._id);
-			newParents[newId] = {"oldId" : body.items[itemBuilds]._id, "slot" : body.items[itemBuilds].slotId};
-			body.items[itemBuilds]._id = newId;
-		}
-
-		if (dupes[body.items[itemBuilds].parentId] > 1) {
-			loggr.logWarning("an item has a duplicated parent ! : " + body.items[itemBuilds].parentId);
-
-			for (let newId in newParents) {
-				if (body.items[itemBuilds].parentId == newParents[newId].oldId) {
-					body.items[itemBuilds].parentId = newId;
-				}
-
-				delete newParents[newId];
-			}
-		}
-	}
+	// replace duplicate ID's
+	body.items = itm_hf.replaceIDs(pmcData, body.items);
 
 	savedBuilds.data.push(body);
 	json.write(getPath(sessionID), savedBuilds);
