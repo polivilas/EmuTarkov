@@ -439,7 +439,7 @@ function isDogtag(itemId) {
     return itemId === "59f32bb586f774757e1e8442" || itemId === "59f32c3b86f77472a31742f0" ? true : false;
 }
 
-function replaceIDs(pmcData, items) {
+function replaceIDs(pmcData, items, checkInsurance) {
     // replace bsg shit long ID with proper one
     let string_inventory = json.stringify(items);
 
@@ -448,9 +448,11 @@ function replaceIDs(pmcData, items) {
 
         // insured items shouldn't be renamed
         // only works for pmcs.
-        for (let insurance in pmcData) {
-            if (pmcData.InsuredItems[insurance].itemId === items[item]._id) {
-                insuredItem = true;
+        if (checkInsurance) {
+            for (let insurance in pmcData) {
+                if (pmcData.InsuredItems[insurance].itemId === items[item]._id) {
+                    insuredItem = true;
+                }
             }
         }
 
@@ -469,7 +471,41 @@ function replaceIDs(pmcData, items) {
         string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);
     }
 
-    return JSON.parse(string_inventory);
+    items = JSON.parse(string_inventory);
+
+    // fix duplicate id's
+	let dupes = {};
+	let newParents = {};
+	
+	for (let item of items) {
+		dupes[item._id] = (dupes[item._id] || 0) + 1;
+	}
+
+	for (let item of items) {
+        // duplicate item
+		if (dupes[item._id] > 1) {
+			let newId = utility.generateNewItemId();
+			
+			logger.logWarning("id is duplicated ! " + item._id);
+			newParents[newId] = {"oldId" : item._id, "slot" : item.slotId};
+			item._id = newId;
+		}
+
+        // duplicate parent
+		if (dupes[item.parentId] > 1) {
+			logger.logWarning("an item has a duplicated parent ! : " + item.parentId);
+
+			for (let newId in newParents) {
+				if (item.parentId == newParents[newId].oldId) {
+					item.parentId = newId;
+				}
+
+				delete newParents[newId];
+			}
+		}
+    }
+    
+    return items;
 }
 
 module.exports.recheckInventoryFreeSpace = recheckInventoryFreeSpace;

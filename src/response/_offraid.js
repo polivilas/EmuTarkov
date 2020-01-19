@@ -65,7 +65,7 @@ function saveProgress(offRaidData, sessionID) {
     }
 
     // replace item ID's
-    offRaidProfile.Inventory.items = itm_hf.replaceIDs(offRaidProfile, offRaidProfile.Inventory.items);
+    offRaidProfile.Inventory.items = itm_hf.replaceIDs(offRaidProfile, offRaidProfile.Inventory.items, true);
 
     // set profile equipment to the raid equipment
     move_f.removeItem(pmcData, pmcData.data[profileIndex].Inventory.equipment, item.getOutput(), profileIndex);

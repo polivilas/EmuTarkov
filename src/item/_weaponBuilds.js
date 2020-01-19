@@ -16,7 +16,9 @@ function SaveBuild(pmcData, body, sessionID) {
 	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 
 	// replace duplicate ID's
-	body.items = itm_hf.replaceIDs(pmcData, body.items);
+	body.items = itm_hf.replaceIDs(pmcData, body.items, false);
+	logger.logWarning("Weapons after ID change");
+	logger.logData(body.items);
 
 	savedBuilds.data.push(body);
 	json.write(getPath(sessionID), savedBuilds);
