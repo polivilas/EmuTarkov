@@ -439,33 +439,31 @@ function isDogtag(itemId) {
     return itemId === "59f32bb586f774757e1e8442" || itemId === "59f32c3b86f77472a31742f0" ? true : false;
 }
 
-function replaceIDs(pmcData, items, checkInsurance) {
+function replaceIDs(pmcData, items) {
     // replace bsg shit long ID with proper one
     let string_inventory = json.stringify(items);
 
-    for (let item in items) {
+    for (let item of items) {
         let insuredItem = false;
 
         // insured items shouldn't be renamed
         // only works for pmcs.
-        if (checkInsurance) {
-            for (let insurance in pmcData) {
-                if (pmcData.InsuredItems[insurance].itemId === items[item]._id) {
-                    insuredItem = true;
-                }
+        for (let insurance of pmcData.InsuredItems) {
+            if (insurance.itemId === item._id) {
+                insuredItem = true;
             }
         }
 
         // do not replace important ID's
-        if (items[item]._id === pmcData.Inventory.equipment
-        || items[item]._id === pmcData.Inventory.questRaidItems
-        || items[item]._id === pmcData.Inventory.questStashItems
+        if (item._id === pmcData.Inventory.equipment
+        || item._id === pmcData.Inventory.questRaidItems
+        || item._id === pmcData.Inventory.questStashItems
         || insuredItem) {
             continue;
         }
 
         // replace id
-        let old_id = items[item]._id;
+        let old_id = item._id;
         let new_id = utility.generateNewItemId();
 
         string_inventory = string_inventory.replace(new RegExp(old_id, 'g'), new_id);

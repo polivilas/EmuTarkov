@@ -128,6 +128,10 @@ function handleRequest(req, resp) {
 
             zlib.inflate(data, function (err, body) {
                 let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
+
+                if (!settings.gameplay.features.lootSavingEnabled) {
+                    return;
+                }
             
                 logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
                 offraid_f.saveProfileProgress(jsonData, sessionID);
