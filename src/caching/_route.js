@@ -290,6 +290,7 @@ function others() {
     filepaths.user.profiles.list = "user/profiles/list.json";
     filepaths.user.profiles.character = "user/profiles/__REPLACEME__/character.json";
     filepaths.user.profiles.scav = "user/profiles/__REPLACEME__/scav.json";
+    filepaths.user.profiles.dialogue = "user/profiles/__REPLACEME__/dialogue.json";
     filepaths.user.profiles.storage = "user/profiles/__REPLACEME__/storage.json";
     filepaths.user.profiles.userbuilds = "user/profiles/__REPLACEME__/userbuilds.json";
     filepaths.user.profiles.assort["579dc571d53a0658a154fbec"] = "user/profiles/__REPLACEME__/assort/579dc571d53a0658a154fbec.json";
