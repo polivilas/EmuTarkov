@@ -71,6 +71,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.server = require('./server/_start.js');
 	global.constants = require('./server/_constants.js');
 	global.header_f = require('./server/_sendHeader.js');
+	global.dialogue_f = require('./response/_dialogue.js');
 	global.account_f = require('./response/_account.js');
 	global.profile_f = require('./response/_profile.js');
 	global.bots = require('./response/_bots.js');

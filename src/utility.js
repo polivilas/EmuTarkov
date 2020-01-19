@@ -76,14 +76,22 @@ function makeSign(length) {
 }
 
 function generateNewItemId() {
-	let getTime = new Date();
-	let month = getTime.getMonth().toString();
-	let date = getTime.getDate().toString();
-	let hour = getTime.getHours().toString();
-	let minute = getTime.getMinutes().toString();
-	let second = getTime.getSeconds().toString();
-	let random = getRandomInt(1000000000, 9999999999).toString();
-	let retVal = "I" + (month + date + hour + minute + second + random).toString();
+    return generateNewId("I");
+}
+
+function generateNewDialogueId() {
+    return generateNewId("D");
+}
+
+function generateNewId(prefix) {
+    let getTime = new Date();
+    let month = getTime.getMonth().toString();
+    let date = getTime.getDate().toString();
+    let hour = getTime.getHours().toString();
+    let minute = getTime.getMinutes().toString();
+    let second = getTime.getSeconds().toString();
+    let random = getRandomInt(1000000000, 9999999999).toString();
+    let retVal = prefix + (month + date + hour + minute + second + random).toString();
     let sign = makeSign(24 - retVal.length).toString();
     
     return retVal + sign;
@@ -117,4 +125,5 @@ module.exports.getTime = getTime;
 module.exports.getDate = getDate;
 module.exports.makeSign = makeSign;
 module.exports.generateNewItemId = generateNewItemId;
+module.exports.generateNewDialogueId = generateNewDialogueId;
 module.exports.getLocalIpAddress = getLocalIpAddress;

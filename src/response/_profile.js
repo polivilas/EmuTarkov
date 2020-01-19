@@ -41,6 +41,7 @@ function create(info, sessionID) {
     json.write(folder + "character.json", pmcData);
     json.write(folder + "storage.json", storage);
     json.write(folder + "userbuilds.json", userbuilds);
+    json.write(folder + "dialogue.json", '{}');
 
     // create traders
     let inputFiles = filepaths.traders;
@@ -107,6 +108,19 @@ function getScavData(sessionID) {
     }
 
     return json.parse(json.read(getScavPath(sessionID)));
+}
+
+function getDialoguePath(sessionID) {
+    let dialoguePath = filepaths.user.profiles.dialogue;
+    return dialoguePath.replace("__REPLACEME__", sessionID);
+}
+
+function getDialogue(sessionID) {
+    return json.parse(json.read(getDialoguePath(sessionID)));
+}
+
+function setDialogue(data, sessionID) {
+    json.write(getDialoguePath(sessionID), data);
 }
 
 function get(sessionID) {
@@ -263,3 +277,5 @@ module.exports.getStashType = getStashType;
 module.exports.getPurchasesData = getPurchasesData;
 module.exports.changeNickname = changeNickname;
 module.exports.changeVoice = changeVoice;
+module.exports.getDialogue = getDialogue;
+module.exports.setDialogue = setDialogue;

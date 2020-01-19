@@ -17,6 +17,15 @@ function acceptQuest(pmcData, body, sessionID) {
 	
     profile_f.setPmcData(pmcData, sessionID);
 
+    // Create a dialog message for starting the quest.
+    let questDb = json.parse(json.read(filepaths.quests[body.qid.toString()]));
+    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid.toString()]));
+    // Note that for starting quests, the correct locale field is "description", not "startedMessageText".
+    dialogue_f.addDialogueMessage(questDb.traderId,
+                                  questLocale.description,
+                                  dialogue_f.getMessageTypeValue('questStart'),
+                                  sessionID);
+
     item.resetOutput();
     return item.getOutput();
 }
@@ -31,6 +40,7 @@ function completeQuest(pmcData, body, sessionID) {
     }
 
     // find Quest data and update trader loyalty
+    let questRewards = [];
     for (let quest of quests.data) {
         if (quest._id !== body.qid) {
             continue;
@@ -40,14 +50,13 @@ function completeQuest(pmcData, body, sessionID) {
             switch (reward.type) {
                 case "Item":
                     for (let rewardItem of reward.items) {
-                        let newReq = {};
+                        // let newReq = {};
 
-                        newReq.item_id = rewardItem._tpl;
-                        newReq.count = parseInt(reward.value);
-                        newReq.tid = "ragfair";
+                        // newReq.item_id = rewardItem._tpl;
+                        // newReq.count = parseInt(reward.value);
+                        // newReq.tid = "ragfair";
                 
-                        pmcData = profile_f.getPmcData(sessionID);
-                        move_f.addItem(pmcData, newReq, item.getOutput(), sessionID);
+                        questRewards.push(rewardItem);
                     }
                     break;
 
@@ -71,6 +80,15 @@ function completeQuest(pmcData, body, sessionID) {
             }
         }
     }
+
+    // Create a dialog message for completing the quest.
+    let questDb = json.parse(json.read(filepaths.quests[body.qid.toString()]));
+    let questLocale = json.parse(json.read(filepaths.locales["en"].quest[body.qid.toString()]));
+    dialogue_f.addDialogueMessage(questDb.traderId,
+                                  questLocale.successMessageText,
+                                  dialogue_f.getMessageTypeValue('questSuccess'),
+                                  sessionID,
+                                  questRewards);
 
     item.resetOutput();
     let output = item.getOutput();
