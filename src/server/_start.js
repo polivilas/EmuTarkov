@@ -1,6 +1,35 @@
 ﻿"use strict";
 require('../libs.js');
 
+function showWatermark() {
+    let text_1 = "JustEmuTarkov " + constants.serverVersion();
+    let text_2 = "https://justemutarkov.github.io/";
+    let diffrence = Math.abs(text_1.length - text_2.length);
+    let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length : text_2.length);
+    let box_spacing_between_1 = "";
+    let box_spacing_between_2 = "";
+    let box_width = "";
+
+    if (text_1.length >= text_2.length) {
+        for (let i = 0; i < diffrence; i++) {
+            box_spacing_between_2 += " ";
+        }
+    } else {
+        for (let i = 0; i < diffrence; i++) {
+            box_spacing_between_1 += " ";
+        }
+    }
+
+    for (let i = 0; i < whichIsLonger; i++) {
+        box_width += "═";
+    }
+
+    logger.logRequest("╔═" + box_width + "═╗");
+    logger.logRequest("║ " + text_1 + box_spacing_between_1 + " ║");
+    logger.logRequest("║ " + text_2 + box_spacing_between_2 + " ║");
+    logger.logRequest("╚═" + box_width + "═╝");
+}
+
 function getCookies(req) {
     let found = {};
     let cookies = req.headers.cookie;
@@ -100,6 +129,13 @@ function handleRequest(req, resp) {
     let IP = req.connection.remoteAddress.replace("::ffff:", "");
     const sessionID = parseInt(getCookies(req)['PHPSESSID']);
 
+    // request without data
+    if (req.method === "GET") {
+        logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
+        sendResponse(req, resp, null, sessionID);
+    }
+
+    // request with data
     if (req.method === "POST") {
         req.on('data', function (data) {
             zlib.inflate(data, function (err, body) {
@@ -108,11 +144,13 @@ function handleRequest(req, resp) {
                 logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData, "cyan");
                 sendResponse(req, resp, jsonData, sessionID);
             });
-
         });
-    } else if (req.method === "PUT") {
-        // --- offline profile saving
+    }
+    
+    // offline profile saving
+    if (req.method === "PUT") {
         req.on('data', function (data) {
+            // receive data
             if (req.headers.hasOwnProperty("expect")) {
                 const requestLength = req.headers["content-length"] - 0;
                 const sessionID = req.headers.sessionid - 0;
@@ -126,6 +164,7 @@ function handleRequest(req, resp) {
                 data = constants.getFromBuffer(sessionID);
             }
 
+            // unpack data
             zlib.inflate(data, function (err, body) {
                 let jsonData = json.parse((body !== undefined) ? body.toString() : "{}");
 
@@ -137,10 +176,6 @@ function handleRequest(req, resp) {
                 offraid_f.saveProfileProgress(jsonData, sessionID);
             });
         });
-        // ---
-    } else {
-        logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url);
-        sendResponse(req, resp, null, sessionID);
     }
 }
 
@@ -157,32 +192,7 @@ function start() {
     }
 
     // show our watermark
-    let text_1 = "JustEmuTarkov " + constants.serverVersion();
-    let text_2 = "https://justemutarkov.github.io/";
-    let diffrence = Math.abs(text_1.length - text_2.length);
-    let whichIsLonger = ((text_1.length >= text_2.length) ? text_1.length : text_2.length);
-    let box_spacing_between_1 = "";
-    let box_spacing_between_2 = "";
-    let box_width = "";
-
-    if (text_1.length >= text_2.length) {
-        for (let i = 0; i < diffrence; i++) {
-            box_spacing_between_2 += " ";
-        }
-    } else {
-        for (let i = 0; i < diffrence; i++) {
-            box_spacing_between_1 += " ";
-        }
-    }
-
-    for (let i = 0; i < whichIsLonger; i++) {
-        box_width += "═";
-    }
-
-    logger.logRequest("╔═" + box_width + "═╗");
-    logger.logRequest("║ " + text_1 + box_spacing_between_1 + " ║");
-    logger.logRequest("║ " + text_2 + box_spacing_between_2 + " ║");
-    logger.logRequest("╚═" + box_width + "═╝");
+    showWatermark();
 
     // create HTTPS server (port 443)
     let gameServer = https.createServer(options, (req, res) => {
