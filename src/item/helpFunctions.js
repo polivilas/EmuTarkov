@@ -115,7 +115,7 @@ function payMoney(pmcData, body, sessionID) {
 
             if (item !== undefined) {
                 if (!isMoneyTpl(item._tpl)) {
-                    output = move_f.removeItem(pmcData, item._id, output, sessionID);
+                    output = move_f.removeItem(item._id, output, sessionID);
                     body.scheme_items[index].count = 0;
                 } else {
                     currencyTpl = item._tpl;
@@ -154,7 +154,7 @@ function payMoney(pmcData, body, sessionID) {
 
         if (leftToPay >= itemAmount) {
             leftToPay -= itemAmount;
-            output = move_f.removeItem(pmcData, moneyItem._id, output);
+            output = move_f.removeItem(moneyItem._id, output, sessionID);
         } else {
             moneyItem.upd.StackObjectsCount -= leftToPay;
             leftToPay = 0;

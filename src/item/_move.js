@@ -142,12 +142,7 @@ function handleCartridges(profileData, body) {
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * Profile index: 0 = main profile, 1 = scav profile
 * */
-function removeItem(pmcData, body, output = "", sessionID, profileIndex = 0) {    
-    if (output === "") {
-		item.resetOutput();
-		output = item.getOutput();
-    }
-    
+function removeItem(body, output, sessionID, profileIndex = 0) {
     let profile = profile_f.get(sessionID);
     let toDo = [body];
 
@@ -205,8 +200,8 @@ function removeInsurance(pmcData, body, sessionID) {
 }
 
 function discardItem(pmcData, body, sessionID) {
-    removeInsurance(pmcData, body, sessionID.item);
-    return removeItem(pmcData, body, sessionID.item);
+    removeInsurance(pmcData, body.item, sessionID);
+    return removeItem(body.item, item.getOutput(), sessionID);
 }
 
 /* Split Item

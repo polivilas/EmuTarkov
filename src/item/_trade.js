@@ -44,7 +44,7 @@ function sellItem(pmcData, body, sessionID) {
                 logger.logInfo("Selling: " + checkID);
 
                 // remove item
-                output = move_f.removeItem(pmcData, checkID, output, sessionID);
+                output = move_f.removeItem(checkID, output, sessionID);
                 move_f.removeInsurance(pmcData, checkID);
 
                 // add money to return to the player

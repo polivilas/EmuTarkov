@@ -3,6 +3,9 @@
 require('../libs.js');
 
 function eatItem(pmcData, body, sessionID) {
+    item.resetOutput();
+    
+    let output = item.getOutput()
     let todelete = false;
     let maxResource = undefined;
     let effects = undefined;
@@ -43,12 +46,10 @@ function eatItem(pmcData, body, sessionID) {
     profile_f.setPmcData(pmcData, sessionID);
 
     if (maxResource === 1 || todelete === true) {
-        move_f.removeItem(pmcData, body.item, sessionID);
-    } else {
-        item.resetOutput();
+        output = move_f.removeItem(body.item, output, sessionID);
     }
 
-    return item.getOutput();
+    return output;
 }
 
 function healPlayer(pmcData, body, sessionID) {
@@ -71,7 +72,7 @@ function healPlayer(pmcData, body, sessionID) {
             }
 
             if (item.upd.MedKit.HpResource === 0) {
-                move_f.removeItem(pmcData, body.item, sessionID);
+                move_f.removeItem(body.item, item.getOutput(), sessionID);
             }
 
             profile_f.setPmcData(pmcData, sessionID);

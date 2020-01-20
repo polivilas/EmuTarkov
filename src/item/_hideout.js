@@ -17,7 +17,7 @@ function HideoutUpgrade(pmcData, body, sessionID) {
 			if (pmcData.Inventory.items[inventoryItem]._tpl === "5449016a4bdc2d6f028b456f") {
 				pmcData.Inventory.items[inventoryItem].upd.StackObjectsCount -= itemToPay.count;
 			} else {	
-				move_f.removeItem(pmcData, pmcData.Inventory.items[inventoryItem]._id);
+				move_f.removeItem(pmcData.Inventory.items[inventoryItem]._id, item.getOutput(), sessionID);
 			}	
 		}
 	}
@@ -85,7 +85,7 @@ function HideoutPutItemsInAreaSlots(pmcData, body, sessionID) {
 				let slot_to_add = {"item": [{"_id": inventoryItem._id, "_tpl": inventoryItem._tpl, "upd": inventoryItem.upd}]}
 
 				pmcData.Hideout.Areas[area].slots.push(slot_to_add);
-				output = move_f.removeItem(pmcData, inventoryItem._id, output);
+				output = move_f.removeItem(inventoryItem._id, output, sessionID);
 			}
 		}
 	}
@@ -139,7 +139,7 @@ function HideoutSingleProductionStart(pmcData, body, sessionID) {
 	let output = item.getOutput();
 
 	for (let itemToDelete of body.items) {
-		output = move_f.removeItem(pmcData, itemToDelete.id, output);
+		output = move_f.removeItem(itemToDelete.id, output, sessionID);
 	}
 
 	return output;

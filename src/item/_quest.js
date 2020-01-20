@@ -106,7 +106,7 @@ function handoverQuest(pmcData, body, sessionID) {
     
     for (let itemHandover of body.items) {
         counter += itemHandover.count;
-        output = move_f.removeItem(pmcData, itemHandover.id, output);
+        output = move_f.removeItem(itemHandover.id, output);
     }
 
     for (let backendCounter in pmcData.BackendCounters) {
