@@ -31,10 +31,10 @@ function markFoundItems(pmcData, offraidData, isPlayerScav) {
     return offraidData;
 }
 
-function setInventory(pmcData) {
-    move_f.removeItem(pmcData, pmcData.Inventory.equipment, item.getOutput());
-    move_f.removeItem(pmcData, pmcData.Inventory.questRaidItems, item.getOutput());
-    move_f.removeItem(pmcData, pmcData.Inventory.questStashItems, item.getOutput());
+function setInventory(pmcData, sessionID) {
+    move_f.removeItem(pmcData, pmcData.Inventory.equipment, item.getOutput(), sessionID);
+    move_f.removeItem(pmcData, pmcData.Inventory.questRaidItems, item.getOutput()), sessionID;
+    move_f.removeItem(pmcData, pmcData.Inventory.questStashItems, item.getOutput(), sessionID);
 
     for (let item in offRaidProfile.Inventory.items) {
         pmcData.Inventory.items.push(offRaidProfile.Inventory.items[item]);
@@ -123,9 +123,9 @@ function saveProgress(offRaidData, sessionID) {
 
     // set profile equipment to the raid equipment
     if (!isPlayerScav) {
-        pmcData = setInventory(pmcData);
+        pmcData = setInventory(pmcData, sessionID);
     } else {
-        scavData = setInventory(scavData);
+        scavData = setInventory(scavData, sessionID);
     }
 
     // terminate early for player scavs because we don't care about whether they died.
