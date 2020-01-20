@@ -28,7 +28,7 @@ function markFoundItems(pmcData, offraidData, isPlayerScav) {
         }
     }
 
-    return offRaidData;
+    return offraidData;
 }
 
 function setInventory(pmcData) {

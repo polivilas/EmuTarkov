@@ -9,6 +9,7 @@ require('../libs.js');
 * */
 function moveItem(pmcData, body, sessionID) {
     item.resetOutput();
+
     let output = item.getOutput();
     let scavData = profile_f.getScavData(sessionID);
 
@@ -24,17 +25,22 @@ function moveItem(pmcData, body, sessionID) {
         profile_f.setPmcData(pmcData, sessionID);
         profile_f.setScavData(pmcData);
         return output;
-    } else if (typeof body.toOwner !== 'undefined' && body.toOwner.id === scavData._id) {
+    }
+    
+    if (typeof body.toOwner !== 'undefined' && body.toOwner.id === scavData._id) {
         // Handle transfers from stash to scav.
         moveItemToProfile(pmcData, scavData, body);
         profile_f.setPmcData(pmcData, sessionID);
         profile_f.setScavData(pmcData);
         return output;
-    } else if (typeof body.fromOwner !== 'undefined' && body.fromOwner.type === 'Mail') {
+    }
+    
+    if (typeof body.fromOwner !== 'undefined' && body.fromOwner.type === 'Mail') {
         // If the item is coming from the mail, we need to get the item contents from the corresponding
         // message (denoted by fromOwner) and push them to player stash.
         let messageItems = dialogue_f.getMessageItemContents(body.fromOwner.id, sessionID);
         let idsToMove = dialogue_f.findAndReturnChildren(messageItems, body.item);
+        
         for (let itemId of idsToMove) {
             for (let messageItem of messageItems) {
                 if (messageItem._id === itemId) {
@@ -42,10 +48,7 @@ function moveItem(pmcData, body, sessionID) {
                 }
             }
         }
-        moveItemInternal(pmcData, body);
-        profile_f.setPmcData(pmcData, sessionID);
-        return output;
-    } else {
+
         moveItemInternal(pmcData, body);
         profile_f.setPmcData(pmcData, sessionID);
         return output;

@@ -300,18 +300,18 @@ function getCustomization(info) {
 }
 
 function getCustomizationOffers(url, info, sessionID) {
-    let tempoffers = [];
-    let allOffers = customizationOffers;
+    let tmpOffers = [];
+    let offers = customizationOffers;
     let splittedUrl = url.split('/');
 
-    for (let oneOffer of allOffers.data) {
-        if (oneOffer.tid == splittedUrl[splittedUrl.length - 2]) {
-            tempoffers.push(oneOffer);
+    for (let offer of offers.data) {
+        if (offer.tid === splittedUrl[splittedUrl.length - 2]) {
+            tmpOffers.push(offer);
         }
     }
 
-    allOffers.data = tempoffers;
-    return JSON.stringify(allOffers);
+    offers.data = tmpOffers;
+    return JSON.stringify(offers);
 }
 
 function getCustomizationStorage(url, info, sessionID) {
