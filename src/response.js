@@ -79,8 +79,9 @@ const dynamicRoutes = {
     "/client/menu/locale/": getMenuLocale,
     "/client/locale/": getGlobalLocale,
     "/notifierBase": nullArrayResponse,
-    "/notifierServer": nullArrayResponse,
+    "/notifierServer": notify,
     "/push/notifier/get/": nullArrayResponse
+
 };
 
 function nullResponse(url, info, sessionID) {
@@ -113,6 +114,10 @@ function showInventoryChecker(url, info, sessionID) {
 
     output += "</table>";
     return output;
+}
+
+function notify(url, info) {
+    return "NOTIFY";
 }
 
 function getGameConfig(url, info, sessionID) {
@@ -164,7 +169,7 @@ function regenerateScav(url, info, sessionID) {
 }
 
 function selectProfile(url, info, sessionID) {
-    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '", "channel_id":"f194bcedc0890f22db37a00dbd7414d2afba981eef61008159a74a29d5fee1cf"}}}';
+    return '{"err":0, "errmsg":null, "data":{"status":"ok", "notifier":{"server":"https://' + ip + '/", "channel_id":"testChannel"}}}';
 }
 
 function getProfileStatus(url, info, sessionID) {
@@ -339,7 +344,9 @@ function getHandbookUserlist(url, info, sessionID) {
 }
 
 function createNotifierChannel(url, info, sessionID) {
-    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip + '","channel_id":"testChannel","url":"https://' + ip + '/notifierBase"},"notifierServer":"https://' + ip + '/notifierServer"}}';
+    return '{"err":0,"errmsg":null,"data":{"notifier":{"server":"https://' + ip +
+           '/","channel_id":"testChannel","url":"https://' + ip + '/notifierServer/get/' + 
+           sessionID + '"},"notifierServer":"https://' + ip + '/notifierServer/get/' + sessionID + '"}}';
 }
 
 function getReservedNickname(url, info, sessionID) {
@@ -364,9 +371,11 @@ function getMailDialogView(url, info, sessionID) {
     return dialogue_f.generateDialogueView(info.dialogId, sessionID);
 }
 
-// This doesn't appear to be called.
 function getMailDialogInfo(url, info, sessionID) {
-    return nullResponse;
+    let dialogueFile = profile_f.getDialogue(sessionID);
+
+    let data = dialogue_f.getDialogueInfo(dialogueFile, info.dialogId, sessionID);
+    return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';;
 }
 
 function removeDialog(url, info, sessionID) {
@@ -393,7 +402,7 @@ function getImage(url, info, sessionID) {
 }
 
 function handleNotifierCustomLink(url, info, sessionID) {
-    return 'DONE';
+    return 'NOTIFY';
 }
 
 function getProfilePurchases(url, info, sessionID) {

@@ -45,6 +45,24 @@ function getCookies(req) {
     return found;
 }
 
+async function notificationWaitAsync(resp, sessionID) {
+    let promise = new Promise(resolve => {
+        setInterval(function() {
+            if (notifier_f.notifierService.hasMessagesInQueue(sessionID)) {
+                resolve();
+            }
+        }, 300);
+    });
+    await promise;
+
+    let data = [];
+    while (notifier_f.notifierService.hasMessagesInQueue(sessionID)) {
+        let message = notifier_f.notifierService.popMessageFromQueue(sessionID);
+        data.push(JSON.stringify(message));
+    }
+    header_f.sendTextJson(resp, data.join('\n'));
+}
+
 function sendResponse(req, resp, body, sessionID) {
     let output = "";
 
@@ -53,6 +71,18 @@ function sendResponse(req, resp, body, sessionID) {
         output = response.getResponse(req, body, sessionID);
     } else {
         output = response.getResponse(req, "{}", sessionID);
+    }
+
+    if (output === "NOTIFY") {
+        let splittedUrl = req.url.split('/');
+        const sessionID = splittedUrl[splittedUrl.length - 1].split("?last_id")[0];
+
+        // If we don't have anything to send, it's ok to not send anything back
+        // because notification requests are long-polling. In fact, we SHOULD wait
+        // until we actually have something to send because otherwise we'd spam the client
+        // and the client would abort the connection due to spam.
+        notificationWaitAsync(resp, sessionID);
+        return;
     }
 
     // prepare message to send
