@@ -31,13 +31,13 @@ function markFoundItems(pmcData, offraidData, isPlayerScav) {
     return offraidData;
 }
 
-function setInventory(pmcData, sessionID) {
+function setInventory(pmcData, offraidData, sessionID) {
     move_f.removeItem(pmcData, pmcData.Inventory.equipment, item.getOutput(), sessionID);
     move_f.removeItem(pmcData, pmcData.Inventory.questRaidItems, item.getOutput(), sessionID);
     move_f.removeItem(pmcData, pmcData.Inventory.questStashItems, item.getOutput(), sessionID);
 
-    for (let item in offRaidProfile.Inventory.items) {
-        pmcData.Inventory.items.push(offRaidProfile.Inventory.items[item]);
+    for (let item of offraidData.Inventory.items) {
+        pmcData.Inventory.items.push(item);
     }
 
     return pmcData;

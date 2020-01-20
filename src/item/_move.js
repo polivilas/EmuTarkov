@@ -54,7 +54,9 @@ function moveItem(pmcData, body, sessionID) {
         return output;
     }
 
-    return "";
+    moveItemInternal(pmcData, body);
+    profile_f.setPmcData(pmcData, sessionID);
+    return output;
 }
 
 /* Internal helper function to transfer an item from one profile to another.
