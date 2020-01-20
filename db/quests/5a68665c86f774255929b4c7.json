@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a2c0",
+				"target": "5d34df2788a4504526796c8d",
 				"value": "2",
 				"id": "5ac6658a86f77403df401d13",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a2c0",
+						"_id": "5d34df2788a4504526796c8d",
 						"_tpl": "544fb3f34bdc2d03748b456a",
 						"upd": {
 							"StackObjectsCount": 2
@@ -34,14 +34,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a2c1",
+				"target": "5d34df2788a4504526796c8e",
 				"value": "26000",
 				"id": "5a68869386f7745fa7410407",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a2c1",
+						"_id": "5d34df2788a4504526796c8e",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 26000
@@ -57,7 +57,7 @@
 				"index": 3
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a2c2",
+				"target": "5d34df2788a4504526796c8f",
 				"id": "5ac6659886f774066f04bd4d",
 				"type": "AssortmentUnlock",
 				"index": 4,
@@ -65,7 +65,7 @@
 				"traderId": "54cb57776803fa99248b456e",
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a2c2",
+						"_id": "5d34df2788a4504526796c8f",
 						"_tpl": "544fb3f34bdc2d03748b456a"
 					}
 				]
@@ -74,7 +74,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5a68663e86f774501078f78a",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

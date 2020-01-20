@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a3f1",
+				"target": "5d34df2788a4504526796d26",
 				"value": "150000",
 				"id": "5c17c12786f77430a70d197d",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a3f1",
+						"_id": "5d34df2788a4504526796d26",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 150000
@@ -34,7 +34,7 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a3f2",
+				"target": "5d34df2788a4504526796d27",
 				"id": "5c17c1a986f77418e53fc52f",
 				"type": "AssortmentUnlock",
 				"index": 2,
@@ -42,7 +42,7 @@
 				"traderId": "58330581ace78e27b8b10cee",
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a3f2",
+						"_id": "5d34df2788a4504526796d27",
 						"_tpl": "5bffdd7e0db834001b734a1a"
 					}
 				]
@@ -60,13 +60,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Level",
+				"_parent": "Quest",
 				"_props": {
-					"compareMethod": ">=",
-					"value": "35",
+					"target": "5b4795fb86f7745876267770",
+					"status": 4,
 					"index": 0,
 					"parentId": "",
-					"id": "5c1faac986f77410894b63f5"
+					"id": ""
 				}
 			}
 		],
@@ -76,7 +76,7 @@
 				"_props": {
 					"target": "StressResistance",
 					"compareMethod": ">=",
-					"value": "8",
+					"value": "13",
 					"index": 0,
 					"parentId": "",
 					"id": "5c0bdbb586f774166e38eed5"

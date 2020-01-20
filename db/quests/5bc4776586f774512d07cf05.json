@@ -25,14 +25,14 @@
 				"index": 1
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a3aa",
+				"target": "5e0ac74b9d594972a112a9d5",
 				"value": "50000",
 				"id": "5bcf216586f7746a45695a6f",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a3aa",
+						"_id": "5e0ac74b9d594972a112a9d5",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 50000
@@ -41,14 +41,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a3ab",
+				"target": "5e0ac74b9d594972a112a9d6",
 				"value": "2",
 				"id": "5bcf2cde86f77401c82fba55",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a3ab",
+						"_id": "5e0ac74b9d594972a112a9d6",
 						"_tpl": "5b3f7c1c5acfc40dc5296b1d",
 						"upd": {
 							"StackObjectsCount": 2
@@ -57,14 +57,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a3ac",
+				"target": "5e0ac74b9d594972a112a9d7",
 				"value": "2",
 				"id": "5bcf2d4886f774723055e998",
 				"type": "Item",
 				"index": 4,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a3ac",
+						"_id": "5e0ac74b9d594972a112a9d7",
 						"_tpl": "5b3f7c005acfc4704b4a1de8",
 						"upd": {
 							"StackObjectsCount": 2
@@ -73,14 +73,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a3ad",
+				"target": "5e0ac74b9d594972a112a9d8",
 				"value": "2",
 				"id": "5bd7018286f77410f65dc659",
 				"type": "Item",
 				"index": 5,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a3ad",
+						"_id": "5e0ac74b9d594972a112a9d8",
 						"_tpl": "5b3f7bf05acfc433000ecf6b",
 						"upd": {
 							"StackObjectsCount": 2
@@ -92,7 +92,28 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5d24b81486f77439c92d6ba8",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			},
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5ac242ab86f77412464f68b4",
+					"status": 4,
+					"index": 1,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a400",
+				"target": "5d34df2788a4504526796d2e",
 				"value": "150000",
 				"id": "5c18c25286f77467bf06520f",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a400",
+						"_id": "5d34df2788a4504526796d2e",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 150000
@@ -35,29 +35,29 @@
 			},
 			{
 				"target": "Intellect",
-				"value": "100",
-				"id": "5dc15762ac40df362239b252",
+				"value": "1",
+				"id": "5c18c27786f77467c00e134d",
 				"type": "Skill",
 				"index": 2
 			},
 			{
 				"target": "Sniper",
-				"value": "100",
-				"id": "5dc15765c0a1b56a867fe682",
+				"value": "1",
+				"id": "5c18c28486f77467bf065210",
 				"type": "Skill",
 				"index": 3
 			},
 			{
 				"target": "StressResistance",
-				"value": "100",
-				"id": "5dc15768f4ea412f68771d24",
+				"value": "1",
+				"id": "5c18c29386f77467c1502ac0",
 				"type": "Skill",
 				"index": 4
 			},
 			{
 				"target": "Perception",
-				"value": "100",
-				"id": "5dc1576dac40df362239b254",
+				"value": "1",
+				"id": "5c18c2ab86f774186730fed1",
 				"type": "Skill",
 				"index": 5
 			}
@@ -67,13 +67,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Level",
+				"_parent": "Quest",
 				"_props": {
-					"compareMethod": ">=",
-					"value": "35",
+					"target": "5a27bc8586f7741b543d8ea4",
+					"status": 4,
 					"index": 0,
 					"parentId": "",
-					"id": "5c1fb5f986f7744a1929a527"
+					"id": ""
 				}
 			}
 		],
@@ -83,7 +83,7 @@
 				"_props": {
 					"target": "Sniper",
 					"compareMethod": ">=",
-					"value": "9",
+					"value": "12",
 					"index": 0,
 					"parentId": "",
 					"id": "5c0be2b486f7747bcb347d58"

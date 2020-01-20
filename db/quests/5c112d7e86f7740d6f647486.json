@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e230f11fabc1e7f3745a445",
+				"target": "5d34df2788a4504526796d3c",
 				"value": "65000",
 				"id": "5c19265186f77401b247ff98",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e230f11fabc1e7f3745a445",
+						"_id": "5d34df2788a4504526796d3c",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 65000
@@ -41,7 +41,7 @@
 				"index": 2
 			},
 			{
-				"target": "5e230f11fabc1e7f3745a446",
+				"target": "5d34df2788a4504526796d3d",
 				"id": "5c192fb086f7747ce71bcbe0",
 				"type": "AssortmentUnlock",
 				"index": 3,
@@ -49,7 +49,7 @@
 				"traderId": "5ac3b934156ae10c4430e83c",
 				"items": [
 					{
-						"_id": "5e230f11fabc1e7f3745a446",
+						"_id": "5d34df2788a4504526796d3d",
 						"_tpl": "5bffe7930db834001b734a39"
 					}
 				]
@@ -60,13 +60,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Level",
+				"_parent": "Quest",
 				"_props": {
-					"compareMethod": ">=",
-					"value": "25",
+					"target": "5b478b1886f7744d1b23c57d",
+					"status": 4,
 					"index": 0,
 					"parentId": "",
-					"id": "5c1fd17786f7742b3b47f063"
+					"id": ""
 				}
 			}
 		],
@@ -76,7 +76,7 @@
 				"_props": {
 					"target": "Search",
 					"compareMethod": ">=",
-					"value": "9",
+					"value": "12",
 					"index": 0,
 					"parentId": "",
 					"id": "5c112dc486f77465686bff38"

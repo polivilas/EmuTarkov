@@ -25,14 +25,14 @@
 				"id": "5bcf13fb86f77423c25c50b0"
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a1b9",
+				"target": "5e0ac74b9d594972a112a856",
 				"value": "30000",
 				"id": "5a2fba6886f774769635db1c",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a1b9",
+						"_id": "5e0ac74b9d594972a112a856",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 30000
@@ -41,14 +41,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a1ba",
+				"target": "5e0ac74b9d594972a112a857",
 				"value": "4",
 				"id": "5ac6643e86f774055a77c730",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a1ba",
+						"_id": "5e0ac74b9d594972a112a857",
 						"_tpl": "5673de654bdc2d180f8b456d",
 						"upd": {
 							"StackObjectsCount": 4
@@ -57,14 +57,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a1bb",
+				"target": "5e0ac74b9d594972a112a858",
 				"value": "2",
 				"id": "5a2fbaa686f77476953ee329",
 				"type": "Item",
 				"index": 4,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a1bb",
+						"_id": "5e0ac74b9d594972a112a858",
 						"_tpl": "590c5d4b86f774784e1b9c45",
 						"upd": {
 							"StackObjectsCount": 2
@@ -76,7 +76,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5969f9e986f7741dde183a50",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "FindItem",

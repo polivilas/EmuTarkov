@@ -25,14 +25,14 @@
 				"id": "5bcf122686f77423c13fb05d"
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a1ff",
+				"target": "5e0ac74b9d594972a112a89c",
 				"value": "200000",
 				"type": "Item",
 				"index": 2,
 				"id": "5a577fe586f77432572473b4",
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a1ff",
+						"_id": "5e0ac74b9d594972a112a89c",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 200000
@@ -41,14 +41,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a200",
+				"target": "5e0ac74b9d594972a112a89d",
 				"value": "1",
 				"type": "Item",
 				"index": 3,
 				"id": "5a2e89ab86f7746036276a82",
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a200",
+						"_id": "5e0ac74b9d594972a112a89d",
 						"_tpl": "5648a7494bdc2d9d488b4583",
 						"upd": {
 							"StackObjectsCount": 1
@@ -75,7 +75,18 @@
 		]
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a0f5686f774273b74f676",
+					"status": 2,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

@@ -22,7 +22,28 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "596a218586f77420d232807c",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			},
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "596b455186f77457cb50eccb",
+					"status": 4,
+					"index": 1,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "HandoverItem",

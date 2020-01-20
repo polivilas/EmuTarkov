@@ -25,14 +25,14 @@
 				"id": "5bcf103486f77423c25c50a4"
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a1f1",
+				"target": "5e0ac74b9d594972a112a88e",
 				"value": "17000",
 				"id": "5a2e867186f7741a95102607",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a1f1",
+						"_id": "5e0ac74b9d594972a112a88e",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 17000
@@ -41,14 +41,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a1f2",
+				"target": "5e0ac74b9d594972a112a88f",
 				"value": "4",
 				"id": "5a2e868686f7741a943575b9",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a1f2",
+						"_id": "5e0ac74b9d594972a112a88f",
 						"_tpl": "5710c24ad2720bc3458b45a3",
 						"upd": {
 							"StackObjectsCount": 4
@@ -60,7 +60,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "5979f9ba86f7740f6c3fe9f2",
+					"status": 2,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "CounterCreator",

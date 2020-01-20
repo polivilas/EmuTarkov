@@ -22,7 +22,18 @@
 		"Fail": []
 	},
 	"conditions": {
-		"AvailableForStart": [],
+		"AvailableForStart": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a0f5686f774273b74f676",
+					"status": 3,
+					"index": 0,
+					"parentId": "",
+					"id": ""
+				}
+			}
+		],
 		"AvailableForFinish": [
 			{
 				"_parent": "HandoverItem",
@@ -38,6 +49,17 @@
 				}
 			}
 		],
-		"Fail": []
+		"Fail": [
+			{
+				"_parent": "Quest",
+				"_props": {
+					"target": "597a0f5686f774273b74f676",
+					"status": 4,
+					"index": 0,
+					"parentId": "",
+					"id": "596a10d886f7741ddf11dbf0"
+				}
+			}
+		]
 	}
 }

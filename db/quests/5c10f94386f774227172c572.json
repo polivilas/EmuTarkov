@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e230f11fabc1e7f3745a440",
+				"target": "5d34df2788a4504526796d28",
 				"value": "75000",
 				"id": "5c19225386f77401b247ff8f",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e230f11fabc1e7f3745a440",
+						"_id": "5d34df2788a4504526796d28",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 75000
@@ -34,14 +34,14 @@
 				]
 			},
 			{
-				"target": "5e230f11fabc1e7f3745a441",
+				"target": "5d34df2788a4504526796d29",
 				"value": "2",
 				"id": "5c1923f986f77401b3750a82",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5e230f11fabc1e7f3745a441",
+						"_id": "5d34df2788a4504526796d29",
 						"_tpl": "5c0e655586f774045612eeb2",
 						"upd": {
 							"StackObjectsCount": 2
@@ -50,14 +50,14 @@
 				]
 			},
 			{
-				"target": "5e230f11fabc1e7f3745a442",
+				"target": "5d34df2788a4504526796d2a",
 				"value": "1",
 				"id": "5c19241d86f77401b1301f39",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5e230f11fabc1e7f3745a442",
+						"_id": "5d34df2788a4504526796d2a",
 						"_tpl": "5c0e774286f77468413cc5b2",
 						"upd": {
 							"StackObjectsCount": 1
@@ -78,13 +78,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Level",
+				"_parent": "Quest",
 				"_props": {
-					"compareMethod": ">=",
-					"value": "30",
+					"target": "5b47876e86f7744d1c353205",
+					"status": 4,
 					"index": 0,
 					"parentId": "",
-					"id": "5c1fb27e86f7744a160dda8c"
+					"id": ""
 				}
 			}
 		],

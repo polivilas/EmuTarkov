@@ -18,14 +18,14 @@
 				"index": 0
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a404",
+				"target": "5d34df2788a4504526796d88",
 				"value": "110000",
 				"id": "5c1929a186f77401b1301f47",
 				"type": "Item",
 				"index": 1,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a404",
+						"_id": "5d34df2788a4504526796d88",
 						"_tpl": "5449016a4bdc2d6f028b456f",
 						"upd": {
 							"StackObjectsCount": 110000
@@ -34,14 +34,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a405",
+				"target": "5d34df2788a4504526796d89",
 				"value": "3",
 				"id": "5c1b782486f77423947f90b0",
 				"type": "Item",
 				"index": 2,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a405",
+						"_id": "5d34df2788a4504526796d89",
 						"_tpl": "5c0e533786f7747fa23f4d47",
 						"upd": {
 							"StackObjectsCount": 3
@@ -50,14 +50,14 @@
 				]
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a406",
+				"target": "5d34df2788a4504526796d8a",
 				"value": "3",
 				"id": "5c1b782786f77413193fa4f8",
 				"type": "Item",
 				"index": 3,
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a406",
+						"_id": "5d34df2788a4504526796d8a",
 						"_tpl": "5c10c8fd86f7743d7d706df3",
 						"upd": {
 							"StackObjectsCount": 3
@@ -73,7 +73,7 @@
 				"index": 4
 			},
 			{
-				"target": "5e230f10fabc1e7f3745a407",
+				"target": "5d34df2788a4504526796d8b",
 				"id": "5c192a1e86f7742c8b74f785",
 				"type": "AssortmentUnlock",
 				"index": 5,
@@ -81,7 +81,7 @@
 				"traderId": "54cb57776803fa99248b456e",
 				"items": [
 					{
-						"_id": "5e230f10fabc1e7f3745a407",
+						"_id": "5d34df2788a4504526796d8b",
 						"_tpl": "5c10c8fd86f7743d7d706df3"
 					}
 				]
@@ -92,13 +92,13 @@
 	"conditions": {
 		"AvailableForStart": [
 			{
-				"_parent": "Level",
+				"_parent": "Quest",
 				"_props": {
-					"compareMethod": ">=",
-					"value": "30",
+					"target": "5a68667486f7742607157d28",
+					"status": 4,
 					"index": 0,
 					"parentId": "",
-					"id": "5c1fd5f586f7742b391bf138"
+					"id": ""
 				}
 			}
 		],
