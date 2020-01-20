@@ -159,7 +159,7 @@ function getProfileData(url, info, sessionID) {
 function regenerateScav(url, info, sessionID) {
     let response = {err: 0, errmsg: null, data: []};
 
-    response.data.push(profile_f.generateScavProfile());
+    response.data.push(profile_f.generateScav());
     return JSON.stringify(response);
 }
 
