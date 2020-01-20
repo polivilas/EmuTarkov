@@ -14,27 +14,31 @@ let messageTypes = {
 * Set the content of the dialogue on the list tab.
 */
 function generateDialogueList(sessionID) {
-	let dialogue_file = profile_f.getDialogue(sessionID);
+	let dialogueFile = profile_f.getDialogue(sessionID);
 
 	let data = [];
 
 	// Iterate through all dialogues
-	for (let dialogueID in dialogue_file) {
-		let dialogue = dialogue_file[dialogueID];
-
-		let listItem = {
-			'_id': dialogueID,
-			'type': 2, // Type npcTrader.
-			'message': getMessagePreview(dialogue),
-			'new': 1,
-			'attachmentsNew': 0,
-			'pinned': false
-		};
-
-		data.push(listItem);
+	for (let dialogueID in dialogueFile) {
+		data.push(getDialogueInfo(dialogueFile, dialogueID, sessionID));
 	}
 
 	return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';
+}
+
+/* Get the content of an incoming message. */
+function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
+	let dialogue = dialogueFile[dialogueID];
+
+	let dialogueInfo = {
+		'_id': dialogueID,
+		'type': 2, // Type npcTrader.
+		'message': getMessagePreview(dialogue),
+		'new': 1,
+		'attachmentsNew': 0,
+		'pinned': false
+	};
+	return dialogueInfo;
 }
 
 /*
@@ -42,10 +46,10 @@ function generateDialogueList(sessionID) {
 * for the specified dialogue.
 */
 function generateDialogueView(dialogueID, sessionID) {
-	let dialogue_file = profile_f.getDialogue(sessionID);
+	let dialogueFile = profile_f.getDialogue(sessionID);
 
 	// TODO(camo1018): Respect the message limit, but to heck with it for now.
-	let messages = dialogue_file[dialogueID].messages;
+	let messages = dialogueFile[dialogueID].messages;
 
 	let data = {
 		'messages': []
@@ -69,10 +73,10 @@ function getMessageTypeValue(messageType) {
 * Add a templated message to the dialogue.
 */
 function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionID, rewards = []) {
-	let dialogue_file = profile_f.getDialogue(sessionID);
+	let dialogueFile = profile_f.getDialogue(sessionID);
 
-	let isNewDialogue = !(dialogueID in dialogue_file);
-	let dialogue = dialogue_file[dialogueID];
+	let isNewDialogue = !(dialogueID in dialogueFile);
+	let dialogue = dialogueFile[dialogueID];
 
 	if (isNewDialogue) {
 		dialogue = {
@@ -80,7 +84,7 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 			'messages': [],
 			'pinned': false
 		};
-		dialogue_file[dialogueID] = dialogue;
+		dialogueFile[dialogueID] = dialogue;
 	}
 
 	// Generate item stash if we have rewards.
@@ -108,7 +112,10 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 	};
 
 	dialogue.messages.push(message);
-	profile_f.setDialogue(dialogue_file, sessionID);
+	profile_f.setDialogue(dialogueFile, sessionID);
+
+	let notificationMessage = notifier_f.createNewMessageNotification(message);
+	notifier_f.notifierService.addToMessageQueue(notificationMessage, sessionID);
 }
 
 /*
@@ -130,14 +137,14 @@ function getMessagePreview(dialogue) {
 * Get the item contents for a particular message.
 */
 function getMessageItemContents(messageId, sessionID) {
-	let dialogue_file = profile_f.getDialogue(sessionID);
+	let dialogueFile = profile_f.getDialogue(sessionID);
 
-	for (let dialogueId in dialogue_file) {
+	for (let dialogueId in dialogueFile) {
 		// Don't want properties from the prototype.
-		if (!dialogue_file.hasOwnProperty(dialogueId)) {
+		if (!dialogueFile.hasOwnProperty(dialogueId)) {
 			continue;
 		}
-		let messages = dialogue_file[dialogueId].messages;
+		let messages = dialogueFile[dialogueId].messages;
 		for (let message of messages) {
 			if (message._id === messageId) {
 				return message.items.data;
@@ -169,19 +176,20 @@ function findAndReturnChildren(messageItems, itemid) {
 }
 
 function removeDialogue(dialogueId, sessionID) {
-	let dialogue_file = profile_f.getDialogue(sessionID);
-	delete dialogue_file[dialogueId];	
-	profile_f.setDialogue(dialogue_file, sessionID);
+	let dialogueFile = profile_f.getDialogue(sessionID);
+	delete dialogueFile[dialogueId];	
+	profile_f.setDialogue(dialogueFile, sessionID);
 }
 
 function setDialoguePin(dialogueId, shouldPin, sessionID) {
-	let dialogue_file = profile_f.getDialogue(sessionID);
-	dialogue_file[dialogueId].pinned = shouldPin;
-	profile_f.setDialogue(dialogue_file, sessionID);
+	let dialogueFile = profile_f.getDialogue(sessionID);
+	dialogueFile[dialogueId].pinned = shouldPin;
+	profile_f.setDialogue(dialogueFile, sessionID);
 }
 
 module.exports.generateDialogueList = generateDialogueList;
 module.exports.generateDialogueView = generateDialogueView;
+module.exports.getDialogueInfo = getDialogueInfo;
 module.exports.getMessageTypeValue = getMessageTypeValue;
 module.exports.addDialogueMessage = addDialogueMessage;
 module.exports.getMessageItemContents = getMessageItemContents;
