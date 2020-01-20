@@ -154,7 +154,7 @@ function handleRequest(req, resp) {
             if (req.headers.hasOwnProperty("expect")) {
                 const requestLength = req.headers["content-length"] - 0;
                 const sessionID = req.headers.sessionid - 0;
-                
+
                 if (!constants.putInBuffer(sessionID, data, requestLength)) {
                     resp.writeContinue();
                     return;
@@ -172,7 +172,7 @@ function handleRequest(req, resp) {
                 }
             
                 logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
-                offraid_f.saveProfileProgress(jsonData, sessionID);
+                offraid_f.saveProgress(jsonData, sessionID);
             });
         });
     }
