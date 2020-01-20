@@ -33,7 +33,7 @@ function markFoundItems(pmcData, offraidData, isPlayerScav) {
 
 function setInventory(pmcData, sessionID) {
     move_f.removeItem(pmcData, pmcData.Inventory.equipment, item.getOutput(), sessionID);
-    move_f.removeItem(pmcData, pmcData.Inventory.questRaidItems, item.getOutput()), sessionID;
+    move_f.removeItem(pmcData, pmcData.Inventory.questRaidItems, item.getOutput()), sessionID);
     move_f.removeItem(pmcData, pmcData.Inventory.questStashItems, item.getOutput(), sessionID);
 
     for (let item in offRaidProfile.Inventory.items) {
