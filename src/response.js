@@ -205,59 +205,7 @@ function getTemplates(url, info, sessionID) {
 }
 
 function getQuests(url, info, sessionID) {
-    let pmcData = profile_f.getPmcData(sessionID);
-    let base = quests;
-    let triggerDeconterminationService = false;
-    let triggerTrustRegain = false;
-    let triggerNoOffence = false;
-    let triggerLoyatyBuyout = false;
-    let triggerHippocraticVow = false;
-
-    // check quest availability
-    for (let quest in pmcData.Quests) {
-        // Decontermination service
-        if (pmcData.Quests[quest].qid === "5a68669a86f774255929b4d4" && pmcData.Quests[quest].status === 4
-        || pmcData.Quests[quest].qid === "5c0be5fc86f774467a116593" && pmcData.Quests[quest].status === 4) {
-            triggerDeconterminationService = true;
-        }
-
-        // Trust regain
-        if (pmcData.Quests[quest].qid === "597a0f5686f774273b74f676" && pmcData.Quests[quest].status === 4
-        || pmcData.Quests[quest].qid === "597a171586f77405ba6887d3" && pmcData.Quests[quest].status === 4) {
-            triggerTrustRegain = true;
-        }
-
-        // No offence
-        if (pmcData.Quests[quest].qid === "597a0f5686f774273b74f676" && pmcData.Quests[quest].status === 4
-        || pmcData.Quests[quest].qid === "597a160786f77477531d39d2" && pmcData.Quests[quest].status === 4) {
-            triggerNoOffence = true;
-        }
-
-        // loyalty buyout
-        if (pmcData.Quests[quest].qid === "597a171586f77405ba6887d3" && pmcData.Quests[quest].status === 4
-        || pmcData.Quests[quest].qid === "597a160786f77477531d39d2" && pmcData.Quests[quest].status === 4) {
-            triggerLoyatyBuyout = true;
-        }
-
-        // Hippocratic vow
-        if (pmcData.Quests[quest].qid === "596a218586f77420d232807c" && pmcData.Quests[quest].status === 4
-        || pmcData.Quests[quest].qid === "596b455186f77457cb50eccb" && pmcData.Quests[quest].status === 4) {
-            triggerHippocraticVow = true;
-        }
-    }
-
-    // quest not found
-    for (let quest in quests.data) {
-        if ((triggerDeconterminationService === false && quests.data[quest].qid === "5c0d1c4cd0928202a02a6f5c")
-        || (triggerTrustRegain === false && quests.data[quest].qid === "59c9392986f7742f6923add2")
-        || (triggerNoOffence === false && quests.data[quest].qid === "59ca1a6286f774509a270942")
-        || (triggerLoyatyBuyout === false && quests.data[quest].qid === "59c93e8e86f7742a406989c4")
-        || (triggerHippocraticVow === false && quests.data[quest].qid === " 5a5642ce86f77445c63c3419")) {
-            base.data.splice(quest, 1);
-        }
-    }
-
-    return JSON.stringify(base, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
+    return JSON.stringify(quests, null, "\t").replace(/[\r\n\t]/g, '').replace(/\s\s+/g, '').replace(/[\\]/g, "");
 }
 
 function getMetrics(url, info, sessionID) {
