@@ -154,8 +154,7 @@ function handleRequest(req, resp) {
             if (req.headers.hasOwnProperty("expect")) {
                 const requestLength = req.headers["content-length"] - 0;
                 const sessionID = req.headers.sessionid - 0;
-                constants.setActiveID(sessionID);
-
+                
                 if (!constants.putInBuffer(sessionID, data, requestLength)) {
                     resp.writeContinue();
                     return;
