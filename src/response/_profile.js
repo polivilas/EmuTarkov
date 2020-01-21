@@ -41,6 +41,7 @@ function create(info, sessionID) {
     json.write(folder + "character.json", pmcData);
     json.write(folder + "storage.json", storage);
     json.write(folder + "userbuilds.json", userbuilds);
+    json.write(folder + "scav.json", generateScav(sessionID));
     json.write(folder + "dialogue.json", {});
 
     // create traders
