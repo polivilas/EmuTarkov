@@ -34,9 +34,9 @@ function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 		'_id': dialogueID,
 		'type': 2, // Type npcTrader.
 		'message': getMessagePreview(dialogue),
-		'new': 1,
-		'attachmentsNew': 0,
-		'pinned': false
+		'new': dialogue.new,
+		'attachmentsNew': dialogue.attachmentsNew,
+		'pinned': dialogue.pinned
 	};
 	return dialogueInfo;
 }
@@ -50,15 +50,9 @@ function generateDialogueView(dialogueID, sessionID) {
 
 	// TODO(camo1018): Respect the message limit, but to heck with it for now.
 	let messages = dialogueFile[dialogueID].messages;
-
 	let data = {
-		'messages': []
+		'messages': messages
 	};
-
-	for (let message of messages) {
-		data.messages.push(message);
-	}
-
 	return '{"err":0,"errmsg":null, "data":' + json.stringify(data) + '}';
 }
 
@@ -82,10 +76,14 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 		dialogue = {
 			'_id': dialogueID,
 			'messages': [],
-			'pinned': false
+			'pinned': false,
+			'new': 0,
+			'attachmentsNew': 0
 		};
 		dialogueFile[dialogueID] = dialogue;
 	}
+	dialogue.new += 1;
+
 
 	// Generate item stash if we have rewards.
 	let items = {};
@@ -99,6 +97,7 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 			reward.slotId = "main";
 			items.data.push(reward);
 		}
+		dialogue.attachmentsNew += 1;
 	}
 
 	let message = {
@@ -138,12 +137,7 @@ function getMessagePreview(dialogue) {
 */
 function getMessageItemContents(messageId, sessionID) {
 	let dialogueFile = profile_f.getDialogue(sessionID);
-
 	for (let dialogueId in dialogueFile) {
-		// Don't want properties from the prototype.
-		if (!dialogueFile.hasOwnProperty(dialogueId)) {
-			continue;
-		}
 		let messages = dialogueFile[dialogueId].messages;
 		for (let message of messages) {
 			if (message._id === messageId) {
@@ -187,6 +181,24 @@ function setDialoguePin(dialogueId, shouldPin, sessionID) {
 	profile_f.setDialogue(dialogueFile, sessionID);
 }
 
+function setRead(dialogueIds, sessionID) {
+	let dialogueFile = profile_f.getDialogue(sessionID);
+	for (let dialogId of dialogueIds) {
+		dialogueFile[dialogId].new = 0;
+		dialogueFile[dialogId].attachmentsNew = 0;
+	}
+	profile_f.setDialogue(dialogueFile, sessionID);
+}
+
+function getAllAttachments(dialogueId, sessionID) {
+	let dialogueFile = profile_f.getDialogue(sessionID);
+	
+	let data = {
+		'messages': dialogueFile[dialogueId].messages
+	};
+	return data;
+}
+
 module.exports.generateDialogueList = generateDialogueList;
 module.exports.generateDialogueView = generateDialogueView;
 module.exports.getDialogueInfo = getDialogueInfo;
@@ -196,3 +208,5 @@ module.exports.getMessageItemContents = getMessageItemContents;
 module.exports.findAndReturnChildren = findAndReturnChildren;
 module.exports.removeDialogue = removeDialogue;
 module.exports.setDialoguePin = setDialoguePin;
+module.exports.setRead = setRead;
+module.exports.getAllAttachments = getAllAttachments;

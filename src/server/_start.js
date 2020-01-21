@@ -47,6 +47,10 @@ function getCookies(req) {
 
 async function notificationWaitAsync(resp, sessionID) {
     let promise = new Promise(resolve => {
+        // Timeout after 15 seconds even if no messages have been received to keep the poll requests going.
+        setTimeout(function() {
+            resolve();
+        }, 15000);
         setInterval(function() {
             if (notifier_f.notifierService.hasMessagesInQueue(sessionID)) {
                 resolve();
@@ -60,6 +64,12 @@ async function notificationWaitAsync(resp, sessionID) {
         let message = notifier_f.notifierService.popMessageFromQueue(sessionID);
         data.push(JSON.stringify(message));
     }
+
+    // If we timed out and don't have anything to send, just send a ping notification.
+    if (data.length == 0) {
+        data.push('{"type": "ping", "eventId": "ping"}');
+    }
+
     header_f.sendTextJson(resp, data.join('\n'));
 }
 

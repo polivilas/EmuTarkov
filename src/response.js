@@ -61,6 +61,8 @@ const staticRoutes = {
     "/client/mail/dialog/remove": removeDialog,
     "/client/mail/dialog/pin": pinDialog,
     "/client/mail/dialog/unpin": unpinDialog,
+    "/client/mail/dialog/read": setRead,
+    "/client/mail/dialog/getAllAttachments": getAllAttachments,
     "/client/friend/request/list/outbox": nullArrayResponse,
     "/client/friend/request/list/inbox": nullArrayResponse,
 
@@ -375,7 +377,7 @@ function getMailDialogInfo(url, info, sessionID) {
     let dialogueFile = profile_f.getDialogue(sessionID);
 
     let data = dialogue_f.getDialogueInfo(dialogueFile, info.dialogId, sessionID);
-    return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';;
+    return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';
 }
 
 function removeDialog(url, info, sessionID) {
@@ -391,6 +393,16 @@ function pinDialog(url, info, sessionID) {
 function unpinDialog(url, info, sessionID) {
     dialogue_f.setDialoguePin(info.dialogId, false, sessionID);
     return nullArrayResponse;
+}
+
+function setRead(url, info, sessionID) {
+    dialogue_f.setRead(info.dialogs, sessionID);
+    return nullArrayResponse;
+}
+
+function getAllAttachments(url, info, sessionID) {
+    let data = dialogue_f.getAllAttachments(info.dialogId, sessionID);
+    return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';
 }
 
 function getMapLocation(url, info, sessionID) {
