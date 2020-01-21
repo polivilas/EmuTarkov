@@ -47,6 +47,10 @@ function getCookies(req) {
 
 async function notificationWaitAsync(resp, sessionID) {
     let promise = new Promise(resolve => {
+        // Timeout after 15 seconds even if no messages have been received to keep the poll requests going.
+        setTimeout(function() {
+            resolve();
+        }, 15000);
         setInterval(function() {
             if (notifier_f.notifierService.hasMessagesInQueue(sessionID)) {
                 resolve();
