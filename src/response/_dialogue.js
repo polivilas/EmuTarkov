@@ -138,10 +138,6 @@ function getMessagePreview(dialogue) {
 function getMessageItemContents(messageId, sessionID) {
 	let dialogueFile = profile_f.getDialogue(sessionID);
 	for (let dialogueId in dialogueFile) {
-		// Don't want properties from the prototype.
-		if (!dialogueFile.hasOwnProperty(dialogueId)) {
-			continue;
-		}
 		let messages = dialogueFile[dialogueId].messages;
 		for (let message of messages) {
 			if (message._id === messageId) {

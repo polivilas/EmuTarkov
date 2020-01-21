@@ -41,7 +41,7 @@ function create(info, sessionID) {
     json.write(folder + "character.json", pmcData);
     json.write(folder + "storage.json", storage);
     json.write(folder + "userbuilds.json", userbuilds);
-    json.write(folder + "dialogue.json", '{}');
+    json.write(folder + "dialogue.json", {});
 
     // create traders
     let inputFiles = filepaths.traders;
