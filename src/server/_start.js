@@ -64,6 +64,12 @@ async function notificationWaitAsync(resp, sessionID) {
         let message = notifier_f.notifierService.popMessageFromQueue(sessionID);
         data.push(JSON.stringify(message));
     }
+
+    // If we timed out and don't have anything to send, just send a ping notification.
+    if (data.length == 0) {
+        data.push('{"type": "ping", "eventId": "ping"}');
+    }
+
     header_f.sendTextJson(resp, data.join('\n'));
 }
 
