@@ -9,7 +9,7 @@ function getRandomValue(node) {
 
 function addDogtag(bot) {
 	let dogtagItem = {
-		_id: generateNewItemId(),
+		_id: utility.generateNewItemId(),
 		_tpl: ((bot.Info.Side === 'Usec') ? "59f32c3b86f77472a31742f0" : "59f32bb586f774757e1e8442"),
 		parentId: bot.Inventory.equipment,
 		slotId: "Dogtag",
