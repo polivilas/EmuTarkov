@@ -111,19 +111,6 @@ function getScavData(sessionID) {
     return json.parse(json.read(getScavPath(sessionID)));
 }
 
-function getDialoguePath(sessionID) {
-    let dialoguePath = filepaths.user.profiles.dialogue;
-    return dialoguePath.replace("__REPLACEME__", sessionID);
-}
-
-function getDialogue(sessionID) {
-    return json.parse(json.read(getDialoguePath(sessionID)));
-}
-
-function setDialogue(data, sessionID) {
-    json.write(getDialoguePath(sessionID), data);
-}
-
 function get(sessionID) {
     let output = {err: 0, errmsg: null, data: []};
 

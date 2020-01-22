@@ -10,11 +10,24 @@ let messageTypes = {
 	'questSuccess': 12
 };
 
+function getPath(sessionID) {
+    let path = filepaths.user.profiles.dialogue;
+    return path.replace("__REPLACEME__", sessionID);
+}
+
+function get(sessionID) {
+    return json.parse(json.read(getPath(sessionID)));
+}
+
+function set(data, sessionID) {
+    json.write(getPath(sessionID), data);
+}
+
 /*
 * Set the content of the dialogue on the list tab.
 */
 function generateDialogueList(sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 	let data = [];
 
 	// Iterate through all dialogues
@@ -45,7 +58,7 @@ function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 * for the specified dialogue.
 */
 function generateDialogueView(dialogueID, sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 
 	// TODO(camo1018): Respect the message limit, but to heck with it for now.
 	let messages = dialogueFile[dialogueID].messages;
@@ -67,7 +80,7 @@ function getMessageTypeValue(messageType) {
 * Add a templated message to the dialogue.
 */
 function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionID, rewards = []) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 	let isNewDialogue = !(dialogueID in dialogueFile);
 	let dialogue = dialogueFile[dialogueID];
 
@@ -114,7 +127,7 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 	};
 
 	dialogue.messages.push(message);
-	profile_f.setDialogue(dialogueFile, sessionID);
+	set(dialogueFile, sessionID);
 
 	let notificationMessage = notifier_f.createNewMessageNotification(message);
 	notifier_f.notifierService.addToMessageQueue(notificationMessage, sessionID);
@@ -139,7 +152,7 @@ function getMessagePreview(dialogue) {
 * Get the item contents for a particular message.
 */
 function getMessageItemContents(messageId, sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 
 	for (let dialogueId in dialogueFile) {
 		let messages = dialogueFile[dialogueId].messages;
@@ -176,30 +189,29 @@ function findAndReturnChildren(messageItems, itemid) {
 }
 
 function removeDialogue(dialogueId, sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 	delete dialogueFile[dialogueId];	
-	profile_f.setDialogue(dialogueFile, sessionID);
+	set(dialogueFile, sessionID);
 }
 
 function setDialoguePin(dialogueId, shouldPin, sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 	dialogueFile[dialogueId].pinned = shouldPin;
-	profile_f.setDialogue(dialogueFile, sessionID);
-}
+	setDialogue
 
 function setRead(dialogueIds, sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 
 	for (let dialogId of dialogueIds) {
 		dialogueFile[dialogId].new = 0;
 		dialogueFile[dialogId].attachmentsNew = 0;
 	}
 
-	profile_f.setDialogue(dialogueFile, sessionID);
+	set(dialogueFile, sessionID);
 }
 
 function getAllAttachments(dialogueId, sessionID) {
-	let dialogueFile = profile_f.getDialogue(sessionID);
+	let dialogueFile = get(sessionID);
 	
 	let data = {
 		'messages': dialogueFile[dialogueId].messages
