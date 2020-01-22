@@ -6,10 +6,10 @@ let dialogues = {};
 
 // TODO(camo1018): Reduce the number of dialogue file reads and writes.
 let messageTypes = {
-	'npcTrader': 2,
-	'questStart': 10,
-	'questFail': 11,
-	'questSuccess': 12
+	"npcTrader": 2,
+	"questStart": 10,
+	"questFail": 11,
+	"questSuccess": 12
 };
 
 function getPath(sessionID) {
@@ -49,12 +49,12 @@ function generateDialogueList(sessionID) {
 function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 	let dialogue = dialogueFile[dialogueID];
 	let dialogueInfo = {
-		'_id': dialogueID,
-		'type': 2, // Type npcTrader.
-		'message': getMessagePreview(dialogue),
-		'new': dialogue.new,
-		'attachmentsNew': dialogue.attachmentsNew,
-		'pinned': dialogue.pinned
+		"_id": dialogueID,
+		"type": 2, // Type npcTrader.
+		"message": getMessagePreview(dialogue),
+		"new": dialogue.new,
+		"attachmentsNew": dialogue.attachmentsNew,
+		"pinned": dialogue.pinned
 	};
 
 	return dialogueInfo;
@@ -65,15 +65,10 @@ function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 * for the specified dialogue.
 */
 function generateDialogueView(dialogueID, sessionID) {
-	let dialogueFile = get(sessionID);
-
 	// TODO(camo1018): Respect the message limit, but to heck with it for now.
+	let dialogueFile = get(sessionID);
 	let messages = dialogueFile[dialogueID].messages;
-	let data = {
-		'messages': messages
-	};
-
-	return '{"err":0,"errmsg":null, "data":' + json.stringify(data) + '}';
+	return '{"err":0,"errmsg":null, "data":' + json.stringify({"messages": messages}) + '}';
 }
 
 /*
@@ -93,11 +88,11 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 
 	if (isNewDialogue) {
 		dialogue = {
-			'_id': dialogueID,
-			'messages': [],
-			'pinned': false,
-			'new': 0,
-			'attachmentsNew': 0
+			"_id": dialogueID,
+			"messages": [],
+			"pinned": false,
+			"new": 0,
+			"attachmentsNew": 0
 		};
 		dialogueFile[dialogueID] = dialogue;
 	}
@@ -124,13 +119,13 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 	}
 
 	let message = {
-		'_id': utility.generateNewDialogueId(),
-		'uid': dialogueID,
-		'type': messageType,
-		'dt': Date.now() / 1000,
-		'templateId': messageTemplateId,
-		'hasRewards': rewards.length > 0,
-		'items': items
+		"_id": utility.generateNewDialogueId(),
+		"uid": dialogueID,
+		"type": messageType,
+		"dt": Date.now() / 1000,
+		"templateId": messageTemplateId,
+		"hasRewards": rewards.length > 0,
+		"items": items
 	};
 
 	dialogue.messages.push(message);
@@ -148,10 +143,10 @@ function getMessagePreview(dialogue) {
 	let message = dialogue.messages[dialogue.messages.length - 1];
 
 	return {
-		'dt': message.dt,
-		'type': message.type,
-		'templateId': message.templateId,
-		'uid': dialogue._id
+		"dt": message.dt,
+		"type": message.type,
+		"templateId": message.templateId,
+		"uid": dialogue._id
 	};
 }
 
@@ -220,7 +215,7 @@ function setRead(dialogueIds, sessionID) {
 
 function getAllAttachments(dialogueId, sessionID) {
 	let dialogueFile = get(sessionID);	
-	return {'messages': dialogueFile[dialogueId].messages};
+	return {"messages": dialogueFile[dialogueId].messages};
 }
 
 module.exports.get = get;
