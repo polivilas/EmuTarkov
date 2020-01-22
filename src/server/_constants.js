@@ -1,5 +1,5 @@
 "use strict";
-let server = '0.8.0-dev-r23';
+let server = '1.0.0';
 let game = 'Not Started';
 const saveLootBuffers = {};
 
