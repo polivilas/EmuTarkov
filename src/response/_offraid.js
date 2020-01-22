@@ -2,9 +2,9 @@
 
 require("../libs.js");
 
-function markFoundItems(pmcData, offraidData, isPlayerScav) {
+function markFoundItems(pmcData, offraidProfile, isPlayerScav) {
     // mark items found in raid
-    for (let offraidItem of offraidData.Inventory.items) {
+    for (let offraidItem of offraidProfile.Inventory.items) {
         let found = false;
 
         // mark new items for PMC, mark all items for scavs
@@ -28,15 +28,24 @@ function markFoundItems(pmcData, offraidData, isPlayerScav) {
         }
     }
 
-    return offraidData;
+    return offraidProfile;
 }
 
-function setInventory(pmcData, offraidData, sessionID) {
-    move_f.removeItem(pmcData.Inventory.equipment, item.getOutput(), sessionID);
-    move_f.removeItem(pmcData.Inventory.questRaidItems, item.getOutput(), sessionID);
-    move_f.removeItem(pmcData.Inventory.questStashItems, item.getOutput(), sessionID);
+/* Function to remove a single item (like equipment and stashes). */
+function removeSingleItem(pmcData, itemId) {
+    for (let a in pmcData.Inventory.items) {
+        if (pmcData.Inventory.items[a]._id === itemId) {
+            pmcData.Inventory.items.splice(a, 1); 
+        }
+    }
+}
 
-    for (let item of offraidData.Inventory.items) {
+function setInventory(pmcData, offraidProfile) {
+    removeSingleItem(pmcData, pmcData.Inventory.equipment);
+    removeSingleItem(pmcData, pmcData.Inventory.questRaidItems);
+    removeSingleItem(pmcData, pmcData.Inventory.questStashItems);
+
+    for (let item of offraidProfile.Inventory.items) {
         pmcData.Inventory.items.push(item);
     }
 
@@ -84,7 +93,7 @@ function deleteInventory(pmcData, sessionID) {
     // finally delete them
     for (let item_to_delete in items_to_delete) {
         if (items_to_delete[item_to_delete] !== "insured") {
-            move_f.removeItem(pmcData, items_to_delete[item_to_delete], sessionID);
+            move_f.removeItem(items_to_delete[item_to_delete], item.getOutput(), sessionID);
         }
     }
 
@@ -92,22 +101,22 @@ function deleteInventory(pmcData, sessionID) {
 }
 
 function saveProgress(offraidData, sessionID) {
-    let offRaidExit = offraidData.exit;
-    let offRaidProfile = offraidData.profile;
+    let offraidExit = offraidData.exit;
+    let offraidProfile = offraidData.profile;
     let pmcData = profile_f.getPmcData(sessionID);
     let scavData = profile_f.getScavData(sessionID);
 
     // replace data
-    // if isPlayerScav is true, then offRaidProfile points to a scav profile
+    // if isPlayerScav is true, then offraidProfile points to a scav profile
     const isPlayerScav = offraidData.isPlayerScav;
     
     if (!isPlayerScav) {
-        pmcData.Info.Level = offRaidProfile.Info.Level;
-        pmcData.Skills = offRaidProfile.Skills;
-        pmcData.Stats = offRaidProfile.Stats;
-        pmcData.Encyclopedia = offRaidProfile.Encyclopedia;
-        pmcData.ConditionCounters = offRaidProfile.ConditionCounters;
-        pmcData.Quests = offRaidProfile.Quests;
+        pmcData.Info.Level = offraidProfile.Info.Level;
+        pmcData.Skills = offraidProfile.Skills;
+        pmcData.Stats = offraidProfile.Stats;
+        pmcData.Encyclopedia = offraidProfile.Encyclopedia;
+        pmcData.ConditionCounters = offraidProfile.ConditionCounters;
+        pmcData.Quests = offraidProfile.Quests;
 
         // level 69 cap to prevent visual bug occuring at level 70
         if (pmcData.Info.Experience > 13129881) {
@@ -116,16 +125,16 @@ function saveProgress(offraidData, sessionID) {
     }
 
     // mark found items
-    offRaidProfile = markFoundItems(pmcData, offRaidProfile, isPlayerScav);
+    offraidProfile = markFoundItems(pmcData, offraidProfile, isPlayerScav);
 
     // replace item ID's
-    offRaidProfile.Inventory.items = itm_hf.replaceIDs(offRaidProfile, offRaidProfile.Inventory.items);
+    offraidProfile.Inventory.items = itm_hf.replaceIDs(offraidProfile, offraidProfile.Inventory.items);
 
     // set profile equipment to the raid equipment
     if (!isPlayerScav) {
-        pmcData = setInventory(pmcData, offraidData, sessionID);
+        pmcData = setInventory(pmcData, offraidProfile);
     } else {
-        scavData = setInventory(scavData, offraidData, sessionID);
+        scavData = setInventory(scavData, offraidProfile);
     }
 
     // terminate early for player scavs because we don't care about whether they died.
@@ -135,7 +144,7 @@ function saveProgress(offraidData, sessionID) {
     }
 
     // remove inventory if player died
-    if (offRaidExit !== "survived" && offRaidExit !== "runner") {
+    if (offraidExit !== "survived" && offraidExit !== "runner") {
         pmcData = deleteInventory(pmcData, sessionID);
     }
 
