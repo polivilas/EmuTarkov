@@ -275,5 +275,3 @@ module.exports.getStashType = getStashType;
 module.exports.getPurchasesData = getPurchasesData;
 module.exports.changeNickname = changeNickname;
 module.exports.changeVoice = changeVoice;
-module.exports.getDialogue = getDialogue;
-module.exports.setDialogue = setDialogue;
