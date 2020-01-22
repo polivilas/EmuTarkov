@@ -211,7 +211,7 @@ function handleRequest(req, resp) {
                     return;
                 }
             
-                logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);s
+                logger.logRequest("[" + sessionID + "][" + IP + "] " + req.url + " -> " + jsonData);
                 offraid_f.saveProgress(jsonData, sessionID);
             });
         });
