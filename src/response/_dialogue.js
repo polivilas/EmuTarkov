@@ -15,7 +15,6 @@ let messageTypes = {
 */
 function generateDialogueList(sessionID) {
 	let dialogueFile = profile_f.getDialogue(sessionID);
-
 	let data = [];
 
 	// Iterate through all dialogues
@@ -29,7 +28,6 @@ function generateDialogueList(sessionID) {
 /* Get the content of an incoming message. */
 function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 	let dialogue = dialogueFile[dialogueID];
-
 	let dialogueInfo = {
 		'_id': dialogueID,
 		'type': 2, // Type npcTrader.
@@ -38,6 +36,7 @@ function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 		'attachmentsNew': dialogue.attachmentsNew,
 		'pinned': dialogue.pinned
 	};
+
 	return dialogueInfo;
 }
 
@@ -53,6 +52,7 @@ function generateDialogueView(dialogueID, sessionID) {
 	let data = {
 		'messages': messages
 	};
+
 	return '{"err":0,"errmsg":null, "data":' + json.stringify(data) + '}';
 }
 
@@ -68,7 +68,6 @@ function getMessageTypeValue(messageType) {
 */
 function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionID, rewards = []) {
 	let dialogueFile = profile_f.getDialogue(sessionID);
-
 	let isNewDialogue = !(dialogueID in dialogueFile);
 	let dialogue = dialogueFile[dialogueID];
 
@@ -82,21 +81,25 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 		};
 		dialogueFile[dialogueID] = dialogue;
 	}
-	dialogue.new += 1;
 
+	dialogue.new += 1;
 
 	// Generate item stash if we have rewards.
 	let items = {};
+
 	if (rewards.length > 0) {
 		const stashId = utility.generateNewItemId();
+
 		items.stash = stashId;
 		items.data = [];
+
 		for (let reward of rewards) {
 			reward._id = utility.generateNewItemId();
 			reward.parentId = stashId;
 			reward.slotId = "main";
 			items.data.push(reward);
 		}
+
 		dialogue.attachmentsNew += 1;
 	}
 
@@ -137,14 +140,17 @@ function getMessagePreview(dialogue) {
 */
 function getMessageItemContents(messageId, sessionID) {
 	let dialogueFile = profile_f.getDialogue(sessionID);
+
 	for (let dialogueId in dialogueFile) {
 		let messages = dialogueFile[dialogueId].messages;
+
 		for (let message of messages) {
 			if (message._id === messageId) {
 				return message.items.data;
 			}
 		}
 	}
+
 	return [];
 }
 
@@ -183,10 +189,12 @@ function setDialoguePin(dialogueId, shouldPin, sessionID) {
 
 function setRead(dialogueIds, sessionID) {
 	let dialogueFile = profile_f.getDialogue(sessionID);
+
 	for (let dialogId of dialogueIds) {
 		dialogueFile[dialogId].new = 0;
 		dialogueFile[dialogId].attachmentsNew = 0;
 	}
+
 	profile_f.setDialogue(dialogueFile, sessionID);
 }
 
@@ -196,6 +204,7 @@ function getAllAttachments(dialogueId, sessionID) {
 	let data = {
 		'messages': dialogueFile[dialogueId].messages
 	};
+	
 	return data;
 }
 

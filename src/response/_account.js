@@ -53,8 +53,7 @@ function getReservedNickname(sessionID) {
 }
 
 function isNicknameTaken(info) {
-    for (let i = 0; i < accounts.length; i++) {
-        let account = accounts[i];
+    for (let account of accounts) {
         let profile = profile_f.getPmcData(account.id);
 
         if (account.nickname === info.nickname || profile.Info.Nickname === info.nickname) {

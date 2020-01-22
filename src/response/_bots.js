@@ -10,7 +10,7 @@ function getRandomValue(node) {
 function addDogtag(bot) {
 	let dogtagItem = {
 		_id: "dogtag_" + utility.getRandomIntEx(999999999),
-		_tpl: "__REPLACEME__",
+		_tpl: (bot.Info.Side === 'Usec') ? "59f32c3b86f77472a31742f0" : "59f32bb586f774757e1e8442",
 		parentId: bot.Inventory.equipment,
 		slotId: "Dogtag",
 		upd: {
@@ -25,12 +25,6 @@ function addDogtag(bot) {
 			},
 			"SpawnedInSession": "true"
 		}
-	}
-
-	if (bot.Info.Side === 'Usec') {
-		dogtagItem._tpl = "59f32c3b86f77472a31742f0";
-	} else {
-		dogtagItem._tpl = "59f32bb586f774757e1e8442";
 	}
 
 	bot.Inventory.items.push(dogtagItem);
@@ -60,15 +54,11 @@ function removeSecureContainer(bot) {
 }
 
 function generateBot(bot, role) {
-	let type = role;
+	let type = (role === "cursedAssault") ? "assault" : role;
 	let node = {};
 
-	if (role === "cursedAssault") {
-		type = "assault";
-	}
-
 	// chance to spawn simulated PMC players
-	if (((type === "assault" || type === "marksman" || type === "pmcBot") && settings.gameplay.bots.pmcEnabled)) {
+	if ((type === "assault" || type === "marksman" || type === "pmcBot") && settings.gameplay.bots.pmcEnabled) {
 		let spawnChance = utility.getRandomInt(0, 99);
 		let sideChance = utility.getRandomInt(0, 99);
 
@@ -91,11 +81,7 @@ function generateBot(bot, role) {
 	}
 
 	// generate bot
-	if (type === "bear" || type === "usec") {
-		node = filepaths.bots.pmc[type];
-	} else {
-		node = filepaths.bots.scav[type.toLowerCase()];
-	}
+	node = (type === "bear" || type === "usec") ? filepaths.bots.pmc[type] : filepaths.bots.scav[type.toLowerCase()];
 
 	bot.Info.Settings.Role = role;
 	bot.Info.Nickname = getRandomValue(node.names);
@@ -108,13 +94,13 @@ function generateBot(bot, role) {
 	bot.Customization.Hands = getRandomValue(node.appearance.hands);
 	bot.Inventory = getRandomValue(node.inventory);
 
-	// remove secure container
-	bot = removeSecureContainer(bot);
-
 	// add dogtag to PMC's		
 	if (type === "usec" || type === "bear") {
 		bot = addDogtag(bot);
 	}
+
+	// remove secure container
+	bot = removeSecureContainer(bot);
 	
 	return bot;
 }

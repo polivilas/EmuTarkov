@@ -167,11 +167,10 @@ function removeItem(body, output, sessionID, profileIndex = 0) {
         }
 
         return output;
-    } else {
-        logger.logError("item id is not vaild");
-        return "BAD"
-        //maybe return something because body.item id wasn't valid.
     }
+
+    logger.logError("item id is not valid");
+    return "BAD";
 }
 
 function removeInsurance(pmcData, body, sessionID) {
@@ -194,9 +193,9 @@ function removeInsurance(pmcData, body, sessionID) {
         }
 
         profile_f.setPmcData(pmcData, sessionID);
-    } else {
-        logger.logError("item id is not vaild");
     }
+
+    logger.logError("item id is not valid");
 }
 
 function discardItem(pmcData, body, sessionID) {
@@ -209,20 +208,28 @@ function discardItem(pmcData, body, sessionID) {
 * */
 function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new item with splited amount and removing that amount from older one
     item.resetOutput();
+
     let output = item.getOutput();
     let location = body.container.location;
+    
     if (typeof body.container.location === "undefined" && body.container.container === "cartridges") {
         let tmp_counter = 0;
+    
         for (let item_ammo in pmcData.Inventory.items) {
-            if (pmcData.Inventory.items[item_ammo].parentId === body.container.id)
+            if (pmcData.Inventory.items[item_ammo].parentId === body.container.id) {
                 tmp_counter++;
+            }
         }
+    
         location = tmp_counter;//wrong location for first cartrige
     }
+    
     for (let item of pmcData.Inventory.items) {
         if (item._id && item._id === body.item) {
             item.upd.StackObjectsCount -= body.count;
+
             let newItem = utility.generateNewItemId();
+
             output.data.items.new.push({
                 "_id": newItem,
                 "_tpl": item._tpl,
@@ -231,6 +238,7 @@ function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new 
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
+
             pmcData.Inventory.items.push({
                 "_id": newItem,
                 "_tpl": item._tpl,
@@ -239,6 +247,7 @@ function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new 
                 "location": location,
                 "upd": {"StackObjectsCount": body.count}
             });
+
             profile_f.setPmcData(pmcData, sessionID);
             return output;
         }
@@ -252,30 +261,33 @@ function splitItem(pmcData, body, sessionID) { // -> Spliting item / Create new 
 * */
 function mergeItem(pmcData, body, sessionID) {
     item.resetOutput();
+
     let output = item.getOutput();
+
     for (let key in pmcData.Inventory.items) {
-        if (pmcData.Inventory.items.hasOwnProperty(key)) {
-            if (pmcData.Inventory.items[key]._id && pmcData.Inventory.items[key]._id === body.with) {
-                for (let key2 in pmcData.Inventory.items) {
-                    if (pmcData.Inventory.items[key2]._id && pmcData.Inventory.items[key2]._id === body.item) {
-                        let stackItem0 = 1;
-                        let stackItem1 = 1;
-                        if (typeof pmcData.Inventory.items[key].upd !== "undefined")
-                            stackItem0 = pmcData.Inventory.items[key].upd.StackObjectsCount;
-                        if (typeof pmcData.Inventory.items[key2].upd !== "undefined")
-                            stackItem1 = pmcData.Inventory.items[key2].upd.StackObjectsCount;
+        if (pmcData.Inventory.items[key]._id && pmcData.Inventory.items[key]._id === body.with) {
+            for (let key2 in pmcData.Inventory.items) {
+                if (pmcData.Inventory.items[key2]._id && pmcData.Inventory.items[key2]._id === body.item) {
+                    let stackItem0 = 1;
+                    let stackItem1 = 1;
 
-                        if (stackItem0 === 1)
-                            Object.assign(pmcData.Inventory.items[key], {"upd": {"StackObjectsCount": 1}});
-
-                        pmcData.Inventory.items[key].upd.StackObjectsCount = stackItem0 + stackItem1;
-
-                        output.data.items.del.push({"_id": pmcData.Inventory.items[key2]._id});
-                        pmcData.Inventory.items.splice(key2, 1);
-
-                        profile_f.setPmcData(pmcData, sessionID);
-                        return output;
+                    if (typeof pmcData.Inventory.items[key].upd !== "undefined") {
+                        stackItem0 = pmcData.Inventory.items[key].upd.StackObjectsCount;
                     }
+
+                    if (typeof pmcData.Inventory.items[key2].upd !== "undefined") {
+                        stackItem1 = pmcData.Inventory.items[key2].upd.StackObjectsCount;
+                    }
+
+                    if (stackItem0 === 1) {
+                        Object.assign(pmcData.Inventory.items[key], {"upd": {"StackObjectsCount": 1}});
+                    }
+
+                    pmcData.Inventory.items[key].upd.StackObjectsCount = stackItem0 + stackItem1;
+                    output.data.items.del.push({"_id": pmcData.Inventory.items[key2]._id});
+                    pmcData.Inventory.items.splice(key2, 1);
+                    profile_f.setPmcData(pmcData, sessionID);
+                    return output;
                 }
             }
         }
@@ -289,31 +301,46 @@ function mergeItem(pmcData, body, sessionID) {
 * */
 function transferItem(pmcData, body, sessionID) {
     item.resetOutput();
+
     let output = item.getOutput();
+
     for (let item of pmcData.Inventory.items) {
         // From item
         if (item._id === body.item) {
             let stackItem = 1;
-            if (typeof item.upd !== "undefined")
+
+            if (typeof item.upd !== "undefined") {
                 stackItem = item.upd.StackObjectsCount;
+            }
+
             // fixed undefined stackobjectscount
-            if (stackItem === 1)
+            if (stackItem === 1) {
                 Object.assign(item, {"upd": {"StackObjectsCount": 1}});
-            if (stackItem > body.count)
+            }
+
+            if (stackItem > body.count) {
                 item.upd.StackObjectsCount = stackItem - body.count;
-            else
+            } else {
                 item.splice(item, 1);
+            }
         }
+
         // To item
         if (item._id === body.with) {
             let stackItemWith = 1;
-            if (typeof item.upd !== "undefined")
+
+            if (typeof item.upd !== "undefined") {
                 stackItemWith = item.upd.StackObjectsCount;
-            if (stackItemWith === 1)
+            }
+
+            if (stackItemWith === 1) {
                 Object.assign(item, {"upd": {"StackObjectsCount": 1}});
+            }
+
             item.upd.StackObjectsCount = stackItemWith + body.count;
         }
     }
+
     profile_f.setPmcData(pmcData, sessionID);
     return output;
 }
@@ -323,19 +350,23 @@ function transferItem(pmcData, body, sessionID) {
 * */
 function swapItem(pmcData, body, sessionID) {
     item.resetOutput();
+
     let output = item.getOutput();
+
     for (let item of pmcData.Inventory.items) {
         if (item._id === body.item) {
             item.parentId = body.to.id;         // parentId
             item.slotId = body.to.container;    // slotId
             item.location = body.to.location    // location
         }
+
         if (item._id === body.item2) {
             item.parentId = body.to2.id;
             item.slotId = body.to2.container;
             delete item.location;
         }
     }
+    
     profile_f.setPmcData(pmcData, sessionID);
     return output;
 }

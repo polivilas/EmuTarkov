@@ -68,9 +68,9 @@ function handleMoving(body, sessionID) {
 
     if (typeof staticRoutes[body.Action] !== "undefined") {
         return staticRoutes[body.Action](pmcData, body, sessionID);
-    } else {
-        logger.logError("[UNHANDLED ACTION] " + body.Action);
     }
+
+    logger.logError("[UNHANDLED ACTION] " + body.Action);
 }
 
 function moving(info, sessionID) {

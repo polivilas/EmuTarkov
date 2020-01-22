@@ -16,6 +16,7 @@ class NotifierService {
 		if (!this.hasMessageQueue(sessionID)) {
 			return [];
 		}
+
 		return this.messageQueue[sessionID];
 	}
 
@@ -24,6 +25,7 @@ class NotifierService {
 		if (!this.hasMessageQueue(sessionID)) {
 			return null;
 		}
+
 		return this.messageQueue[sessionID].splice(0, 1)[0];
 	}
 
@@ -33,6 +35,7 @@ class NotifierService {
 			this.messageQueue[sessionID] = [notificationMessage];
 			return;
 		}
+
 		this.messageQueue[sessionID].push(notificationMessage);
 	}
 
@@ -46,20 +49,14 @@ class NotifierService {
 		if (!this.hasMessageQueue(sessionID)) {
 			return false;
 		}
+
 		return this.messageQueue[sessionID].length > 0;
 	}
 }
 
 /* Creates a new notification of type "new_message" with the specified dialogueMessage object. */
 function createNewMessageNotification(dialogueMessage) {
-	let notificationMessage = {};
-	notificationMessage.type = "new_message";
-	notificationMessage.eventId = dialogueMessage._id;
-	notificationMessage.data = {
-		"dialogId": dialogueMessage.uid,
-		"message": dialogueMessage,
-	};
-	return notificationMessage;
+	return {type: "new_message", eventId: dialogueMessage._id, data : {"dialogId": dialogueMessage.uid, "message": dialogueMessage}};
 }
 
 module.exports.notifierService = new NotifierService();
