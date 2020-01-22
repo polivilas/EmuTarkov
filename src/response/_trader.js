@@ -15,7 +15,7 @@ function loadAllTraders(sessionID) {
     // load trader files
     for (let file in filepaths.traders) {
         if (file !== "ragfair") {
-            traders.push((get(file)).data);
+            traders.push((get(file, sessionID)).data);
         }
     }
 
@@ -27,14 +27,7 @@ function get(id, sessionID) {
         traders[id] = json.parse(json.read(getPath(id, sessionID)));
     }
 
-    // find the trader
-	if (filepaths.traders.hasOwnProperty(id)) {
-        return {err: 0, errmsg: "", data: traders[id]};
-    }
-    
-    // trader not found
-    logger.logError("Couldn't find trader of ID " + id);
-    return {err: 999, errmsg: "Couldn't find trader of ID " + id, data: null};
+	return {err: 0, errmsg: "", data: traders[id]};
 }
 
 function setTrader(data, sessionID) {
