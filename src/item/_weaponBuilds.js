@@ -15,8 +15,10 @@ function SaveBuild(pmcData, body, sessionID) {
 	let output = item.getOutput();
 	let savedBuilds = json.parse(json.read(getPath(sessionID)));
 
-	// replace duplicate ID's
+	// replace duplicate ID's. The first item is the base item.
+	// The root ID and the base item ID need to match.
 	body.items = itm_hf.replaceIDs(pmcData, body.items, false);
+	body.root = body.items[0]._id;
 
 	savedBuilds.data.push(body);
 	json.write(getPath(sessionID), savedBuilds);

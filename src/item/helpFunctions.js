@@ -439,6 +439,14 @@ function isDogtag(itemId) {
     return itemId === "59f32bb586f774757e1e8442" || itemId === "59f32c3b86f77472a31742f0" ? true : false;
 }
 
+/* Gets the identifier for a child using slotId, locationX and locationY. */
+function getChildId(item) {
+    if (typeof item.location === "undefined") {
+        return item.slotId;
+    }
+    return item.slotId + ',' + item.location.x + ',' + item.location.y;
+}
+
 function replaceIDs(pmcData, items) {
     // replace bsg shit long ID with proper one
     let string_inventory = json.stringify(items);
@@ -474,35 +482,52 @@ function replaceIDs(pmcData, items) {
     // fix duplicate id's
 	let dupes = {};
 	let newParents = {};
+    let childrenMapping = {};
+    let oldToNewIds = {};
 	
-	for (let item of items) {
-		dupes[item._id] = (dupes[item._id] || 0) + 1;
-	}
-
-	for (let item of items) {
-        // duplicate item
-		if (dupes[item._id] > 1) {
-			let newId = utility.generateNewItemId();
-			
-			logger.logWarning("id is duplicated ! " + item._id);
-			newParents[newId] = {"oldId" : item._id, "slot" : item.slotId};
-			item._id = newId;
-		}
-
-        // duplicate parent
-		if (dupes[item.parentId] > 1) {
-			logger.logWarning("an item has a duplicated parent ! : " + item.parentId);
-
-			for (let newId in newParents) {
-				if (item.parentId == newParents[newId].oldId) {
-					item.parentId = newId;
-				}
-
-				delete newParents[newId];
-			}
-		}
+	// Finding duplicate IDs involves scanning the item three times.
+    // First scan - Check which ids are duplicated.
+    // Second scan - Map parents to items.
+    // Third scan - Resolve IDs.
+    for (let item of items) {
+        dupes[item._id] = (dupes[item._id] || 0) + 1;
     }
-    
+
+    for (let item of items) {
+        // register the parents
+        if (dupes[item._id] > 1) {
+            let newId = utility.generateNewItemId();
+            
+            logger.logWarning("id is duplicated ! " + item._id);
+            newParents[item.parentId] = newParents[item.parentId] || [];
+            newParents[item.parentId].push(item);
+            oldToNewIds[item._id] = oldToNewIds[item._id] || [];
+            oldToNewIds[item._id].push(newId);
+        }
+    }
+
+    for (let item of items) {
+        if (dupes[item._id] > 1) {
+            let oldId = item._id;
+            let newId = oldToNewIds[oldId].splice(0, 1)[0];
+            item._id = newId;
+
+            // Extract one of the children that's also duplicated.
+            if (oldId in newParents && newParents[oldId].length > 0) {
+                childrenMapping[newId] = {};
+                for (let childIndex in newParents[oldId]) {
+                    // Make sure we haven't already assigned another duplicate child of
+                    // same slot and location to this parent.
+                    let childId = getChildId(newParents[oldId][childIndex]);
+                    if (!(childId in childrenMapping[newId])) {
+                        childrenMapping[newId][childId] = 1;
+                        newParents[oldId][childIndex].parentId = newId;
+                        newParents[oldId].splice(childIndex, 1);
+                    }
+                }
+            }
+        }
+    }
     return items;
 }
 
