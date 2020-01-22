@@ -24,10 +24,6 @@ function loadAllTraders(sessionID) {
 
 function get(id, sessionID) {
     if (typeof traders[id] === "undefined") {
-        if (!fs.existsSync(getPath(id, sessionID))) {
-            continue;
-        }
-
         traders[id] = json.parse(json.read(getPath(id, sessionID)));
     }
 
