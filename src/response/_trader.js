@@ -58,10 +58,11 @@ function lvlUp(id, sessionID) {
     for (let level in loyaltyLevels) {
         // level reached
         if ((loyaltyLevels[level].minLevel <= pmcData.Info.Level
-            && loyaltyLevels[level].minSalesSum <= currentTrader.data.loyalty.currentSalesSum
-            && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
-            && targetLevel < 4) {
-                targetLevel++;
+        && loyaltyLevels[level].minSalesSum <= currentTrader.data.loyalty.currentSalesSum
+        && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
+        && targetLevel < 4) {
+            targetLevel++;
+            continue;
         }
 
         break;
