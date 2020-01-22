@@ -12,6 +12,7 @@ function markFoundItems(pmcData, offraidProfile, isPlayerScav) {
             for (let item of pmcData.Inventory.items) {
                 if (offraidItem._id === item._id) {
                     found = true;
+                    break;
                 }
             }
 
