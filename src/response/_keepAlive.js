@@ -42,13 +42,13 @@ function updatePlayerHideout(sessionID) {
     // update production time
     for (let prod in pmcData.Hideout.Production) { 
         /* bitcoin farm : manage multiples bitcoins but fuck this shit
-        // loop to find btc farm (hideout area 20)
-        //then check what level of upgrade the player btc farm is
-        //if lvl = 1 : do nothing
-        //if level = 2 or 3 then see how many bitcoins are already farmed, 
-        //then check time elapsed, and count how many bitcoins were farmed
-        //if farm is full, cut the production "inProgress" = false
-        */
+         * loop to find btc farm (hideout area 20)
+         * then check what level of upgrade the player btc farm is
+         * if lvl = 1 : do nothing
+         * if level = 2 or 3 then see how many bitcoins are already farmed, 
+         * then check time elapsed, and count how many bitcoins were farmed
+         * if farm is full, cut the production "inProgress" = false
+         */
 
         /*
             this need more checks too
