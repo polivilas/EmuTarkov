@@ -10,9 +10,6 @@ require("./libs.js")(true, new Date());
 process.stdout.write(String.fromCharCode(27) + ']0;' + "JustEmuTarkov Server " + constants.serverVersion() + String.fromCharCode(7));
 process.stdout.write('\u001B[2J\u001B[0;0f');
 
-// start application
-server.start();
-
 // oops all errors
 process.on('uncaughtException', (error, promise) => {
     logger.logError("Server: " + constants.serverVersion());
@@ -21,3 +18,6 @@ process.on('uncaughtException', (error, promise) => {
     logger.logData(error);
     logger.logInfo("Finished Dumping Error", "cyan");
 });
+
+// start application
+server.start();
