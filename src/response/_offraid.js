@@ -31,19 +31,10 @@ function markFoundItems(pmcData, offraidProfile, isPlayerScav) {
     return offraidProfile;
 }
 
-/* Function to remove a single item (like equipment and stashes). */
-function removeSingleItem(pmcData, itemId) {
-    for (let a in pmcData.Inventory.items) {
-        if (pmcData.Inventory.items[a]._id === itemId) {
-            pmcData.Inventory.items.splice(a, 1); 
-        }
-    }
-}
-
 function setInventory(pmcData, offraidProfile) {
-    removeSingleItem(pmcData, pmcData.Inventory.equipment);
-    removeSingleItem(pmcData, pmcData.Inventory.questRaidItems);
-    removeSingleItem(pmcData, pmcData.Inventory.questStashItems);
+    removeItemFromProfile(pmcData, pmcData.Inventory.equipment);
+    removeItemFromProfile(pmcData, pmcData.Inventory.questRaidItems);
+    removeItemFromProfile(pmcData, pmcData.Inventory.questStashItems);
 
     for (let item of offraidProfile.Inventory.items) {
         pmcData.Inventory.items.push(item);
@@ -93,7 +84,7 @@ function deleteInventory(pmcData, sessionID) {
     // finally delete them
     for (let item_to_delete in items_to_delete) {
         if (items_to_delete[item_to_delete] !== "insured") {
-            move_f.removeItem(items_to_delete[item_to_delete], item.getOutput(), sessionID);
+            removeItemFromProfile(pmcData, items_to_delete[item_to_delete]);
         }
     }
 
