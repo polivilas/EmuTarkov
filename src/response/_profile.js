@@ -2,6 +2,9 @@
 
 require("../libs.js");
 
+let pmcs = {};
+let scavs = {};
+
 function getPmcPath(sessionID) {
     let path = filepaths.user.profiles.character;
     return path.replace("__REPLACEME__", sessionID);
@@ -19,23 +22,17 @@ function create(info, sessionID) {
     let storage = json.parse(json.read(filepaths.profile.storage));
     let userbuilds = json.parse(json.read(filepaths.profile.userbuilds));
 
+    // pmc info
     pmcData._id = "pmc" + account.id;
     pmcData.aid = account.id;
     pmcData.savage = "scav" + account.id;
     pmcData.Info.Nickname = info.nickname;
     pmcData.Info.LowerNickname = info.nickname.toLowerCase();
     pmcData.Info.RegistrationDate = Math.floor(new Date() / 1000);
+
+    // storage info
     storage.data._id = "pmc" + account.id;
-
-    switch (info.side) {
-        case "Bear":
-            storage.data.suites = ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
-            break;
-
-        case "Usec":
-            storage.data.suites = ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"];
-            break;
-    }
+    storage.data.suites = (info.side === "Usec") ? ["5cde9ec17d6c8b04723cf479", "5cde9e957d6c8b0474535da7"] : ["5cd946231388ce000d572fe3", "5cd945d71388ce000a659dfb"];
 
     // create profile
     json.write(folder + "character.json", pmcData);
@@ -69,12 +66,14 @@ function create(info, sessionID) {
     account_f.setWipe(account.id, false);
 }
 
-function setPmcData(data, sessionID) {
-    json.write(getPmcPath(sessionID), data);
+function setPmcData(pmcData, sessionID) {
+    pmcs[sessionID] = pmcData;
+    json.write(getPmcPath(sessionID), pmcData);
 }
 
-function setScavData(data, sessionID) {
-    json.write(getScavPath(sessionID), data);   
+function setScavData(scavData, sessionID) {
+    scavs[sessionID] = scavData;
+    json.write(getScavPath(sessionID), scavData);   
 }
 
 function generateScav(sessionID) {
@@ -85,11 +84,18 @@ function generateScav(sessionID) {
     scavData.aid = sessionID;
     setScavData(scavData, sessionID);
 
+    pmcs[sessionID] = pmcData;
+    scavs[sessionID] = scavData;
+
     return scavData;
 }
 
 function getPmcData(sessionID) {
-    let pmcData = json.parse(json.read(getPmcPath(sessionID)));
+    if (typeof pmcs[sessionID] === "undefined") {
+        pmcs[sessionID] = json.parse(json.read(getPmcPath(sessionID)));
+    }
+
+    let pmcData = pmcs[sessionID];
 
     if (pmcData.Stats.TotalSessionExperience > 0) {
         const sessionExp = pmcData.Stats.TotalSessionExperience;
@@ -108,7 +114,11 @@ function getScavData(sessionID) {
         generateScav(sessionID);
     }
 
-    return json.parse(json.read(getScavPath(sessionID)));
+    if (typeof scavs[sessionID] === "undefined") {
+        scavs[sessionID] = json.parse(json.read(getScavPath(sessionID)));
+    }
+
+    return scavs[sessionID];
 }
 
 function get(sessionID) {

@@ -2,6 +2,8 @@
 
 require('../libs.js');
 
+let dialogues = {};
+
 // TODO(camo1018): Reduce the number of dialogue file reads and writes.
 let messageTypes = {
 	'npcTrader': 2,
@@ -16,11 +18,16 @@ function getPath(sessionID) {
 }
 
 function get(sessionID) {
-    return json.parse(json.read(getPath(sessionID)));
+	if (typeof dialogues[sessionID] === "undefined") {
+        dialogues[sessionID] = json.parse(json.read(getPath(sessionID)));
+	}
+	
+    return dialogues[sessionID];
 }
 
-function set(data, sessionID) {
-    json.write(getPath(sessionID), data);
+function set(dialogueData, sessionID) {
+	dialogues[sessionID] = dialogueData;
+    json.write(getPath(sessionID), dialogueData);
 }
 
 /*
@@ -198,6 +205,7 @@ function setDialoguePin(dialogueId, shouldPin, sessionID) {
 	let dialogueFile = get(sessionID);
 	dialogueFile[dialogueId].pinned = shouldPin;
 	setDialogue
+}
 
 function setRead(dialogueIds, sessionID) {
 	let dialogueFile = get(sessionID);
@@ -211,13 +219,8 @@ function setRead(dialogueIds, sessionID) {
 }
 
 function getAllAttachments(dialogueId, sessionID) {
-	let dialogueFile = get(sessionID);
-	
-	let data = {
-		'messages': dialogueFile[dialogueId].messages
-	};
-	
-	return data;
+	let dialogueFile = get(sessionID);	
+	return {'messages': dialogueFile[dialogueId].messages};
 }
 
 module.exports.get = get;
