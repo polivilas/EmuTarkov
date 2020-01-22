@@ -45,47 +45,41 @@ function setInventory(pmcData, offraidData) {
 }
 
 function deleteInventory(pmcData, sessionID) {
-    let items_to_delete = [];
+    let toDelete = [];
 
     for (let item of pmcData.Inventory.items) {
         if (item.parentId === pmcData.Inventory.equipment
             && item.slotId !== "SecuredContainer"
             && item.slotId !== "Scabbard"
             && item.slotId !== "Pockets") {
-            items_to_delete.push(item._id);
+            toDelete.push(item._id);
         }
 
         // remove pocket insides
         if (item.slotId === "Pockets") {
             for (let pocket of pmcData.Inventory.items) {
                 if (pocket.parentId === item._id) {
-                    items_to_delete.push(pocket._id);
+                    toDelete.push(pocket._id);
                 }
             }
         }
     }
 
     // check for insurance
-    for (let item_to_delete in items_to_delete) {
-        for (let insurance in pmcData.InsuredItems) {
-            if (items_to_delete[item_to_delete] !== pmcData.InsuredItems[insurance].itemId) {
-                continue;
-            }
-
-            let insureReturnChance = utility.getRandomInt(0, 99);
-    
-            if (insureReturnChance < settings.gameplay.trading.insureReturnChance) {
-                move_f.removeInsurance(pmcData, items_to_delete[item_to_delete]);
-                items_to_delete[item_to_delete] = "insured";
+    for (let item of toDelete) {
+        for (let insurance of pmcData.InsuredItems) {
+            if (item === insurance.itemId && utility.getRandomInt(0, 99) < settings.gameplay.trading.insureReturnChance) {
+                move_f.removeInsurance(pmcData, toDelete[item]);
+                item = "insured";
                 break;
             }
         }
     }
 
     // finally delete them
-    for (let item_to_delete in items_to_delete) {
-        if (items_to_delete[item_to_delete] !== "insured") {
-            move_f.removeItemFromProfile(pmcData, items_to_delete[item_to_delete]);
+    for (let item of toDelete) {
+        if (item !== "insured") {
+            move_f.removeItemFromProfile(pmcData, item);
         }
     }
 
@@ -93,10 +87,11 @@ function deleteInventory(pmcData, sessionID) {
 }
 
 function saveProgress(offraidData, sessionID) {
-    let offraidData = offraidData.profile;
     let pmcData = profile_f.getPmcData(sessionID);
     let scavData = profile_f.getScavData(sessionID);
     const isPlayerScav = offraidData.isPlayerScav;
+
+    offraidData = offraidData.profile;
     
     // set pmc data
     if (!isPlayerScav) {
