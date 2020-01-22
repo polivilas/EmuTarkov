@@ -2,6 +2,8 @@
 
 require('../libs.js');
 
+let traders = {};
+
 function getPath(id, sessionID) {
     let path = filepaths.user.profiles.traders[id];
     return path.replace("__REPLACEME__", sessionID);
@@ -12,12 +14,8 @@ function loadAllTraders(sessionID) {
 
     // load trader files
     for (let file in filepaths.traders) {
-        if (!fs.existsSync(getPath(file, sessionID))) {
-            continue;
-        }
-
-        if (filepaths.traders.hasOwnProperty(file) && file !== "ragfair") {
-            traders.push(json.parse(json.read(getPath(file, sessionID))));
+        if (file !== "ragfair") {
+            traders.push((get(file)).data);
         }
     }
 
@@ -25,9 +23,17 @@ function loadAllTraders(sessionID) {
 }
 
 function get(id, sessionID) {
+    if (typeof traders[id] === "undefined") {
+        if (!fs.existsSync(getPath(id, sessionID))) {
+            continue;
+        }
+
+        traders[id] = json.parse(json.read(getPath(id, sessionID)));
+    }
+
     // find the trader
 	if (filepaths.traders.hasOwnProperty(id)) {
-        return {err: 0, errmsg: "", data: json.parse(json.read(getPath(id, sessionID)))};
+        return {err: 0, errmsg: "", data: traders[id]};
     }
     
     // trader not found
@@ -36,6 +42,7 @@ function get(id, sessionID) {
 }
 
 function setTrader(data, sessionID) {
+    traders[data._id] = data;
     return json.write(getPath(data._id, sessionID), data);
 }
 
@@ -66,9 +73,9 @@ function lvlUp(id, sessionID) {
             && loyaltyLevels[level].minStanding <= currentTrader.data.loyalty.currentStanding)
             && targetLevel < 4) {
                 targetLevel++;
-        } else {
-            break;
         }
+
+        break;
     }
 
     currentTrader.data.loyalty.currentLevel = targetLevel;
