@@ -75,6 +75,10 @@ function makeSign(length) {
     return result;
 }
 
+function generateNewAssortId() {
+    return generateNewId("A");
+}
+
 function generateNewItemId() {
     return generateNewId("I");
 }
@@ -125,5 +129,6 @@ module.exports.getTime = getTime;
 module.exports.getDate = getDate;
 module.exports.makeSign = makeSign;
 module.exports.generateNewItemId = generateNewItemId;
+module.exports.generateNewAssortId = generateNewAssortId;
 module.exports.generateNewDialogueId = generateNewDialogueId;
 module.exports.getLocalIpAddress = getLocalIpAddress;

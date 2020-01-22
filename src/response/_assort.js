@@ -70,20 +70,19 @@ function generate(id, sessionID) {
 function generateFence(sessionID) {
     let base = json.parse(json.read("db/cache/assort.json"));
     let names = Object.keys(filepaths.assort.ragfair.loyal_level_items);
-    let added = [];
 
     for (let i = 0; i < settings.gameplay.trading.fenceAssortSize; i++) {
         let id = names[utility.getRandomInt(0, names.length - 1)];
 
-        if (added.includes(id)) {
-            i--;
-            continue;
-        }
+        // set items amount
+        let itemID = utility.generateNewAssortID();
+        let itemData = json.parse(json.read(filepaths.assort.ragfair.items[id]));
+        itemData.id = itemID;
+        itemData.upd.StackObjectCount = utility.getRandomInt(1, 100);
 
-        added.push(id);
-        base.data.items.push(json.parse(json.read(filepaths.assort.ragfair.items[id])));
-        base.data.barter_scheme[id] = json.parse(json.read(filepaths.assort.ragfair.barter_scheme[id]));
-        base.data.loyal_level_items[id] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
+        base.data.items.push(itemData);
+        base.data.barter_scheme[itemID] = json.parse(json.read(filepaths.assort.ragfair.barter_scheme[id]));
+        base.data.loyal_level_items[itemID] = json.parse(json.read(filepaths.assort.ragfair.loyal_level_items[id]));
     }
 
     return json.write(getPath("579dc571d53a0658a154fbec", sessionID), base);
