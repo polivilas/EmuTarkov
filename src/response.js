@@ -374,7 +374,7 @@ function getMailDialogView(url, info, sessionID) {
 }
 
 function getMailDialogInfo(url, info, sessionID) {
-    let dialogueFile = profile_f.getDialogue(sessionID);
+    let dialogueFile = dialogue_f.get(sessionID);
 
     let data = dialogue_f.getDialogueInfo(dialogueFile, info.dialogId, sessionID);
     return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';

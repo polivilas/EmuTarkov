@@ -220,6 +220,7 @@ function getAllAttachments(dialogueId, sessionID) {
 	return data;
 }
 
+module.exports.get = get;
 module.exports.generateDialogueList = generateDialogueList;
 module.exports.generateDialogueView = generateDialogueView;
 module.exports.getDialogueInfo = getDialogueInfo;
