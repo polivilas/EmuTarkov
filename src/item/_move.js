@@ -138,6 +138,23 @@ function handleCartridges(profileData, body) {
     }
 }
 
+/* Remove item of itemId and all of its descendants from profile. */
+function removeItemFromProfile(profileData, itemId, output = null) {
+    //get all ids related to this item, +including this item itself
+    let ids_toremove = itm_hf.findAndReturnChildren(profileData, itemId);
+    for (let i in ids_toremove) { //remove one by one all related items and itself
+        if (output !== null) {
+            output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
+        }
+
+        for (let a in profileData.Inventory.items) { //find correct item by id and delete it
+            if (profileData.Inventory.items[a]._id === ids_toremove[i]) {
+                profileData.Inventory.items.splice(a, 1);  //remove item from pmcData
+            }
+        }
+    }
+}
+
 /* Remove Item
 * Deep tree item deletion / Delets main item and all sub items with sub items ... and so on.
 * Profile index: 0 = main profile, 1 = scav profile
@@ -148,17 +165,7 @@ function removeItem(body, output, sessionID, profileIndex = 0) {
 
     //Find the item and all of it's relates
     if (toDo[0] !== undefined && toDo[0] !== null && toDo[0] !== "undefined") {
-        let ids_toremove = itm_hf.findAndReturnChildren(profile.data[profileIndex], toDo[0]); //get all ids related to this item, +including this item itself
-
-        for (let i in ids_toremove) { //remove one by one all related items and itself
-            output.data.items.del.push({"_id": ids_toremove[i]}); // Tell client to remove this from live game
-
-            for (let a in profile.data[profileIndex].Inventory.items) {	//find correct item by id and delete it
-                if (profile.data[profileIndex].Inventory.items[a]._id === ids_toremove[i]) {
-                    profile.data[profileIndex].Inventory.items.splice(a, 1);  //remove item from pmcData
-                }
-            }
-        }
+        removeItemFromProfile(profile.data[profileIndex], toDo[0], output);
 
         if (profileIndex === 1) {
             profile_f.setScavData(profile.data[1]); // save scav profile
@@ -524,6 +531,7 @@ function addItem(pmcData, body, output, sessionID) {
 }
 
 module.exports.moveItem = moveItem;
+module.exports.removeItemFromProfile = removeItemFromProfile;
 module.exports.removeItem = removeItem;
 module.exports.discardItem = discardItem;
 module.exports.splitItem = splitItem;
