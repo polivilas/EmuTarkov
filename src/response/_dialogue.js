@@ -34,20 +34,20 @@ function set(dialogueData, sessionID) {
 * Set the content of the dialogue on the list tab.
 */
 function generateDialogueList(sessionID) {
-	let dialogueFile = get(sessionID);
+	let dialogueData = get(sessionID);
 	let data = [];
 
 	// Iterate through all dialogues
-	for (let dialogueID in dialogueFile) {
-		data.push(getDialogueInfo(dialogueFile, dialogueID, sessionID));
+	for (let dialogueID in dialogueData) {
+		data.push(getDialogueInfo(dialogueData, dialogueID, sessionID));
 	}
 
 	return '{"err":0,"errmsg":null,"data":' + json.stringify(data) + '}';
 }
 
 /* Get the content of an incoming message. */
-function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
-	let dialogue = dialogueFile[dialogueID];
+function getDialogueInfo(dialogueData, dialogueID, sessionID) {
+	let dialogue = dialogueData[dialogueID];
 	let dialogueInfo = {
 		"_id": dialogueID,
 		"type": 2, // Type npcTrader.
@@ -66,8 +66,8 @@ function getDialogueInfo(dialogueFile, dialogueID, sessionID) {
 */
 function generateDialogueView(dialogueID, sessionID) {
 	// TODO(camo1018): Respect the message limit, but to heck with it for now.
-	let dialogueFile = get(sessionID);
-	let messages = dialogueFile[dialogueID].messages;
+	let dialogueData = get(sessionID);
+	let messages = dialogueData[dialogueID].messages;
 	return '{"err":0,"errmsg":null, "data":' + json.stringify({"messages": messages}) + '}';
 }
 
@@ -82,9 +82,9 @@ function getMessageTypeValue(messageType) {
 * Add a templated message to the dialogue.
 */
 function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionID, rewards = []) {
-	let dialogueFile = get(sessionID);
-	let isNewDialogue = !(dialogueID in dialogueFile);
-	let dialogue = dialogueFile[dialogueID];
+	let dialogueData = get(sessionID);
+	let isNewDialogue = !(dialogueID in dialogueData);
+	let dialogue = dialogueData[dialogueID];
 
 	if (isNewDialogue) {
 		dialogue = {
@@ -94,7 +94,7 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 			"new": 0,
 			"attachmentsNew": 0
 		};
-		dialogueFile[dialogueID] = dialogue;
+		dialogueData[dialogueID] = dialogue;
 	}
 
 	dialogue.new += 1;
@@ -129,7 +129,7 @@ function addDialogueMessage(dialogueID, messageTemplateId, messageType, sessionI
 	};
 
 	dialogue.messages.push(message);
-	set(dialogueFile, sessionID);
+	set(dialogueData, sessionID);
 
 	let notificationMessage = notifier_f.createNewMessageNotification(message);
 	notifier_f.notifierService.addToMessageQueue(notificationMessage, sessionID);
@@ -154,10 +154,10 @@ function getMessagePreview(dialogue) {
 * Get the item contents for a particular message.
 */
 function getMessageItemContents(messageId, sessionID) {
-	let dialogueFile = get(sessionID);
+	let dialogueData = get(sessionID);
 
-	for (let dialogueId in dialogueFile) {
-		let messages = dialogueFile[dialogueId].messages;
+	for (let dialogueId in dialogueData) {
+		let messages = dialogueData[dialogueId].messages;
 
 		for (let message of messages) {
 			if (message._id === messageId) {
@@ -191,31 +191,31 @@ function findAndReturnChildren(messageItems, itemid) {
 }
 
 function removeDialogue(dialogueId, sessionID) {
-	let dialogueFile = get(sessionID);
-	delete dialogueFile[dialogueId];	
-	set(dialogueFile, sessionID);
+	let dialogueData = get(sessionID);
+	delete dialogueData[dialogueId];	
+	set(dialogueData, sessionID);
 }
 
 function setDialoguePin(dialogueId, shouldPin, sessionID) {
-	let dialogueFile = get(sessionID);
-	dialogueFile[dialogueId].pinned = shouldPin;
+	let dialogueData = get(sessionID);
+	dialogueData[dialogueId].pinned = shouldPin;
 	setDialogue
 }
 
 function setRead(dialogueIds, sessionID) {
-	let dialogueFile = get(sessionID);
+	let dialogueData = get(sessionID);
 
 	for (let dialogId of dialogueIds) {
-		dialogueFile[dialogId].new = 0;
-		dialogueFile[dialogId].attachmentsNew = 0;
+		dialogueData[dialogId].new = 0;
+		dialogueData[dialogId].attachmentsNew = 0;
 	}
 
-	set(dialogueFile, sessionID);
+	set(dialogueData, sessionID);
 }
 
 function getAllAttachments(dialogueId, sessionID) {
-	let dialogueFile = get(sessionID);	
-	return {"messages": dialogueFile[dialogueId].messages};
+	let dialogueData = get(sessionID);	
+	return {"messages": dialogueData[dialogueId].messages};
 }
 
 module.exports.get = get;
