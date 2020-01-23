@@ -5,8 +5,9 @@ require('../libs.js');
 // statuses seem as follow
 // 1 - not accepted
 // 2 - accepted
-// 3 - failed 
+// 3 - ???
 // 4 - completed
+// 5 - failed
 
 function acceptQuest(pmcData, body, sessionID) {
     pmcData.Quests.push({
