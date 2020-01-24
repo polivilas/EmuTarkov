@@ -3,9 +3,9 @@
 require('../libs.js');
 
 // statuses seem as follow
-// 1 - not accepted
-// 2 - accepted
-// 3 - ???
+// 1 - locked
+// 2 - not accepted
+// 3 - accepted
 // 4 - completed
 // 5 - failed
 
@@ -13,7 +13,7 @@ function acceptQuest(pmcData, body, sessionID) {
     pmcData.Quests.push({
 		"qid": body.qid.toString(), 
 		"startTime": utility.getTimestamp(), 
-		"status": 2
+		"status": 3
 	}); 
 	
     profile_f.setPmcData(pmcData, sessionID);
