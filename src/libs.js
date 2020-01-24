@@ -91,6 +91,7 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.insure_f = require('./item/_insure.js');
 	global.trader_f = require('./response/_trader.js');
 	global.ragfair_f = require('./response/_ragfair.js');
+	global.weather_f = require('./response/_weather.js');
 	global.item = require('./response/_item.js');
 	global.response = require('./response.js');
 	

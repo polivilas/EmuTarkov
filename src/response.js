@@ -164,10 +164,7 @@ function getProfileData(url, info, sessionID) {
 }
 
 function regenerateScav(url, info, sessionID) {
-    let response = {err: 0, errmsg: null, data: []};
-
-    response.data.push(profile_f.generateScav(sessionID));
-    return JSON.stringify(response);
+    return JSON.stringify({err: 0, errmsg: null, data: [profile_f.generateScav(sessionID)]});
 }
 
 function selectProfile(url, info, sessionID) {
@@ -179,28 +176,7 @@ function getProfileStatus(url, info, sessionID) {
 }
 
 function getWeather(url, info, sessionID) {
-    let time = utility.getTime().replace("-", ":").replace("-", ":");
-    let date = utility.getDate();
-    let datetime = date + " " + time;
-    let output = {};
-
-    // set weather
-    if (settings.gameplay.location.forceWeatherEnabled) {
-        output = weather.data[settings.gameplay.location.forceWeatherId];
-    } else {
-        output = weather.data[utility.getRandomInt(0, weather.length - 1)];
-    }
-
-    // replace date and time
-    if (settings.gameplay.location.realTimeEnabled) {
-        output.data.weather.timestamp = Math.floor(new Date() / 1000);
-        output.data.weather.date = date;
-        output.data.weather.time = datetime;
-        output.data.date = date;
-        output.data.time = time;
-    }
-
-    return JSON.stringify(output);
+    weather_f.generate(sessionID);
 }
 
 function getLocations(url, info, sessionID) {
