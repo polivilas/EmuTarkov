@@ -13,7 +13,7 @@ function updateTraders(sessionID) {
     // update each hour
     let update_per = 3600;
     let timeNow = Math.floor(Date.now() / 1000);
-    let tradersToUpdateList = trader.loadAllTraders(sessionID);
+    let tradersToUpdateList = trader_f.getAll(sessionID);
 
     tradersToUpdateList = tradersToUpdateList.data;
     
@@ -32,7 +32,7 @@ function updateTraders(sessionID) {
         compensateUpdate_per = compensateUpdate_per * update_per;
         newTraderTime = newTraderTime + compensateUpdate_per + update_per;
         tradersToUpdateList[i].supply_next_time = newTraderTime;
-        trader.setTrader(tradersToUpdateList[i], sessionID);
+        trader_f.set(tradersToUpdateList[i], sessionID);
     }
 }
 

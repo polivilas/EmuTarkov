@@ -89,9 +89,9 @@ module.exports = function(isFirstLaunch = false, time = 0) {
 	global.weaponBuilds_f = require('./item/_weaponBuilds.js');
 	global.repair_f = require('./item/_repair.js');
 	global.insure_f = require('./item/_insure.js');
+	global.trader_f = require('./response/_trader.js');
+	global.ragfair_f = require('./response/_ragfair.js');
 	global.item = require('./response/_item.js');
-	global.trader = require('./response/_trader.js');
-	global.ragfair = require('./response/_ragfair.js');
 	global.response = require('./response.js');
 	
 	if (isFirstLaunch) {

@@ -224,7 +224,7 @@ function getBots(url, info, sessionID) {
 }
 
 function getTraderList(url, info, sessionID) {
-    return JSON.stringify(trader.loadAllTraders(sessionID));
+    return JSON.stringify(trader_f.getAll(sessionID));
 }
 
 function getServer(url, info, sessionID) {
@@ -232,7 +232,7 @@ function getServer(url, info, sessionID) {
 }
 
 function searchRagfair(url, info, sessionID) {
-    return ragfair.getOffers(info);
+    return ragfair_f.getOffers(info);
 }
 
 function getAvailableMatch(url, info, sessionID) {
@@ -423,7 +423,7 @@ function getProfilePurchases(url, info, sessionID) {
 }
 
 function getTrader(url, info, sessionID) {
-    return JSON.stringify(trader.get(url.replace("/client/trading/api/getTrader/", ''), sessionID));
+    return JSON.stringify(trader_f.get(url.replace("/client/trading/api/getTrader/", ''), sessionID));
 }
 
 function getAssort(url, info, sessionID) {

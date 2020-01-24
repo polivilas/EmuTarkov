@@ -99,7 +99,7 @@ function fromRUB(value, currency) {
 function payMoney(pmcData, body, sessionID) {
     item.resetOutput();
     let output = item.getOutput();
-    let tmpTraderInfo = trader.get(body.tid, sessionID);
+    let tmpTraderInfo = trader_f.get(body.tid, sessionID);
     let currencyTpl = getCurrency(tmpTraderInfo.data.currency);
 
     // delete barter things(not a money) from inventory
@@ -171,8 +171,8 @@ function payMoney(pmcData, body, sessionID) {
     let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum + fromRUB(inRUB(barterPrice, currencyTpl), getCurrency(tmpTraderInfo.data.currency));
 
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
-    trader.setTrader(tmpTraderInfo.data, sessionID);
-    trader.lvlUp(body.tid, sessionID);
+    trader_f.set(tmpTraderInfo.data, sessionID);
+    trader_f.lvlUp(body.tid, sessionID);
     output.data.currentSalesSums[body.tid] = saleSum;
 
     // save changes
@@ -205,7 +205,7 @@ function findMoney(by, pmcData, barter_itemID) { // find required items to take 
 * output: none (output is sended to item.js, and profile is saved to file)
 * */
 function getMoney(pmcData, amount, body, output, sessionID) {
-    let tmpTraderInfo = trader.get(body.tid, sessionID);
+    let tmpTraderInfo = trader_f.get(body.tid, sessionID);
     let currency = getCurrency(tmpTraderInfo.data.currency);
     let calcAmount = fromRUB(inRUB(amount, currency), currency);
     let skip = false;
@@ -275,8 +275,8 @@ function getMoney(pmcData, amount, body, output, sessionID) {
     let saleSum = tmpTraderInfo.data.loyalty.currentSalesSum += amount;
 
     tmpTraderInfo.data.loyalty.currentSalesSum = saleSum;
-    trader.setTrader(tmpTraderInfo.data, sessionID);
-    trader.lvlUp(body.tid, sessionID);
+    trader_f.set(tmpTraderInfo.data, sessionID);
+    trader_f.lvlUp(body.tid, sessionID);
     output.data.currentSalesSums[body.tid] = saleSum;
 
     profile_f.setPmcData(pmcData, sessionID);

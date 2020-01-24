@@ -222,7 +222,7 @@ function getPurchasesData(tmpTraderInfo, sessionID) {
             let preparePrice = basePrice * multiplier * itemCount;
 
             // convert the price using the lastTrader's currency
-            let currency = trader.get(tmpTraderInfo, sessionID).data.currency;
+            let currency = trader_f.get(tmpTraderInfo, sessionID).data.currency;
             preparePrice = itm_hf.fromRUB(preparePrice, itm_hf.getCurrency(currency));
 
             // uses profile information to get the level of the dogtag and multiplies

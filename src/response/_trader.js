@@ -9,17 +9,9 @@ function getPath(id, sessionID) {
     return path.replace("__REPLACEME__", sessionID);
 }
 
-function loadAllTraders(sessionID) {
-    let traders = [];
-
-    // load trader files
-    for (let file in filepaths.traders) {
-        if (file !== "ragfair") {
-            traders.push((get(file, sessionID)).data);
-        }
-    }
-
-	return {err: 0, errmsg: null, data: traders};
+function set(data, sessionID) {
+    traders[data._id] = data;
+    return json.write(getPath(data._id, sessionID), data);
 }
 
 function get(id, sessionID) {
@@ -30,9 +22,17 @@ function get(id, sessionID) {
 	return {err: 0, errmsg: "", data: traders[id]};
 }
 
-function setTrader(data, sessionID) {
-    traders[data._id] = data;
-    return json.write(getPath(data._id, sessionID), data);
+function getAll(sessionID) {
+    let traders = [];
+
+    // load trader files
+    for (let file in filepaths.traders) {
+        if (file !== "ragfair") {
+            traders.push((get(file, sessionID)).data);
+        }
+    }
+
+	return {err: 0, errmsg: null, data: traders};
 }
 
 function lvlUp(id, sessionID) {
@@ -76,7 +76,7 @@ function lvlUp(id, sessionID) {
 }
 
 module.exports.getPath = getPath;
-module.exports.loadAllTraders = loadAllTraders;
+module.exports.set = set;
 module.exports.get = get;
-module.exports.setTrader = setTrader;
+module.exports.getAll = getAll;
 module.exports.lvlUp = lvlUp;

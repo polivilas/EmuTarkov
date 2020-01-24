@@ -6,7 +6,7 @@ function main(pmcData, body, sessionID) {
     item.resetOutput();
 
     let output = item.getOutput();
-    let tmpTraderInfo = trader.get(body.tid, sessionID);
+    let tmpTraderInfo = trader_f.get(body.tid, sessionID);
     let repairRate = (tmpTraderInfo.data.repair.price_rate === 0) ? 1 : (tmpTraderInfo.data.repair.price_rate / 100 + 1);
     let RequestData = body.repairItems;
 
