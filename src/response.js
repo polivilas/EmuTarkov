@@ -144,7 +144,7 @@ function loginUser(url, info, sessionID) {
 }
 
 function getInsuranceCost(url, info, sessionID) {
-    return insure_f.cost(info);
+    return insure_f.cost(info, sessionID);
 }
 
 function getQueueStatus(url, info, sessionID) {

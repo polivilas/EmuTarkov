@@ -2,7 +2,7 @@
 
 require('../libs.js');
 
-function cost(info) {
+function cost(info, sessionID) {
     let output = {"err": 0, "errmsg": null, "data": {}};
     let pmcData = profile_f.getPmcData(sessionID);
 
